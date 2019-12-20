@@ -43,7 +43,7 @@ To enable NFS volume services in <%= vars.app_runtime_abbr %>:
   * For **LDAP server host**, enter the hostname or IP address of the LDAP server.
   * For **LDAP server port**, enter the LDAP server port number. If you do not specify a port number, Ops Manager uses 389.
   * For **LDAP User Search Base**, enter the location in the LDAP directory tree from which any LDAP User search begins. The typical LDAP Search Base matches your domain name. <br>For example, a domain named `cloud.example.com` typically uses the following LDAP User Search Base: `ou=Users,dc=example,dc=com`. 
-  <p class="note"><strong>Note:</strong> Your LDAP user records must also be configured with an attribute `objectClass: User`, used by the PCF NFS Driver to identify records as user records, and have `uidNumber` and `gidNumber` fields, used to establish the correct UID for a named user.  
+  <p class="note"><strong>Note:</strong> Your LDAP user records must also be configured with an attribute `objectClass: User`, used by the NFS Driver to identify records as user records, and have `uidNumber` and `gidNumber` fields, used to establish the correct UID for a named user.  
   </p>
     <%= image_tag('er-config-app-vol-svc.png') %>
 
