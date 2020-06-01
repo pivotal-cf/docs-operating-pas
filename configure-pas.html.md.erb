@@ -38,15 +38,15 @@ To add the <%= vars.app_runtime_abbr %> tile to your <%= vars.ops_manager %> Ins
 
 <p class="note"><strong>Note:</strong> For Azure environments, this configuration pane is <strong>Assign Networks</strong> and does not include AZ configuration.</p>
 
-In the **Assign AZ and Networks** pane, you assign jobs to your Availability Zones (AZs) and networks.
+In the **Assign AZs and Networks** pane, you assign jobs to your Availability Zones (AZs) and networks.
 
-To configure the **Assign AZ and Networks** pane:
+To configure the **Assign AZs and Networks** pane:
 
-1. Select **Assign AZ and Networks**.
+1. Select **Assign AZs and Networks**.
 
-1. Select the first AZ under **Place singleton jobs**. <%= vars.ops_manager %> runs any job with a single instance in this AZ.
+1. Select the first AZ under **Place singleton jobs in**. <%= vars.ops_manager %> runs any job with a single instance in this AZ.
 
-1. Select all AZs under **Balance other jobs**. <%= vars.ops_manager %> balances instances of jobs with more than one instance across the AZs that you specify.
+1. Select all AZs under **Balance other jobs in**. <%= vars.ops_manager %> balances instances of jobs with more than one instance across the AZs that you specify.
     <p class="note"><strong>Note:</strong> For production deployments, <%= vars.company_name %> recommends at least three AZs for a highly available installation.</p>
 
 1. From the **Network** dropdown, choose the runtime network that you created when configuring the BOSH Director tile.
