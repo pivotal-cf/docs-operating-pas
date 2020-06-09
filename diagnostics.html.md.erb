@@ -1,24 +1,25 @@
 ---
-title: Diagnosing Problems in Ops Manager
+title: Diagnosing Problems in TAS for VMs Deployments
 owner: Ops Manager
 ---
 
-<% current_page.data.title = "Diagnosing Problems in " + vars.platform_name %>
+This topic provides guidance for diagnosing issues encountered 
+when installing <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) 
+with <%= vars.ops_manager_full %>.
 
-This topic provides guidance for diagnosing issues encountered during installation of <%= vars.platform_name %>.
-
-Besides whether products install successfully or not, an important consideration when diagnosing
-issues is communication between VMs deployed by <%= vars.platform_name %>. Depending on what
-products you install, communication takes the form of messaging, routing, or both. If either of
-these go wrong, an installation can fail. For example, in a
-<%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) installation, the
-<%= vars.platform_name %> VM must deploy a test app to the cloud during post-installation testing.
+In <%= vars.app_runtime_abbr %> an important consideration when diagnosing
+issues is communication between VMs deployed by <%= vars.platform_name %>. 
+Communication takes the form of messaging, routing, or both. If either of
+these go wrong, an installation can fail. 
+For example, after installing <%= vars.app_runtime_abbr %>), 
+one of the <%= vars.app_runtime_abbr %> VMs must deploy a test app 
+to the cloud during post-installation testing.
 The installation fails if the resulting traffic cannot be routed to the HA Proxy load balancer.
 
 ## <a id='debug'></a> Viewing the Debug Endpoint
 
 The debug endpoint is a web page that provides diagnostics information. If you have superuser
-privileges and can view the <%= vars.platform_name %> Installation Dashboard, you can access the
+privileges and can view the <%= vars.ops_manager %> Installation Dashboard, you can access the
 debug endpoint.
 
 To access the debug endpoint, open the following URL in a web browser:
@@ -39,7 +40,7 @@ component is used by <%= vars.platform_name %> to perform installations and upda
 
 * **Components** describes the components in detail.
 
-* **Rails log** shows errors thrown by the VM where the <%= vars.platform_name %> web app, such
+* **Rails log** shows errors thrown by the VM where the web app, such
 as a Rails app, is running, as recorded in the `production.log` file. To explore other logs, see
 [Logging Tips](#tips).
 
@@ -86,20 +87,18 @@ and open `diego.0.job > garden > garden.stderr.log`.
 
 ### <a id='view_in_terminal'></a> Viewing Web App and BOSH Failure Logs in a Terminal Window
 
-You can obtain diagnostic information from <%= vars.platform_name %> by logging in to the VM where
-it is running. To log in to the <%= vars.platform_name %> VM, you need:
+You can obtain diagnostic information by logging in to the VM where the BOSH Director job is running. To log in to the BOSH Director VM, you need:
 
-* The IP address of the <%= vars.platform_name %> VM shown in the **Settings** tab of the
-<%= vars.platform_name %> Director tile.
+* The IP address of the VM shown in the **Settings** tab of the
+BOSH Director tile.
 
-* Your **import credentials**. Import credentials are the username and password used to import the
-<%= vars.platform_name %> `.ova` or `.ovf` file into your virtualization system.
+* Your **import credentials**. Import credentials are the username and password used to import the `.ova` or `.ovf` file into your virtualization system.
 
-To log in to the <%= vars.platform_name %> VM:
+To log in to the VM:
 
 1. Open a terminal window.
 
-1. To connect to the <%= vars.platform_name %> installation VM, run:
+1. To connect to the BOSH Director VM, run:
 
     ```
     ssh IMPORT-USERNAME@<%= vars.platform_code %>-VM-IP-ADDRESS
@@ -107,7 +106,7 @@ To log in to the <%= vars.platform_name %> VM:
     Where:
     * `IMPORT-USERNAME` is the username you used to import the `.ova` or `.ovf` file into your
       virtualization system.
-    * `VM-IP-ADDRESS` is the IP address of the <%= vars.platform_name %> installation VM.
+    * `VM-IP-ADDRESS` is the IP address of the BOSH Director installation VM.
 
 1. Enter your import password when prompted.
 
@@ -142,7 +141,7 @@ changing the manifest may cause future deployments to fail.</p>
 
 ## <a id='view-vms'></a> Viewing the VMs in Your Deployment
 
-To view the VMs in your <%= vars.platform_name %> deployment, follow the procedure specific to your
+To view the VMs in your deployment, follow the procedure specific to your
 IaaS.
 
 ### <a id="aws"></a> Amazon Web Services (AWS)
@@ -192,7 +191,7 @@ To view the VMs in your vSphere deployment:
 
 1. Select **Hosts and Clusters**.
 
-1. Select the top level object that contains your <%= vars.platform_name %> deployment. For
+1. Select the top level object that contains your deployment. For
 example, select **Cluster**, **Datastore**, or **Resource Pool**.
 
 1. In the top tab, click **Related Objects**.
