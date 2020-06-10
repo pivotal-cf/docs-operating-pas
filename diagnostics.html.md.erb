@@ -4,15 +4,15 @@ owner: Ops Manager
 ---
 
 This topic provides guidance for diagnosing issues encountered 
-when installing <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) 
+when installing products such as <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) 
 with <%= vars.ops_manager_full %>.
 
-In <%= vars.app_runtime_abbr %> an important consideration when diagnosing
+An important consideration when diagnosing
 issues is communication between VMs deployed by <%= vars.platform_name %>. 
 Communication takes the form of messaging, routing, or both. If either of
 these go wrong, an installation can fail. 
-For example, after installing <%= vars.app_runtime_abbr %>), 
-one of the <%= vars.app_runtime_abbr %> VMs must deploy a test app 
+For example, after installing <%= vars.app_runtime_abbr %>, 
+one of the VMs must deploy a test app 
 to the cloud during post-installation testing.
 The installation fails if the resulting traffic cannot be routed to the HA Proxy load balancer.
 
