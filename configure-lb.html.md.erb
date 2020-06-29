@@ -116,7 +116,10 @@ To configure the Gorouter or HAProxy to use AWS Elastic Load Balancers:
   1. In the **LOAD BALANCERS** field, enter the name of your SSH load balancer: `<%= vars.platform_name_lc %>-ssh-elb`.
 
 1. Click to expand the **Router** row, and fill in the **LOAD BALANCERS** field with a value determined by the type of load balancer you are using:
-  * **Application Load Balancer**: Enter the name of the target group of your web load balancer, prefixed with `alb:`: `alb:<%= vars.platform_name_lc %>-web-elb-target-group`. The prefix indicates to Ops Manager that you entered the name of a target group, and is required for AWS Application Load Balancers or Network Load Balancers.  
+  * **Application Load Balancer**: Enter a comma-separated list of the names of the target group
+    of your web load balancer, prefixed with `alb:`: `alb:<%= vars.platform_name_lc %>-web-elb-target-group`.
+    The prefix indicates to Ops Manager that you entered the name of a target group.
+    The prefix is required for AWS Application Load Balancers and Network Load Balancers.
   * **Classic Load Balancer**: Enter the name of the load balancer: `<%= vars.platform_name_lc %>-web-elb`.  
     <p class="note"><strong>Note:</strong> If you are using HAProxy in your deployment, then put the name of the load balancers in the **LOAD BALANCERS** field of the <strong>HAProxy</strong> row instead of the <strong>Router</strong> row. For a high-availability configuration, scale up the HAProxy job to more than one instance.</p>
 
@@ -156,12 +159,14 @@ To configure the Gorouter to use Azure load balancers:
 
 1. Ensure a `Standard` VM type is selected for the **Router** VM. The <%= vars.app_runtime_abbr %> deployment fails if you select a `Basic` VM type.
 
-1. Retrieve the name(s) of your external ALB by navigating to the Azure portal, clicking **All resources**, and locating your **Load balancer** resource.
+1. Retrieve the name(s) of your external Azure Load Balancer (ALB) by navigating to the Azure portal,
+   clicking **All resources**, and locating your **Load balancer** resource.
   <p class="note"><strong>Note:</strong> The Azure portal sometimes displays the names of resources with incorrect capitalization. Always use the Azure CLI to retrieve the correctly capitalized name of a resource. To see the list of resources, run <code>az network lb list</code>.</p>
 
 1. In the **Resource Config** pane of the <%= vars.app_runtime_abbr %> tile, click the icon next to the **Router** job name to expand the row, showing a **LOAD BALANCERS** field and **INTERNET CONNECTED** checkbox underneath.
 
 1. Enter the name of your external ALB in the field under **LOAD BALANCERS**.
+   If you have multiple, external ALBs, this field accepts a comma-separated list.
 
 1. Retrieve the name of your Diego SSH Load Balancer by navigating to the Azure portal, clicking **All resources**, and locating your **Load balancer** resource.
 
