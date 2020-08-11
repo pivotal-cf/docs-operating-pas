@@ -31,7 +31,7 @@ To enable TCP routing:
 
 1. Select **Networking**.
 
-1. Under **Enable TCP requests to apps through specific ports on the TCP router**, select **Enable TCP routing**.
+1. Under **TCP routing**, select **Enable**.
 
 1. For **TCP router IPs**, enter the IP addresses to assign to the TCP routers. You can enter multiple values as a comma-separated list or as a range. For example, `10.254.0.1, 10.254.0.2` or `10.254.0.1-10.254.0.2`. The addresses must be within your subnet CIDR block. These are the same IP addresses with which you configured your load balancer in [Pre-Deployment Steps](../adminguide/enabling-tcp-routing.html#pre-deploy) in _Enabling TCP Routing_, unless you configured DNS to resolve the TCP domain name directly to an IP for the TCP router.
 
@@ -57,6 +57,6 @@ To disable TCP routing:
 
 1. Select **Networking**.
 
-1. Under **Enable TCP requests to apps through specific ports on the TCP router**, select **Disable TCP routing**.
+1. Under **TCP routing**, select **Disable**.
 
 1. Manually remove the TCP routing domain.
