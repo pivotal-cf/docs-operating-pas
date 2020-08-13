@@ -53,7 +53,7 @@ Before scaling down your MySQL cluster, you should ensure the cluster is healthy
 	1. Use the `GET /api/v0/deployed/products` endpoint to retrieve a list of deployed products by running:
 	  
 	  	```
-	  	curl "http<span>s:</span>//OPS-MAN-FQDN/api/v0/deployed/products" \
+	  	curl "https://OPS-MAN-FQDN/api/v0/deployed/products" \
 	  	  -X GET \
 	  	  -H "Authorization: Bearer UAA-ACCESS-TOKEN"
 	  	```
@@ -62,7 +62,7 @@ Before scaling down your MySQL cluster, you should ensure the cluster is healthy
 	1. Run:
 
 		```
-		curl "http<span>s:</span>//OPS-MAN-FQDN/api/v0/deployed/products/PRODUCT-GUID/variables?name=cc-db-credentials" \
+		curl "https://OPS-MAN-FQDN/api/v0/deployed/products/PRODUCT-GUID/variables?name=cc-db-credentials" \
 	      -X GET \
 	      -H "Authorization: Bearer UAA-ACCESS-TOKEN"
 	    ```
