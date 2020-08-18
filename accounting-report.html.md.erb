@@ -3,13 +3,13 @@ title: Reporting App, Task, and Service Instance Usage
 owner: BAM
 ---
 
-This topic describes how to use the Cloud Foundry Command Line Interface (cf CLI) to retrieve historical system- and org-level usage information about your apps, tasks, and service instances through the Cloud Controller and Usage Service APIs.
+This topic describes how to use the Cloud Foundry Command Line Interface (cf CLI) with <%= vars.app_runtime_full %> to retrieve historical system- and org-level usage information about your apps, tasks, and service instances through the Cloud Controller and Usage Service APIs.
 
 You can also access usage information by using Apps Manager. For more information, see [Reporting Instance Usage with Apps Manager](accounting-report-apps-man.html).
 
 To retrieve current app and event information from the Cloud Controller, see [Retrieving App and Event Information](https://docs.cloudfoundry.org/running/managing-cf/app-event.html) in the open-source Cloud Foundry documentation.
 
-<p class="note"><strong>Note:</strong> [Version 2.7.18](https://docs.pivotal.io/platform/2-7/release-notes/runtime-rn.html#2.7.18) fixes [an issue](https://docs.pivotal.io/platform/2-7/release-notes/runtime-rn.html#cc-purge-reseed-usage-bug) which affected some foundations reporting on inaccurate or missing data. Please ensure you are using a recent version.</p>
+<p class="note"><strong>Note:</strong> <%= vars.app_runtime_abbr %> v2.7.18 fixes an issue where foundations report inaccurate or missing data. <%= vars.recommended_by %> recommends upgrading to a recent version.</p>
 
 ## <a id="prerequisite"></a> Prerequisite
 
