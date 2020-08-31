@@ -317,7 +317,10 @@ To install and configure the tile:
 
 1. Click the **VMware NSX-T** tile to open its **Settings** tab, and configure the **NSX Manager** pane as follows:
   - **NSX Manager Address**: The NSX-T Manager host address or IP address.
-  - **Use Client Certificates or Username/Password**: Select **Basic Authentication with Username and Password** and enter **NSX Manager Admin Username** and **Admin Password** credentials in the fields underneath.
+  - **Use Client Certificates or Username/Password**: Configure this setting as follows:
+      1. If you are using VMware Workspace ONE Access, formerly called VMware Identity Manager 
+      (vIDM), then select **Client Certificate Authentication**.
+      1. Otherwise, select **Basic Authentication with Username and Password** and enter **NSX Manager Admin Username** and **Admin Password** credentials in the fields underneath.
   - **NSX Manager CA Cert**: Obtain this certificate from NSX-T Manager as follows:
       1. `ssh` into NSX-T Manager using the admin account that you created when you deployed NSX-T Manager.
       1. From the NSX-T Manager command line, run `get certificate api` to retrieve the certificate.
