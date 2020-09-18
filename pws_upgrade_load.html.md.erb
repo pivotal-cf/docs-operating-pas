@@ -3,13 +3,13 @@ title: Upgrade Load Example&#58; Pivotal Web Services
 owner: CloudOps
 ---
 
-This topic provides sample performance measurements of a <%= vars.platform_name %> installation undergoing the workload associated with an upgrade. 
+This topic provides sample performance measurements of a <%= vars.platform_name %> installation undergoing the workload associated with an upgrade.
 
 To obtain these measurements, Pivotal repaved its production Pivotal Web Services (PWS) deployment. The repave process simulates system load that would be incurred when performing a rolling upgrade of Diego Cells.
 
 Use the measurements and configuration values published in this document as guidance when ensuring you have adequate file storage hardware prior to a platform upgrade.
 
-For more information about the impact of upgrade on file storage performance, see the [Configure File Storage](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/upgrading/configuring.html#file-storage) section of the _Configuring PAS for Upgrades_ topic.
+For more information about the impact of upgrade on file storage performance, see [Configure File Storage](configuring.html#file-storage) in _Configuring PAS for Upgrades_.
 
 
 ## <a id="configuration"></a> Platform Configuration
@@ -20,9 +20,9 @@ The following table details the starting parameters and configuration of PWS.
 | ------------- | ----- | ------------- |
 | IaaS | Amazon Web Services | See your BOSH Director configuration or BOSH deployment manifest. |
 | File Storage | AWS EBS (External with some elastic capacity) | See your Pivotal Application Service (PAS) configuration or BOSH deployment manifest. |
-| Version of Cloud Foundry (CF) | v252 | See your BOSH Director and PAS configuration or BOSH deployment manifest. |
-| Number of Diego Cells | 218 | To view the number of Diego Cell instances currently running in your deployment, see the **Resource Config** pane of your PAS tile or consult your Diego deployment manifest. |
-| Maximum number of started containers | 250 | For more information, see the [Set a Maximum Number of Starting Containers](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/upgrading/configuring.html#container-starts) section of the _Configuring PAS for Upgrades_ topic. |
+| Version of Cloud Foundry (CF) | v252 | See your BOSH Director and TAS for VMs configuration or BOSH deployment manifest. |
+| Number of Diego Cells | 218 | To view the number of Diego Cell instances currently running in your deployment, see the **Resource Config** pane of your TAS for VMs tile or consult your Diego deployment manifest. |
+| Maximum number of started containers | 250 | For more information, see [Set a Maximum Number of Starting Containers](configuring.html#container-starts) in _Configuring TAS for VMs for Upgrades_. |
 | `max_in_flight` Configuration for Diego Cells | 6 | To retrieve the existing `max_in_flight` value for the Diego Cell job in BOSH Director, use the Ops Manager API. If you are running open source CF, consult your BOSH deployment manifest. |
 | Number of Availability Zones (AZs) | 2 | See your PAS or BOSH deployment AZ configuration. |
 | Number of app instances | 16231 | `datadog.nozzle.bbs.LRPsRunning` |
@@ -31,7 +31,7 @@ The following table details the starting parameters and configuration of PWS.
 
 ## <a id="during_upgrade"></a> System Performance Measurements During Diego Cell Repave
 
-This table presents performance measurements taken during the Diego Cell repave. 
+This table presents performance measurements taken during the Diego Cell repave.
 
 <p class="note"><strong>Note:</strong> These measurements indicate the peak cumulative values of the entire system: 250 Diego Cells, ~15,000 app instances, and 2 AZs.</p>
 
@@ -53,7 +53,7 @@ Use these measurements as a baseline for expected system load during Diego Cell 
 
 ## <a id="graph"></a> Sample Performance Graphs
 
-These DataDog graphs represent a timeline visualization of read and write operations during the repave event. 
+These DataDog graphs represent a timeline visualization of read and write operations during the repave event.
 
 ### <a id="graph_readops"></a> Read I/O Operations
 
@@ -70,5 +70,4 @@ The write I/O operations sample was taken over 115 VMs and represent the number 
 
 ## <a id="summary"></a> Summary
 
-During the repave process, 250 Diego Cells were updated. The repave process took 6 hours overall, or about 3 hours for each Availability Zone.
-
+During the repave process, 250 Diego Cells were updated. The repave process took 6 hours overall, or about 3 hours for each AZ.
