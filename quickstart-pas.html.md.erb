@@ -46,9 +46,7 @@ To install <%= vars.app_runtime_abbr %> with minimal configuration:
   <p class="note"><strong>Note:</strong> If you configured <%= vars.ops_manager %> Front End without a certificate, you can use this new certificate to complete your <%= vars.ops_manager %> configuration. To configure your <%= vars.ops_manager %> Front End certificate, see <a href="https://docs.pivotal.io/pcf/om/gcp/prepare-env-manual.html#config-frontend">Configure Front End</a> in <em> Preparing to Deploy Ops Manager on GCP Manually</em>.</p>
   <p class="note"><strong>Note:</strong> Ensure that you add any certificates that you generate in this pane to your infrastructure load balancer.</p>
 
-1. <%# Find this partial in GitHub at `pivotal-cf/docs-partials` %><%= partial "/pcf/core/#{vars.current_major_version.sub('.', '-')}/ssl_verification" %>
-
-1. Disable the **HAProxy forwards all requests to the Gorouter over TLS** checkbox. By default, <%= vars.app_runtime_abbr %> does not deploy HAProxy. 
+1. Disable the **HAProxy forwards all requests to the Gorouter over TLS** checkbox. By default, <%= vars.app_runtime_abbr %> does not deploy HAProxy.
 
 1. Setting appropriate ASGs is critical for a secure deployment. To acknowledge that you are responsible for setting
 the appropriate ASGs after the <%= vars.app_runtime_abbr %> deployment completes:
