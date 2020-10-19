@@ -72,23 +72,15 @@ To configure the **App Containers** pane:
 
 1. Choose how the Gorouter verifies app identity to enable encryption and prevent
 misrouting under **Gorouter app identity verification**:
-    * **The Gorouter uses TLS to verify app identity**: enables the Gorouter to
+<p class='note'><strong>Note:</strong> This feature does not work if the <strong>Disable SSL certificate verification for this environment</strong> checkbox is enabled in the <strong>Networking</strong> pane.</p>
+    * **The Gorouter uses TLS to verify app identity**: Enables the Gorouter to
 verify app identity using TLS. This is the default option.
     * **The Gorouter and apps use mutual TLS to verify each other's identity**:
-enables your apps and the Gorouter to verify each other's identity using mutual
+Enables your apps and the Gorouter to verify each other's identity using mutual
 TLS (mTLS). This option disables TCP routing because app containers accept incoming
 communication only from the Gorouter.
 
-    For more information, see [Preventing Misrouting]
-(../concepts/http-routing.html#consistency) in _HTTP Routing_.
-	    <p class='note'><strong>Note:</strong> This feature does not work if the
-      <strong>Disable SSL certificate verification for this environment</strong>
-      checkbox is enabled in the <strong>Networking</strong> pane.</p>
-	    <p class='note'><strong>Note:</strong> If you are using
-      <%= vars.windows_runtime_abbr %>, you can enable app identification using
-      TLS or mTLS in the <strong>Advanced Features</strong> pane of
-      <%= vars.windows_runtime_abbr %>. For more information, see
-      <a href="https://docs.pivotal.io/application-service-windows/installing.html#enable-route-integrity">TLS Connections from the Gorouter to Apps (Beta)</a></p>
+    For more information, see [Preventing Misrouting](../concepts/http-routing.html#consistency) in _HTTP Routing_.
 
 1. (Optional) You can configure <%= vars.app_runtime_abbr %> to run app instances in Docker containers by provided a comma-separated list of their IP address ranges in the **Private Docker insecure registry allow list** field. For more information, see [Using Docker Registries](../opsguide/docker-registry.html).
 
