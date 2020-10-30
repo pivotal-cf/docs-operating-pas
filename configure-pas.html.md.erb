@@ -62,7 +62,7 @@ To configure the **Domains** pane:
 
 1. Select **Domains**.
 
-1. Enter the name of your system domain in the **System domain** field. The system domain defines your target when you push apps to <%= vars.app_runtime_abbr %>, such as your load balancer or HAProxy. <%= vars.app_runtime_abbr %> assigns system components such as UAA and Apps Manager to subdomains under this domain. 
+1. Enter the name of your system domain in the **System domain** field. The system domain defines your target when you push apps to <%= vars.app_runtime_abbr %>, such as your load balancer or HAProxy. <%= vars.app_runtime_abbr %> assigns system components such as UAA and Apps Manager to subdomains under this domain.
 
 1. Enter the name of your apps domain in the **Apps domain** field. The apps domain is the default domain that apps use for their hostnames. <%= vars.app_runtime_abbr %> hosts each app at subdomains under this domain. You can use the Cloud Foundry Command Line Interface (cf CLI) to add or delete subdomains assigned to individual apps.
 
@@ -103,8 +103,34 @@ For additional guidance based on your installation method, see the following tab
 
 ## <a id='appdevctrl-config'></a> Configure App Developer Controls
 
-<%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
-<%= partial "/pcf/core/#{vars.current_major_version.sub('.', '-')}/application_developer_controls" %>
+In the **App Developer Controls** pane, you configure restrictions and default settings for your apps.
+
+To configure the **App Developer Controls** pane:
+
+1. Select **App Developer Controls**.
+
+1. Enter the **Maximum file upload size** in MB. This is the maximum size of an app upload, including the buildpack.
+
+1. Enter the **Maximum package size** in MB. This is the maximum total size of an app's files.
+
+1. Enter the **Default app memory** in MB. This is the default amount of memory allocated to a newly-pushed app if no value is specified with `cf push`.
+
+1. Enter the **Default app memory quota per org** in MB. This is the default memory limit for all apps in an org. The specified limit only applies to the first installation of <%= vars.app_runtime_abbr %>. After the initial installation, operators can use the cf CLI to change the default value.
+
+1. Enter the **Maximum disk quota per app** in MB. This is the maximum amount of disk allowed per app.
+	<p class="note"><strong>Note:</strong> If you allow developers to push large apps, <%= vars.app_runtime_abbr %> may have trouble placing them on Diego Cells. Additionally, in the event of a system upgrade or an outage that causes a rolling deploy, larger apps may not successfully re-deploy if there is insufficient disk capacity. Monitor your deployment to ensure your Diego Cells have sufficient disk to run your apps.</p>
+
+1. Enter the **Default disk quota per app** in MB. This is the amount of disk allocated by default to a newly-pushed app if no value is specified with `cf push`.
+
+1. Enter the **Default service instance quota per org**. The specified limit only applies to the first installation of <%= vars.app_runtime_abbr %>. After the initial installation, operators can use the cf CLI to change the default value.
+
+1. Enter the **Staging timeout** in seconds. When you stage an app droplet with the Cloud Controller, the server times out after the number of seconds you specify in this field.
+
+1. For **Internal domains**, enter one or more domains that apps use for internal DNS service discovery. If you specify a domain using `cf push -d`, other <%= vars.app_runtime_abbr %> apps can reach the pushed app at `APP-NAME.INTERNAL-DOMAIN`. This value defaults to `apps.internal`.
+
+1. Enable the **Allow space developers to manage network policies** checkbox to permit developers to manage their own network policies for their apps.
+
+1. Click **Save**.
 
 ## <a id='app-security'></a> Configure App Security Groups
 
@@ -159,7 +185,7 @@ To configure the **CredHub** pane:
 1. (Optional) Under **KMS plugin providers**, specify one or more Key Management Service (KMS) providers:
     * **Instance name:** Enter the name of the KMS provider.
     * **Endpoint:** Enter the Unix socket address for the KMS plugin.
-    * **Primary:** Enable the **Primary** checkbox to indicate the primary KMS provider for your environment. You must mark one provider as primary. Do not mark more than one provider as primary. 
+    * **Primary:** Enable the **Primary** checkbox to indicate the primary KMS provider for your environment. You must mark one provider as primary. Do not mark more than one provider as primary.
 
 1. Under **Internal encryption provider keys**, specify one or more keys to use for encrypting and decrypting the values stored in the CredHub database.
     * If you plan to use internal encryption, configure these fields:
@@ -169,7 +195,7 @@ To configure the **CredHub** pane:
     * If you plan to use a hardware security module (HSM) as your encryption provider, configure these fields:
         * **Name:** Enter a key name that already exists on your HSM or a new key name. For each new key name, CredHub generates a key in **HSM provider partition** that you configure below.
         * **Key:** Enter a placeholder value under **Key**. CredHub does not use this key for encryption. However, you cannot leave the **Key** field blank.
-        * **Primary:** This checkbox is used for marking the key you specified above as the primary encryption key. You must mark one key as primary. Do not mark more than one key as primary. 
+        * **Primary:** This checkbox is used for marking the key you specified above as the primary encryption key. You must mark one key as primary. Do not mark more than one key as primary.
     <p class="note"><strong>Note:</strong> For information about using additional keys for key rotation, see <a href="../opsguide/credential-rotation.html">Rotating Runtime CredHub Encryption Keys</a>.</p>
 
 1. (Optional) To configure CredHub to use an HSM, configure these fields:
