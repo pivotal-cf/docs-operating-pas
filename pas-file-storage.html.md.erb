@@ -27,14 +27,13 @@ factors to consider when selecting file storage, see [Configure File Storage]
 This section describes how to configure file storage for AWS.
 
 <p class="note"><strong>Note:</strong> If you followed the procedure in
-  <a href="https://docs.pivotal.io/ops-manager/2-10/aws/prepare-env-manual.html">Preparing
-  to Deploy <%= vars.platform_name %> on AWS Manually</a>, you created the necessary resources
-  for external S3-compatible file storage.</p>
+  <a href="https://docs.pivotal.io/ops-manager/<%= vars.current_major_version.sub('.','-') %>/aws/prepare-env-manual.html">Preparing to Deploy <%= vars.platform_name %> on AWS Manually</a>, you created
+  the necessary resources for external S3-compatible file storage.</p>
 
 For production-level <%= vars.platform_name %> deployments on AWS, <%= vars.company_name %>
 recommends selecting **External S3-compatible filestore**. For more information about production-
 level <%= vars.platform_name %> deployments on AWS, see [AWS Reference Architecture]
-(https://docs.pivotal.io/ops-manager/2-10/refarch/aws/aws_ref_arch.html).
+(https://docs.pivotal.io/ops-manager/<%= vars.current_major_version.sub('.','-') %>/refarch/aws/aws_ref_arch.html).
 
 <%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
 <%= partial(:"/pcf/core/#{vars.current_major_version.sub('.', '-')}/filestore_s3_config", :locals => { :aws => true }) %>
@@ -51,7 +50,7 @@ corresponds to your installation method:
 For production-level <%= vars.platform_name %> deployments on GCP, <%= vars.company_name %>
 recommends selecting **External Google Cloud Storage**. For more information about production-
 level <%= vars.platform_name %> deployments on GCP, see [GCP Reference Architecture]
-(https://docs.pivotal.io/ops-manager/2-10/refarch/gcp/gcp_ref_arch.html).
+(https://docs.pivotal.io/ops-manager/<%= vars.current_major_version.sub('.','-') %>/refarch/gcp/gcp_ref_arch.html).
 
 ### <a id="gcp-manual"></a> Manual
 
@@ -77,7 +76,7 @@ This section describes how to configure file storage for Azure.
 For production-level <%= vars.platform_name %> deployments on Azure, <%= vars.company_name %>
 recommends selecting **External Azure Storage**. For more information about production-level
 <%= vars.platform_name %> deployments on Azure, see [Azure Reference Architecture]
-(https://docs.pivotal.io/ops-manager/2-10/refarch/azure/azure_ref_arch.html).
+(https://docs.pivotal.io/ops-manager/<%= vars.current_major_version.sub('.','-') %>/refarch/azure/azure_ref_arch.html).
 
 For more factors to consider when selecting file storage, see [Configure File Storage]
 (configuring.html#file-storage) in _Configuring <%= vars.app_runtime_abbr %> for Upgrades_.
@@ -103,7 +102,7 @@ For more factors to consider when selecting file storage, see [Configure File St
 For production-level <%= vars.platform_name %> deployments on vSphere, <%= vars.company_name %>
 recommends selecting **External S3-compatible filestore** and using an external filestore.
 For more information about production-level <%= vars.platform_name %> deployments on vSphere,
-see [vSphere Reference Architecture](https://docs.pivotal.io/ops-manager/2-10/refarch/vsphere/vsphere_ref_arch.html).
+see [vSphere Reference Architecture](https://docs.pivotal.io/ops-manager/<%= vars.current_major_version.sub('.','-') %>/refarch/vsphere/vsphere_ref_arch.html).
 
 For more factors to consider when selecting file storage, see [Configure File Storage]
 (configuring.html#file-storage) in _Configuring <%= vars.app_runtime_abbr %> for Upgrades_.
