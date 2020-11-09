@@ -1,5 +1,5 @@
 ---
-title: Configuring Load Balancing for PAS
+title: Configuring Load Balancing for TAS for VMs
 owner: Releng
 ---
 
@@ -120,7 +120,7 @@ To configure the Gorouter or HAProxy to use AWS Elastic Load Balancers:
     of your web load balancer, prefixed with `alb:`: `alb:<%= vars.platform_name_lc %>-web-elb-target-group`.
     The prefix indicates to Ops Manager that you entered the name of a target group.
     The prefix is required for AWS Application Load Balancers and Network Load Balancers.
-  * **Classic Load Balancer**: Enter the name of the load balancer: `<%= vars.platform_name_lc %>-web-elb`.  
+  * **Classic Load Balancer**: Enter the name of the load balancer: `<%= vars.platform_name_lc %>-web-elb`.
     <p class="note"><strong>Note:</strong> If you are using HAProxy in your deployment, then put the name of the load balancers in the **LOAD BALANCERS** field of the <strong>HAProxy</strong> row instead of the <strong>Router</strong> row. For a high-availability configuration, scale up the HAProxy job to more than one instance.</p>
 
 1. If you enabled TCP routing, expand the **TCP Router** row and enter the name of your TCP load balancer: `<%= vars.platform_name_lc %>-tcp-elb`.
