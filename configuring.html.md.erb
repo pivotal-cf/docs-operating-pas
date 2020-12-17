@@ -8,7 +8,7 @@ This topic describes several configuration options for <%= vars.app_runtime_full
 
 ## <a id="limit-restart"></a> Limit Component Instance Restarts
 
-The `max_in_flight` variable limits how many instances of a component can restart simultaneously during updates or upgrades. Increasing the value of `max_in_flight` can make updates run faster, but setting it too high risks overloading VMs and causing failure. For guidance on setting `max_in_flight` values, see [Best Practices](#best-practices).
+The `max_in_flight` variable limits how many instances of a component can restart simultaneously during updates or upgrades. Increasing the value of `max_in_flight` can make updates run faster, but setting it too high risks overloading VMs and causing failure. For guidance on setting `max_in_flight` values, see [Basic Advice](#best-practices).
 
 Values for `max_in_flight` can be any integer between 1 and 100, or a percentage of the total number of instances. For example, a `max_in_flight` value of `20%` in a deployment with 10 Diego Cell instances would make no more than two Diego Cell instances restart at once.
 
@@ -56,86 +56,26 @@ A potential issue arises if too many app instance replacements are slow to start
 
 If too many app instances are starting concurrently, then the load of these starts on the rest of the system can cause other apps that are already running to crash and be rescheduled. These events can result in a cascading failure.
 
-To prevent this issue, <%= vars.app_runtime_abbr %> provides two throttle configurations: the maximum number of in-flight Diego Cell instances and the maximum number of starting containers.
+To prevent this issue, <%= vars.app_runtime_abbr %> provides two throttle configurations:
+
+- The maximum number of in-flight Diego Cell instances
+
+- The maximum number of starting containers
 
 The values of the above throttle configurations depend on the version of <%= vars.app_runtime_abbr %> that you have deployed and whether you have overridden the default values.
 
-See the following table for existing defaults and, if necessary, determine the override values in your deployment.
+The following list describes the existing defaults for determining the override values in your deployment:
 
-<table class="nice">
-  <tr>
-    <th><%= vars.app_runtime_abbr %> Version</th>
-    <th>Starting Container Count Maximum</th>
-    <th>Starting Container Count Overridable?</th>
-    <th>Maximum In-Flight Diego Cell Instances</th>
-    <th>Maximum In-Flight Diego Cell Instances Overridable?</th>
-  </tr>
-  <tr>
-    <td><%= vars.app_runtime_abbr %> v1.7.43 and earlier</td>
-    <td>No limit set</td>
-    <td>No</td>
-    <td>1 instance</td>
-    <td>No</td>
-  </tr>
-  <tr>
-    <td><%= vars.app_runtime_abbr %> v1.7.44 to v1.7.49</td>
-    <td>200</td>
-    <td>No</td>
-    <td>1 instance</td>
-    <td>No</td>
-  </tr>
-  <tr>
-    <td><%= vars.app_runtime_abbr %> v1.7.50 +</td>
-    <td>200</td>
-    <td>No</td>
-    <td>1 instance</td>
-    <td>No</td>
-  </tr>
-  <tr>
-    <td><%= vars.app_runtime_abbr %> v1.8.0 to v1.8.29</td>
-    <td>No limit set</td>
-    <td>No</td>
-    <td>10% of total instances</td>
-    <td>No</td>
-  </tr>
-  <tr>
-    <td><%= vars.app_runtime_abbr %> v1.8.30 +</td>
-    <td>200</td>
-    <td>Yes</td>
-    <td>10% of total instances</td>
-    <td>No</td>
-  </tr>
-  <tr>
-    <td><%= vars.app_runtime_abbr %> v1.9.0 to v1.9.7</td>
-    <td>No limit set</td>
-    <td>No</td>
-    <td>4% of total instances</td>
-    <td>Yes</td>
-  </tr>
-  <tr>
-    <td><%= vars.app_runtime_abbr %> v1.9.8 +</td>
-    <td>200</td>
-    <td>Yes</td>
-    <td>4% of total instances</td>
-    <td>Yes</td>
-  </tr>
-  <tr>
-    <td><%= vars.app_runtime_abbr %> v1.10.0 and later</td>
-    <td>200</td>
-    <td>Yes</td>
-    <td>4% of total instances</td>
-    <td>Yes</td>
-  </tr>
-  <tr>
-    <td><%= vars.app_runtime_abbr %> v1.12.0 and later</td>
-    <td>200</td>
-    <td>Yes</td>
-    <td>4% of total instances</td>
-    <td>Yes</td>
-  </tr>
-</table>
+- **Starting container count maximum:** 200
 
-### <a id="best-practices"></a> Best Practices
+- **Starting container count overridable:** Yes
+
+- **Maximum in-flight Diego cell instances:** 4% of total instances
+
+- **Maximum in-flight Diego cell instances overridable:** Yes
+
+
+### <a id="best-practices"></a> Basic Advice
 
 Set the `max_in_flight` variable high enough that the remaining component instances are not overloaded by typical use. If component instances are overloaded during updates, upgrades, or typical use, users may experience downtime.
 
