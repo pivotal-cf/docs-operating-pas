@@ -53,56 +53,33 @@ The following table summarizes <%= vars.app_runtime_abbr %> user types, their ro
 		<th>Tools They Use</th>
 		<th>Account SOR</th>
 		<th>Accounts They Can Provision</th>
-	</tr><tr>
+	</tr>
+	<tr>
 		<th><%= vars.app_runtime_abbr %> Users</th>
-		<td>
-			<ul>
-				<li>
-					UAA Administrator
-				</li>
-				<li>
-					Org Manager
-				</li>
-				<li>
-					Org Auditor
-				</li>
-				<li>
-					Org Billing Manager
-				</li>
-				<li>
-					Space Manager
-				</li>
-				<li>
-					Space Developer
-				</li>
-				<li>
-					Space Auditor
-				</li>
-			</ul>
-		</td>
-		<td>
-		 	<ul>
-				<li>
-					cf CLI
-				</li>
-				<li>
-					CAPI
-				</li>
-				<li>
-					Apps Manager
-				</li>
-				<li>
-					<%= vars.platform_name %> Metrics
-				</li>
-				<li>
-					Marketplace
-				</li>
-			</ul>
-		</td>
-		<td><%= vars.app_runtime_abbr %> user store through UAA<br>
-			&nbsp;&nbsp;<em>or</em><br>
-			External store through SAML or LDAP</td>
-		<td><%= vars.app_runtime_abbr %> users within permitted orgs and spaces, and <br>
-		end users of the app</td>
+			<td>
+				<ul>
+					<li>UAA Administrator</li>
+					<li>Org Manager</li>
+					<li>Org Auditor</li>
+					<li>Org Billing Manager</li>
+					<li>Space Manager</li>
+					<li>Space Developer</li>
+					<li>Space Auditor</li>
+				</ul>
+			</td>
+			<td>
+			 	<ul>
+					<li>cf CLI</li>
+					<li>CAPI</li>
+					<li>Apps Manager</li>
+					<li><%= vars.platform_name %> Metrics</li>
+					<li>Marketplace</li>
+				</ul>
+			</td>
+			<td><%= vars.app_runtime_abbr %> user store through UAA<br>
+				&nbsp;&nbsp;<em>or</em><br>
+				External store through SAML or LDAP</td>
+			<td><%= vars.app_runtime_abbr %> users within permitted orgs and spaces, and<br>
+			end users of the app</td>
 	</tr>
 </table>
