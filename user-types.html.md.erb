@@ -1,45 +1,46 @@
 ---
-title: Pivotal Platform User Types
+title: PAS User Types
 owners: CAPI, Identity
 ---
 
-<% current_page.data.title = vars.product_name + " User Types"  %>
+This topic describes the types of <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) users in a <%= vars.product_name %> deployment. It also describes the roles and permissions for <%= vars.app_runtime_abbr %> users and who creates and manages their user accounts.
 
-This topic describes the types of Pivotal Application Service (PAS) users in a <%= vars.product_name %> deployment. It also describes the roles and permissions for PAS users and who creates and manages their user accounts.
 
 ## <a id="overview"></a> Overview
 
-PAS users are app developers, managers, and auditors who work within orgs and spaces, the virtual compartments within a deployment where PAS users can run apps and locally manage their roles and permissions.
+<%= vars.app_runtime_abbr %> users are app developers, managers, and auditors who work within orgs and spaces, the virtual compartments within a deployment where <%= vars.app_runtime_abbr %> users can run apps and locally manage their roles and permissions.
 
-A Role-Based Access Control (RBAC) system defines and maintains the different PAS user roles:
+A Role-Based Access Control (RBAC) system defines and maintains the different <%= vars.app_runtime_abbr %> user roles:
 
 * Org Manager, Org Auditor, Org Billing Manager
 * Space Manager, Space Developer, Space Auditor
 
-For more information about PAS user roles and what actions they can take within the orgs and spaces they belong to, see [Orgs, Roles, Spaces, Permissions](../concepts/roles.html). 
+For more information about <%= vars.app_runtime_abbr %> user roles and what actions they can take within the orgs and spaces they belong to, see [Orgs, Roles, Spaces, Permissions](../concepts/roles.html).
 
-## <a id="er-user-tools-tasks"></a> PAS User Tools
 
-All PAS users use system tools such as the Cloud Foundry Command Line Interface (cf CLI), <%= vars.product_name %> Metrics, and Apps Manager, a dashboard for managing PAS users, orgs, spaces, and apps. Space Developer PAS users work with their software development tools and the apps deployed on host VMs.
+## <a id="er-user-tools-tasks"></a> <%= vars.app_runtime_abbr %> User Tools
+
+All <%= vars.app_runtime_abbr %> users use system tools such as the Cloud Foundry Command Line Interface (cf CLI), <%= vars.product_name %> Metrics, and Apps Manager, a dashboard for managing <%= vars.app_runtime_abbr %> users, orgs, spaces, and apps. Space Developer <%= vars.app_runtime_abbr %> users work with their software development tools and the apps deployed on host VMs.
 
 For more information about Apps Manager, see [Using Apps Manager](../console/index.html).
 
-## <a id="er-user-accounts"></a> PAS User Accounts
 
-When an operator configures PAS for the first time, they specify one of the following authentication systems for PAS user accounts:
+## <a id="er-user-accounts"></a> <%= vars.app_runtime_abbr %> User Accounts
 
-* Internal authentication, using a new UAA database created for PAS. This system-wide UAA differs from the Ops Manager internal UAA, which only stores Ops Manager Admin accounts.
+When an operator configures <%= vars.app_runtime_abbr %> for the first time, they specify one of the following authentication systems for <%= vars.app_runtime_abbr %> user accounts:
+
+* Internal authentication, using a new UAA database created for <%= vars.app_runtime_abbr %>. This system-wide UAA differs from the Ops Manager internal UAA, which only stores Ops Manager Admin accounts.
 
 * External authentication, through an existing identity provider accessed through SAML or LDAP protocol.
 
-In either case, PAS user role settings are saved internally in the Cloud Controller Database, separate from the internal or external user store.
+In either case, <%= vars.app_runtime_abbr %> user role settings are saved internally in the Cloud Controller Database, separate from the internal or external user store.
 
-Org and Space Managers then use Apps Manager to invite and manage additional PAS users within their orgs and spaces. PAS users with proper permissions can also use the Cloud Foundry CLI (cf CLI) to assign user roles. For more information, see [Managing User Roles with Apps Manager](../console/console-roles.html).
+Org and Space Managers then use Apps Manager to invite and manage additional <%= vars.app_runtime_abbr %> users within their orgs and spaces. <%= vars.app_runtime_abbr %> users with proper permissions can also use the Cloud Foundry CLI (cf CLI) to assign user roles. For more information, see [Managing User Roles with Apps Manager](../console/console-roles.html).
 
 
 ## <a id='table'></a> User Types Summary
 
-The following table summarizes PAS user types, their roles, the tools they use, the System of Record (SOR) that stores their accounts, and what accounts they can provision.
+The following table summarizes <%= vars.app_runtime_abbr %> user types, their roles, the tools they use, the System of Record (SOR) that stores their accounts, and what accounts they can provision.
 
 <table id='users-summary' border='1' class='nice'>
 	<col width="20%">
@@ -53,57 +54,33 @@ The following table summarizes PAS user types, their roles, the tools they use, 
 		<th>Tools They Use</th>
 		<th>Account SOR</th>
 		<th>Accounts They Can Provision</th>
-	</tr><tr>
-		<th>PAS Users</th>
-		<td>
-			<ul>
-				<li>
-					UAA Administrator
-				</li>
-				<li>
-					Org Manager
-				</li>
-				<li>
-					Org Auditor
-				</li>
-				<li>
-					Org Billing Manager
-				</li>
-				<li>
-					Space Manager
-				</li>
-				<li>
-					Space Developer
-				</li>
-				<li>
-					Space Auditor
-				</li>
-			</ul>
-		</td>
-
-		<td>
-		 	<ul>
-				<li>
-					cf CLI
-				</li>
-				<li>
-					CAPI
-				</li>
-				<li>
-					Apps Manager
-				</li>
-				<li>
-					<%= vars.product_name %> Metrics
-				</li>
-				<li>
-					Marketplace
-				</li>
-			</ul>
-		</td>
-		<td>PAS user store through UAA<br>
-			&nbsp;&nbsp;<i>or</i><br>
-			External store through SAML or LDAP</td>
-		<td>PAS users within permitted orgs and spaces, and <br>
-		end users of the app</td>
+	</tr>
+	<tr>
+		<th><%= vars.app_runtime_abbr %> Users</th>
+			<td>
+				<ul>
+					<li>UAA Administrator</li>
+					<li>Org Manager</li>
+					<li>Org Auditor</li>
+					<li>Org Billing Manager</li>
+					<li>Space Manager</li>
+					<li>Space Developer</li>
+					<li>Space Auditor</li>
+				</ul>
+			</td>
+			<td>
+			 	<ul>
+					<li>cf CLI</li>
+					<li>CAPI</li>
+					<li>Apps Manager</li>
+					<li><%= vars.product_name %> Metrics</li>
+					<li>Marketplace</li>
+				</ul>
+			</td>
+			<td><%= vars.app_runtime_abbr %> user store through UAA<br>
+				&nbsp;&nbsp;<em>or</em><br>
+				External store through SAML or LDAP</td>
+			<td><%= vars.app_runtime_abbr %> users within permitted orgs and spaces, and <br>
+			end users of the app</td>
 	</tr>
 </table>
