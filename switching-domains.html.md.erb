@@ -13,7 +13,7 @@ To change the domain of an existing <%= vars.platform_name %> installation:
 
 1. Select **Domains** to see the current **Apps domain** for your <%= vars.app_runtime_abbr %> deployment.
 
-	<img src="./images/switching_domains/er17-switchdomains-before.png" alt="The page header says 'Domains'. Below this header is the text 'For help configuring these fields, see Configure Domains in Configuring TAS for VMs topic in the VMware Tanzu documentation,' with 'Configure Domain' in blue letters to denote a clickable link. Below this text are two fields labeled 'System domain' and 'Apps domain', with red asterisks to denote that they are required fields. The 'System domain' field contains the text 'yoursystem.yourdomain.com'. The 'Apps domain' field contains the text 'yourapps.yourdomain.com'. At the bottom of the image is a rectangular blue button labeled 'Save'.">
+	<img src="./images/switching_domains/er17-switchdomains-before.png" alt="'Domains' pane shows 'System domain' field with example text 'yoursystem.yourdomain.com' and 'Apps domain' field with 'yourapps.yourdomain.com.'">
 
 1. In the terminal, run:
 
@@ -88,7 +88,7 @@ To change the domain of an existing <%= vars.platform_name %> installation:
 
 1. Repeat the previous step for each app in this space. Afterward, check Apps Manager to confirm that the route URL has updated correctly for each app:
 
-	<img src= "./images/switching_domains/new_domain_confirmed1.png">
+	<img src= "./images/switching_domains/new_domain_confirmed1.png" alt="Apps Manager space shows an application's status at 100%.">
 
 1. Repeat the above steps for each space in your <%= vars.platform_name %> installation except for the System org, beginning with logging into the org and space and ending with confirming the URL update.
 	<p class='note'><strong>Note:</strong> Ordinarily the System org contains only <%= vars.platform_name %> apps that perform utility functions for your installation. <%= vars.company_name %> does not recommend pushing apps to this org. However, if you have pushed apps to the System org, you must also repeat the above steps for these apps.</p>
@@ -113,7 +113,7 @@ To change the domain of an existing <%= vars.platform_name %> installation:
 
 1. In the **Domains** pane of the <%= vars.app_runtime_abbr %> tile, enter the new domain in the **Apps domain** field. This configures <%= vars.app_runtime_abbr %> to use the new domain.
 
-	<img src="./images/switching_domains/er17-switchdomains-after.png" alt="The page header says 'Domains'. Below this header is the text 'For help configuring these fields, see Configure Domains in Configuring TAS for VMs topic in the VMware Tanzu documentation,' with 'Configure Domain' in blue letters to denote a clickable link. Below this text are two fields labeled 'System domain' and 'Apps domain', with red asterisks to denote that they are required fields. The 'System domain' field contains the text 'yoursystem.yourdomain.com'. The 'Apps domain' field contains the text 'newapps.yourdomain.com'. At the bottom of the image is a rectangular blue button labeled 'Save'.">
+	<img src="./images/switching_domains/er17-switchdomains-after.png" alt="'Domains' pane shows 'System domain' field with example text 'yoursystem.yourdomain.com' and 'Apps domain' field with 'yourapps.yourdomain.com.'">
 
 1. Return to the <%= vars.ops_manager %> Installation Dashboard.
 
