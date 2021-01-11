@@ -33,7 +33,7 @@ To scale up PAS instances:
 1. Click the PAS tile.
 
 1. Select **Resource Config**.
-<%= image_tag("images/scaling-ert.png") %>
+<%= image_tag("images/scaling-ert.png", :alt => "'Resource Config pane lists 22 jobs. Each job has a dropdown for 'Instances,' 'Persistent Disk Type,' and 'VM Type.'") %>
 
 1. To scale your deployment horizontally, increase the number of **Instances** of a job. For guidance on the number of job instances required to ensure high availability, see [Scaling Recommendations](#scalingtable).
   <p class="note"><strong>Note:</strong> In <%= vars.platform_name %> v1.12, you cannot scale the Autoscaler job to greater than one instance.</p>
@@ -56,7 +56,7 @@ To scale down your deployment:
 1. Click the PAS tile in the Installation Dashboard.
 
 1. Select **Resource Config**.
-<%= image_tag("images/scaling-ert.png") %>
+<%= image_tag("images/scaling-ert.png", :alt => "'Resource Config pane lists 22 jobs. Each job has a dropdown for 'Instances,' 'Persistent Disk Type,' and 'VM Type.'") %>
 
 1. In the **Resource Config** screen, decrease the number of **Instances** for each job. Choose the suggested values outlined in [Scaling Recommendations](#scalingtable) or in the [Scaling Recommendations for Specific Deployment Configurations](#deployscenarios).
 
