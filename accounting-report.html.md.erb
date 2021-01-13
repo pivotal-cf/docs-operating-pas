@@ -208,7 +208,7 @@ $ curl "https://app-usage.YOUR-SYSTEM-DOMAIN/system_report/service_usages" -k -v
 }
 </pre>
 
-### <a id='org-usage'></a> All Orgs Usage (Beta)
+### <a id='org-usage'></a> All Orgs Usage
 
 The `app_usages` endpoint directly under your system domain returns system-wide app usage for all orgs that you have access to. The command works like the org-specific [App Usage](#org-app-usage) command, except you do not supply an org GUID.
 You can set `order_by` to either `total_instance_hours` or `megabyte_hours`.
@@ -239,7 +239,6 @@ $ curl "https://app-usage.YOUR-SYSTEM-DOMAIN/app_usages?start=2018-010-01&end=20
 
 </pre>
 
-This beta API endpoint may change.
 
 
 ## <a id="individual_org"></a> Obtain Org Usage Information
