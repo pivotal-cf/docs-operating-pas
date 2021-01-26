@@ -87,8 +87,7 @@ Some more precise guidelines include:
 
 * For other components, set `max_in_flight` to the number of instances that you can afford to have down at any one time. The best values for your deployment vary based on your capacity planning. In a highly redundant deployment, you can make the number high so that updates run faster. However, if your components are at high utilization, you should keep the number low to prevent downtime.
 
-* Setting `max_in_flight` to a value greater than or equal to the number of instances you have running may result in reduced functionality.
-
+* Setting `max_in_flight` to a value greater than or equal to the number of instances you have running may reduce functionality.
 
 ## <a id="container-starts"></a> Set a Maximum Number of Starting Containers
 
