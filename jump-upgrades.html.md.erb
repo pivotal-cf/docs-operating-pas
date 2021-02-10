@@ -62,10 +62,6 @@ v2.4 through v2.8 and how to address them before upgrading:
 		<td>You can only SSH onto the <%= vars.ops_manager %> VM in a vSphere deployment
 			with a private SSH key, not a password. You could get an error when authenticating
 			that causes <%= vars.ops_manager %> to shut down and enter a reboot loop.</td>
-		<td>Add a public key to the OVF template for the <%= vars.ops_manager %> VM.
-			Then, use the private key to SSH onto the <%= vars.ops_manager %> VM. For
-			more information, see <a href="vsphere/deploy.html#deploy">Deploy Ops Manager</a>
-			in <em>Deploying Ops Manager on vSphere</em>.</td>
 	</tr>
 	<tr>
 		<td>v2.4 and v2.5</td>
