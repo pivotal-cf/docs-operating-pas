@@ -1,0 +1,332 @@
+---
+title: Deploying TAS for VMs to VMC
+owner: dap-tas-vmc-vcf-anycloud
+---
+
+This topic describes how to install <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) to VMware Cloud on AWS (VMC).
+
+
+## <a id='introduction'></a> Overview
+
+VMC provides Software Defined Data Centers (SDDCs) running on AWS, with a high-level management console to easily configure networking rules. 
+
+This topic describes the procedures to configure and install <%=
+vars.app_runtime_abbr %> on VMC using public IP addresses for ingress. Your
+networking configuration may differ if you plan to use a
+[VPN](https://docs.vmware.com/en/VMware-Cloud-on-AWS/services/com.vmware.vmc-aws.networking-security/GUID-92F6C09E-8E74-430E-8F79-C2E5B2150ADA.html)
+or [Direct Connect
+VIFs](https://docs.vmware.com/en/VMware-Cloud-on-AWS/services/com.vmware.vmc-aws.networking-security/GUID-417EE2F1-0EA5-4808-BDB3-6FF622EECB95.html)
+to connect your network to the VMC SDDC.
+
+## <a id='requirements'></a> Prerequisites
+
+Before deploying <%= vars.app_runtime_abbr %> on a VMC SDDC you must have the following:
+
+* A [VMC account](https://vmc.vmware.com) with an SDDC provisioned and vCenter access configured. If you do not already have browser access to vCenter configured, see the [Notes](#vcenter-access) section below for steps to allow network access.
+* [<%= vars.ops_manager %> for vSphere](https://network.pivotal.io/products/ops-manager/) downloaded from VMware Tanzu Network.
+* The [<%= vars.app_runtime_abbr %> tile](https://network.pivotal.io/products/elastic-runtime) downloaded from VMware Tanzu Network.
+* The [govc cli](https://github.com/vmware/govmomi/blob/master/govc/README.md) installed to your local workstation or jump host.
+
+## <a id='install'></a> Install and Configure <%= vars.app_runtime_abbr %>
+
+Installing <%= vars.app_runtime_abbr %> requires:
+
+1. [Install Operations Manager](#om-setup)
+
+1. [Install BOSH Director for vSphere](#bosh-setup)
+
+1. [Install and Configure the <%= vars.app_runtime_abbr %> Tile](#tas-tile)
+
+### <a id='om-setup'></a> Install Operations Manager
+
+1. Find the VMC pre-installed network to use for the BOSH infrastructure network (typically 192.168.1.0/24):
+    -  [https://vmc.vmware.com/console/sddcs](https://vmc.vmware.com/console/sddcs) → SDDCs → expand anycloud → View Details
+    -  Networking & Security → Network → Segments
+    -  Record the segment name **sddc-cgw-nework-1**
+    -  Record the subnet **192.168.1.1/24** (Note that SDDC combines the gateway IP and CIDR into a single value.)
+
+1. Assuming nothing has changed, create an options.json file for Operations Manager’s .ova with the following contents:
+
+    ```
+    {
+      "NetworkMapping": [
+        {
+          "Name": "Network 1",
+          "Network": "sddc-cgw-network-1"
+        }
+      ],
+      "PropertyMapping": [
+        {
+          "Key": "ip0",
+          "Value": "192.168.1.10"
+        },
+        {
+          "Key": "netmask0",
+          "Value": "255.255.255.0"
+        },
+        {
+          "Key": "gateway",
+          "Value": "192.168.1.1"
+        },
+        {
+          "Key": "DNS",
+          "Value": "8.8.8.8"
+        },
+        {
+          "Key": "ntp_servers",
+          "Value": "time.google.com"
+        }
+      ]
+    }
+    ```
+
+1. Upload the operations manager that we downloaded in an earlier step:
+
+    ```
+    export GOVC_DATACENTER=SDDC-Datacenter
+    export GOVC_DATASTORE=WorkloadDatastore
+    export GOVC_RESOURCE_POOL=Compute-ResourcePool
+
+    # remember to change the password and vCenter URL to the correct values
+    export GOVC_URL='cloudadmin@vmc.local':'aP4ssw0rd!'@vcenter.sddc-35-162-72-214.vmwarevmc.com
+
+    govc library.create tas
+    govc library.import tas <PATH TO OPS MANAGER .ova FILE>
+    govc library.deploy -options options.json /tas/ops-manager-vsphere-2.##.#-build.### ops-manager
+     # create the necessary Resource Pools/AZs
+    govc pool.create /SDDC-Datacenter/host/Cluster-1/Resources/az{1,2,3}
+    ```
+    <p class="note"><strong>Note:</strong> We recommend <code>govc library.*</code> commands
+    instead of <code>govc import.ova</code> because the latter depends on access to the ESXi
+    hosts which is not configured by default in VMC. <code>govc.import</code> will produce
+    errors like: <code>govc: Post
+    "https://10.2.32.4/nfc/5224a51f-114e-4627-8ca8-547c2e2e9488/disk-0.vmdk": dial
+    tcp 10.2.32.4:443: i/o timeout</code>
+    </p>
+
+1. Log into the vCenter: 
+    - [https://vmc.vmware.com/console/sddcs](https://vmc.vmware.com/console/sddcs) → SDDCs → expand anycloud → Open vCenter → Show Credentials  → Open vCenter
+    - Find the Operations Manager VM
+    - ^ ⌥ 2 (ctrl + alt + 2) to get the Hosts & Clusters view
+    - Open the `Compute-ResourcePool`, find the `ops-manager` VM, click it.
+    - Press the ▶ icon to power on the VM.
+
+1. Create public IP addresses for Operations Manager and HAProxy:
+    - [https://vmc.vmware.com/console/sddcs](https://vmc.vmware.com/console/sddcs) → SDDCs → View Details
+    - Networking & Security → Public IPs → Request New IP
+        - notes: **operations-manager**, click Save
+        - Record the IP (**54.190.190.190**)
+    - Request New IP
+        - notes: **HAProxy**, click Save
+        - Record the IP (**54.180.180.180**)
+
+1. Create a second network segment to use as the BOSH deployment network:
+    - [https://vmc.vmware.com/console/sddcs](https://vmc.vmware.com/console/sddcs) → SDDCs → expand anycloud → View Details
+    - Networking & Security → Network → Segments
+    - Click **Add Segment**
+        - Segment Name: **bosh-network**
+        - Type: **routed**
+        - Subnets: **192.168.2.1/24** 
+
+1. Assign public IP addresses to Operations Manager and HAProxy:
+    - [https://vmc.vmware.com/console/sddcs](https://vmc.vmware.com/console/sddcs) → SDDCs → View Details
+    - Networking & Security → NAT → **Add NAT Rule**
+    - Rule Name: **ops-manager**
+    - Public IP: **54.190.190.190** (the one we just got)
+    - Internal IP: **192.168.1.10**
+    - Click **Save**
+    - **Add NAT Rule**
+    - Rule Name: **HAProxy**
+    - Public IP: **54.180.180.180** (the other one we just got)
+    - Internal IP: **192.168.2.2**
+    - Click **Save**
+
+1. Add a firewall rules that allow ingress to Operations Manager and HAProxy:
+    - [https://vmc.vmware.com/console/sddcs](https://vmc.vmware.com/console/sddcs) → SDDCs → View Details
+    - Networking & Security → Security → Gateway Firewall → Compute Gateway → **Add Rule**
+    - Click on the newly-created **New Rule**
+        - Rule Name: **opsman-ingress**
+        - Sources: **Any**
+        - Destinations:
+        - Click on the pencil to edit
+            - Click **add group**
+                - Group name: **OM**
+                - Click **Set Members**
+                - Click the **IP Addresses** tab
+                - Enter the OM internal ip (**192.168.1.10**)
+                - Press **Enter**
+                - Click **apply**
+            - Click **save**
+        - Click **apply**
+    - Click **publish**
+    - Click **Add Rule** again
+    - Click on the newly-created **New Rule**
+        - Rule Name: **HAProxy-ingress**
+        - Sources: **Any**
+        - Destinations:
+        - Click on the pencil to edit
+            - Click **add group**
+                - Group name: **HAProxy**
+                - Click **Set Members**
+                - Click the **IP Addresses** tab
+                - Enter the HAProxy internal ip (**192.168.2.2**)
+                - Press **Enter**
+                - Click **apply**
+            - Click **save**
+        - Click **apply**
+    - Click **publish**
+
+1. Add a firewall rule that allows egress for the 192.168.1.x and 192.168.2.x subnets:
+    - [https://vmc.vmware.com/console/sddcs](https://vmc.vmware.com/console/sddcs) → SDDCs → View Details
+    - Networking & Security → Security → Gateway Firewall → Compute Gateway → Add Rule
+    - Click on the newly-created **New Rule**
+        - Rule Name: **<%= vars.app_runtime_abbr %>-egress**
+        - Sources: click on the **pencil** to edit
+            - Click **add group**
+                - Group name: **<%= vars.app_runtime_abbr %>**
+                - Click **Set Members**
+                - Click the **IP Addresses** tab
+                - Enter the first subnet CIDR (**192.168.1.0/24**)
+                - Press **Enter**
+                - Enter the second subnet CIDR (**192.168.2.0/24**)
+                - Press **Enter**
+                - Click **apply**
+            - Click **save**
+        - Click **apply**
+        - Destinations: **Any**
+    - Click **Publish**
+
+### <a id='bosh-setup'></a> Install BOSH Director for vSphere
+
+<p class="note"><strong>Note:</strong> The instructions are less detailed in
+the following sections, as installation of <%= vars.app_runtime_abbr %> on
+vSphere environments is well documented, but we have highlighted the settings
+that are specific to this reference architecture.
+</p>
+
+1. Log into the new Operations Manager and configure BOSH:
+    - [https://54.190.190.190/](https://54.190.190.190/) 
+    - account: **admin**
+    - password: **_some-password_**
+    - decryption passphrase: **_some-passphrase_**
+
+1. Configure **BOSH Director for vSphere** as follows:
+    - **Settings → vCenter Config**
+        - vCenter Host: your vCenter URL, e.g. **vcenter.sddc-35-162-72-214.vmwarevmc.com**
+        - vCenter Username: **cloudadmin@vmc.local**
+        - vCenter Password: **&lt;use the password you gathered from the SDDC above>**
+        - Datacenter Name: **SDDC-Datacenter**
+        - Virtual Disk Type: select **thin**
+        - Ephemeral Datastore Names: **WorkloadDatastore**
+        - Persistent Datastore Names: **WorkloadDatastore**
+        - Select **Standard vCenter Networking**
+    - **Settings → Director Config**
+        - NTP Servers: **time.google.com **(or some other NTP server of your choice)
+    - **Settings → Create Availability Zones**
+        - az1:
+            - Name: **az1**
+            - Clusters:
+                - Cluster: **Cluster-1**
+                - Resource Pool: **az1**
+        - az2:
+            - Name: **az2**
+            - Clusters:
+                - Cluster: **Cluster-1**
+                - Resource Pool: **az2**
+        - az3:
+            - Name: **az3**
+            - Clusters:
+                - Cluster: **Cluster-1**
+                - Resource Pool: **az3**
+    - **Settings → Create Networks → Networks**
+        - infra:
+            - Name: **infra**
+            - Subnets:
+                - vSphere Network Name: **sddc-cgw-network-1**
+                - CIDR: **192.168.1.0/24**
+                - Reserved IP Ranges: **192.168.1.1-192.168.1.10**
+                - DNS: **8.8.8.8**
+                - Gateway: **192.168.1.1**
+                - Availability Zones: **az1, az2, az3**
+        - deployment:
+            - Name: **deployment**
+            - Subnets:
+                - vSphere Network Name: **bosh-network**
+                - CIDR: **192.168.2.0/24**
+                - Reserved IP Ranges: **192.168.2.1**
+                - DNS: **8.8.8.8**
+                - Gateway: **192.168.2.1**
+                - Availability Zones: **az1, az2, az3**
+    - **Settings → Assign AZs and Networks**
+        - Singleton Availability Zone: **az1**
+        - Network:** infra**
+    - **Settings → Security**
+        - Include Tanzu Ops Manager Root CA in Trusted Certs: **Check this checkbox**
+
+1. **After finishing configuration**, click **Apply Changes**. You will see the following warning:
+    ![Required Datacenter privileges not available](images/opsman-warning.png)
+    - Ignore this warning. You don’t need `EditCluster` permission. 
+        - Click **Ignore Warnings & Apply Changes**.
+
+### <a id='tas-tile'></a> Install <%= vars.app_runtime_abbr %>
+1. Configure the <%= vars.app_runtime_abbr %> tile as follows:
+    - **Settings → Assign AZs and Networks**
+        - Network: select **deployment**
+        - Click **Save** 
+    - **Settings → Domains**
+        - Use nip.io or sslip.io or set up your own wildcard domain, and make sure that it maps to the HAProxy public IP address we configured earlier. For example:
+            - System domain: **sys.54.180.180.180.nip.io**
+            - Apps domain: **run.54.180.180.180.nip.io**
+    - **Settings → Networking**
+        - Set the HAProxy IP to the one we specified in the NAT rule above (the first available IP in the “deployment” network.)
+            - HAProxy IPs: **192.168.2.2**
+        - Generate a certificate for the gorouter/HAProxy:
+            - Certificates and private keys for the Gorouter and HAProxy: click **Add**
+                *   Name: haproxy cert (or whatever)
+                *   Click the **Generate RSA Certificate** link
+                    *   Add *. domains for your system and apps domain above, separated by a comma, E.g. *.**sys.54.180.180.180.nip.io,*.run.54.180.180.180.nip.io**
+        - Set HAProxy as the TLS termination point:
+            - TLS Termination: **HA Proxy**
+        - Disable TLS forwarding for HAProxy so that we don’t have to create a certificate:
+            - HAProxy forwards all requests to the Gorouter over TLS: Click **Disable.**
+    - **Settings → UAA**
+        - For UAA configuration, generate a SAML cert for *.login.SYSTEM-DOMAIN
+            - **→ SAML service provider credentials**
+                - Click **Generate RSA Certificate**
+                - Enter your domain, E.g. ***.login.sys.54.180.180.180.nip.io**
+                - Click **Generate**
+    - **Settings → Resource Config **
+        Scale the HAProxy instances up to 1
+        - **→ HAProxy**
+            *   Set Instances to **1**
+            *   Click **Save**
+
+1. **After finishing configuration**, click **Apply Changes**. You will again see the following warning:
+    ![Required Datacenter privileges not available](images/opsman-warning.png)
+    - Ignore this warning. You don’t need `EditCluster` permission. 
+        - Click **Ignore Warnings & Apply Changes**.
+
+## <a id='notes'></a> Notes
+### <a id='vcenter-access'></a> To allow yourself to access vCenter from the internet
+
+By default, ingress to vCenter is not enabled. If you are not using a VPN or other network, you will need to create a firewall rule in SDDC to allow vCenter access.
+
+[VMC Console](https://vmc.vmware.com/console/sddcs) → SDDCs → expand anycloud → View Details → Networking & Security  → Security 
+
+1. Click **Gateway Firewall**
+1. Click **Management Gateway**
+1. Click **+ Add Rule**
+  * Name: **vCenter Inbound Rule**
+  * Destinations: select **vCenter**, click **Apply**
+  * Services: **HTTPS, ICMP, SSO**
+1. Click **Publish**
+
+### <a id='vcenter-creds'></a> To record the vCenter’s credentials
+
+Login credentials for the vCenter instance in your SDDC can be gathered as follows:
+
+[VMC Console](https://vmc.vmware.com/console/sddcs) → SDDCs → expand anycloud → Open vCenter
+
+1. You will see a pop-up: “Before you can log into vCenter, you must open network access to vCenter through the management gateway. Choose an option for opening network access.”
+1. Click **Show Credentials**
+1. Record the credentials
