@@ -1,0 +1,43 @@
+---
+title: Jump Upgrading to TAS for VMs v2.11
+owner: RelEng
+---
+
+This topic describes upgrading to <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) v2.11 directly from
+<%= vars.app_runtime_abbr %> v2.7 and later.
+
+
+## <a id='overview'></a> Overview
+
+Jump upgrading describes the process of skipping minor versions when upgrading
+<%= vars.app_runtime_abbr %>. Jump upgrading enables you to upgrade directly to the
+long-term support (LTS) version of <%= vars.app_runtime_abbr %>, which is v2.11.
+<%= vars.app_runtime_abbr %> v2.11 is supported through April 2024.
+
+
+## <a id="prerequisites"></a> Prerequisites
+
+Before you jump upgrade to <%= vars.app_runtime_abbr %> v2.11:
+
+
+## <a id="jump-upgrade"></a> Jump Upgrade
+
+After you ensure your deployment meets the requirements described in
+[Prerequisites](#prequisites) above, you can upgrade to <%= vars.app_runtime_abbr %>
+v2.11.0 or later.
+
+To jump upgrade to <%= vars.app_runtime_abbr %> to v2.11.0 or later:
+
+1. Review the table in [Breaking Changes](#breaking-changes) below
+and address any breaking changes that apply to your current <%= vars.app_runtime_abbr %>
+version.
+
+1. Review [Configuring TAS for VMs for Upgrades](./configuring.html).
+
+
+## <a id="breaking-changes"></a> Breaking Changes
+
+The table below describes the breaking changes that affect <%= vars.app_runtime_abbr %>
+v2.4 through v2.8 and how to address them before upgrading:
+
+<%# Relevant TAS breaking changes here %>
