@@ -4,8 +4,10 @@ This reposirtory publishes through the [docs-book-application-service](https://g
 
 For example, http://docs-pcf-staging.cfapps.io/application-service/2-8/operating/configure-pas.html#internal-mysql
 
-As of February 2020, the pipelines are:
+As of February 2021, the pipelines are:
 
-+ https://concourse.run.pivotal.io/teams/cf-docs/pipelines/cf-current?group=application-service-2-9
-+ https://concourse.run.pivotal.io/teams/cf-docs/pipelines/cf-current?group=application-service-2-8
-+ https://concourse.run.pivotal.io/teams/cf-docs/pipelines/cf-previous-versions?group=application-service-2-7
++ https://runway-ci.eng.vmware.com/teams/mapbu-docs/pipelines/cf-current?group=application-service-2-11
++ https://runway-ci.eng.vmware.com/teams/mapbu-docs/pipelines/cf-current?group=application-service-2-10
++ https://runway-ci.eng.vmware.com/teams/mapbu-docs/pipelines/cf-current?group=application-service-2-9
++ https://runway-ci.eng.vmware.com/teams/mapbu-docs/pipelines/cf-current?group=application-service-2-8
++ https://runway-ci.eng.vmware.com/teams/mapbu-docs/pipelines/cf-current?group=application-service-2-7
