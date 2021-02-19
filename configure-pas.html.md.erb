@@ -219,6 +219,12 @@ To configure the **CredHub** pane:
 
 1. Under the **Job** column of the **CredHub** row, ensure that the number of instances is set to `2`. This is the minimum instance count required for high availability.
 
+1. To configure UAA so it recognizes a proxy, complete the following fields:
+    * **List of proxy servers:** Enter a comma-separated list of router IP addresses for the first group of HTTP/TCP backends. 
+    * **http proxy:** Enter the `http_proxy` for all http requests across VMs.
+    * **https proxy:** Enter the `https_proxy` for all http requests across VMs
+    * **no proxy:** Enter a comma-separated list of either domains, IP addresses or DNS suffixes. 
+    
 1. Click **Save**.
 
 
