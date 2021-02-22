@@ -36,9 +36,204 @@ recommends selecting **External S3-compatible filestore**. For more information 
 <%= vars.platform_name %> deployments on AWS, see [AWS Reference Architecture]
 (https://docs.pivotal.io/ops-manager/2-10/refarch/aws/aws_ref_arch.html).
 
+To use an external S3-compatible filestore for <%= vars.app_runtime_abbr %>
+file storage follow one of these procedures:
+
+* Use an access key and secret key. For more information, see [External AWS S3
+with Access Key and Secret Key](#aws-storage-key) below.
+
+* Use an AWS instance profile. For more information, see [External AWS S3 with
+Instance Profile](#aws-storage-instance-profile) below.
+
+#### <a id="aws-storage-key"></a> External AWS S3 with Access Key and Secret Key
+
 <%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
 <%= partial(:"/pcf/core/#{vars.current_major_version.sub('.', '-')}/filestore_s3_config", :locals => { :aws => true }) %>
 
+#### <a id="aws-storage-instance-profile"></a> External AWS S3 with Instance Profile
+
+<p class='note'><strong>Note:</strong>
+  Using AWS Instance Profiles requires that your <%= vars.app_runtime_abbr %>
+  deployment is running on AWS EC2 and that your filestore is AWS S3.
+  For more information, see [AWS Identity and Access Management](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-ro
+  in the AWS documentation.
+</p>
+
+Prior to configuring your <%= vars.app_runtime_abbr %> to authenticate with
+an external S3 blobstore using AWS instance profiles,
+you will need to configure a new VM Extension on your BOSH Director.
+
+1. Create a `cloud-controller` [IAM role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html)
+with the following policy to give access to the S3 buckets you plan to use:
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [{
+    "Effect": "Allow",
+    "Action": [ "s3:*" ],
+    "Resource": [
+      "arn:aws:s3:::YOUR-AWS-BUILDPACK-BUCKET",
+      "arn:aws:s3:::YOUR-AWS-BUILDPACK-BUCKET/*",
+      "arn:aws:s3:::YOUR-AWS-DROPLET-BUCKET",
+      "arn:aws:s3:::YOUR-AWS-DROPLET-BUCKET/*",
+      "arn:aws:s3:::YOUR-AWS-PACKAGE-BUCKET",
+      "arn:aws:s3:::YOUR-AWS-PACKAGE-BUCKET/*",
+      "arn:aws:s3:::YOUR-AWS-RESOURCE-BUCKET",
+      "arn:aws:s3:::YOUR-AWS-RESOURCE-BUCKET/*",
+    ]
+  }]
+}
+```
+Replace `YOUR-AWS-BUILDPACK-BUCKET`, `YOUR-AWS-DROPLET-BUCKET`,
+`YOUR-AWS-PACKAGE-BUCKET`, and `YOUR-AWS-RESOURCE-BUCKET` with the names of your
+AWS buckets.
+
+If you use the AWS console, the IAM Role is automatically assigned to an IAM
+Instance Profile with the same name, cloud-controller. If you do not use the
+AWS console, you must create an IAM Instance Profile with a single assigned IAM
+Role. For more information, see
+[Step 4: Create an IAM Instance Profile for Your
+Amazon EC2 Instances](https://docs.aws.amazon.com/codedeploy/latest/userguide/getting-started-create-iam-instance-profile.html)
+in the AWS documentation.
+
+1. Create a VM Extension with the above IAM role by following
+[these steps](https://docs.pivotal.io/ops-manager/2-10/install/custom-vm-extensions.html#create-vm-extension)
+with the following configuration:
+
+```
+- cloud_properties:
+    iam_instance_profile: cloud-controller
+  name: cloud-controller-iam
+```
+
+1. Apply the above VM Extension to the appropriate jobs (see below) by following
+[these steps](https://docs.pivotal.io/ops-manager/2-10/install/custom-vm-extensions.html#apply-vm-extensions):
+
+For <%= vars.app_runtime_abbr %> apply the VM Extension to the following jobs:
+- `clock_global`
+- `cloud_controller`
+- `cloud_controller_worker`
+
+For Small Footprint <%= vars.app_runtime_abbr %> apply the VM Extension to the following jobs:
+- `control`
+
+1. Select **External S3-compatible filestore**.
+
+1. For **URL endpoint**, enter the `https://` URL endpoint for your region. For example,
+`https://s3.us-west-2.amazonaws.com/`.
+
+1. Enable the **S3 AWS with instance profile** checkbox.
+
+1. From the **S3 signature version** dropdown, select **V4 signature**. For more information
+about S3 signatures, see [Signing AWS API Requests](https://docs.aws.amazon.com/general/latest/gr/signing_aws_api_requests.html) in the
+
+1. For **Region**, enter the region in which your S3 buckets are located. For example,
+`us-west-2`.
+
+1. To encrypt the contents of your S3 filestore, select **Server-side encryption**. This
+option is only available for AWS S3.
+
+1. (Optional) If you selected **Server-side encryption**, you can also specify a **KMS key
+ID**. <%= vars.app_runtime_abbr %> uses the KMS key to encrypt files uploaded to the blobstore.
+If you do not provide a KMS Key ID, <%= vars.app_runtime_abbr %> uses the default AWS key. For
+more information, see [Protecting Data Using Server-Side Encryption with AWS KMS–Managed Keys
+(SSE-KMS)](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html) in the AWS
+documentation.
+
+1. Disable the **Path-style S3 URLs (deprecated)** checkbox. When this checkbox is disabled,
+the S3 bucket is accessed using the virtual-hosted model instead of the path-based model. The
+deprecated path-based model is removed from AWS as of September 30, 2020. For more information
+about S3 path deprecation, see [Amazon S3 Path Deprecation Plan – The Rest of the Story]
+(https://aws.amazon.com/blogs/aws/amazon-s3-path-deprecation-plan-the-rest-of-the-story/)
+on the AWS News Blog.
+
+1. Enter names for your S3 buckets:
+    <table border="1" class="nice">
+      <tr>
+        <th width="30%"><%= vars.ops_manager %> Field</th>
+        <th width="30%">Value</th>
+        <th width="40%">Description</th>
+      </tr>
+      <tr>
+        <td><strong>Buildpacks bucket name</strong></td>
+        <td><code><%= vars.product_name_lc %>-buildpacks-bucket</code><br></td>
+        <td>This S3 bucket stores app buildpacks.</td>
+      </tr>
+      <tr>
+        <td><strong>Droplets bucket name</strong></td>
+        <td><code><%= vars.product_name_lc %>-droplets-bucket</code></td>
+        <td>This S3 bucket stores app droplets. <%= vars.company_name %> recommends that
+          you use a unique bucket name for droplets, but you can also use the same name
+          as above.</td>
+      </tr>
+      <tr>
+        <td><strong>Packages bucket name</strong></td>
+        <td><code><%= vars.product_name_lc %>-packages-bucket</code></td>
+        <td>This S3 bucket stores app packages. <%= vars.company_name %> recommends that
+          you use a unique bucket name for packages, but you can also use the same name
+          as above.</td>
+      </tr>
+      <tr>
+        <td><strong>Resources bucket name</strong></td>
+        <td><code><%= vars.product_name_lc %>-resources-bucket</code></td>
+        <td>This S3 bucket stores app resources. <%= vars.company_name %> recommends that
+          you use a unique bucket name for app resources, but you can also use the same
+          name as above.</td>
+      </tr>
+    </table>
+
+1. Configure these checkboxes depending on whether your S3 buckets have versioning enabled:
+    * For versioned S3 buckets, enable the **Use versioning for backup and restore** checkbox
+    to archive each bucket to a version.<br>
+    If you are using Dell ECS, <%= vars.company_name %> recommends against versioned buckets.
+    For more information, see _Step 3: Configure PAS File Storage_ in [Dell EMC ECS with
+    Pivotal Cloud Foundry](https://www.dellemc.com/resources/en-us/asset/white-papers/products/storage/h17569_wp_ecs_with_pivotal_cloud_
+    use mirroring as an alternative to versioning.
+    * For unversioned S3 buckets, disable the **Use versioning for backup and restore**
+    checkbox, and enter a backup bucket name for each active bucket. The backup bucket name
+    must be different from the name of the active bucket it backs up. For more information
+    about setting up external S3 blobstores, see [Enable Versioning on Your S3-Compatible
+    Blobstore](https://docs.cloudfoundry.org/bbr/external-blobstores.html#enable-s3-versioning)
+    in _Backup and Restore for External Blobstores_ in the Cloud Foundry documentation.
+
+1. Enter the name of the region in which your backup S3 buckets are located. For example,
+`us-west-2`. These are the buckets used to back up and restore the contents of your S3
+filestore.
+
+1. (Optional) Enter names for your backup S3 buckets:
+    <table border="1" class="nice">
+      <tr>
+        <th width="30%"><%= vars.ops_manager %> Field</th>
+        <th width="30%">Value</th>
+        <th width="40%">Description</th>
+      </tr>
+      <tr>
+        <td><strong>Backup buildpacks bucket name</strong></td>
+        <td><code>buildpacks-backup-bucket</code><br></td>
+        <td>This S3 bucket is used to back up and restore your buildpacks bucket. This bucket
+          name must be different from the buckets you named above.</td>
+      </tr>
+      <tr>
+        <td><strong>Backup droplets bucket name</strong></td>
+        <td><code>droplets-backup-bucket</code></td>
+        <td>This S3 bucket is used to back up and restore your droplets bucket.
+          <%= vars.company_name %> recommends that you use a unique bucket name for droplet
+          backups, but you can also use the same name as above.</td>
+      </tr>
+      <tr>
+        <td><strong>Backup packages bucket name</strong></td>
+        <td><code>packages-backup-bucket</code></td>
+        <td>This S3 bucket is used to back up and restore your packages bucket.
+          <%= vars.company_name %> recommends that you use a unique bucket name for package
+          backups, but you can also use the same name as above.</td>
+      </tr>
+    </table>
+
+1. Click **Save**.
+
+<p class="note"><strong>Note:</strong> For more information about AWS S3 signatures, see
+  <a href="http://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html">
+  Authenticating Requests</a> in the AWS documentation.</p>
 
 ## <a id="gcp"></a> GCP
 
@@ -96,6 +291,8 @@ recommends selecting **External S3-compatible filestore**. For more information 
 For more factors to consider when selecting file storage, see [Configure File Storage]
 (configuring.html#file-storage) in _Configuring <%= vars.app_runtime_abbr %> for Upgrades_.
 
+To use an external S3-compatible filestore for <%= vars.app_runtime_abbr %> file storage:
+
 <%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
 <%= partial(:"/pcf/core/#{vars.current_major_version.sub('.', '-')}/filestore_s3_config", :locals => { :aws => false }) %>
 
@@ -109,6 +306,8 @@ see [vSphere Reference Architecture](https://docs.pivotal.io/ops-manager/2-10/re
 
 For more factors to consider when selecting file storage, see [Configure File Storage]
 (configuring.html#file-storage) in _Configuring <%= vars.app_runtime_abbr %> for Upgrades_.
+
+To use an external S3-compatible filestore for <%= vars.app_runtime_abbr %> file storage:
 
 <%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
 <%= partial(:"/pcf/core/#{vars.current_major_version.sub('.', '-')}/filestore_s3_config", :locals => { :aws => false }) %>
