@@ -12,9 +12,10 @@ redundant _external_ filestores for your <%= vars.app_runtime_abbr %> file stora
 factors to consider when selecting file storage, see [Configure File Storage]
 (configuring.html#file-storage) in _Configuring <%= vars.app_runtime_abbr %> for Upgrades_.
 
-<p class="note"><strong>Note:</strong> After initial installation, do not change file storage
-  configuration without first migrating existing files to the new provider.</p>
-
+<p class="note">
+    <strong>Note:</strong> After initial installation, do not change file storage
+      configuration without first migrating existing files to the new provider.
+</p>
 
 ## <a id="internal"></a> Internal File Storage
 
@@ -26,9 +27,11 @@ factors to consider when selecting file storage, see [Configure File Storage]
 
 This section describes how to configure file storage for AWS.
 
-<p class="note"><strong>Note:</strong> If you followed the procedure in
-  <a href="https://docs.pivotal.io/ops-manager/<%= vars.current_major_version.sub('.','-') %>/aws/prepare-env-manual.html"> Preparing to Deploy <%= vars.platform_name %> on AWS Manually</a>, you created the necessary
-  resources for external S3-compatible file storage.</p>
+<p class="note">
+    <strong>Note:</strong> If you followed the procedure in
+      <a href="https://docs.pivotal.io/ops-manager/<%= vars.current_major_version.sub('.','-') %>/aws/prepare-env-manual.html"> Preparing to Deploy <%= vars.platform_name %> on AWS Manually</a>, you created the necessary
+      resources for external S3-compatible file storage.
+</p>
 
 For production-level <%= vars.platform_name %> deployments on AWS, <%= vars.company_name %>
 recommends selecting **External S3-compatible filestore**. For more information about production-level
@@ -51,11 +54,11 @@ Instance Profile](#aws-storage-instance-profile) below.
 
 #### <a id="aws-storage-instance-profile"></a> External AWS S3 with Instance Profile
 
-<p class='note'><strong>Note:</strong>
-  Using AWS Instance Profiles requires that your <%= vars.app_runtime_abbr %>
-  deployment is running on AWS EC2 and that your filestore is AWS S3.
-  For more information, see [AWS Identity and Access Management](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-ro
-  in the AWS documentation.
+<p class="note">
+    <strong>Note:</strong> Using AWS Instance Profiles requires that your <%= vars.app_runtime_abbr %>
+    deployment is running on AWS EC2 and that your filestore is AWS S3.
+    For more information, see [AWS Identity and Access Management](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-ro
+    in the AWS documentation.
 </p>
 
 Prior to configuring your <%= vars.app_runtime_abbr %> to authenticate with
@@ -230,9 +233,11 @@ filestore.
 
 1. Click **Save**.
 
-<p class="note"><strong>Note:</strong> For more information about AWS S3 signatures, see
-  <a href="http://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html">
-  Authenticating Requests</a> in the AWS documentation.</p>
+<p class="note">
+    <strong>Note:</strong> For more information about AWS S3 signatures, see
+      <a href="http://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html">
+      Authenticating Requests</a> in the AWS documentation.
+</p>
 
 ## <a id="gcp"></a> GCP
 
