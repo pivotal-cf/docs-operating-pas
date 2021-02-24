@@ -64,57 +64,57 @@ you will need to configure a new VM Extension on your BOSH Director.
 
 1. Create a `cloud-controller` [IAM role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html)
 with the following policy to give access to the S3 buckets you plan to use:
-```json
-{
-  "Version": "2012-10-17",
-  "Statement": [{
-    "Effect": "Allow",
-    "Action": [ "s3:*" ],
-    "Resource": [
-      "arn:aws:s3:::YOUR-AWS-BUILDPACK-BUCKET",
-      "arn:aws:s3:::YOUR-AWS-BUILDPACK-BUCKET/*",
-      "arn:aws:s3:::YOUR-AWS-DROPLET-BUCKET",
-      "arn:aws:s3:::YOUR-AWS-DROPLET-BUCKET/*",
-      "arn:aws:s3:::YOUR-AWS-PACKAGE-BUCKET",
-      "arn:aws:s3:::YOUR-AWS-PACKAGE-BUCKET/*",
-      "arn:aws:s3:::YOUR-AWS-RESOURCE-BUCKET",
-      "arn:aws:s3:::YOUR-AWS-RESOURCE-BUCKET/*",
-    ]
-  }]
-}
-```
-Replace `YOUR-AWS-BUILDPACK-BUCKET`, `YOUR-AWS-DROPLET-BUCKET`,
-`YOUR-AWS-PACKAGE-BUCKET`, and `YOUR-AWS-RESOURCE-BUCKET` with the names of your
-AWS buckets.
+    ```json
+    {
+      "Version": "2012-10-17",
+      "Statement": [{
+        "Effect": "Allow",
+        "Action": [ "s3:*" ],
+        "Resource": [
+          "arn:aws:s3:::YOUR-AWS-BUILDPACK-BUCKET",
+          "arn:aws:s3:::YOUR-AWS-BUILDPACK-BUCKET/*",
+          "arn:aws:s3:::YOUR-AWS-DROPLET-BUCKET",
+          "arn:aws:s3:::YOUR-AWS-DROPLET-BUCKET/*",
+          "arn:aws:s3:::YOUR-AWS-PACKAGE-BUCKET",
+          "arn:aws:s3:::YOUR-AWS-PACKAGE-BUCKET/*",
+          "arn:aws:s3:::YOUR-AWS-RESOURCE-BUCKET",
+          "arn:aws:s3:::YOUR-AWS-RESOURCE-BUCKET/*",
+        ]
+      }]
+    }
+    ```
+    Replace `YOUR-AWS-BUILDPACK-BUCKET`, `YOUR-AWS-DROPLET-BUCKET`,
+    `YOUR-AWS-PACKAGE-BUCKET`, and `YOUR-AWS-RESOURCE-BUCKET` with the names of your
+    AWS buckets.
 
-If you use the AWS console, the IAM Role is automatically assigned to an IAM
-Instance Profile with the same name, cloud-controller. If you do not use the
-AWS console, you must create an IAM Instance Profile with a single assigned IAM
-Role. For more information, see
-[Step 4: Create an IAM Instance Profile for Your
-Amazon EC2 Instances](https://docs.aws.amazon.com/codedeploy/latest/userguide/getting-started-create-iam-instance-profile.html)
-in the AWS documentation.
+    If you use the AWS console, the IAM Role is automatically assigned to an IAM
+    Instance Profile with the same name, cloud-controller. If you do not use the
+    AWS console, you must create an IAM Instance Profile with a single assigned IAM
+    Role. For more information, see
+    [Step 4: Create an IAM Instance Profile for Your
+    Amazon EC2 Instances](https://docs.aws.amazon.com/codedeploy/latest/userguide/getting-started-create-iam-instance-profile.html)
+    in the AWS documentation.
 
 1. Create a VM Extension with the above IAM role by following
 [these steps](https://docs.pivotal.io/ops-manager/2-10/install/custom-vm-extensions.html#create-vm-extension)
 with the following configuration:
 
-```
-- cloud_properties:
-    iam_instance_profile: cloud-controller
-  name: cloud-controller-iam
-```
+    ```
+    - cloud_properties:
+        iam_instance_profile: cloud-controller
+      name: cloud-controller-iam
+    ```
 
 1. Apply the above VM Extension to the appropriate jobs (see below) by following
 [these steps](https://docs.pivotal.io/ops-manager/2-10/install/custom-vm-extensions.html#apply-vm-extensions):
 
-For <%= vars.app_runtime_abbr %> apply the VM Extension to the following jobs:
-- `clock_global`
-- `cloud_controller`
-- `cloud_controller_worker`
+    For <%= vars.app_runtime_abbr %> apply the VM Extension to the following jobs:
+    - `clock_global`
+    - `cloud_controller`
+    - `cloud_controller_worker`
 
-For Small Footprint <%= vars.app_runtime_abbr %> apply the VM Extension to the following jobs:
-- `control`
+    For Small Footprint <%= vars.app_runtime_abbr %> apply the VM Extension to the following jobs:
+    - `control`
 
 1. Select **External S3-compatible filestore**.
 
