@@ -9,6 +9,10 @@ This topic describes several configuration options for <%= vars.app_runtime_full
 <strong>Breaking Change</strong>: The Service Mesh feature was removed in Tanzu Application Service (TAS) v2.11. You must disable the Service Mesh feature before upgrading to TAS v2.11.
 </p>
 
+### <a id="jump-upgrades"></a> Jump Upgrades
+
+You can upgrade to <%= vars.app_runtime_abbr %> 2.11.0 from patch versions of <%= vars.app_runtime_abbr %> 2.7.31, 2.8.24, 2.9.19 or 2.10.0 or greater. See [jump upgrades](./jump-upgrades.html) for more information.
+
 ## <a id="limit-restart"></a> Limit Component Instance Restarts
 
 The `max_in_flight` variable limits how many instances of a component can restart simultaneously during updates or upgrades. Increasing the value of `max_in_flight` can make updates run faster, but setting it too high risks overloading VMs and causing failure. For guidance on setting `max_in_flight` values, see [Basic Advice](#best-practices).
