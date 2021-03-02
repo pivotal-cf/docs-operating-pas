@@ -3,49 +3,46 @@ title: Deploying TAS for VMs to VMC
 owner: dap-tas-vmc-vcf-anycloud
 ---
 
-This topic describes how to install <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) to VMware Cloud on AWS (VMC).
-
+This topic describes how to install <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) to VMware Cloud (VMC) on Amazon Web Services (AWS).
 
 ## <a id='introduction'></a> Overview
 
-VMC provides Software Defined Data Centers (SDDCs) running on AWS, with a high-level management console to easily configure networking rules. 
+VMC provides Software Defined Data Centers (SDDCs) that run on AWS with a high-level management console to configure networking rules.
+This topic describes the procedures for configuring and installing <%=
+vars.app_runtime_abbr %> on VMC using public IP addresses for ingress.
 
-This topic describes the procedures to configure and install <%=
-vars.app_runtime_abbr %> on VMC using public IP addresses for ingress. Your
-networking configuration may differ if you plan to use a
-[VPN](https://docs.vmware.com/en/VMware-Cloud-on-AWS/services/com.vmware.vmc-aws.networking-security/GUID-92F6C09E-8E74-430E-8F79-C2E5B2150ADA.html)
-or [Direct Connect
-VIFs](https://docs.vmware.com/en/VMware-Cloud-on-AWS/services/com.vmware.vmc-aws.networking-security/GUID-417EE2F1-0EA5-4808-BDB3-6FF622EECB95.html)
-to connect your network to the VMC SDDC.
+To install and configure <%= vars.app_runtime_abbr %> on VMC:
+
+  1. [Install <%= vars.ops_manager %>](#om-setup)
+
+  1. [Install BOSH Director for vSphere](#bosh-setup)
+
+  1. [Install and Configure <%= vars.app_runtime_abbr %>](#tas-tile)
 
 ## <a id='requirements'></a> Prerequisites
 
-Before deploying <%= vars.app_runtime_abbr %> on a VMC SDDC you must have the following:
+Before you install and configure <%= vars.app_runtime_abbr %> on a VMC SDDC:
 
-* A [VMC account](https://vmc.vmware.com) with an SDDC provisioned and vCenter access configured. If you do not already have browser access to vCenter configured, see the [Notes](#vcenter-access) section below for steps to allow network access.
-* [<%= vars.ops_manager %> for vSphere](https://network.pivotal.io/products/ops-manager/) downloaded from VMware Tanzu Network.
-* The [<%= vars.app_runtime_abbr %> tile](https://network.pivotal.io/products/elastic-runtime) downloaded from VMware Tanzu Network.
-* The [govc cli](https://github.com/vmware/govmomi/blob/master/govc/README.md) installed to your local workstation or jump host.
+* Create a VMC account. See [VMware Cloud](https://vmc.vmware.com).
+* Provision SDDC with browser access to vCenter. See [Enable Browser Access to vCenter](#vcenter-access).
+* Download <%= vars.ops_manager %> for vSphere from [<%= vars.product_network %>](https://network.pivotal.io/products/ops-manager/).
+* Download <%= vars.app_runtime_abbr %> from [<%= vars.product_network %>](https://network.pivotal.io/products/elastic-runtime).
+* Install the govc CLI to your local workstation or jump host. See [govmomi](https://github.com/vmware/govmomi/blob/master/govc/README.md) on GitHub.
 
-## <a id='install'></a> Install and Configure <%= vars.app_runtime_abbr %>
+If you plan to use a VPN or Direct Connect Virtual Interfaces (VIFs) to connect your network to the VMC SDDC, see the following topics:
 
-Installing <%= vars.app_runtime_abbr %> requires:
+* [Configure a VPN Connection Between Your SDDC and On-Premises Data Center](https://docs.vmware.com/en/VMware-Cloud-on-AWS/services/com.vmware.vmc-aws.networking-security/GUID-92F6C09E-8E74-430E-8F79-C2E5B2150ADA.html)
+* [Configure AWS Direct Connect Between Your SDDC and On-Premises Data Center](https://docs.vmware.com/en/VMware-Cloud-on-AWS/services/com.vmware.vmc-aws.networking-security/GUID-417EE2F1-0EA5-4808-BDB3-6FF622EECB95.html)
 
-1. [Install Operations Manager](#om-setup)
-
-1. [Install BOSH Director for vSphere](#bosh-setup)
-
-1. [Install and Configure the <%= vars.app_runtime_abbr %> Tile](#tas-tile)
-
-### <a id='om-setup'></a> Install Operations Manager
+## <a id='om-setup'></a> Install <%= vars.ops_manager %>
 
 1. Find the VMC pre-installed network to use for the BOSH infrastructure network (typically 192.168.1.0/24):
     -  [https://vmc.vmware.com/console/sddcs](https://vmc.vmware.com/console/sddcs) → SDDCs → expand anycloud → View Details
     -  Networking & Security → Network → Segments
     -  Record the segment name **sddc-cgw-nework-1**
-    -  Record the subnet **192.168.1.1/24** (Note that SDDC combines the gateway IP and CIDR into a single value.)
+    -  Record the subnet **192.168.1.1/24** (Note that<%# Notes must be in Note boxes and start with |Note: |. %> SDDC combines the gateway IP <%# Do not omit |address| from |IP address|. %>and CIDR into a single value.)
 
-1. Assuming nothing has changed, create an options.json file for Operations Manager’s .ova with the following contents:
+1. Assuming<%# |If| might be better here. %> nothing has changed, create an options.json<%# |JSON| is preferred. %> file for Operations Manager<%# Use <%= vars.ops_manager or, if in alt text, #{vars.ops_manager} %>’s .ova with the following contents:
 
     ```
     {
@@ -80,7 +77,7 @@ Installing <%= vars.app_runtime_abbr %> requires:
     }
     ```
 
-1. Upload the operations manager that we downloaded in an earlier step:
+1. Upload the operations manager that we <%# Specify the party (VMware, Cloud Foundry, etc). %>downloaded in an earlier step<%# Write |earlier in this procedure| or, if referring to a separate procedure, link to it. %>:
 
     ```
     export GOVC_DATACENTER=SDDC-Datacenter
@@ -301,17 +298,16 @@ that are specific to this reference architecture.
             *   Set Instances to **1**
             *   Click **Save**
 
-1. **After finishing configuration**, click **Apply Changes**. You will again see the following warning:
-    ![Required Datacenter privileges not available](images/opsman-warning.png)
-    - Ignore this warning. You don’t need `EditCluster` permission. 
+1. **After finishing configuration**, click **Apply Changes**. You will<%# Avoid |will|: present tense is preferred. %> again see the following warning:
+    ![Required Datacenter privileges not available](images/opsman-warning.png)<%# Alt text must describe the image in detail. %>
+    - Ignore this warning. You don’t need `EditCluster` permission.
         - Click **Ignore Warnings & Apply Changes**.
 
-## <a id='notes'></a> Notes
-### <a id='vcenter-access'></a> To allow yourself to access vCenter from the internet
+## <a id='vcenter-access'></a> Enable Browser Access to vCenter
 
-By default, ingress to vCenter is not enabled. If you are not using a VPN or other network, you will need to create a firewall rule in SDDC to allow vCenter access.
+By default, ingress to vCenter is not enabled. If you are not using a VPN or other network, you must create a firewall rule in SDDC to allow vCenter access.
 
-[VMC Console](https://vmc.vmware.com/console/sddcs) → SDDCs → expand anycloud → View Details → Networking & Security  → Security 
+[VMC Console](https://vmc.vmware.com/console/sddcs) → SDDCs → expand anycloud → View Details → Networking & Security  → Security
 
 1. Click **Gateway Firewall**
 1. Click **Management Gateway**
