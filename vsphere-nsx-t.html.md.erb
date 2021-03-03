@@ -181,7 +181,8 @@ To configure a load balancer:
         - **Name**: `pas-web-pool`
     1. Click **Next**.
     1. Enter **SNAT Translation**:
-        - **Translation Mode**: `Auto Map`
+        - **Translation Mode**: `IP List`
+        - Enter a range of available IPs for SNAT translation. By default, ports from 4000 through 64000 are used for all configured SNAT IP addresses. Be certain you have allocated enough IPs to handle your expected traffic load, otherwise you will encounter SNAT port exhaustion.
     1. Click **Next**.
     1. Enter **Pool Members**:
         - **Membership Type**: `Static`
