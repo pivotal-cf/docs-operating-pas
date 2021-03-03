@@ -34,6 +34,31 @@ If you plan to use a VPN or Direct Connect Virtual Interfaces (VIFs) to connect 
 * [Configure a VPN Connection Between Your SDDC and On-Premises Data Center](https://docs.vmware.com/en/VMware-Cloud-on-AWS/services/com.vmware.vmc-aws.networking-security/GUID-92F6C09E-8E74-430E-8F79-C2E5B2150ADA.html)
 * [Configure AWS Direct Connect Between Your SDDC and On-Premises Data Center](https://docs.vmware.com/en/VMware-Cloud-on-AWS/services/com.vmware.vmc-aws.networking-security/GUID-417EE2F1-0EA5-4808-BDB3-6FF622EECB95.html)
 
+## <a id='vcenter-access'></a> Enable Browser Access to vCenter
+
+By default, ingress to vCenter is not enabled. If you are not using a VPN or other network, you must create a firewall rule in SDDC to allow vCenter access.
+
+To enable browser access to vCenter:
+
+1. From the VMC console, select **SDDCs → expand anycloud → View Details → Networking & Security → Security**.
+1. Click **Gateway Firewall**.
+1. Click **Management Gateway**.
+1. Click **+ Add Rule**.
+  * **Name**: `vCenter Inbound Rule`
+  * **Destinations**: Select **vCenter** and then click **Apply**.
+  * **Services**: Enter `HTTPS, ICMP, SSO`.
+1. Click **Publish**.
+
+## <a id='vcenter-creds'></a> Record vCenter Credentials
+
+To gather login credentials for the vCenter instance in your SDDC:
+
+1. From the VMC console, select **SDDCs → expand anycloud → Open vCenter**.
+1. A dialog box appears with the text:
+   **Before you can log into vCenter, you must open network access to vCenter through the management gateway. Choose an option for opening network access.**
+1. Click **Show Credentials**.
+1. Record the credentials.
+
 ## <a id='om-setup'></a> Install <%= vars.ops_manager %>
 
 To install <%= vars.ops_manager %> on VMC:
@@ -271,64 +296,40 @@ To configure BOSH Director for VMC:
 
 To configure <%= vars.app_runtime_abbr %> for VMC:
 
-1. Configure the <%= vars.app_runtime_abbr %> tile as follows:
+1. Configure the **<%= vars.app_runtime_abbr %>** tile as follows:
     - **Settings → Assign AZs and Networks**
-        - Network: select **deployment**
-        - Click **Save**
+        - **Network**: Select `deployment`.
+        - Click **Save**.
     - **Settings → Domains**
-        - Use nip.io or sslip.io or set up your own wildcard domain, and make sure<%# Replace with |ensure| or, better still, rephrase as a command. %> that it maps to the HAProxy public IP address we <%# Specify the party (VMware, Cloud Foundry, etc). %>configured earlier. For example:
-            - System domain: **sys.54.180.180.180.nip.io**
-            - Apps domain: **run.54.180.180.180.nip.io**
+        - Set up a wildcard domain and ensure that it maps to the HAProxy public IP address you configured earlier. For example:
+            - **System domain**: `sys.54.180.180.180.nip.io`
+            - **Apps domain**: `run.54.180.180.180.nip.io`
     - **Settings → Networking**
-        - Set the HAProxy IP <%# Do not omit |address| from |IP address|. %>to the one we <%# Specify the party (VMware, Cloud Foundry, etc). %>specified in the NAT rule above (the first available IP <%# Do not omit |address| from |IP address|. %>in the “deployment” network.)
-            - HAProxy IPs: **192.168.2.2**
-        - Generate a certificate for the gorouter<%# |Gorouter| is preferred. %>/HAProxy:
-            - Certificates and private keys for the Gorouter and HAProxy: click **Add**
-                *   Name: haproxy cert <%# |certificate| is preferred. %>(or whatever)
-                *   Click the **Generate RSA Certificate** link
-                    *   Add *. domains for your system and apps domain above, separated by a comma, E.g. *.**sys.54.180.180.180.nip.io,*.run.54.180.180.180.nip.io**
+        - Set the HAProxy IP address to the one you specified in the NAT rule above. This is the first available IP address in the `deployment` network.
+            - **HAProxy IPs**: `192.168.2.2`
+        - Generate a certificate for the Gorouter and HAProxy:
+            - **Certificates and private keys for the Gorouter and HAProxy**: Click **Add**.
+                - Name: `haproxy cert`
+                - Click **Generate RSA Certificate**.
+                - Add `*.` domains for your system and apps domain above, separated by a comma. For example, `*.**sys.54.180.180.180.nip.io,*.run.54.180.180.180.nip.io`.
         - Set HAProxy as the TLS termination point:
-            - TLS Termination: **HA Proxy**
-        - Disable TLS forwarding for HAProxy so that we <%# Specify the party (VMware, Cloud Foundry, etc). %>don’t have to create a certificate:
-            - HAProxy forwards all requests to the Gorouter over TLS: Click **Disable.**
+            - **TLS Termination**: **HA Proxy**
+        - Disable TLS forwarding for HAProxy:
+            - **HAProxy forwards all requests to the Gorouter over TLS**: Click **Disable**.
     - **Settings → UAA**
-        - For UAA configuration, generate a SAML cert <%# |certificate| is preferred. %>for *.login.SYSTEM-DOMAIN
+        - For UAA configuration, generate a SAML certificate for *.login.SYSTEM-DOMAIN:
             - **→ SAML service provider credentials**
-                - Click **Generate RSA Certificate**
-                - Enter your domain, E.g. ***.login.sys.54.180.180.180.nip.io**
-                - Click **Generate**
-    - **Settings → Resource Config **
-        Scale the HAProxy instances up to 1
+                - Click **Generate RSA Certificate**.
+                - Enter your domain. For example, `*.login.sys.54.180.180.180.nip.io`
+                - Click **Generate**.
+    - **Settings → Resource Config**:
+      - Scale the HAProxy instances up to 1.
         - **→ HAProxy**
-            *   Set Instances to **1**
-            *   Click **Save**
+            *   Set Instances to **1**.
+            *   Click **Save**.
 
 1. After you finish configuration, click **Apply Changes**. The following warning appears:
     !['Review Pending Changes' in Ops Manager. A warning at the top of the image reads, 'Please review the warnings below. IaaS default: Could not log in. Required Datacenter privileges not available.'](images/opsman-warning.png)
 
     Click **Ignore Warnings & Apply Changes**.
     `EditCluster` permission is not required.
-
-## <a id='vcenter-access'></a> Enable Browser Access to vCenter
-
-By default, ingress to vCenter is not enabled. If you are not using a VPN or other network, you must create a firewall rule in SDDC to allow vCenter access.
-
-[VMC Console](https://vmc.vmware.com/console/sddcs) → SDDCs → expand anycloud → View Details → Networking & Security  → Security
-
-1. Click **Gateway Firewall**
-1. Click **Management Gateway**
-1. Click **+ Add Rule**
-  * Name: **vCenter Inbound Rule**
-  * Destinations: select **vCenter**, click **Apply**
-  * Services: **HTTPS, ICMP, SSO**
-1. Click **Publish**
-
-### <a id='vcenter-creds'></a> To record the vCenter’s credentials
-
-Login credentials for the vCenter instance in your SDDC can be gathered as follows:
-
-[VMC Console](https://vmc.vmware.com/console/sddcs) → SDDCs → expand anycloud → Open vCenter
-
-1. You will see a pop-up: “Before you can log into vCenter, you must open network access to vCenter through the management gateway. Choose an option for opening network access.”
-1. Click **Show Credentials**
-1. Record the credentials
