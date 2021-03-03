@@ -15,7 +15,7 @@ To install and configure <%= vars.app_runtime_abbr %> on VMC:
 
   1. [Install <%= vars.ops_manager %>](#om-setup)
 
-  1. [Install BOSH Director for vSphere](#bosh-setup)
+  1. [Configure BOSH Director](#bosh-setup)
 
   1. [Install and Configure <%= vars.app_runtime_abbr %>](#tas-tile)
 
@@ -197,101 +197,102 @@ To install <%= vars.ops_manager %> on VMC:
     - For **Destinations**, select **Any**.
     - Click **Publish**.
 
-### <a id='bosh-setup'></a> Install BOSH Director for vSphere
+## <a id='bosh-setup'></a> Configure BOSH Director
 
-<p class="note"><strong>Note:</strong> The instructions are less detailed in
-the following sections, as installation of <%= vars.app_runtime_abbr %> on
-vSphere environments is well documented, but we <%# Specify the party (VMware, Cloud Foundry, etc). %>have highlighted the settings
-that are specific to this reference architecture.
-</p>
+<p class="note"><strong>Note:</strong> The procedure in this section contains only the configuration information that is specific to VMC. For more information about configuring BOSH on vSphere, see <a href="https://docs.pivotal.io/ops-manager/2-10/vsphere/config.html">Configuring BOSH Director on vSphere</a>.</p>
 
-1. Log into the new Operations Manager<%# Use <%= vars.ops_manager or, if in alt text, #{vars.ops_manager} %> and configure BOSH:
-    - [https://54.190.190.190/](https://54.190.190.190/)
-    - account: **admin**
-    - password: **_some-password_**
-    - decryption passphrase: **_some-passphrase_**
+To configure BOSH Director for VMC:
 
-1. Configure **BOSH Director for vSphere** as follows:
+1. Log in to <%= vars.ops_manager %>:
+    - Navigate to [https://54.190.190.190/](https://54.190.190.190/).
+    - Enter a **Username**, **Password**, and **Password confirmation** to create an Admin user.
+    - Enter a **Decryption passphrase** and the **Decryption passphrase confirmation**. This passphrase encrypts the Ops Manager datastore and is not recoverable.
+
+1. Select the **BOSH Director for vSphere** tile and configure BOSH as follows:
     - **Settings → vCenter Config**
-        - vCenter Host: your vCenter URL, e.g. <%# |For example| is preferred. %>**vcenter.sddc-35-162-72-214.vmwarevmc.com**
-        - vCenter Username: **cloudadmin@vmc.local**
-        - vCenter Password: **&lt;use the password you gathered from the SDDC above>**
-        - Datacenter<%# |data center| is preferred. %> Name: **SDDC-Datacenter**
-        - Virtual Disk Type: select **thin**
-        - Ephemeral Datastore Names: **WorkloadDatastore**
-        - Persistent Datastore Names: **WorkloadDatastore**
-        - Select **Standard vCenter Networking**
+        - **vCenter Host**: your vCenter URL. For example, `vcenter.sddc-35-162-72-214.vmwarevmc.com`.
+        - **vCenter Username**: `cloudadmin@vmc.local`
+        - **vCenter Password**: Enter the password you gathered from the SDDC.
+        - **Datacenter Name**: `SDDC-Datacenter`
+        - **Virtual Disk Type**: Select **Thin**.
+        - **Ephemeral Datastore Names**: `WorkloadDatastore`
+        - **Persistent Datastore Names**: `WorkloadDatastore`
+        - Select **Standard vCenter Networking**.
     - **Settings → Director Config**
-        - NTP Servers: **time.google.com **(or some other NTP server of your choice)
+        - **NTP Servers**: Enter an NTP server of your choice. For example, `time.google.com`.
     - **Settings → Create Availability Zones**
-        - az1:
-            - Name: **az1**
-            - Clusters:
-                - Cluster: **Cluster-1**
-                - Resource Pool: **az1**
-        - az2:
-            - Name: **az2**
-            - Clusters:
-                - Cluster: **Cluster-1**
-                - Resource Pool: **az2**
-        - az3:
-            - Name: **az3**
-            - Clusters:
-                - Cluster: **Cluster-1**
-                - Resource Pool: **az3**
+        - **az1**:
+            - **Name**: `az1`
+            - **Clusters**:
+                - **Cluster**: `Cluster-1`
+                - **Resource Pool**: `az1`
+        - **az2**:
+            - **Name**: `az2`
+            - **Clusters**:
+                - **Cluster**: `Cluster-1`
+                - **Resource Pool**: `az2`
+        - **az3**:
+            - **Name**: `az3`
+            - **Clusters**:
+                - **Cluster**: `Cluster-1`
+                - **Resource Pool**: `az3`
     - **Settings → Create Networks → Networks**
         - infra:
-            - Name: **infra**
-            - Subnets:
-                - vSphere Network Name: **sddc-cgw-network-1**
-                - CIDR: **192.168.1.0/24**
-                - Reserved IP Ranges: **192.168.1.1-192.168.1.10**
-                - DNS: **8.8.8.8**
-                - Gateway: **192.168.1.1**
-                - Availability Zones: **az1, az2, az3**
+            - **Name**: `infra`
+            - **Subnets**:
+                - **vSphere Network Name**: `sddc-cgw-network-1`
+                - **CIDR**: `192.168.1.0/24`
+                - **Reserved IP Ranges**: `192.168.1.1-192.168.1.10`
+                - **DNS**: `8.8.8.8`
+                - **Gateway**: `192.168.1.1`
+                - **Availability Zones**: `az1, az2, az3`
         - deployment:
-            - Name: **deployment**
-            - Subnets:
-                - vSphere Network Name: **bosh-network**
-                - CIDR: **192.168.2.0/24**
-                - Reserved IP Ranges: **192.168.2.1**
-                - DNS: **8.8.8.8**
-                - Gateway: **192.168.2.1**
-                - Availability Zones: **az1, az2, az3**
+            - **Name**: `deployment`
+            - **Subnets**:
+                - **vSphere Network Name**: `bosh-network`
+                - **CIDR**: `192.168.2.0/24`
+                - **Reserved IP Ranges**: `192.168.2.1`
+                - **DNS**: `8.8.8.8`
+                - **Gateway**: `192.168.2.1`
+                - **Availability Zones**: `az1, az2, az3`
     - **Settings → Assign AZs and Networks**
-        - Singleton Availability Zone: **az1**
-        - Network:** infra**
+        - **Singleton Availability Zone**: `az1`
+        - **Network**: `infra`
     - **Settings → Security**
-        - Include Tanzu Ops Manager Root CA in Trusted Certs: **Check this checkbox**
+        - **Include Tanzu Ops Manager Root CA in Trusted Certs**: Select the checkbox.
 
-1. **After finishing configuration**, click **Apply Changes**. You will see the following warning:
-    ![Required Datacenter privileges not available](images/opsman-warning.png)
-    - Ignore this warning. You don’t need `EditCluster` permission. 
-        - Click **Ignore Warnings & Apply Changes**.
+1. After you finish configuration, click **Apply Changes**. The following warning appears:
+    !['Review Pending Changes' in Ops Manager. A warning at the top of the image reads, 'Please review the warnings below. IaaS default: Could not log in. Required Datacenter privileges not available.'](images/opsman-warning.png)
 
-### <a id='tas-tile'></a> Install <%= vars.app_runtime_abbr %>
+    Click **Ignore Warnings & Apply Changes**.
+    `EditCluster` permission is not required.
+
+## <a id='tas-tile'></a> Install <%= vars.app_runtime_abbr %>
+
+To configure <%= vars.app_runtime_abbr %> for VMC:
+
 1. Configure the <%= vars.app_runtime_abbr %> tile as follows:
     - **Settings → Assign AZs and Networks**
         - Network: select **deployment**
-        - Click **Save** 
+        - Click **Save**
     - **Settings → Domains**
-        - Use nip.io or sslip.io or set up your own wildcard domain, and make sure that it maps to the HAProxy public IP address we configured earlier. For example:
+        - Use nip.io or sslip.io or set up your own wildcard domain, and make sure<%# Replace with |ensure| or, better still, rephrase as a command. %> that it maps to the HAProxy public IP address we <%# Specify the party (VMware, Cloud Foundry, etc). %>configured earlier. For example:
             - System domain: **sys.54.180.180.180.nip.io**
             - Apps domain: **run.54.180.180.180.nip.io**
     - **Settings → Networking**
-        - Set the HAProxy IP to the one we specified in the NAT rule above (the first available IP in the “deployment” network.)
+        - Set the HAProxy IP <%# Do not omit |address| from |IP address|. %>to the one we <%# Specify the party (VMware, Cloud Foundry, etc). %>specified in the NAT rule above (the first available IP <%# Do not omit |address| from |IP address|. %>in the “deployment” network.)
             - HAProxy IPs: **192.168.2.2**
-        - Generate a certificate for the gorouter/HAProxy:
+        - Generate a certificate for the gorouter<%# |Gorouter| is preferred. %>/HAProxy:
             - Certificates and private keys for the Gorouter and HAProxy: click **Add**
-                *   Name: haproxy cert (or whatever)
+                *   Name: haproxy cert <%# |certificate| is preferred. %>(or whatever)
                 *   Click the **Generate RSA Certificate** link
                     *   Add *. domains for your system and apps domain above, separated by a comma, E.g. *.**sys.54.180.180.180.nip.io,*.run.54.180.180.180.nip.io**
         - Set HAProxy as the TLS termination point:
             - TLS Termination: **HA Proxy**
-        - Disable TLS forwarding for HAProxy so that we don’t have to create a certificate:
+        - Disable TLS forwarding for HAProxy so that we <%# Specify the party (VMware, Cloud Foundry, etc). %>don’t have to create a certificate:
             - HAProxy forwards all requests to the Gorouter over TLS: Click **Disable.**
     - **Settings → UAA**
-        - For UAA configuration, generate a SAML cert for *.login.SYSTEM-DOMAIN
+        - For UAA configuration, generate a SAML cert <%# |certificate| is preferred. %>for *.login.SYSTEM-DOMAIN
             - **→ SAML service provider credentials**
                 - Click **Generate RSA Certificate**
                 - Enter your domain, E.g. ***.login.sys.54.180.180.180.nip.io**
@@ -302,10 +303,11 @@ that are specific to this reference architecture.
             *   Set Instances to **1**
             *   Click **Save**
 
-1. **After finishing configuration**, click **Apply Changes**. You will<%# Avoid |will|: present tense is preferred. %> again see the following warning:
-    ![Required Datacenter privileges not available](images/opsman-warning.png)<%# Alt text must describe the image in detail. %>
-    - Ignore this warning. You don’t need `EditCluster` permission.
-        - Click **Ignore Warnings & Apply Changes**.
+1. After you finish configuration, click **Apply Changes**. The following warning appears:
+    !['Review Pending Changes' in Ops Manager. A warning at the top of the image reads, 'Please review the warnings below. IaaS default: Could not log in. Required Datacenter privileges not available.'](images/opsman-warning.png)
+
+    Click **Ignore Warnings & Apply Changes**.
+    `EditCluster` permission is not required.
 
 ## <a id='vcenter-access'></a> Enable Browser Access to vCenter
 
