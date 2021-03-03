@@ -182,7 +182,7 @@ To configure a load balancer:
     1. Click **Next**.
     1. Enter **SNAT Translation**:
         - **Translation Mode**: `IP List`
-        - Enter a range of available IPs for SNAT translation. By default, ports from 4000 through 64000 are used for all configured SNAT IP addresses. Be certain you have allocated enough IPs to handle your expected traffic load, otherwise you will encounter SNAT port exhaustion.
+        - Enter a range of available IPs for SNAT translation. By default, ports from `4000` to `64000` are for all configured SNAT IP addresses. Allocate enough IPs to handle your traffic load. Without enough IPs, the SNAT port is exhausted.
     1. Click **Next**.
     1. Enter **Pool Members**:
         - **Membership Type**: `Static`
