@@ -8,37 +8,43 @@ This topic describes how to install <%= vars.app_runtime_full %> (<%= vars.app_r
 
 ## <a id='introduction'></a> Overview
 
-VMware Cloud Foundation is the hybrid cloud platform for managing VMs and orchestrating containers. 
+VCF is the hybrid cloud platform for managing VMs and orchestrating containers.
 
 This topic describes the procedures to configure and install <%=
-vars.app_runtime_abbr %> on VCF. 
+vars.app_runtime_abbr %> on VCF.
 
 ## <a id='requirements'></a> Prerequisites
 
-Before deploying <%= vars.app_runtime_abbr %> on VCF you must have the following:
+Before deploying <%= vars.app_runtime_abbr %> on VCF:
 
-* A [VI workload domain](https://docs.vmware.com/en/VMware-Cloud-Foundation/4.0/com.vmware.vcf.admin.doc_40/GUID-3A478CF8-AFF8-43D9-9635-4E40A0E372AD.html) provisioned by SDDC.
-* [<%= vars.ops_manager %> for vSphere](https://network.pivotal.io/products/ops-manager/) downloaded from VMware Tanzu Network.
-* The [<%= vars.app_runtime_abbr %> tile](https://network.pivotal.io/products/elastic-runtime) downloaded from VMware Tanzu Network.
-* The [govc cli](https://github.com/vmware/govmomi/blob/master/govc/README.md) installed to your local workstation or jump host.
+* Provision a VI workload domain with a Software Defined Data Centers (SDDC).
+See [About VI Workload Domains](https://docs.vmware.com/en/VMware-Cloud-Foundation/4.0/com.vmware.vcf.admin.doc_40/GUID-3A478CF8-AFF8-43D9-9635-4E40A0E372AD.html).
+* Download <%= vars.ops_manager %> for vSphere from [<%= vars.product_network %>](https://network.pivotal.io/products/ops-manager/).
+* Download <%= vars.app_runtime_abbr %> from [<%= vars.product_network %>](https://network.pivotal.io/products/elastic-runtime).
+* Install the govc CLI to your local workstation or jump host. See [govmomi](https://github.com/vmware/govmomi/blob/master/govc/README.md) on GitHub.
+
 
 ## <a id='install'></a> Install and Configure <%= vars.app_runtime_abbr %>
 
-Installing <%= vars.app_runtime_abbr %> requires:
+To install and configure <%= vars.app_runtime_abbr %>:
 
-1. Collect your vCenter information
-    * In SDDC Manager, select "Workload Domains"
-    ![select workload domains](images/vcf/select-workload-domains.png)
-    * Then select the VI domain to you want to install to
-    ![select vi workload domain](images/vcf/select-vi-workload-domain.png)
-    * Select the cluster
-    ![select cluster](images/vcf/select-cluster.png)
-    * Open the cluster with vSphere Client from the `Actions` menu
-    ![open in vsphere client](images/vcf/open-in-vsphere-client.png)
+1. Collect your vCenter information:
+    1. In SDDC Manager, select **Workload Domains**.
+    ![The SDDC Manager dashboard. 'Workload Domains' is selected.](images/vcf/select-workload-domains.png)
+    1. Select the VI domain to you want to install to.
+    ![The SDDC Manager dashboard. The 'Workload Domains' pane is active.](images/vcf/select-vi-workload-domain.png)
+    1. Select the cluster.
+    ![The SDDC Manager dashborad. The selected domain, named 'nsxt-vi', is active.](images/vcf/select-cluster.png)
+    1. From the **Actions** menu, select **Open the cluster with vSphere Client**.
+    ![The SDDC Manager dashboard. The selected cluster, names 'vi-cluster1', is active. The 'Actions' menu is expanded, and 'Open in vSphere Client' is selected.](images/vcf/open-in-vsphere-client.png)
 
-1. If using NSX-T, collect your NSX-T information
-    * On the VI workload domain Summary, find the NSX Manager IP Address
+1. If you are using NSX-T, collect your NSX-T information:
+    * On the VI Workload Domain summary, find the **NSX Manager IP Address**.
 
-1. [Install Operations Manager and BOSH Director](https://docs.pivotal.io/ops-manager/2-10/install/vsphere.html)
+## <a id='next-steps'></a> Next Steps
 
-1. [Install and Configure the <%= vars.app_runtime_abbr %> Tile](https://docs.pivotal.io/application-service/2-10/operating/pas-vsphere-requirements.html)
+After you complete the procedures in this topic, continue to the following steps:
+
+1. [Installing <%= vars.ops_manager %> on vSphere](https://docs.pivotal.io/ops-manager/2-10/install/vsphere.html)
+
+1. [Configuring <%= vars.app_runtime_abbr %>](https://docs.pivotal.io/application-service/2-10/operating/configure-pas.html)
