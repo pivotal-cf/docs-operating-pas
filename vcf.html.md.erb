@@ -1,0 +1,44 @@
+---
+title: Deploying TAS for VMs to VCF
+owner: dap-tas-vmc-vcf-anycloud
+---
+
+This topic describes how to install <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) to VMware Cloud Foundation (VCF).
+
+
+## <a id='introduction'></a> Overview
+
+VCF is the hybrid cloud platform for managing VMs and orchestrating containers.
+You can install and configure <%= vars.ops_manager %> and <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) after launching the vSphere client through VCF.
+
+## <a id='requirements'></a> Prerequisites
+
+Before deploying <%= vars.app_runtime_abbr %> on VCF:
+
+* Provision a VI workload domain on a Software Defined Data Center (SDDC).
+See [About VI Workload Domains](https://docs.vmware.com/en/VMware-Cloud-Foundation/4.0/com.vmware.vcf.admin.doc_40/GUID-3A478CF8-AFF8-43D9-9635-4E40A0E372AD.html).
+* Download <%= vars.ops_manager %> for vSphere from [<%= vars.product_network %>](https://network.pivotal.io/products/ops-manager/).
+* Download <%= vars.app_runtime_abbr %> from [<%= vars.product_network %>](https://network.pivotal.io/products/elastic-runtime).
+* Install the govc CLI to your local workstation or jump host. See [govmomi](https://github.com/vmware/govmomi/blob/master/govc/README.md) on GitHub.
+
+## <a id='prepare'></a> Prepare to Deploy <%= vars.app_runtime_abbr %> to VCF
+
+To prepare VCF before you install <%= vars.app_runtime_abbr %>:
+
+1. Collect your vCenter information:
+    1. In SDDC Manager, select **Workload Domains**.
+    ![The SDDC Manager dashboard. 'Workload Domains' is selected.](images/vcf/select-workload-domains.png)
+    1. Select the VI domain where you want to install <%= vars.ops_manager %> and <%= vars.app_runtime_abbr %>.
+    ![The SDDC Manager dashboard. The 'Workload Domains' pane is active.](images/vcf/select-vi-workload-domain.png)
+    1. Select the cluster where you want to install <%= vars.ops_manager %> and <%= vars.app_runtime_abbr %>.
+    ![The SDDC Manager dashborad. The selected domain, named 'nsxt-vi', is active.](images/vcf/select-cluster.png)
+    1. From the **Actions** menu, select **Open in vSphere Client**.
+    ![The SDDC Manager dashboard. The selected cluster, named 'vi-cluster1', is active. The 'Actions' menu is expanded, and 'Open in vSphere Client' is selected.](images/vcf/open-in-vsphere-client.png)
+
+1. If you are using NSX-T, select **Workload Domains** and select the **Summary** tab. Record the IP address listed for **NSX Manager IP Address**.
+
+## <a id='next-steps'></a> Next Step
+
+After you complete the procedures in this topic, continue to [Installing <%= vars.ops_manager %> on vSphere](https://docs.pivotal.io/ops-manager/2-10/install/vsphere.html).
+
+After you configure <%= vars.ops_manager %>, you can install and configure <%= vars.app_runtime_abbr %>.
