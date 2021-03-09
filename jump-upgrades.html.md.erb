@@ -21,20 +21,24 @@ For the latest compatibility information, see [Upgrade Planner](https://upgrade-
 
 Before you jump upgrade to <%= vars.app_runtime_abbr %> v2.11:
 
-1. Upgrade <%= vars.ops_manager %> to v2.10 LTS.
-1. Install the [cf CLI](../cf-cli/v7.html).
+1. Upgrade <%= vars.ops_manager %> to v2.10 LTS. For more information, see [<%= vars.ops_manager %> v2.10 Release Notes](https://docs.pivotal.io/ops-manager/2-10/release-notes.html).
+1. Install the Cloud Foundry Command Line Interface (cf CLI). For more information, see [Upgrading to cf CLI v7](../cf-cli/v7.html).
 
 ## <a id="jump-upgrade"></a> Jump Upgrade
 
-After you ensure your deployment meets the requirements described in
+After your deployment meets the requirements described in
 [Prerequisites](#prequisites) above, you can upgrade to <%= vars.app_runtime_abbr %>
 v2.11.0 or later.
 
 To jump upgrade to <%= vars.app_runtime_abbr %> to v2.11.0 or later:
 
-1. Review the table in [Breaking Changes](#breaking-changes) below
+1. Review the following list of breaking changes
 and address any breaking changes that apply to your current <%= vars.app_runtime_abbr %>
-version.
+version:
+    * [<%= vars.app_runtime_abbr %> 2.8 breaking changes](https://docs.pivotal.io/application-service/2-8/overview/release-notes/runtime-rn.html#breaking-changes)
+    * [<%= vars.app_runtime_abbr %> 2.9 breaking changes](https://docs.pivotal.io/application-service/2-9/overview/release-notes/runtime-rn.html#breaking-changes)
+    * [<%= vars.app_runtime_abbr %> 2.10 breaking changes](https://docs.pivotal.io/application-service/2-10/overview/release-notes/runtime-rn.html#breaking-changes)
+    * [<%= vars.app_runtime_abbr %> 2.11 breaking changes](../overview/release-notes/runtime-rn.html#breaking-changes)
 
 1. Review [Configuring TAS for VMs for Upgrades](./configuring.html).
 
@@ -44,11 +48,4 @@ version.
     * [<%= vars.app_runtime_abbr %> 2.10 release notes](https://docs.pivotal.io/application-service/2-10/overview/release-notes/runtime-rn.html)
     * [<%= vars.app_runtime_abbr %> 2.11 release notes](../overview/release-notes/runtime-rn.html)
 
-## <a id="breaking-changes"></a> Breaking Changes
 
-1. The list below describes the breaking changes that affect <%= vars.app_runtime_abbr %>
-v2.8 through v2.11 and how to address them before upgrading:
-    * [<%= vars.app_runtime_abbr %> 2.8 breaking changes](https://docs.pivotal.io/application-service/2-8/overview/release-notes/runtime-rn.html#breaking-changes)
-    * [<%= vars.app_runtime_abbr %> 2.9 breaking changes](https://docs.pivotal.io/application-service/2-9/overview/release-notes/runtime-rn.html#breaking-changes)
-    * [<%= vars.app_runtime_abbr %> 2.10 breaking changes](https://docs.pivotal.io/application-service/2-10/overview/release-notes/runtime-rn.html#breaking-changes)
-    * [<%= vars.app_runtime_abbr %> 2.11 breaking changes](../overview/release-notes/runtime-rn.html#breaking-changes)
