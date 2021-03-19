@@ -30,10 +30,12 @@ Before you install and configure <%= vars.app_runtime_abbr %> on VMC:
 * Download <%= vars.app_runtime_abbr %> from [<%= vars.product_network %>](https://network.pivotal.io/products/elastic-runtime).
 * Install the govc CLI to your local workstation or jump host. See [govmomi](https://github.com/vmware/govmomi/blob/master/govc/README.md) on GitHub.
 
-If you plan to use a VPN or Direct Connect Virtual Interfaces (VIFs) to connect your network to the VMC SDDC, see the following topics:
+(Optional) If you plan to connect to the VMC SDDC using a VPN or Direct Connect Virtual Interfaces (VIFs):
 
-* [Configure a VPN Connection Between Your SDDC and On-Premises Data Center](https://docs.vmware.com/en/VMware-Cloud-on-AWS/services/com.vmware.vmc-aws.networking-security/GUID-92F6C09E-8E74-430E-8F79-C2E5B2150ADA.html)
-* [Configure AWS Direct Connect Between Your SDDC and On-Premises Data Center](https://docs.vmware.com/en/VMware-Cloud-on-AWS/services/com.vmware.vmc-aws.networking-security/GUID-417EE2F1-0EA5-4808-BDB3-6FF622EECB95.html)
+* To use a VPN to connect your network to the VMC SDDC, configure the VPN connection before you install <%= vars.app_runtime_abbr %>.
+See [Configure a VPN Connection Between Your SDDC and On-Premises Data Center](https://docs.vmware.com/en/VMware-Cloud-on-AWS/services/com.vmware.vmc-aws.networking-security/GUID-92F6C09E-8E74-430E-8F79-C2E5B2150ADA.html).
+* To use VIFs to connect your network to the VMC SDDC, configure the VIFs before you install <%= vars.app_runtime_abbr %>.
+See [Configure AWS Direct Connect Between Your SDDC and On-Premises Data Center](https://docs.vmware.com/en/VMware-Cloud-on-AWS/services/com.vmware.vmc-aws.networking-security/GUID-417EE2F1-0EA5-4808-BDB3-6FF622EECB95.html).
 
 ### <a id='vcenter-access'></a> Enable Browser Access to vCenter
 
