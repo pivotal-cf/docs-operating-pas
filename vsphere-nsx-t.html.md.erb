@@ -19,7 +19,7 @@ PAS uses a Container Network Interface (CNI) plugin to support secure and direct
 Before deploying PAS with NSX-T networking, you must have the following:
 
 * An NSX-T environment with NSX-T components installed and configured. The NSX-T version must support the versions of NCP and PAS you intend to use. Verify the compatibility between NSX-T, NCP and PAS with the following documentation:
-   * [Support Matrix: Pivotal PAS, VMware NSX-T, and VMware NSX-T Container Plug-in for <%= vars.platform_name %>](https://pas-nsx-t.cfapps.io/) for supported version combinations.
+   * [Product Interoperability Matrix: Pivotal PAS, VMware NSX-T, and VMware NSX-T Container Plug-in for <%= vars.platform_name %>](https://interopmatrix.vmware.com/) for supported version combinations.
    * [VMware NSX-T Data Center Documentation](https://docs.vmware.com/en/VMware-NSX-T-Data-Center/). In particular, review the _NSX Container Plug-in (NCP) Release Notes_ and _NSX-T Data Center Installation Guide_ for the versions of NCP and NSX-T that you want to install.
 
 * BOSH and Ops Manager installed and configured on vSphere. For more information, see [Deploying Ops Manager on vSphere](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/om/vsphere/deploy.html) and [Configuring BOSH Director on vSphere](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/om/vsphere/config.html).
@@ -348,7 +348,7 @@ For example, if you want to upgrade NSX-T Data Center, you may need to upgrade t
 To upgrade PAS with NSX-T Networking:
 
 1. Plan the upgrade by determining the compatibility of NCP, NSX-T and PAS by checking the following documentation:
-   * See [Support Matrix: Pivotal PAS, VMware NSX-T, and VMware NSX-T Container Plug-in for <%= vars.platform_name %>](https://pas-nsx-t.cfapps.io/) for supported version combinations.
+   * See [Product Interoperability Matrix: Pivotal PAS, VMware NSX-T, and VMware NSX-T Container Plug-in for <%= vars.platform_name %>](https://interopmatrix.vmware.com/) for supported version combinations.
    * See [VMware NSX-T Data Center Documentation](https://docs.vmware.com/en/VMware-NSX-T-Data-Center/). In particular, review the _NSX Container Plug-in (NCP) Release Notes_ and _NSX-T Data Center Installation Guide_ for the versions of NCP and NSX-T that you want to install.
 
 1. Download the desired version of VMware NSX-T Container Plug-in for <%= vars.platform_name %> tile from [Pivotal Network](https://network.pivotal.io/products/vmware-nsx-t).
