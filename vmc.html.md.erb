@@ -40,9 +40,7 @@ See [Configure AWS Direct Connect Between Your SDDC and On-Premises Data Center]
 ### <a id='vcenter-access'></a> Enable Browser Access to vCenter
 
 By default, ingress to vCenter is not enabled. If you are not using a VPN or other network,
-you must create a firewall rule in SDDC to allow vCenter access from your workstation's public ip address.
-
-You can obtain your public ip address from your browser at: https://ifconfig.me/
+you must create a firewall rule in SDDC to allow vCenter access from your workstation's public IP address.
 
 To enable browser access to vCenter:
 
@@ -55,12 +53,13 @@ To enable browser access to vCenter:
 1. Click **+ Add Rule**.
   * **Name**: Enter `vCenter Browser Inbound Rule`.
   * **Sources**:
-        1. Click **User Defined Groups**
+        1. Click **User Defined Groups**.
         1. Click **Add Group**.
           - For **Group name**, enter `public ip address`.
           - Click **Set Members**.
           - Select **IP Addresses**.
-          - Enter your public ip address, for example `66.170.99.1`.
+          - Enter your public IP address. For example, `66.170.99.1`.
+          <p class="note"><strong>Note</strong>: You can locate your public IP address by navigating to https://ifconfig.me/.</p>
           - Press **Enter**.
           - Click **Apply**.
         1. Click **Save**.
@@ -81,7 +80,8 @@ To gather login credentials for the vCenter instance in your SDDC:
 1. Click **Show Credentials**.
 1. Record the credentials.
 
-With the vCenter credentials and the firewall rule allowing access in place, you should now be able to access and authenticate with your cluster's vCenter server.
+After enabling browser access and recording your vCenter credentials, you can access and authenticate with your cluster's vCenter server.
+
 ## <a id='om-setup'></a> Install <%= vars.ops_manager %>
 
 To install <%= vars.ops_manager %> on VMC:
@@ -165,7 +165,7 @@ To install <%= vars.ops_manager %> on VMC:
     1. Find the <%= vars.ops_manager %> VM.
     1. Open the **Hosts & Clusters** view.
     1. Open the `Compute-ResourcePool` and select the `ops-manager` VM.
-    1. Click ▶ to power on the VM.
+    1. Click ▶ to power on the <%= vars.ops_manager %> VM.
 
 1. Create public IP addresses for <%= vars.ops_manager %> and HAProxy:
     1. Navigate to the [VMC console](https://vmc.vmware.com/console/sddcs).
@@ -252,7 +252,7 @@ To install <%= vars.ops_manager %> on VMC:
     1. Click **Add Rule**.
     1. Select the newly-created rule:
         1. For **Rule Name**, enter `tas-egress`.
-        1. Edit **Sources**
+        1. Edit **Sources**.
             - Click **Add Group**.
               - For **Group name**, enter `tas`.
               - Click **Set Members**.
@@ -267,8 +267,7 @@ To install <%= vars.ops_manager %> on VMC:
         1. For **Destinations**, select **Any**.
     - Click **Publish**.
 
-1. Add a firewall rule that allows ingress to vCenter from TAS control plane
-
+1. Add a firewall rule that allows ingress to vCenter from the <%= vars.app_runtime_abbr %> control plane:
 	1. Navigate to the [VMC console](https://vmc.vmware.com/console/sddcs).
 	1. Select **SDDCs**.
 	1. Click **View Details** on your datacenter tile.
@@ -277,14 +276,14 @@ To install <%= vars.ops_manager %> on VMC:
 	1. Click **Add Rule**.
 	1. Select the newly-created rule:
 
-	  1. For ** Rule Name**, enter `vCenter Inbound Rule`.
+	  1. For **Rule Name**, enter `vCenter Inbound Rule`.
 	  1. Edit **Sources**:
-	        - Click **User Defined Groups**
+	        - Click **User Defined Groups**.
 	        - Click **Add Group**.
 	          - For **Group name**, enter `<%= vars.ops_manager %> public IP`.
 	          - Click **Set Members**.
 	          - Select **IP Addresses**.
-	          - Enter your <%= vars.ops_manager %> public ip address, for example `54.190.190.190`.
+	          - Enter your <%= vars.ops_manager %> public IP address. For example, `54.190.190.190`.
 	          - Press **Enter**.
 	          - Click **Apply**.
 	        - Click **Save**.
@@ -292,7 +291,8 @@ To install <%= vars.ops_manager %> on VMC:
 	          - For **Group name**, enter `Workloads Compute NAT public IP`.
 	          - Click **Set Members**.
 	          - Select **IP Addresses**.
-	          - Enter your Workloads Compute NAT public IP (obtained from Networking & Security Overview), for example `44.232.216.160`.
+	          - Enter your Workloads Compute NAT public IP address. For example, `44.232.216.160`.
+            <p class="note"><strong>Note</strong>: You can locate your Workloads Compute NAT public IP address in the Networking & Security Overview.</p>
 	          - Press **Enter**.
 	          - Click **Apply**.
 	        - Click **Save**.
@@ -300,8 +300,7 @@ To install <%= vars.ops_manager %> on VMC:
 	   1. Edit **Services**: Enter `HTTPS, ICMP, SSO`.
 	1. Click **Publish**.
 
-1. Add a firewall rule that allows ingress to ESXi from TAS control plane
-
+1. Add a firewall rule that allows ingress to ESXi from the <%= vars.app_runtime_abbr %> control plane:
 	1. Navigate to the [VMC console](https://vmc.vmware.com/console/sddcs).
 	1. Select **SDDCs**.
 	1. Click **View Details** on your datacenter tile.
@@ -310,22 +309,22 @@ To install <%= vars.ops_manager %> on VMC:
 	1. Click **Add Rule**.
 	1. Select the newly-created rule:
 
-	  1. For ** Rule Name**, enter `ESXi Inbound Rule`.
+	  1. For **Rule Name**, enter `ESXi Inbound Rule`.
 	  1. Edit **Sources**:
-	        - Click **User Defined Groups**
+	        - Click **User Defined Groups**.
 	        - Click **Add Group**.
 	          - For **Group name**, enter `<%= vars.ops_manager %> private IP`.
 	          - Click **Set Members**.
 	          - Select **IP Addresses**.
-	          - Enter your <%= vars.ops_manager %> private ip address, `192.168.1.10`.
+	          - Enter the <%= vars.ops_manager %> private IP address, `192.168.1.10`.
 	          - Press **Enter**.
 	          - Click **Apply**.
 	        - Click **Save**.
 	        - Click **Add Group**.
-	          - For **Group name**, enter `Bosh Director private IP`.
+	          - For **Group name**, enter `BOSH Director private IP`.
 	          - Click **Set Members**.
 	          - Select **IP Addresses**.
-	          - Enter your Bosh Director's private ip address, `192.168.1.11`.
+	          - Enter the BOSH Director private IP address, `192.168.1.11`.
 	          - Press **Enter**.
 	          - Click **Apply**.
 	        - Click **Save**.
