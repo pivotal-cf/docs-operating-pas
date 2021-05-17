@@ -80,15 +80,15 @@ The following list describes the existing defaults for determining the override 
 
 ### <a id="best-practices"></a> Basic Advice
 
-Set the `max_in_flight` variable high enough that the remaining component instances are not overloaded by typical use. If component instances are overloaded during updates, upgrades, or typical use, users may experience downtime.
+Set the `max_in_flight` variable low enough that the remaining component instances are not overloaded by typical use. If component instances are overloaded during updates, upgrades, or typical use, users may experience downtime.
 
 Some more precise guidelines include:
 
-* For jobs with high resource usage, set `max_in_flight` low. For example, for Diego Cells, `max_in_flight` allows non-migrating Diego Cells to pick up the work of Diego Cells stopping and restarting during migration. If resource usage is already close to 100%, scale up your jobs before making any updates.
+* For jobs with high resource usage, set `max_in_flight` to a low value low. For example, for Diego Cells, `max_in_flight` allows non-migrating Diego Cells to pick up the work of Diego Cells stopping and restarting during migration. If resource usage is already close to 100%, scale up your jobs before making any updates.
 
 * Quorum-based components are components with odd-numbered settings in the manifest. For quorum-based components such as etcd and Diego BBS, set `max_in_flight` to 1. This preserves quorum and prevents a split-brain scenario from occurring as jobs restart. For more information, about split-brain scenarios, see [Split-brain (computing)](https://en.wikipedia.org/wiki/Split-brain_(computing)) on Wikipedia.
 
-* For other components, set `max_in_flight` to the number of instances that you can afford to have down at any one time. The best values for your deployment vary based on your capacity planning. In a highly redundant deployment, you can make the number high so that updates run faster. However, if your components are at high utilization, you should keep the number low to prevent downtime.
+* For other components, set `max_in_flight` to the number of instances that you can afford to have down at any one time. The best values for your deployment vary based on your capacity planning. In a highly redundant deployment, you can set the number to a higher value to allow updates to run faster. However, if your components are at high utilization, you should keep the number low to prevent downtime.
 
 * Setting `max_in_flight` to a value greater than or equal to the number of instances you have running may reduce functionality.
 
