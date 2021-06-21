@@ -360,12 +360,3 @@ To upgrade <%= vars.app_runtime_abbr %> with NSX-T Networking:
 1. Click **Apply Changes**.
 
 1. Continue with the upgrade of <%= vars.ops_manager %>, <%= vars.app_runtime_abbr %>, or NSX-T Data Center. For more information, see [Upgrade NCP in a <%= vars.platform_name %> Environment](https://docs.vmware.com/en/VMware-NSX-T-Data-Center/2.4/com.vmware.nsxt.ncp_kubernetes.doc/GUID-4E269C79-1EF7-48E7-AFA4-D79B9F9C9202.html?hWord=N4IghgNiBcIK4AcDmAnMATApgAgHYGMEQBfIA) in the VMware NSX-T Data Center documentation.
-
-
-## <a id='automation'></a> Automation
-
-For more information about automation, see the following resources:
-
-* [Concourse Pipelines: Configure NSX-T for <%= vars.app_runtime_abbr %>](https://github.com/pivotalservices/concourse-pipeline-samples/tree/master/pipelines/pcf/vsphere/nsxt): This sample Concourse pipeline provides jobs setup switches, routers, an IP block, and an IP pool to be used by <%= vars.app_runtime_abbr %>.
-
-* [PyNSXT](https://github.com/pivotalservices/pynsxt): This is a Python library that can be used as a CLI to run commands against a VMware NSX-T installation. It exposes operations for working with logical switches, logical routers, and pools. It uses NSX-T v2.1 for the swagger client.
