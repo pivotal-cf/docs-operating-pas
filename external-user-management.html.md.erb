@@ -1,11 +1,13 @@
 ---
-title: Adding Existing SAML or LDAP Users to a Pivotal Platform Deployment
+title: Adding Existing SAML or LDAP Users to a PAS Deployment
 owner: Identity
 ---
 
-This topic describes the procedure for adding existing SAML or LDAP users to a <%= vars.platform_name %> deployment enabled with SAML or LDAP.
+<% current_page.data.title = "Adding Existing SAML or LDAP Users to a " + vars.app_runtime_abbr %> + " Deployment" %>
 
-The following two ways exist to add existing SAML or LDAP users to your <%= vars.platform_name %> deployment:
+This topic describes the procedure for adding existing SAML or LDAP users to a <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) deployment enabled with SAML or LDAP.
+
+The following two ways exist to add existing SAML or LDAP users to your <%= vars.app_runtime_abbr %> deployment:
 
 * [Option 1: Import Users in Bulk](#bulk-import)
 * [Option 2: Add Users Manually](#manual)
@@ -15,7 +17,7 @@ The following two ways exist to add existing SAML or LDAP users to your <%= vars
 
 To perform the procedures in this topic, you must have:
 
-* Admin access to the <%= vars.ops_manager %> Installation Dashboard for your <%= vars.platform_name %> deployment
+* Admin access to the <%= vars.ops_manager %> Installation Dashboard for your <%= vars.app_runtime_abbr %> deployment
 
 * The [Cloud Foundry Command Line Interface](../cf-cli/install-go-cli.html) (cf CLI) v6.23.0 or later
 
@@ -27,13 +29,13 @@ You can import SAML or LDAP users in bulk by using the CF-MGMT Tool. For instruc
 
 ## <a id='manual'></a> Option 2: Add Users Manually
 
-The following sections describe how to add existing SAML or LDAP users to your <%= vars.platform_name %> deployment manually.
+The following sections describe how to add existing SAML or LDAP users to your <%= vars.app_runtime_abbr %> deployment manually.
 
 ### <a id='step-id'></a> Step 1: Create User
 
 To add a SAML or LDAP user:
 
-1. Target the API endpoint for your <%= vars.platform_name %> deployment by running:
+1. Target the API endpoint for your <%= vars.app_runtime_abbr %> deployment by running:
 
     ```
     cf target https://api.SYSTEM-DOMAIN
