@@ -101,7 +101,7 @@ To set up load balancing for <%= vars.app_runtime_abbr %> on AWS using Terraform
 
 To configure the Gorouter or HAProxy to use AWS Elastic Load Balancers:
 
-1. Record the names of your ELBs. If you followed the procedures in [Installing <%= vars.platform_name %> on AWS Manually](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/om/aws/prepare-env-manual.html), you created:
+1. Record the names of your ELBs. If you followed the procedures in [Preparing to Deploy Ops Manager on AWS](https://docs.pivotal.io/ops-manager/aws/prepare-env-manual.html), you created:
   * `<%= vars.platform_name_lc %>-ssh-elb`: An SSH load balancer. This is a Classic Load Balancer.
   * `<%= vars.platform_name_lc %>-tcp-elb`: A TCP load balancer. This is a Classic Load Balancer.
   * `<%= vars.platform_name_lc %>-web-elb`: A web load balancer. This is an Application Load Balancer.
@@ -149,7 +149,7 @@ To configure the Gorouter to use Azure load balancers:
 1. Ensure that the **INTERNET CONNECTED** checkboxes are deselected for all jobs.
 
 1. Scale the number of instances as appropriate for your deployment.
-  <p class="note"><strong>Note:</strong> For a high-availability deployment of <%= vars.platform_name %> on Azure, <%= vars.company_name %> recommends scaling the number of each <%= vars.app_runtime_abbr %> job to a minimum of three instances. Using three or more instances for each job creates a sufficient number of availability sets and fault domains for your deployment. For more information, see <a href="https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/plan/azure/azure_ref_arch.html">Azure Reference Architecture</a>.</p>
+  <p class="note"><strong>Note:</strong> For a high-availability deployment of Ops Manager on Azure, <%= vars.company_name %> recommends scaling the number of each <%= vars.app_runtime_abbr %> job to a minimum of three instances. Using three or more instances for each job creates a sufficient number of availability sets and fault domains for your deployment. For more information, see <a href="https://docs.pivotal.io/ops-manager/refarch/azure/azure_ref_arch.html">Azure Reference Architecture</a>.</p>
 
 ### <a id="azure-manual"></a> Azure Paved Manually
 
@@ -179,7 +179,7 @@ To configure the Gorouter to use Azure load balancers:
 1. Ensure that the **INTERNET CONNECTED** checkboxes are deselected for all jobs.
 
 1. Scale the number of instances as appropriate for your deployment.
-  <p class="note"><strong>Note:</strong> For a high availability deployment of <%= vars.platform_name %> on Azure, <%= vars.company_name %> recommends scaling the number of each <%= vars.app_runtime_abbr %> job to a minimum of three instances. Using three or more instances for each job creates a sufficient number of availability sets and fault domains for your deployment. For more information, see <a href="https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/plan/azure/azure_ref_arch.html">Azure Reference Architecture</a>.</p>
+  <p class="note"><strong>Note:</strong> For a high availability deployment of Ops Manager on Azure, <%= vars.company_name %> recommends scaling the number of each <%= vars.app_runtime_abbr %> job to a minimum of three instances. Using three or more instances for each job creates a sufficient number of availability sets and fault domains for your deployment. For more information, see <a href="https://docs.pivotal.io/ops-manager/refarch/azure/azure_ref_arch.html">Azure Reference Architecture</a>.</p>
 
 
 ## <a id="gcp"></a> GCP
@@ -217,7 +217,7 @@ To configure the Gorouter to use GCP load balancers:
 
     <%= image_tag('gcp/config-lb.png', :alt => "The load balancer table shows three load balancers: pcf-router HTTPS load balancer, pcf-ssh TCP load balancer, and pcf-websockets TCP load balancer. ") %>
 
-    You should see the SSH load balancer, the HTTP(S) load balancer, the TCP WebSockets load balancer, and the TCP router that you created in [Preparing to Deploy Ops Manager on GCP Manually](https://docs.pivotal.io/platform/ops-manager/<%= vars.current_major_version.sub('.', '-') %>/gcp/prepare-env-manual.html).
+    You should see the SSH load balancer, the HTTP(S) load balancer, the TCP WebSockets load balancer, and the TCP router that you created in [Preparing to Deploy Ops Manager on GCP](https://docs.pivotal.io/ops-manager/2-10/gcp/prepare-env-manual.html).
 
 1. Record the name of your SSH load balancer and your TCP WebSockets load balancer, `<%= vars.platform_code %>-wss-logs` and `<%= vars.platform_code %>-ssh-proxy`.
 
