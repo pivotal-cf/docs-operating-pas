@@ -3,7 +3,7 @@ title: Configuring Load Balancing for TAS for VMs
 owner: Releng
 ---
 
-This topic describes how to configure load balancing for <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) by entering the names of your load balancers in the **Resource Config** pane of the <%= vars.app_runtime_abbr %> tile. This procedure varies by your IaaS and how you prepared ("paved") it for installing <%= vars.app_runtime_abbr %>. See the section below that corresponds to your use case.
+This topic describes how to configure load balancing for <%= vars.app_runtime_first %> by entering the names of your load balancers in the **Resource Config** pane of the <%= vars.app_runtime_abbr %> tile. This procedure varies by your IaaS and how you prepared ("paved") it for installing <%= vars.app_runtime_abbr %>. See the section below that corresponds to your use case.
 
 
 ## <a id="aws"></a> AWS
@@ -13,7 +13,7 @@ This topic describes how to configure load balancing for <%= vars.app_runtime_fu
 To set up load balancing for <%= vars.app_runtime_abbr %> on AWS using Terraform:
 
 1. Create a file named `vm_extensions_config.yml` with the following content, depending on which release you are using:
-    * **<%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>)**:
+    * **<%= vars.app_runtime_first %>**:
 
         ```
         ---
