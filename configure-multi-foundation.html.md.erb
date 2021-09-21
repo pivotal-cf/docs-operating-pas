@@ -5,7 +5,7 @@ owner:
 
 This topic describes how to configure multi-foundation support in Apps Manager.
 
-<p class="note"><strong>Note</strong>: Multi-foundation support in Apps Manager is in beta. If you connect foundations that use different <%= vars.app_runtime_first %> versions, Apps Manager functionality might not work.</p>
+<p class="note warning"><strong>Warning</strong>: Multi-foundation support in Apps Manager is in beta. You can use this feature to connect foundations that use the same major and minor version of <%= vars.app_runtime_first %>. If you connect foundations that use different <%= vars.app_runtime_abbr %> versions, Apps Manager functionality might not work.</p>
 
 
 ## <a id="overview"></a> Overview
@@ -21,7 +21,7 @@ This section describes the procedures for configuring multi-foundation support i
 
 This section describes how to configure <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) on a foundation to enable multi-foundation support in Apps Manager.
 
-To configure multi-foundation support in Apps Manager: 
+To configure multi-foundation support in Apps Manager:
 
 1. In the <%= vars.app_runtime_abbr %> tile of one of your foundations, select **Apps Manager**.
 
@@ -54,19 +54,19 @@ To configure multi-foundation support in Apps Manager:
 
 ### <a id="certificates"></a> Add Trusted Certificate Authorities
 
-Apps Manager must be able to validate the certificate authorities (CAs) used by all foundations. 
+Apps Manager must be able to validate the certificate authorities (CAs) used by all foundations.
 
-If any foundation uses a certificate for TLS termination that is not signed by a globally-trusted CA, add the CA that signed the TLS certificate as a trusted CA on the foundation on which you enabled multi-foundation support. 
+If any foundation uses a certificate for TLS termination that is not signed by a globally-trusted CA, add the CA that signed the TLS certificate as a trusted CA on the foundation on which you enabled multi-foundation support.
 
 For more information, see [Setting Trusted Certificates](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/customizing/trusted-certificates.html).
 
 ### <a id="saml"></a> (Optional) Configure the SAML Identity Provider
 
-<%= vars.company_name %> recommends that all foundations use the same external SAML identity provider. This allows Apps Manager to automatically authenticate with the identity provider. 
+<%= vars.company_name %> recommends that all foundations use the same external SAML identity provider. This allows Apps Manager to automatically authenticate with the identity provider.
 
 To configure all foundations to use the same SAML identity provider:
 
-1. In the <%= vars.app_runtime_abbr %> tile, select **Authentication and Enterprise SSO**. 
+1. In the <%= vars.app_runtime_abbr %> tile, select **Authentication and Enterprise SSO**.
 
 1. Verify that the foundation uses the correct provider for **Provider name**.
 
