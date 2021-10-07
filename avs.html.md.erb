@@ -3,24 +3,22 @@ title: Deploying TAS for VMs to AVS
 owner: Ops Manager
 ---
 
-This topic describes how to install <%= vars.app_runtime_first %> on Azure VMware Solution (AVS) with NSX-T internal networking, using the VMware NSX-T Container Plug-in.
+This topic describes how to install <%= vars.app_runtime_first %> on [Azure VMware Solution (AVS)](https://docs.microsoft.com/en-us/azure/azure-vmware/) with NSX-T internal networking, using the VMware NSX-T Container Plug-in.
 
 
 ## <a id='introduction'></a> Overview
 
-<%= vars.app_runtime_abbr %> uses a Container Network Interface (CNI) plugin to support secure and direct internal communication between containers. This plugin can be:
+Azure VMware Solution provides you with private clouds that contain vSphere clusters built from dedicated bare-metal Azure infrastructure. 
 
-* The internal Silk plugin that comes packaged with <%= vars.app_runtime_abbr %>, or
-* On vSphere, NSX-T Container Plug-in (NCP), which installs as the [VMware NSX-T Container Plug-in for PCF](https://network.pivotal.io/products/vmware-nsx-t) tile in <%= vars.ops_manager %>.
+Azure VMware Solution is a VMware validated solution with ongoing validation and testing of enhancements and upgrades. Microsoft manages and maintains private cloud infrastructure and software. 
 
+All provisioned private clouds have vCenter Server, vSAN, vSphere, and NSX-T.
+
+Deploying TAS for VMS to AVS is very similar to traditional TAS deployments on vSphere, but there are a few minor differences due to the way that AVS deploys vSphere components.
 
 ## <a id='requirements'></a> Prerequisites
 
 Before deploying <%= vars.app_runtime_abbr %> with NSX-T networking, you must have the following:
-
-* An NSX-T environment with NSX-T components installed and configured. The NSX-T version must support the versions of NCP and <%= vars.app_runtime_abbr %> you intend to use. Verify the compatibility between NSX-T, NCP and <%= vars.app_runtime_abbr %> with the following documentation:
-   * [Product Interoperability Matrix: <%= vars.app_runtime_abbr %>, VMware NSX-T, and VMware NSX-T Container Plug-in for <%= vars.platform_name %>](https://interopmatrix.vmware.com) for supported version combinations.
-   * [VMware NSX-T Data Center Documentation](https://docs.vmware.com/en/VMware-NSX-T-Data-Center/). In particular, review the _NSX Container Plug-in (NCP) Release Notes_ and _NSX-T Data Center Installation Guide_ for the versions of NCP and NSX-T that you want to install.
 
 * BOSH and <%= vars.ops_manager %> installed and configured on vSphere. For more information, see [Deploying <%= vars.ops_manager %> on vSphere](https://docs.pivotal.io/ops-manager/2-10/vsphere/deploy.html) and [Configuring BOSH Director on vSphere](https://docs.pivotal.io/ops-manager/2-10/vsphere/config.html).
 
@@ -28,20 +26,11 @@ Before deploying <%= vars.app_runtime_abbr %> with NSX-T networking, you must ha
 
 * The [<%= vars.app_runtime_abbr %> tile](https://network.pivotal.io/products/elastic-runtime) downloaded from VMware Tanzu Network and imported to the <%= vars.ops_manager %> Installation Dashboard. The <%= vars.app_runtime_abbr %> tile must be in one of the following two states:
   * Configured but not deployed yet; you have not yet clicked **Review Pending Changes**, then **Apply Changes** on this version of <%= vars.app_runtime_abbr %>.
-  * Deployed previously, with the **Container network interface plugin** field set to **External** in the **Networking** pane of the <%= vars.app_runtime_abbr %> tile.
-  <p class="note"><strong>Note:</strong> Deploying <%= vars.app_runtime_abbr %> with its container network interface (CNI) set to **Silk** configures Diego Cells to use an internally-managed container network. Subsequently switching the CNI interface to **External** NSX-T leads to errors.</p>
 
+* Retrieve the URLs and user credentials for your AVS private cloud vCenter and NSX-T Manager:
+  * [Connect to the local vCenter of your private cloud](https://docs.microsoft.com/en-us/azure/azure-vmware/tutorial-access-private-cloud#connect-to-the-local-vcenter-of-your-private-cloud)
 
-## <a id='architecture'></a> Architecture
-
-The following diagram shows how to deploy an NSX-T machine to run <%= vars.app_runtime_abbr %> across multiple vSphere hardware clusters. NSX-T runs a Tier-0 (T0) router and multiple Tier-1 (T1) routers, each connecting to a network within <%= vars.platform_name %>. Each vSphere hardware column cluster corresponds to an Availability Zone in <%= vars.platform_name %>:
-
-![NSX-T &amp; <%= vars.app_runtime_abbr %> Overview](nsx-t/nsx-t-refarch.png)
-
-When a developer pushes an app to a new org for the first time, the NSX-T plugin triggers NSX-T to create a new T1 router and allocate an address range for the org, on demand.
-
-
-## <a id='install'></a> Install and Configure <%= vars.app_runtime_abbr %> and NSX-T
+## <a id='install'></a> Install and Configure <%= vars.app_runtime_abbr %> and NSX-T Container Plugin
 
 Installing NSX-T to run with <%= vars.app_runtime_abbr %> requires:
 
@@ -51,17 +40,26 @@ Installing NSX-T to run with <%= vars.app_runtime_abbr %> requires:
 
 1. [Configure <%= vars.app_runtime_abbr %> for External Container Networking](#external-net)
 
-1. [Install and Configure the NSX-T Tile](#nsx-t-tile)
+1. [Install and Configure the NSX-T Container Plugin](#nsx-t-tile)
 
 ### <a id='nsx-t-setup'></a> Set Up NSX-T to Integrate with <%= vars.app_runtime_abbr %>
 
 To set up NSX-T to integrate with <%= vars.app_runtime_abbr %>, complete these procedures:
+
+- [Regenerate NSX-T Management TLS Certificate with valid SAN](#regenerate-nsx-t-cert)
 
 - [Configure Logical Switches](#nsx-t-logical-switches)
 
 - [Configure Routers](#nsx-t-routers)
 
 - [Configure Load Balancer](#nsx-t-load-balancer)
+
+#### <a id='regenerate-nsx-t-cert'></a> Regenerate NSX-T Management TLS Certificate with valid SAN
+
+The AVS deployed NSX-T manager comes with a self-signed TLS certificate with an invalid Subject Alternative Name (SAN).  This causes issues when connecting from Ops Manager and Bosh Director, so we need to create a new certificate using the NSX-T Manager's fully qualified domain name or IP Address as the new SAN.
+
+These steps are documented at: [Generate and Register the NSX-T Management TLS Certificate and Private Key](https://docs.pivotal.io/tkgi/1-12/nsxt-install-tls-certs.html)
+
 
 #### <a id='nsx-t-logical-switches'></a> Configure Logical Switches
 
@@ -86,28 +84,10 @@ To configure logical switches:
 
 To configure routers:
 
-1. Create T0 network address translation (NAT) rules to communicate with <%= vars.ops_manager %>:
-  1. Go to **Advanced Networking & Security**.
-  1. Go to the **Routers** pane.
-  1. Select your T0 router.
-  1. From the **Services** dropdown, choose **NAT**.
-  1. Add a rule for destination NAT (DNAT) with:
-      - The externally-specified destination IP address of incoming requests. If your <%= vars.ops_manager %> has a DNS entry (for example, `opsmgr.example.com`), this is its IP address.
-      - The <%= vars.ops_manager %> internal network address.
-![NSX-T ](nsx-t/nsx-t-dnat-rule.png)
-  1. Add the corresponding source NAT (SNAT) rule with:
-      - The externally-specified destination IP address.
-      - The <%= vars.ops_manager %> internal network address.
-![NSX-T ](nsx-t/nsx-t-snat-rule.png)
-  1. Add a rule for source NAT (SNAT) for the infrastructure and deployment networks:
-      - The externally-specified destination IP address.
-      - The internal network address in CIDR notation.
-![NSX-T ](nsx-t/nsx-t-snat-net-rule.png)
-
 1. Create T1 routers for <%= vars.app_runtime_abbr %>, to connect from the T0 router. For each <%= vars.platform_name %> network, Infrastructure, Deployment, and so on, create a T1 router as follows:
-1. In the NSX-T Manager UI, navigate to **Advanced Networking & Security** > **Routing** > **Routers**.
+2. In the NSX-T Manager UI, navigate to **Advanced Networking & Security** > **Routing** > **Routers**.
   1. Click **+ADD** > **Tier-1 Router**.
-  1. Configure the router. Include the Edge Cluster and Edge Cluster Members; they are required to enable the Load Balancer. The Infrastructure network router configuration might look like the following diagram:
+  2. Configure the router. Include the Edge Cluster and Edge Cluster Members; they are required to enable the Load Balancer. The Infrastructure network router configuration might look like the following diagram:
 ![NSX-T ](nsx-t/nsx-t-t1-router.png)
 
 1. Create T1 router downlink ports for <%= vars.app_runtime_abbr %>. For each T1 router you created, add a **New Router Port** as follows, to allow traffic in and out:
@@ -130,11 +110,6 @@ To configure routers:
   1. Enter a description, such as `Subnets are allocated from this pool to each newly-created org`.
   1. Enter a CIDR to allocate an address block large enough to accommodate all <%= vars.app_runtime_abbr %> apps. A `/14` CIDR is large enough for ~1,000 Orgs with ~250 apps each. If you are planning such a large foundation, see [VMware NSX-T <%= vars.app_runtime_abbr %> limits](https://configmax.vmware.com/guest?vmwareproduct=VMware%20NSX-T&release=NSX-T%20Data%20Center%202.4.0&categories=31-0) in the VMware documentation.
 ![NSX-T ](nsx-t/nsx-t-ip-block.png)
-
-1. Create an external SNAT IP pool.
-  1. Navigate to **Advanced Networking & Security** > **Inventory** > **Groups** > **IP Pools** and click **+ADD**.
-  1. Enter a name (such as `external-ip-pool`) and a description (such as `IP pool that provides 1 public IP for each <%= vars.app_runtime_abbr %> Org`). Later, you will enter this pool name on the **VMware NSX-T** tile in the **NCP** section under **IP Pools used to provide External (NAT) IP Addresses to Org Networks**.
-![NSX-T ](nsx-t/nsx-t-external-ip-pool.png)
 
 #### <a id='nsx-t-load-balancer'></a> Configure Load Balancer
 
@@ -338,25 +313,3 @@ To install and configure the tile:
 
 1. After you have configured both the **<%= vars.app_runtime_abbr %>** tile and the **VMware NSX-T** tile, click **Review Pending Changes**, then **Apply Changes** to deploy <%= vars.app_runtime_abbr %> with NSX-T networking.
 
-
-## <a id='upgrade'></a> Upgrade <%= vars.app_runtime_abbr %> with NSX-T Networking
-
-After you have deployed <%= vars.app_runtime_abbr %> with NSX-T, you may need to upgrade either <%= vars.ops_manager %>, <%= vars.app_runtime_abbr %>, the NSX-T Container Plug-in or NSX-T Data Center. If you upgrade one of these components, you may need to upgrade the other components as well.
-
-For example, if you want to upgrade NSX-T Data Center, you may need to upgrade the NSX-T Container Plug-in first.
-
-To upgrade <%= vars.app_runtime_abbr %> with NSX-T Networking:
-
-1. Plan the upgrade by determining the compatibility of NCP, NSX-T and <%= vars.app_runtime_abbr %> by checking the following documentation:
-   * See [Product Interoperability Matrix: <%= vars.app_runtime_abbr %>, VMware NSX-T, and VMware NSX-T Container Plug-in for <%= vars.platform_name %>](https://interopmatrix.vmware.com) for supported version combinations.
-   * See [VMware NSX-T Data Center Documentation](https://docs.vmware.com/en/VMware-NSX-T-Data-Center/). In particular, review the _NSX Container Plug-in (NCP) Release Notes_ and _NSX-T Data Center Installation Guide_ for the versions of NCP and NSX-T that you want to install.
-
-1. Download the desired version of VMware NSX-T Container Plug-in for <%= vars.platform_name %> tile from [VMware Tanzu Network](https://network.pivotal.io/products/vmware-nsx-t).
-
-1. In <%= vars.ops_manager %>, import the new version of the tile to the **Installation Dashboard**. For instructions, see [Adding and Importing Products](https://docs.pivotal.io/ops-manager/2-10/install/add-delete.html#add-import).
-
-1. Click **Review Pending Changes** and review your changes.
-
-1. Click **Apply Changes**.
-
-1. Continue with the upgrade of <%= vars.ops_manager %>, <%= vars.app_runtime_abbr %>, or NSX-T Data Center. For more information, see [Upgrade NCP in a <%= vars.platform_name %> Environment](https://docs.vmware.com/en/VMware-NSX-T-Data-Center/2.4/com.vmware.nsxt.ncp_kubernetes.doc/GUID-4E269C79-1EF7-48E7-AFA4-D79B9F9C9202.html?hWord=N4IghgNiBcIK4AcDmAnMATApgAgHYGMEQBfIA) in the VMware NSX-T Data Center documentation.
