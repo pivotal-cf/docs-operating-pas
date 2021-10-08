@@ -3,34 +3,18 @@ title: Deploying TAS for VMs to AVS
 owner: Ops Manager
 ---
 
-This topic describes how to install <%= vars.app_runtime_first %> on [Azure VMware Solution (AVS)](https://docs.microsoft.com/en-us/azure/azure-vmware/) with NSX-T internal networking, using the VMware NSX-T Container Plug-in.
+This topic describes how to install <%= vars.app_runtime_first %> on Azure VMware Solution (AVS) with NSX-T internal networking, using the VMware NSX-T Container Plug-in.
 
+For more information about AVS, see the [Azure VMware Solution documentation](https://docs.microsoft.com/en-us/azure/azure-vmware/).
 
 ## <a id='introduction'></a> Overview
 
-Azure VMware Solution provides you with private clouds that contain vSphere clusters built from dedicated bare-metal Azure infrastructure. 
-
-Azure VMware Solution is a VMware validated solution with ongoing validation and testing of enhancements and upgrades. Microsoft manages and maintains private cloud infrastructure and software. 
+AVS provides you with private clouds that contain vSphere clusters built from dedicated bare-metal Azure infrastructure.
+AVS is a VMware-validated solution with ongoing validation and testing of enhancements and upgrades. Microsoft manages and maintains private cloud infrastructure and software.
 
 All provisioned private clouds have vCenter Server, vSAN, vSphere, and NSX-T.
 
-Deploying TAS for VMS to AVS is very similar to traditional TAS deployments on vSphere, but there are a few minor differences due to the way that AVS deploys vSphere components.
-
-## <a id='requirements'></a> Prerequisites
-
-Before deploying <%= vars.app_runtime_abbr %> with NSX-T networking, you must have the following:
-
-* BOSH and <%= vars.ops_manager %> installed and configured on vSphere. For more information, see [Deploying <%= vars.ops_manager %> on vSphere](https://docs.pivotal.io/ops-manager/2-10/vsphere/deploy.html) and [Configuring BOSH Director on vSphere](https://docs.pivotal.io/ops-manager/2-10/vsphere/config.html).
-
-* The [VMware NSX-T Container Plug-in for <%= vars.platform_name %> tile](https://network.pivotal.io/products/vmware-nsx-t) downloaded from VMware Tanzu Network and imported to the <%= vars.ops_manager %> **Installation Dashboard**. For information about downloading and importing VMware Tanzu products to the Installation Dashboard, see [Adding and Importing Products](https://docs.pivotal.io/ops-manager/2-10/install/add-delete.html#add-import).
-
-* The [<%= vars.app_runtime_abbr %> tile](https://network.pivotal.io/products/elastic-runtime) downloaded from VMware Tanzu Network and imported to the <%= vars.ops_manager %> Installation Dashboard. The <%= vars.app_runtime_abbr %> tile must be in one of the following two states:
-  * Configured but not deployed yet; you have not yet clicked **Review Pending Changes**, then **Apply Changes** on this version of <%= vars.app_runtime_abbr %>.
-
-* Retrieve the URLs and user credentials for your AVS private cloud vCenter and NSX-T Manager:
-  * [Connect to the local vCenter of your private cloud](https://docs.microsoft.com/en-us/azure/azure-vmware/tutorial-access-private-cloud#connect-to-the-local-vcenter-of-your-private-cloud)
-
-## <a id='install'></a> Install and Configure <%= vars.app_runtime_abbr %> and NSX-T Container Plugin
+Deploying <%= vars.app_runtime_abbr %> to AVS is similar to traditional <%= vars.app_runtime_abbr %> deployments on vSphere, but there are a few minor differences due to the way that AVS deploys vSphere components.
 
 Installing NSX-T to run with <%= vars.app_runtime_abbr %> requires:
 
@@ -42,11 +26,28 @@ Installing NSX-T to run with <%= vars.app_runtime_abbr %> requires:
 
 1. [Install and Configure the NSX-T Container Plugin](#nsx-t-tile)
 
+## <a id='requirements'></a> Prerequisites
+
+Before deploying <%= vars.app_runtime_abbr %> with NSX-T networking, you must have the following:
+
+* BOSH and <%= vars.ops_manager %> installed and configured on vSphere. For more information, see [Deploying <%= vars.ops_manager %> on vSphere](https://docs.pivotal.io/ops-manager/2-10/vsphere/deploy.html) and [Configuring BOSH Director on vSphere](https://docs.pivotal.io/ops-manager/2-10/vsphere/config.html).
+
+* The [VMware NSX-T Container Plug-in tile](https://network.pivotal.io/products/vmware-nsx-t) downloaded from VMware Tanzu Network and imported to the <%= vars.ops_manager %> Installation Dashboard. For information about downloading and importing VMware Tanzu products to the Installation Dashboard, see [Adding and Importing Products](https://docs.pivotal.io/ops-manager/2-10/install/add-delete.html#add-import).
+
+* The [<%= vars.app_runtime_abbr %> tile](https://network.pivotal.io/products/elastic-runtime) downloaded from VMware Tanzu Network and imported to the <%= vars.ops_manager %> Installation Dashboard. The <%= vars.app_runtime_abbr %> tile must be configured but not deployed yet. Configure the tile for the first time, but do not click **Review Pending Changes** or **Apply Changes**.
+
+* The URLs and user credentials for your AVS private cloud vCenter and NSX-T Manager. See [Connect to the local vCenter of your private cloud](https://docs.microsoft.com/en-us/azure/azure-vmware/tutorial-access-private-cloud#connect-to-the-local-vcenter-of-your-private-cloud) in the AVS documentation.
+
+
+## <a id='install'></a> Install and Configure <%= vars.app_runtime_abbr %>
+
+This section describes how to install and configure <%= vars.app_runtime_abbr %> on AVS.
+
 ### <a id='nsx-t-setup'></a> Set Up NSX-T to Integrate with <%= vars.app_runtime_abbr %>
 
 To set up NSX-T to integrate with <%= vars.app_runtime_abbr %>, complete these procedures:
 
-- [Regenerate NSX-T Management TLS Certificate with valid SAN](#regenerate-nsx-t-cert)
+- [Regenerate NSX-T Management TLS Certificate with a Valid SAN](#regenerate-nsx-t-cert)
 
 - [Configure Logical Switches](#nsx-t-logical-switches)
 
@@ -54,12 +55,11 @@ To set up NSX-T to integrate with <%= vars.app_runtime_abbr %>, complete these p
 
 - [Configure Load Balancer](#nsx-t-load-balancer)
 
-#### <a id='regenerate-nsx-t-cert'></a> Regenerate NSX-T Management TLS Certificate with valid SAN
+#### <a id='regenerate-nsx-t-cert'></a> Regenerate NSX-T Management TLS Certificate with a Valid SAN
 
-The AVS deployed NSX-T manager comes with a self-signed TLS certificate with an invalid Subject Alternative Name (SAN).  This causes issues when connecting from Ops Manager and Bosh Director, so we need to create a new certificate using the NSX-T Manager's fully qualified domain name or IP Address as the new SAN.
+The AVS-deployed NSX-T Manager includes a self-signed TLS certificate with an invalid Subject Alternative Name (SAN). This causes issues when connecting from Ops Manager and the BOSH Director, so you must create a new certificate using the NSX-T Manager's fully qualified domain name (FQDN) or IP address as the new SAN.
 
-These steps are documented at: [Generate and Register the NSX-T Management TLS Certificate and Private Key](https://docs.pivotal.io/tkgi/1-12/nsxt-install-tls-certs.html)
-
+For instructions, see [Generate and Register the NSX-T Management TLS Certificate and Private Key](https://docs.pivotal.io/tkgi/1-12/nsxt-install-tls-certs.html) in the <%= vars.k8s_runtime_full %> (<%= vars.k8s_runtime_abbr %>) documentation.
 
 #### <a id='nsx-t-logical-switches'></a> Configure Logical Switches
 
@@ -251,7 +251,7 @@ To configure a load balancer:
   1. Click **Actions** > **Attach to a Virtual Server**, and then select `pas-web-vs`. Repeat this procedure for the Virtual Servers `pas-tcp-vs` and `pas-ssh-vs`.
   1. Click **Action** > **Attach to a Logical Router**, and then select `T1-Router-<%= vars.app_runtime_abbr %>-Deployment`.
 
-### <a id='nsx-t-mode'></a> Enable NSX-T Mode in the BOSH Director
+## <a id='nsx-t-mode'></a> Enable NSX-T Mode in the BOSH Director
 
 To enable NSX-T mode in the BOSH Director:
 
@@ -264,7 +264,7 @@ To enable NSX-T mode in the BOSH Director:
 1. Configure BOSH Director authentication to the NSX Manager by following the **NSX Networking** instructions
 in the [Step 2: Configure vCenter](https://docs.pivotal.io/ops-manager/2-10/vsphere/config.html#vcenter-config) section of _Configuring BOSH Director on vSphere_.
 
-### <a id='external-net'></a> Configure <%= vars.app_runtime_abbr %> for External Container Networking
+## <a id='external-net'></a> Configure <%= vars.app_runtime_abbr %> for External Container Networking
 
 To configure <%= vars.app_runtime_abbr %> for external container networking:
 
@@ -280,11 +280,11 @@ To configure <%= vars.app_runtime_abbr %> for external container networking:
     1. Click the arrow next to each job to reveal the **NSX-T CONFIGURATION** column. See [Step 10: Resource Config Pane](https://docs.pivotal.io/ops-manager/2-10/vsphere/config.html#resource-config) in _Configuring BOSH Director on vSphere_.
     1. Under **Logical Load Balancer**, enter a JSON-formatted structure to defining a list of `server_pools`  a VM extension for each of the three server pools: `pas-web-pool`, `pas-tcp-pool`, and `pas-ssh-pool`.
 
-### <a id='nsx-t-tile'></a> Install and Configure the NSX-T Container Plug-In
+## <a id='nsx-t-tile'></a> Install and Configure the NSX-T Container Plug-In
 
-To install and configure the tile:
+To install and configure the NSX-T Container Plug-In tile:
 
-1. If you have not already done so, download the VMware NSX-T Container Plug-in for <%= vars.platform_name %> tile from [VMware Tanzu Network](https://network.pivotal.io/products/vmware-nsx-t) and import it to the **Installation Dashboard**. For instructions, see [Adding and Importing Products](https://docs.pivotal.io/ops-manager/2-10/install/add-delete.html#add-import).
+1. If you have not already done so, download the VMware NSX-T Container Plug-in tile from [VMware Tanzu Network](https://network.pivotal.io/products/vmware-nsx-t) and import it to the **Installation Dashboard**. For instructions, see [Adding and Importing Products](https://docs.pivotal.io/ops-manager/2-10/install/add-delete.html#add-import).
 ![<%= vars.ops_manager %> Installation Dashboard with NSX-T tile](nsx-t/nsx-t-install-dash.png)
 
 1. Click the **VMware NSX-T** tile to open its **Settings** tab, and configure the **NSX Manager** pane as follows:
@@ -312,4 +312,3 @@ To install and configure the tile:
 1. Click **Save** and return to the **Installation Dashboard**.
 
 1. After you have configured both the **<%= vars.app_runtime_abbr %>** tile and the **VMware NSX-T** tile, click **Review Pending Changes**, then **Apply Changes** to deploy <%= vars.app_runtime_abbr %> with NSX-T networking.
-
