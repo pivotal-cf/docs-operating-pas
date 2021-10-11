@@ -39,11 +39,7 @@ Before deploying <%= vars.app_runtime_abbr %> with NSX-T networking, you must ha
 * The URLs and user credentials for your AVS private cloud vCenter and NSX-T Manager. See [Connect to the local vCenter of your private cloud](https://docs.microsoft.com/en-us/azure/azure-vmware/tutorial-access-private-cloud#connect-to-the-local-vcenter-of-your-private-cloud) in the AVS documentation.
 
 
-## <a id='install'></a> Install and Configure <%= vars.app_runtime_abbr %>
-
-This section describes how to install and configure <%= vars.app_runtime_abbr %> on AVS.
-
-### <a id='nsx-t-setup'></a> Set Up NSX-T to Integrate with <%= vars.app_runtime_abbr %>
+## <a id='nsx-t-setup'></a> Configure NSX-T to Integrate with <%= vars.app_runtime_abbr %>
 
 To set up NSX-T to integrate with <%= vars.app_runtime_abbr %>, complete these procedures:
 
@@ -55,13 +51,13 @@ To set up NSX-T to integrate with <%= vars.app_runtime_abbr %>, complete these p
 
 - [Configure Load Balancer](#nsx-t-load-balancer)
 
-#### <a id='regenerate-nsx-t-cert'></a> Regenerate NSX-T Management TLS Certificate with a Valid SAN
+### <a id='regenerate-nsx-t-cert'></a> Regenerate NSX-T Management TLS Certificate with a Valid SAN
 
 The AVS-deployed NSX-T Manager includes a self-signed TLS certificate with an invalid Subject Alternative Name (SAN). This causes issues when connecting from Ops Manager and the BOSH Director, so you must create a new certificate using the NSX-T Manager's fully qualified domain name (FQDN) or IP address as the new SAN.
 
 For instructions, see [Generate and Register the NSX-T Management TLS Certificate and Private Key](https://docs.pivotal.io/tkgi/1-12/nsxt-install-tls-certs.html) in the <%= vars.k8s_runtime_full %> (<%= vars.k8s_runtime_abbr %>) documentation.
 
-#### <a id='nsx-t-logical-switches'></a> Configure Logical Switches
+### <a id='nsx-t-logical-switches'></a> Configure Logical Switches
 
 To configure logical switches:
 
@@ -80,7 +76,7 @@ To configure logical switches:
           1. Click **ADD**.
 ![NSX-T ](nsx-t/nsx-t-logical-switch.png)
 
-#### <a id='nsx-t-routers'></a> Configure Routers
+### <a id='nsx-t-routers'></a> Configure Routers
 
 To configure routers:
 
@@ -111,7 +107,7 @@ To configure routers:
   1. Enter a CIDR to allocate an address block large enough to accommodate all <%= vars.app_runtime_abbr %> apps. A `/14` CIDR is large enough for ~1,000 Orgs with ~250 apps each. If you are planning such a large foundation, see [VMware NSX-T <%= vars.app_runtime_abbr %> limits](https://configmax.vmware.com/guest?vmwareproduct=VMware%20NSX-T&release=NSX-T%20Data%20Center%202.4.0&categories=31-0) in the VMware documentation.
 ![NSX-T ](nsx-t/nsx-t-ip-block.png)
 
-#### <a id='nsx-t-load-balancer'></a> Configure Load Balancer
+### <a id='nsx-t-load-balancer'></a> Configure Load Balancer
 
 To configure a load balancer:
 
@@ -250,6 +246,7 @@ To configure a load balancer:
   1. Select `pas-lb`.
   1. Click **Actions** > **Attach to a Virtual Server**, and then select `pas-web-vs`. Repeat this procedure for the Virtual Servers `pas-tcp-vs` and `pas-ssh-vs`.
   1. Click **Action** > **Attach to a Logical Router**, and then select `T1-Router-<%= vars.app_runtime_abbr %>-Deployment`.
+
 
 ## <a id='nsx-t-mode'></a> Enable NSX-T Mode in the BOSH Director
 
