@@ -88,7 +88,7 @@ Set the `max_in_flight` variable low enough that the remaining component instanc
 
 Some more precise guidelines include:
 
-* For jobs with high resource usage, set `max_in_flight` to a low value low. For example, for Diego Cells, `max_in_flight` allows non-migrating Diego Cells to pick up the work of Diego Cells stopping and restarting during migration. If resource usage is already close to 100%, scale up your jobs before making any updates.
+* The best practice for diego cells is to increase the count of diego cells before an upgrade, and then setting `max_in_flight` to the number of cells added. For example, if you have 200 diego cells, adding 20 diego cells and then setting `max_in_flight` to 20 will enable the diego cells to be upgraded in 10 batches of 20 cells each. The default settings would require 25 batches of 8 cells each. Remember to scale back down afterwards. If each batch takes 10 minutes, using this process would save you over 2.5 hours of upgrade time.
 
 * Quorum-based components are components with odd-numbered settings in the manifest. For quorum-based components such as etcd and Diego BBS, set `max_in_flight` to 1. This preserves quorum and prevents a split-brain scenario from occurring as jobs restart. For more information, about split-brain scenarios, see [Split-brain (computing)](https://en.wikipedia.org/wiki/Split-brain_(computing)) on Wikipedia.
 
