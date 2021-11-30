@@ -11,9 +11,16 @@ This topic describes several configuration options for <%= vars.app_runtime_firs
 
 ## <a id="jump-upgrades"></a> Jump Upgrades
 
-You can upgrade to <%= vars.app_runtime_abbr %> 2.11.0 from patch versions of <%= vars.app_runtime_abbr %> 2.7.31, 2.8.24, 2.9.19 or 2.10.0 or greater. See [Jump Upgrading to <%= vars.app_runtime_abbr %> v2.11](./jump-upgrades.html) for more information.
+You can upgrade to <%= vars.app_runtime_abbr %> v2.11.0 from the following patch versions and later:
 
-To minimize downtime for developers pushing applications, platform upgrades should be completed from patch versions of <%= vars.app_runtime_abbr %> 2.7.41, 2.10.21 or 2.11.9 or greater. Upgrading from earlier patch versions may result in an `Unknown Error` when pushing applications.
+- <%= vars.app_runtime_abbr %> v2.7.31
+- <%= vars.app_runtime_abbr %> v2.8.24
+- <%= vars.app_runtime_abbr %> v2.9.19
+- <%= vars.app_runtime_abbr %> v2.10.0
+
+To minimize downtime for developers pushing apps, upgrade from <%= vars.app_runtime_abbr %> v2.7.41 or later, v2.10.21 or later, or v2.11.9 or later. Upgrading from earlier patch versions can result in an `Unknown Error` when pushing apps.
+
+For more information, see [Jump Upgrading to <%= vars.app_runtime_abbr %> v2.11](./jump-upgrades.html).
 
 ## <a id="limit-restart"></a> Limit Component Instance Restarts
 
