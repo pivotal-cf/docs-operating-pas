@@ -491,7 +491,7 @@ There is a single key capacity scaling indicator <%= vars.company_name %> recomm
     <tr>
       <th width="25">Description</th>
         <td> The Log Cache Caching Duration indicator shows the age in milliseconds of the oldest data point stored in Log Cache.<br>
-        Log Cache stores all messages that are passed through the Firehose in an ephemeral in-memory store. The size of this store and the cache duration are dependent on the amount of memory available on the VM where Log Cache runs.
+        Log Cache stores all messages that are passed through the Firehose in an ephemeral in-memory store. The size of this store and the cache duration are dependent on the amount of memory available on the Log Cache VM.
         </td>
     </tr>
     <tr>
@@ -508,11 +508,11 @@ There is a single key capacity scaling indicator <%= vars.company_name %> recomm
     </tr>
     <tr>
       <th>Recommended thresholds</th>
-        <td><strong>Scale indicator:</strong> Scale the VM on which Log Cache runs when the <code>log_cache_cache_period</code> metric drops below 900000 milliseconds.</td>
+        <td><strong>Scale indicator:</strong> Scale the Log Cache VMs when the <code>log_cache_cache_period</code> metric drops below 900000 milliseconds.</td>
     </tr>
     <tr>
       <th>How to scale</th>
-        <td>Increase the number of Log Cache VMs in the Resource Config pane of the TAS for VMs tile, or choose a VM type that provides more memory.</td>
+        <td>Increase the number of Log Cache VMs in the **Resource Config** pane of the TAS for VMs tile, or choose a VM type that provides more memory.</td>
     </tr>
     <tr>
       <th>Additional details</th>
