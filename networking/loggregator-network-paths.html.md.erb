@@ -41,7 +41,7 @@ The following table lists network communication paths for Log Cache:
 
 | Source VM | Destination VM | Port | Transport Layer Protocol | App Layer Protocol | Security and Authentication |
 | --------- | -------------- | ---- | ------------------------ | ------------------ | ---------------------------- |
-| Any VM running Loggregator Syslog Agent&#42; | log_cache | 6667 | TCP | Syslog | TLS |
+| Any VM running Loggregator Syslog Agent&#42; | log_cache | 6067 | TCP | Syslog | TLS |
 | Any&#42;&#42; | log_cache | 8080 | TCP | gRPC over HTTP/2 | Mutual TLS |
 | log_cache (Nozzle)&#42;&#42;&#42; | loggregator_trafficcontroller (Reverse Log Proxy) | 8082 | TCP | gRPC over HTTP/2 | Mutual TLS |
 | gorouter | log_cache (Auth Proxy) | 8083 | TCP | HTTP | OAuth |
