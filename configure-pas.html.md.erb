@@ -89,12 +89,12 @@ For additional guidance based on your installation method, see the following tab
 ## <a id='networking'></a> Configure Networking
 
 <div><%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
-<%= partial "/pcf/core/2-13/networking-main" %></div>
+<%= partial "/pcf/core/2-14/networking-main" %></div>
 
 ## <a id='application-containers-config'></a> Configure App Containers
 
 <%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
-<%= partial "/pcf/core/2-13/application_container_config" %>
+<%= partial "/pcf/core/2-14/application_container_config" %>
 
 ## <a id='appdevctrl-config'></a> Configure App Developer Controls
 
@@ -142,7 +142,7 @@ ASGs, see [Restricting App Access to Internal <%= vars.app_runtime_abbr %> Compo
 ## <a id='auth-config'></a> Configure Authentication and Enterprise SSO
 
 <%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
-<%= partial "/pcf/core/2-13/authsso_config" %>
+<%= partial "/pcf/core/2-14/authsso_config" %>
 
 ## <a id='uaa'></a> Configure UAA
 
@@ -213,12 +213,12 @@ To configure the **CredHub** pane:
 1. Under the **Job** column of the **CredHub** row, ensure that the number of instances is set to `2`. This is the minimum instance count required for high availability.
 
 1. To configure UAA so it recognizes a proxy, complete the following fields:
-    * **List of proxy servers:** Enter a comma-separated list of router IP addresses for the first group of HTTP/TCP backends. 
+    * **List of proxy servers:** Enter a comma-separated list of router IP addresses for the first group of HTTP/TCP backends.
     * **http proxy:** Enter the `http_proxy` for all http requests across VMs.
     * **https proxy:** Enter the `https_proxy` for all http requests across VMs
-    * **no proxy:** Enter a comma-separated list of either domains, IP addresses or DNS suffixes. 
+    * **no proxy:** Enter a comma-separated list of either domains, IP addresses or DNS suffixes.
 
-1. Click **Save**. 
+1. Click **Save**.
 
 ## <a id='sys-db'></a> Configure Databases
 
@@ -231,69 +231,69 @@ In the **Databases** pane, you can configure <%= vars.app_runtime_abbr %> to use
 <p class="note"><strong>Note:</strong> For GCP installations, <%= vars.company_name %> recommends selecting <strong>External</strong> and using Google Cloud SQL. Only use internal MySQL for non-production or test installations on GCP.</p>
 
 <%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
-<%= partial "/pcf/core/2-13/ert_database_internal" %>
+<%= partial "/pcf/core/2-14/ert_database_internal" %>
 
 To configure high availability for your internal MySQL databases, see [Configure Internal MySQL](#internal-mysql).
 
 ### <a id='create-dbs'></a> External System Database Configuration
 
 <%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
-<%= partial "/pcf/core/2-13/ert_database_external" %>
+<%= partial "/pcf/core/2-14/ert_database_external" %>
 
 ## <a id='internal-mysql'></a> (Optional) Configure Internal MySQL
 
 <%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
-<%= partial "/pcf/core/2-13/mysql_proxy_config" %>
+<%= partial "/pcf/core/2-14/mysql_proxy_config" %>
 
 ## <a id='file-storage'></a> Configure File Storage
 
 <%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
-<%= partial "/pcf/core/2-13/max_droplets_packages_config" %>
+<%= partial "/pcf/core/2-14/max_droplets_packages_config" %>
 
 ## <a id='sys-logging'></a> (Optional) Configure System Logging
 
 <%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
-<%= partial "/pcf/core/2-13/system_logging" %>
+<%= partial "/pcf/core/2-14/system_logging" %>
 
 ## <a id='customize-apps-man'></a> (Optional) Configure Custom Branding and Apps Manager
 
 <%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
-<%= partial "/pcf/core/2-13/custombranding" %>
+<%= partial "/pcf/core/2-14/custombranding" %>
 
 ## <a id='smtp'></a> (Optional) Configure Email Notifications
 
 <%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
-<%= partial "/pcf/core/2-13/email-notifs" %>
+<%= partial "/pcf/core/2-14/email-notifs" %>
 
 ## <a id='config-autoscaler'></a> (Optional) Configure App Autoscaler
 
 <%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
-<%= partial "/pcf/core/2-13/app-autoscaler" %>
+<%= partial "/pcf/core/2-14/app-autoscaler" %>
 
 ## <a id='config-cc'></a> Configure Cloud Controller
 
 <%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
-<%= partial "/pcf/core/2-13/cloud-controller" %>
+<%= partial "/pcf/core/2-14/cloud-controller" %>
 
 ## <a id='config-smoke-test'></a> Configure Smoke Tests
 
 <%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
-<%= partial "/pcf/core/2-13/smoketests" %>
+<%= partial "/pcf/core/2-14/smoketests" %>
 
 ## <a id='advanced'></a> (Optional) Configure Advanced Features
 
 <%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
-<%= partial "/pcf/core/2-13/advanced-features" %>
+<%= partial "/pcf/core/2-14/advanced-features" %>
 
 ## <a id='metric-registrar'></a> (Optional) Configure Metric Registrar
 
 <%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
-<%= partial "/pcf/core/2-13/metric-registrar" %>
+<%= partial "/pcf/core/2-14/metric-registrar" %>
 
 ## <a id='errands'></a> Configure Errands
 
 <%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
-<%= partial "/pcf/core/2-13/errands" %>
+<%= partial "/pcf/core/2-14/errands" %>
 
 ## <a id='resources'></a> Configure Resources
 
@@ -302,12 +302,12 @@ In the **Resource Config** pane, you must associate load balancers with the VMs 
 ### <a name='scale-down'></a> (Optional) Scale Down and Disable Resources
 
 <%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
-<%= partial "/pcf/core/2-13/disable_resources" %>
+<%= partial "/pcf/core/2-14/disable_resources" %>
 
 ## <a id='stemcell'></a> Download Stemcell
 
 <%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
-<%= partial "/pcf/core/2-13/download-stemcell" %>
+<%= partial "/pcf/core/2-14/download-stemcell" %>
 
 ## <a id='complete'></a> Complete the <%= vars.app_runtime_abbr %> Installation
 
