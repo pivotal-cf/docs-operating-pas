@@ -428,21 +428,21 @@ There are three key capacity scaling indicators <%= vars.company_name %> recomme
 
 There is a single key capacity scaling indicator <%= vars.company_name %> recommends for Syslog Drain performance.
 
-<p class="note"><strong>Note:</strong> These Syslog Drain scaling indicators are only relevant if your deployment contains apps using the syslog drain binding feature.</p>
+<p class="note"><strong>Note:</strong> These Syslog Drain scaling indicators are relevant for forwarding to Log Cache and for any configured syslog drains.</p>
 
 <table>
   <tr><th id="syslog-agent-ksi" colspan="2" style="text-align: center;"><br>Syslog Agent Loss Rate<br><br></th></tr>
     <tr>
       <th width="25">Description</th>
         <td>
-          Divide the <code>loggregator-agent.syslog_agent.dropped{direction:egress}</code> metric by the <code>loggregator-agent.loggr-syslog-agent.ingress{scope:all_drains}</code> metric to get the rate of messages dropped as a percentage of total message traffic through Syslog Agents. The message traffic through Syslog Agents includes logs for bound apps.The loss rate of Syslog Agents indicates that the syslog drain consumer is ingesting logs from a syslog-drain-bound app too slowly.<br>
+          Divide the <code>syslog_agent.dropped{direction:egress}</code> metric by the <code>syslog_agent.ingress{scope:agent}</code> metric to get the rate of messages dropped as a percentage of total message traffic through Syslog Agents. The loss rate of Syslog Agents indicates that the syslog drain destination is accepting logs too slowly.<br>
 		      The Syslog Agent loss rate does not affect the Firehose loss rate. Message loss can occur in Syslog Agents without message loss occuring in the Firehose.<br>
         </td>
     </tr>
     <tr>
       <th>Source ID</th>
         <td>
-          <code>loggregator-agent</code>
+          <code>syslog_agent</code>
         </td>
     </tr>
     <tr>
@@ -456,7 +456,7 @@ There is a single key capacity scaling indicator <%= vars.company_name %> recomm
       <th>Label</th>
         <td>
           <code>direction:egress</code><br>
-          <code>scope:all_drains</code>
+          <code>scope:agent</code>
         </td>
     </tr>
     <tr>
@@ -470,7 +470,12 @@ There is a single key capacity scaling indicator <%= vars.company_name %> recomm
     </tr>
     <tr>
       <th>How to scale</th>
-        <td>Review the logs of the syslog server for intake issues and other performance issues. Scale the syslog server if necessary.</td>
+      <td>
+        Review the logs of the syslog destinations for intake issues and other performance issues. Scale the syslog destinations if necessary.
+        <br><br>
+        A high Syslog Agent loss rate can indicate that Log Cache is unable to keep up with the ingestion rate for logs. If Log Cache is using Syslog Ingress and is CPU bound, it is likely the source of the syslog drops and should be scaled to
+        have more CPU resources. This can be acomplished by adding instances or choosing instance types with more CPU capacity.
+      </td>
     </tr>
     <tr>
       <th>Additional details</th>
