@@ -436,7 +436,7 @@ There is a single key capacity scaling indicator <%= vars.company_name %> recomm
       <th width="25">Description</th>
         <td>
           Divide the <code>syslog_agent.dropped{direction:egress}</code> metric by the <code>syslog_agent.ingress{scope:agent}</code> metric to get the rate of messages dropped as a percentage of total message traffic through Syslog Agents. The loss rate of Syslog Agents indicates that the syslog drain destination is accepting logs too slowly.<br>
-		      The Syslog Agent loss rate does not affect the Firehose loss rate. Message loss can occur in Syslog Agents without message loss occuring in the Firehose.<br>
+		      The Syslog Agent loss rate does not affect the Firehose loss rate. Message loss can occur in Syslog Agents without message loss occurring in the Firehose.<br>
         </td>
     </tr>
     <tr>
@@ -473,8 +473,7 @@ There is a single key capacity scaling indicator <%= vars.company_name %> recomm
       <td>
         Review the logs of the syslog destinations for intake issues and other performance issues. Scale the syslog destinations if necessary.
         <br><br>
-        A high Syslog Agent loss rate can indicate that Log Cache is unable to keep up with the ingestion rate for logs. If Log Cache is using Syslog Ingress and is CPU bound, it is likely the source of the syslog drops and should be scaled to
-        have more CPU resources. This can be acomplished by adding instances or choosing instance types with more CPU capacity.
+        A high Syslog Agent loss rate can indicate that Log Cache is unable to keep up with the ingestion rate for logs. If Log Cache is using Syslog Ingress and is CPU bound, this is likely the source of the syslog drops. To scale Log Cache to have more CPU resources, add more instances or choose instance types with more CPU capacity.
       </td>
     </tr>
     <tr>
