@@ -70,6 +70,16 @@ To configure the **App Containers** pane:
 
 1. Select **App Containers**.
 
+1. (Optional) Enable CPU Burst Optimization
+
+    When this feature is enabled, apps that stay within their CPU entitlements
+    (on average) will be prioritized when bursting. Apps that exceed their CPU
+    entitlements (on average), often called noisy neighbors, will have lower
+    priority access to extra CPU when bursting. When this feature is not
+    enabled, all apps have equal access to extra CPU when bursting. Regardless
+    of this setting, all apps are always guaranteed the CPU from their
+    CPU entitlement.
+
 1. Choose how the Gorouter verifies app identity to enable encryption and prevent
 misrouting under **Gorouter app identity verification**:
     * **The Gorouter uses TLS to verify app identity**: Enables the Gorouter to
