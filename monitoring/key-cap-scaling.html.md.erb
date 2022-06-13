@@ -435,14 +435,14 @@ There is a single key capacity scaling indicator <%= vars.company_name %> recomm
     <tr>
       <th width="25">Description</th>
         <td>
-          Divide the <code>loggregator.syslog_agent.dropped{direction:egress}</code> metric by the <code>loggregator.syslog_agent.ingress{scope:all_drains}</code> metric to get the rate of messages dropped as a percentage of total message traffic through Syslog Agents. The message traffic through Syslog Agents includes logs for bound apps.The loss rate of Syslog Agents indicates that the syslog drain consumer is ingesting logs from a syslog-drain-bound app too slowly.<br>
-          The Syslog Agent loss rate does not affect the Firehose loss rate. Message loss can occur in Syslog Agents without message loss occuring in the Firehose.<br>
+          Divide the <code>loggregator-agent.syslog_agent.dropped{direction:egress}</code> metric by the <code>loggregator-agent.loggr-syslog-agent.ingress{scope:all_drains}</code> metric to get the rate of messages dropped as a percentage of total message traffic through Syslog Agents. The message traffic through Syslog Agents includes logs for bound apps.The loss rate of Syslog Agents indicates that the syslog drain consumer is ingesting logs from a syslog-drain-bound app too slowly.<br>
+		      The Syslog Agent loss rate does not affect the Firehose loss rate. Message loss can occur in Syslog Agents without message loss occuring in the Firehose.<br>
         </td>
     </tr>
     <tr>
       <th>Source ID</th>
         <td>
-          <code>syslog_agent</code>
+          <code>loggregator-agent</code>
         </td>
     </tr>
     <tr>
