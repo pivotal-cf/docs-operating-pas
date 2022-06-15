@@ -94,15 +94,15 @@ The following image shows the VMs performs the same functions in both versions o
 
 The following topics list the minimum resources needed to run Small Footprint <%= vars.app_runtime_abbr %> on the public IaaSes that <%= vars.platform_name %> supports:
 
-* [Installing <%= vars.platform_name %> on AWS](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/customizing/aws.html#aws)
-* [Installing <%= vars.platform_name %> on Azure](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/customizing/azure.html#azure)
-* [Installing <%= vars.platform_name %> on GCP](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/customizing/gcp.html#gcp)
-* [Installing <%= vars.platform_name %> on vSphere](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/customizing/vsphere.html#vsphere-reqs)
+* [Installing <%= vars.platform_name %> on AWS](../customizing/aws.html#aws)
+* [Installing <%= vars.platform_name %> on Azure](../customizing/azure.html#azure)
+* [Installing <%= vars.platform_name %> on GCP](../customizing/gcp.html#gcp)
+* [Installing <%= vars.platform_name %> on vSphere](../customizing/vsphere.html#vsphere-reqs)
 
 
 ## <a id='install'></a> Installing Small Footprint <%= vars.app_runtime_abbr %>
 
-To install Small Footprint <%= vars.app_runtime_abbr %>, see [Architecture and Installation Overview](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/installing/index.html) and the installation and configuration topics for your IaaS.
+To install Small Footprint <%= vars.app_runtime_abbr %>, see [Architecture and Installation Overview](../installing/index.html) and the installation and configuration topics for your IaaS.
 
 Follow the same installation and configuration steps as for <%= vars.app_runtime_abbr %>, with these differences:
 
@@ -124,9 +124,9 @@ Follow the same installation and configuration steps as for <%= vars.app_runtime
 To troubleshoot a job that runs on the Control or Database VMs:
 
 1. Follow the procedures in _Advanced Troubleshooting with the BOSH CLI_ to  the log in to the BOSH Director for your deployment:
-	1. [Gather Credential and IP Address Information](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/customizing/trouble-advanced.html#gather)
-	1. [SSH into <%= vars.ops_manager %>](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/customizing/trouble-advanced.html#ssh)
-	1. [Log in to the BOSH Director](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/customizing/trouble-advanced.html#log-in)
+	1. [Gather Credential and IP Address Information](../customizing/trouble-advanced.html#gather)
+	1. [SSH into <%= vars.ops_manager %>](../customizing/trouble-advanced.html#ssh)
+	1. [Log in to the BOSH Director](../customizing/trouble-advanced.html#log-in)
 
 1. Use BOSH to list the VMs in your Small Footprint <%= vars.app_runtime_abbr %> deployment. Run:
 
@@ -218,4 +218,4 @@ To troubleshoot a job that runs on the Control or Database VMs:
 
 ## <a id='rn'></a> Release Notes
 
-The Small Footprint <%= vars.app_runtime_abbr %> tile releases alongside the <%= vars.app_runtime_abbr %> tile. For more information, see [<%= vars.app_runtime_full %> <%= vars.v_major_version %> Release Notes](https://docs.pivotal.io/platform/<%= product_info['local_product_version'].to_s.sub('.','-') %>/release-notes/runtime-rn.html).
+The Small Footprint <%= vars.app_runtime_abbr %> tile releases alongside the <%= vars.app_runtime_abbr %> tile. For more information, see [<%= vars.app_runtime_full %> <%= vars.v_major_version %> Release Notes](../release-notes/runtime-rn.html).
