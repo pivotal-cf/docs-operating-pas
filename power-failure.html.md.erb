@@ -148,7 +148,7 @@ does not show **Normal**, it may be due the following known issue: [Monit inaccu
 health of UAA](https://docs.pivotal.io/pivotalcf/2-5/pcf-release-notes/opsmanager-rn.html#monit).
 To resolve this issue, do the following:
 
-    1. SSH into the BOSH Director VM using the instructions in [SSH into the BOSH Director VM](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/customizing/trouble-advanced.html#bosh-director-ssh).
+    1. SSH into the BOSH Director VM using the instructions in [SSH into the BOSH Director VM](../customizing/trouble-advanced.html#bosh-director-ssh).
 
     1. Run the following command to see that all processes are running:
       ```
@@ -168,9 +168,9 @@ vSphere HA.
 To ensure BOSH Resurrector finished recovering, do the following:
 
 1. Log in to the <%= vars.platform_name %> VM with SSH using the instructions in
-[Log in to the <%= vars.platform_name %> VM with SSH](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/customizing/trouble-advanced.html#ssh).
+[Log in to the <%= vars.platform_name %> VM with SSH](../customizing/trouble-advanced.html#ssh).
 
-1. Authenticate with the BOSH Director VM using the instructions in [Authenticate with the BOSH Director VM](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/customizing/trouble-advanced.html#log-in).
+1. Authenticate with the BOSH Director VM using the instructions in [Authenticate with the BOSH Director VM](../customizing/trouble-advanced.html#log-in).
 
 1. Run the following command to see if there is any currently running or queued Resurrector
 activity:
