@@ -208,10 +208,10 @@ There are three key capacity scaling indicators <%= vars.company_name %> recomme
 </table>
 
 <table>
-  <tr><th id="doppler-message-rate-ksi" colspan="2" style="text-align: center;">Doppler Message Rate Capacity</th></tr>
+  <tr><th id="doppler-message-rate-ksi" colspan="2" style="text-align: center;">Doppler Message Ingress Capacity</th></tr>
     <tr>
       <th width="25">Description</th>
-        <td>The Doppler Message Rate Capacity indicator is the average number of messages per Doppler instance. Divide the sum of <code>ingress</code> metrics across instances by the <code>current number of Doppler instances</code> to get this
+        <td>The Doppler Ingress counter is the number of messages ingressed by the Doppler instance. Divide the sum of the rate of <code>ingress</code> metrics across instances by the <code>current number of Doppler instances</code> to get this
         average.</td>
     </tr>
     <tr>
@@ -237,7 +237,7 @@ There are three key capacity scaling indicators <%= vars.company_name %> recomme
     <tr>
       <th>Additional details</th>
         <td>
-          <strong>Type:</strong> Gauge (float)<br>
+          <strong>Type:</strong> Counter (float)<br>
           <strong>Frequency:</strong> Emitted every 5 s<br>
           <strong>Applies to:</strong> cf:doppler<br>
         </td>
