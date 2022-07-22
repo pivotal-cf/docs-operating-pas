@@ -435,8 +435,8 @@ There is a single key capacity scaling indicator <%= vars.company_name %> recomm
     <tr>
       <th width="25">Description</th>
         <td>
-          Divide the <code>loggregator.syslog_agent.dropped{direction:egress}</code> metric by the <code>loggregator.syslog_agent.ingress{scope:all_drains}</code> metric to get the rate of messages dropped as a percentage of total message traffic through Syslog Agents. The message traffic through Syslog Agents includes logs for bound apps.The loss rate of Syslog Agents indicates that the syslog drain consumer is ingesting logs from a syslog-drain-bound app too slowly.<br>
-          The Syslog Agent loss rate does not affect the Firehose loss rate. Message loss can occur in Syslog Agents without message loss occuring in the Firehose.<br>
+          Divide the <code>loggregator.syslog_agent.dropped{direction:egress}</code> metric by the <code>loggregator.syslog_agent.ingress{scope:all_drains}</code> metric to get the rate of messages dropped as a percentage of total message traffic through Syslog Agents. The message traffic through Syslog Agents includes logs for bound apps. The loss rate of Syslog Agents indicates that the Syslog Drain consumer is ingesting logs from a Syslog Drain-bound app too slowly.<br>
+          The Syslog Agent loss rate does not affect the Firehose loss rate. Syslog Agents can still drop messages even though the Firehose does not drop messages.<br>
         </td>
     </tr>
     <tr>
@@ -491,7 +491,7 @@ There is a single key capacity scaling indicator <%= vars.company_name %> recomm
     <tr>
       <th width="25">Description</th>
         <td> The Log Cache Caching Duration indicator shows the age in milliseconds of the oldest data point stored in Log Cache.<br>
-        Log Cache stores all messages that are passed through the Firehose in an ephemeral in-memory store. The size of this store and the cache duration are dependent on the amount of memory available on the VM where Log Cache runs. Typically, Log Cache runs on the Doppler VM. 
+        Log Cache stores all messages that are passed through the Firehose in an ephemeral in-memory store. The size of this store and the cache duration are dependent on the amount of memory available on the VM where Log Cache runs. Typically, Log Cache runs on the Doppler VM.
         </td>
     </tr>
     <tr>
@@ -535,7 +535,7 @@ There is one key capacity scaling indicator <%= vars.company_name %> recommends 
   <tr><th id="system.cpu.user" colspan="2" style="text-align: center;"><br>Gorouter VM CPU Utilization<br><br></th></tr>
     <tr>
       <th>Description</th>
-        <td>The Gorouter VM CPU Utilization indicator shows how much of a Gorouter VM's CPU is being used. 
+        <td>The Gorouter VM CPU Utilization indicator shows how much of a Gorouter VM's CPU is being used.
         High CPU utilization of the Gorouter VMs can increase latency and cause requests per second to decrease.
         </td>
     </tr>
@@ -639,7 +639,7 @@ There is one key capacity scaling indicator for external S3 external storage.
   <tr><th colspan="2" style="text-align: center;"><br>External S3 External Storage<br><br></th></tr>
     <tr>
       <th width="25%">Description</th>
-        <td>The External S3 External Storage indicator shows the percentage of persistent disk used. 
+        <td>The External S3 External Storage indicator shows the percentage of persistent disk used.
         <em>If applicable:</em> Monitor the percentage of persistent disk used on the VM for the NFS Server job.<br>
         If you do not use an external S3 repository for external storage with no capacity constraints, you must monitor the <%= vars.app_runtime_abbr %> object store to push new app and buildpacks.</td>
     </tr>
