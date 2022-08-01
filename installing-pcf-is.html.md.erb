@@ -70,24 +70,11 @@ To configure the **App Containers** pane:
 
 1. Select **App Containers**.
 
-1. (Optional) Enable CPU Burst Optimization
+1. 1. (Optional) To give apps that generally stay within their CPU entitlements priority access to extra CPU during CPU bursts, activate the **Enable CPU Burst Optimization** checkbox. This checkbox is activated by default. When this checkbox is activated, apps that generally stay within their CPU entitlements have higher-priority access to extra CPU than apps that generally exceed their CPU entitlements. When this checkbox is deactivated, all apps have equal access to extra CPU during CPU bursts. Whether you activate or deactivate this checkbox, all apps are always guaranteed the amount of CPU that is within their CPU entitlements.
 
-    When this feature is enabled, apps that stay within their CPU entitlements
-    (on average) will be prioritized when bursting. Apps that exceed their CPU
-    entitlements (on average), often called noisy neighbors, will have lower
-    priority access to extra CPU when bursting. When this feature is not
-    enabled, all apps have equal access to extra CPU when bursting. Regardless
-    of this setting, all apps are always guaranteed the CPU from their
-    CPU entitlement.
-
-1. Choose how the Gorouter verifies app identity to enable encryption and prevent
-misrouting under **Gorouter app identity verification**:
-    * **The Gorouter uses TLS to verify app identity**: Enables the Gorouter to
-verify app identity using TLS. This is the default option.
-    * **The Gorouter and apps use mutual TLS to verify each other's identity**:
-Enables your apps and the Gorouter to verify each other's identity using mutual
-TLS (mTLS). This option disables TCP routing because app containers accept incoming
-communication only from the Gorouter.
+1. Choose how the Gorouter verifies app identity to enable encryption and prevent misrouting under **Gorouter app identity verification**:
+    * **The Gorouter uses TLS to verify app identity**: Enables the Gorouter to verify app identity using TLS. This is the default option.
+    * **The Gorouter and apps use mutual TLS to verify each other's identity**: Enables your apps and the Gorouter to verify each other's identity using mutual TLS (mTLS). This option disables TCP routing because app containers accept incoming communication only from the Gorouter.
 
     For more information, see [Preventing Misrouting](../concepts/http-routing.html#consistency) in _HTTP Routing_.
 
