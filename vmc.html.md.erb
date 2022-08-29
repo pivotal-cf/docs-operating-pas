@@ -343,6 +343,8 @@ To configure BOSH Director for VMC:
     - Enter a **Username**, **Password**, and **Password confirmation** to create an Admin user.
     - Enter a **Decryption passphrase** and the **Decryption passphrase confirmation**. This passphrase encrypts the Ops Manager datastore and is not recoverable.
 
+<p class="note"><strong>Note:</strong> When configuring the BOSH Director, do not configure NSX-T networking; instead, select Standard vCenter Networking.</p>
+
 1. Select the **BOSH Director for vSphere** tile and configure BOSH as follows:
     - **Settings → vCenter Config**
         - **vCenter Host**: your vCenter URL. For example, `vcenter.sddc-35-162-72-214.vmwarevmc.com`.
