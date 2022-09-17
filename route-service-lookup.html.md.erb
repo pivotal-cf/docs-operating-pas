@@ -80,7 +80,7 @@ To configure <%= vars.app_runtime_abbr %> for default lookup behavior, with bypa
 
 1. If your load balancer or Gorouter terminates TLS:
 	1. Work with developers of route services to ensure the load balancer or Gorouter have TLS certificates that are valid for the route service URL.
-	1. Ensure that the TLS certificate from your load balancer is either signed by a well-known Certificate Authority (CA), or the CA has been added to the **Certificate Authorities trusted by the Gorouter and HAProxy** field in the **Networking** pane of the <%= vars.app_runtime_abbr %> and <%= vars.segment_runtime_full %> tiles. The CA for the TLS certificate provided by the load balancer must be trusted by the Gorouter.
+	1. Ensure that the TLS certificate from your load balancer is either signed by a well-known Certificate Authority (CA), or the CA has been added to the **Certificate Authorities trusted by the Gorouter** field in the **Networking** pane of the <%= vars.app_runtime_abbr %> and <%= vars.segment_runtime_full %> tiles. The CA for the TLS certificate provided by the load balancer must be trusted by the Gorouter.
 
 1. Work with developers of route services to verify that their internal route service apps are reachable. You can do this by visiting the HTTPS URL of the route service directly and confirming that the app received the request with the `cf logs` output for the route service app.
 

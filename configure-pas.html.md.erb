@@ -62,7 +62,7 @@ To configure the **Domains** pane:
 
 1. Select **Domains**.
 
-1. Enter the name of your system domain in the **System domain** field. The system domain defines your target when you push apps to <%= vars.app_runtime_abbr %>, such as your load balancer or HAProxy. <%= vars.app_runtime_abbr %> assigns system components such as UAA and Apps Manager to subdomains under this domain.
+1. Enter the name of your system domain in the **System domain** field. The system domain defines your target when you push apps to <%= vars.app_runtime_abbr %>, such as your load balancer. <%= vars.app_runtime_abbr %> assigns system components such as UAA and Apps Manager to subdomains under this domain.
 
 1. Enter the name of your apps domain in the **Apps domain** field. The apps domain is the default domain that apps use for their hostnames. <%= vars.app_runtime_abbr %> hosts each app at subdomains under this domain. You can use the Cloud Foundry Command Line Interface (cf CLI) to add or delete subdomains assigned to individual apps.
 

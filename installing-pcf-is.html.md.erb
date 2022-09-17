@@ -108,7 +108,7 @@ To configure the **System Logging** pane:
 
 1. Select **System Logging**.
 
-1. Select an option under **Configure syslog for system components?**. **No** is selected by default. This setting only affects Diego Cell, Gorouter, and HAProxy components within the isolation segment. This setting does not affect shared <%= vars.app_runtime_abbr %> system components.
+1. Select an option under **Configure syslog for system components?**. **No** is selected by default. This setting only affects Diego Cell and Gorouter components within the isolation segment. This setting does not affect shared <%= vars.app_runtime_abbr %> system components.
 
 1. To use syslog, select **Yes**.
 
@@ -248,8 +248,6 @@ To configure the **Resource Config** pane:
       1. Navigate to the **Networking** pane.
       1. Specify **Gorouter IPs**.
       1. Attach the IP addresses to your load balancer manually.
-
-1. If you are not using HAProxy for this isolation segment, set the number of **Instances** to `0`.
 
 ### <a id='after_config'></a> After Tile Configuration
 

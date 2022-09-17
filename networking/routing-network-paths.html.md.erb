@@ -18,10 +18,8 @@ The following table lists network communication paths for HTTP routing:
 | router (Gorouter) | nats | 4222 | TCP | NATS | Basic authentication |
 | router (Gorouter) | System components | Varies | TCP | Varies | None |
 | router (Gorouter) | App containers | Varies | TCP | Varies | Optional TLS |
-| haproxy | router (Gorouter) | 80 | TCP | HTTP | None |
-| haproxy | router (Gorouter) | 443 | TCP | HTTPS | TLS |
-| Load balancer | haproxy | 80 | TCP | HTTP | None |
-| Load balancer | haproxy | 443 | TCP | HTTPS | TLS |
+| Load balancer | router (Gorouter) | 80 | TCP | HTTP | None |
+| Load balancer | router (Gorouter) | 443 | TCP | HTTPS | TLS |
 
 
 ## <a id="tcp"></a> TCP Routing (Optional)
