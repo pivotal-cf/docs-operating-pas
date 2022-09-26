@@ -108,16 +108,16 @@ To configure the **App Developer Controls** pane:
 
 1. Enter the **Maximum package size** in MB. This is the maximum total size of an app's files.
 
-1. Enter the **Default app memory** in MB. This is the default amount of memory allocated to a newly-pushed app if no value is specified with `cf push`.
+1. Enter the **Default app memory** in MB. This is the default amount of memory allocated to a newly-pushed app if no value is specified when pushing the app.
 
 1. Enter the **Default app memory quota per org** in MB. This is the default memory limit for all apps in an org. The specified limit only applies to the first installation of <%= vars.app_runtime_abbr %>. After the initial installation, operators can use the cf CLI to change the default value.
 
 1. Enter the **Maximum disk quota per app** in MB. This is the maximum amount of disk allowed per app.
 	<p class="note"><strong>Note:</strong> If you allow developers to push large apps, <%= vars.app_runtime_abbr %> may have trouble placing them on Diego Cells. Additionally, in the event of a system upgrade or an outage that causes a rolling deploy, larger apps may not successfully re-deploy if there is insufficient disk capacity. Monitor your deployment to ensure your Diego Cells have sufficient disk to run your apps.</p>
 
-1. Enter the **Default disk quota per app** in MB. This is the amount of disk allocated by default to a newly-pushed app if no value is specified with `cf push`.
+1. Enter the **Default disk quota per app** in MB. This is the amount of disk allocated by default to a newly-pushed app if no value is specified when pushing the app.
 
-1. Enter the **Default log rate limit per app** in bytes per second. This is the amount a newly-pushed app is allowed to log when no value is specified with `cf push`. A value of `-1` means unlimited.
+1. Enter the **Default log rate limit per app** in bytes per second. This is the number of logs that a newly-pushed app is allowed to send to Loggregator if no value is specified when pushing the app. To deactivate this feature and allow app instances to send an unlimited number of logs to Loggregator, enter `-1`. App log rate limiting is deactivated by default. <%= vars.company_name %> recommends activating this feature to prevent app instances from overloading the Loggregator Agent with logs, so the Loggregator Agent does not drop logs for other app instances on the same Diego Cell.
 
 1. Enter the **Default service instance quota per org**. The specified limit only applies to the first installation of <%= vars.app_runtime_abbr %>. After the initial installation, operators can use the cf CLI to change the default value.
 
