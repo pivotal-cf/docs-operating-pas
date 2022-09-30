@@ -14,7 +14,7 @@ A standard <%= vars.app_runtime_abbr %> deployment must have at least 13 VMs, bu
 
 The following image displays a comparison of the number of VMs deployed by <%= vars.app_runtime_abbr %> and Small Footprint <%= vars.app_runtime_abbr %>.
 
-<%= image_tag("ert-vms-2.0.png", :class => "no-border", :alt => "VM comparison between TAS for VMs and Small Footprint TAS for VMs. TAS for VMs has 13 required VMs and 8 optional VMs. Small Footprint TAS for VMs, on the other hand, has 4 required VMs and 5 optional VMs. The required VMs for TAS for VMs are Cloud Controller, Cloud Controller Worker, Clock Global, Diego BBS, Diego Brain, Diego Cell, Doppler Server, Loggregator Traffic Controller, NATS, Router, Syslog Adapter, Syslog Scheduler, and UAA. The optional VMs for TAS for VMs are File Storage, HAProxy, Backup Restore Node, MySQL Monitor, MySQL Proxy, MySQL Server, TCP Router, and CredHub. The required VMs in Small Footprint TAS for VMs are Compute, Control, Database, and Router. The optional VMs for Small Footprint TAS for VMs are File Storage, HAProxy, Backup Restore Node, MySQL Monitor, and TCP Router.")%>
+<%= image_tag("ert-vms-2.0.png", :class => "no-border", :alt => "VM comparison between TAS for VMs and Small Footprint TAS for VMs. TAS for VMs has 13 required VMs and 8 optional VMs. Small Footprint TAS for VMs, on the other hand, has 4 required VMs and 5 optional VMs. The required VMs for TAS for VMs are Cloud Controller, Cloud Controller Worker, Clock Global, Diego BBS, Diego Brain, Diego Cell, Doppler Server, Loggregator Traffic Controller, NATS, Router, Syslog Adapter, Syslog Scheduler, and UAA. The optional VMs for TAS for VMs are File Storage, Backup Restore Node, MySQL Monitor, MySQL Proxy, MySQL Server, TCP Router, and CredHub. The required VMs in Small Footprint TAS for VMs are Compute, Control, Database, and Router. The optional VMs for Small Footprint TAS for VMs are File Storage, Backup Restore Node, MySQL Monitor, and TCP Router.")%>
 [//]: https://docs.google.com/drawings/d/19V1SY4BGW2T--c4Y8Jm26CkA8C-6jIHXl7gpEzYlTmY/edit?usp=sharing
 
 ### <a id='usecase'></a> Use Cases
@@ -50,7 +50,7 @@ You can deploy Small Footprint <%= vars.app_runtime_abbr %> with a minimum of fo
 
 <p class="note"><strong>Note:</strong> The following image assumes that you are using an external blobstore.</p>
 
-<%= image_tag("srt-vms.png", :class => "no-border", :alt => "Small Footprint TAS for VMs has 4 required VMs and 5 optional VMs. The required VMs are Compute, Control, Database, and Router. The optional VMs are File Storage, HAProxy, Backup Restore Node, MySQL Monitor, and TCP Router.")%>
+<%= image_tag("srt-vms.png", :class => "no-border", :alt => "Small Footprint TAS for VMs has 4 required VMs and 5 optional VMs. The required VMs are Compute, Control, Database, and Router. The optional VMs are File Storage, Backup Restore Node, MySQL Monitor, and TCP Router.")%>
 [//]: https://docs.google.com/a/pivotal.io/drawings/d/13ycJou77RzIb3DeLF1rUOdmEiokNj3_-VTkmILcr6dM/edit?usp=sharing
 
 To reduce the number of VMs required for Small Footprint <%= vars.app_runtime_abbr %>, the Control and Database VMs include colocated jobs that run on a single VM in <%= vars.app_runtime_abbr %>. See the next sections for details.
@@ -86,7 +86,7 @@ The Compute VM is the same as the Diego Cell VM in <%= vars.app_runtime_abbr %>.
 
 The following image shows the VMs performs the same functions in both versions of the <%= vars.app_runtime_abbr %> tile.
 
-<%= image_tag("unchanged-vms.png", :class => "no-border", :alt => "The Router, File Storage, HAProxy, Backup Restore Node, MySQL Monitor, and TCP Router VMs are the same in both TAS for VMs and small footprint TAS for VMs.")%>
+<%= image_tag("unchanged-vms.png", :class => "no-border", :alt => "The Router, File Storage, Backup Restore Node, MySQL Monitor, and TCP Router VMs are the same in both TAS for VMs and small footprint TAS for VMs.")%>
 [//]: https://docs.google.com/a/pivotal.io/drawings/d/12vWg66BUjOsSK4qC9vMqNxO9Ea1kdzfM2cH4yEAEgsg/edit?usp=sharing
 
 

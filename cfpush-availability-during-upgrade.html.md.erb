@@ -12,7 +12,7 @@ Availability of `cf push` during <%= vars.app_runtime_abbr %> upgrades varies fr
 
 ## <a id='single-vs-ha'></a> Impact on Single VMs vs. High-Availability Infrastructure 
 
-Having a single VM in use, such as a WebDAV, a HAProxy, a Gorouter, a UAA, or a Cloud Controller, impacts whether `cf push` is unavailable during an upgrade.
+Having a single VM in use, such as a WebDAV, a Gorouter, a UAA, or a Cloud Controller, impacts whether `cf push` is unavailable during an upgrade.
 
 If you have scaled out your app to achieve high availability and are not using WebDAV, `cf push` should be available for the entire duration of the upgrade. However, upgrades to certain versions of <%= vars.app_runtime_abbr %> sometimes require a CCDB schema or data migration, which may cause `cf push` to be unavailable while Cloud Controllers are rolling during the upgrade.
 

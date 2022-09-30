@@ -12,7 +12,7 @@ This topic describes how to use your own load balancer and forward traffic to yo
 
 In order for the <%= vars.app_runtime_abbr %> routers to be horizontally scalable and highly available, a load balancer must be deployed in front of them. The simplest solution is to use a Layer 4 TCP load balancer, provided by your IaaS or IT team, which passes all HTTP and TLS handling to the <%= vars.app_runtime_abbr %> routers. For more information about TLS termination, see [Securing Traffic into <%= vars.app_runtime_abbr %>](../adminguide/securing-traffic.html). For a description of features supported by the <%= vars.app_runtime_abbr %> routing tier, see [HTTP Routing](../concepts/http-routing.html).
 
-If you have requirements that are not fulfilled by the <%= vars.app_runtime_abbr %> routers alone, you can choose to use your own Layer 7 load balancer provided by your IaaS or IT team, or the HAProxy load balancer included with <%= vars.app_runtime_abbr %>. If you use HAProxy, you must use a Layer 4 TCP load balancer in front of it in order for HAProxy itself to be highly available. Singleton instances of HAProxy are only for use in lab and test environments.
+If you have requirements that are not fulfilled by the <%= vars.app_runtime_abbr %> routers alone, you can choose to use your own Layer 7 load balancer provided by your IaaS or IT team.
 
 If you use your own Layer 7 load balancer, it must fulfill the following requirements:
 
@@ -26,7 +26,7 @@ If you use your own Layer 7 load balancer, it must fulfill the following require
 
 * (Optional) Supports WebSocket
 
-The choice to use HAProxy or your own load balancer depends on what features you need out of a load balancer, and whether you want the ability to configure it yourself.
+The choice to use your own load balancer depends on what features you need out of a load balancer, and whether you want the ability to configure it yourself.
 
 <p class='note'><strong>Note:</strong> App logging with Loggregator requires WebSocket. To use another logging service, see <a href="../devguide/services/log-management.html">Streaming App Logs to Log Management Services</a>.</p>
 
