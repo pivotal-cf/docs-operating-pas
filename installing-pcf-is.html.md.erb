@@ -140,33 +140,91 @@ To configure the **System Logging** pane:
 
 ### <a id='compute-networking-isolation'></a> Configure Compute and Networking Isolation
 
-In the **Compute and Networking Isolation** pane, you can enable or disable compute isolation and configure Gorouter sharding for isolation segments.
+In the **Compute and Networking Isolation** pane, you can enable or disable
+compute isolation and configure Gorouter sharding for isolation segments.
 
-Compute isolation is when an app runs on compute resources, such as clusters, resource pools, and servers, that are isolated from other resources by a network partition or firewall.
+Compute isolation is when an app runs on compute resources, such as clusters,
+resource pools, and servers, that are isolated from other resources by a
+network partition or firewall.
 
-Networking isolation, or Gorouter sharding, is when traffic to an app instance uses a dedicated route that is isolated from routes used by other app instances by a network partition or firewall rule.
+Networking isolation, or Gorouter sharding, is when traffic to an app instance
+uses a dedicated route that is isolated from routes used by other app instances
+by a network partition or firewall rule.
 
-In the <%= vars.segment_runtime_full %> tile, you cannot disable compute isolation and enable networking isolation at the same time. This is because networking isolation configures the route by which traffic goes to the <%= vars.segment_runtime_full %> tile. Both compute and networking isolation are enabled by default.
+In the <%= vars.segment_runtime_full %> tile, you cannot disable compute
+isolation and enable networking isolation at the same time. This is because
+networking isolation configures the route by which traffic goes to the
+<%= vars.segment_runtime_full %> tile. Both compute and networking isolation
+are enabled by default.
 
 #### <a id='compute-networking-isolation-configs'></a> Options for Configuring Compute and Networking Isolation
 
-The following table describes the three ways <%= vars.company_name %> recommends configuring the **Compute and Networking Isolation** pane and the **Gorouters reject requests for isolation segments** checkbox in the **Networking** pane of the <%= vars.app_runtime_abbr %> tile:
+The following table describes the three ways <%= vars.company_name %>
+recommends configuring the **Compute and Networking Isolation** pane and the
+**Gorouter isolation segment request handling** property in the **Networking**
+pane of the <%= vars.app_runtime_abbr %> tile:
 
-| Use case | Compute isolation | Gorouter sharding mode | Gorouters reject requests for isolation segments (<%= vars.app_runtime_abbr %> tile) | Other requirements | Scaling recommendations |
+| Use case | Compute isolation | Gorouter sharding mode | Gorouter isolation segment request handling | Other requirements | Scaling recommendations |
 | -------- | ----------------- | -------------------- | ---------------------------------------------------------------------------------- | ------------------ | ----------------------- |
-| Use compute isolation and network isolation | Enabled | Isolation segment only | Enabled | <%= vars.segment_runtime_full %> has its own load balancer and uses a different domain from <%= vars.app_runtime_abbr %> | Apps in the isolation segment should have their own Diego Cells and Gorouters. |
-| Use compute isolation and extra <%= vars.segment_runtime_full %> Gorouters | Enabled | Isolation segment only | Disabled | <%= vars.segment_runtime_full %> has its own load balancer and uses the same domain as <%= vars.app_runtime_abbr %> | Apps in the isolation segment should have their own Diego Cells and Gorouters. |
-| Use compute isolation only | Enabled | No isolation segment | Disabled | <%= vars.segment_runtime_full %> uses <%= vars.app_runtime_abbr %> load balancer and domain | Scale <%= vars.segment_runtime_full %> Gorouters to 0. |
+| Use compute isolation and network isolation | Enabled | Isolation segment only | Reject all | <%= vars.segment_runtime_full %> has its own load balancer and uses a different domain from <%= vars.app_runtime_abbr %> | Apps in the isolation segment should have their own Diego Cells and Gorouters. |
+| Use compute isolation and extra <%= vars.segment_runtime_full %> Gorouters | Enabled | Isolation segment only | Accept all | <%= vars.segment_runtime_full %> has its own load balancer and uses the same domain as <%= vars.app_runtime_abbr %> | Apps in the isolation segment should have their own Diego Cells and Gorouters. |
+| Use compute isolation only | Enabled | No isolation segment | Accept all | <%= vars.segment_runtime_full %> uses <%= vars.app_runtime_abbr %> load balancer and domain | Scale <%= vars.segment_runtime_full %> Gorouters to 0. |
+| Use network isolation in some cases | See other rows for guidance | See other rows for guidance | Accept some | See other rows for guidance | See other rows for guidance |
 
 The use cases in the table above are described below:
 
-* **Use compute isolation and network isolation**: The most common use case is to enable compute isolation, networking isolation, and the **Gorouters reject requests for isolation segments** checkbox in the **Networking** pane of the <%= vars.app_runtime_abbr %> tile. This configuration routes traffic between an isolation segment and a block of compute resources that is dedicated solely to that isolation segment. It also ensures that no traffic is routed through the <%= vars.app_runtime_abbr %> Gorouters.
+* **Use compute isolation and network isolation for all isolation segments**:
+  This is the most common case. For this use case, select "Reject all" for the
+  **Gorouter isolation segment request handling** radio button in the **Networking**
+  pane of the <%= vars.app_runtime_abbr %> tile. This configuration routes
+  traffic between an isolation segment and a block of compute resources that is
+  dedicated solely to that isolation segment. It also ensures that no traffic is
+  routed through the <%= vars.app_runtime_abbr %> Gorouters.
 
-* **Use compute isolation and extra <%= vars.segment_runtime_full %> Gorouters**: To configure traffic for your isolated apps to pass through the Gorouters for both <%= vars.segment_runtime_full %> and <%= vars.app_runtime_abbr %>, enable compute isolation and networking isolation, and disable the **Gorouters reject requests for isolation segments** checkbox in <%= vars.app_runtime_abbr %>. You can also use either the same apps domain you configured in the **Domains** pane of the <%= vars.app_runtime_abbr %> tile, or a different domain that you configure with the DNS for the load balancer for the <%= vars.segment_runtime_full %> Gorouters. This configuration is useful if you want to configure isolated compute resources for your apps but do not have additional networking restrictions.
+* **Use compute isolation and extra <%= vars.segment_runtime_full %>
+  Gorouters**: To configure traffic for your isolated apps to pass through the
+  Gorouters for both <%= vars.segment_runtime_full %> and
+  <%= vars.app_runtime_abbr %>, enable compute isolation and networking isolation,
+  and select "Accept all" for the **Gorouter isolation segment request handling**
+  radio button in the **Networking** in <%= vars.app_runtime_abbr %>. You can
+  also use either the same apps domain you configured in the **Domains** pane
+  of the <%= vars.app_runtime_abbr %> tile, or a different domain that you
+  configure with the DNS for the load balancer for the <%= vars.segment_runtime_full %>
+  Gorouters. This configuration is useful if you want to configure isolated
+  compute resources for your apps but do not have additional networking
+  restrictions.
 
-* **Use compute isolation only**: To configure the <%= vars.app_runtime_abbr %> load balancer and apps domain route requests from your isolated apps, you can enable compute isolation, disable networking isolation, and disable the **Gorouters reject requests for isolation segments** checkbox in <%= vars.app_runtime_abbr %>. This configuration enables you to move Diego Cells out of <%= vars.app_runtime_abbr %> and into isolation segments, so you can upgrade <%= vars.app_runtime_abbr %> first and your <%= vars.segment_runtime_full %> tiles as time permits. This allows you to upgrade a large foundation in pieces, making it easier to upgrade within scheduled maintenance windows. This configuration is useful if your foundation has additional compute resource blocks, but no additional Gorouters for <%= vars.segment_runtime_full %> configured in the **Resource Config** pane.
+* **Use compute isolation only**: To configure the <%= vars.app_runtime_abbr %>
+  load balancer and apps domain route requests from your isolated apps, you can
+  enable compute isolation, disable networking isolation, and select "Accept
+  all" for the **Gorouter isolation segment request handling** radio button in
+  the **Networking** pane of the <%= vars.app_runtime_abbr %> tile. This
+  configuration enables you to move Diego Cells out of <%= vars.app_runtime_abbr %>
+  and into isolation segments, so you can upgrade <%= vars.app_runtime_abbr %>
+  first and your <%= vars.segment_runtime_full %> tiles as time permits. This
+  allows you to upgrade a large foundation in pieces,
+  making it easier to upgrade within scheduled maintenance windows. This
+  configuration is useful if your foundation has additional compute resource
+  blocks, but no additional Gorouters for <%= vars.segment_runtime_full %>
+  configured in the **Resource Config** pane.
 
-<p class='note warning'><strong>Warning:</strong> If you configure the <strong>Compute and Networking Isolation</strong> pane and the <strong>Gorouters reject requests for isolation segments</strong> checkbox in the <%= vars.app_runtime_abbr %> tile in a manner other than the use cases described above, the smoke tests fail. To deploy the tile anyway, you must disable the Smoke Test errand in the <strong>Errands</strong> pane of the <%= vars.app_runtime_abbr %> tile. <%= vars.company_name %> does not recommend disabling smoke tests. To configure the Smoke Test errand, see <a href="#errands">Configure Errands</a>.</p>
+* **Use network isolation in some cases**:
+  For this use case, select "Accept some" for the **Gorouter isolation segment
+  request handling** radio button in the **Networking** pane of the
+  <%= vars.app_runtime_abbr %> tile. Then provide a comma-separated list of
+  <%= vars.segment_runtime_full %> names that Gorouters should accept traffic
+  to. See other cases for guidance on how to configure the each
+  <%= vars.segment_runtime_full %>.
+
+<p class='note warning'><strong>Warning:</strong> If you configure the
+<strong>Compute and Networking Isolation</strong> pane and the
+<strong>Gorouter isolation segment request handling</strong> radio button in
+the <%= vars.app_runtime_abbr %> tile in a manner other than the use cases
+described above, the smoke tests fail. To deploy the tile anyway, you must
+disable the Smoke Test errand in the <strong>Errands</strong> pane of the <%=
+vars.app_runtime_abbr %> tile. <%= vars.company_name %> does not recommend
+disabling smoke tests. To configure the Smoke Test errand, see <a
+href="#errands">Configure Errands</a>.</p>
 
 #### <a id='pane-config'></a> Configure Pane
 
@@ -211,7 +269,12 @@ To configure the **Smoke Tests** pane:
 
 1. Click **Save**.
 
-<p class='note warning'><strong>Warning:</strong> If you configure the <strong>Compute and Networking Isolation</strong> pane and the <strong>Gorouters reject requests for isolation segments</strong> checkbox in the <%= vars.app_runtime_abbr %> tile in a manner other than the use cases described in <a href="#compute-networking-isolation-configs">Options for Configuring Compute and Networking Isolation</a>, the smoke tests fail.</p>
+<p class='note warning'><strong>Warning:</strong> If you configure the
+<strong>Compute and Networking Isolation</strong> pane and the
+<strong>Gorouter isolation segment request handling</strong> property in
+the <%= vars.app_runtime_abbr %> tile in a manner other than the use cases
+described in <a href="#compute-networking-isolation-configs">Options for
+Configuring Compute and Networking Isolation</a>, the smoke tests fail.</p>
 
 ### <a id='errands'></a> Configure Errands
 
@@ -224,8 +287,8 @@ In the **Errands** pane, you can select **On** to always run an errand or **Off*
 For more information about how <%= vars.ops_manager %> manages errands, see [Managing Errands in <%= vars.ops_manager %>](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/customizing/managing_errands.html).
 
 <div class="note warning"><strong>Warning:</strong> You should disable the Smoke Test errand if:
-	<ul>
-		<li>You configure the <strong>Compute and Networking Isolation</strong> pane and the <strong>Gorouters reject requests for isolation segments</strong> checkbox in the <%= vars.app_runtime_abbr %> tile in a manner other than the use cases described in <a href="#compute-networking-isolation-configs">Options for Configuring Compute and Networking Isolation</a>. Otherwise, apps fail to schedule in <%= vars.segment_runtime_full %>.</li>
+    <ul>
+    <li>You configure the <strong>Compute and Networking Isolation</strong> pane and the <strong>Gorouter isolation segment request handling </strong> checkbox in the <%= vars.app_runtime_abbr %> tile in a manner other than the use cases described in <a href="#compute-networking-isolation-configs">Options for Configuring Compute and Networking Isolation</a>. Otherwise, apps fail to schedule in <%= vars.segment_runtime_full %>.</li>
     <li>Both the V2 and V1 Firehoses are disabled in <%= vars.app_runtime_abbr %>. Otherwise, the deploy fails.</li>
     </ul>
 </div>
