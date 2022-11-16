@@ -1,9 +1,9 @@
 ---
-title: Jump Upgrading to TAS for VMs v2.11
+title: Jump Upgrading to TAS for VMs v2.13
 owner: RelEng
 ---
 
-This topic describes upgrading to <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) v2.11 directly from
+This topic describes upgrading to <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) v2.13 directly from
 Pivotal Application Service (PAS) v2.7 and later.
 
 
@@ -11,15 +11,17 @@ Pivotal Application Service (PAS) v2.7 and later.
 
 Jump upgrading describes the process of skipping minor versions when upgrading
 <%= vars.app_runtime_abbr %>. Jump upgrading enables you to upgrade directly to the
-long-term support (LTS) version of <%= vars.app_runtime_abbr %>, which is v2.11.
-<%= vars.app_runtime_abbr %> v2.11 is supported through April 2024.
+long-term support (LTS) version of <%= vars.app_runtime_abbr %>, which is v2.13.
+<%= vars.app_runtime_abbr %> v2.13 is supported through April 2024.
 
+To minimize downtime for developers pushing apps, upgrade from PAS v2.7.41 or later, or TAS for VMs v2.10.21 or later.
+Upgrading from earlier patch versions can result in an `Unknown Error` when pushing apps.
 
 ## <a id="prerequisites"></a> Prerequisites
 
-Before you jump upgrade to <%= vars.app_runtime_abbr %> v2.11:
+Before you jump upgrade to <%= vars.app_runtime_abbr %> v2.13:
 
-1. Verify that the products you have installed are compatible with <%= vars.app_runtime_abbr %> v2.11. To create an upgrade path for your product tiles, see the [Upgrade Planner](https://upgrade-planner.pivotal.io/).
+1. Verify that the products you have installed are compatible with <%= vars.app_runtime_abbr %> v2.13. To create an upgrade path for your product tiles, see the [Upgrade Planner](https://upgrade-planner.pivotal.io/).
 
 1. Upgrade <%= vars.ops_manager %> to v2.10 LTS. For more information, see [<%= vars.ops_manager %> v2.10 Release Notes](https://docs.pivotal.io/ops-manager/2-10/release-notes.html).
 
@@ -29,16 +31,17 @@ Before you jump upgrade to <%= vars.app_runtime_abbr %> v2.11:
 
 After your deployment meets the requirements described in
 [Prerequisites](#prerequisites) above, you can upgrade to <%= vars.app_runtime_abbr %>
-v2.11.0 or later.
+v2.13.0 or later.
 
-To jump upgrade to <%= vars.app_runtime_abbr %> to v2.11.0 or later:
+To jump upgrade to <%= vars.app_runtime_abbr %> to v2.13.0 or later:
 
 1. Review the breaking changes for each version of <%= vars.app_runtime_abbr %> included in the jump upgrade.
-For example, if you are upgrading from PAS v2.7 to <%= vars.app_runtime_abbr %> v2.11, read all of the following breaking changes:
+For example, if you are upgrading from PAS v2.7 to <%= vars.app_runtime_abbr %> v2.13, read all of the following breaking changes:
     * [PAS 2.8 Breaking Changes](https://docs.pivotal.io/application-service/2-8/release-notes/runtime-rn.html#breaking-changes)
     * [<%= vars.app_runtime_abbr %> 2.9 Breaking Changes](https://docs.pivotal.io/application-service/2-9/release-notes/runtime-rn.html#breaking-changes)
     * [<%= vars.app_runtime_abbr %> 2.10 Breaking Changes](https://docs.pivotal.io/application-service/2-10/release-notes/runtime-rn.html#breaking-changes)
-    * [<%= vars.app_runtime_abbr %> 2.11 Breaking Changes](../release-notes/runtime-rn.html#breaking-changes)
+    * [<%= vars.app_runtime_abbr %> 2.11 Breaking Changes](https://docs.pivotal.io/application-service/2-11/release-notes/runtime-rn.html)
+
 
 1. Review [Configuring TAS for VMs for Upgrades](./configuring.html).
 
@@ -46,4 +49,5 @@ For example, if you are upgrading from PAS v2.7 to <%= vars.app_runtime_abbr %> 
     * [PAS 2.8 Release Notes](https://docs.pivotal.io/application-service/2-8/release-notes/runtime-rn.html)
     * [<%= vars.app_runtime_abbr %> 2.9 Release Notes](https://docs.pivotal.io/application-service/2-9/release-notes/runtime-rn.html)
     * [<%= vars.app_runtime_abbr %> 2.10 Release Notes](https://docs.pivotal.io/application-service/2-10/release-notes/runtime-rn.html)
-    * [<%= vars.app_runtime_abbr %> 2.11 Release Notes](../release-notes/runtime-rn.html)
+    * [<%= vars.app_runtime_abbr %> 2.11 Release Notes](https://docs.pivotal.io/application-service/2-11/release-notes/runtime-rn.html)
+    * [<%= vars.app_runtime_abbr %> 2.13 Release Notes](../release-notes/runtime-rn.html)
