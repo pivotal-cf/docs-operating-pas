@@ -1,5 +1,5 @@
 ---
-title: Jump Upgrading to TAS for VMs v2.11
+title: Jump Upgrading to TAS for VMs v2.8
 owner: RelEng
 ---
 
@@ -8,7 +8,7 @@ owner: RelEng
   In v2.9 and later, Pivotal Application Service is renamed to VMware Tanzu Application Service for VMs.
 </p>
 
-This topic describes upgrading to VMware Tanzu Application Service for VMs (TAS for VMs) v2.11 directly from
+This topic describes upgrading to VMware Tanzu Application Service for VMs (TAS for VMs) v2.8 directly from
 Pivotal Application Service (PAS) v2.7 and later.
 
 
@@ -16,15 +16,14 @@ Pivotal Application Service (PAS) v2.7 and later.
 
 Jump upgrading describes the process of skipping minor versions when upgrading
 <%= vars.app_runtime_abbr %>. Jump upgrading enables you to upgrade directly to the
-long-term support (LTS) version of TAS for VMs, which is v2.11.
-TAS for VMs v2.11 is supported through April 2024.
+long-term support (LTS) version of TAS for VMs, which is v2.8.
 
 
 ## <a id="prerequisites"></a> Prerequisites
 
-Before you jump upgrade to TAS for VMs v2.11:
+Before you jump upgrade to TAS for VMs v2.8:
 
-1. Verify that the products you have installed are compatible with TAS for VMs v2.11. To create an upgrade path for your product tiles, see the [Upgrade Planner](https://upgrade-planner.pivotal.io/).
+1. Verify that the products you have installed are compatible with TAS for VMs v2.8. To create an upgrade path for your product tiles, see the [Upgrade Planner](https://upgrade-planner.pivotal.io/).
 
 1. Upgrade <%= vars.ops_manager %> to v2.10 LTS. For more information, see [<%= vars.ops_manager %> v2.10 Release Notes](https://docs.pivotal.io/ops-manager/2-10/release-notes.html).
 
@@ -34,21 +33,15 @@ Before you jump upgrade to TAS for VMs v2.11:
 
 After your deployment meets the requirements described in
 [Prerequisites](#prerequisites) above, you can upgrade to TAS for VMs
-v2.11.0 or later.
+v2.8.0 or later.
 
-To jump upgrade to TAS for VMs to v2.11.0 or later:
+To jump upgrade to TAS for VMs to v2.8.0 or later:
 
 1. Review the breaking changes for each version of <%= vars.app_runtime_abbr %> included in the jump upgrade.
-For example, if you are upgrading from PAS v2.7 to TAS for VMs v2.11, read all of the following breaking changes:
+For example, if you are upgrading from PAS v2.7 to TAS for VMs v2.8, read all of the following breaking changes:
     * [PAS 2.8 Breaking Changes](https://docs.pivotal.io/application-service/2-8/release-notes/runtime-rn.html#breaking-changes)
-    * [TAS for VMs 2.9 Breaking Changes](https://docs.pivotal.io/application-service/2-9/release-notes/runtime-rn.html#breaking-changes)
-    * [TAS for VMs 2.10 Breaking Changes](https://docs.pivotal.io/application-service/2-10/release-notes/runtime-rn.html#breaking-changes)
-    * [TAS for VMs 2.11 Breaking Changes](../release-notes/runtime-rn.html#breaking-changes)
 
 1. Review [Configuring <%= vars.app_runtime_abbr %> for Upgrades](./configuring.html).
 
-1. (Optional) Review release notes for each version of <%= vars.app_runtime_abbr %> included in the jump upgrade:
+2. (Optional) Review release notes for each version of <%= vars.app_runtime_abbr %> included in the jump upgrade:
     * [PAS 2.8 Release Notes](https://docs.pivotal.io/application-service/2-8/release-notes/runtime-rn.html)
-    * [TAS for VMs 2.9 Release Notes](https://docs.pivotal.io/application-service/2-9/release-notes/runtime-rn.html)
-    * [TAS for VMs 2.10 Release Notes](https://docs.pivotal.io/application-service/2-10/release-notes/runtime-rn.html)
-    * [TAS for VMs 2.11 Release Notes](https://docs.pivotal.io/application-service/2-11/release-notes/runtime-rn.html)
