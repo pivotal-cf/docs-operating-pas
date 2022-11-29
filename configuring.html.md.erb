@@ -119,7 +119,7 @@ This section describes critical factors to consider when evaluating the type of 
 
 During an upgrade, file storage with insufficient IOPS numbers can negatively impact the performance and stability of your <%= vars.app_runtime_abbr %> deployment.
 
-If disk processing time takes longer than the evacuation timeout for Diego Cells, then Diego Cells and app instances may take too long to start up, resulting in a cascading failure.
+If disk processing time is longer than the evacuation timeout for Diego Cells, then Diego Cells and app instances may take too long to start up, resulting in a cascading failure.
 
 However, the minimum required IOPS depends upon a number of deployment-specific factors and configuration choices. Use this section as a guide when deciding on the file storage configuration for your deployment.
 
