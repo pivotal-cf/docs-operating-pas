@@ -134,9 +134,9 @@ Whenever possible, <%= vars.recommended_by %> recommends using external file sto
 
 ### <a id="load"></a> Calculate Potential Disk Load Requirements
 
-As a best-effort calculation, estimate the total number of bits needed to move during a system upgrade to determine how IOPS-performant your file storage needs to be.
+As a best-effort calculation, estimate the total number of bits needed to move during a system upgrade to determine the IOPS performance required of your file storage.
 
 * **Number of Diego Cells**: As a first calculation, determine the number of Diego Cells that your deployment currently uses. To view the number of Diego Cell instances currently running in your deployment, see the **Resource Config** pane of the <%= vars.app_runtime_abbr %> tile. If you expect to scale up the number of instances, use the anticipated scaled number.
-	<p class="note"><strong>Note:</strong> If your deployment uses more than 20 Diego Cells, you should avoid using internal file storage. Instead, you should always select external or IaaS-provided file storage.</p>
+	<p class="note"><strong>Note:</strong> If your deployment uses more than 20 Diego Cells, avoid using internal file storage. Instead, always select external or IaaS-provided file storage.</p>
 
 * **Maximum In-Flight Load and Container Starts for Diego Cells**: Operators can limit the number of containers and Diego Cell instances that Diego starts concurrently. If operators impose no limits, your file storage may experience exceptionally heavy load during an upgrade.
