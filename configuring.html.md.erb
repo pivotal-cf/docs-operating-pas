@@ -49,7 +49,7 @@ The number of Diego Cells that undergo upgrade simultaneously (either in a state
 
 When BOSH triggers an upgrade, each Diego Cell undergoing upgrade enters "evacuation" mode. Evacuation mode means that the Diego Cell stops accepting new work and signals the rest of the Diego system to schedule replacements for its app instances. This scheduling is managed by the Diego auctioneer process. For more information, see [How Diego Balances App Processes](../concepts/diego/diego-auction.html).
 
-The evacuating Diego Cells continue to interact with the Diego system as replacements come online. The Diego Cell undergoing upgrade waits until either its app instance replacements run successfully before shutting down the original local instances, or for the evacuation process to time out. This "evacuation timeout" defaults to 10 minutes.
+The evacuating Diego Cells continue to interact with the Diego system as replacements come online. The Diego Cell undergoing upgrade waits until either its app instance replacements run successfully or the evacuation process times out before shutting down the original local instances. This "evacuation timeout" defaults to 10 minutes.
 
 If Diego Cell evacuation exceeds this timeout, then the Diego Cell stops its app instances and shuts down. The Diego system continues to re-emit start requests for the app replacements.
 
