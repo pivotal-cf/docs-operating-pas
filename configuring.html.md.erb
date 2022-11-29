@@ -55,7 +55,7 @@ If Diego Cell evacuation exceeds this timeout, then the Diego Cell stops its app
 
 #### <a id="limitations-considerations"></a> Prevent Overload
 
-A potential issue arises if too many app instance replacements are slow to start or do not start successfully at all.
+A potential issue arises if too many app instance replacements are slow to start or do not start at all.
 
 If too many app instances are starting concurrently, then the load of these starts on the rest of the system can cause other apps that are already running to crash and be rescheduled. These events can result in a cascading failure.
 
@@ -84,7 +84,7 @@ Set the `max_in_flight` variable low enough that the remaining component instanc
 
 Some more precise guidelines include:
 
-* For jobs with high resource usage, set `max_in_flight` to a low value low. For example, for Diego Cells, `max_in_flight` allows non-migrating Diego Cells to pick up the work of Diego Cells stopping and restarting during migration. If resource usage is already close to 100%, scale up your jobs before making any updates.
+* For jobs with high resource usage, set `max_in_flight` to a low value. For example, for Diego Cells, `max_in_flight` allows non-migrating Diego Cells to pick up the work of Diego Cells stopping and restarting during migration. If resource usage is already close to 100%, scale up your jobs before making any updates.
 
 * Quorum-based components are components with odd-numbered settings in the manifest. For quorum-based components such as etcd and Diego BBS, set `max_in_flight` to 1. This preserves quorum and prevents a split-brain scenario from occurring as jobs restart. For more information, about split-brain scenarios, see [Split-brain (computing)](https://en.wikipedia.org/wiki/Split-brain_(computing)) on Wikipedia.
 
