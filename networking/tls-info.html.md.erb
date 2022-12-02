@@ -24,8 +24,8 @@ The following table describes each component involved in receiving a client requ
 
 | Component | Certificate Source |
 | --------- | ------------------ |
-| External Load Balancer | Enterprise root certificate authority (CA). |
-| Gorouter | Enterprise root CA. |
+| External Load Balancer | Enterprise root certificate authority (CA) |
+| Gorouter | Enterprise root CA |
 | App | <%= vars.ops_manager %> root CA dedicated to app instance identity. For more information, see [App Instance Container Identity Credentials](#container-creds). |
 
 ### <a id="component-to-component"></a> Between Platform Components
@@ -108,8 +108,8 @@ To learn about app instance identity credentials, see the following table:
     <th>Purpose</th>
     <td>
       <ul>
-        <li>For app developers to enable secure TLS communications from their apps.</li>
-        <li>For <%= vars.ops_manager %> to use internally to validate the identities of app instances.</li>
+        <li>For app developers to enable secure TLS communications from their apps</li>
+        <li>For <%= vars.ops_manager %> to use internally to validate the identities of app instances</li>
       </ul>
     </td>
   </tr>
@@ -117,7 +117,7 @@ To learn about app instance identity credentials, see the following table:
     <th>Type</th>
     <td>
       <ul>
-        <li>A PEM-encoded <a href="https://tools.ietf.org/html/rfc5280">X.509</a> certificate and <a href="https://tools.ietf.org/html/rfc3447">PKCS #1 RSA</a> private key.</li>
+        <li>A PEM-encoded <a href="https://tools.ietf.org/html/rfc5280">X.509</a> certificate and <a href="https://tools.ietf.org/html/rfc3447">PKCS #1 RSA</a> private key</li>
       </ul>
     </td>
   </tr>
@@ -212,7 +212,7 @@ The TLS cipher suites <%= vars.company_name %> recommends using within <%= vars.
 
 ### <a id="cipher_gorouter"></a> Gorouter Configuration
 
-As part of your <%= vars.app_runtime_abbr %> networking configuration, you must specify the TLS cipher suites that the Gorouter uses to secure its communications. Only specify the cipher suites that you need.
+As part of your <%= vars.app_runtime_abbr %> networking configuration, you must specify the TLS cipher suites that the Gorouter uses to secure its communications. Specify only the cipher suites that you need.
 
 The TLS cipher suites <%= vars.company_name %> recommends for the Gorouter are:
 
@@ -225,7 +225,7 @@ For instructions on how to configure the TLS cipher suites for the Gorouter, see
 
 ### <a id="cipher_haproxy"></a> HAProxy Configuration
 
-As part of your <%= vars.app_runtime_abbr %> networking configuration, you must specify the TLS cipher suites that HAProxy uses to secure its communications. Only specify the cipher suites that you need.
+As part of your <%= vars.app_runtime_abbr %> networking configuration, you must specify the TLS cipher suites that HAProxy uses to secure its communications. Specify only the cipher suites that you need.
 
 The TLS cipher suites <%= vars.company_name %> recommends for HAProxy are:
 
@@ -234,7 +234,7 @@ The TLS cipher suites <%= vars.company_name %> recommends for HAProxy are:
 * ECDHE-RSA-AES128-GCM-SHA256
 * ECDHE-RSA-AES256-GCM-SHA384
 
-You can specify other cipher suites and a different minimum version of TLS support if your deployment requires it. For a list of other cipher suites and other versions of TLS that are optionally supported by HAProxy, see [ciphers - Cipher Suite Names](https://www.openssl.org/docs/man1.0.2/apps/ciphers.html#CIPHER-SUITE-NAMES) in the OpenSSL documentation.
+You can specify other cipher suites and a different minimum version of TLS support if your deployment requires it. For a list of other cipher suites and other versions of TLS that are optionally supported by HAProxy, see [Ciphers - Cipher Suite Names](https://www.openssl.org/docs/man1.0.2/apps/ciphers.html#CIPHER-SUITE-NAMES) in the OpenSSL documentation.
 
 If you use the default and recommended Gorouter TLS cipher suites in <%= vars.app_runtime_abbr %>, then ensure you have included these Gorouter TLS cipher suites in your HAProxy TLS cipher suite configuration.
 

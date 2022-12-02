@@ -37,20 +37,20 @@ There are many monitoring options available, both open source and commercial pro
 * Other Commercial Services
   - [VMware vRealize Operations (vROPS)](http://www.vmware.com/products/vrealize-operations.html)
 
-* Open-Source Tooling
+* Open Source Tooling
   - [Prometheus + Grafana](https://github.com/bosh-prometheus/prometheus-boshrelease)
   - [OpenTSDB](http://opentsdb.net)
 
 ### <a id='cloud-ops'></a> <%= vars.company_name %> Cloud Ops Tools
 
-The <%= vars.company_name %> Cloud Ops Team manages two types of deployments for internal <%= vars.company_name %> use: open-source Cloud Foundry, and <%= vars.platform_name %>.
+The <%= vars.company_name %> Cloud Ops Team manages two types of deployments for internal <%= vars.company_name %> use: open source Cloud Foundry, and <%= vars.platform_name %>.
 
-For **Cloud Foundry**, <%= vars.company_name %> Cloud Ops uses several monitoring tools. The [Datadog Config repository](https://github.com/pivotal-cf-experimental/datadog-config-oss) provides an example of how the <%= vars.company_name %> Cloud Ops team uses a customized Datadog dashboard to monitor the health of its open-source Cloud Foundry deployments.
+For **Cloud Foundry**, <%= vars.company_name %> Cloud Ops uses several monitoring tools. The [Datadog Config repository](https://github.com/pivotal-cf-experimental/datadog-config-oss) provides an example of how the <%= vars.company_name %> Cloud Ops team uses a customized Datadog dashboard to monitor the health of its open source Cloud Foundry deployments.
 
 To monitor its **<%= vars.platform_name %>** deployments, <%= vars.company_name %> Cloud Ops leverages a combination of [Healthwatch](https://docs.pivotal.io/pcf-healthwatch/1-2/index.html) and [Google Stackdriver](https://cloud.google.com/stackdriver/).
 
 
-## <a id='cloud-ops'></a> Key Inputs for Platform Monitoring
+## <a id='key-inputs'></a> Key Inputs for Platform Monitoring
 
 ### <a id='component-metrics'></a> BOSH VM and <%= vars.platform_name %> Component Health Metrics
 
@@ -70,7 +70,7 @@ For information about high-signal-value metrics and capacity scaling indicators 
 
 <%= vars.platform_name %> includes smoke tests, which are functional unit and integration tests on all major system components. By default, whenever an operator upgrades to a new version of <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>), these smoke tests run as a post-deploy errand.
 
-<%= vars.company_name %> recommends additional higher-resolution monitoring by the execution of continuous smoke tests, or Service Level Indicator tests, that measure user-defined features and check them against expected levels.
+<%= vars.company_name %> recommends additional higher-resolution monitoring by the execution of continuous smoke tests or Service Level Indicator tests that measure user-defined features and check them against expected levels.
 
 * [Healthwatch](https://network.pivotal.io/products/p-healthwatch) automatically executes these tests for <%= vars.app_runtime_abbr %> Service Level Indicators.
 
@@ -83,9 +83,9 @@ For information about how to set up Concourse to generate custom component metri
 
 To properly configure your monitoring dashboard and alerts, you must establish what thresholds should drive alerting and red/yellow/green dashboard behavior.
 
-Some key metrics have more fixed thresholds, with similar threshold numbers numbers recommended across different foundations and use cases. These metrics tend to revolve around the health and performance of key components that can impact the performance of the entire system.
+Some key metrics have more fixed thresholds, with similar threshold numbers numbers recommended across different foundations and use cases. These metrics tend to revolve around the health and performance of key components that can affect the performance of the entire system.
 
-Other metrics of operational value are more dynamic in nature. This means that you must establish a baseline and yellow/red thresholds suitable for your system and its use cases. You can establish initial baselines by watching values of key metrics over time and noting what seems to be a good starting threshold level that divides acceptable and unacceptable system performance and health.
+Other metrics of operational value are more dynamic. This means that you must establish a baseline and yellow/red thresholds suitable for your system and its use cases. You can establish initial baselines by watching values of key metrics over time and noting what seems to be a good starting threshold level that divides acceptable and unacceptable system performance and health.
 
 ### <a id='continuous'></a> Continuous Evolution
 
