@@ -23,13 +23,13 @@ If you provide your root CA certificate in the <%= vars.ops_manager %> configura
 
 1. Click **Security**.
 
-    <%= image_tag("images/docker-registry-ops-man.png", :alt => "Security pane shows 'Trusted Certificates' textarea field and 'Generate VM passwords' radio button field with a save button.") %>
+    <%= image_tag("images/docker-registry-ops-man.png", :alt => "Security pane of Ops Manager Director screen shows Trusted Certificates textarea field." ) %>
 
-1. In the **Trusted Certificates** field, paste one or more root CA certificates. The Docker registry does not use the CA certificate itself but uses a certificate that is signed by the CA certificate.
+2. In the **Trusted Certificates** field, paste one or more root CA certificates. The Docker registry does not use the CA certificate itself but uses a certificate that is signed by the CA certificate.
 
-1. Click **Save**.
+3. Click **Save**.
 
-1. Choose one of the following:
+4. Choose one of the following:
   - If you are configuring <%= vars.ops_manager %> for the first time, return to your specific IaaS installation instructions ([AWS](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/customizing/aws.html), [Azure](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/customizing/azure.html), [GCP](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/customizing/gcp.html), [OpenStack](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/customizing/openstack.html), [vSphere](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/customizing/vsphere.html)) to continue the installation process.
   - If you are modifying an existing <%= vars.ops_manager %> installation, return to the <%= vars.ops_manager %> Installation Dashboard, click **Review Pending Changes**, and click **Apply Changes**.
 
