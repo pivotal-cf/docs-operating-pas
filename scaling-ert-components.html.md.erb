@@ -34,15 +34,16 @@ To scale up <%= vars.app_runtime_abbr %> instances:
 1. Click the <%= vars.app_runtime_abbr %> tile.
 
 1. Select **Resource Config**.
-<%= image_tag("images/scaling-ert.png", :alt => "The Resource Config pane lists the jobs. For each job there is a dropdown for Instances, Persistent Disk Type, and VM Type." ) %>
 
-1. To scale your deployment horizontally, increase the number of **Instances** of a job. For guidance on the number of job instances required to ensure high availability, see [Scaling Recommendations](#scalingtable).
+    ![alt-text="The Resource Config pane lists the jobs. For each job there is a dropdown for Instances, Persistent Disk Type, and VM Type."](images/scaling-ert.png)
 
-1. To scale your deployment vertically, adjust the **Persistent Disk Type** and **VM Type** of a job to allocate more disk space and memory. If you choose **Automatic** from the dropdown, <%= vars.app_runtime_abbr %> uses the recommended amount of resources for the job.
+2. To scale your deployment horizontally, increase the number of **Instances** of a job. For guidance on the number of job instances required to ensure high availability, see [Scaling Recommendations](#scalingtable).
 
-1. Click **Save**.
+3. To scale your deployment vertically, adjust the **Persistent Disk Type** and **VM Type** of a job to allocate more disk space and memory. If you choose **Automatic** from the dropdown, <%= vars.app_runtime_abbr %> uses the recommended amount of resources for the job.
 
-1. Return to the <%= vars.ops_manager %> Installation Dashboard, click **Review Pending Changes**, and click **Apply Changes**.
+4. Click **Save**.
+
+5. Return to the <%= vars.ops_manager %> Installation Dashboard, click **Review Pending Changes**, and click **Apply Changes**.
 
 
 ## <a id='scaledown'></a> Scaling Down <%= vars.app_runtime_abbr %>
@@ -56,13 +57,14 @@ To scale down your deployment:
 1. Click the <%= vars.app_runtime_abbr %> tile.
 
 1. Select **Resource Config**.
-<%= image_tag("images/scaling-ert.png", :alt => "The Resource Config pane lists the jobs. For each job there is a dropdown for Instances, Persistent Disk Type, and VM Type." ) %>
 
-1. In the **Resource Config** screen, decrease the number of **Instances** for each job. Choose the suggested values outlined in [Scaling Recommendations](#scalingtable) or in the [Scaling Recommendations for Specific Deployment Configurations](#deployscenarios).
+    ![alt-text="The Resource Config pane lists the jobs. For each job there is a dropdown for Instances, Persistent Disk Type, and VM Type."](images/scaling-ert.png)
 
-1. Click **Save**.
+2. In the **Resource Config** screen, decrease the number of **Instances** for each job. Choose the suggested values outlined in [Scaling Recommendations](#scalingtable) or in the [Scaling Recommendations for Specific Deployment Configurations](#deployscenarios).
 
-1. Return to the <%= vars.ops_manager %> Installation Dashboard, click **Review Pending Changes**, and click **Apply Changes**.
+3. Click **Save**.
+
+4. Return to the <%= vars.ops_manager %> Installation Dashboard, click **Review Pending Changes**, and click **Apply Changes**.
 
 ### <a id="diskscale"></a> Scaling Down Jobs with Persistent Disk
 

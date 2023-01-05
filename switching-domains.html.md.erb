@@ -13,9 +13,9 @@ To change the domain of an existing <%= vars.platform_name %> installation:
 
 1. Select **Domains** to see the current **Apps domain** for your <%= vars.app_runtime_abbr %> deployment.
 
-	<img src="./images/switching_domains/er17-switchdomains-before.png" alt="Domains pane shows System domain field with example text, yoursystem.yourdomain.com and the Apps domain field with example text, yourapps.yourdomain.com.">
+	![alt-text="Domains pane shows System domain field with example text, yoursystem.yourdomain.com and the Apps domain field with example text, yourapps.yourdomain.com."](./images/switching_domains/er17-switchdomains-before.png)
 
-1. In the terminal, run:
+2. In the terminal, run:
 
 		cf login -a API-ENDPOINT
 
@@ -24,7 +24,7 @@ To change the domain of an existing <%= vars.platform_name %> installation:
 	<br>
 	The cf CLI prompts you for your <%= vars.platform_name %> username and password, as well as the org and space you want to access. If you do not know your API endpoint, see [Identifying the API Endpoint for Your <%= vars.app_runtime_abbr %> Instance](../opsguide/api-endpoint.html).
 
-1. To view the domains in the space, run:
+3. To view the domains in the space, run:
 
 		cf domains
 
@@ -38,7 +38,7 @@ To change the domain of an existing <%= vars.platform_name %> installation:
 	</pre>
 	If you have more than one shared domain, ensure that the domain you want to change is at the top of the list before you apply the new domain to your <%= vars.app_runtime_abbr %> tile configuration. You can delete and re-create the other shared domains as necessary to push the domain you want to change to the top of the list. If you do this, make sure to re-map the routes for each domain. For more information, see [Configuring Routes and Domains](../devguide/deploy-apps/routes-domains.html).
 
-1. To confirm that your apps are assigned to the domain you plan to change, run:
+4. To confirm that your apps are assigned to the domain you plan to change, run:
 
 		cf routes
 
@@ -51,7 +51,7 @@ To change the domain of an existing <%= vars.platform_name %> installation:
 	your-space yourapp yourapps.yourdomain.com yourapp
 	</pre>
 
-1. To create the new domain you want to use, run:
+5. To create the new domain you want to use, run:
 
 		cf create-shared-domain NEW-DOMAIN
 
@@ -66,7 +66,7 @@ To change the domain of an existing <%= vars.platform_name %> installation:
 	OK
 	</pre>
 
-1. To map the new domain to your app, run:
+6. To map the new domain to your app, run:
 
 		cf map-route APP-NAME NEW-DOMAIN -n HOST-NAME
 
@@ -86,14 +86,14 @@ To change the domain of an existing <%= vars.platform_name %> installation:
 		</pre>
 	In this example, both the `APP-NAME` and `HOST-NAME` arguments are `yourapp`, since this is both the name of the app to which you are mapping a route and the intended hostname for the URL.
 
-1. Repeat the previous step for each app in this space. Then check Apps Manager to confirm that the route URL has updated correctly for each app.
+7. Repeat the previous step for each app in this space. Then check Apps Manager to confirm that the route URL has updated correctly for each app.
 
-	<img src= "./images/switching_domains/new_domain_confirmed1.png" alt="Apps Manager space shows an application status at 100%.">
+	![alt-text="Apps Manager space shows an application status at 100%."](./images/switching_domains/new_domain_confirmed1.png)
 
-1. Repeat the above steps for each space in your <%= vars.platform_name %> installation except for the System org, beginning with logging into the org and space and ending with confirming the URL update.
+8. Repeat the above steps for each space in your <%= vars.platform_name %> installation except for the System org, beginning with logging into the org and space and ending with confirming the URL update.
 	<p class='note'><strong>Note:</strong> Ordinarily the System org contains only <%= vars.platform_name %> apps that perform utility functions for your installation. <%= vars.company_name %> does not recommend pushing apps to this org. However, if you have pushed apps to the System org, you must also repeat the above steps for these apps.</p>
 
-1. Once you have confirmed that every app in every space has been mapped to the new domain, delete the old domain by running:
+9. Once you have confirmed that every app in every space has been mapped to the new domain, delete the old domain by running:
 
 		cf delete-shared-domain OLD-DOMAIN
 
@@ -111,12 +111,12 @@ To change the domain of an existing <%= vars.platform_name %> installation:
 	</pre>
 	When prompted, type `yes` to confirm that you want to delete the domain.
 
-1. In the **Domains** pane of the <%= vars.app_runtime_abbr %> tile, enter the new domain in the **Apps domain** field. This configures <%= vars.app_runtime_abbr %> to use the new domain.
+10. In the **Domains** pane of the <%= vars.app_runtime_abbr %> tile, enter the new domain in the **Apps domain** field. This configures <%= vars.app_runtime_abbr %> to use the new domain.
 
-	<img src="./images/switching_domains/er17-switchdomains-after.png" alt="Domains pane shows System domain field with example text, yoursystem.yourdomain.com and the Apps domain field with yourapps.yourdomain.com.">
+	![alt-text="Domains pane shows System domain field with example text, yoursystem.yourdomain.com and the Apps domain field with yourapps.yourdomain.com."](./images/switching_domains/er17-switchdomains-after.png)
 
-1. Return to the <%= vars.ops_manager %> Installation Dashboard.
+11. Return to the <%= vars.ops_manager %> Installation Dashboard.
 
-1. Click **Review Pending Changes**.
+12. Click **Review Pending Changes**.
 
-2. Click **Apply Changes**. Any apps you push after this update finishes use this new domain.
+13. Click **Apply Changes**. Any apps you push after this update finishes use this new domain.

@@ -27,15 +27,15 @@ To use your F5 deployment as a load balancer, you must configure it to forward u
 This <%= vars.app_runtime_abbr %> configuration option forwards unencrypted traffic to the Gorouter.
 It assumes an external load balancer is configured to forward unencrypted traffic.
 
-<%= image_tag("images/f5-config-1.png", :alt => "" ) %>
+![alt-text=""](images/f5-config-1.png)
 
 This configuration terminates client SSL at the F5 and forward standard HTTP traffic to the backend Gorouters from the LTM. All TCP back ends accept forwarded traffic from the LTM.
 
 1. In the F5 UI, go to **Local Traffic**.
 
-1. Go to **iRules** and click **iRule List**.
+2. Go to **iRules** and click **iRule List**.
 
-1. Create the following rules:
+3. Create the following rules:
     * **Name:** `cf-xforward-for`
        **Definition:** `when HTTP_REQUEST { HTTP::header insert X-Forwarded-For [IP::remote_addr] }`
     * **Name:** `cf-xforward-proto-https`
@@ -43,70 +43,70 @@ This configuration terminates client SSL at the F5 and forward standard HTTP tra
     * **Name:** `cf-xforward-proto-http`
        **Definition:** `when HTTP_REQUEST { HTTP::header insert X-Forwarded-Proto "http" }`
 
-1. Go to **System**, then **File Management**, and click **SSL Certificate List**.
+4. Go to **System**, then **File Management**, and click **SSL Certificate List**.
   1. Import your <%= vars.app_runtime_abbr %> certificate and name it `pcf-pas-cert`.
-  1. Import your <%= vars.app_runtime_abbr %> certificate key and name it `pcf-pas-key`.
+  2. Import your <%= vars.app_runtime_abbr %> certificate key and name it `pcf-pas-key`.
 
-1. Go to **Local Traffic** and click **Monitors**.
+5. Go to **Local Traffic** and click **Monitors**.
   1. Create a `gorouter` health monitor and give it the following parameters:
       * **Name:** `gorouter_mon`
       * **Type:** `HTTP`
       * **Send String:** `GET /health HTTP/1.0\r\n`
       * **Alias Service Port:** `8080`
       * **Receive String:** `ok`
-  1. Create a `sshproxy` health monitor and give it the following parameters:
+  2. Create a `sshproxy` health monitor and give it the following parameters:
        * **Name:** `diegobrain_mon`
        * **Type:** `TCP`
        * **Alias Service Port:** `2222`
-  1. Create a `tcprouter` health monitor and give it the following parameters:
+  3. Create a `tcprouter` health monitor and give it the following parameters:
        * **Name:** `tcprouter_mon`
        * **Type:** `HTTP`
        * **Send String:** `GET /health`
        * **Alias Service Port:** `80`
 
-1. Create all required nodes:
+6. Create all required nodes:
     1. Go to **Local Traffic**, then **Nodes**, and click **Node List**.
-    1. Create the desired number of `gorouter` nodes, one for each Gorouter
+    2. Create the desired number of `gorouter` nodes, one for each Gorouter
        in your <%= vars.app_runtime_abbr %> deployment, and give it the following parameters:
        * **Name:** `gorouter-#`
        * **Address:** `[IP-ADDRESS-OF-GOROUTER]`
        * **State:** `enabled`
        * **Health Monitors:** `Node Default`
-    1. Create the desired number of `diegobrain` nodes, one for each Diego Brain
+    3. Create the desired number of `diegobrain` nodes, one for each Diego Brain
        in your <%= vars.app_runtime_abbr %> deployment, and give it the following parameters:
        * **Name:** `diegobrain-#`
        * **Address:** `[IP-ADDRESS-OF-DIEGOBRAIN]`
        * **State:** `enabled`
        * **Health Monitors:** `Node Default`
-    1. Create the desired number of `tcprouter` nodes, one for each TCP Router
+    4. Create the desired number of `tcprouter` nodes, one for each TCP Router
        in your <%= vars.app_runtime_abbr %> deployment, and give it the following parameters:
        * **Name:** `tcprouter-#`
        * **Address:** `[IP-ADDRESS-OF-TCPROUTER]`
        * **State:** `enabled`
        * **Health Monitors:** `Node Default`
 
-1. Create three member pools:
+7. Create three member pools:
     1. Go to **Local Traffic** and click **Pools**.
-    1. Create a `gorouter` pool and give it the following parameters:
+    2. Create a `gorouter` pool and give it the following parameters:
        * **Name:** `gorouter_pool`
        * **Health Monitors:** `gorouter_mon`
        * **Load Balancing Method:** `Least Connections`
        * Add all `gorouter-#` nodes.
          * **Service Port:** `80`
-    1. Create a `diegobrain` pool and give it the following parameters:
+    3. Create a `diegobrain` pool and give it the following parameters:
        * **Name:** `diegobrain_pool`
        * **Health Monitors:** `diegobrain_mon`
        * **Load Balancing Method:** `Least Connections`
        * Add all `diegobrain-#` nodes.
          * **Service Port:** `2222`
-    1. Create a `tcprouter` pool and give it the following parameters:
+    4. Create a `tcprouter` pool and give it the following parameters:
        * **Name:** `tcprouter_pool`
        * **Health Monitors:** `tcprouter_mon`
        * **Load Balancing Method:** `Least Connections`
        * Add all `tcprouter-#` nodes.
          * **Service Port:** `*/0`
 
-1. Create an SSL client profile.
+8. Create an SSL client profile.
     1. Go to Local **Traffic**, then **Profiles**, then **SSL**, and click **Client**.
     2. Create an SSL client profile and give it the following parameters:
        * **Name:** `pcf-ssl-client-certs-profile`
@@ -117,9 +117,9 @@ This configuration terminates client SSL at the F5 and forward standard HTTP tra
            - **Key:** `pcf-pas-key`
            <p class='note'><strong>Note:</strong> Your deployment may require additional root or intermediate certificates. You can select them here. Additionally, you can also enter passphrases for certificates.</p>
 
-1. Create four LTM virtual servers. One is required, while three are optional.
+9. Create four LTM virtual servers. One is required, while three are optional.
     1. Go to **Local Traffic**, click **Virtual Servers**, and click **Virtual Server List**.
-    1. (Required) Create a virtual server for HTTPS access to Cloud Foundry API and apps and give it the following parameters:
+    2. (Required) Create a virtual server for HTTPS access to Cloud Foundry API and apps and give it the following parameters:
        * **Name:** `pcf-https`
        * **Type:** `Standard`
        * **Source Address:** `0.0.0.0/0`
@@ -138,7 +138,7 @@ This configuration terminates client SSL at the F5 and forward standard HTTP tra
        <p class='note'><strong>Note:</strong> This must be set in one-arm configurations.</p>
        * **Default Pool:** `gorouter_pool`
        * **iRules:** `cf-xforward-for` and `cf-xforward-proto-https`
-    1. (Optional) Create a virtual server for HTTP access to apps and give it the following parameters:
+    3. (Optional) Create a virtual server for HTTP access to apps and give it the following parameters:
        * **Name:** `pcf-http`
        * **Type:** `Standard`
        * **Source Address:** `0.0.0.0/0`
@@ -157,7 +157,7 @@ This configuration terminates client SSL at the F5 and forward standard HTTP tra
        <p class='note'><strong>Note:</strong> This must be set in one-arm configurations.</p>
        * **Default Pool:** `gorouter_pool`
        * **iRules:** `cf-xforward-for` and `cf-xforward-proto-http`
-    1. (Optional) Create a virtual server for `sshproxy`. This virtual server allows developers to SSH into Diego containers. Give it the following parameters:
+    4. (Optional) Create a virtual server for `sshproxy`. This virtual server allows developers to SSH into Diego containers. Give it the following parameters:
        * **Name:** `pcf-sshproxy`
        * **Type:** `Standard`
        * **Source Address:** `0.0.0.0/0`
@@ -174,7 +174,7 @@ This configuration terminates client SSL at the F5 and forward standard HTTP tra
        * **Source Address Translation:** `Auto Map`
        <p class='note'><strong>Note:</strong> This must be set in one-arm configurations.</p>
        * **Default Pool:** `diegobrain_pool`
-    1. (Optional) Create a virtual server for `tcprouter`.
+    5. (Optional) Create a virtual server for `tcprouter`.
        This virtual server allows access to the TCP app.
        Give it the following parameters:
        * **Name:** `pcf-tcprouter`
