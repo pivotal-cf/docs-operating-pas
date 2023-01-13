@@ -767,55 +767,6 @@ These sections describe Diego Cell metrics.
 
 These sections describe Diego Locket metrics.
 
-### <a id="ActiveLocks"></a> Active Locks
-
-<table>
-  <tr><th colspan="2" style="text-align: center;"><br>locket.ActiveLocks<br><br></th></tr>
-    <tr>
-      <th width="25%">Description</th>
-        <td>
-          Total count of how many locks the system components are holding.<br><br>
-          <strong>Use:</strong> If the ActiveLocks count is not equal to the expected value, there is likely a problem with Diego.<br><br>
-          <strong>Origin:</strong> Firehose<br>
-          <strong>Type:</strong> Gauge<br>
-          <strong>Frequency:</strong> 60 s
-        </td>
-    </tr>
-    <tr>
-      <th>Recommended measurement</th>
-        <td>Maximum over the last 5 minutes</td>
-    </tr>
-    <tr>
-      <th>Recommended alert thresholds</th>
-        <td>
-          <strong>Yellow warning:</strong> <em>N/A</em><br>
-          <strong>Red critical:</strong> &ne; 5
-        </td>
-    </tr>
-    <tr>
-      <th>Recommended response</th>
-        <td>
-          <ol>
-            <li>Run <code>monit status</code> to inspect for failing processes.</li>
-            <li>If there are no failing processes, then review the logs for the components using the Locket service: BBS, Auctioneer, TPS Watcher, Routing API, and Clock Global (Cloud Controller clock). Look for indications that only one of each component is active at a time.</li>
-            <li>Focus triage on the BBS first:
-              <ul>
-                <li>A healthy BBS shows obvious activity around starting or claiming LRPs.</li>
-                <li>An unhealthy BBS leads to the Auctioneer showing minimal or no activity. The BBS sends work to the Auctioneer.</li>
-		            <li>Reference the BBS-level Locket metric <code>bbs.LockHeld</code>. A value of 0 indicates Locket issues at the BBS level. For more information, see <a href="#BBSActiveLocks">Locks Held by BBS</a>.</li>
-              </ul>
-            <li>If the BBS appears healthy, then check the Auctioneer to ensure it is processing auction payloads.</li>
-              <ul>
-                <li>Recent logs for Auctioneer should show all but one of its instances are currently waiting on locks, and the active Auctioneer should show a record of when it last attempted to execute work. This attempt should correspond to app development activity, such as <code>cf push</code>.</li>
-                <li>Reference the Auctioneer-level Locket metric <code>auctioneer.LockHeld</code>. A value of 0 indicates Locket issues at the Auctioneer level. For more information, see <a href="#AuctioneerActiveLocks">Locks Held by Auctioneer</a>.</li>
-              </ul>
-            <li>The TPS Watcher is primarily active when app instances crash. Therefore, if the TPS Watcher is suspected, review the most recent logs.</li>
-            <li>If you are unable to resolve on-going excessive active locks, pull logs from the Diego BBS and Auctioneer VMs, which includes the Locket service component logs, and contact Support.</li>
-          </ol>
-        </td>
-    </tr>
-</table>
-
 ### <a id="BBSActiveLocks"></a> Locks Held by BBS
 
 <table>
