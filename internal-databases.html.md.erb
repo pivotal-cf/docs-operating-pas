@@ -49,7 +49,7 @@ Before scaling down your MySQL cluster, you should ensure the cluster is healthy
 	1. Record the IP addresses for all instances of the **MySQL Server** job.
 
 1. To retrieve Cloud Controller database credentials from CredHub using the Ops Manager API:
-	1. Follow the procedures in [Using the Ops Manager API](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/customizing/ops-man-api.html) to authenticate and access the Ops Manager API.
+	1. Follow the procedures in [Using the Ops Manager API](https://docs.pivotal.io/platform/<%= vars.current_major_version %>/customizing/ops-man-api.html) to authenticate and access the Ops Manager API.
 	1. Use the `GET /api/v0/deployed/products` endpoint to retrieve a list of deployed products by running:
 	  
 	  	```
@@ -72,7 +72,7 @@ Before scaling down your MySQL cluster, you should ensure the cluster is healthy
 	    * `UAA-ACCESS-TOKEN` is the is the access token you recorded earlier.
 	1. Record the Cloud Controller database `username` and `password` from the response to the above request.
 
-1. SSH into the Ops Manager VM. For instructions specific to your IaaS, see the [SSH into Ops Manager](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/customizing/trouble-advanced.html#ssh) section of the _Advanced Troubleshooting with the BOSH CLI_ topic.
+1. SSH into the Ops Manager VM. For instructions specific to your IaaS, see the [SSH into Ops Manager](https://docs.pivotal.io/platform/<%= vars.current_major_version %>/customizing/trouble-advanced.html#ssh) section of the _Advanced Troubleshooting with the BOSH CLI_ topic.
 
 1. For each of the MySQL server IP addresses recorded above:
 	1. From the Ops Manager VM, query the new organization by running:

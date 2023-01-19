@@ -68,7 +68,7 @@ To scale down your deployment:
 
 If you scale down or delete a job that uses persistent disk, <%= vars.app_runtime_abbr %> marks the disk as orphaned. Orphaned disks are not attached to any job, and <%= vars.app_runtime_abbr %> deletes them after five days.
 
-Use the BOSH CLI to list and recover orphaned disks. Follow the instructions in [Advanced Troubleshooting with the BOSH CLI](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/customizing/trouble-advanced.html) to log in to the BOSH Director, and then follow the procedures in [Orphaned Disks](http://bosh.io/docs/persistent-disks.html#orphaned-disks) in the BOSH documentation.
+Use the BOSH CLI to list and recover orphaned disks. Follow the instructions in [Advanced Troubleshooting with the BOSH CLI](https://docs.pivotal.io/platform/<%= vars.current_major_version %>/customizing/trouble-advanced.html) to log in to the BOSH Director, and then follow the procedures in [Orphaned Disks](http://bosh.io/docs/persistent-disks.html#orphaned-disks) in the BOSH documentation.
 
 
 ## <a id="deployscenarios"></a> Scaling Recommendations for Specific Deployment Configurations
