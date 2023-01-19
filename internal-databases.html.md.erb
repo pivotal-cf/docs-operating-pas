@@ -3,11 +3,11 @@ title: Managing Internal Databases
 owner: MySQL
 ---
 
-This topic describes two procedures for managing the internal MySQL databases used by Pivotal Application Service (PAS) system components: scaling down your MySQL cluster, and migrating the cluster to a database stack that uses TLS encryption. It also provides example sizing data from two environments that have significant load on their MySQL clusters. 
+This topic describes two procedures for managing the internal MySQL databases used by Pivotal Application Service (PAS) system components: scaling down your MySQL cluster, and migrating the cluster to a database stack that uses TLS encryption. It also provides example sizing data from two environments that have significant load on their MySQL clusters.
 
-<p class="note"><strong>Note:</strong> The procedures do not apply to databases configured as external in the <strong>Databases</strong> pane of the PAS tile.</p>
+<p class="note"><strong>Note:</strong> The procedures do not apply to databases configured as external in the <strong>Databases</strong> pane of the <%= vars.app_runtime_abbr %> tile.</p>
 
-PAS components that use system databases include the Cloud Controller, Diego Brain, Gorouter, and the User Authorization and Authentication (UAA) server. For more information, see [PAS Components](../concepts/architecture/index.html).
+<%= vars.app_runtime_abbr %> components that use system databases include the Cloud Controller, Diego Brain, Gorouter, and the User Authorization and Authentication (UAA) server. For more information, see [<%= vars.app_runtime_abbr %> Components](../concepts/architecture/index.html).
 
 
 ## <a id='scale-down'></a> Scale Down Your MySQL Cluster
@@ -21,37 +21,37 @@ By default, internal MySQL deploys as a single node. To take advantage of the hi
 Before scaling down your MySQL cluster, you should ensure the cluster is healthy. To check the health of your cluster:
 
 1. Using the Cloud Foundry Command Line Interface (cf CLI), target the API endpoint of your <%= vars.platform_name %> deployment by running:
-	
+
 	```
 	cf api api.YOUR-SYSTEM-DOMAIN
 	```
-	Where `YOUR-SYSTEM-DOMAIN` is the system domain you configured in the **Domains** pane of the PAS tile.
+	Where `YOUR-SYSTEM-DOMAIN` is the system domain you configured in the **Domains** pane of the <%= vars.app_runtime_abbr %> tile.
 
 1. To obtain your User Account and Authentication (UAA) Administrator user credentials:
-	1. Select the **Credentials** tab in the PAS tile.
+	1. Select the **Credentials** tab in the <%= vars.app_runtime_abbr %> tile.
 	1. Under **UAA**, locate the **Admin Credentials**.
 	1. Click **Link to Credential**.
 
 1. Log in to the API endpoint of your <%= vars.platform_name %> deployment by running:
-	
+
 	```
 	cf login -u admin
 	```
 
 1. Create a test organization to verify the database across all nodes by running:
-	
+
 	```
 	cf create-org data-integrity-test-organization
 	```
 
 1. To obtain the IP addresses of your MySQL server:
-	1. Select the **Status** tab in the PAS tile.
+	1. Select the **Status** tab in the <%= vars.app_runtime_abbr %> tile.
 	1. Record the IP addresses for all instances of the **MySQL Server** job.
 
 1. To retrieve Cloud Controller database credentials from CredHub using the Ops Manager API:
 	1. Follow the procedures in [Using the Ops Manager API](https://docs.pivotal.io/platform/<%= vars.current_major_version %>/customizing/ops-man-api.html) to authenticate and access the Ops Manager API.
 	1. Use the `GET /api/v0/deployed/products` endpoint to retrieve a list of deployed products by running:
-	  
+
 	  	```
 	  	curl "https://OPS-MAN-FQDN/api/v0/deployed/products" \
 	  	  -X GET \
@@ -76,7 +76,7 @@ Before scaling down your MySQL cluster, you should ensure the cluster is healthy
 
 1. For each of the MySQL server IP addresses recorded above:
 	1. From the Ops Manager VM, query the new organization by running:
-		
+
 		```
 		mysql -h YOUR-IP -u YOUR-IDENTITY -D ccdb -p -e "select created_at, name from organizations where name = 'data-integrity-test-organization'"
 		```
@@ -97,7 +97,7 @@ Before scaling down your MySQL cluster, you should ensure the cluster is healthy
 
 ### <a id="scale-down"></a> Set Server Instance Count to 1
 
-1. From the <%= vars.platform_name %> **Installation Dashboard**, click the PAS tile.
+1. From the <%= vars.platform_name %> **Installation Dashboard**, click the <%= vars.app_runtime_abbr %> tile.
 
 1. Select **Resource Config**.
 
@@ -106,7 +106,7 @@ Before scaling down your MySQL cluster, you should ensure the cluster is healthy
 1. Click **Save**, then **Review Pending Changes** and **Apply Changes** to apply the changes.
 
 1. Delete your test organization by running:
-	
+
 	```
 	cf delete-org data-integrity-test-organization
 	```
@@ -114,16 +114,16 @@ Before scaling down your MySQL cluster, you should ensure the cluster is healthy
 
 ## <a id='sizing-examples'></a> MySQL Cluster Sizing Example
 
-This section describes a sizing example for internal MySQL in PAS. Use this data as guidance to ensure your MySQL clusters are scaled to handle the number of app instances running on your deployment. 
+This section describes a sizing example for internal MySQL in PAS. Use this data as guidance to ensure your MySQL clusters are scaled to handle the number of app instances running on your deployment.
 
 ### <a id="diego"></a> Example: Diego Test Environment
 
-The information in this section comes from an environment used by Diego to test the MySQL cluster with a high load similar to one generated large deployment. 
+The information in this section comes from an environment used by Diego to test the MySQL cluster with a high load similar to one generated large deployment.
 
 * **IAAS**: GCP
 * **App Instances**: 250,000
 * **Average SQL Queries Per Minute**: ~5,100,000
-* **Average IOPS**: 
+* **Average IOPS**:
 	* **Reads**: 3.63
 	* **Writes**: 363.98
 
