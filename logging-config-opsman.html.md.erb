@@ -108,7 +108,7 @@ More API parameters are available to customize retrieved app logs. For more info
 ## <a id='syslog-forward'></a> Enable Syslog Forwarding
 
 <%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
-<%= partial "/pcf/core/#{vars.current_major_version.sub('.', '-')}/system_logging" %>
+<%= partial "/pcf/core/#{vars.current_major_version}/system_logging" %>
 
 
 ## <a id='container-metrics'></a> Include Container Metrics in Syslog Drains
@@ -199,7 +199,7 @@ For example, the first part of an app traffic log line looks like: `{"timestamp"
 
 Each log message includes:
 
-* A timestamp, either in RFC3339 format or in epoch format. The format depends upon the configuration of the **Timestamp format for component logs** in the **System Logging** pane of the <%= vars.app_runtime_abbr %> tile 
+* A timestamp, either in RFC3339 format or in epoch format. The format depends upon the configuration of the **Timestamp format for component logs** in the **System Logging** pane of the <%= vars.app_runtime_abbr %> tile
 
 * The GUID for the source or destination app that sent or was designated to receive the packet
 
