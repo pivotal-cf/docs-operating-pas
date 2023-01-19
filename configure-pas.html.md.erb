@@ -10,7 +10,7 @@ This topic describes how to configure <%= vars.app_runtime_first %> as part of d
 
 Before beginning this procedure, you must:
 
-* Ensure that you have successfully completed the steps to prepare your environment for <%= vars.platform_name %> and install and configure the BOSH Director. For more information, see the [<%= vars.ops_manager_full %> configuration topic for your IaaS](https://docs.pivotal.io/platform/ops-manager/<%= vars.current_major_version.sub('.', '-') %>/index.html).
+* Ensure that you have successfully completed the steps to prepare your environment for <%= vars.platform_name %> and install and configure the BOSH Director. For more information, see the [<%= vars.ops_manager_full %> configuration topic for your IaaS](https://docs.pivotal.io/platform/ops-manager/<%= vars.current_major_version %>/index.html).
 
 * If you plan to install the <%= vars.platform_name %> IPsec add-on, you must do so before installing any other tiles. <%= vars.company_name %> recommends installing IPsec immediately after <%= vars.ops_manager %> and before installing the <%= vars.app_runtime_abbr %> Runtime tile. For more information, see [Installing the IPsec Add-On for <%= vars.platform_name %>](http://docs.pivotal.io/addon-ipsec/installing.html).
 
@@ -29,7 +29,7 @@ To add the <%= vars.app_runtime_abbr %> tile to your <%= vars.ops_manager %> Ins
 
 1. Navigate to the <%= vars.ops_manager %> Installation Dashboard.
 
-1. Click **Import a Product** to add your tile to <%= vars.ops_manager %>. For more information, see [Adding and Deleting Products](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/customizing/add-delete.html).
+1. Click **Import a Product** to add your tile to <%= vars.ops_manager %>. For more information, see [Adding and Deleting Products](https://docs.pivotal.io/platform/<%= vars.current_major_version %>/customizing/add-delete.html).
 
 1. Click the **<%= vars.app_runtime_full %>** tile in the Installation Dashboard.
 
@@ -194,7 +194,7 @@ To configure the **CredHub** pane:
 1. (Optional) To configure CredHub to use an HSM, configure these fields:
     * **HSM provider partition:** Enter the name of the HSM provider partition.
     * **HSM provider partition password:** Enter a password to use to access the HSM provider partition.
-    * **HSM provider client certificate:** Enter the client certificate for the HSM. For more information, see [Create and Register HSM Clients](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/customizing/hsm-config.html#create-register-hsm) in _Preparing CredHub HSMs for Configuration_.
+    * **HSM provider client certificate:** Enter the client certificate for the HSM. For more information, see [Create and Register HSM Clients](https://docs.pivotal.io/platform/<%= vars.current_major_version %>/customizing/hsm-config.html#create-register-hsm) in _Preparing CredHub HSMs for Configuration_.
     * Under **HSM provider encryption keys**, specify one or more keys to use for encrypting and decrypting the values stored in the HSM provider. For each key, configure these fields:
         * **Name:** Enter the name of the encryption key.
         * **Primary:** This checkbox is used for marking the key you specified above as the primary encryption key. You must mark one key as primary. Do not mark more than one key as primary.
@@ -224,7 +224,7 @@ To configure the **CredHub** pane:
 
 In the **Databases** pane, you can configure <%= vars.app_runtime_abbr %> to use an internal MySQL database provided with <%= vars.platform_name %>, or you can configure an external database provider for the databases required by <%= vars.app_runtime_abbr %>.
 
-<p class="note"><strong>Note:</strong> If you are performing an upgrade, do not modify your existing internal database configuration, or you may lose data. You must migrate your existing data first before changing the configuration. For additional upgrade information, see <a href="https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/customizing/upgrading-pcf.html">Upgrading <%= vars.platform_name %></a>.</p>
+<p class="note"><strong>Note:</strong> If you are performing an upgrade, do not modify your existing internal database configuration, or you may lose data. You must migrate your existing data first before changing the configuration. For additional upgrade information, see <a href="https://docs.pivotal.io/platform/<%= vars.current_major_version %>/customizing/upgrading-pcf.html">Upgrading <%= vars.platform_name %></a>.</p>
 
 ### <a id='internal-db'></a> Internal Database Configuration
 
