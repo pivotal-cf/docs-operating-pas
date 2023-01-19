@@ -1,16 +1,14 @@
 ---
-title: General Data Protection Regulation and Pivotal Application Service
+title: General Data Protection Regulation and TAS for VMs
 owner: Legal
 ---
-
-<% current_page.data.title = "General Data Protection Regulation and " + vars.app_runtime_full %>
 
 This topic provides an overview of the General Data Protection Regulation (GDPR) and where <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) may store personal data.
 
 
 ## <a id='overview'></a> Overview
 
-GDPR came into effect on May 25, 2018 and impacts any company processing the data of EU citizens or residents, even if the company is not EU-based. The GDPR sets forth how companies should handle privacy issues, securely store data, and respond to security breaches. 
+GDPR came into effect on May 25, 2018 and impacts any company processing the data of EU citizens or residents, even if the company is not EU-based. The GDPR sets forth how companies should handle privacy issues, securely store data, and respond to security breaches.
 
 
 ## <a id='personal-data'></a> Understand Personal Data
@@ -21,11 +19,11 @@ Article 4, Section 1 of the GDPR defines personal data as follows:
 
 <blockquote>
 'personal data' means any information relating to an identified or identifiable natural person ('data subject'); an identifiable natural person is one who can be identified, directly or indirectly, in particular by reference to an identifier such as a name, an identification number, location data, an online identifier or to one or more factors specific to the physical, physiological, genetic, mental, economic, cultural or social identity of that natural person;
-</blockquote> 
+</blockquote>
 
 For more information, see the GDPR [text](http://www.privacy-regulation.eu/en/article-4-definitions-GDPR.htm).
 
-Personal data can be collected, stored, and processed in a <%= vars.app_runtime_abbr %> deployment. <%= vars.company_name %> has performed a review of <%= vars.app_runtime_abbr %> components and determined that personal data may reside in the following areas: 
+Personal data can be collected, stored, and processed in a <%= vars.app_runtime_abbr %> deployment. <%= vars.company_name %> has performed a review of <%= vars.app_runtime_abbr %> components and determined that personal data may reside in the following areas:
 
 + [User Account and Authentication (UAA)](#uaa)
 + [Cloud Foundry API](#capi)
@@ -342,7 +340,7 @@ To disable logging of client IP addresses:
 1. Click **Networking**.
 
 1. Under **Logging of client IPs in the Gorouter**, select one of the two options:
-	* If the source IP address exposed by your load balancer is its own IP address, select **Disable logging of X-Forwarded-For header only**. 
+	* If the source IP address exposed by your load balancer is its own IP address, select **Disable logging of X-Forwarded-For header only**.
 	* If the source IP address exposed by your load balancer belongs to the downstream client, select **Disable logging of both source IP and X-Forwarded-For header**.
 
 1. Click **Save**.
