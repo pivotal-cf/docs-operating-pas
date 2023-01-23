@@ -192,11 +192,10 @@ recommends selecting **External S3-compatible filestore**. For more information 
 <%= vars.platform_name %> deployments on OpenStack, see [OpenStack Reference Architecture]
 (https://docs.pivotal.io/ops-manager/2-10/refarch/openstack/openstack_ref_arch.html).
 
-For more factors to consider when selecting file storage, see [Configure File Storage]
-(configuring.html#file-storage) in _Configuring <%= vars.app_runtime_abbr %> for Upgrades_.
+For more factors to consider when selecting file storage, see [Configure File Storage](configuring.html#file-storage) in _Configuring <%= vars.app_runtime_abbr %> for Upgrades_.
 
 <%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
-<%= partial(:"/pcf/core/#{vars.current_major_version}/filestore_s3_config", :locals => { :aws => false }) %>
+<%= partial "/pcf/core/#{vars.current_major_version}/filestore_s3_config", :locals => { :aws => false } %>
 
 
 ## <a id="vsphere"></a> vSphere
@@ -206,8 +205,7 @@ recommends selecting **External S3-compatible filestore** and using an external 
 For more information about production-level <%= vars.platform_name %> deployments on vSphere,
 see [vSphere Reference Architecture](https://docs.pivotal.io/ops-manager/2-10/refarch/vsphere/vsphere_ref_arch.html).
 
-For more factors to consider when selecting file storage, see [Configure File Storage]
-(configuring.html#file-storage) in _Configuring <%= vars.app_runtime_abbr %> for Upgrades_.
+For more factors to consider when selecting file storage, see [Configure File Storage](configuring.html#file-storage) in _Configuring <%= vars.app_runtime_abbr %> for Upgrades_.
 
 <%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
-<%= partial(:"/pcf/core/#{vars.current_major_version}/filestore_s3_config", :locals => { :aws => false }) %>
+<%= partial "/pcf/core/#{vars.current_major_version}/filestore_s3_config", :locals => { :aws => false } %>
