@@ -40,13 +40,12 @@ You can also configure Fog blobstores to use AWS IAM instance profiles.
 For instructions, see [Fog with AWS IAM Instance Profiles](#fog-aws-iam) below.
 
 For more information about production-level
-<%= vars.platform_name %> deployments on AWS, see [AWS Reference Architecture]
-(https://docs.pivotal.io/ops-manager/2-10/refarch/aws/aws_ref_arch.html).
+<%= vars.platform_name %> deployments on AWS, see [AWS Reference Architecture](https://docs.pivotal.io/ops-manager/2-10/refarch/aws/aws_ref_arch.html).
 
 ### <a id="aws-s3"></a>External S3-Compatible Filestore
 
 <%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
-<%= partial(:"/pcf/core/#{vars.current_major_version}/filestore_s3_config", :locals => { :aws => true }) %>
+<%= partial "/pcf/core/#{vars.current_major_version}/filestore_s3_config", :locals => { :aws => true } %>
 
 ### <a id="fog-aws-iam"></a> Fog with AWS IAM Instance Profiles
 
