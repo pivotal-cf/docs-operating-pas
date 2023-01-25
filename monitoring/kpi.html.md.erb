@@ -1403,41 +1403,6 @@ These sections describe system metrics, or BOSH metrics.
     </tr>
 </table>
 
-### <a id="mem.percent"></a> VM Memory Used
-
-<table>
-  <tr><th colspan="2" style="text-align: center;"><br>system.mem.percent<br>system_mem_percent<br><br></th></tr>
-    <tr>
-      <th width="25%">Description</th>
-        <td>
-          System Memory — Percentage of memory used on the VM<br><br>
-          <strong>Use:</strong> Set an alert and investigate if the free RAM is low over an extended period.<br><br>
-          <strong>Origin:</strong> Firehose<br>
-          <strong>Type:</strong> Gauge (%)<br>
-          <strong>Frequency:</strong> 60 s<br>
-        </td>
-    </tr>
-    <tr>
-      <th>Recommended measurement</th>
-        <td>Average over the last 10 minutes</td>
-    </tr>
-    <tr>
-      <th>Recommended alert thresholds</th>
-        <td>
-          <strong><em>Doppler VMs Only</em></strong><br>
-          <strong>&nbsp;&nbsp;&nbsp;&nbsp;Yellow warning:</strong> &ge; 90%<br>
-          <strong>&nbsp;&nbsp;&nbsp;&nbsp;Red critical:</strong> &ge; 95%<br>
-          <hr>
-          <strong><em>Other VMs</em></strong><br>
-          <strong>&nbsp;&nbsp;&nbsp;&nbsp;Yellow warning:</strong> &ge; 80%<br>
-          <strong>&nbsp;&nbsp;&nbsp;&nbsp;Red critical:</strong> &ge; 90%
-        </td>
-    </tr>
-    <tr>
-      <th>Recommended response</th>
-        <td>The response depends on the job the metric is associated with. If appropriate, scale affected jobs out and monitor for improvement.</td>
-    </tr>
-</table>
 
 ### <a id="disk.system.percent"></a> VM Disk Used
 
@@ -1540,43 +1505,6 @@ These sections describe system metrics, or BOSH metrics.
           <ol>
             <li>Run <code>bosh vms --details</code> to view jobs on affected deployments.</li>
             <li>Determine cause of the data consumption, and, if appropriate, increase disk space or scale out affected jobs.</li>
-          </ol>
-        </td>
-    </tr>
-</table>
-
-### <a id="cpu.user"></a> VM CPU Utilization
-
-<table>
-  <tr><th colspan="2" style="text-align: center;"><br>system.cpu.user<br>system_cpu_user<br><br></th></tr>
-    <tr>
-      <th width="25%">Description</th>
-        <td>
-          CPU utilization — The percentage of CPU spent in user processes<br><br>
-          <strong>Use:</strong> Set an alert and investigate further if the CPU utilization is too high for a job.<br><br>
-          For monitoring Gorouter performance, CPU utilization of the Gorouter VM is the key capacity scaling indicator <%= vars.company_name %> recommends. For more information, see <a href="./key-cap-scaling.html#system.cpu.user">Router VM CPU Utilization</a> in <em>Key Capacity Scaling Indicators</em>.<br><br>
-          <strong>Origin:</strong> Firehose<br>
-          <strong>Type:</strong> Gauge (%)<br>
-          <strong>Frequency:</strong> 60 s<br>
-        </td>
-    </tr>
-    <tr>
-      <th>Recommended measurement</th>
-        <td>Average over the last 5 minutes</td>
-    </tr>
-    <tr>
-      <th>Recommended alert thresholds</th>
-        <td>
-          <strong>Yellow warning:</strong> &ge; 85%<br>
-          <strong>Red critical:</strong> &ge; 95%
-        </td>
-    </tr>
-    <tr>
-      <th>Recommended response</th>
-        <td>
-          <ol>
-            <li>Investigate the cause of the spike.</li>
-            <li>If the cause is a normal workload increase, then scale up the affected jobs.</li>
           </ol>
         </td>
     </tr>
