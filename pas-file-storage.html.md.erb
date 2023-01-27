@@ -20,7 +20,7 @@ factors to consider when selecting file storage, see [Configure File Storage](co
 ## <a id="internal"></a> Internal File Storage
 
 <%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
-<%= partial "/pcf/core/2-13/filestore_internal" %>
+<%= partial "/pcf/core/#{vars.current_major_version}/filestore_internal" %>
 
 
 ## <a id="aws"></a> AWS
@@ -44,7 +44,7 @@ For more information about production-level
 ### <a id="aws-s3"></a>External S3-Compatible Filestore
 
 <%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
-<%= partial "/pcf/core/2-13/filestore_s3_config", :locals => { :aws => true } %>
+<%= partial "/pcf/core/#{vars.current_major_version}/filestore_s3_config", :locals => { :aws => true } %>
 
 ### <a id="fog-aws-iam"></a> Fog with AWS IAM Instance Profiles
 
@@ -156,7 +156,7 @@ This section describes how to configure file storage for GCP if you installed <%
 manually.
 
 <%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
-<%= partial "/pcf/core/2-13/filestore_gcp_config" %>
+<%= partial "/pcf/core/#{vars.current_major_version}/filestore_gcp_config" %>
 
 ### <a id="gcp-terraform"></a> Terraform
 
@@ -164,7 +164,7 @@ This section describes how to configure file storage for GCP if you installed <%
 with Terraform.
 
 <%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
-<%= partial "/pcf/core/2-13/filestore_gcp_config_terraform" %>
+<%= partial "/pcf/core/#{vars.current_major_version}/filestore_gcp_config_terraform" %>
 
 
 ## <a id="azure"></a> Azure
@@ -177,8 +177,8 @@ recommends selecting **External Azure Storage**. For more information about prod
 
 For more factors to consider when selecting file storage, see [Configure File Storage](configuring.html#file-storage) in _Configuring <%= vars.app_runtime_abbr %> for Upgrades_.
 
-<%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
-<%= partial "/pcf/core/2-13/filestore_azure_config" %>
+<%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
+<%= partial "/pcf/core/#{vars.current_major_version}/filestore_azure_config" %>
 
 
 ## <a id="openstack"></a> OpenStack
@@ -190,7 +190,7 @@ recommends selecting **External S3-compatible filestore**. For more information 
 For more factors to consider when selecting file storage, see [Configure File Storage](configuring.html#file-storage) in _Configuring <%= vars.app_runtime_abbr %> for Upgrades_.
 
 <%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
-<%= partial "/pcf/core/2-13/filestore_s3_config", :locals => { :aws => false } %>
+<%= partial "/pcf/core/#{vars.current_major_version}/filestore_s3_config", :locals => { :aws => false } %>
 
 
 ## <a id="vsphere"></a> vSphere
@@ -203,4 +203,4 @@ see [vSphere Reference Architecture](https://docs.pivotal.io/ops-manager/2-10/re
 For more factors to consider when selecting file storage, see [Configure File Storage](configuring.html#file-storage) in _Configuring <%= vars.app_runtime_abbr %> for Upgrades_.
 
 <%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
-<%= partial "/pcf/core/2-13/filestore_s3_config", :locals => { :aws => false } %>
+<%= partial "/pcf/core/#{vars.current_major_version}/filestore_s3_config", :locals => { :aws => false } %>
