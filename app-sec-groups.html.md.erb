@@ -109,13 +109,13 @@ Applying the default ASG to the `system` org provides network access to <%= vars
 1. Bind the default ASG to the staging set in the `system` org by running:
 
     ```
-    cf bind-staging-security-group default_security_group system
+    cf bind-security-group default_security_group system
     ```
 
 1. Bind the default ASG to the running set in the `system` org by running:
 
     ```
-    cf bind-running-security-group default_security_group system
+    cf bind-security-group default_security_group system --lifecycle staging
     ```
 
 For more information about staging and running sets, see the [ASG Sets](../concepts/asg.html#asg-sets) section of the _App Security Groups_ topic.
