@@ -139,7 +139,7 @@ appropriate ASGs after the <%= vars.app_runtime_abbr %> deployment completes:
 1. Click **Save**.
 
 For more information about ASGs, see [App Security Groups](../concepts/asg.html). For more information about setting
-ASGs, see [Restricting App Access to Internal <%= vars.app_runtime_abbr %> Components](../opsguide/app-sec-groups.html).
+ASGs, see [Restricting App Access to Internal <%= vars.app_runtime_abbr %> Components](app-sec-groups.html).
 
 ## <a id='auth-config'></a> Configure Authentication and Enterprise SSO
 
@@ -191,7 +191,7 @@ To configure the **CredHub** pane:
         * **Name:** Enter a key name that already exists on your HSM or a new key name. For each new key name, CredHub generates a key in **HSM provider partition** that you configure below.
         * **Key:** Enter a placeholder value under **Key**. CredHub does not use this key for encryption. However, you cannot leave the **Key** field blank.
         * **Primary:** This checkbox is used for marking the key you specified above as the primary encryption key. You must mark one key as primary. Do not mark more than one key as primary.
-    <p class="note"><strong>Note:</strong> For information about using additional keys for key rotation, see <a href="../opsguide/credential-rotation.html">Rotating Runtime CredHub Encryption Keys</a>.</p>
+    <p class="note"><strong>Note:</strong> For information about using additional keys for key rotation, see <a href="credential-rotation.html">Rotating Runtime CredHub Encryption Keys</a>.</p>
 
 1. (Optional) To configure CredHub to use an HSM, configure these fields:
     * **HSM provider partition:** Enter the name of the HSM provider partition.
@@ -206,7 +206,7 @@ To configure the **CredHub** pane:
         * **Partition serial number:** Enter the serial number of the HSM partition.
         * **HSM certificate:** Enter the certificate for the HSM server. The HSM presents this certificate to CredHub to establish a two-way TLS connection.
 
-1. If your deployment uses any <%= vars.platform_name %> services that support storing service instance credentials in CredHub and you want to enable this feature, enable the **Secure service instance credentials** checkbox. For more information about using CredHub for securing service instance credentials, see [Securing Service Instance Credentials with Runtime CredHub](../opsguide/secure-si-creds.html).
+1. If your deployment uses any <%= vars.platform_name %> services that support storing service instance credentials in CredHub and you want to enable this feature, enable the **Secure service instance credentials** checkbox. For more information about using CredHub for securing service instance credentials, see [Securing Service Instance Credentials with Runtime CredHub](secure-si-creds.html).
 
 1. Click **Save**.
 
