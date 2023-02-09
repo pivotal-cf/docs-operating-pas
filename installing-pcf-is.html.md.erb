@@ -78,13 +78,13 @@ To configure the **App Containers** pane:
 
     For more information, see [Preventing Misrouting](../concepts/http-routing.html#consistency) in _HTTP Routing_.
 
-1. (Optional) You can configure <%= vars.app_runtime_abbr %> to run app instances in Docker containers by provided a comma-separated list of their IP address ranges in the **Private Docker insecure registry allow list** field. For more information, see [Using Docker Registries](../opsguide/docker-registry.html).
+1. (Optional) You can configure <%= vars.app_runtime_abbr %> to run app instances in Docker containers by provided a comma-separated list of their IP address ranges in the **Private Docker insecure registry allow list** field. For more information, see [Using Docker Registries](../operating/docker-registry.html).
 
-1. Select your preference for **Docker images disk cleanup scheduling on Diego Cell VMs**. If you choose **Clean up disk space once usage fills disk**, enter a value in MB for **Reserved disk space for other jobs**. This is the amount of space the garbage collection algorithm should keep free for other jobs. For more information about the configuration options and how to configure a reserved amount, see [Configuring Diego Cell Disk Cleanup Scheduling](../opsguide/config-cell-cleanup.html).
+1. Select your preference for **Docker images disk cleanup scheduling on Diego Cell VMs**. If you choose **Clean up disk space once usage fills disk**, enter a value in MB for **Reserved disk space for other jobs**. This is the amount of space the garbage collection algorithm should keep free for other jobs. For more information about the configuration options and how to configure a reserved amount, see [Configuring Diego Cell Disk Cleanup Scheduling](../operating/config-cell-cleanup.html).
 
 1. The **Enable containerd delegation** checkbox governs whether or not Garden delegates container create and destroy operations to the containerd tool. By default, this option is enabled and Garden uses containerd. Disable this option by disabling the checkbox. For more information about the containerd tool, see [containerd](https://containerd.io).
 
-1. Under **NFSv3 volume services**, select **Enable** or **Disable**. NFS volume services allow app developers to bind existing NFS volumes to their apps for shared file access. For more information, see [Enabling Volume Services](../opsguide/enable-vol-services.html).
+1. Under **NFSv3 volume services**, select **Enable** or **Disable**. NFS volume services allow app developers to bind existing NFS volumes to their apps for shared file access. For more information, see [Enabling Volume Services](../operating/enable-vol-services.html).
   <p class="note"><strong>Note:</strong> In a fresh install, NFSv3 volume services is enabled by default. In an upgrade, NFSv3 volume services is set to the same setting as it was in the previous deployment.</p>
 
 1. (Optional) To configure LDAP for NFSv3 volume services:
