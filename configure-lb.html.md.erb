@@ -215,14 +215,14 @@ To configure the Gorouter to use GCP load balancers:
 
 1. Navigate to the GCP Console and select **Load balancing**.
 
-    <%= image_tag('gcp/config-lb.png', :alt => "The load balancer table shows three load balancers: pcf-router HTTPS load balancer, pcf-ssh TCP load balancer, and pcf-websockets TCP load balancer. ") %>
+    ![alt-text="The load balancer table shows three load balancers: pcf-router HTTPS load balancer, pcf-ssh TCP load balancer, and pcf-websockets TCP load balancer."](./images/gcp/config-lb.png)
 
     You should see the SSH load balancer, the HTTP(S) load balancer, the TCP WebSockets load balancer, and the TCP router that you created in [Preparing to Deploy Ops Manager on GCP](https://docs.pivotal.io/ops-manager/2-10/gcp/prepare-env-manual.html).
 
 1. Record the name of your SSH load balancer and your TCP WebSockets load balancer, `<%= vars.platform_code %>-wss-logs` and `<%= vars.platform_code %>-ssh-proxy`.
 
 1. Click your HTTP(S) load balancer, `<%= vars.platform_code %>-global-<%= vars.platform_name_lc %>`.
-    <%= image_tag('gcp/pcf-router.png', :alt => "Load balancer details for example pcf-router load balancer.") %>
+    ![alt-text="Load balancer details: pcf-router load balancer is shown here."](./images/gcp/pcf-router.png)
 
 1. Under **Backend services**, record the name of the back end service of the HTTP(S) load balancer, `<%= vars.platform_code %>-http-lb-backend`.
 
