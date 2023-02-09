@@ -38,7 +38,7 @@ Before deploying <%= vars.app_runtime_abbr %> with NSX-T networking, you must ha
 
 The following diagram shows how to deploy an NSX-T machine to run <%= vars.app_runtime_abbr %> across multiple vSphere hardware clusters. NSX-T runs a Tier-0 (T0) gateway and multiple Tier-1 (T1) gateways, each connecting to a network within <%= vars.platform_name %>. Each vSphere hardware column cluster corresponds to an Availability Zone in <%= vars.platform_name %>:
 
-![NSX-T &amp; <%= vars.app_runtime_abbr %> Overview](nsx-t/nsx-t-refarch.png)
+![NSX-T &amp; <%= vars.app_runtime_abbr %> Overview](./images/nsx-t/nsx-t-refarch.png)
 
 When a developer pushes an app to a new org for the first time, the NSX-T plugin triggers NSX-T to create a new T1 gateway and allocate an address range for the org, on demand.
 
@@ -80,17 +80,17 @@ To configure Network Address Translation (NAT) rules:
       - The externally-specified destination IP address of incoming requests. If your <%= vars.ops_manager %> has a DNS entry (for example, `opsmgr.example.com`), this is its IP address.
       - The <%= vars.ops_manager %> internal network address.
       - Firewall Setting "bypass" - the packet bypasses firewall rules.
-![NSX-T ](nsx-t/nsx-t-dnat-rule.png)
+![NSX-T ](./images/nsx-t/nsx-t-dnat-rule.png)
   1. Add the corresponding source NAT (SNAT) rule with:
       - The externally-specified destination IP address.
       - The <%= vars.ops_manager %> internal network address.
       - Firewall Setting "bypass" - the packet bypasses firewall rules.
-![NSX-T ](nsx-t/nsx-t-snat-rule.png)
+![NSX-T ](./images/nsx-t/nsx-t-snat-rule.png)
   1. Add a rule for source NAT (SNAT) for the infrastructure and deployment networks:
       - The externally-specified destination IP address.
       - The internal network address in CIDR notation.
       - Firewall Setting "bypass" - the packet bypasses firewall rules.
-![NSX-T ](nsx-t/nsx-t-snat-net-rule.png)
+![NSX-T ](./images/nsx-t/nsx-t-snat-net-rule.png)
 
 #### <a id='nsx-t-gateways'></a> Configure Gateways
 
@@ -100,27 +100,33 @@ To configure Tier-1 (T1) gateways:
 1. In the NSX-T Manager UI, navigate to **Networking** > **Tier-1 Gateways**.
   1. Click **ADD TIER-1 GATEWAY**.
   1. Configure the gateway. Include the Edge Cluster as it is required to enable the Load Balancer. The Infrastructure network gateway configuration might look like the following diagram:
-![NSX-T ](nsx-t/nsx-t-t1-gateway.png)
+![NSX-T ](./images/nsx-t/nsx-t-t1-gateway.png)
 
 1. Advertise the routes of the T1 gateways to the T0 gateway, so the T0 gateway can correctly route incoming requests based on their destination IP address:
-  1. Edit your T1 Gateway and navigate to **Route Advertisement**.
-  1. Enable **All Connected Segments & Service Ports**.
-  1. Enable **All LB VIP Routes**. (necessary if Load Balancing service is configured).
-![NSX-T ](nsx-t/nsx-t-route-advertise.png)
+
+    1. Edit your T1 Gateway and navigate to **Route Advertisement**.
+    1. Enable **All Connected Segments & Service Ports**.
+    1. Enable **All LB VIP Routes**. (necessary if Load Balancing service is configured).
+
+        ![NSX-T ](./image/nsx-t/nsx-t-route-advertise.png)
 
 1. Allocate an IP block for <%= vars.app_runtime_abbr %> orgs.
-  1. From the NSX-T Manager, navigate to **Networking** > **IP Address Pools**, click "IP ADDRESS BLOCKS tab and click **ADD IP ADDRESS BLOCK**.
-  1. Enter a name (for example, `<%= vars.app_runtime_abbr %>-container-ip-block`). This IP block name is also used in the **VMware NSX-T** tile in the **NCP** section under **IP Blocks of Container Networks**.
-  1. Enter a description, such as `Subnets are allocated from this pool to each newly-created org`.
-  1. Enter a CIDR to allocate an address block large enough to accommodate all <%= vars.app_runtime_abbr %> apps. A `/14` CIDR is large enough for ~1,000 Orgs with ~250 apps each. If you are planning such a large foundation, see [VMware NSX-T <%= vars.app_runtime_abbr %> limits](https://configmax.vmware.com/guest?vmwareproduct=VMware%20NSX-T&release=NSX-T%20Data%20Center%202.4.0&categories=31-0) in the VMware documentation.
-![NSX-T ](nsx-t/nsx-t-ip-block.png)
+
+    1. From the NSX-T Manager, navigate to **Networking** > **IP Address Pools**, click "IP ADDRESS BLOCKS tab and click **ADD IP ADDRESS BLOCK**.
+    1. Enter a name (for example, `<%= vars.app_runtime_abbr %>-container-ip-block`). This IP block name is also used in the **VMware NSX-T** tile in the **NCP** section under **IP Blocks of Container Networks**.
+    1. Enter a description, such as `Subnets are allocated from this pool to each newly-created org`.
+    1. Enter a CIDR to allocate an address block large enough to accommodate all <%= vars.app_runtime_abbr %> apps. A `/14` CIDR is large enough for ~1,000 Orgs with ~250 apps each. If you are planning such a large foundation, see [VMware NSX-T <%= vars.app_runtime_abbr %> limits](https://configmax.vmware.com/guest?vmwareproduct=VMware%20NSX-T&release=NSX-T%20Data%20Center%202.4.0&categories=31-0) in the VMware documentation.
+
+        ![NSX-T ](./image/nsx-t/nsx-t-ip-block.png)
 
 1. Create an external SNAT IP pool.
-  1. Navigate to **Networking** > **IP Address Pools**, click "IP ADDRESS POOLS tab and click **ADD IP ADDRESS POOL**.
-  1. Enter a name (such as `external-ip-pool`) and a description (such as `IP pool that provides 1 public IP for each <%= vars.app_runtime_abbr %> Org`). Later, you will enter this pool name on the **VMware NSX-T** tile in the **NCP** section under **IP Pools used to provide External (NAT) IP Addresses to Org Networks**.
-  1. Set a subnet of externally routable ip addresses for future NAT ip addresses
-![NSX-T ](nsx-t/nsx-t-external-ip-pool.png)
-![NSX-T ](nsx-t/nsx-t-external-ip-pool-subnet.png)
+
+    1. Navigate to **Networking** > **IP Address Pools**, click "IP ADDRESS POOLS tab and click **ADD IP ADDRESS POOL**.
+    1. Enter a name (such as `external-ip-pool`) and a description (such as `IP pool that provides 1 public IP for each <%= vars.app_runtime_abbr %> Org`). Later, you will enter this pool name on the **VMware NSX-T** tile in the **NCP** section under **IP Pools used to provide External (NAT) IP Addresses to Org Networks**.
+    1. Set a subnet of externally routable IP addresses for future NAT IP addresses.
+
+        ![NSX-T ](./images/nsx-t/nsx-t-external-ip-pool.png)
+        ![NSX-T ](./images/nsx-t/nsx-t-external-ip-pool-subnet.png)
 
 #### <a id='nsx-t-segments'></a> Configure Segments
 
@@ -140,7 +146,7 @@ To configure segments:
           1. Enter a name for the segment
           1. Enter a Gateway to connect to.
           1. Click **SAVE**.
-![NSX-T ](nsx-t/nsx-t-segment.png)
+![NSX-T ](./images/nsx-t/nsx-t-segment.png)
 
 #### <a id='nsx-t-load-balancer'></a> Configure Load Balancer
 
@@ -259,17 +265,17 @@ To enable NSX-T mode in the BOSH Director:
 in the [Step 2: Configure vCenter](https://docs.pivotal.io/platform/ops-manager/vsphere/config.html#vcenter-config) section of _Configuring BOSH Director on vSphere_.
 
 1. Ensure the "Use NSX-T Policy API" option is selected.
-![NSX-T ](nsx-t/nsx-t-bosh-director-policy.png)
+![NSX-T ](./images/nsx-t/nsx-t-bosh-director-policy.png)
 
 ### <a id='external-net'></a> Configure <%= vars.app_runtime_abbr %> for External Container Networking
 
 To configure <%= vars.app_runtime_abbr %> for external container networking:
 
 1. If you have not already done so, download the <%= vars.app_runtime_abbr %> tile from [VMware Tanzu Network](https://network.pivotal.io/products/elastic-runtime) and import it to the **Installation Dashboard**. For instructions, see [Adding and Importing Products](https://docs.pivotal.io/platform/<%= vars.current_major_version %>/customizing/add-delete.html#add-import).
-![<%= vars.ops_manager %> Installation Dashboard with NSX-T tile](nsx-t/nsx-t-install-dash.png)
+![<%= vars.ops_manager %> Installation Dashboard with NSX-T tile](./images/nsx-t/nsx-t-install-dash.png)
 
 1. Configure <%= vars.app_runtime_abbr %>, following the directions in [Configuring <%= vars.app_runtime_abbr %>](./configure-pas.html). When you configure **Networking**, select **External** under **Container networking interface plugin**.<br>
-![NSX-T ](nsx-t/nsx-t-tas-cni.png)
+![NSX-T ](./images/nsx-t/nsx-t-tas-cni.png)
 
 1. Configure <%= vars.app_runtime_abbr %> to add router, diego_brain, and tcp_router instances to the corresponding NSX-T server pools upon deployment.
   1. Open the <%= vars.app_runtime_abbr %> tile > **Resource Config** pane.
@@ -279,38 +285,45 @@ To configure <%= vars.app_runtime_abbr %> for external container networking:
       - diego_brain -> tas-ssh-pool
       - tcp_router -> tas-tcp-pool
   1. Click **Save**
-![NSX-T ](nsx-t/nsx-t-web-server-pool.png)
+![NSX-T ](./images/nsx-t/nsx-t-web-server-pool.png)
 
 ### <a id='nsx-t-tile'></a> Install and Configure the NSX-T Container Plug-In
 
 To install and configure the tile:
 
 1. If you have not already done so, download the VMware NSX-T Container Plug-in for <%= vars.platform_name %> tile from [VMware Tanzu Network](https://network.pivotal.io/products/vmware-nsx-t) and import it to the **Installation Dashboard**. For instructions, see [Adding and Importing Products](https://docs.pivotal.io/platform/<%= vars.current_major_version %>/customizing/add-delete.html#add-import).
-![<%= vars.ops_manager %> Installation Dashboard with NSX-T tile](nsx-t/nsx-t-install-dash.png)
+![<%= vars.ops_manager %> Installation Dashboard with NSX-T tile](./images/nsx-t/nsx-t-install-dash.png)
 
 1. Click the **VMware NSX-T** tile to open its **Settings** tab, and configure the **NSX Manager** pane as follows:
-  - **NSX Manager Address**: The NSX-T Manager host address or IP address.
-  - **Use Client Certificates or Username/Password**: Configure this setting as follows:
-      1. If you are using VMware Workspace ONE Access, formerly called VMware Identity Manager
-      (vIDM), then select **Client Certificate Authentication**.
-      1. Otherwise, select **Basic Authentication with Username and Password** and enter **NSX Manager Admin Username** and **Admin Password** credentials in the fields underneath.
-  - **NSX Manager CA Cert**: Obtain this certificate from NSX-T Manager as follows:
-      1. `ssh` into NSX-T Manager using the admin account that you created when you deployed NSX-T Manager.
-      1. From the NSX-T Manager command line, run `get certificate api` to retrieve the certificate.
-![NSX-T tile config: NSX-T Manager](nsx-t/nsx-t-tile-config-mgr.png)
+
+    - **NSX Manager Address**: The NSX-T Manager host address or IP address.
+    - **Use Client Certificates or Username/Password**: Configure this setting as follows:
+
+        1. If you are using VMware Workspace ONE Access, formerly called VMware Identity Manager
+        (vIDM), then select **Client Certificate Authentication**.
+        1. Otherwise, select **Basic Authentication with Username and Password** and enter **NSX Manager Admin Username** and **Admin Password** credentials in the fields underneath.
+
+    - **NSX Manager CA Cert**: Obtain this certificate from NSX-T Manager as follows:
+
+        1. `ssh` into NSX-T Manager using the admin account that you created when you deployed NSX-T Manager.
+        1. From the NSX-T Manager command line, run `get certificate api` to retrieve the certificate.
+
+            ![NSX-T tile config: NSX-T Manager](./images/nsx-t/nsx-t-tile-config-mgr.png)
 
 1. Open and configure the **NCP** (NSX-T Container Plugin) pane as follows:
-  - **<%= vars.app_runtime_abbr %> Foundation Name**: If unsure, use `<%= vars.app_runtime_abbr %>`. If multiple foundations co-exist on the same NSX-T Manager, choose a unique string, such as `<%= vars.app_runtime_abbr %>-beta`. NCP creates artifacts, such as T1 gateways and prefixes their names with this string for easy identification.
-  - **Overlay Transport Zone**: A uniquely identifying string for the **Transport Zone** that you chose when you [created segments](#nsx-t-setup) for each network. This can be the name of the transport zone if no other zones in NSX-T share the same name, or else the UUID for the transport zone.
-  - **Tier-0 Router**: A uniquely identifying string for the T0 gateway. This can be the tag string that you gave the gateway in NSX-T Manager if no other T0 gateways in NSX-T share the same name, or else the UUID for the gateway.
-  - **IP Blocks of Container Networks**: Use the same IP block created [Configure Gateways](#nsx-t-gateways).
-  - **Subnet Prefix of Container Networks**: Subnet mask to set the address range size for apps in a single org. Defaults to `24`. This number must be higher than the mask for all <%= vars.app_runtime_abbr %> orgs in the NSX-T Manager **New IP Block** pane, to define each org's fraction of the total <%= vars.app_runtime_abbr %> address space.
-  - **IP Pools used to provide External (NAT) IP Addresses to Org Networks**: Use the same IP Pool created iin [Configure Gateways](#nsx-t-gateways).
-  - **Enable NSX-T Policy API**: Enable this checkbox to use the new Policy API.
-![NSX-T tile config: NCP](nsx-t/nsx-t-tile-config-ncp.png)
+
+    - **<%= vars.app_runtime_abbr %> Foundation Name**: If unsure, use `<%= vars.app_runtime_abbr %>`. If multiple foundations co-exist on the same NSX-T Manager, choose a unique string, such as `<%= vars.app_runtime_abbr %>-beta`. NCP creates artifacts, such as T1 gateways and prefixes their names with this string for easy identification.
+    - **Overlay Transport Zone**: A uniquely identifying string for the **Transport Zone** that you chose when you [created segments](#nsx-t-setup) for each network. This can be the name of the transport zone if no other zones in NSX-T share the same name, or else the UUID for the transport zone.
+    - **Tier-0 Router**: A uniquely identifying string for the T0 gateway. This can be the tag string that you gave the gateway in NSX-T Manager if no other T0 gateways in NSX-T share the same name, or else the UUID for the gateway.
+    - **IP Blocks of Container Networks**: Use the same IP block created [Configure Gateways](#nsx-t-gateways).
+    - **Subnet Prefix of Container Networks**: Subnet mask to set the address range size for apps in a single org. Defaults to `24`. This number must be higher than the mask for all <%= vars.app_runtime_abbr %> orgs in the NSX-T Manager **New IP Block** pane, to define each org's fraction of the total <%= vars.app_runtime_abbr %> address space.
+    - **IP Pools used to provide External (NAT) IP Addresses to Org Networks**: Use the same IP Pool created iin [Configure Gateways](#nsx-t-gateways).
+    - **Enable NSX-T Policy API**: Enable this checkbox to use the new Policy API.
+
+        ![NSX-T tile config: NCP](./images/nsx-t/nsx-t-tile-config-ncp.png)
 
 1. In the **NSX Node Agent** pane, enable the **Enable Debug Level of Logging for NSX Node Agent** checkbox.
-![NSX-T tile config: NSX-T Node Agent](nsx-t/nsx-t-tile-config-agent.png)
+![NSX-T tile config: NSX-T Node Agent](./images/nsx-t/nsx-t-tile-config-agent.png)
 
 1. Click **Save** and return to the **Installation Dashboard**.
 
