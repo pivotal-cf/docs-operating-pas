@@ -3,16 +3,16 @@ title: Diagnosing Deployment Problems
 owner: Ops Manager
 ---
 
-This topic provides guidance for diagnosing issues encountered 
-when installing products such as <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) 
+This topic provides guidance for diagnosing issues encountered
+when installing products such as <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>)
 with <%= vars.ops_manager_full %>.
 
 An important consideration when diagnosing
-issues is communication between VMs deployed by <%= vars.platform_name %>. 
+issues is communication between VMs deployed by <%= vars.platform_name %>.
 Communication takes the form of messaging, routing, or both. If either of
-these go wrong, an installation can fail. 
-For example, after installing <%= vars.app_runtime_abbr %>, 
-one of the VMs must deploy a test app 
+these go wrong, an installation can fail.
+For example, after installing <%= vars.app_runtime_abbr %>,
+one of the VMs must deploy a test app
 to the cloud during post-installation testing.
 The installation fails if the resulting traffic cannot be routed to the HA Proxy load balancer.
 
@@ -69,11 +69,11 @@ To troubleshoot specific <%= vars.app_runtime_abbr %> components by viewing thei
 
 1. In the **Logs** column for the component, click the download icon.
 
-    <%= image_tag("troubleshooting/status.png", :alt => "Tile configuration screen on 'Status' tab. A table shows information for each job. In the last column labeled 'Logs', the 'Download' icon is circled in red.") %>
+    ![alt-text="Tile configuration screen on Status tab. A table shows information for each job. The download icon is in the Logs column."](./images/troubleshooting/status.png)
 
 1. Select the **Logs** tab.
 
-    <%= image_tag("troubleshooting/logs.png", :alt => "Tile configuration screen on 'Logs' tab. A list of zip files shows the file paths next to timestamps for when the files were last updated.") %>
+    ![alt-text="Tile configuration screen on Logs tab. A list of zip files shows the file paths next to timestamps for when the files were last updated."](./images/troubleshooting/logs.png)
 
 1. Once the ZIP file corresponding to the component moves to the **Downloaded** list, click the
 linked file path to download the ZIP file.
