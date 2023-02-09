@@ -43,12 +43,15 @@ To configure <%= vars.app_runtime_abbr %> to use a SAML IDP:
 1. Select **Domains**.
 
 1. Record your system domain.
-    ![The page header says "Domains". Below this header is the text "For help configuring these fields, see Configure Domains in Configuring TAS for VMs in the VMware Tanzu documentation," with "Configure Domain" in blue letters to denote a clickable link. Below this text are two fields labeled "System domain" and "Apps domain", with red asterisks to denote that they are required fields. The "System domain" field contains the ghost text "system.example.com". The "Apps domain" field contains the ghost text "apps.example.com". At the bottom of the image is a rectangular blue button labeled "Save".](domains.png)
+
+    ![In the Domains section, enter the System domain and the Apps domain. Click Save.](./images/domains.png)
 
 1. Select **Authentication and Enterprise SSO**.
 
 1. Select **SAML identity provider**.
-    ![At the top of the image is the text "Configure your UAA user account store with either internal or external authentication mechanisms:", with a red asterisk to denote that it is a required field. Below this text is a radio button labeled "Internal UAA" and a selected radio button labeled "SAML identity provider". Below the "SAML identity provider" button are two fields with red asterisks labeled "Provider name" and "Display name". Next is a text area labeled "Provider metadata". Next is a field labeled "Provider metadata URL". Next is a dropdown labeled "Name ID format", with a red asterisk, with the "Email Address" option selected. Next are five fields labeled, from top to bottom: "Email domains", "First name attribute", "Last name attribute", "Email attribute", and "External groups attribute". Next is an enabled checkbox labeled "Sign authentication requests". Next is a disabled checkbox labeled "Require signed assertions".](sso-ert.png)
+
+    ![In the SAML Identity Provider section, fill in the fields as described in the following steps.](./images/sso-ert.png)
+
     <p class='note'><strong>Note:</strong> You must manually disable a SAML IDP created by <%= vars.app_runtime_abbr %> when you no longer require it.</p>
 
 1. Set the **Provider name**. This is a unique name you create for the IDP. This name can include only alphanumeric characters, `+`, `_`, and `-`. You should not change this name after deployment because all external users use it to link to the provider.
@@ -56,7 +59,7 @@ To configure <%= vars.app_runtime_abbr %> to use a SAML IDP:
 1. Enter a **Display name**. Your provider display name appears as a link on your <%= vars.platform_name %> login page. You can access this link at `https://login.SYSTEM-DOMAIN`, where `SYSTEM-DOMAIN` is the system domain you recorded from the **Domains** pane.
 <br>
 <br>
-    ![At the top of the image is the VMware logo in large teal letters. Below the logo is the text "Welcome!" in medium-sized letters. Below this text are two fields on top of each other. The top field contains the text "pi", followed by a black rectangle to redact the rest of the username. The bottom field contains eleven small circles, indicating hidden characters. Below these fields is a blue, rectangular button labeled "SIGN IN" in white letters. Below this button is a horizontal line break.](login-page.png)
+    ![In the login dialog box, enter the user name and password. Click Sign in.](./images/login-page.png)
 
 1. Retrieve the metadata from your IDP and copy it into either the **Provider metadata** or the **Provider metadata URL** fields, depending on whether your IDP exposes a metadata URL or not. For more information, see [Configure SAML as an Identity Provider for <%= vars.app_runtime_abbr %>](#configure-saml-for-pcf). <%= vars.company_name %> recommends that you use the provider metadata URL rather than provider metadata because the metadata can change. You can do this in either of the following ways:
     * If your IDP exposes a metadata URL, provide the metadata URL.
@@ -124,7 +127,7 @@ To integrate the UAA with one or more LDAP servers:
 1. Click the <%= vars.app_runtime_abbr %> tile.
 
 1. Select **Authentication and Enterprise SSO**.
-    ![There is a selected radio button labeled "LDAP server". Below this is a field labeled "Server URLs", with a red asterisk to denote that it is a required field. It contains the ghost text "ldaps://example.com". Next is a set of two fields under the label "LDAP credentials", with a red asterisk. The first contains the ghost text "Username", and the second contains the ghost text "Password". Next is a field labeled "User search base", with a red asterisk, containing the ghost text "ou=Groups,dc=example,dc=com". Next is a field labeled "User search field", with a red asterisk, containing the text "cn={0}". Next is a field labeled "Group search base", containing the ghost text "ou=Groups,dc=example,dc=com". Next is a field labeled "Group search filter", with a red asterisk, containing the text "member={0}". Next is a field labeled "Group maximum search depth ( min: 1, max: 10)", containing the text "1". Next is a text area labeled "Server SSL certificate". Next are two fields labeled "First name attribute" and "Last name attribute". Next is a field labeled "Email attribute", with a red asterisk, containing the text "mail". Next is a field labeled "Email domains". Next is a dropdown labeled "LDAP referrals", with a red asterisk, with the option "Automatically follow any referrals" selected.](uaa/ldap-config.png)
+    ![The LDAP Server radio button is selected. Fill in the additional fields as described in the steps below.](./images/uaa/ldap-config.png)
 
 1. Under **Configure your UAA user account store with either internal or external authentication mechanisms**, select **LDAP server**.
 
