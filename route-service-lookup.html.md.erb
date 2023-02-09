@@ -100,7 +100,7 @@ In this case, when the Gorouter receives the request, it sends the traffic back 
 
 The diagram below illustrates the flow of the request and numbers the steps to indicate order of occurrence:
 
-![A request makes multiple trips between the load balancer and Gorouter before reaching the route service. Four boxes are labeled as follows: Load Balancer, Gorouter, Route Service, and <%= vars.app_runtime_abbr %>. The Gorouter and route service box are inside of the <%= vars.app_runtime_abbr %> box to show that they are running inside of <%= vars.app_runtime_abbr %>. Arrows numbered 1-5 indicate the flow of the request in the following order: load balancer, Gorouter, load balancer, Gorouter, Gorouter service.](default-internal.png)
+![A request makes multiple trips between the load balancer and Gorouter before reaching the route service. Four boxes are labeled as follows: Load Balancer, Gorouter, Route Service, and <%= vars.app_runtime_abbr %>. The Gorouter and route service box are inside of the <%= vars.app_runtime_abbr %> box to show that they are running inside of <%= vars.app_runtime_abbr %>. Arrows numbered 1-5 indicate the flow of the request in the following order: load balancer, Gorouter, load balancer, Gorouter, Gorouter service.](./images/default-internal.png)
 
 ### <a id="bypass-internal"></a> Bypass Mode and Internal Route Service
 
@@ -113,7 +113,7 @@ In this case, when the Gorouter receives the request, it sends it directly to th
 
 The diagram below illustrates the flow of the request:
 
-![Arrows indicate the flow of the request through platform components. A request goes directly from the load balancer to the Gorouter to the route service.](bypass-internal.png)
+![Arrows indicate the flow of the request through platform components. A request goes directly from the load balancer to the Gorouter to the route service.](./images/bypass-internal.png)
 
 ### <a id="bypass-external"></a> Bypass Mode and External Route Service (Security Risk)
 
@@ -128,7 +128,7 @@ In this case, when the Gorouter receives the request, it checks for an existing 
 
 The diagram below illustrates the flow of the request in the case that it is intercepted:
 
-![A fake route service inside of <%= vars.app_runtime_abbr %> intercepts traffic intended for a route service outside of <%= vars.app_runtime_abbr %>. Five boxes are labeled as follows: Load Balancer, Gorouter, Route Service (example.com), Fake Route Service (example.com), and <%= vars.app_runtime_abbr %>. The Gorouter and fake route service boxes are inside of the <%= vars.app_runtime_abbr %> box to show that they are running inside of <%= vars.app_runtime_abbr %>. Arrows point to the load balancer and then the Gorouter to indicate the flow of traffic. Two arrows then point from the Gorouter: one to the fake route service and another to the route service. A red "X" indicates that the traffic does not go to the route service. It goes to the fake route service instead.](bypass-external.png)
+![A fake route service inside of <%= vars.app_runtime_abbr %> intercepts traffic intended for a route service outside of <%= vars.app_runtime_abbr %>. Five boxes are labeled as follows: Load Balancer, Gorouter, Route Service (example.com), Fake Route Service (example.com), and <%= vars.app_runtime_abbr %>. The Gorouter and fake route service boxes are inside of the <%= vars.app_runtime_abbr %> box to show that they are running inside of <%= vars.app_runtime_abbr %>. Arrows point to the load balancer and then the Gorouter to indicate the flow of traffic. Two arrows then point from the Gorouter: one to the fake route service and another to the route service. A red "X" indicates that the traffic does not go to the route service. It goes to the fake route service instead.](./images/bypass-external.png)
 
 ### <a id="default-external"></a> Default Lookup and External Route Service
 
