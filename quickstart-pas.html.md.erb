@@ -53,7 +53,7 @@ To install <%= vars.app_runtime_abbr %> with minimal configuration:
   1. In the **Type "X" to acknowledge this requirement** field, enter `X`.
   1. Click **Save**.
   <br><br>
-  For more information about ASGs, see [App Security Groups](../concepts/asg.html). For more information about setting ASGs, see [Restricting App Access to Internal <%= vars.app_runtime_abbr %> Components](../opsguide/app-sec-groups.html).
+  For more information about ASGs, see [App Security Groups](../concepts/asg.html). For more information about setting ASGs, see [Restricting App Access to Internal <%= vars.app_runtime_abbr %> Components](../operating/app-sec-groups.html).
 
 1. Under **SAML service provider credentials**, enter a certificate and private key for the User Account and Authentication (UAA) server to use as a SAML service provider for signing outgoing SAML authentication requests. You can provide an existing certificate and private key from your trusted CA or generate a self-signed certificate. The domain `*.login.SYSTEM-DOMAIN` must be associated with the certificate, where `SYSTEM-DOMAIN` is the system domain you configured in the **Domains** pane.
   <p class="note"><strong>Note:</strong> The Single Sign-On for VMware Tanzu service and Spring Cloud Services for VMware Tanzu tiles require the <code>*.login.SYSTEM-DOMAIN</code>.</p>
