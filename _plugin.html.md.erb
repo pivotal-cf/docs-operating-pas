@@ -1,5 +1,4 @@
-The metric `absolute_entitlement` shows an app's CPU usage relative to its
-entitlement.
+The metric `absolute_entitlement` shows an app's CPU usage relative to its entitlement.
 
 To retrieve `absolute_entitlement` metrics for all instances of an app:
 
@@ -12,10 +11,11 @@ repository on GitHub.
     ```
     cf cpu-entitlement APP-NAME
     ```
+
     Where `APP-NAME` is the name of the app.
     <br>
-    <br>
     The above command returns `absolute_entitlement` metrics for all instances of the app, similar to the following example:
+
     <pre class='terminal'>
     Showing CPU usage against entitlement for app dora-example in org example-org / space example-org-staging as dora@example.com ...
     ​
@@ -25,12 +25,7 @@ repository on GitHub.
     &#35;2   2.51%       2.62%
     </pre>
 
-After you run the `cf cpu-entitlement` command, you see two values: `avg usage`
-and `curr usage`. The average usage is used to split the app into two groups,
-good and bad. Good apps have an average CPU usage that is below 100% of their
-CPU entitlements, and bad apps have an average CPU usage that is over 100% of
-their CPU entitlements. In the example above, all values for the average CPU
-usage are under 100% of their CPU entitlements.
+After you run the `cf cpu-entitlement` command, you see two values: `avg usage` and `curr usage`. The average usage is used to split the apps into two groups, good and bad. Good apps have an average CPU usage that is below 100% of their CPU entitlements, and bad apps have an average CPU usage that is over 100% of their CPU entitlements. In the example above, all values for the average CPU usage are under 100% of their CPU entitlements.
 
 <%# This partial is used for both TAS and CF docs. %>
-<%# Don't reference TAS or bosh configs here. %>
+<%# Don't reference TAS or BOSH configs here. %>

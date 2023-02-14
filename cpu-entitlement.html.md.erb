@@ -3,7 +3,7 @@ title: CPU Entitlement
 owner: Diego
 ---
 
-This topic describes how to CPU entitlements work in <%= vars.app_runtime_first %> and how to configure them.
+This topic describes how CPU entitlements work in <%= vars.app_runtime_first %> and how to configure them.
 
 ## <a id='overview'></a> Overview
 
@@ -13,28 +13,16 @@ This topic describes how to CPU entitlements work in <%= vars.app_runtime_first 
 
 <%= partial "plugin" %>
 
-## <a id='spare-cpu-resources'></a> Spare CPU Resources and Throttling
+## <a id='spare-cpu-resources'></a> Spare CPU resources and throttling
 
 <%= partial "spare-cpu-and-throttling" %>
 
-CPU Burst Optimization is turned off by default. You can check this setting by
-going to the App Containers tab and checking the property **Enable CPU Burst
-Optimization**
+CPU Burst Optimization is turned off by default. Go to the App Containers tab and select the **Enable CPU Burst Optimization** property.
 
 ### <a id='without-cpu-burst-optimization'></a> Without CPU Burst Optimization
-When CPU Burst Optimization is turned off, all apps on the cell share any spare
-CPU resources.
+When CPU Burst Optimization is turned off, all apps on the cell share any spare CPU resources.
 
-### <a id='spare-cpu-resources'></a> With CPU Burst Optimization
-When CPU Burst Optimization is turned on, "good" apps get bursting priority
-over "bad" apps. Good apps are apps that, on average, have stayed within their
-CPU entitlement. Bad apps are apps that, on average, have exceeded their CPU
-entitlement.
+### <a id='spare-cpu-resources'></a> With CPU burst optimization
+When CPU Burst Optimization is turned on, "good" apps get bursting priority over "bad" apps. Good apps are apps that, on average, have stayed within their CPU entitlement. Bad apps are apps that, on average, have exceeded their CPU entitlement.
 
-Imagine a Diego Cell with 5 bad apps and 1 good app. Initially the 5 "bad"
-apps will evenly split all of the spare CPU resources. If the good app needs
-to burst, it will be given priority to all of the extra CPU it needs. If the
-good app continues bursting for long enough and on average it exceeds its CPU
-entitlement, then it will become a bad app. Then all 6 "bad" apps will
-equally share the spare CPU resources. Likewise, if one of the bad apps stops
-using so much CPU it will become a good app again.
+Imagine a Diego Cell with 5 bad apps and 1 good app. Initially the 5 "bad" apps will split all of the spare CPU resources evenly. If the good app needs to burst, it will be given priority for all the extra CPU it needs. If the good app continues bursting for long enough, and on average it exceeds its CPU entitlement, then it will become a bad app. Then all 6 "bad" apps will share the spare CPU resources equally. Likewise, if one of the bad apps stops using so much CPU it will become a good app again.
