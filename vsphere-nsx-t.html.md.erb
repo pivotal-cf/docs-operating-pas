@@ -108,7 +108,7 @@ To configure Tier-1 (T1) gateways:
     1. Enable **All Connected Segments & Service Ports**.
     1. Enable **All LB VIP Routes**. (necessary if Load Balancing service is configured).
 
-        ![NSX-T ](./image/nsx-t/nsx-t-route-advertise.png)
+        ![NSX-T ](./images/nsx-t/nsx-t-route-advertise.png)
 
 1. Allocate an IP block for <%= vars.app_runtime_abbr %> orgs.
 
@@ -117,7 +117,7 @@ To configure Tier-1 (T1) gateways:
     1. Enter a description, such as `Subnets are allocated from this pool to each newly-created org`.
     1. Enter a CIDR to allocate an address block large enough to accommodate all <%= vars.app_runtime_abbr %> apps. A `/14` CIDR is large enough for ~1,000 Orgs with ~250 apps each. If you are planning such a large foundation, see [VMware NSX-T <%= vars.app_runtime_abbr %> limits](https://configmax.vmware.com/guest?vmwareproduct=VMware%20NSX-T&release=NSX-T%20Data%20Center%202.4.0&categories=31-0) in the VMware documentation.
 
-        ![NSX-T ](./image/nsx-t/nsx-t-ip-block.png)
+        ![NSX-T ](./images/nsx-t/nsx-t-ip-block.png)
 
 1. Create an external SNAT IP pool.
 
