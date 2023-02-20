@@ -71,16 +71,18 @@ To configure logical switches:
   1. Log in to the **NSX-T Manager Dashboard**.
   1. Go to **Advanced Networking & Security**.
   1. Go to the **Switching** pane.
-  1. For each of these networks...
+  1. For each of these networks:
+
       - **Infrastructure** (BOSH and <%= vars.ops_manager %>, defined in the **Assign AZs and Networks** pane of the BOSH Director tile)
       - **Deployment** (<%= vars.app_runtime_abbr %>, defined in the **Assign AZs and Networks** pane of the <%= vars.app_runtime_abbr %> tile)
       - **Services** and **Dynamic Services** (marketplace services and on-demand services, also defined in the <%= vars.app_runtime_abbr %> tile)
-      - **Isolation Segment** (optional, defined in the **Assign AZs and Networks** pane of the Isolation Segment tile)
-    ...do the following:
+      - **Isolation Segment** (optional, defined in the **Assign AZs and Networks** pane of the Isolation Segment tile) do the following:
+
           1. Click **+ADD**.
           1. Enter a name for the logical switch (such as `<%= vars.app_runtime_abbr %>-Infrastructure`, `<%= vars.app_runtime_abbr %>-Deployment`).
           1. Click **ADD**.
-![NSX-T ](nsx-t/nsx-t-logical-switch.png)
+
+              ![NSX-T ](./images/nsx-t/nsx-t-logical-switch.png)
 
 #### <a id='nsx-t-routers'></a> Configure Routers
 
@@ -316,7 +318,7 @@ To configure <%= vars.app_runtime_abbr %> for external container networking:
 
 1. Configure <%= vars.app_runtime_abbr %>, following the directions in [Configuring <%= vars.app_runtime_abbr %>](./configure-pas.html). When you configure **Networking**, select **External** under **Container networking interface plugin**.
 
-    ![NSX-T ](./image/nsx-t/nsx-t-pas-cni.png)
+    ![NSX-T ](./images/nsx-t/nsx-t-pas-cni.png)
 
 1. Update the server pool membership for the NSX-T load balancers:
 
