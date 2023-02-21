@@ -44,50 +44,50 @@ To configure <%= vars.app_runtime_abbr %> to use a SAML IDP:
 
 1. Record your system domain.
 
-    ![In the Domains section, enter the System domain and the Apps domain. Click Save.](./images/domains.png)
+    ![alt-text="In the Domains section, enter the System domain and the Apps domain. Click Save."](./images/domains.png)
 
-1. Select **Authentication and Enterprise SSO**.
+2. Select **Authentication and Enterprise SSO**.
 
-1. Select **SAML identity provider**.
+3. Select **SAML Identity Provider**.
 
-    ![In the SAML Identity Provider section, fill in the fields as described in the following steps.](./images/sso-ert.png)
 
+    ![alt-text="In the SAML Identity Provider section, fill in the fields as described in the following steps."](./images/sso-ert.png)
     <p class='note'><strong>Note:</strong> You must manually disable a SAML IDP created by <%= vars.app_runtime_abbr %> when you no longer require it.</p>
 
-1. Set the **Provider name**. This is a unique name you create for the IDP. This name can include only alphanumeric characters, `+`, `_`, and `-`. You should not change this name after deployment because all external users use it to link to the provider.
+4. Set the **Provider name**. This is a unique name you create for the IDP. This name can include only alphanumeric characters, `+`, `_`, and `-`. You should not change this name after deployment because all external users use it to link to the provider.
 
-1. Enter a **Display name**. Your provider display name appears as a link on your <%= vars.platform_name %> login page. You can access this link at `https://login.SYSTEM-DOMAIN`, where `SYSTEM-DOMAIN` is the system domain you recorded from the **Domains** pane.
+5. Enter a **Display name**. Your provider display name appears as a link on your <%= vars.platform_name %> login page. You can access this link at `https://login.SYSTEM-DOMAIN`, where `SYSTEM-DOMAIN` is the system domain you recorded from the **Domains** pane.
 <br>
 <br>
-    ![In the login dialog box, enter the user name and password. Click Sign in.](./images/login-page.png)
+    ![alt-text="In the login dialog box, enter the user name and password. Click Sign in."](./images/login-page.png)
 
-1. Retrieve the metadata from your IDP and copy it into either the **Provider metadata** or the **Provider metadata URL** fields, depending on whether your IDP exposes a metadata URL or not. For more information, see [Configure SAML as an Identity Provider for <%= vars.app_runtime_abbr %>](#configure-saml-for-pcf). <%= vars.company_name %> recommends that you use the provider metadata URL rather than provider metadata because the metadata can change. You can do this in either of the following ways:
+1. Retrieve the metadata from your IDP and copy it into either the **Provider metadata** or the **Provider metadata URL** fields, depending on whether your IDP exposes a metadata URL or not. For more information, see [Configure SAML as an Identity Provider for <%= vars.app_runtime_abbr %>](#configure-saml-for-pcf). <%= vars.company_name %> recommends that you use the provider metadata URL rather than provider metadata because the metadata can change. You can do this in one of the following ways:
     * If your IDP exposes a metadata URL, provide the metadata URL.
     * Download your IDP metadata and paste this XML into the **Provider metadata** field.
     <p class='note'><strong>Note:</strong> You only need to select one of the above configurations. If you configure both, your IDP defaults to the <strong>Provider metadata URL</strong>.</p>
     <p class="note"><strong>Note:</strong> For information about onboarding SAML users and mapping them to <%= vars.app_runtime_abbr %> user roles, see <a href="external-user-management.html">Adding Existing SAML or LDAP Users to an <%= vars.platform_name %> Deployment</a>.</p>
 
-1. Select the **Name ID format** for your SAML IDP. This translates to `username` in <%= vars.app_runtime_abbr %>. The default is **Email Address**.
+2. Select the **Name ID format** for your SAML IDP. This translates to `username` in <%= vars.app_runtime_abbr %>. The default is **Email Address**.
 
-1. For **Email domains**, enter a comma-separated list of the email domains for external users who are to receive invitations to Apps Manager.
+3. For **Email domains**, enter a comma-separated list of the email domains for external users who are to receive invitations to Apps Manager.
 
-1. For **First name attribute** and **Last name attribute**, enter the attribute names in your SAML database that correspond to the first and last names in each user record. For example, `first_name` and `last_name`. This field is case-sensitive.
+4. For **First name attribute** and **Last name attribute**, enter the attribute names in your SAML database that correspond to the first and last names in each user record. For example, `first_name` and `last_name`. This field is case-sensitive.
 
-1. For **Email attribute**, enter the attribute name in your SAML assertion that corresponds to the email address in each user record. For example, `EmailID`. This field is case-sensitive.
+5. For **Email attribute**, enter the attribute name in your SAML assertion that corresponds to the email address in each user record. For example, `EmailID`. This field is case-sensitive.
 
-1. For **External groups attribute**, enter the attribute name in your SAML database that defines the groups that a user belongs to. For example, `group_memberships`. To map the groups from the SAML assertion to admin roles in <%= vars.app_runtime_abbr %>, see [Grant Admin Permissions to an External Group (SAML or LDAP)](../uaa/uaa-user-management.html#external-group) in _Creating and Managing Users with the UAA CLI (UAAC)_. This field is case-sensitive.
+6. For **External groups attribute**, enter the attribute name in your SAML database that defines the groups that a user belongs to. For example, `group_memberships`. To map the groups from the SAML assertion to admin roles in <%= vars.app_runtime_abbr %>, see [Grant Admin Permissions to an External Group (SAML or LDAP)](../uaa/uaa-user-management.html#external-group) in _Creating and Managing Users with the UAA CLI (UAAC)_. This field is case-sensitive.
 
-1. By default, all SAML authentication requests from <%= vars.app_runtime_abbr %> are signed. To change this, disable the **Sign authentication requests** checkbox and configure your IDP to verify SAML authentication requests.
+7. By default, all SAML authentication requests from <%= vars.app_runtime_abbr %> are signed. To change this, disable the **Sign authentication requests** checkbox and configure your IDP to verify SAML authentication requests.
 
-1. To validate the signature for the incoming SAML assertions, enable the **Required signed assertions** checkbox and configure your IDP to send signed SAML assertions.
+8. To validate the signature for the incoming SAML assertions, enable the **Required signed assertions** checkbox and configure your IDP to send signed SAML assertions.
 
-1. Click **Save**.
+9. Click **Save**.
 
-1. Return to the <%= vars.ops_manager %> Installation Dashboard.
+10. Return to the <%= vars.ops_manager %> Installation Dashboard.
 
-1. Click **Review Pending Changes**.
+11. Click **Review Pending Changes**.
 
-1. Click **Apply Changes**.
+12. Click **Apply Changes**.
 
 ### <a id="configure-saml-for-pcf"></a> Configure SAML as an Identity Provider for <%= vars.app_runtime_abbr %>
 
@@ -127,7 +127,7 @@ To integrate the UAA with one or more LDAP servers:
 1. Click the <%= vars.app_runtime_abbr %> tile.
 
 1. Select **Authentication and Enterprise SSO**.
-    ![The LDAP Server radio button is selected. Fill in the additional fields as described in the steps below.](./images/uaa/ldap-config.png)
+    ![alt-text="The LDAP Server radio button is selected. Fill in the additional fields as described in the steps below."](./images/uaa/ldap-config.png)
 
 1. Under **Configure your UAA user account store with either internal or external authentication mechanisms**, select **LDAP server**.
 
