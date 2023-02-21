@@ -43,12 +43,12 @@ To configure <%= vars.app_runtime_abbr %> to use a SAML IDP:
 1. Select **Domains**.
 
 1. Record your system domain.
-    ![In the Domains section, enter the System domain and the Apps domain. Click Save.](./images/domains.png)
+    ![alt-text="In the Domains section, enter the System domain and the Apps domain. Click Save.](./images/domains.png)
 
 1. Select **Authentication and Enterprise SSO**.
 
 1. Select **SAML Identity Provider**.
-    ![In the SAML Identity Provider section, fill in the fields as described in the following steps.](./images/sso-ert.png)
+    ![alt-text="In the SAML Identity Provider section, fill in the fields as described in the following steps."](./images/sso-ert.png)
     <p class='note'><strong>Note:</strong> You must manually disable a SAML IDP created by <%= vars.app_runtime_abbr %> when you no longer require it.</p>
 
 2. Set the **Provider name**. This is a unique name you create for the IDP. This name can include only alphanumeric characters, `+`, `_`, and `-`. You should not change this name after deployment because all external users use it to link to the provider.
@@ -56,7 +56,7 @@ To configure <%= vars.app_runtime_abbr %> to use a SAML IDP:
 3. Enter a **Display name**. Your provider display name appears as a link on your <%= vars.platform_name %> login page. You can access this link at `https://login.SYSTEM-DOMAIN`, where `SYSTEM-DOMAIN` is the system domain you recorded from the **Domains** pane.
 <br>
 <br>
-    ![In the login dialog box, enter the user name and password. Click Sign in.](./images/login-page.png)
+    ![alt-text="In the login dialog box, enter the user name and password. Click Sign in."](./images/login-page.png)
 
 1. Retrieve the metadata from your IDP and copy it into either the **Provider metadata** or the **Provider metadata URL** fields, depending on whether your IDP exposes a metadata URL or not. For more information, see [Configure SAML as an Identity Provider for <%= vars.app_runtime_abbr %>](#configure-saml-for-pcf). <%= vars.company_name %> recommends that you use the provider metadata URL rather than provider metadata because the metadata can change. You can do this in either of the following ways:
     * If your IDP exposes a metadata URL, provide the metadata URL.
@@ -124,7 +124,7 @@ To integrate the UAA with one or more LDAP servers:
 1. Click the <%= vars.app_runtime_abbr %> tile.
 
 1. Select **Authentication and Enterprise SSO**.
-    ![The LDAP Server radio button is selected. Fill in the additional fields as described in the steps below.](./images/uaa/ldap-config.png)
+    ![alt-text="The LDAP Server radio button is selected. Fill in the additional fields as described in the steps below."](./images/uaa/ldap-config.png)
 
 2. In **Configure your UAA user account store with either internal or external authentication mechanisms**, select **LDAP server**.
 

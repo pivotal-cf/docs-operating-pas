@@ -334,7 +334,7 @@ To install <%= vars.ops_manager %> on VMC:
 
 ## <a id='bosh-setup'></a> Configure BOSH Director
 
-<p class="note"><strong>Note:</strong> The procedure in this section contains only the configuration information that is specific to VMC. For more information about configuring BOSH on vSphere, see <a href="https://docs.pivotal.io/ops-manager/2-10/vsphere/config.html">Configuring BOSH Director on vSphere</a>.</p>
+<p class="note"><strong>Note:</strong> The procedure in this section contains only the configuration information that is specific to VMC. For more information about configuring BOSH on vSphere, see <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/<%= vars.current_major_version %>/vsphere/config.html">Configuring BOSH Director on vSphere</a>.</p>
 
 To configure BOSH Director for VMC:
 
@@ -346,7 +346,7 @@ To configure BOSH Director for VMC:
     - Enter a **Decryption passphrase** and the **Decryption passphrase confirmation**. This passphrase encrypts the Ops Manager datastore and is not recoverable.
 
 1. Select the **BOSH Director for vSphere** tile and configure BOSH as follows:
-    - **Settings → vCenter Config**
+    - **Settings**, then **vCenter Config**
         - **vCenter Host**: your vCenter URL. For example, `vcenter.sddc-35-162-72-214.vmwarevmc.com`.
         - **vCenter Username**: `cloudadmin@vmc.local`
         - **vCenter Password**: Enter the password you gathered from the SDDC.
@@ -355,9 +355,9 @@ To configure BOSH Director for VMC:
         - **Ephemeral Datastore Names**: Enter `WorkloadDatastore`.
         - **Persistent Datastore Names**: Enter `WorkloadDatastore`.
         - Select **Standard vCenter Networking**.
-    - **Settings → Director Config**
+    - **Settings**, then **Director Config**
         - **NTP Servers**: Enter an NTP server of your choice. For example, `time.google.com`.
-    - **Settings → Create Availability Zones**
+    - **Settings**, then **Create Availability Zones**
         - **az1**:
             - **Name**: `az1`
             - **Clusters**:
@@ -373,7 +373,7 @@ To configure BOSH Director for VMC:
             - **Clusters**:
                 - **Cluster**: `Cluster-1`
                 - **Resource Pool**: `az3`
-    - **Settings → Create Networks → Networks**
+    - **Settings**, then **Create Networks**, then **Networks**
         - **infra**:
             - **Name**: `infra`
             - **Subnets**:
@@ -392,14 +392,14 @@ To configure BOSH Director for VMC:
                 - **DNS**: `8.8.8.8`
                 - **Gateway**: `192.168.2.1`
                 - **Availability Zones**: `az1, az2, az3`
-    - **Settings → Assign AZs and Networks**
+    - **Settings**, then **Assign AZs and Networks**
         - **Singleton Availability Zone**: `az1`
         - **Network**: `infra`
-    - **Settings → Security**
+    - **Settings**, then **Security**
         - **Include Tanzu Ops Manager Root CA in Trusted Certs**: Select the checkbox.
 
 1. After you finish configuration, click **Apply Changes**. The following warning appears:
-    ![Review Pending Changes. Warning: Please review the warnings below. IaaS default: Could not log in. Required Datacenter privileges not available.](images/opsman-warning.png)
+    ![alt-text="Review Pending Changes. Warning: Please review the warnings below. IaaS default: Could not log in. Required Datacenter privileges not available."](images/opsman-warning.png)
 
     Click **Ignore Warnings & Apply Changes**.
     `EditCluster` permission is not required.
@@ -409,14 +409,14 @@ To configure BOSH Director for VMC:
 To configure <%= vars.app_runtime_abbr %> for VMC:
 
 1. Configure the **<%= vars.app_runtime_abbr %>** tile as follows:
-    - **Settings → Assign AZs and Networks**
+    - **Settings**, then **Assign AZs and Networks**
         - **Network**: Select `deployment`.
         - Click **Save**.
-    - **Settings → Domains**
+    - **Settings**, then **Domains**
         - Set up a wildcard domain and ensure that it maps to the HAProxy public IP address you configured earlier. For example:
             - **System domain**: `sys.54.180.180.180.nip.io`
             - **Apps domain**: `run.54.180.180.180.nip.io`
-    - **Settings → Networking**
+    - **Settings**, then **Networking**
         - Set the HAProxy IP address to the one you specified in the NAT rule above. This is the first available IP address in the `deployment` network.
             - **HAProxy IPs**: `192.168.2.2`
         - Generate a certificate for the Gorouter and HAProxy:
@@ -428,20 +428,20 @@ To configure <%= vars.app_runtime_abbr %> for VMC:
             - **TLS Termination**: **HA Proxy**
         - Disable TLS forwarding for HAProxy:
             - **HAProxy forwards all requests to the Gorouter over TLS**: Click **Disable**.
-    - **Settings → UAA**
+    - **Settings**, then **UAA**
         - For UAA configuration, generate a SAML certificate for *.login.SYSTEM-DOMAIN:
-            - **→ SAML service provider credentials**
+            - **SAML service provider credentials**
                 - Click **Generate RSA Certificate**.
                 - Enter your domain. For example, `*.login.sys.54.180.180.180.nip.io`
                 - Click **Generate**.
-    - **Settings → Resource Config**:
+    - **Settings**, then **Resource Config**:
       - Scale the HAProxy instances up to 1.
-        - **→ HAProxy**
+        - **HAProxy**
             *   Set Instances to **1**.
             *   Click **Save**.
 
-1. After you finish configuration, click **Apply Changes**. The following warning appears:
-    ![Review Pending Changes. Warning: Please review the warnings below. IaaS default: Could not log in. Required Datacenter privileges not available.](images/opsman-warning.png)
+2. After you finish configuration, click **Apply Changes**. The following warning appears:
+    ![alt-text="Review Pending Changes. Warning: Please review the warnings below. IaaS default: Could not log in. Required Datacenter privileges not available."](images/opsman-warning.png)
 
     Click **Ignore Warnings & Apply Changes**.
     `EditCluster` permission is not required.
