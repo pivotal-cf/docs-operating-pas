@@ -149,7 +149,7 @@ ASGs, see [Restricting App Access to Internal <%= vars.app_runtime_abbr %> Compo
 ## <a id='uaa'></a> Configure UAA
 
 <%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
-<%= partial "/pcf/core/uaa" %>
+<%= partial "/pcf/core/#{vars.current_major_version}/uaa" %>
 
 ## <a id='credhub'></a> Configure CredHub
 
