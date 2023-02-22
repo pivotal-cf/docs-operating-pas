@@ -53,9 +53,13 @@ To add a SAML or LDAP user:
     ```
     cf create-user USERNAME --origin PROVIDER-NAME
     ```
+
     Where:
-    * `USERNAME` is the username of the SAML or LDAP user you want to add.
-    * `PROVIDER-NAME` is `ldap` for an LDAP user, or the name of the SAML provider you provided when configuring <%= vars.ops_manager %> for a SAML user.
+    <ul>
+      <li><code>USERNAME</code> is the username of the SAML or LDAP user you want to add.</li>
+      <li><code>PROVIDER-NAME</code> is <code>ldap</code> for an LDAP user, or the name of the SAML provider you provided when configuring &lt;%= vars.ops_manager %&gt; for a SAML user.</li>
+    </ul>
+
 
 ### <a id='user-role'></a> Step 2: Associate User with Org or Space Role
 
@@ -72,20 +76,25 @@ To associate the SAML or LDAP user with an Org role:
     ```
     cf set-org-role USERNAME ORG ROLE
     ```
+
     Where:
-    * `USERNAME` is the name of the SAML or LDAP user.
-    * `ORG` is the name of your org.
-    * For `ROLE`, enter one of the following:
-      * `OrgManager`: Org Managers can invite and manage users, select and change plans, and set spending limits.
-      * `BillingManager`: Billing Managers can create and manage the billing account and payment information.
-      * `OrgAuditor`: Org Auditors have read-only access to Org information and reports.
-      <br>
-      <br>
+    <ul>
+      <li><code>USERNAME</code> is the name of the SAML or LDAP user.</li>
+      <li><code>ORG</code> is the name of your org.</li>
+      <li>For <code>ROLE</code>, enter one of the following:
+        <ul>
+          <li><code>OrgManager</code>: Org Managers can invite and manage users, select and change plans, and set spending limits.</li>
+          <li><code>BillingManager</code>: Billing Managers can create and manage the billing account and payment information.</li>
+          <li><code>OrgAuditor</code>: Org Auditors have read-only access to Org information and reports.</li>
+        </ul>
+      </li>
+    </ul>
+
     For example:
 
-      ```
-      cf set-org-role j.smith@example.com example-org OrgManager
-      ```
+    <pre class="terminal">
+    cf set-org-role j.smith@example.com example-org OrgManager
+    </pre>
 
 #### <a id='space-role'></a> Associate User with Space Role
 
@@ -96,18 +105,23 @@ To associate the SAML or LDAP user with a Space role:
     ```
     cf set-space-role USERNAME ORG SPACE ROLE
     ```
+
     Where:
-    * `USERNAME` is the name of the SAML or LDAP user.
-    * `ORG` is the name of your org.
-    * `SPACE` is the name of a space in your org.
-    * For `ROLE`, enter one of the following:
-      * `SpaceManager`: Space Managers can invite and manage users, and enable features for a given Space.
-      * `SpaceDeveloper`: Space Developers can create and manage apps and services, and see logs and reports.
-      * `SpaceAuditor`: Space Auditors can view logs, reports, and settings on this Space.
-      <br>
-      <br>
+    <ul>
+      <li><code>USERNAME</code> is the name of the SAML or LDAP user.</li>
+      <li><code>ORG</code> is the name of your org.</li>
+      <li><code>SPACE</code> is the name of a space in your org.</li>
+      <li>For <code>ROLE</code>, enter one of the following:
+        <ul>
+          <li><code>SpaceManager</code>: Space Managers can invite and manage users, and enable features for a given Space.</li>
+          <li><code>SpaceDeveloper</code>: Space Developers can create and manage apps and services, and see logs and reports.</li>
+          <li><code>SpaceAuditor</code>: Space Auditors can view logs, reports, and settings on this Space.</li>
+        </ul>
+      </li>
+    </ul>
+
     For example:
 
-      ```
-      cf set-space-role j.smith@example.com example-org example-space SpaceDeveloper
-      ```
+    <pre class="terminal">
+    cf set-space-role j.smith@example.com example-org example-space SpaceDeveloper
+    </pre>
