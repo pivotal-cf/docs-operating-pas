@@ -30,7 +30,7 @@ To install NSX-T to run with <%= vars.app_runtime_abbr %>:
 
 Before deploying <%= vars.app_runtime_abbr %> with NSX-T networking, you must have:
 
-* BOSH and <%= vars.ops_manager %> installed and configured on vSphere. For more information, see [Deploying <%= vars.ops_manager %> on vSphere](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/<%= vars.current_major_version %>/vmware-tanzu-ops-manager/vsphere-deploy.html) and [Configuring BOSH Director on vSphere](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/<%= vars.current_major_version %>/vsphere/config.html).
+* BOSH and <%= vars.ops_manager %> installed and configured on vSphere. For more information, see [Deploying <%= vars.ops_manager %> on vSphere](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/vsphere-deploy.html) and [Configuring BOSH Director on vSphere](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/vsphere-config.html).
 
 * The [VMware NSX-T Container Plug-in tile](https://network.pivotal.io/products/vmware-nsx-t) downloaded from VMware Tanzu Network and imported to the <%= vars.ops_manager %> Installation Dashboard. For information about downloading and importing VMware Tanzu products to the Installation Dashboard, see [Adding and Importing Products](https://docs.pivotal.io/ops-manager/2-10/install/add-delete.html#add-import).
 
@@ -262,7 +262,7 @@ To enable NSX-T mode in the BOSH Director:
 1. Select **NSX Networking** below.
 
 1. Configure BOSH Director authentication to the NSX Manager by following the **NSX Networking** instructions
-in the [Step 2: Configure vCenter](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/<%= vars.current_major_version %>/vsphere/config.html) section of _Configuring BOSH Director on vSphere_.
+in the [Step 2: Configure vCenter](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/vsphere-config.html) section of _Configuring BOSH Director on vSphere_.
 
 ## <a id='external-net'></a> Configure <%= vars.app_runtime_abbr %> for External Container Networking
 
