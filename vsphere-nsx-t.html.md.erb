@@ -114,7 +114,7 @@ To create a T1 gateway, for each <%= vars.platform_name %> network, infrastructu
 1. Advertise the routes of the T1 gateways to the T0 gateway, so the T0 gateway can correctly route incoming requests based on their destination IP address:
      1. Edit your T1 Gateway and go to **Route Advertisement**.
      2. Activate **All Connected Segments & Service Ports**.
-     3. Activate **All LB VIP Routes**; this is required if the load balancing service is configured.
+     3. Activate **All LB VIP Routes**. This is required if the load balancing service is configured.
 
 ![alt-text=""](./images/nsx-t/nsx-t-route-advertise-policy.png)
 
@@ -151,11 +151,12 @@ In vSphere, you create segments that correspond to the networks that <%= vars.pl
    3. Enter a Gateway to connect to.
    4. Click **Save**.
 
-        **Networks**
-    * **Infrastructure** (BOSH and <%= vars.ops_manager %>, defined in the **Assign AZs and Networks** pane of the BOSH Director tile)
-    * **Deployment** (<%= vars.app_runtime_abbr %>, defined in the **Assign AZs and Networks** pane of the <%= vars.app_runtime_abbr %> tile)
-    * **Services** and **Dynamic Services** (marketplace services and on-demand services, defined in the <%= vars.app_runtime_abbr %> tile)
-    * **Isolation Segment** (optional, defined in the **Assign AZs and Networks** pane of the Isolation Segment tile)
+       **Networks**
+
+      * **Infrastructure** (BOSH and <%= vars.ops_manager %>, defined in the **Assign AZs and Networks** pane of the BOSH Director tile)
+      * **Deployment** (<%= vars.app_runtime_abbr %>, defined in the **Assign AZs and Networks** pane of the <%= vars.app_runtime_abbr %> tile)
+      * **Services** and **Dynamic Services** (marketplace services and on-demand services, defined in the <%= vars.app_runtime_abbr %> tile)
+      * **Isolation Segment** (optional, defined in the **Assign AZs and Networks** pane of the Isolation Segment tile)
 
 ![alt-text=""](./images/nsx-t/nsx-t-segment.png)
 
@@ -305,6 +306,7 @@ To configure <%= vars.app_runtime_abbr %> for external  container networking:
 
    For instructions, see [Adding and Importing Products](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/<%= vars.current_major_version %>/vmware-tanzu-ops-manager/install-add-delete.html]
    ).
+
 ![alt-text="Ops Manager Installation Dashboard with NSX-T tile"](./images/nsx-t/nsx-t-install-dash.png)
 
 1. Configure <%= vars.app_runtime_abbr %>, following the directions in [Configuring <%= vars.app_runtime_abbr %>](./configure-pas.html). When you configure **Networking**, click **External** under **Container networking interface plugin**.<br>
