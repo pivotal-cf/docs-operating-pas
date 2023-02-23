@@ -17,103 +17,123 @@ To change the domain of an existing <%= vars.platform_name %> installation:
 
 2. In the terminal, run:
 
-		cf login -a API-ENDPOINT
+    ```console
+    cf login -a API-ENDPOINT
+    ```
 
-	Where `API-ENDPOINT` is the API endpoint for your <%= vars.app_runtime_abbr %> instance.
-	<br>
-	<br>
-	The cf CLI prompts you for your <%= vars.platform_name %> username and password, as well as the org and space you want to access. If you do not know your API endpoint, see [Identifying the API Endpoint for Your <%= vars.app_runtime_abbr %> Instance](../operating/api-endpoint.html).
+    Where `API-ENDPOINT` is the API endpoint for your <%= vars.app_runtime_abbr %> instance.
+    <br>
+    The cf CLI prompts you for your <%= vars.platform_name %> username and password, as well as the org and space you want to access. If you do not know your API endpoint, see [Identifying the API Endpoint for Your <%= vars.app_runtime_abbr %> Instance](../operating/api-endpoint.html).
 
 3. To view the domains in the space, run:
 
-		cf domains
+    ```console
+    cf domains
+    ```
 
-	The command returns output similar to the following example:
-	<pre class="terminal">
-	$ cf domains
-	Getting domains in org your-org as admin...
+    The command returns output similar to the following example:
 
-	name                  status
-	yourapps.yourdomain.com   shared
-	</pre>
-	If you have more than one shared domain, ensure that the domain you want to change is at the top of the list before you apply the new domain to your <%= vars.app_runtime_abbr %> tile configuration. You can delete and re-create the other shared domains as necessary to push the domain you want to change to the top of the list. If you do this, make sure to re-map the routes for each domain. For more information, see [Configuring Routes and Domains](../devguide/deploy-apps/routes-domains.html).
+    <pre class="terminal">
+    $ cf domains
+    Getting domains in org your-org as admin...
+
+    name                  status
+    yourapps.yourdomain.com   shared
+    </pre>
+
+    If you have more than one shared domain, ensure that the domain you want to change is at the top of the list before you apply the new domain to your <%= vars.app_runtime_abbr %> tile configuration. You can delete and re-create the other shared domains as necessary to push the domain you want to change to the top of the list. If you do this, make sure to re-map the routes for each domain.
+    For more information, see [Configuring Routes and Domains](../devguide/deploy-apps/routes-domains.html).
 
 4. To confirm that your apps are assigned to the domain you plan to change, run:
 
-		cf routes
+    ```console
+    cf routes
+    ```
 
-	The command returns output similar to the following example:
-	<pre class="terminal">
-	$ cf routes
-	Getting routes as admin ...
+    The command returns output similar to the following example:
 
-	space      host    domain                apps
-	your-space yourapp yourapps.yourdomain.com yourapp
-	</pre>
+    <pre class="terminal">
+    $ cf routes
+    Getting routes as admin ...
+
+    space      host    domain                apps
+    your-space yourapp yourapps.yourdomain.com yourapp
+    </pre>
 
 5. To create the new domain you want to use, run:
 
-		cf create-shared-domain NEW-DOMAIN
+    ```console
+    cf create-shared-domain NEW-DOMAIN
+    ```
 
-	Where `NEW-DOMAIN` is the name you give the new domain.
-	<br>
-	<br>
-	The command returns output similar to the following example:
-	<pre class="terminal">
-	$ cf create-shared-domain newapps.yourdomain.com
+    Where `NEW-DOMAIN` is the name you give the new domain.
+    <br>
+    The command returns output similar to the following example:
 
-	Creating shared domain newapps.yourdomain.com as admin...
-	OK
-	</pre>
+    <pre class="terminal">
+    $ cf create-shared-domain newapps.yourdomain.com
+
+    Creating shared domain newapps.yourdomain.com as admin...
+    OK
+    </pre>
 
 6. To map the new domain to your app, run:
 
-		cf map-route APP-NAME NEW-DOMAIN -n HOST-NAME
+    ```
+    cf map-route APP-NAME NEW-DOMAIN -n HOST-NAME
+    ```
 
-	Where:
-	* `APP-NAME` is the name of the app you want to map to the new domain.
-	* `NEW-DOMAIN` is the domain to which you want to map your app.
-	* `HOST-NAME` is the hostname of the URL for the route you are mapping.
-	<br>
-	<br>
-	The command returns output similar to the following example:
-		<pre class="terminal">$ cf map-route yourapp newapps.yourdomain.com -n yourapp
+    Where:
+    <ul>
+      <li><code>APP-NAME</code> is the name of the app you want to map to the new domain.</li>
+      <li><code>NEW-DOMAIN</code> is the domain to which you want to map your app.</li>
+      <li><code>HOST-NAME</code> is the hostname of the URL for the route you are mapping.</li>
+    </ul>
 
-		Creating route yourapp.newapps.yourdomain.com for org your-org / space your-space as admin...
-		OK
-		Adding route yourapp.newapps.yourdomain.com to app yourapp in org your-org / space your-space as admin...
-		OK
-		</pre>
-	In this example, both the `APP-NAME` and `HOST-NAME` arguments are `yourapp`, since this is both the name of the app to which you are mapping a route and the intended hostname for the URL.
+    The command returns output similar to the following example:
+
+    <pre class="terminal">
+    $ cf map-route yourapp newapps.yourdomain.com -n yourapp
+
+    Creating route yourapp.newapps.yourdomain.com for org your-org / space your-space as admin...
+    OK
+    Adding route yourapp.newapps.yourdomain.com to app yourapp in org your-org / space your-space as admin...
+    OK
+    </pre>
+
+    In this example, both the `APP-NAME` and `HOST-NAME` arguments are `yourapp`, since this is both the name of the app to which you are mapping a route and the intended hostname for the URL.
 
 7. Repeat the previous step for each app in this space. Then check Apps Manager to confirm that the route URL has updated correctly for each app.
 
-	![alt-text="Apps Manager space shows an application status at 100%."](./images/switching_domains/new_domain_confirmed1.png)
+    ![alt-text="Apps Manager space shows an application status at 100%."](./images/switching_domains/new_domain_confirmed1.png)
 
 8. Repeat the above steps for each space in your <%= vars.platform_name %> installation except for the System org, beginning with logging into the org and space and ending with confirming the URL update.
 	<p class='note'><strong>Note:</strong> Ordinarily the System org contains only <%= vars.platform_name %> apps that perform utility functions for your installation. <%= vars.company_name %> does not recommend pushing apps to this org. However, if you have pushed apps to the System org, you must also repeat the above steps for these apps.</p>
 
 9. Once you have confirmed that every app in every space has been mapped to the new domain, delete the old domain by running:
 
-		cf delete-shared-domain OLD-DOMAIN
+    ```console
+    cf delete-shared-domain OLD-DOMAIN
+    ```
 
-	Where `OLD-DOMAIN` is the old domain to delete.
-	<br>
-	<br>
-	The command returns output similar to the following example:
-	<pre class="terminal">
-	$ cf delete-shared-domain yourapps.yourdomain.com
-	Deleting domain yourapps.yourdomain.com as admin...
+    Where `OLD-DOMAIN` is the old domain to delete.
+    <br>
+    The command returns output similar to the following example:
 
-	This domain is shared across all orgs.
-	Deleting it will remove all associated routes, and will make any app with this domain unreachable.
-	Are you sure you want to delete the domain yourapps.yourdomain.com?
-	</pre>
-	When prompted, type `yes` to confirm that you want to delete the domain.
+    <pre class="terminal">
+    $ cf delete-shared-domain yourapps.yourdomain.com
+    Deleting domain yourapps.yourdomain.com as admin...
+
+    This domain is shared across all orgs.
+    Deleting it will remove all associated routes, and will make any app with this domain unreachable.
+    Are you sure you want to delete the domain yourapps.yourdomain.com?
+    </pre>
+
+    When prompted, type `yes` to confirm that you want to delete the domain.
 
 10. In the **Domains** pane of the <%= vars.app_runtime_abbr %> tile, enter the new domain in the **Apps domain** field. This configures <%= vars.app_runtime_abbr %> to use the new domain.
 
-	![alt-text="The Domains pane shows System and Apps domain example text."](./images/switching_domains/er17-switchdomains-after.png)
+    ![alt-text="The Domains pane shows System and Apps domain example text."](./images/switching_domains/er17-switchdomains-after.png)
 
 11. Return to the <%= vars.ops_manager %> Installation Dashboard.
 

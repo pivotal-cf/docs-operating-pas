@@ -113,7 +113,9 @@ This section describes how the Gorouter handles app requests when:
 
 In this case, when the Gorouter receives the request, it sends it directly to the route service. This assumes the Gorouter finds an existing route for the route service.
 
-A request goes directly from the load balancer to the Gorouter to the route service.
+The diagram below illustrates the flow of the request. Arrows indicate the flow of the request through platform components. A request goes directly from the load balancer to the Gorouter to the route service.
+
+![alt-text=""](./images/bypass-internal.png)
 
 ### <a id="bypass-external"></a> Bypass Mode and External Route Service (Security Risk)
 
