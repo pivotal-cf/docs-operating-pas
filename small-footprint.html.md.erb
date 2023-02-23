@@ -12,8 +12,7 @@ The Small Footprint <%= vars.app_runtime_abbr %> is a repackaging of the <%= var
 
 A standard <%= vars.app_runtime_abbr %> deployment must have at least 13 VMs, but Small Footprint <%= vars.app_runtime_abbr %> requires only four.
 
-The following image displays a comparison of the number of VMs deployed by <%= vars.app_runtime_abbr %> and Small Footprint <%= vars.app_runtime_abbr %>.
-For TAS for VMs:
+
 
 * Required VMs: Cloud Controller, Cloud Controller Worker, Clock Global, Diego BBS, Diego Brain, Diego Cell, Doppler Server, Loggregator Traffic Controller, NATS, Router, Syslog Adapter, Syslog Scheduler, and UAA.
 * Optional VMs: File Storage, HAProxy, Backup Restore Node, MySQL Monitor, MySQL Proxy, MySQL Server, TCP Router, and CredHub.
@@ -22,6 +21,9 @@ For Small Footprint TAS for VMs:
 
 * Required VMs: Compute, Control, Database, and Router.
 * Optional VMs: File Storage, HAProxy, Backup Restore Node, MySQL Monitor, and TCP Router.
+
+The following image displays a comparison of the number of VMs deployed by <%= vars.app_runtime_abbr %> and Small Footprint <%= vars.app_runtime_abbr %>.
+For TAS for VMs:
 
 [//]: https://docs.google.com/drawings/d/19V1SY4BGW2T--c4Y8Jm26CkA8C-6jIHXl7gpEzYlTmY/edit?usp=sharing
 
@@ -58,9 +60,9 @@ Small Footprint <%= vars.app_runtime_abbr %> has the following limitations:
 
 You can deploy Small Footprint <%= vars.app_runtime_abbr %> with a minimum of four VMs, as shown in the image below.
 
-<p class="note"><strong>Note:</strong> The following assumes that you are using an external blobstore.</p>
+<p class="note"><strong>Note:</strong> The following image assumes that you are using an external blobstore.</p>
 
-![alt-text="Small Footprint TAS for VMs has 4 required VMs and 5 optional VMs as described above."](./images/srt-vms.png)
+![alt-text="Small Footprint TAS for VMs has 4 required VMs and 5 optional VMs."](./images/srt-vms.png)
 
 [//]: https://docs.google.com/a/pivotal.io/drawings/d/13ycJou77RzIb3DeLF1rUOdmEiokNj3_-VTkmILcr6dM/edit?usp=sharing
 
@@ -70,7 +72,7 @@ For more information about the components mentioned on this page, see [<%= vars.
 
 ### <a id='controlvm'></a> Control VM
 
-The Control VM includes the <%= vars.app_runtime_abbr %> jobs that handle management plane operations, app lifecycles, logging, and user authorization and authentication. Additionally, all errands run on the Control VM, eliminating the need for a VM for each errand and significantly reducing the time it takes to run errands.
+The Control VM includes the <%= vars.app_runtime_abbr %> jobs that handle management plane operations, app life cycles, logging, and user authorization and authentication. Additionally, all errands run on the Control VM, eliminating the need for a VM for each errand and significantly reducing the time it takes to run errands.
 
 The following image shows all the jobs from <%= vars.app_runtime_abbr %> that are co-located on the Control VM in Small Footprint <%= vars.app_runtime_abbr %>.
 
@@ -84,7 +86,7 @@ The Database VM includes the <%= vars.app_runtime_abbr %> jobs that handle inter
 
 The following image shows all the jobs from <%= vars.app_runtime_abbr %> that are co-located on the Database VM in Small Footprint <%= vars.app_runtime_abbr %>.
 
-![alt-text="Small Footprint TAS for VMs Condenses 3 VMs onto 1 VM called Database. The three TAS for VMs VMs are NATS, MySQL Proxy, and MySQL Server. MySQL Proxy and MySQL Server are optional VMs."](./images/db-vms.png)
+![alt-text="Small Footprint TAS for VMs Condenses 3 VMs onto 1 VM called Database. The three TAS for VMs VMs are NATS, MySQL Proxy, and MySQL Server. The MySQL Proxy and MySQL Server are optional VMs."](./images/db-vms.png)
 
 [//]: https://docs.google.com/a/pivotal.io/drawings/d/12UkinQ58ejlq9AZQvwq6r7Ghtp4RnTopI_-gTGerpU4/edit?usp=sharing
 

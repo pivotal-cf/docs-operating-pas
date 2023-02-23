@@ -17,7 +17,7 @@ Within an <%= vars.app_runtime_abbr %> deployment, TLS secures connections betwe
 
 The following diagram illustrates the flow of communication from a client making a request to an app. The Client Request goes to the External Load Balancer, and then through Gorouter to the app.
 
-![alt-text="Gorouter and the app are grouped as TAS for VMs."](ingress-traffic.png)
+![alt-text="The Gorouter and app are grouped as TAS for VMs."](ingress-traffic.png)
 [//]: https://docs.google.com/drawings/d/113hdlLwssAj_0I7WdTCaQ9Oz_Nf2f-6vXGSD8nccabE/edit?usp=sharing
 
 The following table describes each component involved in receiving a client request and where their certificates for TLS termination originate:
@@ -61,7 +61,7 @@ These topics list the paths, ports, and protocols that subsystems within <%= var
 
 The following diagram illustrates TLS communications between apps running on <%= vars.app_runtime_abbr %>:
 
-![alt-text=""](between-app-traffic.png)
+![alt-text="The TLS communications between apps."](between-app-traffic.png)
 [//]: https://docs.google.com/drawings/d/1Shng1QbrXZbjRTOCJGldvXghUnlHl8Qy9nIT5k0w9wI/edit?usp=sharing
 
 In the example shown, the `frontend-blue` and `frontend-green` apps both receive client requests, but only the `frontend-green` app is allowed to communicate with the `backend` app.
@@ -74,7 +74,9 @@ Developers specify which apps are allowed to communicate using container network
 
 The following diagram illustrates TLS communication between apps and managed, on-platform services. It uses Cloud Cache as an example of a managed service.
 
-![alt-text="The certificates are copied to each element (Cache Server, Locator, and your App) from CredHub, which is in the BOSH block. TLS traffic flows between the App and both Cache Server and Locator components."](apps-services.png)
+![alt-text="The certificates are copied to each element
+(Cache Server, Locator, and your App) from CredHub, which is in the BOSH block.
+ TLS traffic flows between the App and both Cache Server and Locator components."](apps-services.png)
 [//]: https://docs.google.com/drawings/d/10UxDZPwFDmU9X2RUZRw-y_WwGcwqTHEOQCBGjJhiEg8/edit?usp=sharing
 
 BOSH CredHub issues certificates to the VMware Tanzu GemFire components. For the app, the developer must retrieve a copy of this certificate using the CredHub API and place it in the truststore for the app. For more information, see [Developing an App Under TLS](https://docs.pivotal.io/p-cloud-cache/tls-enabled-app.html) in the VMware Tanzu GemFire documentation.
@@ -85,7 +87,8 @@ Separately, <%= vars.app_runtime_abbr %> Runtime CredHub might store credentials
 
 The following diagram illustrates communications between apps and external, brokered services secured with TLS:
 
-![alt-text="The TAS Block (internal) includes App1 and App2, along with CredHub. The off-platform backend block (external) includes the Oracle DB and a TIBCO block."](apps-external-services.png)
+![alt-text="The TAS Block (internal) includes App1 and App2, along with CredHub.
+ The off-platform backend block (external) includes the Oracle DB and a TIBCO block."](apps-external-services.png)
 [//]: https://docs.google.com/drawings/d/1LNneD74qBvbFF0x4B9x3BYNYD5A8m9luXNoR895bwj8/edit?usp=sharing
 
 The developer must retrieve the certificate from the external service and provide it to their app. One way to do this is by placing the certificate in Runtime CredHub and modifying your app to consume the certificate through CredHub Service Broker. For more information, see the [CredHub Service Broker](https://docs.pivotal.io/credhub-service-broker/) documentation.

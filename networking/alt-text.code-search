@@ -1,0 +1,347 @@
+# Query: alt-text
+# ContextLines: 1
+
+83 results - 23 files
+
+accounting-report-apps-man.html.md.erb:
+  26  
+  27:     ![alt-text="The Accounting report has the monthly count of App instances in use for all orgs (not including the system org."](./images/accounting-report.png)
+  28  
+
+  41  
+  42:     ![alt-text="The Usage report has details for all spaces in an org."](./images/usage-report-link.png)
+  43  
+
+  45  
+  46:     ![alt-text=""](./images/usage-report.png)
+  47  
+
+  49  
+  50:     ![alt-text=""](./images/usage-report-spaces.png)
+  51  
+
+  53  
+  54:     ![alt-text="Detailed information ia available."](./images/service-details.png)
+
+api-endpoint.html.md.erb:
+  11  
+  12: ![alt-text="The Getting Started section of the Tools page shows your API endpoint."](./images/getting-started-api.png)
+  13  
+
+auth-sso.html.md.erb:
+   43  1. Record your system domain.
+   44:     ![alt-text="In Domains, enter the System domain and Apps domain, then click Save.](./images/domains.png)
+   45  
+
+   49  
+   50:     ![alt-text="In the SAML Identity Provider section, fill in the required fields."](./images/sso-ert.png)
+   51  **Note**: You must manually disable a SAML IDP created by <%= vars.app_runtime_abbr %> when you no longer require it.
+
+   56  <br>
+   57:     ![alt-text="In the login dialog, enter the user name and password and click Sign In."](./images/login-page.png)
+   58  
+
+  125  
+  126:     ![alt-text="The LDAP Server is selected. Fill in the required fields."](./images/uaa/ldap-config.png)
+  127  
+
+avs.html.md.erb:
+   77  
+   78: ![alt-text="Add a new logical switch."](./images/nsx-t/nsx-t-logical-switch.png)
+   79  
+
+   88  
+   89: ![alt-text="Add a Tier 1 Router and configure it."](./images/nsx-t/nsx-t-t1-router.png)
+   90  
+
+   95  4. For **IP Address**, use the first IP of the appropriate subnet. In this example, 192.168.1.0/24 is set aside for Infrastructure (<%= vars.ops_manager %> and BOSH Director), and 192.168.2.0/24 for the Deployment, so 192.168.1.1 and 192.168.2.1 are used respectively.
+   96: ![alt-text="The New Router port."](./images/nsx-t/nsx-t-router-port.png)
+   97  
+
+  102  4. Set **Advertise All LB VIP Routes** to **Yes** (necessary if Load Balancing service is configured).
+  103: ![alt-text="Edit the Route Advertisement Configuration."](./images/nsx-t/nsx-t-route-advertise.png)
+  104  
+
+  110  
+  111: ![alt-text="Add a new IP block"](./images/nsx-t/nsx-t-ip-block.png)
+  112  
+
+  301  1. If you have not already done so, download the <%= vars.app_runtime_abbr %> tile from [VMware Tanzu Network](https://network.pivotal.io/products/elastic-runtime) and import it to the **Installation Dashboard**. For instructions, see [Adding and Importing Products](https://docs.pivotal.io/ops-manager/2-10/install/add-delete.html#add-import).
+  302: ![alt-text="The Installation Dashboard with NSX-T tile.]"](./images/nsx-t/nsx-t-install-dash.png)
+  303  
+
+  339  * **Enable SNAT for Container Network**: Enable this checkbox.
+  340: ![alt-text="The NSX-T tile config: NCP."]
+  341  (./images/nsx-t/nsx-t-tile-config-ncp.png)
+
+  343  1. In the **NSX Node Agent** pane, enable the **Enable Debug Level of Logging for NSX Node Agent** checkbox.
+  344: ![alt-text="Enable the Debug Level of Logging for NSX Node Agent."](./images/nsx-t/nsx-t-tile-config-agent.png)
+  345  
+
+configure-lb.html.md.erb:
+  215  
+  216:     ![alt-text="The load balancer table has three load balancers: pcf-router HTTPS load balancer, pcf-ssh TCP load balancer, and pcf-websockets TCP load balancer."](./images/gcp/config-lb.png)
+  217  
+
+  223  
+  224:     ![alt-text="The Load balancer details for the pcf-router and load balancer."](./images/gcp/pcf-router.png)
+  225  
+
+configure-pas.html.md.erb:
+  340  
+  341:     ![alt-text="The Changes Applied window is shown when the process is completed."](images/cloudform/ops-manager-complete.png)
+
+console-login.html.md.erb:
+  21  
+  22: 	![alt-text="Click Link to Credential in the Admin  Credentials section."](images/uaa_admin_link.png)
+
+credential-rotation.html.md.erb:
+  51  
+  52:     ![alt-text="The example Status shows two CredHub rows. One of the rows has an Index with the value of zero."](./images/logs-list.png)
+  53  
+
+diagnostics.html.md.erb:
+  71  
+  72:     ![alt-text="The tile configuration is in the Status tab and has information for each job. The download icon is in the Logs column."](./images/troubleshooting/status.png)
+  73  
+
+  75  
+  76:     ![alt-text="The tile configuration is in the Logs tab. A list of zip files shows the file paths next to timestamps for when the files were last updated."](./images/troubleshooting/logs.png)
+  77  
+
+docker-registry.html.md.erb:
+  25  
+  26:     ![alt-text="The Security pane of Ops Manager Director has Trusted Certificates in the text area."](images/docker-registry-ops-man.png)
+  27  
+
+elb-ssh-proxy.html.md.erb:
+  13  
+  14:   ![alt-text="Define the Load Balancer."](./images/aws/aws_ssh_elb_step1.png)
+  15  
+
+  27  
+  28:     ![alt-text="Create a new security group that allows inbound traffic on the TCP port 2222."](./images/aws/aws_ssh_elb_securitygroup.png)
+  29  
+
+  31  
+  32:     ![alt-text="Ignore the warning on the Configure Security Settings page."](./images/aws/aws_ssh_elb_security_warning.png)
+  33  
+
+  35  
+  36:     ![alt-text="You can customize the health checks."](./images/aws/aws_ssh_elb_healthcheck.png)
+  37  
+
+  52  
+  53:     ![alt-text="The Create Record Set form shows a TTL of 300 and the name of your ELB domain."](./images/aws/aws_ssh_elb_domain.png)
+  54  
+
+  56  
+  57:   ![alt-text=""](./images/aws/aws_ssh_er_diego_brain_config.png)
+
+f5-lb.html.md.erb:
+  29  
+  30: ![alt-text="To use your F5 deployment as a load balancer, you must configure it to forward unencrypted HTTP."](images/f5-config-1.png)
+  31  
+
+id-jobs.html.md.erb:
+  20  
+  21:     ![alt-text="Use the Inventory, Hosts and Clusters view."](images/id/host-cluster.jpg)
+  22  
+
+  24  
+  25:     ![alt-text="Select your Resource Pool for your deployment."](images/id/deployment.jpg)
+  26  
+
+  28  
+  29:     ![alt-text=""](images/id/vm-tab.jpg)
+  30  
+
+  32  
+  33:     ![alt-text="The job column shows the the job that is associated with virtual machine."](images/id/job.jpg)
+  34  
+  35:     ![alt-text=""](images/id/jobs.jpg)
+
+pw-policy.html.md.erb:
+  19  
+  20:   ![alt-text="Deployment uses the internal user store for authentication. Verify that the Internal UAA is selected."](./images/er-config-auth-enterprise-sso-uaa.png)
+  21  
+
+route-service-lookup.html.md.erb:
+  104  
+  105: ![alt-text="The flow of the Gorouter request."](./images/default-internal.png)
+  106  
+
+  132  
+  133: ![alt-text=""](./images/bypass-external.png)
+  134  
+
+  145  
+  146: ![alt-text="The flow of the request through platform components."](./images/default-external.png)
+
+scaling-ert-components.html.md.erb:
+  39  
+  40:     ![alt-text="The Resource Config pane lists the jobs. For each job there is a dropdown for Instances, Persistent Disk Type, and VM Type."](images/scaling-ert.png)
+  41  
+
+  62  
+  63:     ![alt-text="The Resource Config pane lists the jobs. For each job there is a dropdown for Instances, Persistent Disk Type, and VM Type."](images/scaling-ert.png)
+  64  
+
+security_config.html.md.erb:
+  78  
+  79:     ![alt-text=""](./images/generate-cert.png)
+
+small-footprint.html.md.erb:
+   29  
+   30: ![alt-text=""](./images/ert-vms-2.0.png)
+   31  
+
+   64  
+   65: ![alt-text="The Small Footprint TAS for VMs has 4 required VMs and 5 optional VMs."](./images/srt-vms.png)
+   66  
+
+   78  
+   79: ![alt-text="The Small Footprint TAS for VMs co-locates 11 VMs onto 1 VM called Control. The 11 VMs are Cloud Controller, Cloud Controller Worker, Clock Global, Diego BBS, Diego Brain, Doppler Server, Loggregator Traffic Controller, Syslog Adapter, Syslog Scheduler, UAA, and optionally, CredHub."](./images/control-vms-2.0.png)
+   80  
+
+   88  
+   89: ![alt-text="The Small Footprint TAS for VMs Condenses 3 VMs onto 1 VM called Database. The three TAS for VMs VMs are NATS, MySQL Proxy, and MySQL Server. The MySQL Proxy and MySQL Server are optional VMs."](./images/db-vms.png)
+   90  
+
+   96  
+   97: ![alt-text=""](./images/compute-vms.png)
+   98  
+
+  104  
+  105: ![alt-text=""](./images/unchanged-vms.png)
+  106  
+
+switching-domains.html.md.erb:
+   15  
+   16: 	![alt-text="The current App domain for your deployment."](./images/switching_domains/er17-switchdomains-before.png)
+   17  
+
+   90  
+   91: 	![alt-text="The Apps Manager space has an application status at 100%."](./images/switching_domains/new_domain_confirmed1.png)
+   92  
+
+  115  
+  116: 	![alt-text="The Domains pane shows System and Apps domain example text."](./images/switching_domains/er17-switchdomains-after.png)
+  117  
+
+vcf.html.md.erb:
+  30  
+  31: ![alt-text="The SDDC Manager dashboard collects vCenter information."](images/vcf/select-workload-domains.png)
+  32  
+
+  34  
+  35: ![alt-text="The SDDC Manager dashboard shows the Workload Domains pane is active."](images/vcf/select-vi-workload-domain.png)
+  36  
+
+  38  
+  39: ![alt-text="In the SDDC Manager dashboard, the selected domain, nsxt-vi, is active."](images/vcf/select-cluster.png)
+  40  
+
+  42  
+  43: ![alt-text="In the SDDC Manager dashboard, the selected cluster, vi-cluster1, is active. The Actions menu is expanded."](images/vcf/open-in-vsphere-client.png)
+  44  
+
+vmc.html.md.erb:
+  401  1. After you finish configuration, click **Apply Changes**. The following warning appears:
+  402:     ![alt-text="Review Pending Changes. Warning: Please review the warnings. IaaS default: Could not log in. Required Datacenter privileges not available."](images/opsman-warning.png)
+  403  
+
+  443  2. After you finish configuration, click **Apply Changes**. The following warning appears again:
+  444:     ![alt-text="Review Pending Changes. Warning: Please review the warnings. IaaS default: Could not log in. Required Datacenter privileges not available."](images/opsman-warning.png)
+  445  
+
+vsphere-nsx-t.html.md.erb:
+   41  
+   42: ![alt-text="NSX-T Overview"](./images/nsx-t/nsx-t-refarch.png)
+   43  
+
+   83  
+   84: ![alt-text="Add a NAT (DNAT) rule."](./images/nsx-t/nsx-t-dnat-rule.png)
+   85  
+
+   90  
+   91: ![alt-text="Add corresponding NAT (SNAT) rule."](./images/nsx-t/nsx-t-snat-rule.png)
+   92  
+
+   97  
+   98: ![alt-text="Add a NAT (SNAT) rule for the infrastructure and deployment networks.:
+   99  "](./images/nsx-t/nsx-t-snat-net-rule.png)
+
+  112  
+  113: ![alt-text="An infrastructure network gateway configuration."](./images/nsx-t/nsx-t-t1-gateway.png)
+  114  
+
+  119  
+  120: ![alt-text="Add IP Address Blocks for TAS for VMs orgs"](./images/nsx-t/nsx-t-route-advertise-policy.png)
+  121  
+
+  128  
+  129: ![alt-text=""](./images/nsx-t/nsx-t-ip-block-policy.png)
+  130  
+
+  137  
+  138: ![alt-text="Add an IP Address Pool for an external SNAT IP pool."](./images/nsx-t/nsx-t-external-ip-pool.png)
+  139  
+  140: ![alt-text="Set a subnet for future NAT IP addresses."](./images/nsx-t/nsx-t-external-ip-pool-subnet.png)
+  141  
+
+  161  
+  162: ![alt-text="Add a segment for the networks."](./images/nsx-t/nsx-t-segment.png)
+  163  
+
+  299  
+  300: ![alt-text=""](./images/nsx-t/nsx-t-bosh-director-policy.png)
+  301  
+
+  310  
+  311: ![alt-text="The Ops Manager Installation Dashboard with NSX-T tile."](./images/nsx-t/nsx-t-install-dash.png)
+  312  
+  313  1. Configure <%= vars.app_runtime_abbr %>, following the directions in [Configuring <%= vars.app_runtime_abbr %>](./configure-pas.html). When you configure **Networking**, click **External** under **Container networking interface plugin**.<br>
+  314: ![alt-text=""](./images/nsx-t/nsx-t-tas-cni.png)
+  315  
+
+  324  
+  325: ![alt-text=""](./images/nsx-t/nsx-t-web-server-pool.png)
+  326  
+
+  334  
+  335: ![alt-text="The Ops Manager Installation Dashboard with NSX-T tile."](./images/nsx-t/nsx-t-install-dash.png)
+  336  
+
+  346  
+  347: ![alt-text="The VMware NSX-T tile: NSX-T Manager Configuration"](./images/nsx-t/nsx-t-tile-config-mgr-policy.png)
+  348  
+
+  357  
+  358: ![alt-text="The Configure the NCP (NSX-T Container Plug-in) pane. "](./images/nsx-t/nsx-t-tile-config-ncp-policy.png)
+  359  
+
+  361  
+  362: ![alt-text="The Configure the NSX-T Node Agent pane."](./images/nsx-t/nsx-t-tile-config-agent.png)
+  363  
+
+networking/tls-info.html.md.erb:
+  19  
+  20: ![alt-text="The Gorouter and app are grouped as TAS for VMs."](ingress-traffic.png)
+  21  [//]: https://docs.google.com/drawings/d/113hdlLwssAj_0I7WdTCaQ9Oz_Nf2f-6vXGSD8nccabE/edit?usp=sharing
+
+  34  
+  35: ![alt-text="A Connection diagram of communication paths."](platform-components.png)
+  36  [//]: https://docs.google.com/drawings/d/1_6GsjdOZT6Z_5MNeCV5LEXaJLmUqAMAM0kh7Xy0qJFI/edit?usp=sharing
+
+  63  
+  64: ![alt-text="The TLS communications between apps."](between-app-traffic.png)
+  65  [//]: https://docs.google.com/drawings/d/1Shng1QbrXZbjRTOCJGldvXghUnlHl8Qy9nIT5k0w9wI/edit?usp=sharing
+
+  76  
+  77: ![alt-text="The certificates are copied to each element
+  78  (Cache Server, Locator, and your App) from CredHub, which is in the BOSH block.
+
+  89  
+  90: ![alt-text="The TAS Block (internal) includes App1 and App2, along with CredHub.
+  91   The off-platform backend block (external) includes the Oracle DB and a TIBCO block."](apps-external-services.png)
