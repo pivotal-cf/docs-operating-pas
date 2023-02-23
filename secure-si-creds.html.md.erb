@@ -159,18 +159,25 @@ To unbind and rebind your service instances to their apps:
     ```
     cf unbind-service YOUR-APP YOUR-SERVICE-INSTANCE
     ```
+
     Where:
-    * `YOUR-APP` is the app to which you bound the service instance.
-    * `YOUR-SERVICE-INSTANCE` is the service instance you want to unbind from the app.
+    <ul>
+      <li><code>YOUR-APP</code> is the app to which you bound the service instance.</li>
+      <li><code>YOUR-SERVICE-INSTANCE</code> is the service instance you want to unbind from the app.</li>
+    </ul>
+
 
 1. Rebind the service instance to the app by running:
 
     ```
     cf bind-service YOUR-APP YOUR-SERVICE-INSTANCE
     ```
+
     Where:
-    * `YOUR-APP` is the app from which you unbound the service instance.
-    * `YOUR-SERVICE-INSTANCE` is the service instance you want to rebind to the app.
+    <ul>
+      <li><code>YOUR-APP</code> is the app from which you unbound the service instance.</li>
+      <li><code>YOUR-SERVICE-INSTANCE</code> is the service instance you want to rebind to the app.</li>
+    </ul>
 
 1. Review the `VCAP_SERVICES` environment variable to verify that the new service instance binding includes CredHub pointers by running:
 
@@ -179,7 +186,7 @@ To unbind and rebind your service instances to their apps:
     ```
     Where `YOUR-APP` is the app to which you bound the service instance.
     <br>
-    <br>
+
     For help parsing the output of the `cf-env` command, see [VCAP_SERVICES](../devguide/deploy-apps/environment-variable.html#VCAP-SERVICES)
      in _<%= vars.app_runtime_abbr %> Environment Variables_.
 
@@ -190,5 +197,5 @@ To unbind and rebind your service instances to their apps:
     ```
     Where `YOUR-APP` is the app to which you bound the service instance.
     <br>
-    <br>
+
     If you run `cf-env` again, you can see the `VCAP-SERVICES` environment variable now contains the credentials for the service instance binding.

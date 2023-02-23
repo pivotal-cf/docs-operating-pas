@@ -49,7 +49,9 @@ The following table lists network communication paths for Log Cache:
 | log_cache (Auth Proxy) | cloud_controller | 9024 | TCP | HTTPS | TLS |
 
 <sup>&#42;</sup>When Log Cache is configured to use Syslog ingestion.
+
 <sup>&#42;&#42;</sup>Any source VM can send requests to the specified destination within its subnet.
+
 <sup>&#42;&#42;&#42;</sup>When Log Cache is configured to use Reverse Log Proxy ingestion.
 
 <%= partial "bosh-dns" %>
