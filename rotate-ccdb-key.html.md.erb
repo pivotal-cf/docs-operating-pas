@@ -134,8 +134,13 @@ To view current and previous encryption keys using CredHub:
    in the Knowledge Base to log in to the CredHub CLI.
 
 1. Run the following command to view the five most recent encryption keys:
-<pre>credhub get -n /opsmgr/TAS-GUID/cloud_controller/INDEX/encryption_keys --versions=5</pre>
-	Where:
-	* `TAS-GUID` is the GUID of your <%= vars.app_runtime_abbr %> BOSH deployment.
-	* `INDEX` is the zero-based index of the key. This corresponds to the order
-           of the **Encryption key ledger** in the <%= vars.ops_manager %> UI.
+
+    ```yaml
+    credhub get -n /opsmgr/TAS-GUID/cloud_controller/INDEX/encryption_keys --versions=5
+    ```
+
+    Where:
+    <ul>
+      <li><code>TAS-GUID</code> is the GUID of your <%= vars.app_runtime_abbr %> BOSH deployment.</li>
+      <li><code>INDEX</code> is the zero-based index of the key. This corresponds to the order of the <strong>Encryption key ledger</strong> in the <%= vars.ops_manager %> UI.</li>
+    </ul>
