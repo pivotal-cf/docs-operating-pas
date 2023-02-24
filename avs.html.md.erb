@@ -62,15 +62,15 @@ To configure logical switches:
 
 1. In vSphere, create logical network switches to correspond to the networks that your foundation uses.
 1. Log in to the **NSX-T Manager Dashboard**.
-2. Go to **Advanced Networking & Security**.
-3. Go to the **Switching** pane.
-4. For each of these networks...
+2. Navigate to **Advanced Networking & Security**.
+3. Navigate to the **Switching** pane.
+4. For each of these networks:
     * **Infrastructure** (BOSH and <%= vars.ops_manager %>, defined in the **Assign AZs and Networks** pane of the BOSH Director tile)
     * **Deployment** (<%= vars.app_runtime_abbr %>, defined in the **Assign AZs and Networks** pane of the <%= vars.app_runtime_abbr %> tile)
     * **Services** and **Dynamic Services** (marketplace services and on-demand services, also defined in the <%= vars.app_runtime_abbr %> tile)
     * **Isolation Segment** (optional, defined in the **Assign AZs and Networks** pane of the Isolation Segment tile)
 
-    ...do the following:
+    Do the following:
     1. Click **+Add**.
     2. Enter a name for the logical switch (such as `<%= vars.app_runtime_abbr %>-Infrastructure`, `<%= vars.app_runtime_abbr %>-Deployment`).
     3. Click **Add**.
@@ -108,7 +108,7 @@ To configure routers:
 3. Enter a description, such as `Subnets are allocated from this pool to each newly-created org`.
 4. Enter a CIDR to allocate an address block large enough to accommodate all <%= vars.app_runtime_abbr %> apps. A `/14` CIDR is large enough for ~1,000 Orgs with ~250 apps each. If you are planning such a large foundation, see [VMware NSX-T <%= vars.app_runtime_abbr %> limits](https://configmax.vmware.com/guest?vmwareproduct=VMware%20NSX-T&release=NSX-T%20Data%20Center%202.4.0&categories=31-0) in the VMware documentation.
 
-![alt-text="Add a new IP block"](./images/nsx-t/nsx-t-ip-block.png)
+![alt-text="Add a new IP block."](./images/nsx-t/nsx-t-ip-block.png)
 
 ### <a id='nsx-t-load-balancer'></a> Configure Load Balancer
 
@@ -336,13 +336,14 @@ To install and configure the NSX-T Container Plug-In tile:
 * **Overlay Transport Zone**: A uniquely identifying string for the **Transport Zone** that you chose when you [created logical switches](#nsx-t-setup) for each network. This can be the name of the transport zone if no other zones in NSX-T share the same name, or else the UUID for the transport zone.
 * **Tier-0 Router**: A uniquely identifying string for the T0 router. This can be the tag string that you gave the router in NSX-T Manager if no other T0 routers in NSX-T share the same name, or else the UUID for the router.
 * **Subnet Prefix of Container Networks**: Subnet mask to set the address range size for apps in a single org. Defaults to `24`. This number must be higher than the mask for all <%= vars.app_runtime_abbr %> orgs in the NSX-T Manager **New IP Block** pane, to define each org's fraction of the total <%= vars.app_runtime_abbr %> address space.
-* **Enable SNAT for Container Network**: Enable this checkbox.
+* **Enable SNAT for Container Network**: Select  this check box.
 
     ![alt-text="NSX-T tile config: NCP"](./images/nsx-t/nsx-t-tile-config-ncp.png)
 
-1. In the **NSX Node Agent** pane, enable the **Enable Debug Level of Logging for NSX Node Agent** checkbox.
-![alt-text="Enable Debug Level of Logging for NSX Node Agent"](./images/nsx-t/nsx-t-tile-config-agent.png)
+1. In the **NSX Node Agent** pane, select the **Enable Debug Level of Logging for NSX Node Agent** check box.
+![alt-text="Enable the Debug Level of Logging for NSX Node Agent."](./images/nsx-t/nsx-t-tile-config-agent.png)
 
 1. Click **Save** and return to the **Installation Dashboard**.
 
-2. After you have configured both the **<%= vars.app_runtime_abbr %>** tile and the **VMware NSX-T** tile, click **Review Pending Changes**, then **Apply Changes** to deploy <%= vars.app_runtime_abbr %> with NSX-T networking.
+2. After you have configured both the **<%= vars.app_runtime_abbr %>** tile and the **VMware NSX-T** tile, click **Review Pending Changes**.
+3. Clickc **Apply Changes** to deploy <%= vars.app_runtime_abbr %> with NSX-T networking.
