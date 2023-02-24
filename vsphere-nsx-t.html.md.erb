@@ -72,8 +72,8 @@ To set up NSX-T to integrate with <%= vars.app_runtime_abbr %>, follow these pro
 To configure Network Address Translation (NAT) rules:
 
 1. Create network address translation (NAT) rules to communicate with <%= vars.ops_manager %>:
-     1. Go to **Networking**.
-     2. Go to the **Nat** pane.
+     1. Navigate to **Networking**.
+     2. Navigate to the **Nat** pane.
      3. Select your T0 gateway.
      4. Select **Add Nat Rule**.
      5. Add a rule for destination NAT (DNAT) with:
@@ -83,7 +83,7 @@ To configure Network Address Translation (NAT) rules:
 
 ![alt-text="Add a NAT (DNAT) rule."](./images/nsx-t/nsx-t-dnat-rule.png)
 
-1. Add the corresponding source NAT (SNAT) rule.
+1. Add the corresponding source NAT (SNAT) rule:
       * The externally-specified destination IP address.
       * The <%= vars.ops_manager %> internal network address.
       * Firewall Setting "bypass;" the packet bypasses firewall rules.
@@ -129,7 +129,7 @@ To create a T1 gateway, for each <%= vars.platform_name %> network, infrastructu
 ![alt-text=""](./images/nsx-t/nsx-t-ip-block-policy.png)
 
 1. Create an external SNAT IP pool:
-     1. Go to **Networking**, then **IP Address Pools**.
+     1. Navigate to **Networking**, then **IP Address Pools**.
      2. Click the **IP Address Pools** tab and then click **Add IP Address Pool**.
      3. Enter a name (for example,  `external-ip-pool`).
      4. Enter a description (for example, "IP pool that provides 1 public IP for each <%= vars.app_runtime_abbr %> Org"). Later, you enter this pool name, on the **VMware NSX-T** tile, in the **NCP** section, under **IP Pools used to provide External (NAT) IP Addresses to Org Networks**.
@@ -144,7 +144,7 @@ To create a T1 gateway, for each <%= vars.platform_name %> network, infrastructu
 In vSphere, you create segments that correspond to the networks that <%= vars.platform_name %> uses:
 
 1. Log in to the **NSX-T Manager Dashboard**.
-2. Go to **Networking** and click the **Segments** pane.
+2. Navigate to **Networking** and click the **Segments** pane.
 3. Follow these steps, for each of the networks that are listed:
 
    1. Click **Add Segment**.
@@ -152,7 +152,7 @@ In vSphere, you create segments that correspond to the networks that <%= vars.pl
    3. Enter a Gateway to connect to.
    4. Click **Save**.
 
-       **Networks**
+       **Networks**:
 
       * **Infrastructure** (BOSH and <%= vars.ops_manager %>, defined in the **Assign AZs and Networks** pane of the BOSH Director tile)
       * **Deployment** (<%= vars.app_runtime_abbr %>, defined in the **Assign AZs and Networks** pane of the <%= vars.app_runtime_abbr %> tile)
@@ -167,6 +167,7 @@ To create active monitors (health checks) for the virtual servers:
 
 1. On the NSX-T Manager UI, go to **Networking** > **Load Balancing**.
 2. Click the **Monitors** tab.
+
 To create the health monitor for web load balancing:
 
 1. Click **Add Active Monitor**.
@@ -231,7 +232,7 @@ To create the server pool for TCP load balancing:
 
 To create the load balancer:
 
-1. In the NSX-T Manager UI, go to **Networking** > **Load Balancing**.
+1. In the NSX-T Manager UI, navigate to **Networking** > **Load Balancing**.
 2. Click the **Load Balancers** tab.
 3. Click **Add Load Balancer**.
 
@@ -295,7 +296,7 @@ To enable NSX-T mode in the BOSH Director:
 4. Configure BOSH Director authentication to the NSX Manager by following the **NSX Networking** instructions
 in the [Step 2: Configure vCenter](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/<%= vars.current_major_version %>/vsphere/config.html#vcenter-config) section of _Configuring BOSH Director on vSphere_.
 
-1. Ensure the **Use NSX-T Policy API** option is selected.
+1. Verify that the **Use NSX-T Policy API** option is selected.
 
 ![alt-text=""](./images/nsx-t/nsx-t-bosh-director-policy.png)
 
