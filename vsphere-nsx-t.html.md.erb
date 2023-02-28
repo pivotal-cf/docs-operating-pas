@@ -16,7 +16,7 @@ This plug-in is:
 
 or
 
-* On vSphere, the NSX-T Container Plug-in (NCP), which is installed as the [VMware NSX-T Container Plug-in for <%= vars.platform_name %>](https://network.pivotal.io/products/vmware-nsx-t) tile in <%= vars.ops_manager %>.
+* On vSphere, the NSX-T Container Plug-in (NCP), which is installed as the [VMware NSX-T Container Plug-in for <%= vars.platform_name %>](https://network.tanzu.vmware.com/products/vmware-nsx-t) tile in <%= vars.ops_manager %>.
 
 ## <a id='requirements'></a> Prerequisites
 
@@ -28,9 +28,9 @@ Before you deploy <%= vars.app_runtime_abbr %> with NSX-T networking, you must h
 
 * BOSH and <%= vars.ops_manager %> installed and configured on vSphere. For more information, see [Deploying <%= vars.ops_manager %> on vSphere](https://docs.pivotal.io/ops-manager/<%= vars.current_major_version %>/vmware-tanzu-ops-manager/vsphere-config.html) and [Configuring BOSH Director on vSphere](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/<%= vars.current_major_version %>/vsphere/config.html).
 
-* The [VMware NSX-T Container Plug-in for <%= vars.platform_name %> tile](https://network.pivotal.io/products/vmware-nsx-t) is downloaded from VMware Tanzu Network and imported to the <%= vars.ops_manager %> **Installation Dashboard**. For information about downloading and importing VMware Tanzu products to the Installation Dashboard, see [Adding and Importing Products](https://docs.pivotal.io/platform/<%= vars.current_major_version %>/customizing/add-delete.html#add-import).
+* The [VMware NSX-T Container Plug-in for <%= vars.platform_name %> tile](https://network.tanzu.vmware.com/products/vmware-nsx-t) is downloaded from VMware Tanzu Network and imported to the <%= vars.ops_manager %> **Installation Dashboard**. For information about downloading and importing VMware Tanzu products to the Installation Dashboard, see [Adding and Importing Products](https://docs.pivotal.io/platform/<%= vars.current_major_version %>/customizing/add-delete.html#add-import).
 
-* The [<%= vars.app_runtime_abbr %> tile](https://network.pivotal.io/products/elastic-runtime) is downloaded from VMware Tanzu Network and imported to the <%= vars.ops_manager %> Installation Dashboard. The <%= vars.app_runtime_abbr %> tile must be in one of these states:
+* The [<%= vars.app_runtime_abbr %> tile](https://network.tanzu.vmware.com/products/elastic-runtime) is downloaded from VMware Tanzu Network and imported to the <%= vars.ops_manager %> Installation Dashboard. The <%= vars.app_runtime_abbr %> tile must be in one of these states:
   * Configured but not currently deployed. You did not click **Review Pending Changes**, then **Apply Changes** on this version of <%= vars.app_runtime_abbr %>.
   * Deployed previously, with the **Container network interface plugin** field set to **External** in the **Networking** pane of the <%= vars.app_runtime_abbr %> tile.
   <p class="note"><strong>Note:</strong> Deploying <%= vars.app_runtime_abbr %> with its container network interface (CNI) set to <strong>Silk</strong> configures Diego Cells to use an internally-managed container network. Subsequently, switching the CNI interface to <strong>External</strong> NSX-T leads to errors.</p>
@@ -304,7 +304,7 @@ in the [Step 2: Configure vCenter](https://docs.vmware.com/en/VMware-Tanzu-Opera
 
 To configure <%= vars.app_runtime_abbr %> for external  container networking:
 
-1. If you have not already done so, download the <%= vars.app_runtime_abbr %> tile from [VMware Tanzu Network](https://network.pivotal.io/products/elastic-runtime) and import it to the **Installation Dashboard**.
+1. If you have not already done so, download the <%= vars.app_runtime_abbr %> tile from [VMware Tanzu Network](https://network.tanzu.vmware.com/products/elastic-runtime) and import it to the **Installation Dashboard**.
 
    For instructions, see [Adding and Importing Products](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/<%= vars.current_major_version %>/vmware-tanzu-ops-manager/install-add-delete.html]
    ).
@@ -329,7 +329,7 @@ To configure <%= vars.app_runtime_abbr %> for external  container networking:
 
 To install and configure the NSX-T Container Plug-in:
 
-1. If you have not already done so, download the VMware NSX-T Container Plug-in for <%= vars.platform_name %> tile from [VMware Tanzu Network](https://network.pivotal.io/products/vmware-nsx-t) and import it to the **Installation Dashboard**.
+1. If you have not already done so, download the VMware NSX-T Container Plug-in for <%= vars.platform_name %> tile from [VMware Tanzu Network](https://network.tanzu.vmware.com/products/vmware-nsx-t) and import it to the **Installation Dashboard**.
 
    For instructions, see [Adding and Importing Products](https://docs.pivotal.io/platform/<%= vars.current_major_version %>/customizing/add-delete.html#add-import).
 
@@ -378,7 +378,7 @@ To upgrade <%= vars.app_runtime_abbr %> with NSX-T Networking:
    * [Product Interoperability Matrix: <%= vars.app_runtime_abbr %>, VMware NSX-T, and VMware NSX-T Container Plug-in for <%= vars.platform_name %>](https://interopmatrix.vmware.com): To help you discover supported version combinations.
    * [VMware NSX-T Data Center Documentation](https://docs.vmware.com/en/VMware-NSX-T-Data-Center/): Start by reviewing the _NSX Container Plug-in (NCP) Release Notes_ and _NSX-T Data Center Installation Guide_ for the versions of NCP and NSX-T that you want to install.
 
-2. Download the desired version of VMware NSX-T Container Plug-in for <%= vars.platform_name %> tile from [VMware Tanzu Network](https://network.pivotal.io/products/vmware-nsx-t).
+2. Download the desired version of VMware NSX-T Container Plug-in for <%= vars.platform_name %> tile from [VMware Tanzu Network](https://network.tanzu.vmware.com/products/vmware-nsx-t).
 
 3. In <%= vars.ops_manager %>, import the new version of the tile to the **Installation Dashboard**. For instructions, see [Adding and Importing Products](https://docs.pivotal.io/platform/<%= vars.current_major_version %>/customizing/add-delete.html#add-import).
 
