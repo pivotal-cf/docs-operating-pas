@@ -27,23 +27,27 @@ To configure multi-foundation support in Apps Manager:
 
 1. For **Multi-foundation configuration (beta)**, enter a JSON object for each additional foundation that you want to manage. Use the following format for the JSON object:
 
-	```
-	{
-	  "FOUNDATION-NAME": {
-	    "ccUrl": "https://api.FOUNDATION-SYSTEM-DOMAIN.com",
-	    "systemDomain": "FOUNDATION-SYSTEM-DOMAIN.com",
-	    "usageServiceUrl": "https://app-usage.FOUNDATION-SYSTEM-DOMAIN.com",
-	    "invitationsServiceUrl": "https://p-invitations.FOUNDATION-SYSTEM-DOMAIN.com",
-	    "logoutUrl": "https://login.FOUNDATION-SYSTEM-DOMAIN.com/logout.do",
-	    "metricsUrl": "https://metrics.FOUNDATION-SYSTEM-DOMAIN.com",
-	    "uaaUrl": "https://login.FOUNDATION-SYSTEM-DOMAIN.com"
-	  }
-    }
-	```
-	Where:
-	* `FOUNDATION-NAME` is a name for the foundation.
-	* `FOUNDATION-SYSTEM-DOMAIN` is the system domain of the foundation. The system domain is listed in the **Domains** pane of the <%= vars.app_runtime_abbr %> tile.
-	* `metricsUrl` is an optional field. If App Metrics is installed on the foundation, provide the App Metrics URL.
+    ```
+    {
+      "FOUNDATION-NAME": {
+        "ccUrl": "https://api.FOUNDATION-SYSTEM-DOMAIN.com",
+        "systemDomain": "FOUNDATION-SYSTEM-DOMAIN.com",
+        "usageServiceUrl": "https://app-usage.FOUNDATION-SYSTEM-DOMAIN.com",
+        "invitationsServiceUrl": "https://p-invitations.FOUNDATION-SYSTEM-DOMAIN.com",
+        "logoutUrl": "https://login.FOUNDATION-SYSTEM-DOMAIN.com/logout.do",
+        "metricsUrl": "https://metrics.FOUNDATION-SYSTEM-DOMAIN.com",
+        "uaaUrl": "https://login.FOUNDATION-SYSTEM-DOMAIN.com"
+      }
+      }
+    ```
+    
+    Where:
+    <ul>
+      <li><code>FOUNDATION-NAME</code> is a name for the foundation.</li>
+      <li><code>FOUNDATION-SYSTEM-DOMAIN</code> is the system domain of the foundation. The system domain is listed in the <strong>Domains</strong> pane of the &lt;%= vars.app_runtime_abbr %&gt; tile.</li>
+      <li><code>metricsUrl</code> is an optional field. If App Metrics is installed on the foundation, provide the App Metrics URL.</li>
+    </ul>
+
 
 1. For **Redirect URIs**, enter a comma-separated list of the URI for each additional foundation on which you enabled multi-foundation support. Use the following format for each URI:
 
