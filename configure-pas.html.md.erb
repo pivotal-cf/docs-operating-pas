@@ -127,7 +127,7 @@ To configure the **App Developer Controls** pane:
 
 1. For **Internal domains**, enter one or more domains that apps use for internal DNS service discovery. If you specify a domain using `cf push -d`, other <%= vars.app_runtime_abbr %> apps can reach the pushed app at `APP-NAME.INTERNAL-DOMAIN`. This value defaults to `apps.internal`.
 
-1. Enable the **Allow space developers to manage network policies** checkbox to permit developers to manage their own network policies for their apps.
+1. Enable the **Allow space developers to manage network policies** check box to permit developers to manage their own network policies for their apps.
 
 1. Click **Save**.
 
@@ -171,7 +171,7 @@ To configure the **CredHub** pane:
         * **Username:** Enter a unique username that can access your CredHub database on the database server.
         * **Password:** Enter the password for the provided username.
         * **Database CA certificate:** This certificate is used when encrypting traffic to and from the database.
-        * **Disable hostname verification:** Enable this checkbox to disable hostname verification for TLS connections to the targeted database server. You cannot disable hostname verification for TLS connections to Postgres databases. You must select this option if you are configuring an external database on GCP or Azure.
+        * **Disable hostname verification:** Enable this check box to disable hostname verification for TLS connections to the targeted database server. You cannot disable hostname verification for TLS connections to Postgres databases. You must select this option if you are configuring an external database on GCP or Azure.
       <div class="note"><strong>Note:</strong> If you deploy <%= vars.app_runtime_abbr %> on AWS using Terraform, you can locate these values in your Terraform output:
           <ul>
             <li><strong>Hostname:</strong> <code>rds_address</code></li>
@@ -184,23 +184,23 @@ To configure the **CredHub** pane:
 1. (Optional) Under **KMS plugin providers**, specify one or more Key Management Service (KMS) providers:
     * **Instance name:** Enter the name of the KMS provider.
     * **Endpoint:** Enter the Unix socket address for the KMS plugin.
-    * **Primary:** Enable the **Primary** checkbox to indicate the primary KMS provider for your environment. You must mark one provider as primary. Do not mark more than one provider as primary.
+    * **Primary:** Enable the **Primary** check box to indicate the primary KMS provider for your environment. You must mark one provider as primary. Do not mark more than one provider as primary.
 
 1. Under **Internal encryption provider keys**, specify one or more keys to use for encrypting and decrypting the values stored in the CredHub database.
     * If you plan to use internal encryption, configure these fields:
         * **Name:** Enter any key name.
         * **Key:** Enter a randomly generated value that is at least 20 characters long. This key is used for encrypting all data.
-        * **Primary:** This checkbox marks the key you specified above as the primary encryption key. You must mark one key as primary. Do not mark more than one key as primary.
+        * **Primary:** This check box marks the key you specified above as the primary encryption key. You must mark one key as primary. Do not mark more than one key as primary.
     * If you plan to use a hardware security module (HSM) as your encryption provider, configure these fields:
         * **Name:** Enter a key name that already exists on your HSM or a new key name. For each new key name, CredHub generates a key in **HSM provider partition** that you configure below.
         * **Key:** Enter a placeholder value under **Key**. CredHub does not use this key for encryption. However, you cannot leave the **Key** field blank.
-        * **Primary:** This checkbox is used for marking the key you specified above as the primary encryption key. You must mark one key as primary. Do not mark more than one key as primary.
+        * **Primary:** This check box is used for marking the key you specified above as the primary encryption key. You must mark one key as primary. Do not mark more than one key as primary.
     <p class="note"><strong>Note:</strong> For information about using additional keys for key rotation, see <a href="credential-rotation.html">Rotating Runtime CredHub Encryption Keys</a>.</p>
 
 1. (Optional) To configure CredHub to use an HSM, configure these fields:
     * **HSM provider partition:** Enter the name of the HSM provider partition.
     * **HSM provider partition password:** Enter a password to use to access the HSM provider partition.
-    * **HSM provider client certificate:** Enter the client certificate for the HSM. For more information, see [Create and Register HSM Clients](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/<%= vars.current_major_version %>/vmware-tanzu-ops-manager/install-hsm-config.html#create-register-hsm) in _Preparing CredHub HSMs for Configuration_.
+    * **HSM provider client certificate:** Enter the client certificate for the HSM. For more information, see [Create and Register HSM Clients](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-hsm-config.html#create-register-hsm) in _Preparing CredHub HSMs for Configuration_.
     * Under **HSM provider encryption keys**, specify one or more keys to use for encrypting and decrypting the values stored in the HSM provider. For each key, configure these fields:
         * **Name:** Enter the name of the encryption key.
         * **Primary:** This check box is used for marking the key you specified above as the primary encryption key. You must mark one key as primary. Do not mark more than one key as primary.
@@ -210,27 +210,27 @@ To configure the **CredHub** pane:
         * **Partition serial number:** Enter the serial number of the HSM partition.
         * **HSM certificate:** Enter the certificate for the HSM server. The HSM presents this certificate to CredHub to establish a two-way TLS connection.
 
-1. If your deployment uses any <%= vars.platform_name %> services that support storing service instance credentials in CredHub and you want to enable this feature, enable the **Secure service instance credentials** checkbox. For more information about using CredHub for securing service instance credentials, see [Securing Service Instance Credentials with Runtime CredHub](secure-si-creds.html).
+2. If your deployment uses any <%= vars.platform_name %> services that support storing service instance credentials in CredHub and you want to enable this feature, enable the **Secure service instance credentials** check box. For more information about using CredHub for securing service instance credentials, see [Securing Service Instance Credentials with Runtime CredHub](secure-si-creds.html).
 
-1. Click **Save**.
+3. Click **Save**.
 
-1. Go to the **Resource Config** pane.
+4. Go to the **Resource Config** pane.
 
-1. Under the **Job** column of the **CredHub** row, ensure that the number of instances is set to `2`. This is the minimum instance count required for high availability.
+5. Under the **Job** column of the **CredHub** row, ensure that the number of instances is set to `2`. This is the minimum instance count required for high availability.
 
-1. To configure UAA so it recognizes a proxy, complete the following fields:
+6. To configure UAA so it recognizes a proxy, complete the following fields:
     * **List of proxy servers:** Enter a comma-separated list of router IP addresses for the first group of HTTP/TCP backends.
     * **http proxy:** Enter the `http_proxy` for all http requests across VMs.
     * **https proxy:** Enter the `https_proxy` for all http requests across VMs
     * **no proxy:** Enter a comma-separated list of domains, IP addresses, or DNS suffixes.
 
-1. Click **Save**.
+7. Click **Save**.
 
 ## <a id='sys-db'></a> Configure Databases
 
 In the **Databases** pane, you can configure <%= vars.app_runtime_abbr %> to use an internal MySQL database provided with <%= vars.platform_name %>, or you can configure an external database provider for the databases required by <%= vars.app_runtime_abbr %>.
 
-<p class="note"><strong>Note:</strong> If you are performing an upgrade, do not modify your existing internal database configuration, or you may lose data. You must migrate your existing data first before changing the configuration. For additional upgrade information, see <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/<%= vars.current_major_version %>/vmware-tanzu-ops-manager/install-upgrading-pcf.html">Upgrading <%= vars.platform_name %></a>.</p>
+<p class="note"><strong>Note:</strong> If you are performing an upgrade, do not modify your existing internal database configuration, or you may lose data. You must migrate your existing data first before changing the configuration. For additional upgrade information, see <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-upgrading-pcf.html">Upgrading <%= vars.platform_name %></a>.</p>
 
 ### <a id='internal-db'></a> Internal Database Configuration
 
