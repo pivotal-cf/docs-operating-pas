@@ -35,7 +35,7 @@ Before deploying <%= vars.app_runtime_abbr %> with NSX-T networking, you must ha
 * The [<%= vars.app_runtime_abbr %> tile](https://network.tanzu.vmware.com/products/elastic-runtime) is downloaded from VMware Tanzu Network and imported to the <%= vars.ops_manager %> Installation Dashboard. The <%= vars.app_runtime_abbr %> tile must be in one of these states:
   * Configured but not currently deployed. You did not click **Review Pending Changes**, then **Apply Changes** on this version of <%= vars.app_runtime_abbr %>.
   * Deployed previously, with the **Container network interface plugin** field set to **External** in the **Networking** pane of the <%= vars.app_runtime_abbr %> tile.
-  <p class="note"><strong>Note:</strong> Deploying <%= vars.app_runtime_abbr %> with its container network interface (CNI) set to **Silk** configures Diego Cells to use an internally-managed container network. Subsequently switching the CNI interface to **External** NSX-T leads to errors.</p>
+  <p class="note"><strong>Note:</strong> Deploying <%= vars.app_runtime_abbr %> with its container network interface (CNI) set to <strong>Silk</strong> configures Diego Cells to use an internally-managed container network. Subsequently switching the CNI interface to <strong>External</strong> NSX-T leads to errors.</p>
 
 
 ## <a id='architecture'></a> Architecture
