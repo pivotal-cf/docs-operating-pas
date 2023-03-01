@@ -195,7 +195,9 @@ App traffic logging generates log messages as follows:
 
 App traffic logs are formatted as described in the [silk-release Traffic logging](https://github.com/cloudfoundry/silk-release/blob/develop/docs/traffic_logging.md) documentation, following the `iptables-logger` format but without line breaks.
 
-For example, the first part of an app traffic log line looks like: <code>{"timestamp": "2020-06-23T11:36:01.710452019Z", "source": "cfnetworking.iptables", "message": "cfnetworking.iptables.ingress-allowed", "log_level": 1, "data": { "destination": { "container_id": "d5978989-1401-49ff-46cd-33e5","app_guid": "bc6f229d-5e4a-4c41-a63f-e8795496c283",</code>.
+For example, the first part of an app traffic log line looks like: 
+
+<code> {"timestamp": "2020-06-23T11:36:01.710452019Z", "source": "cfnetworking.iptables", "message": "cfnetworking.iptables.ingress-allowed", "log_level": 1, "data": { "destination": { "container_id": "d5978989-1401-49ff-46cd-33e5","app_guid": "bc6f229d-5e4a-4c41-a63f-e8795496c283", </code>.
 
 Each log message includes:
 
