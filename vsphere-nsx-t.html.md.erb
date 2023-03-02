@@ -307,8 +307,11 @@ To enable NSX-T mode in the BOSH Director:
 
 1. Select **NSX Networking** below.
 
-1. Configure BOSH Director authentication to the NSX Manager by following the **NSX Networking** instructions
-in the [Step 2: Configure vCenter](https://docs.pivotal.io/platform/ops-manager/2-8/vsphere/config.html#vcenter-config) section of _Configuring BOSH Director on vSphere_.
+2. Configure BOSH Director authentication to the NSX Manager by following the **NSX Networking** instructions in the [Step 2: Configure vCenter](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/vsphere-config.html#vcenter-config) section of _Configuring BOSH Director on vSphere_.
+
+3. Verify that the **Use NSX-T Policy API** option is selected.
+
+![alt-text=""](./images/nsx-t/nsx-t-bosh-director-policy.png)
 
 ### <a id='external-net'></a> Configure <%= vars.app_runtime_abbr %> for External Container Networking
 
@@ -316,6 +319,7 @@ To configure <%= vars.app_runtime_abbr %> for external container networking:
 
 1. If you have not already done so, download the <%= vars.app_runtime_abbr %> tile from [VMware Tanzu Network](https://network.tanzu.vmware.com/products/elastic-runtime) and import it to the **Installation Dashboard**.
 
+  For instructions, see [Add and Import Products](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-add-delete.html#add-and-import-products-0).
 1. Configure <%= vars.app_runtime_abbr %>, following the directions in [Configuring <%= vars.app_runtime_abbr %>](./configure-pas.html). When you configure **Networking**, select **External** under **Container networking interface plugin**.
 
     ![NSX-T ](./images/nsx-t/nsx-t-pas-cni.png)
@@ -330,13 +334,8 @@ To configure <%= vars.app_runtime_abbr %> for external container networking:
 
 To install and configure the tile:
 
-1. If you have not already done so, download the VMware NSX-T Container Plug-in for <%= vars.platform_name %> tile from [VMware Tanzu Network](https://network.pivotal.io/products/vmware-nsx-t) and import it to the **Installation Dashboard**. For instructions, see [Adding and Importing Products](https://docs.pivotal.io/platform/<%= vars.current_major_version %>/customizing/add-delete.html#add-import).
-![<%= vars.ops_manager %> Installation Dashboard with NSX-T tile](./images/nsx-t/nsx-t-install-dash.png)
-
-1. If you have not already done so, download the VMware NSX-T Container Plug-in for <%= vars.platform_name %> tile from [VMware Tanzu Network](https://network.tanzu.vmware.com/products/vmware-nsx-t) and import it to the **Installation Dashboard**.
-
-    - **NSX Manager Address**: The NSX-T Manager host address or IP address.
-    - **Use Client Certificates or Username/Password**: Configure this setting as follows:
+1. If you have not already done so, download the VMware NSX-T Container Plug-in for <%= vars.platform_name %> tile from [VMware Tanzu Network](https://network.tanzu.vmware.com/products/vmware-nsx-t) and import it to the **Installation Dashboard**. For instructions, see [https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-add-delete.html#add-import).
+![alt-text="Installation Dashboard with NSX-T tile."](./images/nsx-t/nsx-t-install-dash.png)
 
         1. If you are using VMware Workspace ONE Access, formerly called VMware Identity Manager
         (vIDM), then select **Client Certificate Authentication**.
@@ -364,7 +363,7 @@ To install and configure the tile:
 
 1. Click **Save** and return to the **Installation Dashboard**.
 
-1. After you have configured both the **<%= vars.app_runtime_abbr %>** tile and the **VMware NSX-T** tile, click **Review Pending Changes**, then **Apply Changes** to deploy <%= vars.app_runtime_abbr %> with NSX-T networking.
+2. After you have configured both the **<%= vars.app_runtime_abbr %>** tile and the **VMware NSX-T** tile, click **Review Pending Changes**, then **Apply Changes** to deploy <%= vars.app_runtime_abbr %> with NSX-T networking.
 
 
 ## <a id='upgrade'></a> Upgrade <%= vars.app_runtime_abbr %> with NSX-T Networking
@@ -381,10 +380,10 @@ To upgrade <%= vars.app_runtime_abbr %> with NSX-T Networking:
 
 2. Download the desired version of VMware NSX-T Container Plug-in for <%= vars.platform_name %> tile from [VMware Tanzu Network](https://network.tanzu.vmware.com/products/vmware-nsx-t).
 
-1. In <%= vars.ops_manager %>, import the new version of the tile to the **Installation Dashboard**. For instructions, see [Adding and Importing Products](https://docs.pivotal.io/platform/<%= vars.current_major_version %>/customizing/add-delete.html#add-import).
+3. In <%= vars.ops_manager %>, import the new version of the tile to the **Installation Dashboard**. For instructions, see [Adding and Importing Products](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-add-delete.html#add-import).
 
-1. Click **Review Pending Changes** and review your changes.
+4. Click **Review Pending Changes** and review your changes.
 
-1. Click **Apply Changes**.
+5. Click **Apply Changes**.
 
 1. Continue with the upgrade of <%= vars.ops_manager %>, <%= vars.app_runtime_abbr %>, or NSX-T Data Center. For more information, see [Upgrade NCP in a <%= vars.platform_name %> Environment](https://docs.vmware.com/en/VMware-NSX-T-Data-Center/2.4/com.vmware.nsxt.ncp_kubernetes.doc/GUID-4E269C79-1EF7-48E7-AFA4-D79B9F9C9202.html?hWord=N4IghgNiBcIK4AcDmAnMATApgAgHYGMEQBfIA) in the VMware NSX-T Data Center documentation.
