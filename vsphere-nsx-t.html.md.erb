@@ -80,17 +80,17 @@ To configure Network Address Translation (NAT) rules:
   1. Add a rule for destination NAT (DNAT) with:
       - The externally-specified destination IP address of incoming requests. If your <%= vars.ops_manager %> has a DNS entry (for example, `opsmgr.example.com`), this is its IP address.
       - The <%= vars.ops_manager %> internal network address.
-      - Firewall Setting "bypass" - the packet bypasses firewall rules.
+      - Firewall Setting bypass - the packet bypasses firewall rules.
 ![NSX-T ](./images/nsx-t/nsx-t-dnat-rule.png)
   1. Add the corresponding source NAT (SNAT) rule with:
       - The externally-specified destination IP address.
       - The <%= vars.ops_manager %> internal network address.
-      - Firewall Setting "bypass" - the packet bypasses firewall rules.
+      - Firewall Setting bypass - the packet bypasses firewall rules.
 ![NSX-T ](./images/nsx-t/nsx-t-snat-rule.png)
   1. Add a rule for source NAT (SNAT) for the infrastructure and deployment networks:
       - The externally-specified destination IP address.
       - The internal network address in CIDR notation.
-      - Firewall Setting "bypass" - the packet bypasses firewall rules.
+      - Firewall Setting bypass - the packet bypasses firewall rules.
 ![NSX-T ](./images/nsx-t/nsx-t-snat-net-rule.png)
 
 #### <a id='nsx-t-gateways'></a> Configure Gateways
@@ -98,7 +98,7 @@ To configure Network Address Translation (NAT) rules:
 To configure Tier-1 (T1) gateways:
 
 1. Create T1 gateways for <%= vars.app_runtime_abbr %>, to connect from the T0 gateway. For each <%= vars.platform_name %> network, Infrastructure, Deployment, and so on, create a T1 gateway as follows:
-1. In the NSX-T Manager UI, navigate to **Networking** > **Tier-1 Gateways**.
+1. In the NSX-T Manager UI, navigate to **Networking**, then **Tier-1 Gateways**.
   1. Click **ADD TIER-1 GATEWAY**.
   1. Configure the gateway. Include the Edge Cluster as it is required to enable the Load Balancer. The Infrastructure network gateway configuration might look like the following diagram:
 ![NSX-T ](./images/nsx-t/nsx-t-t1-gateway.png)
@@ -153,7 +153,7 @@ To configure segments:
 
 To configure a load balancer:
 
-1. Create Active Monitors (health checks) for use by the virtual servers later on. In the NSX-T Manager UI, navigate to **Networking** > **Load Balancing** and click the **Monitors** tab.
+1. Create Active Monitors (health checks) for use by the virtual servers later on. In the NSX-T Manager UI, navigate to **Networking**, then **Load Balancing**, and click the **Monitors** tab.
     1. Create the health monitor for web load balancing:
       1. Click **ADD ACTIVE MONITOR**.
       1. Select **HTTP**
@@ -262,46 +262,39 @@ To enable NSX-T mode in the BOSH Director:
 
 1. Select **NSX Networking** below.
 
-1. Configure BOSH Director authentication to the NSX Manager by following the **NSX Networking** instructions
-in the [Step 2: Configure vCenter](https://docs.pivotal.io/platform/ops-manager/vsphere/config.html#vcenter-config) section of _Configuring BOSH Director on vSphere_.
+2. Configure BOSH Director authentication to the NSX Manager by following the **NSX Networking** instructions in the [Step 2: Configure vCenter](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/vsphere-config.html#vcenter-config) section of _Configuring BOSH Director on vSphere_.
 
-1. Ensure the "Use NSX-T Policy API" option is selected.
-![NSX-T ](./images/nsx-t/nsx-t-bosh-director-policy.png)
+3. Verify that the **Use NSX-T Policy API** option is selected.
+
+![alt-text=""](./images/nsx-t/nsx-t-bosh-director-policy.png)
 
 ### <a id='external-net'></a> Configure <%= vars.app_runtime_abbr %> for External Container Networking
 
 1. If you have not already done so, download the <%= vars.app_runtime_abbr %> tile from [VMware Tanzu Network](https://network.tanzu.vmware.com/products/elastic-runtime) and import it to the **Installation Dashboard**.
 
-1. If you have not already done so, download the <%= vars.app_runtime_abbr %> tile from [VMware Tanzu Network](https://network.pivotal.io/products/elastic-runtime) and import it to the **Installation Dashboard**. For instructions, see [Adding and Importing Products](https://docs.pivotal.io/platform/<%= vars.current_major_version %>/customizing/add-delete.html#add-import).
-![<%= vars.ops_manager %> Installation Dashboard with NSX-T tile](./images/nsx-t/nsx-t-install-dash.png)
+  For instructions, see [Add and Import Products](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-add-delete.html#add-and-import-products-0).
+
+  ![alt-text="Ops Manager Installation Dashboard with NSX-T tile"](./images/nsx-t/nsx-t-install-dash.png)
 
 1. Configure <%= vars.app_runtime_abbr %>, following the directions in [Configuring <%= vars.app_runtime_abbr %>](./configure-pas.html). When you configure **Networking**, select **External** under **Container networking interface plugin**.<br>
 ![NSX-T ](./images/nsx-t/nsx-t-tas-cni.png)
 
 1. Configure <%= vars.app_runtime_abbr %> to add router, diego_brain, and tcp_router instances to the corresponding NSX-T server pools upon deployment.
   1. Open the <%= vars.app_runtime_abbr %> tile > **Resource Config** pane.
-  1. Click the arrow next to each job to reveal the **NSX-T CONFIGURATION** column.
-  1. Under **Logical Load Balancer**, fill in the JSON `server_pools` list with the NSX-T Server Pool these instance should be added to upon deployment.
+  2. Click the arrow next to each job to reveal the **NSX-T CONFIGURATION** column.
+  3. Under **Logical Load Balancer**, fill in the JSON `server_pools` list with the NSX-T Server Pool these instance should be added to upon deployment.
       - router -> tas-web-pool
       - diego_brain -> tas-ssh-pool
       - tcp_router -> tas-tcp-pool
-  1. Click **Save**
+  4. Click **Save**
 ![NSX-T ](./images/nsx-t/nsx-t-web-server-pool.png)
 
 ### <a id='nsx-t-tile'></a> Install and Configure the NSX-T Container Plug-In
 
 To install and configure the tile:
 
-1. If you have not already done so, download the VMware NSX-T Container Plug-in for <%= vars.platform_name %> tile from [VMware Tanzu Network](https://network.pivotal.io/products/vmware-nsx-t) and import it to the **Installation Dashboard**. For instructions, see [Adding and Importing Products](https://docs.pivotal.io/platform/<%= vars.current_major_version %>/customizing/add-delete.html#add-import).
-![<%= vars.ops_manager %> Installation Dashboard with NSX-T tile](./images/nsx-t/nsx-t-install-dash.png)
-
-1. Click the **VMware NSX-T** tile to open its **Settings** tab, and configure the **NSX Manager** pane as follows:
-
-1. If you have not already done so, download the VMware NSX-T Container Plug-in for <%= vars.platform_name %> tile from [VMware Tanzu Network](https://network.tanzu.vmware.com/products/vmware-nsx-t) and import it to the **Installation Dashboard**.
-
-   For instructions, see [Adding and Importing Products](https://docs.pivotal.io/platform/<%= vars.current_major_version %>/customizing/add-delete.html#add-import).
-
-![alt-text="The Ops Manager Installation Dashboard with NSX-T tile."](./images/nsx-t/nsx-t-install-dash.png)
+1. If you have not already done so, download the VMware NSX-T Container Plug-in for <%= vars.platform_name %> tile from [VMware Tanzu Network](https://network.tanzu.vmware.com/products/vmware-nsx-t) and import it to the **Installation Dashboard**. For instructions, see [https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-add-delete.html#add-import).
+![alt-text="Installation Dashboard with NSX-T tile."](./images/nsx-t/nsx-t-install-dash.png)
 
         1. If you are using VMware Workspace ONE Access, formerly called VMware Identity Manager
         (vIDM), then select **Client Certificate Authentication**.
@@ -331,7 +324,7 @@ To install and configure the tile:
 
 1. Click **Save** and return to the **Installation Dashboard**.
 
-1. After you have configured both the **<%= vars.app_runtime_abbr %>** tile and the **VMware NSX-T** tile, click **Review Pending Changes**, then **Apply Changes** to deploy <%= vars.app_runtime_abbr %> with NSX-T networking.
+2. After you have configured both the **<%= vars.app_runtime_abbr %>** tile and the **VMware NSX-T** tile, click **Review Pending Changes**, then **Apply Changes** to deploy <%= vars.app_runtime_abbr %> with NSX-T networking.
 
 
 ## <a id='upgrade'></a> Upgrade <%= vars.app_runtime_abbr %> with NSX-T Networking
@@ -348,10 +341,10 @@ To upgrade <%= vars.app_runtime_abbr %> with NSX-T Networking:
 
 2. Download the desired version of VMware NSX-T Container Plug-in for <%= vars.platform_name %> tile from [VMware Tanzu Network](https://network.tanzu.vmware.com/products/vmware-nsx-t).
 
-1. In <%= vars.ops_manager %>, import the new version of the tile to the **Installation Dashboard**. For instructions, see [Adding and Importing Products](https://docs.pivotal.io/platform/<%= vars.current_major_version %>/customizing/add-delete.html#add-import).
+3. In <%= vars.ops_manager %>, import the new version of the tile to the **Installation Dashboard**. For instructions, see [Adding and Importing Products](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-add-delete.html#add-import).
 
-1. Click **Review Pending Changes** and review your changes.
+4. Click **Review Pending Changes** and review your changes.
 
-1. Click **Apply Changes**.
+5. Click **Apply Changes**.
 
 1. Continue with the upgrade of <%= vars.ops_manager %>, <%= vars.app_runtime_abbr %>, or NSX-T Data Center. For more information, see [Upgrade NCP in a <%= vars.platform_name %> Environment](https://docs.vmware.com/en/VMware-NSX-T-Data-Center/2.4/com.vmware.nsxt.ncp_kubernetes.doc/GUID-4E269C79-1EF7-48E7-AFA4-D79B9F9C9202.html?hWord=N4IghgNiBcIK4AcDmAnMATApgAgHYGMEQBfIA) in the VMware NSX-T Data Center documentation.
