@@ -403,7 +403,8 @@ To create the load balancer:
     3. Click Yes, when prompted with, **Want to continue configuring this Load Balancer?**.
 
 To create the virtual server that forwards unencrypted web (HTTP) traffic to the foundation.
-<p class="note"><strong>Note:</strong> For foundations requiring end-to-end encryption, do not enable the virtual server on port 80. If it must be enabled, configure it to redirect traffic to the encrypted port (443).</p>
+
+    <p class="note"><strong>Note:</strong> For foundations requiring end-to-end encryption, do not enable the virtual server on port 80. If it must be enabled, configure it to redirect traffic to the encrypted port (443).</p>
 
 1. Click **Virtual Servers Set**.
 2. Click **Add Virtual Server**.
@@ -483,7 +484,7 @@ To configure <%= vars.app_runtime_abbr %> for external container networking:
 
 To install and configure the tile:
 
-1. If you have not already done so, download the VMware NSX-T Container Plug-in for <%= vars.platform_name %> tile from [VMware Tanzu Network](https://network.tanzu.vmware.com/products/vmware-nsx-t) and import it to the **Installation Dashboard**. For instructions, see [https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-add-delete.html#add-import).
+1. If you have not already done so, download the VMware NSX-T Container Plug-in for <%= vars.platform_name %> tile from [VMware Tanzu Network](https://network.tanzu.vmware.com/products/vmware-nsx-t) and import it to the **Installation Dashboard**. For instructions, see [Add and Import Products](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-add-delete.html#add-import).
 ![alt-text="Installation Dashboard with NSX-T tile."](./images/nsx-t/nsx-t-install-dash.png)
 
         1. If you are using VMware Workspace ONE Access, formerly called VMware Identity Manager
