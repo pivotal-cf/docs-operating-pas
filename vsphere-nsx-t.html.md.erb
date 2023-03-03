@@ -265,51 +265,53 @@ To configure a load balancer:
         </ul>
     1. Click **Save**.
 
-1. Create virtual servers:
+Create virtual servers:
   1. In the NSX-T Manager UI, navigate to **Advanced Networking & Security** > **Networking** > **Load Balancing** > **Virtual Servers**.
-  1. Create the virtual server which forwards unencrypted web (HTTP) traffic to the foundation:
-<p class="note"><strong>Note:</strong> Foundations requiring end-to-end encryption should not enable the virtual server on port 80, or, if enabled, should configure it to redirect traffic to the encrypted port (443).</p>
+  2. Create the virtual server which forwards unencrypted web (HTTP) traffic to the foundation:
+
+    <p class="note"><strong>Note:</strong> Foundations requiring end-to-end encryption should not enable the virtual server on port 80, or, if enabled, should configure it to redirect traffic to the encrypted port (443).</p>
+
     1. Click **+ADD**.
-    1. Enter **General Properties**:
+    2. Enter **General Properties**:
         - **Name**: `pas-web-vs`
         - **Application Type**: `Layer 4 (TCP)`
         - **Application Profile**: `nsx-default-lb-fast-tcp-profile`
-    1. Click **Next**.
-    1. Enter **Virtual Server Identifiers**:
+    3. Click **Next**.
+    4. Enter **Virtual Server Identifiers**:
         - **IP Address**: use the address of the DNS record of `*.system.YOUR-SYSTEM-DOMAIN.com`
         - **Port**: `80,443`
-    1. Enter **Server Pool and Rules**:
+    5. Enter **Server Pool and Rules**:
         - **Default Server Pool**: `pas-web-pool`
-    1. Click **Next** several times, then click **Finish**.
-  1. Create the virtual server which forwards traffic to apps with custom ports to the foundation:
+    6. Click **Next** several times, then click **Finish**.
+  3. Create the virtual server which forwards traffic to apps with custom ports to the foundation:
     1. Click **+ADD** to add a new virtual server.
-    1. Enter **General Properties**:
+    2. Enter **General Properties**:
         - **Name**: `pas-tcp-vs`
         - **Application Type**: `Layer 4 (TCP)`
         - **Application Profile**: `nsx-default-lb-fast-tcp-profile`
-    1. Click **Next**.
-    1. Enter **Virtual Server Identifiers**:
+    3. Click **Next**.
+    4. Enter **Virtual Server Identifiers**:
         - **IP Address**: use the address of the DNS record of `tcp.apps.YOUR-SYSTEM-DOMAIN.com`
         - **Port**: use the same ports as configured in the **<%= vars.app_runtime_abbr %> Tile** > **Networking** > **TCP Routing Ports**,
           e.g. `1024-1123,5900`
-    1. Click **Next**.
-    1. Enter **Server Pool and Rules**:
+    5. Click **Next**.
+    6. Enter **Server Pool and Rules**:
         - **Default Server Pool**: `pas-tcp-pool`
-    1. Click **Next**, then click **Finish**.
-  1. Create the virtual server which forwards SSH traffic to the foundation:
+    7. Click **Next**, then click **Finish**.
+  4. Create the virtual server which forwards SSH traffic to the foundation:
     1. Click **+ADD** to add a new virtual server.
-    1. Enter **General Properties**:
+    2. Enter **General Properties**:
         - **Name**: `pas-ssh-vs`
         - **Application Type**: `Layer 4 (TCP)`
         - **Application Profile**: `nsx-default-lb-fast-tcp-profile`
-    1. Click **Next**.
-    1. Enter **Virtual Server Identifiers**:
+    3. Click **Next**.
+    4. Enter **Virtual Server Identifiers**:
         - **IP Address**: use the address of the DNS record of `ssh.system.YOUR-SYSTEM-DOMAIN.com`
         - **Port**: `2222`
-    1. Click **Next**.
-    1. Enter **Server Pool and Rules**:
+    5. Click **Next**.
+    6. Enter **Server Pool and Rules**:
         - **Default Server Pool**: `pas-ssh-pool`
-    1. Click **Next**, then click **Finish**.
+    7. Click **Next**, then click **Finish**.
 
 1. Create the load balancer. In the NSX-T Manager UI, navigate to **Networking**, then **Load Balancing**, and click the **Load Balancers** tab.
     1. Click **ADD LOAD BALANCER**.
