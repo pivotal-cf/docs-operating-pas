@@ -266,10 +266,11 @@ To configure a load balancer:
     1. Click **Save**.
 
 Create virtual servers:
+
   1. In the NSX-T Manager UI, navigate to **Advanced Networking & Security** > **Networking** > **Load Balancing** > **Virtual Servers**.
   2. Create the virtual server which forwards unencrypted web (HTTP) traffic to the foundation:
 
-    <p class="note"><strong>Note:</strong> Foundations requiring end-to-end encryption should not enable the virtual server on port 80, or, if enabled, should configure it to redirect traffic to the encrypted port (443).</p>
+  <p class="note"><strong>Note:</strong> Foundations requiring end-to-end encryption should not enable the virtual server on port 80, or, if enabled, should configure it to redirect traffic to the encrypted port (443).</p>
 
     1. Click **+ADD**.
     2. Enter **General Properties**:
