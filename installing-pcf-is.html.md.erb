@@ -217,7 +217,7 @@ The use cases in the table above are described below:
   to. See other cases for guidance on how to configure each
   <%= vars.segment_runtime_full %>.
 
-<p class='note warning'><strong>Warning:</strong> If you configure the
+<p class='note warning'><strong>Caution:</strong> If you configure the
 <strong>Compute and Networking Isolation</strong> pane and the
 <strong>Gorouter isolation segment request handling</strong> radio button in
 the <%= vars.app_runtime_abbr %> tile in a manner other than the use cases
@@ -270,7 +270,7 @@ To configure the **Smoke Tests** pane:
 
 1. Click **Save**.
 
-<p class='note warning'><strong>Warning:</strong> If you configure the
+<p class='note warning'><strong>Caution:</strong> If you configure the
 <strong>Compute and Networking Isolation</strong> pane and the
 <strong>Gorouter isolation segment request handling</strong> property in
 the <%= vars.app_runtime_abbr %> tile in a manner other than the use cases
@@ -287,7 +287,7 @@ In the **Errands** pane, you can select **On** to always run an errand or **Off*
 
 For more information about how <%= vars.ops_manager %> manages errands, see [Managing Errands in <%= vars.ops_manager %>](https://docs.pivotal.io/platform/<%= vars.current_major_version %>/customizing/managing_errands.html).
 
-<div class="note warning"><strong>Warning:</strong> You should disable the Smoke Test errand if:
+<div class="note warning"><strong>Caution:</strong> You should disable the Smoke Test errand if:
     <ul>
     <li>You configure the <strong>Compute and Networking Isolation</strong> pane and the <strong>Gorouter isolation segment request handling </strong> checkbox in the <%= vars.app_runtime_abbr %> tile in a manner other than the use cases described in <a href="#compute-networking-isolation-configs">Options for Configuring Compute and Networking Isolation</a>. Otherwise, apps fail to schedule in <%= vars.segment_runtime_full %>.</li>
     <li>Both the V2 and V1 Firehoses are disabled in <%= vars.app_runtime_abbr %>. Otherwise, the deploy fails.</li>
