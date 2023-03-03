@@ -75,9 +75,8 @@ misrouting under **Gorouter app identity verification**:
     * **The Gorouter uses TLS to verify app identity**: Enables the Gorouter to
 verify app identity using TLS. This is the default option.
     * **The Gorouter and apps use mutual TLS to verify each other's identity**:
-Enables your apps and the Gorouter to verify each other's identity using mutual
-TLS (mTLS). This option disables TCP routing because app containers accept incoming
-communication only from the Gorouter.
+    Enables your apps and the Gorouter to verify each other's identity using mutual TLS (mTLS).
+    This option disables TCP routing because app containers accept incoming communication only from the Gorouter.
 
     For more information, see [Preventing Misrouting](../concepts/http-routing.html#consistency) in _HTTP Routing_.
 
@@ -285,15 +284,19 @@ To create multiple isolation segments:
 1. Replicate the tile by running:
 
     ```
-  	./replicator \
-      	--name "TILE-NAME" \
-      	--path /PATH/TO/ORIGINAL.pivotal \
-      	--output /PATH/TO/COPY.pivotal
-  	```
+    ./replicator \
+          --name "TILE-NAME" \
+          --path /PATH/TO/ORIGINAL.pivotal \
+          --output /PATH/TO/COPY.pivotal
+    ```
+
     Where:
-  	* `TILE-NAME` is a unique name you provide for the new <%= vars.segment_runtime_full %> tile. The name must be ten characters or less and only contain alphanumeric characters, dashes, underscores, and spaces.
-  	* `/PATH/TO/ORIGINAL.pivotal` is the absolute path to the original <%= vars.segment_runtime_full %> tile you downloaded from <%= vars.product_network %>.
-  	* `/PATH/TO/COPY.pivotal` is the absolute path for the copy that the Replicator tool produces.
+    <ul>
+      <li><code>TILE-NAME</code> is a unique name you provide for the new &lt;%= vars.segment_runtime_full %&gt; tile. The name must be ten characters or less and only contain alphanumeric characters, dashes, underscores, and spaces.</li>
+      <li><code>/PATH/TO/ORIGINAL.pivotal</code> is the absolute path to the original &lt;%= vars.segment_runtime_full %&gt; tile you downloaded from &lt;%= vars.product_network %&gt;.</li>
+      <li><code>/PATH/TO/COPY.pivotal</code> is the absolute path for the copy that the Replicator tool produces.</li>
+    </ul>
+
 
 1. Follow the procedures in this topic using the new `.pivotal` file, starting with [Step 1](#routing).
 
