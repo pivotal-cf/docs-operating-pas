@@ -267,8 +267,8 @@ To configure a load balancer:
 
 Create virtual servers:
 
-  1. In the NSX-T Manager UI, navigate to **Advanced Networking & Security** > **Networking** > **Load Balancing** > **Virtual Servers**.
-  2. Create the virtual server which forwards unencrypted web (HTTP) traffic to the foundation:
+1. In the NSX-T Manager UI, navigate to **Advanced Networking & Security** > **Networking** > **Load Balancing** > **Virtual Servers**.
+2. Create the virtual server which forwards unencrypted web (HTTP) traffic to the foundation:
 
   <p class="note"><strong>Note:</strong> Foundations requiring end-to-end encryption should not enable the virtual server on port 80, or, if enabled, should configure it to redirect traffic to the encrypted port (443).</p>
 
@@ -284,7 +284,7 @@ Create virtual servers:
     5. Enter **Server Pool and Rules**:
         - **Default Server Pool**: `pas-web-pool`
     6. Click **Next** several times, then click **Finish**.
-  3. Create the virtual server which forwards traffic to apps with custom ports to the foundation:
+3. Create the virtual server which forwards traffic to apps with custom ports to the foundation:
     1. Click **+ADD** to add a new virtual server.
     2. Enter **General Properties**:
         - **Name**: `pas-tcp-vs`
@@ -299,7 +299,7 @@ Create virtual servers:
     6. Enter **Server Pool and Rules**:
         - **Default Server Pool**: `pas-tcp-pool`
     7. Click **Next**, then click **Finish**.
-  4. Create the virtual server which forwards SSH traffic to the foundation:
+4. Create the virtual server which forwards SSH traffic to the foundation:
     1. Click **+ADD** to add a new virtual server.
     2. Enter **General Properties**:
         - **Name**: `pas-ssh-vs`
