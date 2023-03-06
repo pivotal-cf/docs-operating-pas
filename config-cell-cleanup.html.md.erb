@@ -45,7 +45,7 @@ However, if you are deploying any BOSH add-ons that require space in the ephemer
 
 For more information on disk usage and garbage collection in GrootFS, see [GrootFS Disk Usage](../concepts/grootfs-disk.html) and [Examining GrootFS Disk Usage](../adminguide/examining_grootfs_disk.html).
 
-<p class="note warning"><strong>Warning:</strong> Setting the reserve to an excessive value can cause garbage collection to occur more frequently. An increase in frequency can result in regular slowdowns in performance of apps on particular Diego Cells. <%= vars.company_name %> recommends leaving the default value for the reserve unless you are advised to modify it.
+<p class="note warning"><strong>Caution:</strong> Setting the reserve to an excessive value can cause garbage collection to occur more frequently. An increase in frequency can result in regular slowdowns in performance of apps on particular Diego Cells. <%= vars.company_name %> recommends leaving the default value for the reserve unless you are advised to modify it.
 </p>
 
 

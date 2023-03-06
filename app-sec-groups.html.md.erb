@@ -221,7 +221,7 @@ To create ASGs that block apps from sending traffic to the networks that host <%
 
 <p class="note"><strong>Note:</strong> This part is only necessary if you blocked apps from a network that hosts services in the previous part. If you did not block apps from a network that hosts services, proceed to <a href="#unbind-default">Step 4: Remove the Default ASG</a>.</p>
 
-<p class="note warning"><strong>Warning:</strong> In the two network layout, <%= vars.app_runtime_abbr %> and services share the same network. This means that each time you create an ASG that allows apps to access a new port and protocol within the network, you further expose the <%= vars.app_runtime_abbr %> component VMs. This is a limitation of a two network layout. For guidance on network topology, see <a href="https://docs.pivotal.io/platform/<%= vars.current_major_version %>/plan/index.html">Reference Architectures</a>.</p>
+<p class="note warning"><strong>Caution:</strong> In the two network layout, <%= vars.app_runtime_abbr %> and services share the same network. This means that each time you create an ASG that allows apps to access a new port and protocol within the network, you further expose the <%= vars.app_runtime_abbr %> component VMs. This is a limitation of a two network layout. For guidance on network topology, see <a href="https://docs.pivotal.io/platform/<%= vars.current_major_version %>/plan/index.html">Reference Architectures</a>.</p>
 
 Now that you have created ASGs to secure the <%= vars.ops_manager %>, <%= vars.app_runtime_abbr %>, and service components, work with developers to create additional ASGs that give apps access to the services they need.
 
