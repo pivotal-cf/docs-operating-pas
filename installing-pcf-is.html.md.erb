@@ -75,9 +75,8 @@ misrouting under **Gorouter app identity verification**:
     * **The Gorouter uses TLS to verify app identity**: Enables the Gorouter to
 verify app identity using TLS. This is the default option.
     * **The Gorouter and apps use mutual TLS to verify each other's identity**:
-Enables your apps and the Gorouter to verify each other's identity using mutual
-TLS (mTLS). This option disables TCP routing because app containers accept incoming
-communication only from the Gorouter.
+    Enables your apps and the Gorouter to verify each other's identity using mutual TLS (mTLS).
+    This option disables TCP routing because app containers accept incoming communication only from the Gorouter.
 
     For more information, see [Preventing Misrouting](../concepts/http-routing.html#consistency) in _HTTP Routing_.
 
@@ -175,7 +174,7 @@ The use cases in the table above are described below:
 
 * **Use network isolation in some cases**: For this use case, enable the **Gorouters reject requests for isolation segments** checkbox in the **Networking** pane of the <%= vars.app_runtime_abbr %> tile. Then provide a comma-separated list of <%= vars.segment_runtime_full %> names that Gorouters should accept traffic to in the **Always allow Gorouter to accept requests for these Isolation Segments** field. See other cases for guidance on how to configure each <%= vars.segment_runtime_full %>.
 
-<p class='note warning'><strong>Warning:</strong> If you configure the <strong>Compute and Networking Isolation</strong> pane and the <strong>Gorouters reject requests for isolation segments</strong> checkbox in the <%= vars.app_runtime_abbr %> tile in a manner other than the use cases described above, the smoke tests fail. To deploy the tile anyway, you must disable the Smoke Test errand in the <strong>Errands</strong> pane of the <%= vars.app_runtime_abbr %> tile. <%= vars.company_name %> does not recommend disabling smoke tests. To configure the Smoke Test errand, see <a href="#errands">Configure Errands</a>.</p>
+<p class='note warning'><strong>Caution:</strong> If you configure the <strong>Compute and Networking Isolation</strong> pane and the <strong>Gorouters reject requests for isolation segments</strong> checkbox in the <%= vars.app_runtime_abbr %> tile in a manner other than the use cases described above, the smoke tests fail. To deploy the tile anyway, you must disable the Smoke Test errand in the <strong>Errands</strong> pane of the <%= vars.app_runtime_abbr %> tile. <%= vars.company_name %> does not recommend disabling smoke tests. To configure the Smoke Test errand, see <a href="#errands">Configure Errands</a>.</p>
 
 #### <a id='pane-config'></a> Configure Pane
 
@@ -220,7 +219,7 @@ To configure the **Smoke Tests** pane:
 
 1. Click **Save**.
 
-<p class='note warning'><strong>Warning:</strong> If you configure the <strong>Compute and Networking Isolation</strong> pane and the <strong>Gorouters reject requests for isolation segments</strong> checkbox in the <%= vars.app_runtime_abbr %> tile in a manner other than the use cases described in <a href="#compute-networking-isolation-configs">Options for Configuring Compute and Networking Isolation</a>, the smoke tests fail.</p>
+<p class='note warning'><strong>Caution:</strong> If you configure the <strong>Compute and Networking Isolation</strong> pane and the <strong>Gorouters reject requests for isolation segments</strong> checkbox in the <%= vars.app_runtime_abbr %> tile in a manner other than the use cases described in <a href="#compute-networking-isolation-configs">Options for Configuring Compute and Networking Isolation</a>, the smoke tests fail.</p>
 
 ### <a id='errands'></a> Configure Errands
 
@@ -232,7 +231,7 @@ In the **Errands** pane, you can select **On** to always run an errand or **Off*
 
 For more information about how <%= vars.ops_manager %> manages errands, see [Managing Errands in <%= vars.ops_manager %>](https://docs.pivotal.io/platform/<%= vars.current_major_version %>/customizing/managing_errands.html).
 
-<div class="note warning"><strong>Warning:</strong> You should disable the Smoke Test errand if:
+<div class="note warning"><strong>Caution:</strong> You should disable the Smoke Test errand if:
 	<ul>
 		<li>You configure the <strong>Compute and Networking Isolation</strong> pane and the <strong>Gorouters reject requests for isolation segments</strong> checkbox in the <%= vars.app_runtime_abbr %> tile in a manner other than the use cases described in <a href="#compute-networking-isolation-configs">Options for Configuring Compute and Networking Isolation</a>. Otherwise, apps fail to schedule in <%= vars.segment_runtime_full %>.</li>
     <li>Both the V2 and V1 Firehoses are disabled in <%= vars.app_runtime_abbr %>. Otherwise, the deploy fails.</li>
@@ -285,15 +284,19 @@ To create multiple isolation segments:
 1. Replicate the tile by running:
 
     ```
-  	./replicator \
-      	--name "TILE-NAME" \
-      	--path /PATH/TO/ORIGINAL.pivotal \
-      	--output /PATH/TO/COPY.pivotal
-  	```
+    ./replicator \
+          --name "TILE-NAME" \
+          --path /PATH/TO/ORIGINAL.pivotal \
+          --output /PATH/TO/COPY.pivotal
+    ```
+
     Where:
-  	* `TILE-NAME` is a unique name you provide for the new <%= vars.segment_runtime_full %> tile. The name must be ten characters or less and only contain alphanumeric characters, dashes, underscores, and spaces.
-  	* `/PATH/TO/ORIGINAL.pivotal` is the absolute path to the original <%= vars.segment_runtime_full %> tile you downloaded from <%= vars.product_network %>.
-  	* `/PATH/TO/COPY.pivotal` is the absolute path for the copy that the Replicator tool produces.
+    <ul>
+      <li><code>TILE-NAME</code> is a unique name you provide for the new <%= vars.segment_runtime_full %> tile. The name must be ten characters or less and only contain alphanumeric characters, dashes, underscores, and spaces.</li>
+      <li><code>/PATH/TO/ORIGINAL.pivotal</code> is the absolute path to the original <%= vars.segment_runtime_full %> tile you downloaded from <%= vars.product_network %>.</li>
+      <li><code>/PATH/TO/COPY.pivotal</code> is the absolute path for the copy that the Replicator tool produces.</li>
+    </ul>
+
 
 1. Follow the procedures in this topic using the new `.pivotal` file, starting with [Step 1](#routing).
 
