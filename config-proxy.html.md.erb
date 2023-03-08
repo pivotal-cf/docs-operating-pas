@@ -71,7 +71,7 @@ To globally configure proxy settings for <%= vars.platform_name %> apps:
           <li><code>http_proxy</code> is the proxy to use for HTTP requests.</li>
           <li><code>https_proxy</code> is the proxy to use for HTTPS requests. In most cases, this is the same as <code>http_proxy</code>.</li>
           <li><code>PROXY</code> is your proxy.</li>
-          <li><code>no_proxy</code> is a comma-separated list of DNS suffixes or IP addresses that can be accessed without passing through the proxy. &lt;%= vars.company_name %&gt; recommends this value contains the domain <code>.cf.internal</code>, which is used by the platform to communicate with CredHub.</li>
+          <li><code>no_proxy</code> is a comma-separated list of DNS suffixes or IP addresses that can be accessed without passing through the proxy. <%= vars.company_name %> recommends this value contains the domain <code>.cf.internal</code>, which is used by the platform to communicate with CredHub.</li>
           <li><code>DNS-SUFFIX-OR-IP-ADDRESS</code> is a DNS suffix or IP address that can be accessed without passing through the proxy.</li>
         </ul>
     * For Java-based apps, run:
@@ -85,7 +85,7 @@ To globally configure proxy settings for <%= vars.platform_name %> apps:
           <li><code>-Dhttp.proxyHost</code> is the proxy to use for HTTP requests.</li>
           <li><code>PROXY</code> is your proxy.</li>
           <li><code>-Dhttp.proxyPort</code> is the port your proxy uses.</li>
-          <li><code>-Dhttp.nonProxyHosts</code> is a pipe-separated list of DNS suffixes or IP addresses that can be accessed without passing through the proxy. &lt;%= vars.company_name %&gt; recommends this value contains the domain <code>.cf.internal</code>, which is used by the platform to communicate with CredHub.</li>
+          <li><code>-Dhttp.nonProxyHosts</code> is a pipe-separated list of DNS suffixes or IP addresses that can be accessed without passing through the proxy. <%= vars.company_name %> recommends this value contains the domain <code>.cf.internal</code>, which is used by the platform to communicate with CredHub.</li>
           <li><code>DNS-SUFFIX-OR-IP-ADDRESS</code> is a DNS suffix or IP address that can be accessed without passing through the proxy.</li>
         </ul>
 
