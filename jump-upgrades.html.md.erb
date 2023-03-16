@@ -4,7 +4,7 @@ owner: RelEng
 ---
 
 This topic describes upgrading to <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) v2.13 directly from
-Pivotal Application Service (PAS) v2.7 and later.
+Tanzu Application Service (TAS) v2.11 and later.
 
 
 ## <a id='overview'></a> Overview
@@ -14,8 +14,6 @@ Jump upgrading describes the process of skipping minor versions when upgrading
 long-term support (LTS) version of <%= vars.app_runtime_abbr %>, which is v2.13.
 <%= vars.app_runtime_abbr %> v2.13 is supported through April 2024.
 
-To minimize downtime for developers pushing apps, upgrade from PAS v2.7.41 or later, or TAS for VMs v2.10.21 or later.
-Upgrading from earlier patch versions can result in an `Unknown Error` when pushing apps.
 
 ## <a id="prerequisites"></a> Prerequisites
 
@@ -36,18 +34,16 @@ v2.13.0 or later.
 To jump upgrade to <%= vars.app_runtime_abbr %> to v2.13.0 or later:
 
 1. Review the breaking changes for each version of <%= vars.app_runtime_abbr %> included in the jump upgrade.
-For example, if you are upgrading from PAS v2.7 to <%= vars.app_runtime_abbr %> v2.13, read all of the following breaking changes:
-    * [PAS 2.8 Breaking Changes](https://docs.pivotal.io/application-service/2-8/release-notes/runtime-rn.html#breaking-changes)
-    * [<%= vars.app_runtime_abbr %> 2.9 Breaking Changes](https://docs.pivotal.io/application-service/2-9/release-notes/runtime-rn.html#breaking-changes)
-    * [<%= vars.app_runtime_abbr %> 2.10 Breaking Changes](https://docs.pivotal.io/application-service/2-10/release-notes/runtime-rn.html#breaking-changes)
-    * [<%= vars.app_runtime_abbr %> 2.11 Breaking Changes](https://docs.pivotal.io/application-service/2-11/release-notes/runtime-rn.html)
+For example, if you are upgrading from TAS v2.11 to <%= vars.app_runtime_abbr %> v2.13, read all of the following breaking changes:
+    * [<%= vars.app_runtime_abbr %> 2.11 Breaking Changes](https://docs.pivotal.io/application-service/2-11/release-notes/runtime-rn.html#breaking-changes)
+    * [<%= vars.app_runtime_abbr %> 2.12 Breaking Changes](https://docs.pivotal.io/application-service/2-12/release-notes/runtime-rn.html#breaking-changes)
+
+
 
 
 1. Review [Configuring TAS for VMs for Upgrades](./configuring.html).
 
 1. (Optional) Review release notes for each version of <%= vars.app_runtime_abbr %> included in the jump upgrade:
-    * [PAS 2.8 Release Notes](https://docs.pivotal.io/application-service/2-8/release-notes/runtime-rn.html)
-    * [<%= vars.app_runtime_abbr %> 2.9 Release Notes](https://docs.pivotal.io/application-service/2-9/release-notes/runtime-rn.html)
-    * [<%= vars.app_runtime_abbr %> 2.10 Release Notes](https://docs.pivotal.io/application-service/2-10/release-notes/runtime-rn.html)
     * [<%= vars.app_runtime_abbr %> 2.11 Release Notes](https://docs.pivotal.io/application-service/2-11/release-notes/runtime-rn.html)
+    * [<%= vars.app_runtime_abbr %> 2.12 Release Notes](https://docs.pivotal.io/application-service/2-12/release-notes/runtime-rn.html)
     * [<%= vars.app_runtime_abbr %> 2.13 Release Notes](../release-notes/runtime-rn.html)
