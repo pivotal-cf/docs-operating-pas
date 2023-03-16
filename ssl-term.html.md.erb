@@ -14,7 +14,7 @@ Choose an SSL termination method to determine the steps you must take to configu
 
 <%= vars.platform_name %> deploys with a single instance of HAProxy for use in lab and test environments. You can use this HAProxy instance for SSL termination and load balancing to the <%= vars.app_runtime_abbr %> Gorouters. HAProxy can generate a self-signed certificate if you do not want to obtain a signed certificate from a well-known certificate authority (CA).
 <%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
-<%= partial "/pcf/core/2-13/known-issue-self-signed-certs" %>
+<%= partial "/pcf/core/known-issue-self-signed-certs" %>
 
 To use the HAProxy load balancer:
 
