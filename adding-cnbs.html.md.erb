@@ -1,0 +1,47 @@
+---
+title: Adding Cloud Native Buildpacks (beta)
+owner: TAS
+---
+
+This topic describes a beta feature in TAS for adding new buildpacks
+based on the Cloud Native Buildpack (CNB) project to the list of system buildpacks
+managed by TAS.
+
+## <a id="overview"></a> Overview
+
+TAS 4.0 introduces an option for operators to allow a new slate of buildpacks,
+based on the Cloud Native Buildpack project,
+to be installed with TAS and managed by the TAS tile.
+These buildpacks are still in beta and have some limitations (see below)
+so they are **not recommended for production use at this time**.
+In the future, with further testing and expansion of the feature set,
+these buildpacks will be considered Generally Available and supported along with the other buildpacks in TAS.
+
+In this release of TAS, the list is limited to a single new buildpack
+-- the [Web Servers Cloud Native Buildpack](https://github.com/paketo-buildpacks/web-servers),
+which can be used to push applications that leverage NGINX or HTTPD web servers
+as well as JavaScript Frontend apps
+(full documenation can be found [here](https://paketo.io/docs/howto/web-servers)).
+
+## <a id="configure-cnbs"></a> Configuring TAS to include CNBs
+
+Follow these steps to enable the use of the Web Servers Buildpack on your TAS installation:
+1. Open OpsManager and click on the Tanzu Application Service tile.
+1. Navigate to the `Cloud Controller` tab.
+1. Find the radio button under the label `Add beta Cloud Native Buildpacks to system buildpack list` and choose `Include Cloud Native Buildpacks`.
+1. Navigate back to the Installation Dashboard, click `Apply Changes`, and initiatie another deployment of TAS.
+
+## <a id="cnb-limitations"></a> Limitations during Beta release
+As mentioned above, this release of the CNBs for TAS is still in beta, meaning it is not recommended for production use.
+This is largely to do certain known limitations in the current functionality of the buildpack that will be resolved in future releases of TAS.
+For now, these are the known limitations for the buildpack:
+- **Procfiles:** Apps with Procfiles do not work correctly with this shim builder. Only the `web` process type will be honored by Cloud Foundry.
+  This is because the Procfile CNB, which ships as part of most meta-buildpacks (or composite buildpacks), manages the Procfile in a way that CF/Diego does not understand.
+  Upcoming work may resolve this issue.
+- **Service Bindings:** Becuase CNBs were designed with Kubernetes secrets in mind, service bindings -- which typically contain credentials -- do not yet work with CNB shims.
+- **Activating and Deactiviating the Feature**: The radio button introduced to the TAS tile in OpsManager adds the Web Servers Buildpack to the list of system buildpacks managed by TAS.
+  That means TAS is responsible for adding, updating, and removing the Web Servers Buildpack during deployment after the `Apply Changes` button is clicked.
+  As long as the radio button is set to `Include Cloud Native Buildpacks`, the TAS tile will manage those operations to the buildpack.
+  However, if an operator first selects `Include Cloud Native Buildpacks` and then later chooses `Do not include`, this will simply prevent the TAS tile from continuing to make updates to the buildpack during deploys.
+  This will not remove the buildpack from the list of buildpacks visible to app developers.
+  **To remove the Web Servers Buildpack**, an admin will need to run `cf delete-buildpack web_servers_buildpack` after deploying with the `Do not include` radio button selected.
