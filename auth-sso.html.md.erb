@@ -8,9 +8,9 @@ This topic describes <%= vars.app_runtime_first %> authentication and single sig
 
 ## <a id='overview'></a> Overview
 
-Connecting <%= vars.app_runtime_abbr %> to either the LDAP or SAML external user store allows the User Account and Authentication (UAA) server to delegate authentication to existing enterprise user stores.
+Connecting <%= vars.app_runtime_abbr %> to SAML, LDAP, or OIDC external user store allows the User Account and Authentication (UAA) server to delegate authentication to existing enterprise user stores.
 
-If your enterprise user store is exposed as a SAML or LDAP identity provider (IDP) for single sign-on (SSO), you can configure SSO to allow users to access Apps Manager and the Cloud Foundry Command Line Interface (cf CLI) without creating a new account or, if using SAML, without re-entering credentials.
+If your enterprise user store is exposed as a SAML, LDAP, or OIDC identity provider (IDP) for single sign-on (SSO), you can configure SSO to allow users to access Apps Manager and the Cloud Foundry Command Line Interface (cf CLI) without creating a new account or, if using SAML or OIDC, without re-entering credentials.
 
 For information about managing user identity and pre-provisioning user roles with SAML or LDAP, see [Adding Existing SAML or LDAP Users to an <%= vars.platform_name %> Deployment](external-user-management.html).
 
@@ -18,7 +18,7 @@ For an explanation of the process used by the UAA server when it attempts to aut
 
 <p class='note'><strong>Note:</strong> When integrating with an external IDP, such as LDAP, authentication within the UAA becomes chained. An authentication attempt with a user's credentials is first attempted against the UAA user store before the external provider, LDAP. For more information, see <a href="https://github.com/cloudfoundry/uaa/blob/master/docs/UAA-LDAP.md#chained-authentication">Chained Authentication</a> in the <em>User Account and Authentication LDAP Integration</em> documentation on GitHub.</p>
 
-Follow one of the procedures below to configure your deployment with SAML or LDAP.
+Follow one of the procedures below to configure your deployment with SAML, LDAP, or OIDC.
 
 ## <a id="configure-saml"></a> Configure <%= vars.app_runtime_abbr %> to Use a SAML Identity Provider
 
@@ -182,3 +182,58 @@ This is required if you are mapping LDAP groups to an admin role. To map the gro
 1. Click **Review Pending Changes**.
 
 1. Click **Apply Changes**.
+
+## <a id="configure-oidc"></a> Configure <%= vars.app_runtime_abbr %> to Use an OIDC Identity Provider
+
+To integrate the UAA with an external OIDC identity provider (IDP):
+
+1. Navigate to the <%= vars.ops_manager %> Installation Dashboard.
+
+1. Click the <%= vars.app_runtime_abbr %> tile.
+
+1. Select **Authentication and Enterprise SSO**.
+
+1. Select **OIDC identity provider**.
+
+1. Set the **Provider name**. This is a unique name you create for the IDP. This name can include only alphanumeric characters, `+`, `_`, and `-`. You should not change this name after deployment because all external users use it to link to the provider.
+
+1. Enter a **Display name**. Your provider display name appears as a link on your <%= vars.platform_name %> login page.
+
+1. For **Discovery URL**, enter the OIDC discovery URL of the external OIDC provider. This URL usually has this format: `https://<example-oidc-provider>.com/.well-known/openid-configuration`. And it should serve a JSON containing the OIDC provider specifications, such as its `issuer`, `authorization_endpoint`, and `token_endpoint` values.
+
+1. For **Client ID**, enter the ID of the client registered with the external OIDC provider for use by the UAA. This external OIDC client must be configured according to the following general requirements, if applicable (please note that different OIDC providers might use slightly different terminologies for these configuration options):
+   * **Client**: Per security best practices, register a dedicated client for use by <%= vars.app_runtime_abbr %>. Some providers might refer to a "client" as an "application". Save the client secret for the next step.
+   * **Grant type**:  Make sure that the client is allowed to perform the `Authorization Code` OAuth flow.
+   * **Sign-in redirect URIs**:  Include a URL in this format: `https://login.<SYSTEM-DOMAIN>/login/callback/<PROVIDER-NAME>` where:
+      * `SYSTEM-DOMAIN` is the domain for system-level components (you can find this value under the **Domains** section of the <%= vars.app_runtime_abbr %> tile).
+      * `PROVIDER-NAME` is the unique name you create for the IDP in the UAA. This should match the **Provider name** value that you previously entered.
+   * **Users**: Make sure that the users to whom you want to grant access to <%= vars.app_runtime_abbr %> are allowed access to this client/application.
+   * **Groups**:  Make sure that this client is allowed to obtain all relevant OIDC user groups information that you need to perform mappings from external OIDC user groups to internal <%= vars.app_runtime_abbr %> scopes. For example, if you wish to grant <%= vars.app_runtime_abbr %> admin scopes to all external OIDC users belonging to the `example-inc-operators` group, you should make sure that this client is allowed to access this group memberships.
+
+   <p class="note"><strong>Note:</strong> For more information about how to perform external group mappings, see [Grant Admin Permissions to an External Group (SAML, LDAP, or OIDC)](../uaa/uaa-user-management.html#external-group). </p>
+
+1. For **Client secret**, enter the client secret of the client whose ID is entered in the previous step.
+
+1. For **Scopes**, enter a comma-separated list of scopes to request from the external OIDC provider. Per the OIDC 1.0 spec, requesting certain scopes from an OIDC provider should result in receiving additional claims. For example, requesting `openid, profile, email` scopes (the current default value for this input field) should allow the UAA to obtain claims containing the user's first name, last name, and email. Additionally, please include the scope(s) (e.g.: `groups`) that allows the UAA to obtain the user's group memberships. Please consult your OIDC provider's documentations to decide the exact scopes to request in order to obtain sufficient claims.
+
+1. For **Email domains**, enter a comma-separated list of the email domains for external users who are to receive invitations to Apps Manager.
+
+1. For **Username Claim**, enter the external OIDC provider's claim that will be mapped to TAS username.
+
+1. For **First Name Claim**, enter the external OIDC provider's claim that will be mapped to the user's first name in TAS.
+
+1. For **Last Name Claim**, enter the external OIDC provider's claim that will be mapped to the user's last name in TAS.
+
+1. For **Email Claim**, enter the external OIDC provider's claim that will be mapped to the user's email in TAS.
+
+1. For **External Groups Claim(s)**, enter a comma-separated list of external OIDC provider's claim(s) containing groups information, which can be used to map to internal <%= vars.app_runtime_abbr %> scopes.
+
+1. Click **Save**.
+
+1. Return to the <%= vars.ops_manager %> Installation Dashboard.
+
+1. Click **Review Pending Changes**.
+
+1. Click **Apply Changes**.
+
+<p class="note warning"><strong>Known issue:</strong> As of TAS 4.0.0, when an external OIDC provider login is configured, and when users successfully log out from the UAA UI or other <%= vars.app_runtime_abbr %> UIs, the UAA will attempt to log the users out of the OIDC provider as well. This external OIDC provider logout operation may fail due to a known issue, resulting in an error page from the provider. If you do not wish to log out of the external OIDC provider to begin with, this error can be ignored. If you do wish to log out of the external OIDC provider, please navigate to the provider login page directly and log out from there. This issue will be addressed in a future release.</p>
