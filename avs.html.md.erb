@@ -308,10 +308,12 @@ in the [Step 2: Configure vCenter](https://docs.vmware.com/en/VMware-Tanzu-Opera
 To configure <%= vars.app_runtime_abbr %> for external container networking:
 
 1. If you have not already done so, download the <%= vars.app_runtime_abbr %> tile from [VMware Tanzu Network](https://network.tanzu.vmware.com/products/elastic-runtime) and import it to the **Installation Dashboard**. For instructions, see [Adding and Importing Products](https://docs.pivotal.io/ops-manager/2-10/install/add-delete.html#add-import).
-![alt-text="Installation Dashboard with NSX-T tile]"](./images/nsx-t/nsx-t-install-dash.png)
 
-1. Configure <%= vars.app_runtime_abbr %>, following the directions in [Configuring <%= vars.app_runtime_abbr %>](./configure-pas.html). When you configure **Networking**, select **External** under **Container networking interface plugin**.<br>
-![NSX-T ](./images/nsx-t/nsx-t-pas-cni.png)
+    ![alt-text="Installation Dashboard with NSX-T tile]"](./images/nsx-t/nsx-t-install-dash.png)
+
+1. Configure <%= vars.app_runtime_abbr %>, following the directions in [Configuring <%= vars.app_runtime_abbr %>](./configure-pas.html). When you configure **Networking**, select **External** under **Container networking interface plugin**.
+
+    ![NSX-T ](./images/nsx-t/nsx-t-pas-cni.png)
 
 1. Update the server pool membership for the NSX-T load balancers:
 
@@ -332,14 +334,15 @@ To install and configure the NSX-T Container Plug-In tile:
     * **NSX Manager Address**: The NSX-T Manager host address or IP address.
     * **Use Client Certificates or Username/Password**: Configure this setting as follows:
         <ol>
-            <li>If you are using VMware Workspace ONE Access, formerly called VMware Identity Manager (vIDM), then select **Client Certificate Authentication**.</li>
-            <li>Otherwise, select **Basic Authentication with Username and Password** and enter **NSX Manager Admin Username** and **Admin Password** credentials in the fields underneath.</li>
+            <li>If you are using VMware Workspace ONE Access, formerly called VMware Identity Manager (vIDM), then select <strong>Client Certificate Authentication</strong>.</li>
+            <li>Otherwise, select <strong>Basic Authentication with Username and Password</strong> and enter <strong>NSX Manager Admin Username</strong> and <strong>Admin Password</strong> credentials in the fields underneath.</li>
         </ol>
     * **NSX Manager CA Cert**: Obtain this certificate from NSX-T Manager as follows:
         <ol>
-            <li>`ssh` into NSX-T Manager using the admin account that you created when you deployed NSX-T Manager.</li>
-            <li>From the NSX-T Manager command line, run `get certificate api` to retrieve the certificate.</li>
+            <li>SSH into NSX-T Manager using the admin account that you created when you deployed NSX-T Manager.</li>
+            <li>From the NSX-T Manager command line, run <code>get certificate api</code> to retrieve the certificate.</li>
         </ol>
+        
         ![Obtain the NSX Manager CA Cert](./images/nsx-t/nsx-t-tile-config-mgr.png)
 
 1. Open and configure the **NCP** (NSX-T Container Plugin) pane as follows:
