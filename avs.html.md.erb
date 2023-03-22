@@ -307,7 +307,7 @@ in the [Step 2: Configure vCenter](https://docs.vmware.com/en/VMware-Tanzu-Opera
 
 To configure <%= vars.app_runtime_abbr %> for external container networking:
 
-1. If you have not already done so, download the <%= vars.app_runtime_abbr %> tile from [VMware Tanzu Network](https://network.tanzu.vmware.com/products/elastic-runtime) and import it to the **Installation Dashboard**. For instructions, see [Adding and Importing Products](https://docs.pivotal.io/ops-manager/2-10/install/add-delete.html#add-import).
+1. If you have not already done so, download the <%= vars.app_runtime_abbr %> tile from [VMware Tanzu Network](https://network.tanzu.vmware.com/products/elastic-runtime) and import it to the **Installation Dashboard**. For instructions, see [Adding and Importing Products](https://docs.pivotal.io/ops-manager/3-0/install/add-delete.html#add-import).
 
     ![alt-text="Installation Dashboard with NSX-T tile]"](./images/nsx-t/nsx-t-install-dash.png)
 
@@ -325,7 +325,7 @@ To configure <%= vars.app_runtime_abbr %> for external container networking:
 
 To install and configure the NSX-T Container Plug-In tile:
 
-1. If you have not already done so, download the VMware NSX-T Container Plug-in tile from [VMware Tanzu Network](https://network.tanzu.vmware.com/products/vmware-nsx-t) and import it to the **Installation Dashboard**. For instructions, see [Adding and Importing Products](https://docs.pivotal.io/ops-manager/2-10/install/add-delete.html#add-import).
+1. If you have not already done so, download the VMware NSX-T Container Plug-in tile from [VMware Tanzu Network](https://network.tanzu.vmware.com/products/vmware-nsx-t) and import it to the **Installation Dashboard**. For instructions, see [Adding and Importing Products](https://docs.pivotal.io/ops-manager/3-0/install/add-delete.html#add-import).
 
     ![<%= vars.ops_manager %> Installation Dashboard with NSX-T tile](./images/nsx-t/nsx-t-install-dash.png)
 
@@ -342,7 +342,7 @@ To install and configure the NSX-T Container Plug-In tile:
             <li>SSH into NSX-T Manager using the admin account that you created when you deployed NSX-T Manager.</li>
             <li>From the NSX-T Manager command line, run <code>get certificate api</code> to retrieve the certificate.</li>
         </ol>
-        
+
         ![Obtain the NSX Manager CA Cert](./images/nsx-t/nsx-t-tile-config-mgr.png)
 
 1. Open and configure the **NCP** (NSX-T Container Plugin) pane as follows:
