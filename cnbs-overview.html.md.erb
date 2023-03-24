@@ -31,14 +31,14 @@ This is the list of supported Cloud Native Buildpacks.
 ## <a id="remove-cnb"></a> Removing the beta Cloud Native Buildpacks
 
 For operators who do not wish to give developers access to the beta Cloud Native Buildpacks,
-they can do using the `cf` CLI with admin access:
+they can make the change using the `cf` CLI with admin access:
 ```
   cf update-buildpack web_servers_buildpack_beta --disable
 ```
 
 ## <a id="cnb-limitations"></a> Limitations of beta release
 
-Cloud Native Buildpacks currently  have these known limitations:
+Cloud Native Buildpacks currently have these known limitations:
 
 * **Procfiles:** Apps with Procfiles do not work correctly with the implementation of CNBs for TAS. Only the `web`
   process type is honored by Cloud Foundry. This is because the Procfile CNB, which ships as part of
