@@ -299,8 +299,8 @@ There are three key capacity scaling indicators <%= vars.company_name %> recomme
   <tr><th id="slow-consumer" colspan="2" style="text-align: center;"><br>Slow Consumer Drops<br><br></th></tr>
     <tr>
       <th width="25">Description</th>
-        <td>The Slow Consumer Drops indicator is the <code>slow_consumer</code> metric incremented for each connection the Firehose closes because a consumer could not keep up.<br>
-          This indicator shows how fast a Firehose consumer, such as a monitoring tool nozzle, is ingesting data. If this number is anomalous, it may result in the downstream monitoring tool not having all expected data, even though that data was successfully transported through the Firehose.</td>
+        <td>The Slow Consumer Drops indicator is the <code>slow_consumer</code> metric incremented for each connection the Firehose closes because a consumer cannot keep up.<br>
+          This indicator shows how fast a Firehose consumer, such as a monitoring tool nozzle, is ingesting data. If this number is anomalous, it might result in the downstream monitoring tool not having all expected data, even though that data was successfully transported through the Firehose.</td>
     </tr>
     <tr>
       <th>Source ID</th>
@@ -533,7 +533,7 @@ There is a single key capacity scaling indicator <%= vars.company_name %> recomm
 
 There is one key capacity scaling indicator <%= vars.company_name %> recommends for Gorouter performance.
 
-<p class= "note"><strong>Note:</strong> The following metric appears in the Firehose in two different formats. The below table lists both formats. For more information, see <a href="https://docs.pivotal.io/platform/2-8/pcf-release-notes/runtime-rn.html#duplicate-metrics">Duplicate Metrics Appear in the Firehose</a> in <em><%= vars.app_runtime_full %> v2.8 Release Notes</em>.</p>
+<p class= "note"><strong>Note:</strong> The following metric appears in the Firehose in two different formats. The following table lists both formats. For more information, see <a href="https://docs.pivotal.io/platform/2-8/pcf-release-notes/runtime-rn.html#duplicate-metrics">Duplicate Metrics Appear in the Firehose</a> in <em><%= vars.app_runtime_full %> v2.8 Release Notes</em>.</p>
 
 <table>
   <tr><th id="system.cpu.user" colspan="2" style="text-align: center;"><br>Gorouter VM CPU Utilization<br><br></th></tr>
@@ -585,7 +585,7 @@ There is one key capacity scaling indicator <%= vars.company_name %> recommends 
 
 There is one key capacity scaling indicator <%= vars.company_name %> recommends for UAA performance.
 
-<p class= "note"><strong>Note:</strong> The following metric appears in the Firehose in two different formats. The below table lists both formats. For more information, see <a href="https://docs.pivotal.io/platform/2-8/pcf-release-notes/runtime-rn.html#duplicate-metrics">Duplicate Metrics Appear in the Firehose</a> in <em><%= vars.app_runtime_full %> v2.8 Release Notes</em>.</p>
+<p class= "note"><strong>Note:</strong> The following metric appears in the Firehose in two different formats. The following table lists both formats. For more information, see <a href="https://docs.pivotal.io/platform/2-8/pcf-release-notes/runtime-rn.html#duplicate-metrics">Duplicate Metrics Appear in the Firehose</a> in <em><%= vars.app_runtime_full %> v2.8 Release Notes</em>.</p>
 
 <table>
   <tr><th id="uaa-system.cpu.user" colspan="2" style="text-align: center;"><br>UAA VM CPU Utilization<br><br></th></tr>
@@ -616,7 +616,7 @@ There is one key capacity scaling indicator <%= vars.company_name %> recommends 
     </tr>
     <tr>
       <th>How to scale</th>
-        <td>Scale UAA horizontally or vertically. To scale UAA, navigate to the <strong>Resource Config</strong> pane of the <%= vars.app_runtime_abbr %> tile and edit the number of your <strong>UAA</strong> VM instances or change the VM type to a type that utilizes more CPU cores.<br>
+        <td>Scale UAA horizontally or vertically. To scale UAA, navigate to the <strong>Resource Config</strong> pane of the <%= vars.app_runtime_abbr %> tile and edit the number of your <strong>UAA</strong> VM instances or change the VM type to a type that uses more CPU cores.<br>
         </td>
     </tr>
     <tr>
@@ -637,7 +637,7 @@ There is one key capacity scaling indicator for external S3 external storage.
 <p class="note"><strong>Note:</strong> This metric is only relevant if your deployment does not use an external S3 repository for
   external storage with no capacity constraints.</p>
 
-<p class= "note"><strong>Note:</strong> The following metric appears in the Firehose in two different formats. The below table lists both formats. For more information, see <a href="https://docs.pivotal.io/platform/2-8/pcf-release-notes/runtime-rn.html#duplicate-metrics">Duplicate Metrics Appear in the Firehose</a> in <em><%= vars.app_runtime_full %> v2.8 Release Notes</em>.</p>
+<p class= "note"><strong>Note:</strong> The following metric appears in the Firehose in two different formats. The following table lists both formats. For more information, see <a href="https://docs.pivotal.io/platform/2-8/pcf-release-notes/runtime-rn.html#duplicate-metrics">Duplicate Metrics Appear in the Firehose</a> in <em><%= vars.app_runtime_full %> v2.8 Release Notes</em>.</p>
 
 <table>
   <tr><th colspan="2" style="text-align: center;"><br>External S3 External Storage<br><br></th></tr>

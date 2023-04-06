@@ -31,7 +31,7 @@ For TAS for VMs:
 
 ### <a id='usecase'></a> Use Cases
 
-Use Small Footprint <%= vars.app_runtime_abbr %> for smaller <%= vars.platform_name %> deployments on which you intend to host 2500 or fewer apps, as described in [Limitations](#limits). If you want to use Small Footprint <%= vars.app_runtime_abbr %> in a production environment, ensure the limitations described below are not an issue in your use case.
+Use Small Footprint <%= vars.app_runtime_abbr %> for smaller <%= vars.platform_name %> deployments on which you intend to host 2500 or fewer apps, as described in [Limitations](#limits). If you want to use Small Footprint <%= vars.app_runtime_abbr %> in a production environment, ensure the limitations described are not an issue in your use case.
 
 <p class="note"><strong>Note:</strong> Small Footprint <%= vars.app_runtime_abbr %> is compatible with <%= vars.platform_name %> service tiles.</p>
 
@@ -51,14 +51,14 @@ Small Footprint <%= vars.app_runtime_abbr %> has the following limitations:
 
 * **Increasing platform capacity:** You cannot upgrade the Small Footprint <%= vars.app_runtime_abbr %> tile to the standard <%= vars.app_runtime_abbr %> tile. If you expect platform usage to increase beyond the capacity of Small Footprint <%= vars.app_runtime_abbr %>, <%= vars.company_name %> recommends using the standard <%= vars.app_runtime_abbr %> tile.
 
-* **Management plane availability during tile upgrades:** You may not be able to perform management plane operations like deploying new apps and accessing APIs for brief periods during tile upgrades. The management plane is located on the Control VM.
+* **Management plane availability during tile upgrades:** You might not be able to perform management plane operations like deploying new apps and accessing APIs for brief periods during tile upgrades. The management plane is located on the Control VM.
 
 * **App availability during tile upgrades:** If you require availability during your upgrades, you must scale your Compute VMs to a highly available configuration. Ensure sufficient capacity exists to move app instances between Compute VM instances during the upgrade.
 
 
 ## <a id='arch'></a> Architecture
 
-You can deploy Small Footprint <%= vars.app_runtime_abbr %> with a minimum of four VMs, as shown in the image below.
+You can deploy Small Footprint <%= vars.app_runtime_abbr %> with a minimum of four VMs, as shown in the following image.
 
 <p class="note"><strong>Note:</strong> The following image assumes that you are using an external blobstore.</p>
 
@@ -176,7 +176,7 @@ To troubleshoot a job that runs on the Control or Database VMs:
 
 		monit summary
 
-	The example output below lists the processes running on the Control VM. The processes listed reflect the co-location of jobs as outlined in [Architecture](#arch).
+	The following example output lists the processes running on the Control VM. The processes listed reflect the co-location of jobs as outlined in [Architecture](#arch).
 	<pre class="terminal">
 	control/12b1b027-7ffd-43ca-9dc9-7f4ff204d86a:/var/vcap/bosh\_ssh/bosh\_f9d2446b18b445e# monit summary
 	The Monit daemon 5.2.5 uptime: 5d 21h 10m

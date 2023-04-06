@@ -13,7 +13,7 @@ After installing the tile, you must follow the procedure in [Register an Isolati
 For more information about how isolation segments work, see [Isolation Segments](../concepts/security.html#isolation-segments) in _<%= vars.app_runtime_abbr %> Security_.
 
 
-## <a id='routing'></a> Step 1: (Optional) Configure Routing
+## <a id='routing'></a> Step 1: Configure Routing (Optional)
 
 By default, the <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) Gorouter handles traffic for your isolation segment. However, you can deploy a dedicated Gorouter for your isolation segment instead. For information about configuring and managing routing for isolation segments, see [Routing for Isolation Segments](../adminguide/routing-is.html).
 
@@ -53,7 +53,7 @@ To configure the **Assign AZ and Networks** pane:
 
 1. Select an AZ for your singleton jobs, and one or more AZs to balance other jobs in.
 
-1. Select a network. This network does not need to be the same network where you deployed <%= vars.app_runtime_abbr %>. For most deployments, operators should create unique networks in which to deploy the <%= vars.segment_runtime_full %> tile. These networks should maintain network reach-ability with the Diego components so that the Diego Cells can reach the Diego Brain and Diego Database VMs.
+1. Select a network. This network does not need to be the same network where you deployed <%= vars.app_runtime_abbr %>. For most deployments, operators should create unique networks in which to deploy the <%= vars.segment_runtime_full %> tile. These networks can maintain network reach with the Diego components because the Diego Cells can reach the Diego Brain and Diego Database VMs.
 
 1. Click **Save**.
 
@@ -71,11 +71,11 @@ To configure the **App Containers** pane:
 
 1. Select **App Containers**.
 
-1. (Optional) To give apps that generally stay within their CPU entitlements priority access to extra CPU during CPU bursts, activate the **Enable CPU Burst Optimization** checkbox. This checkbox is activated by default. When this checkbox is activated, apps that generally stay within their CPU entitlements have higher-priority access to extra CPU than apps that generally exceed their CPU entitlements. When this checkbox is deactivated, all apps have equal access to extra CPU during CPU bursts. Whether you activate or deactivate this checkbox, all apps are always guaranteed the amount of CPU that is within their CPU entitlements.
+1. (Optional) To give apps that generally stay within their CPU entitlements priority access to extra CPU during CPU bursts, activate the **Enable CPU Burst Optimization** check box. This check box is activated by default. When this check box is activated, apps that generally stay within their CPU entitlements have higher-priority access to extra CPU than apps that generally exceed their CPU entitlements. When this check box is deactivated, all apps have equal access to extra CPU during CPU bursts. Whether you activate or deactivate this check box, all apps are always guaranteed the amount of CPU that is within their CPU entitlements.
 
-1. Choose how the Gorouter verifies app identity to enable encryption and prevent misrouting under **Gorouter app identity verification**:
-    * **The Gorouter uses TLS to verify app identity**: Enables the Gorouter to verify app identity using TLS. This is the default option.
-    * **The Gorouter and apps use mutual TLS to verify each other's identity**: Enables your apps and the Gorouter to verify each other's identity using mutual TLS (mTLS). This option disables TCP routing because app containers accept incoming communication only from the Gorouter.
+1. Choose how the Gorouter verifies app identity to activate encryption and prevent mis routing under **Gorouter app identity verification**:
+    * **The Gorouter uses TLS to verify app identity**: Activates the Gorouter to verify app identity using TLS. This is the default option.
+    * **The Gorouter and apps use mutual TLS to verify each other's identity**: Activates your apps and the Gorouter to verify each other's identity using mutual TLS (mTLS). This option deactivates TCP routing because app containers accept incoming communication only from the Gorouter.
 
     For more information, see [Preventing Misrouting](../concepts/http-routing.html#consistency) in _HTTP Routing_.
 
@@ -83,10 +83,10 @@ To configure the **App Containers** pane:
 
 1. Select your preference for **Docker images disk cleanup scheduling on Diego Cell VMs**. If you choose **Clean up disk space once usage fills disk**, enter a value in MB for **Reserved disk space for other jobs**. This is the amount of space the garbage collection algorithm should keep free for other jobs. For more information about the configuration options and how to configure a reserved amount, see [Configuring Diego Cell Disk Cleanup Scheduling](../operating/config-cell-cleanup.html).
 
-1. The **Enable containerd delegation** checkbox governs whether or not Garden delegates container create and destroy operations to the containerd tool. By default, this option is enabled and Garden uses containerd. Disable this option by disabling the checkbox. For more information about the containerd tool, see [containerd](https://containerd.io).
+1. The **Enable containerd delegation** check box governs whether or not Garden delegates container create and destroy operations to the containerd tool. By default, this option is activated and Garden uses containerd. Deactivate this option by deselecting the check box. For more information about the containerd tool, see [containerd](https://containerd.io).
 
 1. Under **NFSv3 volume services**, select **Enable** or **Disable**. NFS volume services allow app developers to bind existing NFS volumes to their apps for shared file access. For more information, see [Enabling Volume Services](../operating/enable-vol-services.html).
-  <p class="note"><strong>Note:</strong> In a fresh install, NFSv3 volume services is enabled by default. In an upgrade, NFSv3 volume services is set to the same setting as it was in the previous deployment.</p>
+  <p class="note"><strong>Note:</strong> In a fresh installation, NFSv3 volume services are activated by default. In an upgrade, NFSv3 volume services is set to the same setting as it was in the previous deployment.</p>
 
 1. (Optional) To configure LDAP for NFSv3 volume services:
   * For **LDAP service account user**, enter the username of the service account in LDAP that manages volume services.
@@ -95,9 +95,8 @@ To configure the **App Containers** pane:
   * For **LDAP server port**, enter the LDAP server port number. If you do not specify a port number, <%= vars.ops_manager %> uses 389.
   * For **LDAP user search base**, enter the location in the LDAP directory tree from which any LDAP user search begins. The typical LDAP search base matches your domain name. <br>For example, a domain named `cloud.example.com` typically uses the following LDAP user search base: `ou=Users,dc=example,dc=com`.
   * (Optional) For **LDAP server CA certificate**, you can enter a certificate if your LDAP server supports TLS and you want to enable TLS connections from the NFS driver to your LDAP server. Paste in the root certificate from your CA certificate or your self-signed certificate.
-  <p class='note'><strong>Note:</strong> UAA can only parse one certificate entered into this field. If you enter multiple certificates, UAA only uses the first one you entered and ignores the rest. You only need to include one root certificate or self-signed certificate.</p>
-
-1. Click **Save**.
+  <p class='note'><strong>Note:</strong> UAA can only parse one certificate entered into this field. If you enter multiple certificates, UAA only uses the first one you entered and ignores the rest. You only have to include one root certificate or self-signed certificate.</p>
+    2. Click Save.
 
 ### <a id='syslog'></a> Configure System Logging
 
@@ -117,20 +116,20 @@ To configure the **System Logging** pane:
 
 1. Select a protocol from the **Transport protocol** menu. This is the protocol the system uses to transmit logs to syslog.
 
-1. (Optional) To transmit logs over TLS, select the **Enable TLS** checkbox.
+1. (Optional) To transmit logs over TLS, select the **Enable TLS** check box.
 
 1. Enter a **Permitted peer**.
 
 1. Paste the certificate for your TLS certificate authority (CA) in the **TLS CA certificate** field.
 
-1. (Optional) Enable the **Use TCP for file forwarding local transport** checkbox to transmit logs over TCP. This prevents log truncation, but may cause performance issues.
+1. (Optional) Activate the **Use TCP for file forwarding local transport** check box to transmit logs over TCP. This prevents log truncation, but might cause performance issues.
 
-1. (Optional) The **Do not forward debug logs** checkbox is enabled by default. To forward `DEBUG` syslog messages to an external service, disable the checkbox.
-  <p class="note"><strong>Note:</strong> Some <%= vars.segment_runtime_full %> components generate a high volume of <code>DEBUG</code> syslog messages. Enabling the <strong>Do not forward debug logs</strong> checkbox prevents <%= vars.app_runtime_abbr %> components from forwarding the <code>DEBUG</code> syslog messages to external services. However, <%= vars.segment_runtime_full %> still writes the messages to the local disk.</p>
+1. (Optional) The **Do not forward debug logs** checkbox is activated by default. To forward `DEBUG` syslog messages to an external service, deactivate the check box.
+  <p class="note"><strong>Note:</strong> Some <%= vars.segment_runtime_full %> components generate a high volume of <code>DEBUG</code> syslog messages. Activating the <strong>Do not forward debug logs</strong> checkbox prevents <%= vars.app_runtime_abbr %> components from forwarding the <code>DEBUG</code> syslog messages to external services. However, <%= vars.segment_runtime_full %> still writes the messages to the local disk.</p>
 
 1. (Optional) To specify a custom syslog rule, enter it in the **Custom rsyslog configuration** field in RainerScript syntax. For more information about customizing syslog rules, see [Customizing Syslog Rules](./custom-syslog-rules.html). For more information about RainerScript, see the [RainerScript](http://www.rsyslog.com/doc/v8-stable/rainerscript/index.html) documentation.
 
-1. Select the **Enable system metrics** checkbox to emit system-level metrics about all VMs in the deployment. For a list of the VM metrics that the System Metric Agent emits, see [VM Metrics](https://github.com/cloudfoundry/system-metrics-release/blob/develop/docs/system-metrics-agent.md#vm-metrics) in GitHub. When you enable this checkbox, ensure that you open port `9100` for the isolation segment. For more information, see [Configure Firewall Rules](../adminguide/routing-is.html#config-firewall) in _Routing for Isolation Segments_.
+1. Select the **Enable system metrics** check box to emit system-level metrics about all VMs in the deployment. For a list of the VM metrics that the System Metric Agent emits, see [VM Metrics](https://github.com/cloudfoundry/system-metrics-release/blob/develop/docs/system-metrics-agent.md#vm-metrics) in GitHub. When you activate this check box, ensure that you open port `9100` for the isolation segment. For more information, see [Configure Firewall Rules](../adminguide/routing-is.html#config-firewall) in _Routing for Isolation Segments_.
 
 1. Click **Save**.
 
@@ -142,7 +141,7 @@ To configure the **System Logging** pane:
 
 ### <a id='compute-networking-isolation'></a> Configure Compute and Networking Isolation
 
-In the **Compute and Networking Isolation** pane, you can enable or disable
+In the **Compute and Networking Isolation** pane, you can activate or deactivate
 compute isolation and configure Gorouter sharding for isolation segments.
 
 Compute isolation is when an app runs on compute resources, such as clusters,
@@ -153,15 +152,15 @@ Networking isolation, or Gorouter sharding, is when traffic to an app instance
 uses a dedicated route that is isolated from routes used by other app instances
 by a network partition or firewall rule.
 
-In the <%= vars.segment_runtime_full %> tile, you cannot disable compute
-isolation and enable networking isolation at the same time. This is because
+In the <%= vars.segment_runtime_full %> tile, you cannot deactivate compute
+isolation and activate networking isolation at the same time. This is because
 networking isolation configures the route by which traffic goes to the
 <%= vars.segment_runtime_full %> tile. Both compute and networking isolation
-are enabled by default.
+are activated by default.
 
 #### <a id='compute-networking-isolation-configs'></a> Options for Configuring Compute and Networking Isolation
 
-The following table describes the three ways <%= vars.company_name %>
+The following table describes the ways <%= vars.company_name %>
 recommends configuring the **Compute and Networking Isolation** pane and the
 **Gorouter isolation segment request handling** property in the **Networking**
 pane of the <%= vars.app_runtime_abbr %> tile:
@@ -173,7 +172,7 @@ pane of the <%= vars.app_runtime_abbr %> tile:
 | Use compute isolation only | Enabled | No isolation segment | Accept all | <%= vars.segment_runtime_full %> uses <%= vars.app_runtime_abbr %> load balancer and domain | Scale <%= vars.segment_runtime_full %> Gorouters to 0. |
 | Use network isolation in some cases | See other rows for guidance | See other rows for guidance | Accept some | See other rows for guidance | See other rows for guidance |
 
-The use cases in the table above are described below:
+The use cases in the following table are described here:
 
 * **Use compute isolation and network isolation for all isolation segments**:
   This is the most common case. For this use case, select "Reject all" for the
@@ -186,7 +185,7 @@ The use cases in the table above are described below:
 * **Use compute isolation and extra <%= vars.segment_runtime_full %>
   Gorouters**: To configure traffic for your isolated apps to pass through the
   Gorouters for both <%= vars.segment_runtime_full %> and
-  <%= vars.app_runtime_abbr %>, enable compute isolation and networking isolation,
+  <%= vars.app_runtime_abbr %>, activate compute isolation and networking isolation,
   and select "Accept all" for the **Gorouter isolation segment request handling**
   radio button in the **Networking** pane of the <%= vars.app_runtime_abbr %> tile. You can
   also use either the same apps domain you configured in the **Domains** pane
@@ -198,10 +197,10 @@ The use cases in the table above are described below:
 
 * **Use compute isolation only**: To configure the <%= vars.app_runtime_abbr %>
   load balancer and apps domain route requests from your isolated apps, you can
-  enable compute isolation, disable networking isolation, and select "Accept
+  activate compute isolation, deactivate networking isolation, and select "Accept
   all" for the **Gorouter isolation segment request handling** radio button in
   the **Networking** pane of the <%= vars.app_runtime_abbr %> tile. This
-  configuration enables you to move Diego Cells out of <%= vars.app_runtime_abbr %>
+  configuration allows you to move Diego Cells out of <%= vars.app_runtime_abbr %>
   and into isolation segments, so you can upgrade <%= vars.app_runtime_abbr %>
   first and your <%= vars.segment_runtime_full %> tiles as time permits. This
   allows you to upgrade a large foundation in pieces,
@@ -222,8 +221,8 @@ The use cases in the table above are described below:
 <strong>Compute and Networking Isolation</strong> pane and the
 <strong>Gorouter isolation segment request handling</strong> radio button in
 the <%= vars.app_runtime_abbr %> tile in a manner other than the use cases
-described above, the smoke tests fail. To deploy the tile anyway, you must
-disable the Smoke Test errand in the <strong>Errands</strong> pane of the <%=
+described previously, the smoke tests fail. To deploy the tile anyway, you must
+deactivate the Smoke Test errand in the <strong>Errands</strong> pane of the <%=
 vars.app_runtime_abbr %> tile. <%= vars.company_name %> does not recommend
 disabling smoke tests. To configure the Smoke Test errand, see <a
 href="#errands">Configure Errands</a>.</p>
@@ -234,12 +233,12 @@ To configure the **Compute and Networking Isolation** pane:
 
 1. Select **Compute and Networking Isolation**.
 
-1. Under **Compute isolation**, enable or disable compute isolation:
-  * To disable compute isolation, select **Disable**. Select this option if you do not require compute isolation and you are deploying the <%= vars.segment_runtime_full %> tile for the purpose of making upgrades more manageable. For example, if you have a <%= vars.app_runtime_abbr %> tile with a large volume of Diego Cells. This approach helps separate the upgrade of the <%= vars.app_runtime_abbr %> control plane from the upgrade of the Diego Cells. Further, it splits the upgrade of the Diego Cells into smaller groups.
-  * To enable compute isolation, select **Enable** and enter a placement tag for your Diego Cells in the **Segment name** field. This placement tag identifies the Diego Cells that run in your isolation segment and must be unique across your <%= vars.platform_name %> deployment. You use this placement tag when following the steps in [Register an Isolation Segment](../adminguide/isolation-segments.html#register-an-is) in _Managing Isolation Segments_ to create the isolation segment in the CCDB.
-    <p class='note'><strong>Note:</strong> If you disable compute isolation, you must set <strong>Gorouter sharding mode</strong> to <strong>No isolation segment</strong>. Otherwise, the <%= vars.segment_runtime_full %> tile fails to schedule the apps in your isolation segment.</p>
+1. Under **Compute isolation**, activate or deactivate compute isolation:
+  * To deactivate compute isolation, select **Disable**. Select this option if you do not require compute isolation and you are deploying the <%= vars.segment_runtime_full %> tile for the purpose of making upgrades more manageable. For example, if you have a <%= vars.app_runtime_abbr %> tile with a large volume of Diego Cells. This approach helps separate the upgrade of the <%= vars.app_runtime_abbr %> control plane from the upgrade of the Diego Cells. Further, it splits the upgrade of the Diego Cells into smaller groups.
+  * To activate compute isolation, select **Enable** and enter a placement tag for your Diego Cells in the **Segment name** field. This placement tag identifies the Diego Cells that run in your isolation segment and must be unique across your <%= vars.platform_name %> deployment. You use this placement tag when following the steps in [Register an Isolation Segment](../adminguide/isolation-segments.html#register-an-is) in _Managing Isolation Segments_ to create the isolation segment in the CCDB.
+    <p class='note'><strong>Note:</strong> If you deactivate compute isolation, you must set <strong>Gorouter sharding mode</strong> to <strong>No isolation segment</strong>. Otherwise, the <%= vars.segment_runtime_full %> tile fails to schedule the apps in your isolation segment.</p>
 
-1. Under **Gorouter sharding mode**, enable or disable networking isolation by selecting a sharding mode. For more information, see [Sharding Gorouters for Isolation Segments](../adminguide/routing-is.html#sharding-routers-isolation-segment) in _Routing for Isolation Segments_.
+1. Under **Gorouter sharding mode**, activate or deactivate networking isolation by selecting a sharding mode. For more information, see [Sharding Gorouters for Isolation Segments](../adminguide/routing-is.html#sharding-routers-isolation-segment) in _Routing for Isolation Segments_.
   * **Isolation segment only**: The Gorouters for the <%= vars.app_runtime_abbr %> tile acknowledge requests only for apps deployed within the Diego Cells of the tile. All other requests fail.
   * **No isolation segment**: The Gorouters for the <%= vars.app_runtime_abbr %> tile reject requests for any isolation segment. Choose this option to add a group of Gorouters for the <%= vars.app_runtime_abbr %> tile, such as when you want a private point of entry for the system domain or to configure a group of Gorouters to receive requests from your corporate intranet.
 
@@ -288,29 +287,32 @@ In the **Errands** pane, you can select **On** to always run an errand or **Off*
 
 For more information about how <%= vars.ops_manager %> manages errands, see [Managing Errands in <%= vars.ops_manager %>](https://docs.pivotal.io/platform/<%= vars.current_major_version %>/customizing/managing_errands.html).
 
-<div class="note warning"><strong>Caution:</strong> You should disable the Smoke Test errand if:
+<div class="note warning"><strong>Caution:</strong> You can deactivate the Smoke Test errand if:
     <ul>
-    <li>You configure the <strong>Compute and Networking Isolation</strong> pane and the <strong>Gorouter isolation segment request handling </strong> checkbox in the <%= vars.app_runtime_abbr %> tile in a manner other than the use cases described in <a href="#compute-networking-isolation-configs">Options for Configuring Compute and Networking Isolation</a>. Otherwise, apps fail to schedule in <%= vars.segment_runtime_full %>.</li>
-    <li>Both the V2 and V1 Firehoses are disabled in <%= vars.app_runtime_abbr %>. Otherwise, the deploy fails.</li>
+    <li>You configure the <strong>Compute and Networking Isolation</strong> pane and the <strong>Gorouter isolation segment request handling </strong> check box in the <%= vars.app_runtime_abbr %> tile in a manner other than the use cases described in <a href="#compute-networking-isolation-configs">Options for Configuring Compute and Networking Isolation</a>. Otherwise, apps fail to schedule in <%= vars.segment_runtime_full %>.</li>
+    <li>Both the V2 and V1 Firehoses are deactivate in <%= vars.app_runtime_abbr %>. Otherwise, the deploy fails.</li>
     </ul>
 </div>
 
 ### <a id='resources'></a> Configure Resources
 
-In the **Resource Config** pane, you must associate load balancers with the VMs in your deployment to enable traffic.
+In the **Resource Config** pane, you must associate load balancers with the VMs in your deployment to activate traffic.
 
 To configure the **Resource Config** pane:
 
 1. Select **Resource Config**.
 
-1. If you are using a dedicated Gorouter for your isolation segment:
+1. If you use a dedicated Gorouter for your isolation segment:
   <p class="note"><strong>Note:</strong> The configuration settings available in <strong>Resource Config</strong> vary depending on your IaaS.</p>
-  * **If you have the Load Balancers column in your Resource Config**:
-      1. Enter the wildcard DNS entry attached to your load balancer into the **Router** row under **Load Balancers**.
-  * **If you do not have the Load Balancers column in your Resource Config**:
-      1. Navigate to the **Networking** pane.
-      1. Specify **Gorouter IPs**.
-      1. Attach the IP addresses to your load balancer manually.
+  If you have the Load Balancers column in your Resource Config pane:
+
+Enter the wildcard DNS entry attached to your load balancer into the Router row under Load Balancers.
+
+If you do not have the Load Balancers column in your Resource Config pane:
+
+1. Navigate to the Networking pane.
+2. Specify Gorouter IPs.
+3. Manually attach the IP addresses to your load balancer.
 
 ### <a id='after_config'></a> After Tile Configuration
 
@@ -326,7 +328,7 @@ After you configure the <%= vars.segment_runtime_full %> tile:
 After the tile finishes deploying, see [Managing Isolation Segments](../adminguide/isolation-segments.html) for more information about managing an isolation segment.
 
 
-## <a id='copy'></a> (Optional) Step 4: Copy the Tile
+## <a id='copy'></a>  Step 4: Copy the Tile (Optional)
 
 To create multiple isolation segments, you can copy the <%= vars.segment_runtime_full %> tile with the Replicator tool.
 

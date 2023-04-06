@@ -40,7 +40,7 @@ To install <%= vars.app_runtime_abbr %> with minimal configuration:
 
 1. Select **Networking**.
 
-1. Under **Certificates and private keys for the Gorouter**, you must provide at least one certificate and private key name and certificate key pair for the Gorouter. The Gorouter is enabled to receive TLS communication by default. You can configure multiple certificates for the Gorouter.
+1. Under **Certificates and private keys for the Gorouter**, you must provide at least one certificate and private key name and certificate key pair for the Gorouter. The Gorouter is activated to receive TLS communication by default. You can configure multiple certificates for the Gorouter.
   <p class="note"><strong>Note:</strong> When providing custom certificates, enter them in this order: <code>wildcard</code>, <code>Intermediate</code>, <code>CA</code>. For more information, see <a href="https://www.digicert.com/ssl-support/pem-ssl-creation.htm">Creating a .pem File for SSL Certificate Installations</a> in the DigiCert documentation.</p>
   1. Click **Add** to add a name for the certificate chain and its private key pair. This certificate is the default used by the Gorouter. You can either provide a certificate signed by a Certificate Authority (CA) or click **Generate RSA Certificate** to generate a self-signed certificate in <%= vars.ops_manager %>.
   <p class="note"><strong>Note:</strong> If you configured <%= vars.ops_manager %> Front End without a certificate, you can use this new certificate to complete your <%= vars.ops_manager %> configuration. To configure your <%= vars.ops_manager %> Front End certificate, see <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/gcp-prepare-env-manual.html#config-frontend">Configure Front End</a> in <em> Preparing to Deploy Ops Manager on GCP</em>.</p>
@@ -65,7 +65,7 @@ To install <%= vars.app_runtime_abbr %> with minimal configuration:
 4. Under **Internal encryption provider keys**, specify one or more keys to use for encrypting and decrypting the values stored in the CredHub database:
 	* **Name:** This is the name of the encryption key.
 	* **Key:** This key is used for encrypting all data. The key must be at least 20 characters long.
-  * **Primary:** This checkbox is used for marking the key you specified above as the primary encryption key. You must mark one key as **Primary**. Do not mark more than one key as **Primary**.
+  * **Primary:** This check box is used for marking the key you specified as the primary encryption key. You must mark one key as **Primary**. Do not mark more than one key as **Primary**.
 
 1. Go to the **Internal MySQL** pane.
 
@@ -73,7 +73,7 @@ To install <%= vars.app_runtime_abbr %> with minimal configuration:
 
 3. Select **Resource Config**.
 
-4. In the **Resource Config** pane, you must associate load balancers with the VMs in your deployment to enable traffic. For more information, see [Configure Load Balancing for <%= vars.app_runtime_abbr %>](configure-lb.html).
+4. In the **Resource Config** pane, you must associate load balancers with the VMs in your deployment to activate traffic. For more information, see [Configure Load Balancing for <%= vars.app_runtime_abbr %>](configure-lb.html).
 
 
 ## <a id='complete'></a> Complete the <%= vars.app_runtime_abbr %> Installation

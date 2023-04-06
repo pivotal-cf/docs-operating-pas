@@ -30,7 +30,7 @@ Cloud Controller emits the following metrics:
 
 #### Heuristic Failures
 
-The following behaviors may occur:
+The following behaviors might occur:
 
 * There is a latency in average response.
 * Web UI responsiveness or timeouts are degraded.
@@ -38,7 +38,7 @@ The following behaviors may occur:
 
 #### Relevant Log Files
 
-You can find the above heuristic failures in the following log files:
+You can find the heuristic failures in the following log files:
 
 * `/var/vcap/sys/log/cloud_controller_ng/cloud_controller_ng.log`
 * `/var/vcap/sys/log/cloud_controller_ng/nginx-access.log`
@@ -80,14 +80,14 @@ Cloud Controller emits the following metrics:
 
 #### Heuristic Failures
 
-The following behaviors may occur:
+The following behaviors might occur:
 
 * `cf push` is intermittently failing.
 * `cf push` average time is elevated.
 
 #### Relevant Log Files
 
-You can find the above heuristic failures in the following log files:
+You can find the heuristic failures in the following log files:
 
 * `/var/vcap/sys/log/cloud_controller_ng/cloud_controller_ng.log`
 
@@ -109,12 +109,12 @@ When determining whether to scale `cloud_controller_worker`, look for the follow
 
 Cloud Controller emits the following metrics:
 
-* `cc.job_queue_length.cc-VM_TYPE-VM_INDEX` is continuously growing. For example, `cc.job_queue_length.cc-cc-worker-0`. 
+* `cc.job_queue_length.cc-VM_TYPE-VM_INDEX` is continuously growing. For example, `cc.job_queue_length.cc-cc-worker-0`.
 * `cc.job_queue_length.total` is continuously growing.
 
 #### Heuristic Failures
 
-The following behaviors may occur:
+The following behaviors can occur:
 
 * `cf delete-org ORG_NAME` appears to leave its contained resources around for a long time.
 * Users report slow deletes for other resources.
@@ -122,7 +122,7 @@ The following behaviors may occur:
 
 #### Relevant Log Files
 
-You can find the above heuristic failures in the following log files:
+You can find the heuristic failures in the following log files:
 
 * `/var/vcap/sys/log/cloud_controller_worker/cloud_controller_worker.log`
 
@@ -157,7 +157,7 @@ Cloud Controller emits the following metrics:
 
 #### Heuristic Failures
 
-The following behaviors may occur:
+The following behaviors can occur:
 
 * Diego domains are frequently unfresh. For more information, see
 [Domain Freshness](https://github.com/cloudfoundry/bbs/blob/master/doc/domains.md#domain-freshness) in
@@ -168,7 +168,7 @@ APIs.
 
 #### Relevant Log Files
 
-You can find the above heuristic failures in the following log files:
+You can find the heuristic failures in the following log files:
 
 * `/var/vcap/sys/log/cloud_controller_clock/cloud_controller_clock.log`
 * `/var/vcap/sys/log/cc_deployment_updater/cc_deployment_updater.log`
@@ -199,7 +199,7 @@ Cloud Controller emits the following metrics:
 
 #### Heuristic Failures
 
-The following behaviors may occur:
+The following behaviors can occur:
 
 * `cf push` is intermittently failing.
 * `cf push` average time is elevated.
@@ -207,7 +207,7 @@ The following behaviors may occur:
 
 #### Relevant Log Files
 
-You can find the above heuristic failures in the following log files:
+You can find the heuristic failures in the following log files:
 
 * `/var/vcap/sys/log/blobstore/internal_access.log`
 

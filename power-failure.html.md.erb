@@ -49,7 +49,7 @@ Use the checklist in this section to ensure that <%= vars.platform_name %> is in
 a power failure.
 
 This checklist assumes that your <%= vars.platform_name %> on vSphere installation is configured
-for vSphere HA and that you have the BOSH Resurrector enabled.
+for vSphere HA and that you have the BOSH Resurrector activated.
 
 <table>
   <tr>
@@ -80,7 +80,7 @@ for vSphere HA and that you have the BOSH Resurrector enabled.
   <tr>
     <td>5</td>
     <td><%= vars.app_runtime_abbr %></td>
-    <td><a href="#check-pas">Ensure VMs for <%= vars.app_runtime_abbr %> are Running</a>. This may
+    <td><a href="#check-pas">Ensure VMs for <%= vars.app_runtime_abbr %> are Running</a>. This might
         include manually recovering the MySQL cluster.</td>
   </tr>
   <tr>
@@ -142,7 +142,7 @@ deployment.
 **Powered On**, restart the VM.
 
 1. If the **State** column shows that the VM is **Powered On** but the **Status** column does not
-does not show **Normal**, it may be due the following known issue: [Monit inaccurately reports the
+does not show **Normal**, it might be due the following known issue: [Monit inaccurately reports the
 health of UAA](https://docs.pivotal.io/pivotalcf/2-5/pcf-release-notes/opsmanager-rn.html#monit).
 To resolve this issue, do the following:
 
@@ -160,7 +160,7 @@ To resolve this issue, do the following:
 
 ## <a id="resurrector"></a> Phase 4: Ensure BOSH Resurrector Finished Recovering
 
-If enabled, the BOSH Resurrector re-creates any VMs in a problematic state after being recovered by
+If activated, the BOSH Resurrector recreates any VMs in a problematic state after being recovered by
 vSphere HA.
 
 To ensure BOSH Resurrector finished recovering, do the following:

@@ -3,21 +3,21 @@ title: Restricting App Access to Internal TAS for VMs Components
 owner: Security
 ---
 
-This topic describes how to secure the component virtual machines (VMs) of your <%= vars.app_runtime_first %> deployment from being accessed by apps.
+This topic describes how to secure the virtual machines (VMs) component of your <%= vars.app_runtime_first %> deployment from being accessed by apps.
 
 
 ## <a id='overview'></a> Overview
 
-See the following list to understand the concepts for this topic:
+See the following list to interpert the concepts for this topic:
 
 * **How <%= vars.app_runtime_abbr %> determines where apps can send traffic**:
   * <%= vars.app_runtime_abbr %> uses _App Security Groups (ASGs)_, which are network policy rules specifying protocols, ports, and IP ranges that apply to outbound network connections initiated from apps. For more information, see [App Security Groups](../concepts/asg.html).
 
 * **Why you must create new rules for outbound app traffic**:
-  * <%= vars.app_runtime_abbr %> installs with a default ASG that allows apps running on your deployment to send traffic to almost any IP address. This means apps are not blocked from initiating connections to most network destinations unless an administrator takes action to update the ASGs with a more restrictive policy. For more information, see the [Default ASGs](../concepts/asg.html#default-asg) section of the _App Security Groups_ topic.
+  * <%= vars.app_runtime_abbr %> installs with a default ASG that you can run for apps on your deployment that send traffic to almost any IP address. This results in apps not being blocked from initiating connections to most network destinations unless an administrator takes action to update the ASGs with a more restrictive policy. For more information, see the [Default ASGs](../concepts/asg.html#default-asg) section of the _App Security Groups_ topic.
 
 * **How you can set up new rules**:
-  * To help secure your component VMs against apps while ensuring your apps can access the services they need, follow the steps in the [Procedure](#procedure) section, which includes:
+  * To help secure your VM component against apps while ensuring that your apps can access the services they need, follow the steps in the [Procedure](#procedure) section, which includes:
     <table>
     <tr>
     <th>Step</th>
@@ -33,11 +33,11 @@ See the following list to understand the concepts for this topic:
     </tr>
     <tr>
       <td>3</td>
-      <td><a href="#initial">Create New ASGs</a>: <br>Block apps from sending traffic to system components, but allow them to send traffic to the services they need.</td>
+      <td><a href="#initial">Create New ASGs</a>: <br>Block apps from sending traffic to system components, but you can send traffic to the services they need.</td>
     </tr>
     <tr>
       <td>4</td>
-      <td><a href="#unbind-default">Remove the Default ASG</a>: <br>After you create and bind new ASGs, you no longer need the deployment-wide default ASG bindings that allow apps to send traffic to any IP.</td>
+      <td><a href="#unbind-default">Remove the Default ASG</a>: <br>After you create and bind new ASGs, you no longer need the deployment wide default ASG bindings that allow apps to send traffic to any IP.</td>
     </tr>
     <tr>
       <td>5</td>
@@ -54,7 +54,7 @@ See the following list to understand the concepts for this topic:
 
 ## <a id='prerequisites'></a> Prerequisites
 
-The procedure below requires that you have the latest release of [ASG Creator](https://github.com/cloudfoundry-incubator/asg-creator/releases/latest) from the Cloud Foundry incubator repository on GitHub. For more information, see the [About the ASG Creator Tool](../concepts/asg.html#asg-baseline) section of the _App Security Groups_ topic.
+The procedure section requires that you have the latest release of [ASG Creator](https://github.com/cloudfoundry-incubator/asg-creator/releases/latest) from the Cloud Foundry incubator repository on GitHub. For more information, see the [About the ASG Creator Tool](../concepts/asg.html#asg-baseline) section of the _App Security Groups_ topic.
 
 
 ## <a id='procedure'></a> Procedure
@@ -104,7 +104,7 @@ The procedure for securing your deployment with ASGs varies depending on your ne
 
 ### <a name='bind-default'></a> Step 2: Ensure Access for <%= vars.app_runtime_abbr %> System Apps
 
-Applying the default ASG to the `system` org provides network access to <%= vars.app_runtime_abbr %> system apps without restrictions, which enables them to continue functioning properly after you perform [Step 4: Remove the Deployment-wide Default ASG Binding](#unbind-default). To apply the default ASG to the `system` org:
+Applying the default ASG to the `system` org provides network access to <%= vars.app_runtime_abbr %> system apps without restrictions, which activates them to continue functioning properly after you perform [Step 4: Remove the Deployment-wide Default ASG Binding](#unbind-default). To apply the default ASG to the `system` org:
 
 1. Bind the default ASG to the staging set in the `system` org by running:
 
@@ -173,45 +173,45 @@ To create ASGs that block apps from sending traffic to the networks that host <%
         etc...
         ```
 
-1. To generate the default `public-networks.json` and `private-networks.json` files that contain your ASG rules, specifying the location of the `config.yml` file as input, run:
+1. To generate the `public-networks.json` and `private-networks.json` default files that contain your ASG rules, specify the location of the `config.yml` file as input, and run:
 
-    ```
+    ```yaml
     asg-creator create --config config.yml
     ```
 
 1. Create the `public-networks` ASG by running:
 
-    ```
+    ```console
     cf create-security-group public-networks public-networks.json
     ```
 
 1. Bind the ASG to the default staging set by running:
 
-    ```
+    ```console
     cf bind-staging-security-group public-networks
     ```
 
 1. Bind the ASG to the default running set by running:
 
-    ```
+    ```console
     cf bind-running-security-group public-networks
     ```
 
 1. Create the `private-networks` ASG by running:
 
-    ```
+    ```console
     cf create-security-group private-networks private-networks.json
     ```
 
 1. Bind the ASG to the default staging set by running:
 
-    ```
+    ```console
     cf bind-staging-security-group private-networks
     ```
 
 1. Bind the ASG to the default running set by running:
 
-    ```
+    ```console
     cf bind-running-security-group private-networks
     ```
 
@@ -221,7 +221,7 @@ To create ASGs that block apps from sending traffic to the networks that host <%
 
 <p class="note"><strong>Note:</strong> This part is only necessary if you blocked apps from a network that hosts services in the previous part. If you did not block apps from a network that hosts services, proceed to <a href="#unbind-default">Step 4: Remove the Default ASG</a>.</p>
 
-<p class="note warning"><strong>Caution:</strong> In the two network layout, <%= vars.app_runtime_abbr %> and services share the same network. This means that each time you create an ASG that allows apps to access a new port and protocol within the network, you further expose the <%= vars.app_runtime_abbr %> component VMs. This is a limitation of a two network layout. For guidance on network topology, see <a href="https://docs.pivotal.io/platform/<%= vars.current_major_version %>/plan/index.html">Reference Architectures</a>.</p>
+<p class="note warning"><strong>Caution:</strong> In the two network layout, <%= vars.app_runtime_abbr %> and services share the same network. Each time you create an ASG that allows apps to access a new port and protocol within the network, you further expose the <%= vars.app_runtime_abbr %> component VMs. This is a limitation of a two network layout. For guidance on network topology, see <a href="https://docs.pivotal.io/platform/<%= vars.current_major_version %>/plan/index.html">Reference Architectures</a>.</p>
 
 Now that you have created ASGs to secure the <%= vars.ops_manager %>, <%= vars.app_runtime_abbr %>, and service components, work with developers to create additional ASGs that give apps access to the services they need.
 
@@ -245,15 +245,15 @@ Now that you have bound new ASGs to determine outbound traffic rules, you no lon
 
 ### <a name='restart'></a> Step 5: Restart your Apps
 
-To apply the ASG changes, you must restart all of the apps in your deployment.
+To apply the ASG changes, you must start all of the apps in your deployment again.
 To mitigate app downtime during the restart, <%= vars.company_name %> recommends a blue-green deployment strategy.
 For more information, see [Using Blue-Green Deployment to Reduce Downtime and Risk](../devguide/deploy-apps/blue-green.html).
 
 To restart all of the apps in your deployment:
 
-<p class="note"><strong>Note:</strong> You do not need to restart the apps in the <code>system</code> org.</p>
+<p class="note"><strong>Note:</strong> You do not have to restart the apps in the <code>system</code> org.</p>
 
-1. Work with developers to restart a few of their apps individually and test that they still work correctly with the new ASGs in place. If an app does not work as expected, you likely must create another ASG that allows the app to send traffic to a service it requires.
-  <p class="note"><strong>Note:</strong> To quickly roll back to the original overly-permissive state, you can re-bind the <code>default_security_group</code> ASG to the <code>default-staging</code> and <code>default-running</code> sets. You must then restart your apps to re-apply the original ASGs.</p>
+1. Work with developers to restart a few of their apps individually and test that they still work correctly with the new ASGs in place. If an app does not work as expected, you likely must create another ASG that you can have the app send traffic to a required service.
+  <p class="note"><strong>Note:</strong> To quickly roll back to the original overly permissive state, you can rebind the <code>default_security_group</code> ASG to the <code>default-staging</code> and <code>default-running</code> sets. You must then restart your apps to re-apply the original ASGs.</p>
 
-1. Restart the rest of the apps running on your deployment. Optionally, you can use the [app-restarter cf CLI plugin](https://github.com/cloudfoundry-incubator/app-restarter) to restart all apps in a particular space, org, or deployment.
+1. Restart the rest of the apps running on your deployment. You can use the [app-restarter cf CLI plug-in](https://github.com/cloudfoundry-incubator/app-restarter) to restart all apps in a particular space, org, or deployment.

@@ -17,7 +17,7 @@ Developers can then use the Cloud Foundry Command Line Interface (cf CLI) to cre
 
 ## <a id='nfs-enable'></a> Enable NFS Volume Services
 
-To enable NFS volume services in <%= vars.app_runtime_abbr %>:
+To activate NFS volume services in <%= vars.app_runtime_abbr %>:
 
 1. Navigate to the <%= vars.ops_manager %> Installation Dashboard.
 
@@ -26,30 +26,30 @@ To enable NFS volume services in <%= vars.app_runtime_abbr %>:
 1. Select **App Containers**.
 
 1. Under **NFSv3 volume services**, select **Enable**.
-  <p class="note"><strong>Note:</strong> In a clean install, NFS volume services are enabled by default. In an upgrade, NFS volume services match the setting of the previous deployment.</p>
+  <p class="note"><strong>Note:</strong> In a clean install, NFS volume services are activated by default. In an upgrade, NFS volume services match the setting of the previous deployment.</p>
 
 1. (Optional) To configure LDAP for NFS volume services:
-  <p class="note"><strong>Note:</strong> If you already use an LDAP server with your network-attached storage (NAS) file server, enter its information below. This ensures that the identities known to the file server match those checked by the NFS driver.</p>
+  <p class="note"><strong>Note:</strong> If you already use an LDAP server with your network-attached storage (NAS) file server, enter the information in the following fields. This ensures that the identities known to the file server match those checked by the NFS driver.</p>
   * For **LDAP service account user**, enter either the full domain name for the service account or the username of the service account that manages volume services. This value must be what you enter when binding the account to your LDAP server.
   * For **LDAP service account password**, enter the password for the service account.
   * For **LDAP server host**, enter the hostname or IP address of the LDAP server.
   * For **LDAP server port**, enter the LDAP server port number. If you do not specify a port number, <%= vars.ops_manager %> uses 389.
   * For **LDAP user search base**, enter the location in the LDAP directory tree from which any LDAP user search begins. The typical LDAP search base matches your domain name. For example, a domain named `cloud.example.com` typically uses the following LDAP user search base: `ou=Users,dc=example,dc=com`.
       <p class="note"><strong>Note:</strong> Additionally, your LDAP user records must be configured with an attribute <code>objectClass: User</code>, which is used by the NFS driver to identify records as user records. They must also have <code>uidNumber</code> and <code>gidNumber</code> fields, which are used to establish the correct UID for a named user.</p>
-  * (Optional) For **LDAP server CA certificate**, you can enter a Certificate Authority (CA) certificate if your LDAP server supports TLS. Enter a certificate if you want to enable TLS connections from the NFS driver to your LDAP server. Paste in the root certificate from your CA certificate or your self-signed certificate.
+  * (Optional) For **LDAP server CA certificate**, you can enter a Certificate Authority (CA) certificate if your LDAP server supports TLS. Enter a certificate if you want to activate TLS connections from the NFS driver to your LDAP server. Paste in the root certificate from your CA certificate or your self-signed certificate.
 
 1. Click **Save**.
 
 1. Return to the <%= vars.ops_manager %> Installation Dashboard, click **Review Pending Changes**, and click **Apply Changes** to redeploy.
 
-1. Using the cf CLI, enable access to the service by running:
+1. Using the cf CLI, activate access to the service by running:
 
     ```
     cf enable-service-access nfs
     ```
-  	To limit access to a specific org, use the `-o` flag, followed by the name of the org where you want to enable access. For more information, see [Access Control](../services/access-control.html).
+  	To limit access to a specific org, use the `-o` flag, followed by the name of the org where you want to activate access. For more information, see [Access Control](../services/access-control.html).
 
-1. (Optional) Enable access to the `nfs-legacy` service by running:
+1. (Optional) Activate access to the `nfs-legacy` service by running:
 
     ```
     cf enable-service-access nfs-legacy
@@ -64,16 +64,16 @@ You can use ASGs and LDAP to secure your NFS server against traffic apps running
 
 * **App Security Groups (ASGs):** Prevent apps from sending traffic directly to your NFS ports. Apps should never need to use NFS ports directly. <%= vars.company_name %> recommends defining an ASG that blocks direct access to your NFS server IP, especially ports 111 and 2049. For more information on setting up ASGs, see [App Security Groups](../concepts/asg.html).
 
-* **LDAP:** In addition to ASGs, secures the NFS volume service so that app developers cannot bind to the service using an arbitrary UID. App developers also cannot gain access to sensitive data. With LDAP support enabled, app developers must provide credentials for any user they want to bind as.
+* **LDAP:** In addition to ASGs, secures the NFS volume service so that app developers cannot bind to the service using an arbitrary UID. App developers also cannot gain access to sensitive data. With LDAP support activated, app developers must provide credentials for any user they want to bind as.
 
 The Diego Cells running on <%= vars.app_runtime_abbr %> must be able to reach your LDAP server on the port you use for connections, which are typically 389 or 636. You cannot limit which Diego Cells have access to your NFS or LDAP servers.
 
 
-## <a id='smb-enable'></a> Enable SMB Volume Services
+## <a id='smb-enable'></a> Activate SMB Volume Services
 
-<p class="note"><strong>Note:</strong> In a clean install, SMB volume services are enabled by default. In an upgrade, SMB volume services match the setting of the previous deployment.</p>
+<p class="note"><strong>Note:</strong> In a clean install, SMB volume services are activated by default. In an upgrade, SMB volume services match the setting of the previous deployment.</p>
 
-To enable SMB volume services in <%= vars.app_runtime_abbr %>:
+To activate SMB volume services in <%= vars.app_runtime_abbr %>:
 
 1. Navigate to the <%= vars.ops_manager %> Installation Dashboard.
 
@@ -81,7 +81,7 @@ To enable SMB volume services in <%= vars.app_runtime_abbr %>:
 
 1. Select **App Containers**.
 
-1. Select the **Enable SMB volume services** checkbox.
+1. Select the **Enable SMB volume services** check box.
 
 1. Click **Save**.
 
@@ -93,7 +93,7 @@ To enable SMB volume services in <%= vars.app_runtime_abbr %>:
 
 1. Return to the <%= vars.ops_manager %> Installation Dashboard, click **Review Pending Changes**, and click **Apply Changes** to redeploy.
 
-1. Using the cf CLI, enable access to the service by running:
+1. Using the cf CLI, activate access to the service by running:
 
     ```
     cf enable-service-access smb

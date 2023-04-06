@@ -15,11 +15,11 @@ This topic assumes you are familiar with the following concepts:
 * Creating admin users on the F5 load balancer
 * Creating F5 self-IPs, VLANs, and routes
 
-For guidance about the above topics, see [AskF5](https://support.f5.com/csp/knowledge-center/software/BIG-IP?module=BIG-IP%20LTM).
+For guidance about the previous topics, see [AskF5](https://support.f5.com/csp/knowledge-center/software/BIG-IP?module=BIG-IP%20LTM).
 
 <p class='note'><strong>Note:</strong> You must configure your F5 load balancer before installing <%= vars.app_runtime_abbr %>.</p>
 
-To use your F5 deployment as a load balancer, you must configure it to forward unencrypted HTTP following the steps below. This procedure assumes that you are running F5 v12.1.2 or v13.0.0.
+To use your F5 deployment as a load balancer, you must configure it to forward unencrypted HTTP following these steps. This procedure assumes that you are running F5 v12.1.2 or v13.0.0.
 
 
 ## <a id='unencrypted-http'></a> Procedure
@@ -115,7 +115,7 @@ This configuration terminates client SSL at the F5 and forward standard HTTP tra
        * Add a certificate key chain.
            - **Certificate:** `pcf-pas-cert`
            - **Key:** `pcf-pas-key`
-           <p class='note'><strong>Note:</strong> Your deployment may require additional root or intermediate certificates. You can select them here. Additionally, you can also enter passphrases for certificates.</p>
+           <p class='note'><strong>Note:</strong> Your deployment might require additional root or intermediate certificates. You can select them here. Additionally, you can also enter passphrases for certificates.</p>
 
 9. Create four LTM virtual servers. One is required, while three are optional.
     1. Go to **Local Traffic**, click **Virtual Servers**, and click **Virtual Server List**.
@@ -227,5 +227,5 @@ For a sample SCF, see [pcf-f5-recipe1-scf.txt](https://github.com/pivotalservice
 
 ## <a id='additional-resources'></a> Additional F5 Resources
 
-For information about F5 iRules that may be useful when configuring an F5 load balancer for <%= vars.app_runtime_abbr %>,
+For information about F5 iRules that can be useful when configuring an F5 load balancer for <%= vars.app_runtime_abbr %>,
 see the [Pivotal CF iRules For F5](https://github.com/pivotalservices/pivotal-cf-irules) repository on GitHub.

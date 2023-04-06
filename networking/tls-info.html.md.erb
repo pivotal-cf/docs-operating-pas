@@ -91,12 +91,12 @@ The following diagram illustrates communications between apps and external, brok
  The off-platform backend block (external) includes the Oracle DB and a TIBCO block."](apps-external-services.png)
 [//]: https://docs.google.com/drawings/d/1LNneD74qBvbFF0x4B9x3BYNYD5A8m9luXNoR895bwj8/edit?usp=sharing
 
-The developer must retrieve the certificate from the external service and provide it to their app. One way to do this is by placing the certificate in Runtime CredHub and modifying your app to consume the certificate through CredHub Service Broker. For more information, see the [CredHub Service Broker](https://docs.pivotal.io/credhub-service-broker/) documentation.
+The developer must retrieve the certificate from the external service and provide it to their app. One way to do this is by placing the certificate in Runtime CredHub and editing your app to consume the certificate through CredHub Service Broker. For more information, see the [CredHub Service Broker](https://docs.pivotal.io/credhub-service-broker/) documentation.
 
 
 ## <a id="container-creds"></a> App Instance Container Identity Credentials
 
-Each app instance container in <%= vars.app_runtime_abbr %> has its own identity credentials. This section describes how to understand and use these credentials.
+Each app instance container in <%= vars.app_runtime_abbr %> has its own identity credentials. This section describes how to process and use these credentials.
 
 ### <a id="cred-details"></a> About App Instance Identity Credentials
 
@@ -111,7 +111,7 @@ To learn about app instance identity credentials, see the following table:
     <th>Purpose</th>
     <td>
       <ul>
-        <li>For app developers to enable secure TLS communications from their apps.</li>
+        <li>For app developers to activate secure TLS communications from their apps.</li>
         <li>For <%= vars.ops_manager %> to use internally to validate the identities of app instances.</li>
       </ul>
     </td>
@@ -163,7 +163,7 @@ To learn about app instance identity credentials, see the following table:
 
 ### <a id="use-creds"></a> Using the Credentials
 
-If you want to enable secure TLS communications from an app using container instance identity credentials, ensure that you:
+If you want to activate secure TLS communications from an app using container instance identity credentials, ensure that you:
 
 * **Add the credentials to your development stack configuration:** The credentials must be present in your development stack configuration for your app to use them. You can retrieve the credentials through following environment variables, which <%= vars.ops_manager %> sets to the locations of key and certificate files.
     <table id='instance-certs' border="1" class="nice" >
@@ -187,7 +187,7 @@ If you want to enable secure TLS communications from an app using container inst
 
 * **Reload the credential files before they expire:** <%= vars.ops_manager %> rotates the credentials shortly before the current certificate expires. Apps that use these credentials must reload the certificate and key file contents either periodically or in reaction to filesystem watcher events.
 
-* **Configure external clients or servers to trust the root CA:** To enable secure TLS communication between an app and a client or server external to <%= vars.ops_manager %>, you must configure the external client or server to trust the CA that issues app instance container identity credentials. For more information, see the _Issuing Authority_ row of the table in [About App Instance Identity Credentials](#cred-details).
+* **Configure external clients or servers to trust the root CA:** To activate secure TLS communication between an app and a client or server external to <%= vars.ops_manager %>, you must configure the external client or server to trust the CA that issues app instance container identity credentials. For more information, see the _Issuing Authority_ row of the table in [About App Instance Identity Credentials](#cred-details).
 
 ### <a id="more-info"></a> Additional Information
 
@@ -196,7 +196,7 @@ For more information about instance identity credentials, see [Instance Identity
 
 ## <a id="ciphers"></a> TLS Cipher Suites
 
-By default, <%= vars.ops_manager %> uses a limited set of cipher suites to secure its internal communications. However, some components used in <%= vars.ops_manager %>, like the Gorouter, may support additional TLS cipher suites to accommodate older clients outside of <%= vars.ops_manager %>.
+By default, <%= vars.ops_manager %> uses a limited set of cipher suites to secure its internal communications. However, some components used in <%= vars.ops_manager %>, like the Gorouter, can support additional TLS cipher suites to accommodate older clients outside of <%= vars.ops_manager %>.
 
 <p class="note"><strong>Note:</strong> The AWS Classic load balancer does not support the recommended TLS cipher suites. For details and mitigations, see <a href="https://docs.pivotal.io/application-service/adminguide/securing-traffic.html#ciphers">TLS Cipher Suite Support</a> in <em>Securing Traffic into <%= vars.app_runtime_abbr %></em>.</p>
 

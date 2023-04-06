@@ -42,7 +42,7 @@ To configure <%= vars.app_runtime_abbr %> as the SAML SP for PingFederate:
   1. Under **Main Menu**, select **IdP Configuration**.
   1. Select **SP Connection**.
   1. Click **Import**.
-  1. In the **Import Connection** screen, browse and select the `.xml` file downloaded in the previous step.
+  1. In the **Import Connection** pane, browse and select the `.xml` file downloaded in the previous step.
   1. Click **Import**.
   1. Click **Done**.
 
@@ -52,24 +52,24 @@ To configure <%= vars.app_runtime_abbr %> as the SAML SP for PingFederate:
     1. Click **Configure Browser SSO**.
     1. Under **Browser SSO**, select **Assertion Creation**.
     1. Select **Configure Assertion Creation**.
-    1. On the **Summary** screen, select **Identity Mapping**.
+    1. On the **Summary** pane, select **Identity Mapping**.
     1. Select **Standard**.
     1. For the NameID format, select **Email Address** and enter the email address of the user.
 
 1. Select the Authentication Source:
     1. Under the **SP Connection**, select **Browser SSO**.
     1. Select **Configure Browser SSO**.
-    1. Under **Browser SSO**, select **Assertion Creation**.
+    1. In **Browser SSO**, select **Assertion Creation**.
     1. Select **Configure Assertion Creation**.
-    1. On the **Summary** screen, select **IdP Adapter Mapping**.
+    1. On the **Summary** pane, select **IdP Adapter Mapping**.
     1. Select **Adapter Instance Name**.
-    1. On the **Summary** screen, select **Adapter Instance**.
+    1. On the **Summary** pane, select **Adapter Instance**.
 
-1. Enable the SSO Browser Profiles:
+1. Activate the SSO Browser Profiles:
     1. Under **SP Connection**, select **Browser SSO**.
     1. Select **Configure Browser SSO**.
-    1. On the **Summary** screen, select **SAML Profiles**.
-    1. Ensure that the **IdP-Initiated SSO** and **SP-Initiated SSO** checkboxes are enabled.
-    <p class='note'><strong>Note:</strong> <%= vars.app_runtime_abbr %> does not support SLO profiles at this time. You can leave them disabled.</p>
+    1. On the **Summary** pane, select **SAML Profiles**.
+    1. Ensure that the **IdP-Initiated SSO** and **SP-Initiated SSO** check boxes are activated.
+    <p class='note'><strong>Note:</strong> <%= vars.app_runtime_abbr %> does not support SLO profiles at this time. You can leave them deactivated.</p>
 
 1. Activate the SP Connection.

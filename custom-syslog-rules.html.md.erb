@@ -5,7 +5,7 @@ owner: Platform Logging
 
 You can configure <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) to forward logs to remote endpoints using the syslog protocol defined in [RFC 5424](https://tools.ietf.org/html/rfc5424). For more information about enabling log forwarding, see [Configure System Logging](configure-pas.html#sys-logging) in _Configuring <%= vars.app_runtime_abbr %>_.
 
-<%= vars.app_runtime_abbr %> annotates forwarded messages with structured data. This structured data identifies the originating BOSH Director, deployment, instance group, availability zone, and instance ID. All logs forwarded from BOSH jobs have their PRI set to `14`, representing **Facility: user-level messages** and **Informational: informational messages**, as defined in [RFC 5424 Section 6.2.1](https://tools.ietf.org/html/rfc5424#section-6.2.1). This PRI value may not reflect the originally intended PRI of the log.
+<%= vars.app_runtime_abbr %> annotates forwarded messages with structured data. This structured data identifies the originating BOSH Director, deployment, instance group, availability zone, and instance ID. All logs forwarded from BOSH jobs have their PRI set to `14`, representing **Facility: user-level messages** and **Informational: informational messages**, as defined in [RFC 5424 Section 6.2.1](https://tools.ietf.org/html/rfc5424#section-6.2.1). This PRI value might not reflect the originally intended PRI of the log.
 
 Logs forwarded from other sources, such as kernel logs, retain their original PRI value.
 
@@ -20,24 +20,24 @@ The following table describes the log line Structured Data:
 | AVAILABILITY_ZONE | The name of the BOSH availability zone. |
 | ID | The BOSH GUID. |
 
-Log lines use the format below:
+Log lines use the following format:
 
 ```
-<$PRI>$VERSION $TIMESTAMP $HOST $APP_NAME $PROC_ID $MSG_ID   
-    [instance@ENTERPRISE_NUMBER director="$DIRECTOR" deployment="$DEPLOYMENT" 
+<$PRI>$VERSION $TIMESTAMP $HOST $APP_NAME $PROC_ID $MSG_ID
+    [instance@ENTERPRISE_NUMBER director="$DIRECTOR" deployment="$DEPLOYMENT"
     group="$INSTANCE_GROUP" az="$AVAILABILITY_ZONE" id="$ID"] $MESSAGE
 ```
 
 Example log messages:
 
 ```
-<14>1 2017-01-25T13:25:03.18377Z 192.0.2.10 etcd - - [instance@47450 
-    director="test-env" deployment="cf-c42ae2c4dfb6f67b6c27" group="diego_database" az="us-west1-a" 
-    id="83bd66e5-3fdf-44b7-bdd6-508deae7c786"] [INFO] the leader is 
+<14>1 2017-01-25T13:25:03.18377Z 192.0.2.10 etcd - - [instance@47450
+    director="test-env" deployment="cf-c42ae2c4dfb6f67b6c27" group="diego_database" az="us-west1-a"
+    id="83bd66e5-3fdf-44b7-bdd6-508deae7c786"] [INFO] the leader is
     [https://diego-database-0.etcd.service.cf.internal:4001]
-<14>1 2017-01-25T13:25:03.184491Z 192.0.2.10 bbs - - [instance@47450 
-    director="test-env" deployment="cf-c42ae2c4dfb6f67b6c27" group="diego_database" az="us-west1-a" 
-    id="83bd66e5-3fdf-44b7-bdd6-508deae7c786"] 
+<14>1 2017-01-25T13:25:03.184491Z 192.0.2.10 bbs - - [instance@47450
+    director="test-env" deployment="cf-c42ae2c4dfb6f67b6c27" group="diego_database" az="us-west1-a"
+    id="83bd66e5-3fdf-44b7-bdd6-508deae7c786"]
     {"timestamp":"1485350702.539694548","source":"bbs","message":
     "bbs.request.start-actual-lrp.starting","log_level":1,"data":
     {"actual_lrp_instance_key":{"instance_guid":
@@ -51,9 +51,9 @@ Example log messages:
 ```
 
 
-## <a id='examples'></a> Modify Which Logs <%= vars.app_runtime_abbr %> Forwards
+## <a id='examples'></a> Edit which Logs <%= vars.app_runtime_abbr %> forwards
 
-When you enable log forwarding, <%= vars.app_runtime_abbr %> forwards all log lines written to the `/var/vcap/sys/log` directories on all <%= vars.platform_name %> virtual machines (VMs) to your configured External Syslog Aggregator endpoint by default.
+When you activate log forwarding, <%= vars.app_runtime_abbr %> forwards all log lines written to the `/var/vcap/sys/log` directories on all <%= vars.platform_name %> virtual machines (VMs) to your configured External Syslog Aggregator endpoint by default.
 
 To configure <%= vars.app_runtime_abbr %> to forward a subset of logs instead of forwarding all logs:
 
@@ -63,11 +63,11 @@ To configure <%= vars.app_runtime_abbr %> to forward a subset of logs instead of
 
 1. Select **System Logging**.
 
-1. In the **Custom rsyslog configuration** field, enter a custom syslog rule. See the example custom syslog rules below.
+1. In the **Custom rsyslog configuration** field, enter a custom syslog rule. See the following custom syslog rules example.
 
 1. Click **Save**.
 
-The custom rsyslog rules shown below are written in [RainerScript](http://www.rsyslog.com/doc/v8-stable/rainerscript/index.html). The custom rules are inserted before the rule that forwards logs. The _stop_ command, `stop`, prevents logs from reaching the forwarding rule. This filters out these logs.
+The custom rsyslog rules shown here are written in [RainerScript](http://www.rsyslog.com/doc/v8-stable/rainerscript/index.html). The custom rules are inserted before the rule that forwards logs. The _stop_ command, `stop`, prevents logs from reaching the forwarding rule. This filters out these logs.
 
 Logs filtered out before forwarding remain on the local disk, where the BOSH job originally wrote them. These logs remain on the local disk only until BOSH Director recreates the VMs. You can access these logs from <%= vars.ops_manager %> or through SSH.
 
@@ -89,4 +89,4 @@ This rule filters out logs that contain "DEBUG" in the body.
 if ($msg contains "DEBUG") then stop
 ```
 
-<p class='note'><strong>Note:</strong> The above example contains "DEBUG" in the message body. Not all logs intended for debugging purposes contain the string "DEBUG" in the message body.</p>
+<p class='note'><strong>Note:</strong> The previous example contains "DEBUG" in the message body. Not all logs intended for debugging purposes contain the string "DEBUG" in the message body.</p>

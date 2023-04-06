@@ -7,7 +7,7 @@ This topic describes how to install <%= vars.app_runtime_full %> (<%= vars.app_r
 
 ## <a id='introduction'></a> Overview
 
-VMC provides Software Defined Data Centers (SDDCs) that run on AWS with a high-level management console to configure networking rules.
+VMC provides Software Defined Data Centers (SDDCs) that run on AWS with a high level management console to configure networking rules.
 This topic describes the procedures for configuring and installing <%=
 vars.app_runtime_abbr %> on VMC using public IP addresses for ingress.
 
@@ -37,12 +37,12 @@ See [Configure a VPN Connection Between Your SDDC and On-Premises Data Center](h
 * To use VIFs to connect your network to the VMC SDDC, configure the VIFs before you install <%= vars.app_runtime_abbr %>.
 See [Configure AWS Direct Connect Between Your SDDC and On-Premises Data Center](https://docs.vmware.com/en/VMware-Cloud-on-AWS/services/com.vmware.vmc-aws.networking-security/GUID-417EE2F1-0EA5-4808-BDB3-6FF622EECB95.html).
 
-### <a id='vcenter-access'></a> Enable Browser Access to vCenter
+### <a id='vcenter-access'></a> Activate Browser Access to vCenter
 
-By default, ingress to vCenter is not enabled. If you are not using a VPN or other network,
+By default, ingress to vCenter is not activated. If you are not using a VPN or other network,
 you must create a firewall rule in SDDC to allow vCenter access from your workstation's public IP address.
 
-To enable browser access to vCenter:
+To activate browser access to vCenter:
 
 1. Navigate to the [VMC console](https://vmc.vmware.com/console/sddcs).
 1. Select **SDDCs**.
@@ -80,7 +80,7 @@ To gather login credentials for the vCenter instance in your SDDC:
 1. Click **Show Credentials**.
 1. Record the credentials.
 
-After enabling browser access and recording your vCenter credentials, you can access and authenticate with your cluster's vCenter server.
+After activating browser access and recording your vCenter credentials, you can access and authenticate with your cluster's vCenter server.
 
 ## <a id='om-setup'></a> Install <%= vars.ops_manager %>
 
@@ -130,7 +130,7 @@ To install <%= vars.ops_manager %> on VMC:
     }
     ```
 
-1. Replace the following example text in the code below, then run the commands to upload the <%= vars.ops_manager %> file to VMC:
+1. Replace the example text in the following code, then run the commands to upload the <%= vars.ops_manager %> file to VMC:
   - `EXAMPLE-PASSWORD`: the vCenter password you recorded in [Record vCenter Credentials](#vcenter-creds).
   - `<%= vars.example_domain %>`: your vCenter URL.
   - `PATH-TO-OPS-MANAGER`: the path to your <%= vars.ops_manager %> OVA file.
@@ -340,7 +340,7 @@ To configure BOSH Director for VMC:
 <p class="note"><strong>Note:</strong> When configuring the BOSH Director, do not configure NSX-T networking. Instead, select <strong>Standard vCenter Networking</strong>.</p>
 
 1. Log in to <%= vars.ops_manager %>:
-    - Navigate to the IP address you configured for <%= vars.ops_manager %> above. For example, [https://54.190.190.190/](https://54.190.190.190/).
+    - Navigate to the IP address you configured for <%= vars.ops_manager %>. For example, [https://54.190.190.190/](https://54.190.190.190/).
     - Enter a **Username**, **Password**, and **Password confirmation** to create an Admin user.
     - Enter a **Decryption passphrase** and the **Decryption passphrase confirmation**. This passphrase encrypts the Ops Manager datastore and is not recoverable.
 
@@ -395,7 +395,7 @@ To configure BOSH Director for VMC:
         - **Singleton Availability Zone**: `az1`
         - **Network**: `infra`
     - **Settings**, then **Security**
-        - **Include Tanzu Ops Manager Root CA in Trusted Certs**: Select the checkbox.
+        - **Include Tanzu Ops Manager Root CA in Trusted Certs**: Select the check box.
 
 1. After you finish configuration, click **Apply Changes**. The following warning appears:
     ![alt-text="Review Pending Changes. Warning: Please review the warnings. IaaS default: Could not log in. Required Datacenter privileges not available."](images/opsman-warning.png)
@@ -416,16 +416,16 @@ To configure <%= vars.app_runtime_abbr %> for VMC:
             - **System domain**: `sys.54.180.180.180.nip.io`
             - **Apps domain**: `run.54.180.180.180.nip.io`
     - **Settings**, then **Networking**
-        - Set the HAProxy IP address to the one you specified in the NAT rule above. This is the first available IP address in the `deployment` network.
+        - Set the HAProxy IP address to the one you specified in the NAT rule. This is the first available IP address in the `deployment` network.
             - **HAProxy IPs**: `192.168.2.2`
         - Generate a certificate for the Gorouter and HAProxy:
             - **Certificates and private keys for the Gorouter and HAProxy**: Click **Add**.
                 - Name: `haproxy cert`
                 - Click **Generate RSA Certificate**.
-                - Add `*.` domains for your system and apps domain above, separated by a comma. For example, `*.**sys.54.180.180.180.nip.io,*.run.54.180.180.180.nip.io`.
+                - Add `*.` domains for your system and apps domain, separated by a comma. For example, `*.**sys.54.180.180.180.nip.io,*.run.54.180.180.180.nip.io`.
         - Set HAProxy as the TLS termination point:
             - **TLS Termination**: **HA Proxy**
-        - Disable TLS forwarding for HAProxy:
+        - Deactivate TLS forwarding for HAProxy:
             - **HAProxy forwards all requests to the Gorouter over TLS**: Click **Disable**.
     - **Settings**, then **UAA**
         - For UAA configuration, generate a SAML certificate for *.login.SYSTEM-DOMAIN:

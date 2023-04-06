@@ -3,7 +3,7 @@ title: Diagnosing Deployment Problems
 owner: Ops Manager
 ---
 
-This topic provides guidance for diagnosing issues encountered
+This topic provides guidance for diagnosing issues that you encounter
 when installing products such as <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>)
 with <%= vars.ops_manager_full %>.
 
@@ -50,7 +50,7 @@ as a Rails app, is running, as recorded in the `production.log` file. To explore
 
 This section contains general tips for locating where a particular problem is called out in the log
 files. For guidance regarding specific logs, such as those for <%= vars.app_runtime_abbr %>
-components, see the sections below.
+components, see the following sections.
 
 * Start with the largest and most recently updated files in the job log.
 * Identify logs that contain `err` in the name.
@@ -103,7 +103,7 @@ To log in to the VM:
     ```
     ssh IMPORT-USERNAME@<%= vars.platform_code %>-VM-IP-ADDRESS
     ```
-    
+
     Where:
     <ul>
       <li><code>IMPORT-USERNAME</code> is the username you used to import the <code>.ova</code> or <code>.ovf</code> file into your
@@ -129,7 +129,7 @@ MicroBOSH installation is required to install <%= vars.app_runtime_abbr %> and a
     cd /var/tempest/workspaces/default/deployments/micro
     ```
 
-1. You may want to begin by running a tail command on the `current` log. Run:
+1. You can begin by running a tail command on the `current` log. Run:
 
     ```
     cd /var/tempest/workspaces/default/deployments/micro
@@ -138,9 +138,9 @@ MicroBOSH installation is required to install <%= vars.app_runtime_abbr %> and a
     problems, you can troubleshoot further by running BOSH diagnostic commands with the BOSH
     Command Line Interface (CLI).
 
-<p class="note"><strong>Note:</strong> Do not manually modify the deployment manifest.
+<p class="note"><strong>Note:</strong> Do not manually edit the deployment manifest.
 <%= vars.platform_name %> overwrites manual changes to this manifest. In addition, manually
-changing the manifest may cause future deployments to fail.</p>
+changing the manifest might cause future deployments to fail.</p>
 
 ## <a id='view-vms'></a> Viewing the VMs in Your Deployment
 
@@ -238,7 +238,7 @@ Apps Manager app logs:
 
 ### <a id='changing-log-level'></a> Changing Logging Levels for Apps Manager
 
-Apps Manager recognizes the `LOG_LEVEL` environment variable. The `LOG_LEVEL` environment variable
+Apps Manager detects the `LOG_LEVEL` environment variable. The `LOG_LEVEL` environment variable
 allows you to filter the messages reported in Apps Manager log files by severity level. Apps
 Manager defines severity levels using the Ruby standard library
 [Logger class](http://www.ruby-doc.org/stdlib-1.9.3/libdoc/logger/rdoc/Logger.html).
@@ -256,13 +256,13 @@ Where `LEVEL` is the desired severity level.
 You can set `LOG_LEVEL` to one of the six severity levels defined by the Ruby Logger class:
 
 * **Level 5** `unknown`: An unknown message that should always be logged.
-* **Level 4** `fatal`: An unhandleable error that results in a program crash.
+* **Level 4** `fatal`: An unhandleable error that results in a program failure.
 * **Level 3** `error`: A handleable error condition.
 * **Level 2** `warn`: A warning.
 * **Level 1** `info`: General information about system operation.
 * **Level 0** `debug`: Low-level information for developers.
 
-Once set, Apps Manager log files only include messages at the set severity level and above. For
+Once set, Apps Manager log files only include messages at the set severity level and higher. For
 example, if you set `LOG_LEVEL` to `fatal`, the log only includes `fatal` and `unknown` level messages.
 
 ## <a id='disk-space-diagnostics'></a> Analyzing Disk Usage on Containers and Diego Cell VMs

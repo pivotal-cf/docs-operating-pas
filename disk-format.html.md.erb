@@ -40,12 +40,13 @@ zeros out the block or blocks, then finally writes the data.
 Because of this overhead, thin provisioned VMDKs have the lowest performance of
 the three disk formats.
 
-Thin provisioning allows you to overcommit disk spaces to VMs on a datastore.
-For example, you could put 10 VMs, each with a 50 GB VMDK attached to it, on a
+You can use thin provisioning to overcommit disk spaces to VMs on a datastore.
+For example, you can put 10 VMs, each with a 50 GB VMDK attached to it, on a
 single 100 GB datastore, as long as the sum total of all data written by the VMs
 never exceeded 100 GB.
-Thin provisioning allows administrators to use space on datastores that would
-otherwise be unavailable if using thick provisioning, possibly reducing costs
+Administrators can use thin provisioning to use space on datastores that can
+otherwise be unavailable. If you are using thick provisioning,
+you have the benefit of less latency because all storage is allocated at once possibly reducing costs
 and administrative overhead.
 
 ## <a id='thick-lazy'></a> Thick Provisioned Lazy Zeroed ##

@@ -3,7 +3,7 @@ title: General Data Protection Regulation and TAS for VMs
 owner: Legal
 ---
 
-This topic provides an overview of the General Data Protection Regulation (GDPR) and where <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) may store personal data.
+This topic provides an overview of the General Data Protection Regulation (GDPR) and where <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) might store personal data.
 
 
 ## <a id='overview'></a> Overview
@@ -11,19 +11,19 @@ This topic provides an overview of the General Data Protection Regulation (GDPR)
 GDPR came into effect on May 25, 2018 and impacts any company processing the data of EU citizens or residents, even if the company is not EU-based. The GDPR sets forth how companies should handle privacy issues, securely store data, and respond to security breaches.
 
 
-## <a id='personal-data'></a> Understand Personal Data
+## <a id='personal-data'></a> Process Personal Data
 
 The GDPR grants data subjects certain rights, such as the right to obtain a copy of their personal data, object to the processing of personal data, and the right to have their personal data erased. Organizations subject to GDPR need to ensure that they can address and respond to requests by data subjects if they are processing their personal data.
 
 Article 4, Section 1 of the GDPR defines personal data as follows:
 
 <blockquote>
-'personal data' means any information relating to an identified or identifiable natural person ('data subject'); an identifiable natural person is one who can be identified, directly or indirectly, in particular by reference to an identifier such as a name, an identification number, location data, an online identifier or to one or more factors specific to the physical, physiological, genetic, mental, economic, cultural or social identity of that natural person;
+'personal data' is any information relating to an identified or identifiable natural person ('data subject'); an identifiable natural person is one who can be identified, directly or indirectly, in particular by reference to an identifier such as a name, an identification number, location data, an online identifier or to one or more factors specific to the physical, physiological, genetic, mental, economic, cultural or social identity of that natural person;
 </blockquote>
 
 For more information, see the GDPR [text](http://www.privacy-regulation.eu/en/article-4-definitions-GDPR.htm).
 
-Personal data can be collected, stored, and processed in a <%= vars.app_runtime_abbr %> deployment. <%= vars.company_name %> has performed a review of <%= vars.app_runtime_abbr %> components and determined that personal data may reside in the following areas:
+Personal data can be collected, stored, and processed in a <%= vars.app_runtime_abbr %> deployment. <%= vars.company_name %> has performed a review of <%= vars.app_runtime_abbr %> components and determined that personal data might reside in the following areas:
 
 + [User Account and Authentication (UAA)](#uaa)
 + [Cloud Foundry API](#capi)
@@ -32,7 +32,7 @@ Personal data can be collected, stored, and processed in a <%= vars.app_runtime_
 + [Notifications Service](#cf-notifications)
 
 
-## <a id='where'></a> Where Personal Data May Reside
+## <a id='where'></a> Where Personal Data might Reside
 
 The following sections explain how different <%= vars.app_runtime_abbr %> components collect personal data.
 
@@ -272,7 +272,7 @@ The Cloud Foundry API release contains several components, including the Cloud C
 <td>
 <ul>
 <li><%= vars.platform_name %> operator</li>
-<li>Users that can view the resource that had an audited change</li>
+<li>You can view the resource that had an audited change</li>
 </ul>
 </td>
 <td>31 days</td>
@@ -327,19 +327,19 @@ The Cloud Foundry API release contains several components, including the Cloud C
 
 ### <a id='routing'></a>Routing
 
-By default, the [Gorouter](../concepts/http-routing.html#http-headers) logs include the `X-Forwarded-For` header, which may include the originating client IP. Under GDPR, client IP addresses should be considered personal data.
+By default, the [Gorouter](../concepts/http-routing.html#http-headers) logs include the `X-Forwarded-For` header, which might include the originating client IP. Under GDPR, client IP addresses can be considered personal data.
 
-#### <a id='disable-client-ip-logging'></a> Disable Client IP Logging
+#### <a id='disable-client-ip-logging'></a> Deactivate Client IP Logging
 
-In <%= vars.app_runtime_abbr %> v2.0 and later and Elastic Runtime v1.12, operators can disable logging of client IP addresses in the Gorouter.
+In <%= vars.app_runtime_abbr %> v2.0 and later and Elastic Runtime v1.12, you can deactivate logging of client IP addresses in the Gorouter.
 
-To disable logging of client IP addresses:
+To deactivate logging of client IP addresses:
 
-1. Navigate to the <%= vars.ops_manager %> Installation Dashboard and click the <%= vars.app_runtime_abbr %> or Elastic Runtime tile.
+1. Navigate to the <%= vars.ops_manager %> Installation Dashboard and click the **<%= vars.app_runtime_abbr %>** or **Elastic Runtime** tile.
 
 1. Click **Networking**.
 
-1. Under **Logging of client IPs in the Gorouter**, select one of the two options:
+1. In **Logging of client IPs in the Gorouter**, select one of the two options:
 	* If the source IP address exposed by your load balancer is its own IP address, select **Disable logging of X-Forwarded-For header only**.
 	* If the source IP address exposed by your load balancer belongs to the downstream client, select **Disable logging of both source IP and X-Forwarded-For header**.
 
@@ -366,22 +366,22 @@ Diego is the container management system for <%= vars.app_runtime_abbr %>. For m
 <tr>
 <th>Business Execution</th>
 <td>Executing apps and tasks</td>
-<td>No personal data is collected explicitly, but personal data may be encoded in app file contents or runtime metadata such as environment variables or start commands.</td>
+<td>No personal data is collected explicitly, but personal data might be encoded in app file contents or runtime metadata such as environment variables or start commands.</td>
 <td>Runtime metadata is collected when Cloud Controller submits work specification to the Diego BBS API. File contents are collected when Diego schedules an app or a task on a Diego Cell.</td>
 <td>Runtime metadata is stored in the Diego BBS DB. App file contents are cached on Diego Cells.</td>
 <td>Runtime metadata is used to start processes inside app instance containers and to configure their environment. App file contents are presented as part of the app instance container filesystem.</td>
 <td>Platform operators and other developers with access to the Cloud Controller space containing that app can view the data.</td>
 <td><ul><li>To delete the runtime metadata stored in the Diego BBS DB, stop the app or cancel the task that includes that data.</li>
-<li>To delete the app file contents stored in the running app and task containers, stop the app or cancel the task to destroy the containers. To destroy the app file contents stored in the download cache on the Diego Cells, recreate the Diego Cell VMs.</li></ul></td>
+<li>To delete the app file contents stored in the running app and task containers, stop the app or cancel the task to destroy the containers. To get rid of the app file contents stored in the download cache on the Diego Cells, recreate the Diego Cell VMs.</li></ul></td>
 </tr>
 <tr>
 <th>Reports/Logs</th>
 <td>SSH proxy logs <%= vars.app_runtime_abbr %> user access.</td>
 <td>UAA user name and ID</td>
 <td>When the user authenticates for SSH access to an app.</td>
-<td>The data is stored in a log file collocated with the SSH proxy instance handling the authentication request. This log file may also have its contents forwarded to a remote syslog destination.</td>
-<td>No processing of the local log file is done automatically. If the log file contents are forwarded to a log aggregation service, they may be parsed and processed arbitrarily.</td>
-<td>Only platform operators have access to the local log file. Platform operators or auditors may have access to these log contents in a downstream log aggregation service.</td>
+<td>The data is stored in a log file collocated with the SSH proxy instance handling the authentication request. This log file can also have its contents forwarded to a remote syslog destination.</td>
+<td>No processing of the local log file is done automatically. If the log file contents are forwarded to a log aggregation service, they might be parsed and processed arbitrarily.</td>
+<td>Only platform operators have access to the local log file. Platform operators or auditors have access to these log contents in a downstream log aggregation service.</td>
 <td>To delete the log lines containing the user ID:
 	<ol><li>Run <code>bosh recreate</code> on the VMs hosting the SSH proxy processes to remove all the logs on ephemeral disk.</li>
 	<li><code>bosh ssh</code> into the VMs hosting the SSH proxy processes and remove specific log lines containing user IDs.</li>
@@ -392,7 +392,7 @@ Diego is the container management system for <%= vars.app_runtime_abbr %>. For m
 
 ### <a id='cf-notifications'></a> Notifications Service
 
-The Notifications Service enables operators to configure components of <%= vars.app_runtime_abbr %> to send emails to end users. For more information, see [Getting Started with the Notifications Service](../adminguide/notifications.html).
+The Notifications Service allows you to configure components of <%= vars.app_runtime_abbr %> to send emails to end users. For more information, see [Getting Started with the Notifications Service](../adminguide/notifications.html).
 
 <table>
 <tbody>

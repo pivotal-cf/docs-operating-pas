@@ -21,11 +21,11 @@ For example, you might want to perform this procedure if your existing key is le
 
 ##  <a id="rotate"></a> Rotate the CCDB Encryption Key
 
-<p class="note warning"><strong>Caution:</strong> Do not modify the <strong>Cloud Controller
+<p class="note warning"><strong>Caution:</strong> Do not edit the <strong>Cloud Controller
    database encryption key</strong> field in the <%= vars.app_runtime_abbr %> tile.
    This field is only for use when restoring <%= vars.app_runtime_abbr %> from a backup.
-   If you modify this value at a time other than restore, commands such as <code>cf push</code> might fail.
-   Instead, change keys using the <strong>Encryption key ledger</strong> as described below.</p>
+   If you edit this value at a time other than restore, commands such as <code>cf push</code> might fail.
+   Instead, change keys using the <strong>Encryption key ledger</strong>.</p>
 
 To rotate the CCDB encryption key:
 
@@ -33,9 +33,9 @@ To rotate the CCDB encryption key:
    select the **Cloud Controller** pane.
 
 1. Review the **Encryption key ledger** field. If you previously added a key and
-   enabled the **Primary** checkbox, disable the checkbox.
+   activated the **Primary** check box, deactivate the check box.
    The <%= vars.app_runtime_abbr %> deploy fails if there is more than one key
-   with the **Primary** checkbox enabled.
+   with the **Primary** check box activated.
 
 1. In the **Encryption key ledger** field:
 	<p class="note"><strong>Note:</strong> Do not remove any existing keys until
@@ -44,7 +44,7 @@ To rotate the CCDB encryption key:
         </p>
 	1. Click **Add**.
 	1. Enter values for **Encryption key label** and **Encryption key**.
-	1. Enable the checkbox to mark this as your **Primary** key.
+	1. Activate the check box to mark this as your **Primary** key.
 
 1. Click **Save**.
 
@@ -61,7 +61,7 @@ To rotate the CCDB encryption key:
 
 ## <a id="troubleshoot"></a> Troubleshoot Failed Rotation
 
-This section describes how to troubleshoot errors that you may encounter while rotating the CCDB encryption key.
+This section describes how to troubleshoot errors that you might encounter while rotating the CCDB encryption key.
 
 ### <a id="values-changed"></a> Error: Encryption key(s) have had their values changed
 
@@ -71,8 +71,8 @@ This section describes how to troubleshoot errors that you may encounter while r
 	<td>The <%= vars.app_runtime_abbr %> deploy fails with a Cloud Controller error.
             The Cloud Controller logs include the following message:
             <code>Encryption key(s) mykey have had their values changed.
-            Label and value pairs should not change, rather a new label and
-            value pair should be added.</code></td>
+            Label and value pairs must not change, rather a new label and
+            value pair can be added.</code></td>
  </tr>
  <tr>
 	<th>Cause</th>
@@ -83,7 +83,7 @@ This section describes how to troubleshoot errors that you may encounter while r
 </tr>
 <tr>
 	<th>Solution</th>
-	<td>Replace the value for the key with its original value and follow the rotation procedure to add a new key. <br>You may need to find the original value of the key using the steps in <a href="#view">View Encryption Keys</a>.</td>
+	<td>Replace the value for the key with its original value and follow the rotation procedure to add a new key. <br>You  need to find the original value of the key using the steps in <a href="#view">View Encryption Keys</a>.</td>
 </tr>
 </table>
 
@@ -104,7 +104,7 @@ This section describes how to troubleshoot errors that you may encounter while r
 <tr>
 	<th>Solution</th>
 	<td>Add the previously used key back to the ledger and redeploy <%= vars.app_runtime_abbr %>.
-            <br>You may need to find the value of the previously used key using the steps
+            <br>You might need to find the value of the previously used key using the steps
             in <a href="#view">View Encryption Keys</a>.
 	</td>
 </tr>
@@ -112,7 +112,7 @@ This section describes how to troubleshoot errors that you may encounter while r
 
 ###  <a id="view"></a> View Encryption Keys
 
-The section describes how to retrieve the value of an existing or previous encryption key. You may need to do this when troubleshooting a failed key rotation.
+The section describes how to retrieve the value of an existing or previous encryption key. You might need to do this when troubleshooting a failed key rotation.
 
 #### <a id="actual-installation"></a> <%= vars.ops_manager %> actual-installation.yml
 
@@ -120,7 +120,7 @@ The <%= vars.ops_manager %> `actual-installation.yml` file shows properties
 from the most recent successful deploy.
 To view the encryption keys listed in this file:
 
-1. Follow the steps in [Modify the Installation Files](https://docs.pivotal.io/platform/<%= vars.current_major_version %>/customizing/modify-ops-man.html#installation)
+1. Follow the steps in [Editing the Installation Files](https://docs.pivotal.io/platform/<%= vars.current_major_version %>/customizing/modify-ops-man.html#installation)
     in _Modifying Your <%= vars.ops_manager %> Installation and Product Template Files_
     to decrypt the `actual-installation.yml` file.
 

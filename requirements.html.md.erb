@@ -9,16 +9,16 @@ This topic describes the resource requirements for installing <%= vars.app_runti
 
 The general requirements for deploying and managing an installation of <%= vars.ops_manager %> and <%= vars.app_runtime_abbr %> are:
 
-* A wildcard DNS record that points to your Gorouter or load balancer. Alternatively, you can use a service such as xip.io. For example, `203.0.113.0.xip.io`.
+* A wildcard DNS record that points to your Gorouter or load balancer. Also, you can use a service such as xip.io. For example, `203.0.113.0.xip.io`.
   * <%= vars.app_runtime_abbr %> gives each app its own hostname in your app domain.
-  * With a wildcard DNS record, every hostname in your domain resolves to the IP address of your Gorouter or load balancer, and you do not need to configure an A record for each app hostname. For example, if you create a DNS record `*.example.com` pointing to your load balancer or Gorouter, every app deployed to the `example.com` domain resolves to the IP address of your Gorouter.
+  * With a wildcard DNS record, every hostname in your domain resolves to the IP address of your Gorouter or load balancer, and you do not have to configure an A record for each app hostname. For example, if you create a DNS record `*.example.com` pointing to your load balancer or Gorouter, every app deployed to the `example.com` domain resolves to the IP address of your Gorouter.
 
-* At least one wildcard TLS certificate that matches the DNS record you set up above, `*.example.com`.
+* At least one wildcard TLS certificate that matches the DNS record you set up, `*.example.com`.
 
 * Sufficient IP allocation:
   * One static IP address for one of your Gorouters.
   * One static IP address for each job in the <%= vars.app_runtime_abbr %> tile. For a full list, see the **Resource Config** pane for each tile.
-  * One static IP address for each job listed below:
+  * One static IP address for each of the following jobs:
       * Consul
       * NATS
       * File Storage

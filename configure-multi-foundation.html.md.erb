@@ -19,7 +19,7 @@ This section describes the procedures for configuring multi-foundation support i
 
 ### <a id="pas"></a> Configure <%= vars.app_runtime_abbr %>
 
-This section describes how to configure <%= vars.app_runtime_first %> on a foundation to enable multi-foundation support in Apps Manager.
+This section describes how to configure <%= vars.app_runtime_first %> on a foundation to activate multi-foundation support in Apps Manager.
 
 To configure multi-foundation support in Apps Manager:
 
@@ -40,7 +40,7 @@ To configure multi-foundation support in Apps Manager:
       }
       }
     ```
-    
+
     Where:
     <ul>
       <li><code>FOUNDATION-NAME</code> is a name for the foundation.</li>
@@ -49,12 +49,12 @@ To configure multi-foundation support in Apps Manager:
     </ul>
 
 
-1. For **Redirect URIs**, enter a comma-separated list of the URI for each additional foundation on which you enabled multi-foundation support. Use the following format for each URI:
+1. For **Redirect URIs**, enter a comma-separated list of the URI for each additional foundation on which you activated multi-foundation support. Use the following format for each URI:
 
     ```
     https://apps.FOUNDATION-SYSTEM-DOMAIN.com/**
     ```
-    Where `FOUNDATION-SYSTEM-DOMAIN` is the system domain of the foundation on which you enabled multi-foundation support.
+    Where `FOUNDATION-SYSTEM-DOMAIN` is the system domain of the foundation on which you activated multi-foundation support.
 
 ### <a id="certificates"></a> Add Trusted Certificate Authorities
 
@@ -74,7 +74,7 @@ To configure all foundations to use the same SAML identity provider:
 
 1. Verify that the foundation uses the correct provider for **Provider name**.
 
-1. Repeat the above steps for each foundation in your deployment.
+1. Repeat the previous steps for each foundation in your deployment.
 
 For more information on UAA and identity providers, see [Identity Providers in UAA](../uaa/identity-providers.html).
 

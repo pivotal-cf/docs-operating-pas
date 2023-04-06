@@ -28,7 +28,7 @@ To configure a load balancer for service mesh:
 		* TLS on port 443
 
 1. Navigate to your DNS provider and create a DNS name that resolves to the IP of the load balancer:
-	* If you did not configure the **External domain** field in the **Networking - Service Mesh (Beta)** pane of the <%= vars.app_runtime_abbr %> tile, create the DNS name using the default value of `*.mesh.APPS-DOMAIN`, where `APPS-DOMAIN` is the name of the external domain. 
+	* If you did not configure the **External domain** field in the **Networking - Service Mesh (Beta)** pane of the <%= vars.app_runtime_abbr %> tile, create the DNS name using the default value of `*.mesh.APPS-DOMAIN`, where `APPS-DOMAIN` is the name of the external domain.
 	* If you configured the **External domain** field in the **Networking - Service Mesh (Beta)** pane of the <%= vars.app_runtime_abbr %> tile, create the DNS name using the value you configured.
 
 
@@ -42,7 +42,7 @@ To deploy service mesh:
 	om staged-config --product-name=cf > /tmp/staged-config.yml
 	```
 
-1. Create an ops file to enable Istio by running:
+1. Create an ops file to activate Istio by running:
 
 	```
 	cat <<EOF > /tmp/enable-istio.yml
