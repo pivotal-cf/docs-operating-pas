@@ -35,14 +35,17 @@ To change the domain of an existing <%= vars.platform_name %> installation:
 
     <pre class="terminal">
     $ cf domains
-    Getting domains in org your-org as admin...
+    Getting domains in your-org as admin...
 
     name                  status
     yourapps.yourdomain.com   shared
     </pre>
 
-    If you have more than one shared domain, ensure that the domain you want to change is at the top of the list before you apply the new domain to your <%= vars.app_runtime_abbr %> tile configuration. You can delete and re-create the other shared domains as necessary to push the domain you want to change to the top of the list. If you do this, make sure to re-map the routes for each domain.
-    For more information, see [Configuring Routes and Domains](../devguide/deploy-apps/routes-domains.html).
+    If you have more than one shared domain, ensure that the domain you want to change is at the top of the list before you apply the new domain to your <%= vars.app_runtime_abbr %> tile configuration. You can delete and recreate the other shared domains as necessary to push the domain you want to change to the top of the list. If you do this, make sure to map the routes again for each domain.
+
+    The status column is named availability.
+        The table refers to private domains with private instead of own.
+        For more information, see [Configuring Routes and Domains](../devguide/deploy-apps/routes-domains.html).
 
 4. To confirm that your apps are assigned to the domain you plan to change, run:
 
@@ -89,6 +92,8 @@ To change the domain of an existing <%= vars.platform_name %> installation:
       <li><code>NEW-DOMAIN</code> is the domain to which you want to map your app.</li>
       <li><code>HOST-NAME</code> is the hostname of the URL for the route you are mapping.</li>
     </ul>
+    Note: When you map a TCP route to an app, a random port is assigned to the route by default.
+    To specify a port for a TCP route, use the --port flag.
 
     The command returns output similar to the following example:
 
@@ -125,7 +130,7 @@ To change the domain of an existing <%= vars.platform_name %> installation:
     Deleting domain yourapps.yourdomain.com as admin...
 
     This domain is shared across all orgs.
-    Deleting it will remove all associated routes, and will make any app with this domain unreachable.
+    Deleting it removes all associated routes, and makes any app with this domain unreachable.
     Are you sure you want to delete the domain yourapps.yourdomain.com?
     </pre>
 

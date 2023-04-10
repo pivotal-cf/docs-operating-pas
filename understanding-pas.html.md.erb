@@ -15,9 +15,9 @@ When BOSH triggers an upgrade, each upgrading Diego Cell enters evacuation mode.
 For more information, see [Specific Guidance for Diego Cells](configuring.html#diego-cells) in _Configuring <%= vars.app_runtime_abbr %> for Upgrades_.
 
 
-## <a id="cf-push"></a> cf push Can Become Unavailable
+## <a id="cf-push"></a> The cf push command can become Unavailable
 
-`cf push` is mostly available for the duration of a <%= vars.app_runtime_abbr %> upgrade. However, `cf push` can become unavailable when a single VM is in use or during BOSH Backup and Restore (BBR).
+The `cf push`  command is mostly available for the duration of a <%= vars.app_runtime_abbr %> upgrade. However, `cf push` can become unavailable when a single VM is in use or during BOSH Backup and Restore (BBR).
 
 For more information, see [cf push Availability During <%= vars.app_runtime_abbr %> Upgrades](cfpush-availability-during-upgrade.html).
 

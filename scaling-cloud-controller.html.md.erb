@@ -85,7 +85,7 @@ The following behaviors might occur:
 * `cf push` is intermittently failing.
 * `cf push` average time is elevated.
 
-#### Relevant Log Files
+#### Relevant Log files
 
 You can find the heuristic failures in the following log files:
 
@@ -116,8 +116,8 @@ Cloud Controller emits the following metrics:
 
 The following behaviors can occur:
 
-* `cf delete-org ORG_NAME` appears to leave its contained resources around for a long time.
-* Users report slow deletes for other resources.
+* `cf delete-org ORG_NAME` appears to leave its contained resources around for a long time. Also, the command fails if the `-org ORG_NAME` contains shared private domains.
+* Users report a slow delete action for other resources.
 * cf-acceptance-tests succeed generally, but fail during cleanup.
 
 #### Relevant Log Files

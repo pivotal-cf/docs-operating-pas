@@ -840,7 +840,7 @@ These sections describe Diego Locket metrics.
             <li>Run <code>monit status</code> on the Diego Database VM to check for failing processes.</li>
             <li>If there are no failing processes, then review the logs for Auctioneer.
               <ul>
-                <li>Recent logs for Auctioneer should show all but one of its instances are currently waiting on locks, and the active Auctioneer should show a record of when it last attempted to run work. This attempt should correspond to app development activity, such as <code>cf push</code>.</li>
+                <li>Recent logs for Auctioneer should show all but one of its instances are currently waiting on locks, and the active Auctioneer should show a record of when it last attempted to run work. This attempt corresponds to app development activity, such as <code>cf push</code>.</li>
               </ul>
             <li>If you are unable to resolve the issue, pull logs from the Diego BBS and Auctioneer VMs, which includes the Locket service component logs, and contact Support.</li>
           </ol>
