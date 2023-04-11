@@ -333,7 +333,7 @@ To install <%= vars.ops_manager %> on VMC:
 
 ## <a id='bosh-setup'></a> Configure BOSH Director
 
-<p class="note"><strong>Note:</strong> The procedure in this section contains only the configuration information that is specific to VMC. For more information about configuring BOSH on vSphere, see <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vsphere/config.html">Configuring BOSH Director on vSphere</a>.</p>
+<p class="note"><strong>Note:</strong> The procedure in this section contains only the configuration information that is specific to VMC. For more information about configuring BOSH on vSphere, see <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/vsphere-config.html">Configuring BOSH Director on vSphere</a>.</p>
 
 To configure BOSH Director for VMC:
 
@@ -344,7 +344,7 @@ To configure BOSH Director for VMC:
     - Enter a **Username**, **Password**, and **Password confirmation** to create an Admin user.
     - Enter a **Decryption passphrase** and the **Decryption passphrase confirmation**. This passphrase encrypts the Ops Manager datastore and is not recoverable.
 
-1. Select the **BOSH Director for vSphere** tile and configure BOSH as follows:
+2. Select the **BOSH Director for vSphere** tile and configure BOSH as follows:
     - **Settings**, then **vCenter Config**
         - **vCenter Host**: your vCenter URL. For example, `vcenter.sddc-35-162-72-214.vmwarevmc.com`.
         - **vCenter Username**: `cloudadmin@vmc.local`
@@ -397,10 +397,10 @@ To configure BOSH Director for VMC:
     - **Settings**, then **Security**
         - **Include Tanzu Ops Manager Root CA in Trusted Certs**: Select the checkbox.
 
-1. After you finish configuration, click **Apply Changes**. The following warning appears: "Review Pending Changes. Warning: Please review the warnings below. IaaS default: Could not log in. Required Datacenter privileges not available."
+3. After you finish configuration, click **Apply Changes**. The following warning appears: "Review Pending Changes. Warning: Please review the warnings below. IaaS default: Could not log in. Required Datacenter privileges not available."
     ![alt-text=""](images/opsman-warning.png)
 
-2. Click **Ignore Warnings & Apply Changes**.
+4. Click **Ignore Warnings & Apply Changes**.
 `EditCluster` permission is not required.
 
 ## <a id='tas-tile'></a> Install <%= vars.app_runtime_abbr %>
