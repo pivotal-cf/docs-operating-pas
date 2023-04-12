@@ -491,7 +491,7 @@ There is a single key capacity scaling indicator <%= vars.company_name %> recomm
     <tr>
       <th width="25">Description</th>
         <td> The Log Cache Caching Duration indicator shows the age in milliseconds of the oldest data point stored in Log Cache.<br>
-        Log Cache stores all messages that are passed through the Firehose in an ephemeral in-memory store. The size of this store and the cache duration are dependent on the amount of memory available on the VM where Log Cache runs. Typically, Log Cache runs on the Doppler VM. 
+        Log Cache stores all messages that are passed through the Firehose in an ephemeral in-memory store. The size of this store and the cache duration are dependent on the amount of memory available on the Log Cache VM.
         </td>
     </tr>
     <tr>
@@ -535,7 +535,7 @@ There is one key capacity scaling indicator <%= vars.company_name %> recommends 
   <tr><th id="system.cpu.user" colspan="2" style="text-align: center;"><br>Gorouter VM CPU Utilization<br><br></th></tr>
     <tr>
       <th>Description</th>
-        <td>The Gorouter VM CPU Utilization indicator shows how much of a Gorouter VM's CPU is being used. 
+        <td>The Gorouter VM CPU Utilization indicator shows how much of a Gorouter VM's CPU is being used.
         High CPU utilization of the Gorouter VMs can increase latency and cause requests per second to decrease.
         </td>
     </tr>
@@ -581,7 +581,7 @@ There is one key capacity scaling indicator <%= vars.company_name %> recommends 
 
 There is one key capacity scaling indicator <%= vars.company_name %> recommends for UAA performance.
 
-<p class= "note"><strong>Note:</strong> The following metric appears in the Firehose in two different formats. The below table lists both formats. For more information, see <a href="https://docs.pivotal.io/platform/2-8/pcf-release-notes/runtime-rn.html#duplicate-metrics">Duplicate Metrics Appear in the Firehose</a> in <em><%= vars.app_runtime_full %> v2.8 Release Notes</em>.</p>
+<p class= "note"><strong>Note:</strong> The following metric appears in the Firehose in two different formats. The following table lists both formats. For more information, see <a href="https://docs.pivotal.io/application-service/2-8/release-notes/runtime-rn.html#duplicate-metrics">Duplicate Metrics Appear in the Firehose</a> in <em><%= vars.app_runtime_full %> v2.8 Release Notes</em>.</p>
 
 <table>
   <tr><th id="uaa-system.cpu.user" colspan="2" style="text-align: center;"><br>UAA VM CPU Utilization<br><br></th></tr>
@@ -639,7 +639,7 @@ There is one key capacity scaling indicator for external S3 external storage.
   <tr><th colspan="2" style="text-align: center;"><br>External S3 External Storage<br><br></th></tr>
     <tr>
       <th width="25%">Description</th>
-        <td>The External S3 External Storage indicator shows the percentage of persistent disk used. 
+        <td>The External S3 External Storage indicator shows the percentage of persistent disk used.
         <em>If applicable:</em> Monitor the percentage of persistent disk used on the VM for the NFS Server job.<br>
         If you do not use an external S3 repository for external storage with no capacity constraints, you must monitor the <%= vars.app_runtime_abbr %> object store to push new app and buildpacks.</td>
     </tr>
