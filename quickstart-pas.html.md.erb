@@ -46,9 +46,9 @@ To install <%= vars.app_runtime_abbr %> with minimal configuration:
   <p class="note"><strong>Note:</strong> If you configured <%= vars.ops_manager %> Front End without a certificate, you can use this new certificate to complete your <%= vars.ops_manager %> configuration. To configure your <%= vars.ops_manager %> Front End certificate, see <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/gcp-prepare-env-manual.html#config-frontend">Configure Front End</a> in <em> Preparing to Deploy Ops Manager on GCP</em>.</p>
   <p class="note"><strong>Note:</strong> Ensure that you add any certificates that you generate in this pane to your infrastructure load balancer.</p>
 
-1. Setting appropriate ASGs is critical for a secure deployment. To acknowledge that you are responsible for setting the appropriate ASGs after the <%= vars.app_runtime_abbr %> deployment completes:
+1. Setting appropriate ASGs is critical for a secure deployment.
   1. Select **App Security Groups**.
-  2. In the **Type "X" to acknowledge this requirement** field, enter `X`.
+  2. Acknowledge **You are responsible for setting the appropriate ASGs after TAS for VMs finishes deploying**.
   3. Click **Save**.
   <br><br>
   For more information about ASGs, see [App Security Groups](../concepts/asg.html). For more information about setting ASGs, see [Restricting App Access to Internal <%= vars.app_runtime_abbr %> Components](../operating/app-sec-groups.html).
@@ -67,13 +67,13 @@ To install <%= vars.app_runtime_abbr %> with minimal configuration:
 	* **Key:** This key is used for encrypting all data. The key must be at least 20 characters long.
   * **Primary:** This checkbox is used for marking the key you specified above as the primary encryption key. You must mark one key as **Primary**. Do not mark more than one key as **Primary**.
 
-1. Go to the **Internal MySQL** pane.
+5. Go to the **Internal MySQL** pane.
 
-2. In the **Email address** field, enter the email address where the MySQL service sends alerts when the cluster experiences a replication issue or when a node is not allowed to auto-rejoin the cluster.
+6. In the **Email address** field, enter the email address where the MySQL service sends alerts when the cluster experiences a replication issue or when a node is not allowed to auto-rejoin the cluster.
 
-3. Select **Resource Config**.
+7. Select **Resource Config**.
 
-4. In the **Resource Config** pane, you must associate load balancers with the VMs in your deployment to enable traffic. For more information, see [Configure Load Balancing for <%= vars.app_runtime_abbr %>](configure-lb.html).
+8. In the **Resource Config** pane, you must associate load balancers with the VMs in your deployment to enable traffic. For more information, see [Configure Load Balancing for <%= vars.app_runtime_abbr %>](configure-lb.html).
 
 
 ## <a id='complete'></a> Complete the <%= vars.app_runtime_abbr %> Installation
