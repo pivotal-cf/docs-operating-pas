@@ -13,19 +13,19 @@ To help troubleshoot apps hosted by a deployment, <%= vars.app_runtime_abbr %> s
 
 ## <a id='diego-configuration'></a> Configure <%= vars.app_runtime_abbr %> SSH Access
 
-This section describes how to configure <%= vars.app_runtime_abbr %> to activate or deactivate deployment wide SSH access to app instances. In addition to this deployment-wide configuration, Space Managers have SSH access control over their Space, and Space Developers have SSH access control over their to their apps. For details about SSH access permissions, see [App SSH Overview](../devguide/deploy-apps/app-ssh-overview.html).
+This section describes how to configure <%= vars.app_runtime_abbr %> to activate or deactivate deployment-wide SSH access to app instances. In addition to this deployment-wide configuration, Space Managers have SSH access control over their Space, and Space Developers have SSH access control to their apps. For details about SSH access permissions, see [App SSH Overview](../devguide/deploy-apps/app-ssh-overview.html).
 
 To configure <%= vars.app_runtime_abbr %> SSH access for app instances:
 
 1. Navigate to the <%= vars.ops_manager %> Installation Dashboard.
 
-1. Click the <%= vars.app_runtime_abbr %> tile.
+2. Click the <%= vars.app_runtime_abbr %> tile.
 
-1. Select **App Containers**.
+3. Select **App Containers**.
 
-1. Activate or deactivate the **Allow SSH access to app containers** check box.
+4. Activate or deactivate the **Allow SSH access to app containers** check box.
 
-1. Optionally, select the **Enable SSH when an app is created** check box to activate SSH access for new apps by default in spaces that permit SSH. If you deselect this check box, developers can still activate SSH after pushing their apps by running `cf enable-ssh APP-NAME`, where `APP-NAME` is the name of the app for which they want to enable SSH.
+5. Optionally, select the **Allow SSH when an app is created** check box to activate SSH access for new apps by default in spaces that permit SSH. If you deselect this check box, developers can still activate SSH after pushing their apps by running `cf enable-ssh APP-NAME`, where `APP-NAME` is the name of the app for which they want to enable SSH.
 
 
 ## <a id="ssh-load-balancer-configuration"></a> Configure an SSH Load Balancer

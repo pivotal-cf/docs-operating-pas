@@ -187,9 +187,9 @@ App traffic logging generates log messages as follows:
 
 * **TCP traffic:** Logs the first packet of every new TCP connection.
 
-* **UDP traffic:** Logs UDP packets sent and received, up to a maximum per-second rate for each container. Set this rate limit in the **UDP logging interval** field in the **Networking** pane of the <%= vars.app_runtime_abbr %> tile. The default rate limit is `100`.
+* **UDP traffic:** Logs UDP packets sent and received, up to a maximum per-second rate for each container. Set this rate limit in the **UDP logging interval** field in the **Networking** pane of the <%= vars.app_runtime_abbr %> tile. The default rate limit is `100` packets per second.
 
-* **Packets denied:** Logs packets blocked by either a container-specific networking policy or by ASG rules applied across the space, org, or deployment. Logs packet denials up to a maximum per-second rate for each container, set in the **Denied logging interval** field in the **Networking** pane of the <%= vars.app_runtime_abbr %> tile. The default rate is `1`. For more information about container-specific networking policies, see [Policies](../concepts/understand-cf-networking.html#policies) in _Container-to-Container Networking_.
+* **Packets denied:** Logs packets blocked by either a container-specific networking policy or by ASG rules applied across the space, org, or deployment. Logs packet denials up to a maximum per-second rate for each container, set in the **Denied logging interval** field in the **Networking** pane of the <%= vars.app_runtime_abbr %> tile. The default rate is `1` (packet per second). For more information about container-specific networking policies, see [Policies](../concepts/understand-cf-networking.html#policies) in _Container-to-Container Networking_.
 
 ### <a id="log-format"></a> App Traffic Log Format and Contents
 

@@ -50,9 +50,10 @@ To configure an IP address allow list with the IP address of your Docker registr
 
 1. Select **App Containers**.
 
-1. Select **Allow SSH access to app containers** to activate app containers to accept SSH connections. If you use a load balancer, you must open port 2222 on your load balancer to activate SSH traffic. To open an SSH connection to an app, a user must have Space Developer privileges for the space where the app is deployed. Operators can grant those privileges in Apps Manager or using the cf CLI.
+1. Select **Allow SSH access to app containers** to activate app containers to accept SSH connections. If you use a load balancer, you must open port 2222 on your load balancer to activate SSH traffic. To open an SSH connection to an app, a user must have Space Developer privileges for the space where the app is deployed. Operators can grant those privileges in Apps Manager or using the cf CLI. Note that selecting this option allows SSH access across your entire TAS for VMs deployment.
 
-1. For **Private Docker insecure registry allow list**, provide the hostname or IP address and port that point to your private Docker registry. For example, enter `198.51.100.1:80` or `mydockerregistry.com:80`. Enter multiple entries in a comma-delimited sequence. SSL validation is ignored for private Docker image registries secured with self-signed certificates at these locations.
+2. For **Docker registry allow list**, provide the hostnames or IP addresses and ports of Docker registries in which TAS for VMs can run app
+instances. Enter hostnames or IP addresses and ports as a comma-separated list. SSL validation is ignored for Docker image registries secured with self-signed certificates at these locations.
 
 1. Under **Docker images disk cleanup scheduling on Diego Cell VMs**, choose one of the following options. For more information about these options, see [Configuring Docker Images Disk-Cleanup Scheduling](./config-cell-cleanup.html).
 	* **Never clean up Diego Cell disk space**
@@ -62,7 +63,7 @@ To configure an IP address allow list with the IP address of your Docker registr
 
 1. Click **Save**.
 
-1. Choose one of the following:
+2. Choose one of the following:
 	- If you are configuring <%= vars.app_runtime_abbr %> for the first time, return to your specific IaaS installation instructions ([AWS](https://docs.pivotal.io/platform/<%= vars.current_major_version %>/customizing/aws.html), [Azure](https://docs.pivotal.io/platform/<%= vars.current_major_version %>/customizing/azure.html), [GCP](https://docs.pivotal.io/platform/<%= vars.current_major_version %>/customizing/gcp.html), [OpenStack](https://docs.pivotal.io/platform/<%= vars.current_major_version %>/customizing/openstack.html), [vSphere](https://docs.pivotal.io/platform/<%= vars.current_major_version %>/customizing/vsphere.html)) to continue the installation process.
 	- If you are editing an existing <%= vars.app_runtime_abbr %> installation, return to the <%= vars.ops_manager %> Installation Dashboard, click **Review Pending Changes**, and click **Apply Changes**.
 
