@@ -959,7 +959,7 @@ These sections describe Gorouter metrics.
           The Gorouter limits the number of file descriptors to 100,000 per job. Once the limit is met, the Gorouter is unable to establish any new connections.<br><br>
           To reduce the risk of DDoS attacks, <%= vars.company_name %> recommends doing one or both of the following:<br><br>
             <ul>
-              <li>Within <%= vars.app_runtime_abbr %>, set <strong>Maximum connections per back end</strong> to define how many requests can be routed to any particular app instance. This prevents a single app from using all Gorouter connections. The value specified should be determined by the operator based on the use cases for that foundation.</li>
+              <li>Within <%= vars.app_runtime_abbr %>, set <strong>Maximum connections per back end</strong> to define how many requests can be routed to each Gorouter app instance. This prevents a single app from using all Gorouter connections. The value specified should be determined by the operator based on the use cases for that foundation. A value of 0 sets no limit. The default number is 500.</li>
               <li>Add rate limiting at the load balancer level.</li>
             </ul>
           <strong>Origin:</strong> Firehose<br>

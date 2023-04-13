@@ -339,13 +339,13 @@ To disable logging of client IP addresses:
 
 1. Click **Networking**.
 
-1. Under **Logging of client IPs in the Gorouter**, select one of the two options:
-	* If the source IP address exposed by your load balancer is its own IP address, select **Disable logging of X-Forwarded-For header only**.
-	* If the source IP address exposed by your load balancer belongs to the downstream client, select **Disable logging of both source IP and X-Forwarded-For header**.
+2. In **Client IP Logging**::
+	* If the source IP address exposed by your load balancer is its own IP address, select **Do not log X-Forwarded-For header**.
+	* If the source IP address exposed by your load balancer belongs to the downstream client, select **Do not log source IP or X-Forwarded-For header**.
 
-1. Click **Save**.
+3. Click **Save**.
 
-1. Return to the <%= vars.ops_manager %> Installation Dashboard, click **Review Pending Changes**, and click **Apply Changes** to redeploy.
+4. Return to the <%= vars.ops_manager %> Installation Dashboard, click **Review Pending Changes**, and click **Apply Changes** to redeploy.
 
 ### <a id='diego'></a> Diego
 
