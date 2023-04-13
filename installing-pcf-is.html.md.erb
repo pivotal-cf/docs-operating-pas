@@ -71,7 +71,7 @@ To configure the **App Containers** pane:
 
 1. Select **App Containers**.
 
-1. (Optional) To give apps that generally stay within their CPU entitlements priority access to extra CPU during CPU bursts, activate the **Enable CPU Burst Optimization** check box. This check box is activated by default. When this check box is activated, apps that generally stay within their CPU entitlements have higher-priority access to extra CPU than apps that generally exceed their CPU entitlements. When this check box is deactivated, all apps have equal access to extra CPU during CPU bursts. Whether you activate or deactivate this check box, all apps are always guaranteed the amount of CPU that is within their CPU entitlements.
+1. (Optional) To give apps that generally stay within their CPU entitlements priority access to extra CPU during CPU bursts, activate the **Enable CPU burst optimization** check box. This check box is activated by default. When this check box is activated, apps that generally stay within their CPU entitlements have higher-priority access to extra CPU than apps that generally exceed their CPU entitlements. When this check box is deactivated, all apps have equal access to extra CPU during CPU bursts. Whether you activate or deactivate this check box, all apps are always guaranteed the amount of CPU that is within their CPU entitlements.
 
 1. Choose how the Gorouter verifies app identity to activate encryption and prevent mis routing under **Gorouter app identity verification**:
     * **The Gorouter uses TLS to verify app identity**: Activates the Gorouter to verify app identity using TLS. This is the default option.
@@ -81,22 +81,24 @@ To configure the **App Containers** pane:
 
 2. (Optional) You can configure <%= vars.app_runtime_abbr %> to run app instances in Docker containers by provided a comma-separated list of their IP address ranges in the **Docker registry allow list** field. For more information, see [Using Docker Registries](../operating/docker-registry.html).
 
-3. Select your preference for **Docker images disk cleanup scheduling on Diego Cell VMs**. If you choose **Clean up disk space once usage fills disk**, enter a value in MB for **Reserved disk space for other jobs**. This is the amount of space the garbage collection algorithm should keep free for other jobs. For more information about the configuration options and how to configure a reserved amount, see [Configuring Diego Cell Disk Cleanup Scheduling](../operating/config-cell-cleanup.html).
+3. Select your preference for disk cleanup scheduling. If you choose **Clean up disk space once usage fills disk**, enter a value in MB for **Reserved disk space for other jobs**. This is the amount of space the garbage collection algorithm should keep free for other jobs. For more information about the configuration options and how to configure a reserved amount, see [Configuring Diego Cell Disk Cleanup Scheduling](../operating/config-cell-cleanup.html).
 
-4. The **Enable containerd delegation** check box governs whether or not Garden delegates container create and destroy operations to the containerd tool. By default, this option is activated and Garden uses containerd. Deactivate this option by deselecting the check box. For more information about the containerd tool, see [containerd](https://containerd.io).
+4. The **Allow containerd delegation** check box governs whether or not Garden delegates containers create and destroy operations to the containerd tool. By default, this option is activated and Garden uses containerd. Deactivate this option by deselecting the check box. For more information about the containerd tool, see [containerd](https://containerd.io).
 
 5. Under **NFSv3 volume services**, select **Allow** or **Do not allow**. NFS volume services allow app developers to bind existing NFS volumes to their apps for shared file access. For more information, see [Enabling Volume Services](../operating/enable-vol-services.html).
   <p class="note"><strong>Note:</strong> In a fresh installation, NFSv3 volume services are activated by default. In an upgrade, NFSv3 volume services is set to the same setting as it was in the previous deployment.</p>
 
 1. (Optional) To configure LDAP for NFSv3 volume services:
-  * For **LDAP service account user**, enter the username of the service account in LDAP that manages volume services.
+  * For **LDAP service account user**, enter the user name of the service account in LDAP that manages volume services.
   * For **LDAP service account password**, enter the password for the service account.
   * For **LDAP server host**, enter the hostname or IP address of the LDAP server.
-  * For **LDAP server port**, enter the LDAP server port number. If you do not specify a port number, <%= vars.ops_manager %> uses 389.
+  * For **LDAP server port**, enter the LDAP server port number. The default port is 389.
   * For **LDAP user search base**, enter the location in the LDAP directory tree from which any LDAP user search begins. The typical LDAP search base matches your domain name. <br>For example, a domain named `cloud.example.com` typically uses the following LDAP user search base: `ou=Users,dc=example,dc=com`.
-  * (Optional) For **LDAP server CA certificate**, you can enter a certificate if your LDAP server supports TLS and you want to enable TLS connections from the NFS driver to your LDAP server. Paste in the root certificate from your CA certificate or your self-signed certificate.
-  <p class='note'><strong>Note:</strong> UAA can only parse one certificate entered into this field. If you enter multiple certificates, UAA only uses the first one you entered and ignores the rest. You only have to include one root certificate or self-signed certificate.</p>
-    1. Click Save.
+  * (Optional) For **LDAP server CA certificate**, you can enter a certificate if your LDAP server supports TLS and you want to enable TLS connections from the NFS driver to your LDAP server. This is the CA certificate that your LDAP server uses to verify the TLS certificates for NFS. Paste in the root certificate from your CA certificate or your self-signed certificate.
+
+  <p class='note'><strong>Note:</strong> UAA can only parse one certificate entered into this field. If you enter multiple certificates, UAA only uses the first one you entered and ignores the rest. You only need to include one root certificate or self-signed certificate.</p>
+
+1. Click **Save**.
 
 ### <a id='syslog'></a> Configure System Logging
 

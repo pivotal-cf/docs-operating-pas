@@ -21,9 +21,9 @@ To perform a detailed analysis of disk usage in your <%= vars.app_runtime_full %
 
 <%= vars.platform_name %> provides the following options for scheduling the disk cleanup process on Diego Cells in the **App Containers** pane of the <%= vars.app_runtime_abbr %> tile:
 
-* **Never clean up Diego Cell disk space**: <%= vars.company_name %> does not recommend selecting this option for production environments.
+* **Never clean up disk space**: <%= vars.company_name %> does not recommend selecting this option for production environments.
 
-* **Routinely clean up Diego Cell disk space**: This option makes the Diego Cell schedule a disk cleanup whenever a container is created. Running the disk cleanup process this frequently can result in a negative impact on the Diego Cell performance.
+* **Routinely clean up disk space**: This option makes the Diego Cell schedule a disk cleanup whenever a container is created. Running the disk cleanup process this frequently can result in a negative impact on the Diego Cell performance.
 
 * **Clean up disk space once usage fills disk**: This option makes the Diego Cell schedule the disk cleanup process only when disk usage encroaches on the space reserved for other jobs.
 
@@ -33,7 +33,7 @@ For more information about these options, see [Configure Disk Cleanup Scheduling
 
 To select the best option for disk cleanup, you must consider the workload that the Diego Cells run.
 
-For <%= vars.platform_name %> installations that primarily run buildpack-based apps, <%= vars.company_name %> recommends selecting the **Routinely clean up Diego Cell disk space** option. The **Routinely clean up Diego Cell disk space** option ensures that when a new stack becomes available on a cell, the old stack is dropped immediately from the cache.
+For <%= vars.platform_name %> installations that primarily run buildpack-based apps, <%= vars.company_name %> recommends selecting the **Routinely clean up disk space** option. The **Routinely clean up disk space** option ensures that when a new stack becomes available on a cell, the old stack is dropped immediately from the cache; that is, Diego Cells schedule a disk cleanup whenever a container is created.
 
 For <%= vars.platform_name %> installations that primarily run Docker images, or both Docker images and buildpack-based apps, <%= vars.company_name %> recommends selecting the **Clean up disk space once usage fills disk** option.
 
@@ -55,7 +55,7 @@ For more information on disk usage and garbage collection in GrootFS, see [Groot
 
 1. Click the <%= vars.app_runtime_full %> tile, and navigate to **App Containers**.
 
-1. Under **Docker images disk cleanup scheduling on Diego Cell VMs**, select an option.
+1. Under **Diego Cell disk cleanup scheduling**, select an option.
 
 1. If you select **Clean up disk space once usage fills disk**, you can edit the **Reserved disk space for other jobs** field. <%= vars.company_name %> recommends that you leave the default value of `15360`&nbsp;MB, or 15&nbsp;GB, in **Reserved disk space for other jobs** unless you are instructed to change it. For more information, see [Calculating a Reserve](#choosing-a-reserve).
 

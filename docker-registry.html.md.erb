@@ -55,9 +55,9 @@ To configure an IP address allow list with the IP address of your Docker registr
 2. For **Docker registry allow list**, provide the hostnames or IP addresses and ports of Docker registries in which TAS for VMs can run app
 instances. Enter hostnames or IP addresses and ports as a comma-separated list. SSL validation is ignored for Docker image registries secured with self-signed certificates at these locations.
 
-1. Under **Docker images disk cleanup scheduling on Diego Cell VMs**, choose one of the following options. For more information about these options, see [Configuring Docker Images Disk-Cleanup Scheduling](./config-cell-cleanup.html).
-	* **Never clean up Diego Cell disk space**
-	* **Routinely clean up Diego Cell disk space**
+1. Under **Diego Cell disk cleanup scheduling**, select one of the options listed below. For more information about these options, see [Configuring Docker Images Disk-Cleanup Scheduling](./config-cell-cleanup.html).
+	* **Never clean up disk space**
+	* **Routinely clean up disk space**
 	* **Clean up disk space once threshold is reached**. If you choose this option, enter the amount of disk space limit the Diego Cell must reach before disk cleanup initiates under **Reserved disk space for other jobs**.
 <br><br>
 

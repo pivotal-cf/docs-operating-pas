@@ -30,13 +30,13 @@ To activate NFS volume services in <%= vars.app_runtime_abbr %>:
 
 1. (Optional) To configure LDAP for NFS volume services:
   <p class="note"><strong>Note:</strong> If you already use an LDAP server with your network-attached storage (NAS) file server, enter the information in the following fields. This ensures that the identities known to the file server match those checked by the NFS driver.</p>
-  * For **LDAP service account user**, enter either the full domain name for the service account or the username of the service account that manages volume services. This value must be what you enter when binding the account to your LDAP server.
+  * For **LDAP service account user**, enter either the full domain name for the service account or the user name of the service account that manages volume services. This value must be what you enter when binding the account to your LDAP server.
   * For **LDAP service account password**, enter the password for the service account.
   * For **LDAP server host**, enter the hostname or IP address of the LDAP server.
-  * For **LDAP server port**, enter the LDAP server port number. If you do not specify a port number, <%= vars.ops_manager %> uses 389.
+  * For **LDAP server port**, enter the LDAP server port number. The default port is 389.
   * For **LDAP user search base**, enter the location in the LDAP directory tree from which any LDAP user search begins. The typical LDAP search base matches your domain name. For example, a domain named `cloud.example.com` typically uses the following LDAP user search base: `ou=Users,dc=example,dc=com`.
       <p class="note"><strong>Note:</strong> Additionally, your LDAP user records must be configured with an attribute <code>objectClass: User</code>, which is used by the NFS driver to identify records as user records. They must also have <code>uidNumber</code> and <code>gidNumber</code> fields, which are used to establish the correct UID for a named user.</p>
-  * (Optional) For **LDAP server CA certificate**, you can enter a Certificate Authority (CA) certificate if your LDAP server supports TLS. Enter a certificate if you want to activate TLS connections from the NFS driver to your LDAP server. Paste in the root certificate from your CA certificate or your self-signed certificate.
+  * (Optional) For **LDAP server CA certificate**, you can enter a Certificate Authority (CA) certificate if your LDAP server supports TLS. Enter a certificate if you want to activate TLS connections from the NFS driver to your LDAP server. This is the CA certificate that your LDAP server uses to verify the TLS certificates for NFS. Paste in the root certificate from your CA certificate or your self-signed certificate.
 
 1. Click **Save**.
 
@@ -81,7 +81,7 @@ To activate SMB volume services in <%= vars.app_runtime_abbr %>:
 
 1. Select **App Containers**.
 
-1. Select the **Enable SMB volume services** check box.
+1. Select the **Allow SMB volume services** check box.
 
 1. Click **Save**.
 
