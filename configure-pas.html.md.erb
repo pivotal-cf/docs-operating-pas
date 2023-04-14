@@ -34,7 +34,7 @@ To add the <%= vars.app_runtime_abbr %> tile to your <%= vars.ops_manager %> Ins
 1. Click the **<%= vars.app_runtime_full %>** tile in the Installation Dashboard.
 
 
-## <a id='assign-azs-networks'></a> Assign AZs and Networks
+## <a id='assign-azs-networks'></a> Assign AZs and networks
 
 <p class="note"><strong>Note:</strong> For Azure environments, this configuration pane is <strong>Assign Networks</strong> and does not include AZ configuration.</p>
 
@@ -54,7 +54,7 @@ To configure the **Assign AZ and Networks** pane:
 1. Click **Save**.
 
 
-## <a id='domains'></a> Configure Domains
+## <a id='domains'></a> Configure domains
 
 In the **Domains** pane, you configure a wildcard DNS record for both the apps domain and system domain.
 
@@ -86,13 +86,13 @@ For additional guidance based on your installation method, see the following tab
 	<p class="note"><strong>Note:</strong> <%= vars.company_name %> recommends that you use the same domain name but different subdomain names for your system and app domains. Doing so allows you to use a single wildcard certificate for the domain while preventing apps from creating routes that overlap with system routes.</p>
 
 
-## <a id='networking'></a> Configure Networking
+## <a id='networking'></a> Configure networking
 
 <%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
 
 <%= partial "/pcf/core/networking-main" %>
 
-## <a id='application-containers-config'></a> Configure App Containers
+## <a id='application-containers-config'></a> Configure app containers
 
 <%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
 
@@ -142,7 +142,7 @@ Setting appropriate ASGs is critical for a secure deployment.
 For more information about ASGs, see [App Security Groups](../concepts/asg.html). For more information about setting
 ASGs, see [Restricting App Access to Internal <%= vars.app_runtime_abbr %> Components](app-sec-groups.html).
 
-## <a id='auth-config'></a> Configure Authentication and Enterprise SSO
+## <a id='auth-config'></a> Configure authentication and enterprise SSO
 
 <%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
 
@@ -163,14 +163,15 @@ To configure the **CredHub** pane:
 1. Select **CredHub**.
 
 1. Under **CredHub database location**, select the location of your CredHub database. <%= vars.app_runtime_abbr %> includes this CredHub database for services to store their service instance credentials.
-    * **Tanzu Application Service database**: If you select this option, CredHub uses the same database as other <%= vars.app_runtime_abbr %> components, whether the database is internal or external. You configure this database in the **Databases** pane.
-    * **Other external database**: If you select this option, configure these fields:
+    * **TAS for VMs database**: If you select this option, CredHub uses the same database as other <%= vars.app_runtime_abbr %> components, whether the database is internal or external. You configure this database in the **Databases** pane.
+    * **External database**: If you select this option, configure these fields:
         * **Hostname:** Enter the IP address of your database server.
         * **TCP port:** Enter the port of your database server, such as `3306`.
-        * **Username:** Enter a unique username that can access your CredHub database on the database server.
+        * **Username:** Enter a unique username to use to access your UAA database on the database server.
         * **Password:** Enter the password for the provided username.
-        * **Database CA certificate:** This certificate is used when encrypting traffic to and from the database.
-        * **Disable hostname verification:** Activate this check box to deactivate hostname verification for TLS connections to the targeted database server. You cannot deactivate hostname verification for TLS connections to Postgres databases. You must select this option if you are configuring an external database on GCP or Azure.
+        * **CA certificate:** This certificate is used when encrypting traffic to and from the UAA database.
+        * **Skip hostname verification:** Select if you don't want CredHub to verify the identity of your database server during TLS connections.You cannot deactivate hostname verification for TLS connections to Postgres databases. You must select this option if you are configuring an external database on GCP or Azure.
+
       <div class="note"><strong>Note:</strong> If you deploy <%= vars.app_runtime_abbr %> on AWS using Terraform, you can locate these values in your Terraform output:
           <ul>
             <li><strong>Hostname:</strong> <code>rds_address</code></li>
@@ -180,12 +181,12 @@ To configure the **CredHub** pane:
           </ul>
       </div>
 
-1. (Optional) Under **KMS plug-in providers**, specify one or more Key Management Service (KMS) providers:
-    * **Instance name:** Enter the name of the KMS provider.
+2. (Optional) Under **KMS providers**, specify one or more Key Management Service (KMS) providers:
+    * **Name:** Enter the name of the KMS provider.
     * **Endpoint:** Enter the Unix socket address for the KMS plug-in.
     * **Primary:** Activate the **Primary** check box to indicate the primary KMS provider for your environment. You must mark one provider as primary. Do not mark more than one provider as primary.
 
-1. Under **Internal encryption provider keys**, specify one or more keys to use for encrypting and decrypting the values stored in the CredHub database.
+3. Under **Internal encryption provider keys**, specify one or more keys to use for encrypting and decrypting the values stored in the CredHub database.
     * If you plan to use internal encryption, configure these fields:
         * **Name:** Enter any key name.
         * **Key:** Enter a randomly generated value that is at least 20 characters long. This key is used for encrypting all data.
@@ -196,7 +197,7 @@ To configure the **CredHub** pane:
         * **Primary:** This check box is used for marking the key you specified as the primary encryption key. You must mark one key as primary. Do not mark more than one key as primary.
     <p class="note"><strong>Note:</strong> For information about using additional keys for key rotation, see <a href="credential-rotation.html">Rotating Runtime CredHub Encryption Keys</a>.</p>
 
-1. (Optional) To configure CredHub to use an HSM, configure these fields:
+4. (Optional) To configure CredHub to use an HSM, configure these fields:
     * **HSM provider partition:** Enter the name of the HSM provider partition.
     * **HSM provider partition password:** Enter a password to use to access the HSM provider partition.
     * **HSM provider client certificate:** Enter the client certificate for the HSM. For more information, see [Create and Register HSM Clients](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-hsm-config.html#create-register-hsm) in _Preparing CredHub HSMs for Configuration_.
@@ -209,29 +210,29 @@ To configure the **CredHub** pane:
         * **Partition serial number:** Enter the serial number of the HSM partition.
         * **HSM certificate:** Enter the certificate for the HSM server. The HSM presents this certificate to CredHub to establish a two-way TLS connection.
 
-2. If your deployment uses any <%= vars.platform_name %> services that support storing service instance credentials in CredHub and you want to activate this feature, activate the **Secure service instance credentials** check box. For more information about using CredHub for securing service instance credentials, see [Securing Service Instance Credentials with Runtime CredHub](secure-si-creds.html).
+5. If your deployment uses any <%= vars.platform_name %> services that support storing service instance credentials in CredHub and you want to activate this feature, activate the **Secure service instance credentials** check box. For more information about using CredHub for securing service instance credentials, see [Securing Service Instance Credentials with Runtime CredHub](secure-si-creds.html).
 
-3. Click **Save**.
+6. Click **Save**.
 
-4. Go to the **Resource Config** pane.
+7. Go to the **Resource Config** pane.
 
-5. Under the **Job** column of the **CredHub** row, ensure that the number of instances is set to `2`. This is the minimum instance count required for high availability.
+8. Under the **Job** column of the **CredHub** row, ensure that the number of instances is set to `2`. This is the minimum instance count required for high availability.
 
-6. To configure UAA so it detects a proxy, complete the following fields:
-    * **List of proxy servers:** Enter a comma-separated list of router IP addresses for the first group of HTTP/TCP backends.
-    * **http proxy:** Enter the `http_proxy` for all http requests across VMs.
-    * **https proxy:** Enter the `https_proxy` for all http requests across VMs
-    * **no proxy:** Enter a comma-separated list of domains, IP addresses, or DNS suffixes.
+9. To configure UAA so it detects a proxy, complete the following fields:
+    * **Proxy servers**: Enter a comma-separated list of router IP addresses for the first group of HTTP/TCP backends.
+    * **HTTP proxy URL**: Enter the `http_proxy` for all HTTP requests across VMs.
+    * **HTTPS proxy URL**: Enter the `https_proxy` for all HTTPS requests across VMs
+    * **Excluded hosts**: Enter a comma-separated list of domains, IP addresses, or DNS suffixes to exclude from proxying.
 
-7. Click **Save**.
+10. Click **Save**.
 
-## <a id='sys-db'></a> Configure Databases
+## <a id='sys-db'></a> Configure databases
 
 In the **Databases** pane, you can configure <%= vars.app_runtime_abbr %> to use an internal MySQL database provided with <%= vars.platform_name %>, or you can configure an external database provider for the databases required by <%= vars.app_runtime_abbr %>.
 
 <p class="note"><strong>Note:</strong> If you are performing an upgrade, do not edit your existing internal database configuration, or you might lose data. You must migrate your existing data first before changing the configuration. For additional upgrade information, see <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-upgrading-pcf.html">Upgrading <%= vars.platform_name %></a>.</p>
 
-### <a id='internal-db'></a> Internal Database Configuration
+### <a id='internal-db'></a> Internal database configuration
 
 <p class="note"><strong>Note:</strong> For GCP installations, <%= vars.company_name %> recommends selecting <strong>External</strong> and using Google Cloud SQL. Only use internal MySQL for non-production or test installations on GCP.</p>
 
@@ -241,7 +242,7 @@ In the **Databases** pane, you can configure <%= vars.app_runtime_abbr %> to use
 
 To configure high availability for your internal MySQL databases, see [Configure Internal MySQL](#internal-mysql).
 
-### <a id='create-dbs'></a> External System Database Configuration
+### <a id='create-dbs'></a> External system database configuration
 
 <%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
 
@@ -253,25 +254,25 @@ To configure high availability for your internal MySQL databases, see [Configure
 
 <%= partial "/pcf/core/mysql_proxy_config" %>
 
-## <a id='file-storage'></a> Configure File Storage
+## <a id='file-storage'></a> Configure file storage
 
 <%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
 
 <%= partial "/pcf/core/max_droplets_packages_config" %>
 
-## <a id='sys-logging'></a> Configure System Logging (Optional)
+## <a id='sys-logging'></a> Configure system logging (Optional)
 
 <%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
 
 <%= partial "/pcf/core/system_logging" %>
 
-## <a id='customize-apps-man'></a> Configure Custom Branding and Apps Manager (Optional)
+## <a id='customize-apps-man'></a> Configure custom branding and Apps Manager (Optional)
 
 <%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
 
 <%= partial "/pcf/core/custombranding" %>
 
-## <a id='smtp'></a> Configure Email Notifications (Optional)
+## <a id='smtp'></a> Configure email notifications (Optional)
 
 <%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
 
@@ -289,13 +290,13 @@ To configure high availability for your internal MySQL databases, see [Configure
 
 <%= partial "/pcf/core/cloud-controller" %>
 
-## <a id='config-smoke-test'></a> Configure Smoke Tests
+## <a id='config-smoke-test'></a> Configure smoke tests
 
 <%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
 
 <%= partial "/pcf/core/smoketests" %>
 
-## <a id='advanced'></a> Configure Advanced Features (Optional)
+## <a id='advanced'></a> Configure advanced features (Optional)
 
 <%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
 
@@ -307,17 +308,17 @@ To configure high availability for your internal MySQL databases, see [Configure
 
 <%= partial "/pcf/core/metric-registrar" %>
 
-## <a id='errands'></a> Configure Errands
+## <a id='errands'></a> Configure errands
 
 <%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
 
 <%= partial "/pcf/core/errands" %>
 
-## <a id='resources'></a> Configure Resources
+## <a id='resources'></a> Configure resources
 
 In the **Resource Config** pane, you must associate load balancers with the VMs in your deployment to activate traffic. For more information, see [Configure Load Balancing for <%= vars.app_runtime_abbr %>](configure-lb.html).
 
-### <a name='scale-down'></a> Scale Down and Deactivate Resources (Optional)
+### <a name='scale-down'></a> Scale down and deactivate resources (Optional)
 
 <%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
 

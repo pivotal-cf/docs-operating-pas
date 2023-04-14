@@ -54,11 +54,12 @@ To install <%= vars.app_runtime_abbr %> with minimal configuration:
   For more information about ASGs, see [App Security Groups](../concepts/asg.html). For more information about setting ASGs, see [Restricting App Access to Internal <%= vars.app_runtime_abbr %> Components](../operating/app-sec-groups.html).
 
 1. Under **SAML service provider credentials**, enter a certificate and private key for the User Account and Authentication (UAA) server to use as a SAML service provider for signing outgoing SAML authentication requests. You can provide an existing certificate and private key from your trusted CA or generate a self-signed certificate. The domain `*.login.SYSTEM-DOMAIN` must be associated with the certificate, where `SYSTEM-DOMAIN` is the system domain you configured in the **Domains** pane.
+
   <p class="note"><strong>Note:</strong> The Single Sign-On for VMware Tanzu service and Spring Cloud Services for VMware Tanzu tiles require the <code>*.login.SYSTEM-DOMAIN</code>.</p>
 
 1. Select **UAA**.
 
-2. If the private key specified under **SAML service provider credentials** is password-protected, enter the password under **SAML service provider key password**.
+2. If the private key specified under **SAML service provider credentials** is password-protected, enter the password in **Private key password**.
 
 3. Select **CredHub**.
 
@@ -73,7 +74,7 @@ To install <%= vars.app_runtime_abbr %> with minimal configuration:
 
 7. Select **Resource Config**.
 
-4. In the **Resource Config** pane, you must associate load balancers with the VMs in your deployment to activate traffic. For more information, see [Configure Load Balancing for <%= vars.app_runtime_abbr %>](configure-lb.html).
+8. In the **Resource Config** pane, you must associate load balancers with the VMs in your deployment to activate traffic. For more information, see [Configure Load Balancing for <%= vars.app_runtime_abbr %>](configure-lb.html).
 
 
 ## <a id='complete'></a> Complete the <%= vars.app_runtime_abbr %> Installation

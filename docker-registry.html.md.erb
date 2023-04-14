@@ -8,14 +8,14 @@ This topic describes how to configure <%= vars.platform_name %> to access Docker
 Docker registries store Docker container images. <%= vars.platform_name %> uses these images to create the Docker containers that it runs apps in.
 
 
-## <a id='prerequisite'></a> Prerequisite: Enable Docker Support
+## <a id='prerequisite'></a> Prerequisite: Enable Docker support
 
 <%= vars.platform_name %> can only access Docker registries if you have activated Docker support with the `cf enable-feature-flag diego_docker` command, as described in the [Enable Docker](../adminguide/docker.html#enable) section of the _Using Docker in <%= vars.app_runtime_abbr %>_ topic.
 
 With Docker activated, developers can push an app with a Docker image using the Cloud Foundry Command Line Interface (cf CLI). For more information, see [Deploying an App with Docker](../devguide/deploy-apps/push-docker.html).
 
 
-## <a id='ops-man'></a> Use a CA Certificate
+## <a id='ops-man'></a> Use a CA certificate
 
 If you provide your root CA certificate in the <%= vars.ops_manager %> configuration:
 
@@ -36,7 +36,7 @@ If you provide your root CA certificate in the <%= vars.ops_manager %> configura
 After configuration, BOSH propagates your CA certificate to all application containers in your deployment. You can then push and pull images from your Docker registries.
 
 
-## <a id='ert'></a> Use an IP Address Allow List
+## <a id='ert'></a> Use an IP address allow List
 
 If you choose not to provide a CA certificate, you must provide the IP address of your Docker registry.
 
@@ -63,20 +63,20 @@ instances. Enter hostnames or IP addresses and ports as a comma-separated list. 
 
 1. Click **Save**.
 
-2. Choose one of the following:
+2. Do one of the following:
 	- If you are configuring <%= vars.app_runtime_abbr %> for the first time, return to your specific IaaS installation instructions ([AWS](https://docs.pivotal.io/platform/<%= vars.current_major_version %>/customizing/aws.html), [Azure](https://docs.pivotal.io/platform/<%= vars.current_major_version %>/customizing/azure.html), [GCP](https://docs.pivotal.io/platform/<%= vars.current_major_version %>/customizing/gcp.html), [OpenStack](https://docs.pivotal.io/platform/<%= vars.current_major_version %>/customizing/openstack.html), [vSphere](https://docs.pivotal.io/platform/<%= vars.current_major_version %>/customizing/vsphere.html)) to continue the installation process.
 	- If you are editing an existing <%= vars.app_runtime_abbr %> installation, return to the <%= vars.ops_manager %> Installation Dashboard, click **Review Pending Changes**, and click **Apply Changes**.
 
 After configuration, <%= vars.app_runtime_abbr %> allows Docker images to pass through the specified IP address without checking certificates.
 
 
-## <a id='proxy'></a> Configure <%= vars.platform_name %> to Access Proxies for Docker Registries
+## <a id='proxy'></a> Configure <%= vars.platform_name %> to access proxies for Docker registries
 
 If you have proxies already set up for Docker registries, you should configure <%= vars.platform_name %> to access your Docker registries through a proxy.
 
 To configure <%= vars.platform_name %> to access a Docker registry through a proxy:
 
-1. On the Installation Dashboard, navigate to USERNAME > **Settings** > **Proxy Settings**.
+1. On the Installation Dashboard, navigate to **Username**; then click **Settings**, followed by **Proxy Settings**.
 
 1. On the **Update Proxy Settings** pane, complete one of the following fields:
     + **HTTP proxy**: If you have an HTTP proxy server for your Docker registry, enter its IP address.
