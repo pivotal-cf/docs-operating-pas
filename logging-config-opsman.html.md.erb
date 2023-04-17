@@ -171,7 +171,7 @@ To enable app traffic logging:
 
 1. Select the **Networking** pane.
 
-1. Enable the **Log traffic for all accepted and denied app packets** checkbox.
+1. Enable the **Log traffic for all accepted and denied app packets** check box.
 
 1. Click **Save**.
 
@@ -195,7 +195,7 @@ App traffic logging generates log messages as follows:
 
 App traffic logs are formatted as described in the [silk-release Traffic logging](https://github.com/cloudfoundry/silk-release/blob/develop/docs/traffic_logging.md) documentation, following the `iptables-logger` format but without line breaks.
 
-For example, the first part of an app traffic log line looks like: 
+For example, the first part of an app traffic log line looks like:
 
 `{"timestamp": "2020-06-23T11:36:01.710452019Z", "source": "cfnetworking.iptables", "message": "cfnetworking.iptables.ingress-allowed", "log_level": 1, "data": { "destination": { "container_id": "d5978989-1401-49ff-46cd-33e5","app_guid": "bc6f229d-5e4a-4c41-a63f-e8795496c283",`.
 
@@ -229,7 +229,7 @@ You can determine whether a denied-packet log resulted from a container networki
 
 ### <a id="scope-app-traffic-log"></a> Global vs. ASG-Level App Traffic Logging
 
-<%= vars.app_runtime_abbr %> supports two mechanisms for enabling app traffic logging. Enabling the **Log traffic for all accepted and denied app packets** checkbox in the **Networking** pane of the <%= vars.app_runtime_abbr %> tile enables app traffic logging globally for all ASGs and container policies. Setting the `log` property of an ASG to `true` enables app traffic logging at the individual ASG level. For more information about setting the `log` property of an ASG to `true`, see [The Structure and Attributes of ASGs](../concepts/asg.html#creating-groups) in _App Security Groups_.
+<%= vars.app_runtime_abbr %> supports two mechanisms for enabling app traffic logging. Enabling the **Log traffic for all accepted and denied app packets** check box in the **Networking** pane of the <%= vars.app_runtime_abbr %> tile enables app traffic logging globally for all ASGs and container policies. Setting the `log` property of an ASG to `true` enables app traffic logging at the individual ASG level. For more information about setting the `log` property of an ASG to `true`, see [The Structure and Attributes of ASGs](../concepts/asg.html#creating-groups) in _App Security Groups_.
 
 Because these two mechanisms operate independently, <%= vars.app_runtime_abbr %> generates duplicate logs when app traffic logging is enabled globally and an ASG's `log` property is set to `true`. To avoid duplicate logs, <%= vars.company_name %> recommends setting the `log` property to `false` for all ASGs, or leaving it out entirely, when app traffic logging is enabled globally. For more information, see [App Traffic Logging](#app-traffic-log).
 
