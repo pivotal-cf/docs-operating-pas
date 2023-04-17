@@ -74,7 +74,7 @@ To configure <%= vars.app_runtime_abbr %> for default lookup behavior, with bypa
 
 1. Under **Route services**, select **Allow**.
 
-1. Deactivate the **Bypass security checks for route service lookup** check box.
+1. Deselect the **Bypass security checks for route service lookup** checkbox.
 
 1. Communicate to developers of route services that the domain name for their internally-hosted route services must resolve to the load balancer.
 
@@ -93,7 +93,7 @@ These sections describe how the Gorouter behaves when bypass mode is activated o
 
 This section describes how the Gorouter handles app requests when:
 
-* The **Bypass security checks for route service lookup** check box in <%= vars.app_runtime_abbr %> is deactivated.
+* The **Bypass security checks for route service lookup** check box in <%= vars.app_runtime_abbr %> is deselected.
 * The app is bound to a route service that is hosted on <%= vars.app_runtime_abbr %>.
 
 In this case, when the Gorouter receives the request, it sends the traffic back to the load balancer to resolve DNS. The load balancer then sends the traffic back to the Gorouter.
@@ -108,7 +108,7 @@ The following diagram illustrates the flow of the request and numbers the steps 
 
 This section describes how the Gorouter handles app requests when:
 
-* The **Bypass security checks for route service lookup** check box in <%= vars.app_runtime_abbr %> is activated.
+* The **Bypass security checks for route service lookup** checkbox in <%= vars.app_runtime_abbr %> is selected.
 * The app is bound to a route service that is hosted on <%= vars.app_runtime_abbr %>.
 
 In this case, when the Gorouter receives the request, it sends it directly to the route service. This assumes the Gorouter finds an existing route for the route service.
@@ -121,7 +121,7 @@ The following diagram illustrates the flow of the request. Arrows indicate the f
 
 This section describes how the Gorouter handles app requests when:
 
-* The **Bypass security checks for route service lookup** check box in <%= vars.app_runtime_abbr %> is activated.
+* The **Bypass security checks for route service lookup** check box in <%= vars.app_runtime_abbr %> is selected.
 * The app is bound to a route service that is hosted outside of <%= vars.app_runtime_abbr %>.
 
 In this case, when the Gorouter receives the request, it checks for an existing route and then sends the request directly to the route service. This activates external clients to intercept route service traffic. A developer can register the external route service domain as a private domain in <%= vars.app_runtime_abbr %> and map it to their own, malicious app. When the Gorouter receives a request for the original app bound to the external route service, it finds the domain internally and sends the request to the malicious app.
@@ -138,7 +138,7 @@ The following diagram illustrates the flow of the request in the case that it is
 
 This section describes how the Gorouter handles app requests when:
 
-* The **Bypass security checks for route service lookup** check box in <%= vars.app_runtime_abbr %> is deactivate.
+* The **Bypass security checks for route service lookup** check box in <%= vars.app_runtime_abbr %> is deselected.
 * The app is bound to a route service that is hosted outside of <%= vars.app_runtime_abbr %>.
 
 In this case, the Gorouter sends traffic directly to the external route service without checking for an existing route.

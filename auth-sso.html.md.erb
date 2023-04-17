@@ -73,7 +73,7 @@ To configure <%= vars.app_runtime_abbr %> to use a SAML IDP:
 
 6. For **External groups attribute**, enter the attribute name in your SAML database that defines the groups that a user belongs to. For example, `group_memberships`. To map the groups from the SAML assertion to admin roles in <%= vars.app_runtime_abbr %>, see [Grant Admin Permissions to an External Group (SAML or LDAP)](../uaa/uaa-user-management.html#external-group) in _Creating and Managing Users with the UAA CLI (UAAC)_. This field is case-sensitive.
 
-7. By default, all SAML authentication requests from <%= vars.app_runtime_abbr %> are signed. To change this, deselect the **Sign authentication requests** check box and configure your IDP to verify SAML authentication requests.
+1. By default, all SAML authentication requests from <%= vars.app_runtime_abbr %> are signed. To change this, deselect the **Sign authentication requests** check box and configure your IDP to verify SAML authentication requests.
 
 8. To validate the signature for the incoming SAML assertions, activate the **Required signed assertions** check box and configure your IDP to send signed SAML assertions.
 
