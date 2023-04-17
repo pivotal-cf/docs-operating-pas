@@ -34,7 +34,7 @@ Runtime CredHub supports credential rotation. For more information, see [Rotatin
 
 ## <a id='services'></a> Services that Use Secure Binding Credentials
 
-The procedures in this document are only effective for services that support storing their instance credentials in runtime CredHub. To learn whether a service supports this feature, see the table below or the documentation for that service.
+The procedures in this document are only effective for services that support storing their instance credentials in runtime CredHub. To learn whether a service supports this feature, see the following table or the documentation for that service.
 
 <table id='service-table' border="1" class="nice" >
   <tr>
@@ -79,7 +79,7 @@ The procedures in this document are only effective for services that support sto
 
 <p class="note breaking"><strong>Breaking Change:</strong> If you opt out of the BOSH DNS feature, your <%= vars.platform_name %> deployment cannot support Secure Service Instance Credentials. For more information, see <a href="http://docs.pivotal.io/pivotalcf/2-0/pcf-release-notes/runtime-rn.html#bosh-dns">BOSH DNS Service Discovery for Application Containers (Beta)</a> in the Pivotal Application Service v2.0 release notes.</p>
 
-Runtime CredHub allows you to use one or more Hardware Security Modules (HSMs) to store encryption keys. If you wish to use an HSM with CredHub, you must configure the HSM before completing the procedures below. For more information, see [Preparing CredHub HSMs for Configuration](https://docs.pivotal.io/platform/<%= vars.current_major_version %>/customizing/hsm-config.html).
+Runtime CredHub allows you to use one or more Hardware Security Modules (HSMs) to store encryption keys. If you wish to use an HSM with CredHub, you must configure the HSM before completing the following procedures. For more information, see [Preparing CredHub HSMs for Configuration](https://docs.pivotal.io/platform/<%= vars.current_major_version %>/customizing/hsm-config.html).
 
 
 ## <a id='pas-config'></a> Step 1: Configure the <%= vars.app_runtime_abbr %> Tile
@@ -123,7 +123,7 @@ To ensure the ASGs for your deployment allow apps to communicate with the runtim
 
 1. Record the CIDR for the <%= vars.app_runtime_abbr %> network.
 
-1. Create a file named `runtime-credhub.json` for specifying your ASG rules. Copy the content below into the file. Replace `YOUR-TAS-CIDR` with the CIDR you recorded in the previous step.
+1. Create a file named `runtime-credhub.json` for specifying your ASG rules. Copy the following content into the file. Replace `YOUR-TAS-CIDR` with the CIDR you recorded in the previous step.
 
     ```
     [

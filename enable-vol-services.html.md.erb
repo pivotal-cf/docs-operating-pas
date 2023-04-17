@@ -29,7 +29,7 @@ To enable NFS volume services in <%= vars.app_runtime_abbr %>:
   <p class="note"><strong>Note:</strong> In a clean install, NFS volume services are activated by default. In an upgrade, NFS volume services match the setting of the previous deployment.</p>
 
 1. (Optional) To configure LDAP for NFS volume services:
-  <p class="note"><strong>Note:</strong> If you already use an LDAP server with your network-attached storage (NAS) file server, enter its information below. This ensures that the identities known to the file server match those checked by the NFS driver.</p>
+  <p class="note"><strong>Note:</strong> If you already use an LDAP server with your network-attached storage (NAS) file server, enter its information. This ensures that the identities known to the file server match those checked by the NFS driver.</p>
   * For **LDAP service account user**, enter either the full domain name for the service account or the user name of the service account that manages volume services. This value must be what you enter when binding the account to your LDAP server.
   * For **LDAP service account password**, enter the password for the service account.
   * For **LDAP server host**, enter the hostname or IP address of the LDAP server.
