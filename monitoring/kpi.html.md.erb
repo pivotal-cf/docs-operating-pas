@@ -107,7 +107,7 @@ These sections describe Diego Auctioneer metrics.
       <th width="25%">Description</th>
         <td>
           The number of LRP instances that the Auctioneer successfully placed on Diego Cells. This metric is cumulative over the lifetime of the Auctioneer job.<br><br>
-          <strong>Use:</strong> Provides a sense of running system activity levels in your environment. Can also give you a sense of how many app instances have been started over time. The measurement <%= vars.company_name %> recommends, below, can help indicate a significant amount of container churn. However, for capacity planning purposes, it is more helpful to observe deltas over a long time window.<br><br>
+          <strong>Use:</strong> Provides a sense of running system activity levels in your environment. Can also give you a sense of how many app instances have been started over time. The measurement <%= vars.company_name %> can help indicate a significant amount of container churn. However, for capacity planning purposes, it is more helpful to observe deltas over a long time window.<br><br>
     		  This metric is emitted on event, and therefore gaps in receipt of this metric can be normal during periods of no app instances being scheduled.<br><br>
           <strong>Origin:</strong> Firehose<br>
           <strong>Type:</strong> Counter (Integer)<br>
@@ -254,7 +254,7 @@ These sections describe Diego BBS metrics.
           <li>Check BBS logs for faults and errors that can indicate issues with BBS.</li>
           <li>Try scaling the BBS VM resources up. For example, add more CPUs and memory depending on its <code>system.cpu</code>/<code>system.memory</code> metrics.</li>
           <li>Consider vertically scaling the <%= vars.app_runtime_abbr %> backing database, if <code>system.cpu</code> and <code>system.memory</code> metrics for the database instances are high.</li>
-          <li>If the above steps do not solve the issue, collect a sample of the Diego Cell logs from the BBS VMs and contact Support to troubleshoot further.
+          <li>If the previous steps do not solve the issue, collect a sample of the Diego Cell logs from the BBS VMs and contact Support to troubleshoot further.
         </ol>
       </td>
     </tr>
@@ -647,7 +647,7 @@ These sections describe Diego Cell metrics.
         <td>
           Remaining amount of disk in MiB available for this Diego Cell to allocate to containers.<br><br>
           <strong>Use:</strong> Low disk capacity can prevent app scaling and new deployments. Because Diego staging Tasks can fail without at least 6&nbsp;GB free, the red threshold <%= vars.company_name %> recommends is based on the minimum disk capacity across the deployment falling below 6&nbsp;GB in the previous 5 minutes.<br><br>
-          It can also be meaningful to assess how many chunks of free disk space are above a given threshold, similar to <code>rep.CapacityRemainingMemory</code>.<br><br>
+          It can also be meaningful to assess how many chunks of free disk space are for a given threshold, similar to <code>rep.CapacityRemainingMemory</code>.<br><br>
           <strong>Origin:</strong> Firehose<br>
           <strong>Type:</strong> Gauge (Integer in MiB)<br>
           <strong>Frequency:</strong> 60 s<br>
@@ -936,7 +936,7 @@ These sections describe Diego Route Emitter metrics.
 
 These sections describe <%= vars.app_runtime_abbr %> MySQL KPIs.
 
-When <%= vars.app_runtime_abbr %> uses an internal MySQL database, as configured in the **Databases** pane of the <%= vars.app_runtime_abbr %> tile, the database cluster generates KPIs as described below.
+When <%= vars.app_runtime_abbr %> uses an internal MySQL database, as configured in the **Databases** pane of the <%= vars.app_runtime_abbr %> tile, the database cluster generates KPIs as described here:
 
 <p class="note"><strong>Note:</strong> This section assumes you are using the <strong>Internal Databases - MySQL - Percona XtraDB Cluster</strong> option as your system database.</p>
 
@@ -983,7 +983,7 @@ These sections describe Gorouter metrics.
         <td>
   	      <ol>
             <li>Identify which app(s) are requesting excessive connections and resolve the impacting issues with these apps.</li>
-            <li>If the above mitigation steps have not already been taken, do so.</li>
+            <li>If the these mitigation steps have not already been taken, do so.</li>
             <li>Consider adding more Gorouter VM resources to increase the number of available file descriptors.</li>
           </ol>
         </td>

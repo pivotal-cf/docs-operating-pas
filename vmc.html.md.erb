@@ -341,7 +341,7 @@ To configure BOSH Director for VMC:
 <p class="note"><strong>Note:</strong> When configuring the BOSH Director, do not configure NSX-T networking. Instead, select <strong>Standard vCenter Networking</strong>.</p>
 
 1. Log in to <%= vars.ops_manager %>:
-    - Navigate to the IP address you configured for <%= vars.ops_manager %> above. For example, [https://54.190.190.190/](https://54.190.190.190/).
+    - Navigate to the IP address you configured for <%= vars.ops_manager %>. For example, [https://54.190.190.190/](https://54.190.190.190/).
     - Enter a **Username**, **Password**, and **Password confirmation** to create an Admin user.
     - Enter a **Decryption passphrase** and the **Decryption passphrase confirmation**. This passphrase encrypts the Ops Manager datastore and is not recoverable.
 
@@ -417,16 +417,16 @@ To configure <%= vars.app_runtime_abbr %> for VMC:
             - **System domain**: `sys.54.180.180.180.nip.io`
             - **Apps domain**: `run.54.180.180.180.nip.io`
     - **Settings**, then **Networking**
-        - Set the HAProxy IP address to the one you specified in the NAT rule above. This is the first available IP address in the `deployment` network.
+        - Set the HAProxy IP address to the one you specified in the NAT rule. This is the first available IP address in the `deployment` network.
             - **HAProxy IPs**: `192.168.2.2`
         - Generate a certificate for the Gorouter and HAProxy:
             - **Certificates and private keys for the Gorouter and HAProxy**: Click **Add**.
                 - Name: `haproxy cert`
                 - Click **Generate RSA Certificate**.
-                - Add `*.` domains for your system and apps domain above, separated by a comma. For example, `*.**sys.54.180.180.180.nip.io,*.run.54.180.180.180.nip.io`.
+                - Add `*.` domains for your system and apps domain, separated by a comma. For example, `*.**sys.54.180.180.180.nip.io,*.run.54.180.180.180.nip.io`.
         - Set HAProxy as the TLS termination point:
             - **TLS Termination**: **HA Proxy**
-        - Disable TLS forwarding for HAProxy:
+        - Deactivate TLS forwarding for HAProxy:
             - **HAProxy forwards all requests to the Gorouter over TLS**: Click **Disable**.
     - **Settings**, then **UAA**
         - For UAA configuration, generate a SAML certificate for *.login.SYSTEM-DOMAIN:

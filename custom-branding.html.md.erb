@@ -59,7 +59,7 @@ To continue customizing your Apps Manager interface:
 1. For **Marketplace name**, enter text to replace the header in the Marketplace pages. This text defaults to **Marketplace** if left blank.
 
 1. By default, Apps Manager includes three secondary navigation links: **Marketplace**, **Docs**, and **Tools**. You can edit existing secondary navigation links by clicking the name of the link and editing the **Link text** and **URL** fields. You can also remove the link by clicking the trash icon next to its name. If you want to add a new secondary navigation link, click **Add** and complete the **Link text** and **URL** fields.
-	<p class="note"><strong>Note:</strong> Removing any of the default links will remove them from the secondary navigation for all users.</p>
+	<p class="note"><strong>Note:</strong> Removing any of the default links removes them from the secondary navigation for all users.</p>
 
 1. For **Apps Manager buildpack**, enter a static content-compatible buildpack you want <%= vars.app_runtime_abbr %> to use when deploying the Apps Manager app. By default, this is `staticfile_buildpack`.
 
@@ -76,9 +76,9 @@ To continue customizing your Apps Manager interface:
 1. The **Apps Manager polling interval** field provides a temporary fix if Apps Manager usage degrades Cloud Controller response times. In this case, you can use this field to reduce the load on the Cloud Controller and ensure Apps Manager remains available while you troubleshoot the Cloud Controller. <%= vars.company_name %> recommends that you do not keep this field modified as a long-term fix because it can degrade Apps Manager performance. Optionally, you can:
 	* Increase the polling interval above the default of 30 seconds.
 		<p class="note"><strong>Note:</strong> If you enter a value between <code>0</code> and <code>30</code>, the field is automatically set to <code>30</code>.</p>
-	* Disable polling by entering `0`. This stops Apps Manager from refreshing data automatically, but users can update displayed data by reloading Apps Manager manually.
+	* Deactivate polling by entering `0`. This stops Apps Manager from refreshing data automatically, but users can update displayed data by reloading Apps Manager manually.
 
 1. The **App details polling interval** field provides an additional way to reduce the load on the Cloud Controller when the **Apps Manager polling interval** field is not sufficient. This field controls the rate at which Apps Manager polls for data when a user views the **Overview** page of an app. <%= vars.company_name %> recommends that you do not keep this field modified as a long-term fix because it can degrade Apps Manager performance. Optionally, you can:
 	* Increase the polling interval above the default of 10 seconds.
 		<p class="note"><strong>Note:</strong> If you enter a value between <code>0</code> and <code>30</code>, the field is automatically set to <code>10</code>.</p>
-	* Disable polling by entering `0`. This stops Apps Manager from refreshing data automatically, but users can update displayed data by reloading Apps Manager manually.
+	* Deactivate polling by entering `0`. This stops Apps Manager from refreshing data automatically, but users can update displayed data by reloading Apps Manager manually.

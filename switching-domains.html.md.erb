@@ -108,7 +108,7 @@ To change the domain of an existing <%= vars.platform_name %> installation:
     ![alt-text="Apps Manager space shows an application status at 100%."](./images/switching_domains/new_domain_confirmed1.png)
 
 8. Repeat the above steps for each space in your <%= vars.platform_name %> installation except for the System org, beginning with logging into the org and space and ending with confirming the URL update.
-	<p class='note'><strong>Note:</strong> Ordinarily the System org contains only <%= vars.platform_name %> apps that perform utility functions for your installation. <%= vars.company_name %> does not recommend pushing apps to this org. However, if you have pushed apps to the System org, you must also repeat the above steps for these apps.</p>
+	<p class='note'><strong>Note:</strong> Ordinarily the System org contains only <%= vars.platform_name %> apps that perform utility functions for your installation. <%= vars.company_name %> does not recommend pushing apps to this org. However, if you have pushed apps to the System org, you must also repeat the previous steps for these apps.</p>
 
 9. Once you have confirmed that every app in every space has been mapped to the new domain, delete the old domain by running:
 
@@ -125,7 +125,7 @@ To change the domain of an existing <%= vars.platform_name %> installation:
     Deleting domain yourapps.yourdomain.com as admin...
 
     This domain is shared across all orgs.
-    Deleting it will remove all associated routes, and will make any app with this domain unreachable.
+    Deleting it removes all associated routes, and makes any app with this domain unreachable.
     Are you sure you want to delete the domain yourapps.yourdomain.com?
     </pre>
 

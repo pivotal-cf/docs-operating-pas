@@ -6,7 +6,7 @@ owner:
 This topic describes several configuration options for <%= vars.app_runtime_first %> that can help ensure successful upgrades. In addition to following the [Upgrade Preparation Checklist](https://docs.pivotal.io/ops-manager/2-10/upgrade/checklist.html), review this topic to better understand how to prepare for <%= vars.app_runtime_abbr %> upgrades.
 
 <p class="note breaking">
-<strong>Breaking Change</strong>: The Service Mesh feature was removed in <%= vars.app_runtime_abbr %> v2.11. You must disable the Service Mesh feature before upgrading to <%= vars.app_runtime_abbr %> v2.11.
+<strong>Breaking Change</strong>: The Service Mesh feature was removed in <%= vars.app_runtime_abbr %> v2.11. You must deactivate the Service Mesh feature before upgrading to <%= vars.app_runtime_abbr %> v2.11.
 </p>
 
 ## <a id="limit-restart"></a> Limit Component Instance Restarts
@@ -65,7 +65,7 @@ To prevent this issue, <%= vars.app_runtime_abbr %> provides two throttle config
 
 - The maximum number of starting containers
 
-The values of the above throttle configurations depend on the version of <%= vars.app_runtime_abbr %> that you have deployed and whether you have overridden the default values.
+The values of the throttle configurations depend on the version of <%= vars.app_runtime_abbr %> that you have deployed and whether you have overridden the default values.
 
 The following list describes the existing defaults for determining the override values in your deployment:
 

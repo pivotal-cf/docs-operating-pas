@@ -143,7 +143,7 @@ To configure the **System Logging** pane:
 
 ### <a id='compute-networking-isolation'></a> Configure Compute and Networking Isolation
 
-In the **Compute and Networking Isolation** pane, you can enable or disable
+In the **Compute and Networking Isolation** pane, you can activate or deactivate
 compute isolation and configure Gorouter sharding for isolation segments.
 
 Compute isolation is when an app runs on compute resources, such as clusters,
@@ -154,7 +154,7 @@ Networking isolation, or Gorouter sharding, is when traffic to an app instance
 uses a dedicated route that is isolated from routes used by other app instances
 by a network partition or firewall rule.
 
-In the <%= vars.segment_runtime_full %> tile, you cannot disable compute
+In the <%= vars.segment_runtime_full %> tile, you cannot deactivate compute
 isolation and enable networking isolation at the same time. This is because
 networking isolation configures the route by which traffic goes to the
 <%= vars.segment_runtime_full %> tile. Both compute and networking isolation
@@ -174,7 +174,7 @@ pane of the <%= vars.app_runtime_abbr %> tile:
 | Use compute isolation only | Enabled | No isolation segment | Accept requests for all isolation segments | <%= vars.segment_runtime_full %> uses <%= vars.app_runtime_abbr %> load balancer and domain | Scale <%= vars.segment_runtime_full %> Gorouters to 0. |
 | Use network isolation in some cases | See other rows for guidance | See other rows for guidance | Accept requests for some isolation segments | See other rows for guidance | See other rows for guidance |
 
-The use cases in the table above are described below:
+The use cases in the previous table are described here:
 
 * **Use compute isolation and network isolation for all isolation segments**:
   This is the most common case. For this use case, select **Reject requests for all isolation segments** for the
@@ -222,7 +222,7 @@ The use cases in the table above are described below:
 <strong>Compute and Networking Isolation</strong> pane and
 <strong>Requests to isolation segments</strong> setting in
 the <%= vars.app_runtime_abbr %> tile in a manner other than the use cases
-described above, the smoke tests fail. To deploy the tile anyway, you must
+described, the smoke tests fail. To deploy the tile anyway, you must
 deactivate the Smoke Test errand in the <strong>Errands</strong> pane of the <%=
 vars.app_runtime_abbr %> tile. <%= vars.company_name %> does not recommend
 disabling smoke tests. To configure the Smoke Test errand, see <a
@@ -288,7 +288,7 @@ In the **Errands** pane, you can select **On** to always run an errand or **Off*
 
 For more information about how <%= vars.ops_manager %> manages errands, see [Managing Errands in <%= vars.ops_manager %>](https://docs.pivotal.io/platform/<%= vars.current_major_version %>/customizing/managing_errands.html).
 
-<div class="note warning"><strong>Caution:</strong> You should disable the Smoke Test errand if:
+<div class="note warning"><strong>Caution:</strong> You should deactivate the Smoke Test errand if:
     <ul>
     <li>You configure the <strong>Compute and Networking Isolation</strong> pane and the <strong>Requests to isolation segments</strong> check box in the <%= vars.app_runtime_abbr %> tile in a manner other than the use cases described in <a href="#compute-networking-isolation-configs">Options for Configuring Compute and Networking Isolation</a>. Otherwise, apps fail to schedule in <%= vars.segment_runtime_full %>.</li>
     <li>Both the V2 and V1 Firehoses are deactivated in <%= vars.app_runtime_abbr %>. Otherwise, the deploy fails.</li>

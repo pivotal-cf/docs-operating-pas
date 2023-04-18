@@ -209,7 +209,7 @@ To configure the Gorouter to use GCP Load Balancers:
 1. Under **Load Balancers** for the SSH job, enter the value of `ssh_router_pool` from your Terraform output, prepended with `tcp:`. For example, `tcp:<%= vars.platform_code %>-ssh-proxy`.
 
 1. Verify that the **Internet Connected** check box for every job is enabled. The Terraform templates do not provision a Network Address Translation (NAT) box for Internet connectivity to your VMs, so they are provided with ephemeral public IP addresses to allow the jobs to reach the Internet.
-   <p class="note"><strong>Note:</strong> If you want to provision a Network Address Translation (NAT) box to provide Internet connectivity to your VMs instead of providing them with public IP addresses, disable the <strong>Internet Connected</strong> checkboxes. For more information about using NAT in GCP, see <a href="https://cloud.google.com/compute/docs/networking">VPC network overview</a> in the GCP documentation.</p>
+   <p class="note"><strong>Note:</strong> If you want to provision a Network Address Translation (NAT) box to provide Internet connectivity to your VMs instead of providing them with public IP addresses,deactivate the <strong>Internet Connected</strong> checkboxes. For more information about using NAT in GCP, see <a href="https://cloud.google.com/compute/docs/networking">VPC network overview</a> in the GCP documentation.</p>
 
 1. Click **Save**.
 
@@ -246,8 +246,8 @@ To configure the Gorouter to use GCP Load Balancers:
 
 10. Under **Load Balancers** for the SSH job, enter the value of `ssh_router_pool` from your Terraform output, prepended with `tcp:`. For example, `tcp:<%= vars.platform_code %>-ssh-proxy`.
 
-11. Verify that the **Internet Connected** check box for every job is disabled. When preparing your GCP environment, you provisioned a Network Address Translation (NAT) box to provide Internet connectivity to your VMs instead of providing them with public IP addresses to allow the jobs to reach the Internet.
-   <p class="note"><strong>Note:</strong> If you want to provision a Network Address Translation (NAT) box to provide Internet connectivity to your VMs instead of providing them with public IP addresses, disable the <strong>Internet Connected</strong> checkboxes. For more information about using NAT in GCP, see <a href="https://cloud.google.com/compute/docs/networking">VPC network overview</a> in the GCP documentation.</p>
+11. Verify that the **Internet Connected** check box for every job is deactivated. When preparing your GCP environment, you provisioned a Network Address Translation (NAT) box to provide Internet connectivity to your VMs instead of providing them with public IP addresses to allow the jobs to reach the Internet.
+   <p class="note"><strong>Note:</strong> If you want to provision a Network Address Translation (NAT) box to provide Internet connectivity to your VMs instead of providing them with public IP addresses, deactivate the <strong>Internet Connected</strong> checkboxes. For more information about using NAT in GCP, see <a href="https://cloud.google.com/compute/docs/networking">VPC network overview</a> in the GCP documentation.</p>
 
 12. Click **Save**.
 

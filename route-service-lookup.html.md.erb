@@ -12,7 +12,7 @@ You can bind your app to a route service to preprocess requests before they reac
 
 The **Bypass security checks for route service lookup** check box in the **Networking** pane of the <%= vars.app_runtime_abbr %> tile allows you to configure how the Gorouter handles traffic for apps that are bound to route services. The configuration options are:
 
-* **Default lookup:** Default lookup is configured when you disable the **Bypass security checks for route service lookup** check box. In this case, the Gorouter does not check for an existing route. It sends traffic back through the load balancer when the traffic is for an internal route service.
+* **Default lookup:** Default lookup is configured when you deactivate the **Bypass security checks for route service lookup** check box. In this case, the Gorouter does not check for an existing route. It sends traffic back through the load balancer when the traffic is for an internal route service.
 
 * **Bypass mode:** Bypass mode is configured when you enable the **Bypass security checks for route service lookup** check box. The Gorouter checks for an existing route. If the Gorouter finds the route and the route service is internal, it sends the traffic directly to the route service and skips the load balancer. This improves performance, but introduces the security risk described in [Bypass Mode and External Route Service (Security Risk)](#bypass-external).
 
@@ -64,7 +64,7 @@ To prevent users from intercepting traffic for externally-hosted route services:
 
 ### <a id="disable"></a> Configure <%= vars.app_runtime_abbr %> for Default Lookup
 
-To configure <%= vars.app_runtime_abbr %> for default lookup behavior, with bypass mode disabled:
+To configure <%= vars.app_runtime_abbr %> for default lookup behavior, with bypass mode deactivated:
 
 1. Navigate to the <%= vars.ops_manager_full %> Installation Dashboard.
 
@@ -74,7 +74,7 @@ To configure <%= vars.app_runtime_abbr %> for default lookup behavior, with bypa
 
 1. Under **Route services**, select **Allow**.
 
-1. Disable the **Bypass security checks for route service lookup** check box.
+1. Deactivate the **Bypass security checks for route service lookup** check box.
 
 1. Communicate to developers of route services that the domain name for their internally-hosted route services must resolve to the load balancer.
 
@@ -87,13 +87,13 @@ To configure <%= vars.app_runtime_abbr %> for default lookup behavior, with bypa
 
 ## <a id="summary"></a> Summary of Behavior in Different Configurations
 
-These sections describe how the Gorouter behaves when bypass mode is enabled or disabled and when a route service is internal or external.
+These sections describe how the Gorouter behaves when bypass mode is activated or deactivated and when a route service is internal or external.
 
 ### <a id="default-internal"></a> Default Lookup and Internal Route Service
 
 This section describes how the Gorouter handles app requests when:
 
-* The **Bypass security checks for route service lookup** check box in <%= vars.app_runtime_abbr %> is disabled.
+* The **Bypass security checks for route service lookup** check box in <%= vars.app_runtime_abbr %> is deactivated.
 * The app is bound to a route service that is hosted on <%= vars.app_runtime_abbr %>.
 
 In this case, when the Gorouter receives the request, it sends the traffic back to the load balancer to resolve DNS. The load balancer then sends the traffic back to the Gorouter.
@@ -138,7 +138,7 @@ The following diagram illustrates the flow of the request in the case that it is
 
 This section describes how the Gorouter handles app requests when:
 
-* The **Bypass security checks for route service lookup** check box in <%= vars.app_runtime_abbr %> is disabled.
+* The **Bypass security checks for route service lookup** check box in <%= vars.app_runtime_abbr %> is deactivated.
 * The app is bound to a route service that is hosted outside of <%= vars.app_runtime_abbr %>.
 
 In this case, the Gorouter sends traffic directly to the external route service without checking for an existing route.

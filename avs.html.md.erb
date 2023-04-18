@@ -99,7 +99,7 @@ For each T1 router you created, add a **New Router Port** as follows, to allow t
 
 1. In the NSX-T Manager UI, select the T1 router.
 2. In **Configuration** > **Router Ports**, click **+Add** to add a new router port.
-3. For **Logical Switch**, enter the name of the logical switch you defined for the network in **Add New Logical Switch**, above.
+3. For **Logical Switch**, enter the name of the logical switch you defined for the network in **Add New Logical Switch**.
 4. For **IP Address**, use the first IP of the appropriate subnet. In this example, 192.168.1.0/24 is set aside for Infrastructure (<%= vars.ops_manager %> and BOSH Director), and 192.168.2.0/24 for the Deployment, so 192.168.1.1 and 192.168.2.1 are used respectively.
 ![alt-text="New Router port"](./images/nsx-t/nsx-t-router-port.png)
 

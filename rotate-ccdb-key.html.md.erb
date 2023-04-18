@@ -25,7 +25,7 @@ For example, you might want to perform this procedure if your existing key is le
    database encryption key</strong> field in the <%= vars.app_runtime_abbr %> tile.
    This field is only for use when restoring <%= vars.app_runtime_abbr %> from a backup.
    If you modify this value at a time other than restore, commands such as <code>cf push</code> might fail.
-   Instead, change keys using the <strong>Encryption key ledger</strong> as described below.</p>
+   Instead, change keys using the <strong>Encryption key ledger</strong>.</p>
 
 To rotate the CCDB encryption key:
 
@@ -33,7 +33,7 @@ To rotate the CCDB encryption key:
    select the **Cloud Controller** pane.
 
 1. Review the **Encryption key ledger** field. If you previously added a key and
-   enabled the **Primary** check box, disable the check box.
+   enabled the **Primary** check box, deactivate the check box.
    The <%= vars.app_runtime_abbr %> deploy fails if there is more than one key
    with the **Primary** check box enabled.
 

@@ -190,11 +190,11 @@ To configure the **CredHub** pane:
     * If you plan to use internal encryption, configure these fields:
         * **Name:** Enter any key name.
         * **Key:** Enter a randomly generated value that is at least 20 characters long. This key is used for encrypting all data.
-        * **Primary:** This check box marks the key you specified above as the primary encryption key. You must mark one key as primary. Do not mark more than one key as primary.
+        * **Primary:** This check box marks the key you specified as the primary encryption key. You must mark one key as primary. Do not mark more than one key as primary.
     * If you plan to use a hardware security module (HSM) as your encryption provider, configure these fields:
         * **Name:** Enter a key name that already exists on your HSM or a new key name. For each new key name, CredHub generates a key in **HSM provider partition** that you configure.
         * **Key:** Enter a placeholder value under **Key**. CredHub does not use this key for encryption. However, you cannot leave the **Key** field blank.
-        * **Primary:** This check box is used for marking the key you specified above as the primary encryption key. You must mark one key as primary. Do not mark more than one key as primary.
+        * **Primary:** This check box is used for marking the key you specified as the primary encryption key. You must mark one key as primary. Do not mark more than one key as primary.
     <p class="note"><strong>Note:</strong> For information about using additional keys for key rotation, see <a href="credential-rotation.html">Rotating Runtime CredHub Encryption Keys</a>.</p>
 
 4. (Optional) To configure CredHub to use an HSM, configure these fields:
@@ -203,7 +203,7 @@ To configure the **CredHub** pane:
     * **HSM provider client certificate:** Enter the client certificate for the HSM. For more information, see [Create and Register HSM Clients](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-hsm-config.html#create-register-hsm) in _Preparing CredHub HSMs for Configuration_.
     * Under **HSM provider encryption keys**, specify one or more keys to use for encrypting and decrypting the values stored in the HSM provider. For each key, configure these fields:
         * **Name:** Enter the name of the encryption key.
-        * **Primary:** This check box is used for marking the key you specified above as the primary encryption key. You must mark one key as primary. Do not mark more than one key as primary.
+        * **Primary:** This check box is used for marking the key you specified as the primary encryption key. You must mark one key as primary. Do not mark more than one key as primary.
     * In the **HSM provider servers** section, click **Add** to add an HSM server. You can add multiple HSM servers. For each HSM server, configure these fields:
         * **Host address:** Enter the hostname or IP address of the HSM server.
         * **Port:** Enter the port of the HSM server. If you do not know your port address, enter `1792`.
