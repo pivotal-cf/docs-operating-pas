@@ -36,20 +36,19 @@ To add the <%= vars.app_runtime_abbr %> tile to your <%= vars.ops_manager %> Ins
 
 ## <a id='assign-azs-networks'></a> Assign AZs and networks
 
-<p class="note"><strong>Note:</strong> For Azure environments, this configuration pane is <strong>Assign Networks</strong> and does not include AZ configuration.</p>
+<p class="note"><strong>Note:</strong> For Azure environments, this configuration pane is <strong>Assign Networks</strong> and does not include AZ
+  configuration.</p>
 
-In the **Assign AZ and Networks** pane, you assign jobs to your Availability Zones (AZs) and networks.
+1. Select **Assign AZ and Networks**. These are the Availability Zones (AZs) that you create when configuring BOSH Director.
 
-To configure the **Assign AZ and Networks** pane:
+1. Under **Place singleton jobs**, select an AZ. <%= vars.ops_manager %> runs any job with a single instance in this AZ.
 
-1. Select **Assign AZ and Networks**.
+1. Under **Balance other jobs**, select all AZs. <%= vars.ops_manager %> balances instances of jobs with more than one instance across the AZs that you
+specify.
+    <p class="note"><strong>Note:</strong> For production deployments, <%= vars.company_name %> recommends at least three AZs for a highly available
+      installation of <%= vars.app_runtime_abbr %>.</p>
 
-1. Select the first AZ under **Place singleton jobs**. <%= vars.ops_manager %> runs any job with a single instance in this AZ.
-
-1. Select all AZs under **Balance other jobs**. <%= vars.ops_manager %> balances instances of jobs with more than one instance across the AZs that you specify.
-    <p class="note"><strong>Note:</strong> For production deployments, <%= vars.company_name %> recommends at least three AZs for a highly available installation.</p>
-
-1. From the **Network** dropdown, choose the runtime network that you created when configuring the BOSH Director tile.
+1. From the **Network** dropdown, choose the network where you want to run <%= vars.app_runtime_abbr %>.
 
 1. Click **Save**.
 
@@ -98,7 +97,7 @@ For additional guidance based on your installation method, see the following tab
 
 <%= partial "/pcf/core/application_container_config" %>
 
-## <a id='appdevctrl-config'></a> Configure App Developer Controls
+## <a id='appdevctrl-config'></a> Configure app developer controls
 
 In the **App Developer Controls** pane, you configure restrictions and default settings for your apps.
 
@@ -106,41 +105,55 @@ To configure the **App Developer Controls** pane:
 
 1. Select **App Developer Controls**.
 
-1. Enter the **Maximum file upload size** in MB. This is the maximum size of an app upload, including the buildpack.
+1. For **Maximum staged droplet size**, enter in MB the maximum allowed size of a staged app droplet.
 
-1. Enter the **Maximum package size** in MB. This is the maximum total size of an app's files.
+1. For **Maximum package size**, enter in B the maximum allowed total size of all files in an app.
 
-1. Enter the **Default app memory** in MB. This is the default amount of memory allocated to a newly-pushed app if no value is specified when pushing the app.
+1. For **Default app memory**, enter in MB the default amount of memory you want to allocate to a newly-pushed app if no value is specified with `cf push`.
 
-1. Enter the **Default app memory quota per org** in MB. This is the default memory limit for all apps in an org. The specified limit only applies to the first installation of <%= vars.app_runtime_abbr %>. After the initial installation, operators can use the cf CLI to change the default value.
+1. For **Default app memory quota per org**, enter in MB the default memory limit you want to define for all apps in an org. The limit you configure in this
+field only applies to the first installation of <%= vars.app_runtime_abbr %>. After the initial installation, operators can change the default value through
+the cf CLI.
 
-1. Enter the **Maximum disk quota per app** in MB. This is the maximum amount of disk allowed per app.
-	<p class="note"><strong>Note:</strong> If you allow developers to push large apps, <%= vars.app_runtime_abbr %> may have trouble placing them on Diego Cells. Additionally, in the event of a system upgrade or an outage that causes a rolling deploy, larger apps may not successfully re-deploy if there is insufficient disk capacity. Monitor your deployment to ensure your Diego Cells have sufficient disk to run your apps.</p>
+1. For **Maximum disk quota per app** in MB, enter in MB the maximum amount of disk allowed per app.
+	<p class="note"><strong>Note:</strong> If you allow developers to push large apps, <%= vars.app_runtime_abbr %> may have trouble placing them on Diego
+		Cells. Additionally, in the event of a system upgrade or an outage that causes a rolling deploy, larger apps may not successfully re-deploy if there is
+		insufficient disk capacity. Monitor your deployment to ensure that your Diego Cells have sufficient disk to run your apps.</p>
 
-1. Enter the **Default disk quota per app** in MB. This is the amount of disk allocated by default to a newly-pushed app if no value is specified when pushing the app.
+1. For **Default disk quota per app**, enter in MB the amount of disk you want to allocate by default to a newly-pushed app if no value is specified with `cf
+push`.
 
-1. Enter the **Default log rate limit per app** in bytes per second. This is the number of logs that a newly-pushed app is allowed to send to Loggregator if no value is specified when pushing the app. To deactivate this feature and allow app instances to send an unlimited number of logs to Loggregator, enter `-1`. App log rate limiting is deactivated by default. <%= vars.company_name %> recommends activating this feature to prevent app instances from overloading the Loggregator Agent with logs, so the Loggregator Agent does not drop logs for other app instances on the same Diego Cell.
+1. For **Default log rate limit per app**, enter in bytes per second number of log lines that a newly-pushed app is allowed to generate when no number is
+specified at push.
 
-1. Enter the **Default service instance quota per org**. The specified limit only applies to the first installation of <%= vars.app_runtime_abbr %>. After the initial installation, operators can use the cf CLI to change the default value.
+1. For **Default service instance quota per org**, enter the default service instance limit you want to define for all apps in an org. The limit you configure
+in this field only applies to the first installation of <%= vars.app_runtime_abbr %>. After the initial installation, operators can change the default value
+through the cf CLI.
 
-1. Enter the **Staging timeout** in seconds. When you stage an app droplet with the Cloud Controller, the server times out after the number of seconds you specify in this field.
+1. For **Staging timeout**, enter in seconds the amount of time  When you stage an app droplet with the Cloud Controller, the server times out after the
+number of seconds you specify in this field.
 
-1. For **Internal domains**, enter one or more domains that apps use for internal DNS service discovery. If you specify a domain using `cf push -d`, other <%= vars.app_runtime_abbr %> apps can reach the pushed app at `APP-NAME.INTERNAL-DOMAIN`. This value defaults to `apps.internal`.
+1. For **Internal domains**, enter one or more domains that apps use for internal DNS service discovery. If you specify a domain using `cf push -d`, other
+<%= vars.app_runtime_abbr %> apps can reach the pushed app at `APP-NAME.INTERNAL-DOMAIN`. This value defaults to `apps.internal`.
 
-1. Enable the **Allow space developers to manage network policies** check box to permit developers to manage their own network policies for their apps.
+1. (Optional) To allow developers to manage their own network policies for their apps, select the **Allow space developers to manage network policies**
+check box.
 
 1. Click **Save**.
 
+
 ## <a id='app-security'></a> Configure App Security Groups
 
-Setting appropriate ASGs is critical for a secure deployment.
+Setting appropriate ASGs is critical for a secure deployment. To acknowledge that once the <%= vars.app_runtime_abbr %> deployment completes, it is your
+responsibility to set the appropriate ASGs:
 
 1. Select **App Security Groups**.
-2. Acknowledge **You are responsible for setting the appropriate ASGs after TAS for VMs finishes deploying**.
-3. Click **Save**.
 
-For more information about ASGs, see [App Security Groups](../concepts/asg.html). For more information about setting
-ASGs, see [Restricting App Access to Internal <%= vars.app_runtime_abbr %> Components](app-sec-groups.html).
+1. For **You are responsible for setting the appropriate ASGs after TAS for VMs finishes deploying.**, enter `X`.
+
+1. Click **Save**.
+
+For more information about ASGs, see [App Security Groups](../concepts/asg.html). For more information about setting ASGs, see [Restricting App Access to Internal <%= vars.app_runtime_abbr %> Components](../operating/app-sec-groups.html).
 
 ## <a id='auth-config'></a> Configure authentication and enterprise SSO
 
@@ -232,7 +245,7 @@ In the **Databases** pane, you can configure <%= vars.app_runtime_abbr %> to use
 
 <p class="note"><strong>Note:</strong> If you are performing an upgrade, do not modify your existing internal database configuration, or you may lose data. You must migrate your existing data first before changing the configuration. For additional upgrade information, see <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-upgrading-pcf.html">Upgrading <%= vars.platform_name %></a>.</p>
 
-### <a id='internal-db'></a> Internal database configuration
+### <a id='internal-db'></a> Configure an internal database
 
 <p class="note"><strong>Note:</strong> For GCP installations, <%= vars.company_name %> recommends selecting <strong>External</strong> and using Google Cloud SQL. Only use internal MySQL for non-production or test installations on GCP.</p>
 
@@ -242,7 +255,7 @@ In the **Databases** pane, you can configure <%= vars.app_runtime_abbr %> to use
 
 To configure high availability for your internal MySQL databases, see [Configure Internal MySQL](#internal-mysql).
 
-### <a id='create-dbs'></a> External system database configuration
+### <a id='create-dbs'></a> Configure an external database
 
 <%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
 
@@ -302,7 +315,7 @@ To configure high availability for your internal MySQL databases, see [Configure
 
 <%= partial "/pcf/core/advanced-features" %>
 
-## <a id='metric-registrar'></a> (Optional) Configure Metric Registrar
+## <a id='metric-registrar'></a> Configure Metric Registrar (Optional)
 
 <%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
 
@@ -316,7 +329,8 @@ To configure high availability for your internal MySQL databases, see [Configure
 
 ## <a id='resources'></a> Configure resources
 
-In the **Resource Config** pane, you must associate load balancers with the VMs in your deployment to enable traffic. For more information, see [Configure Load Balancing for <%= vars.app_runtime_abbr %>](configure-lb.html).
+In the **Resource Config** pane, you must associate load balancers with the VMs in your deployment to allow the VMs to receive traffic. For more information,
+see [Configure Load Balancing for <%= vars.app_runtime_abbr %>](configure-lb.html).
 
 ### <a name='scale-down'></a> Scale down and deactivate resources (Optional)
 
@@ -330,12 +344,17 @@ In the **Resource Config** pane, you must associate load balancers with the VMs 
 
 <%= partial "/pcf/core/download-stemcell" %>
 
-## <a id='complete'></a> Complete the <%= vars.app_runtime_abbr %> Installation
+## <a id='complete'></a> Complete the <%= vars.app_runtime_abbr %> installation
 
 To complete your installation of <%= vars.app_runtime_abbr %>:
 
 1. Click the **Installation Dashboard** link to return to the <%= vars.ops_manager %> Installation Dashboard.
 
-1. Click **Review Pending Changes**, then **Apply Changes**. The install process generally takes a minimum of 90 minutes to complete. The Changes Applied window is shown when the installation process completes successfully. Click Close or Return to Installation Dashboard (default selection)
+1. Click **Review Pending Changes**.
+
+1. Click **Apply Changes**. The install process generally takes a minimum of 90 minutes to complete. When the installation process completes successfully, the
+**Changed Applied** window appears.
+
+1. Click **Close** or **Return to Installation Dashboard**.
 
     ![alt-text="The Changes Applied window is shown when the process is completed."](images/cloudform/ops-manager-complete.png)
