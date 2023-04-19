@@ -103,7 +103,7 @@ vSphere monitoring dashboard.
 
 ## <a id="check-ops-manager"></a> Phase 2: Ensure <%= vars.platform_name %> is Running
 
-To ensure that <%= vars.platform_name %> is running, do the following:
+To make sure that <%= vars.platform_name %> is running, do the following:
 
 1. Open vCenter and navigate to the resource pool that hosts your <%= vars.platform_name %>
 deployment.
@@ -149,18 +149,20 @@ To resolve this issue, do the following:
     1. SSH into the BOSH Director VM using the instructions in [SSH into the BOSH Director VM](https://docs.pivotal.io/platform/<%= vars.current_major_version %>/customizing/trouble-advanced.html#bosh-director-ssh).
 
     1. Run the following command to see that all processes are running:
-      ```
+
+      ```console
       monit summary
       ```
 
     1. If the `uaa` process is not running, run the following command:
-      ```
+
+      ```console
       monit restart UAA
       ```
 
 ## <a id="resurrector"></a> Phase 4: Ensure BOSH Resurrector Finished Recovering
 
-If enabled, the BOSH Resurrector re-creates any VMs in a problematic state after being recovered by
+If enabled, the BOSH Resurrector recreates any VMs in a problematic state after being recovered by
 vSphere HA.
 
 To ensure BOSH Resurrector finished recovering, do the following:
@@ -173,10 +175,11 @@ To ensure BOSH Resurrector finished recovering, do the following:
 1. Run the following command to see if there is any currently running or queued Resurrector
 activity:
 
-    ```
+    ```console
     bosh tasks --all -d ''
     ```
-    Review the task description for `scan` and `fix`. If no task are running, the BOSH Director has
+
+    Review the task description for `scan` and `fix`. If no tasks are running, the BOSH Director has
     probably finished recovering. Run `bosh tasks --recent --all -d ''` to view finished tasks.
 
 ## <a id="check-pas"></a> Phase 5: Ensure the VMs for <%= vars.app_runtime_abbr %> are Running
@@ -186,7 +189,7 @@ activity:
 services, use the <%= vars.platform_name %> Healthwatch dashboard and the documentation for each
 service.</p>
 
-To ensure that the VMs for <%= vars.app_runtime_abbr %> are running, do the following:
+To make sure that the VMs for <%= vars.app_runtime_abbr %> are running, do the following:
 
 1. Run the following command to confirm that VMs are running:
 
@@ -239,5 +242,5 @@ the app has or visit the URL of the app to verify that it is working.
 ## <a id="check-hw"></a> Phase 8: Check the Healthwatch Dashboard
 
 You can use <%= vars.platform_name %> Healthwatch to further assess the state of
-<%= vars.platform_name %>. For more information, see
-[Using <%= vars.platform_name %> Healthwatch](https://docs.pivotal.io/pcf-healthwatch/using.html).
+<%= vars.platform_name %>. For more information, see <a href="https://docs.vmware.com/en/Healthwatch-for-VMware-Tanzu/2.2/healthwatch/index.html">Using <%= vars.platform_name %> Healthwatch].</a>
+

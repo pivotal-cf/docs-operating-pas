@@ -1,0 +1,28 @@
+---
+title: CPU Entitlement
+owner: Diego
+---
+
+This topic describes how CPU entitlements work in <%= vars.app_runtime_first %> and how to configure them.
+
+## <a id='overview'></a> Overview
+
+<%= partial "overview" %>
+
+## <a id='cpu-entitlement-plugin'></a> CPU Entitlement Plugin
+
+<%= partial "plugin" %>
+
+## <a id='spare-cpu-resources'></a> Spare CPU resources and throttling
+
+<%= partial "spare-cpu-and-throttling" %>
+
+CPU burst optimization is turned off by default. Go to the **App Containers** tab and select **Allow CPU burst optimization**.
+
+### <a id='without-cpu-burst-optimization'></a> Without CPU Burst Optimization
+When CPU Burst Optimization is turned off, all apps on the cell share any spare CPU resources.
+
+### <a id='spare-cpu-resources'></a> With CPU burst optimization
+When CPU Burst Optimization is turned on, "good" apps get bursting priority over "bad" apps. Good apps are apps that, on average, stay within their CPU entitlement. Bad apps are apps that, on average, exceed their CPU entitlement.
+
+Imagine a Diego Cell with 5 bad apps and 1 good app. Initially the 5 "bad" apps are split all of the spare CPU resources evenly. If the good app needs to burst, it's given priority for all the extra CPU it needs. If the good app continues bursting for long enough, and on average it exceeds its CPU entitlement, then it becomes a bad app. Then all 6 "bad" apps share the spare CPU resources equally. Likewise, if one of the bad apps stops using so much CPU it becomes a good app again.
