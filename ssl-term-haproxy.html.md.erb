@@ -5,7 +5,6 @@ owner: Ops Manager
 
 This topic describes how to configure SSL/TLS termination at HAProxy in <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) and <%= vars.segment_runtime_full %>.
 
-
 ## <a id='overview'></a> Overview
 
 Both <%= vars.app_runtime_abbr %> and <%= vars.segment_runtime_full %> include an HAProxy instance.
@@ -15,7 +14,6 @@ HAProxy is appropriate to use in a deployment when features are needed that are 
 While HAProxy instances provide load balancing for the Gorouters, HAProxy is not itself highly available. For production environments, use a highly-available load balancer to scale HAProxy horizontally. The load balancer does not need to terminate TLS or even operate at Layer 7 (HTTP), as it can provide Layer 4 load balancing of TCP connections. Use of HAProxy does not remove the need for Gorouters. The Gorouter must always be deployed for HTTP apps, and the TCP router for non-HTTP apps.
 
 You can generate a self-signed certificate for HAProxy if you do not want to obtain a signed certificate from a certificate authority (CA).
-
 
 ## <a id="haproxy"></a> Terminate SSL/TLS at HAProxy
 
