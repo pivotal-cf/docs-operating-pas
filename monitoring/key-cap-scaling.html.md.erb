@@ -428,15 +428,15 @@ There are three key capacity scaling indicators <%= vars.company_name %> recomme
 
 There is a single key capacity scaling indicator <%= vars.company_name %> recommends for Syslog Drain performance.
 
-<p class="note"><strong>Note:</strong> These Syslog Drain scaling indicators are relevant for forwarding to Log Cache and for any configured syslog drains.</p>
+<p class="note"><strong>Note:</strong> These Syslog Drain scaling indicators are only relevant if your deployment contains apps using the syslog drain binding feature.</p>
 
 <table>
   <tr><th id="syslog-agent-ksi" colspan="2" style="text-align: center;"><br>Syslog Agent Loss Rate<br><br></th></tr>
     <tr>
       <th width="25">Description</th>
         <td>
-          Divide the <code>syslog_agent.dropped{direction:egress}</code> metric by the <code>syslog_agent.ingress{scope:agent}</code> metric to get the rate of messages dropped as a percentage of total message traffic through Syslog Agents. The loss rate of Syslog Agents indicates that the syslog drain destination is accepting logs too slowly.<br>
-		      The Syslog Agent loss rate does not affect the Firehose loss rate. Message loss can occur in Syslog Agents without message loss occurring in the Firehose.<br>
+          Divide the <code>loggregator.syslog_agent.dropped{direction:egress}</code> metric by the <code>loggregator.syslog_agent.ingress{scope:all_drains}</code> metric to get the rate of messages dropped as a percentage of total message traffic through Syslog Agents. The message traffic through Syslog Agents includes logs for bound apps. The loss rate of Syslog Agents indicates that the Syslog Drain consumer is ingesting logs from a Syslog Drain-bound app too slowly.<br>
+          The Syslog Agent loss rate does not affect the Firehose loss rate. Syslog Agents can still drop messages even though the Firehose does not drop messages.<br>
         </td>
     </tr>
     <tr>
@@ -456,7 +456,7 @@ There is a single key capacity scaling indicator <%= vars.company_name %> recomm
       <th>Label</th>
         <td>
           <code>direction:egress</code><br>
-          <code>scope:agent</code>
+          <code>scope:all_drains</code>
         </td>
     </tr>
     <tr>
@@ -470,11 +470,7 @@ There is a single key capacity scaling indicator <%= vars.company_name %> recomm
     </tr>
     <tr>
       <th>How to scale</th>
-      <td>
-        Review the logs of the syslog destinations for intake issues and other performance issues. Scale the syslog destinations if necessary.
-        <br><br>
-        A high Syslog Agent loss rate can indicate that Log Cache is unable to keep up with the ingestion rate for logs. If Log Cache is using Syslog Ingress and is CPU bound, this is likely the source of the syslog drops. To scale Log Cache to have more CPU resources, add more instances or choose instance types with more CPU capacity.
-      </td>
+        <td>Review the logs of the syslog server for intake issues and other performance issues. Scale the syslog server if necessary.</td>
     </tr>
     <tr>
       <th>Additional details</th>
@@ -495,7 +491,7 @@ There is a single key capacity scaling indicator <%= vars.company_name %> recomm
     <tr>
       <th width="25">Description</th>
         <td> The Log Cache Caching Duration indicator shows the age in milliseconds of the oldest data point stored in Log Cache.<br>
-        Log Cache stores all messages that are passed through the Firehose in an ephemeral in-memory store. The size of this store and the cache duration are dependent on the amount of memory available on the Log Cache VM.
+        Log Cache stores all messages that are passed through the Firehose in an ephemeral in-memory store. The size of this store and the cache duration are dependent on the amount of memory available on the VM where Log Cache runs. Typically, Log Cache runs on the Doppler VM.
         </td>
     </tr>
     <tr>
@@ -512,11 +508,11 @@ There is a single key capacity scaling indicator <%= vars.company_name %> recomm
     </tr>
     <tr>
       <th>Recommended thresholds</th>
-        <td><strong>Scale indicator:</strong> Scale the Log Cache VMs when the <code>log_cache_cache_period</code> metric drops below 900000 milliseconds.</td>
+        <td><strong>Scale indicator:</strong> Scale the VM on which Log Cache runs when the <code>log_cache_cache_period</code> metric drops below 900000 milliseconds.</td>
     </tr>
     <tr>
       <th>How to scale</th>
-        <td>Increase the number of Log Cache VMs in the <strong>Resource Config</strong> pane of the TAS for VMs tile, or choose a VM type that provides more memory.</td>
+        <td>Scale up the number of Doppler VMs or choose a VM type for Doppler that provides more memory.</td>
     </tr>
     <tr>
       <th>Additional details</th>
@@ -640,7 +636,7 @@ There is one key capacity scaling indicator for external S3 external storage.
 <p class="note"><strong>Note:</strong> This metric is only relevant if your deployment does not use an external S3 repository for
   external storage with no capacity constraints.</p>
 
-<p class= "note"><strong>Note:</strong> The following metric appears in the Firehose in two different formats. The below table lists both formats. For more information, see <a href="https://docs.pivotal.io/platform/2-8/pcf-release-notes/runtime-rn.html#duplicate-metrics">Duplicate Metrics Appear in the Firehose</a> in <em><%= vars.app_runtime_full %> v2.8 Release Notes</em>.</p>
+<p class= "note"><strong>Note:</strong> The following metric appears in the Firehose in two different formats. The below table lists both formats. For more information, see <a href="https://docs.pivotal.io/application-service/2-8/release-notes/runtime-rn.html#duplicate-metrics">Duplicate Metrics Appear in the Firehose</a> in <em><%= vars.app_runtime_full %> v2.8 Release Notes</em>.</p>
 
 <table>
   <tr><th colspan="2" style="text-align: center;"><br>External S3 External Storage<br><br></th></tr>
