@@ -146,7 +146,7 @@ does not show **Normal**, it might be due the following known issue: [Monit inac
 health of UAA](https://docs.pivotal.io/pivotalcf/2-5/pcf-release-notes/opsmanager-rn.html#monit).
 To resolve this issue, do the following:
 
-    1. SSH into the BOSH Director VM using the instructions in [SSH into the BOSH Director VM](https://docs.pivotal.io/platform/<%= vars.current_major_version %>/customizing/trouble-advanced.html#bosh-director-ssh).
+    1. SSH into the BOSH Director VM using the instructions in [SSH into the BOSH Director VM](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-ssh-login.html).
 
     1. Run the following command to see that all processes are running:
       ```
@@ -166,9 +166,9 @@ vSphere HA.
 To ensure BOSH Resurrector finished recovering, do the following:
 
 1. Log in to the <%= vars.platform_name %> VM with SSH using the instructions in
-[Log in to the <%= vars.platform_name %> VM with SSH](https://docs.pivotal.io/platform/<%= vars.current_major_version %>/customizing/trouble-advanced.html#ssh).
+[Log in to the <%= vars.platform_name %> VM with SSH](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-ssh-login.html).
 
-1. Authenticate with the BOSH Director VM using the instructions in [Authenticate with the BOSH Director VM](https://docs.pivotal.io/platform/<%= vars.current_major_version %>/customizing/trouble-advanced.html#log-in).
+1. Authenticate with the BOSH Director VM using the instructions in [Authenticate with the BOSH Director VM](https://docs.pivotal.io/ops-manager/2-7/install/trouble-advanced.html#log-in).
 
 1. Run the following command to see if there is any currently running or queued Resurrector
 activity:
@@ -240,4 +240,4 @@ the app has or visit the URL of the app to verify that it is working.
 
 You can use <%= vars.platform_name %> Healthwatch to further assess the state of
 <%= vars.platform_name %>. For more information, see
-[Using <%= vars.platform_name %> Healthwatch](https://docs.pivotal.io/pcf-healthwatch/using.html).
+[Using <%= vars.platform_name %> Healthwatch](https://docs.pivotal.io/healthwatch/1-8/installing.html).
