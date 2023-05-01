@@ -100,14 +100,15 @@ The following image shows the VMs performs the same functions in both versions o
 
 The following topics list the minimum resources needed to run Small Footprint <%= vars.app_runtime_abbr %> on the public IaaSes that <%= vars.platform_name %> supports:
 
-* [Installing <%= vars.platform_name %> on AWS](https://docs.pivotal.io/platform/<%= vars.current_major_version %>/customizing/aws.html#aws)
-* [Installing <%= vars.platform_name %> on Azure](https://docs.pivotal.io/platform/<%= vars.current_major_version %>/customizing/azure.html#azure)
-* [Installing <%= vars.platform_name %> on GCP](https://docs.pivotal.io/platform/<%= vars.current_major_version %>/customizing/gcp.html#gcp)
-* [Installing <%= vars.platform_name %> on vSphere](https://docs.pivotal.io/platform/<%= vars.current_major_version %>/customizing/vsphere.html#vsphere-reqs)
+* [Installing <%= vars.platform_name %> on AWS](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/aws-index.html)
+* [Installing <%= vars.platform_name %> on Azure](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/azure-index.html)
+* [Installing <%= vars.platform_name %> on GCP](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/azure-index.html)
+* [Installing <%= vars.platform_name %> on vSphere](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/vsphere-index.html)
+
 
 ## <a id='install'></a> Installing Small Footprint <%= vars.app_runtime_abbr %>
 
-To install Small Footprint <%= vars.app_runtime_abbr %>, see <a href="https://docs.vmware.com/en/VMware-Tanzu-Application-Service/3.0/tas-for-vms/configure-pas.html">Architecture and Installation Overview</a> and the installation and configuration topics for your IaaS.
+To install Small Footprint <%= vars.app_runtime_abbr %>, see [Architecture and Installation Overview](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/refarch-index.html) and the installation and configuration topics for your IaaS.
 
 Follow the same installation and configuration steps as for <%= vars.app_runtime_abbr %>, with these differences:
 
@@ -130,8 +131,8 @@ To troubleshoot a job that runs on the Control or Database VMs:
 
 1. Follow the procedures in _Advanced Troubleshooting with the BOSH CLI_ to  the log in to the BOSH Director for your deployment:
 	1. [Gather Credential and IP Address Information](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html#gather)
-	2. [SSH into <%= vars.ops_manager %>](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html#ssh)
-	3. [Log in to the BOSH Director](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html#log-in)
+	2. [Log into <%= vars.ops_manager %> with SSH](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html#ssh)
+	3. [Authenticate with the BOSH Director](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html#log-in)
 
 2. Use BOSH to list the VMs in your Small Footprint <%= vars.app_runtime_abbr %> deployment. Run:
 
