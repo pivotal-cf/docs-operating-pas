@@ -100,15 +100,15 @@ The following image shows the VMs performs the same functions in both versions o
 
 The following topics list the minimum resources needed to run Small Footprint <%= vars.app_runtime_abbr %> on the public IaaSes that <%= vars.platform_name %> supports:
 
-* [Installing <%= vars.platform_name %> on AWS](https://docs.pivotal.io/platform/<%= vars.current_major_version %>/customizing/aws.html#aws)
-* [Installing <%= vars.platform_name %> on Azure](https://docs.pivotal.io/platform/<%= vars.current_major_version %>/customizing/azure.html#azure)
-* [Installing <%= vars.platform_name %> on GCP](https://docs.pivotal.io/platform/<%= vars.current_major_version %>/customizing/gcp.html#gcp)
-* [Installing <%= vars.platform_name %> on vSphere](https://docs.pivotal.io/platform/<%= vars.current_major_version %>/customizing/vsphere.html#vsphere-reqs)
+* [Installing <%= vars.platform_name %> on AWS](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/aws-index.html)
+* [Installing <%= vars.platform_name %> on Azure](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/azure-index.html)
+* [Installing <%= vars.platform_name %> on GCP](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/azure-index.html)
+* [Installing <%= vars.platform_name %> on vSphere](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/vsphere-index.html)
 
 
 ## <a id='install'></a> Installing Small Footprint <%= vars.app_runtime_abbr %>
 
-To install Small Footprint <%= vars.app_runtime_abbr %>, see [Architecture and Installation Overview](https://docs.pivotal.io/platform/<%= vars.current_major_version %>/installing/index.html) and the installation and configuration topics for your IaaS.
+To install Small Footprint <%= vars.app_runtime_abbr %>, see [Architecture and Installation Overview](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/refarch-index.html) and the installation and configuration topics for your IaaS.
 
 Follow the same installation and configuration steps as for <%= vars.app_runtime_abbr %>, with these differences:
 
@@ -130,11 +130,11 @@ Follow the same installation and configuration steps as for <%= vars.app_runtime
 To troubleshoot a job that runs on the Control or Database VMs:
 
 1. Follow the procedures in _Advanced Troubleshooting with the BOSH CLI_ to  the log in to the BOSH Director for your deployment:
-	1. [Gather Credential and IP Address Information](https://docs.pivotal.io/platform/<%= vars.current_major_version %>/customizing/trouble-advanced.html#gather)
-	1. [SSH into <%= vars.ops_manager %>](https://docs.pivotal.io/platform/<%= vars.current_major_version %>/customizing/trouble-advanced.html#ssh)
-	1. [Log in to the BOSH Director](https://docs.pivotal.io/platform/<%= vars.current_major_version %>/customizing/trouble-advanced.html#log-in)
+	1. [Gather Credential and IP Address Information](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html#gather)
+	2. [Log into <%= vars.ops_manager %> with SSH](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html#ssh)
+	3. [Authenticate with the BOSH Director](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html#log-in)
 
-1. Use BOSH to list the VMs in your Small Footprint <%= vars.app_runtime_abbr %> deployment. Run:
+2. Use BOSH to list the VMs in your Small Footprint <%= vars.app_runtime_abbr %> deployment. Run:
 
 		bosh -e BOSH-ENV -d TAS-DEPLOYMENT vms
 
@@ -143,7 +143,7 @@ To troubleshoot a job that runs on the Control or Database VMs:
 	* `TAS-DEPLOYMENT` is the name of your Small Footprint <%= vars.app_runtime_abbr %> deployment.
 	<p class="note"><strong>Note:</strong> If you do not know the name of your deployment, you can run <code>bosh -e BOSH-ENV deployments</code> to list the deployments for your BOSH Director.</p>
 
-1. Use BOSH to SSH into one of the Small Footprint <%= vars.app_runtime_abbr %> VMs. Run:
+3. Use BOSH to SSH into one of the Small Footprint <%= vars.app_runtime_abbr %> VMs. Run:
 
 		bosh -e BOSH-ENV -d TAS-DEPLOYMENT ssh VM-NAME/VM-GUID
 
@@ -157,11 +157,11 @@ To troubleshoot a job that runs on the Control or Database VMs:
 
 		bosh -e example-env -d example-deployment ssh control/12b1b027-7ffd-43ca-9dc9-7f4ff204d86a
 
-1. To act as a super user, run:
+4. To act as a super user, run:
 
 		sudo su
 
-1. To list the processes running on the VM, run:
+5. To list the processes running on the VM, run:
 
 		monit summary
 
@@ -200,15 +200,15 @@ To troubleshoot a job that runs on the Control or Database VMs:
 	System 'system\_localhost'           running
 	</pre>
 
-1. To access logs, navigate to `/vars/vcap/sys/log` by running:
+6. To access logs, navigate to `/vars/vcap/sys/log` by running:
 
 		cd /var/vcap/sys/log
 
-1. To list the log directories for each process, run:
+7. To list the log directories for each process, run:
 
 		ls
 
-1. Navigate to the directory of the process that you want to view logs for. For example, for the Cloud Controller process, run:
+8. Navigate to the directory of the process that you want to view logs for. For example, for the Cloud Controller process, run:
 
 		cd cloud_controller_ng/
 
@@ -224,4 +224,4 @@ To troubleshoot a job that runs on the Control or Database VMs:
 
 ## <a id='rn'></a> Release Notes
 
-The Small Footprint <%= vars.app_runtime_abbr %> tile releases alongside the <%= vars.app_runtime_abbr %> tile. For more information, see [<%= vars.app_runtime_full %> <%= vars.v_major_version %> Release Notes](https://docs.pivotal.io/platform/<%= vars.current_major_version %>/release-notes/runtime-rn.html).
+The Small Footprint <%= vars.app_runtime_abbr %> tile releases alongside the <%= vars.app_runtime_abbr %> tile. For more information, see [<%= vars.app_runtime_full %> <%= vars.v_major_version %> Release Notes](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/<%= vars.current_major_version %>/tas-for-vms/runtime-rn.html).
