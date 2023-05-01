@@ -5,7 +5,6 @@ owner: Security
 
 This topic describes how to secure the virtual machines (VMs) component of your <%= vars.app_runtime_first %> deployment from being accessed by apps.
 
-
 ## <a id='overview'></a> Overview
 
 See the following list to interpert the concepts for this topic:
@@ -51,11 +50,9 @@ See the following list to interpert the concepts for this topic:
     If you complete the procedure after apps have been pushed to the platform,
     you must restart all the apps in your deployment.
 
-
 ## <a id='prerequisites'></a> Prerequisites
 
 The procedure section requires that you have the latest release of [ASG Creator](https://github.com/cloudfoundry-incubator/asg-creator/releases/latest) from the Cloud Foundry incubator repository on GitHub. For more information, see the [About the ASG Creator Tool](../concepts/asg.html#asg-baseline) section of the _App Security Groups_ topic.
-
 
 ## <a id='procedure'></a> Procedure
 
@@ -70,6 +67,7 @@ The procedure for securing your deployment with ASGs varies depending on your ne
 1. For each tile, click **Assign AZs and Networks** and record the selected **Network** that the tile is installed on.
 
 1. Based on the information you gathered, determine which of the following network layouts you have:
+
   <table>
     <tr>
       <th>Layout Name</th>
@@ -140,14 +138,15 @@ To create ASGs that block apps from sending traffic to the networks that host <%
 <%= vars.app_runtime_abbr %>, and, optionally, any installed services:
 
 1. Create a `config.yml` containing the appropriate content for your network layout and replace the indicated values with the CIDRs you gathered:
-  * **Two Network Layout**:
+
+* **Two Network Layout**:
 
         ```
         exclude:
         - YOUR-OPS-MANAGER-CIDR
         - YOUR-TAS-AND-SERVICES-CIDR
         ```
-   * **Three Network Layout**:
+* **Three Network Layout**:
       <p class="note"><strong>Note:</strong> If you want to secure only the <%= vars.ops_manager %>
          and <%= vars.app_runtime_abbr %> components, you can remove the services CIDR
          from the <code>exclude</code> section.</p>
@@ -158,6 +157,7 @@ To create ASGs that block apps from sending traffic to the networks that host <%
           - YOUR-TAS-CIDR
           - YOUR-SERVICES-CIDR
          ```
+
     * **Three or More Network Layout**:
       <p class="note"><strong>Note:</strong> If you want to secure only the <%= vars.ops_manager %>
          and <%= vars.app_runtime_abbr %> components, you can remove the services CIDRs
@@ -221,7 +221,7 @@ To create ASGs that block apps from sending traffic to the networks that host <%
 
 <p class="note"><strong>Note:</strong> This part is only necessary if you blocked apps from a network that hosts services in the previous part. If you did not block apps from a network that hosts services, proceed to <a href="#unbind-default">Step 4: Remove the Default ASG</a>.</p>
 
-<p class="note warning"><strong>Caution:</strong> In the two network layout, <%= vars.app_runtime_abbr %> and services share the same network. Each time you create an ASG that allows apps to access a new port and protocol within the network, you further expose the <%= vars.app_runtime_abbr %> component VMs. This is a limitation of a two network layout. For guidance on network topology, see <a href="https://docs.pivotal.io/platform/<%= vars.current_major_version %>/plan/index.html">Reference Architectures</a>.</p>
+<p class="note warning"><strong>Caution:</strong> In the two network layout, <%= vars.app_runtime_abbr %> and services share the same network. This means that each time you create an ASG that allows apps to access a new port and protocol within the network, you further expose the <%= vars.app_runtime_abbr %> component VMs. This is a limitation of a two network layout. For guidance on network topology, see <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/refarch-refarch-index.html">Reference Architecture</a>. </p>
 
 Now that you have created ASGs to secure the <%= vars.ops_manager %>, <%= vars.app_runtime_abbr %>, and service components, work with developers to create additional ASGs that give apps access to the services they need.
 
@@ -253,7 +253,8 @@ To restart all of the apps in your deployment:
 
 <p class="note"><strong>Note:</strong> You do not have to restart the apps in the <code>system</code> org.</p>
 
-1. Work with developers to restart a few of their apps individually and test that they still work correctly with the new ASGs in place. If an app does not work as expected, you likely must create another ASG that you can have the app send traffic to a required service.
-  <p class="note"><strong>Note:</strong> To quickly roll back to the original overly permissive state, you can rebind the <code>default_security_group</code> ASG to the <code>default-staging</code> and <code>default-running</code> sets. You must then restart your apps to re-apply the original ASGs.</p>
+1. Work with developers to restart a few of their apps individually and test that they still work correctly with the new ASGs in place. If an app does not work as expected, you likely must create another ASG that allows the app to send traffic to a service it requires.
+
+  <p class="note"><strong>Note:</strong> To quickly roll back to the original overly-permissive state, you can re-bind the <code>default_security_group</code> ASG to the <code>default-staging</code> and <code>default-running</code> sets. You must then restart your apps to re-apply the original ASGs.</p>
 
 1. Restart the rest of the apps running on your deployment. You can use the [app-restarter cf CLI plug-in](https://github.com/cloudfoundry-incubator/app-restarter) to restart all apps in a particular space, org, or deployment.
