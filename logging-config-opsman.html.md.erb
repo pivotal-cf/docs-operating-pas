@@ -128,8 +128,7 @@ Apps constantly generate app logs and <%= vars.app_runtime_abbr %> platform comp
 
 * The Traffic Controller serves the aggregated data stream through the Firehose WebSocket endpoint.
 
-Use the following instructions to scale the Loggregator system.
-">Monitoring TAS for VMs</a>.
+Follow the instructions below to scale the Loggregator system. For guidance on monitoring and capacity planning, see [Monitoring <%= vars.app_runtime_abbr %>](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/2.12/tas-for-vms/monitoring-index.html).
 
 ### <a id="instances"></a> Add Component VM Instances
 
@@ -143,8 +142,8 @@ To add component VM instances for Loggregator components:
 
 1. Increase the number in the **Instances** column of the component you want to scale. You can add instances for the following Loggregator components:
 	* **Loggregator Traffic Controller**
-		<p class="note"><strong>Note:</strong> The Reverse Log Proxy (RLP) BOSH job is colocated on the Traffic Controller VM. If you want to scale Loggregator to handle more logs for syslog drains, you can add instances of the Traffic Controller. For more information, see <a href="../loggregator/architecture.html">Loggregator Architecture</a>.</p>
-		<p class="note"><strong>Note:</strong> The BOSH System Metrics Forwarder</a> job is colocated on the Traffic Controller VM. If you want to scale Loggregator to handle more BOSH component metrics, you can add instances of the Traffic Controller. For more information, see <a href="../loggregator/architecture.html#bosh-metrics">Related BOSH Components</a> in <em>Loggregator Architecture</em>.</p>
+		<p class="note"><strong>Note:</strong> The Reverse Log Proxy (RLP) BOSH job is co-located on the Traffic Controller VM. If you want to scale Loggregator to handle more logs for syslog drains, you can add instances of the Traffic Controller. For more information, see <a href="../loggregator/architecture.html">Loggregator Architecture</a>.</p>
+		<p class="note"><strong>Note:</strong> The BOSH System Metrics Forwarder</a> job is co-located on the Traffic Controller VM. If you want to scale Loggregator to handle more BOSH component metrics, you can add instances of the Traffic Controller. For more information, see <a href="../loggregator/architecture.html#bosh-metrics">Related BOSH Components</a> in <em>Loggregator Architecture</em>.</p>
 	* **Doppler Server**
 
 1. Click **Save**.
