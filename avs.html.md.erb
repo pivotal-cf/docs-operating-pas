@@ -55,7 +55,7 @@ To set up NSX-T to integrate with <%= vars.app_runtime_abbr %>, complete these p
 
 The AVS-deployed NSX-T Manager includes a self-signed TLS certificate with an invalid Subject Alternative Name (SAN). This causes issues when connecting from Ops Manager and the BOSH Director, so you must create a new certificate using the NSX-T Manager's fully qualified domain name (FQDN) or IP address as the new SAN.
 
-For instructions, see [Generate and Register the NSX-T Management TLS Certificate and Private Key](https://docs.pivotal.io/tkgi/1-12/nsxt-install-tls-certs.html) in the <%= vars.k8s_runtime_full %> (<%= vars.k8s_runtime_abbr %>) documentation.
+For instructions, see [Generate and Register the NSX-T Management TLS Certificate and Private Key](https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/1.12/tkgi/GUID-nsxt-install-tls-certs.html) in the <%= vars.k8s_runtime_full %> (<%= vars.k8s_runtime_abbr %>) documentation.
 
 ### <a id='nsx-t-logical-switches'></a> Configure Logical Switches
 
