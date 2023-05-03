@@ -88,28 +88,28 @@ To configure routers:
 1. In the NSX-T Manager UI, navigate to **Advanced Networking & Security** > **Routing** > **Routers**.
   1. Click **+Add** > **Tier-1 Router**.
   1. Configure the router. Include the Edge Cluster and Edge Cluster Members; they are required to enable the Load Balancer. The Infrastructure network router configuration might look like the following diagram:
-![NSX-T ](./images/nsx-t/nsx-t-t1-router.png)
+![alt-text=""](./images/nsx-t/nsx-t-t1-router.png)
 
 1. Create T1 router downlink ports for <%= vars.app_runtime_abbr %>. For each T1 router you created, add a **New Router Port** as follows, to allow traffic in and out:
   1. In the NSX-T Manager UI, select the T1 router.
   1. In **Configuration** > **Router Ports**, click **+Add** to add a new router port.
   1. For **Logical Switch**, enter the name of the logical switch you defined for the network in **Add New Logical Switch**, above.
   1. For **IP Address**, use the first IP of the appropriate subnet. In this example, 192.168.1.0/24 is set aside for Infrastructure (<%= vars.ops_manager %> and BOSH Director), and 192.168.2.0/24 for the Deployment, so 192.168.1.1 and 192.168.2.1 are used respectively.
-![NSX-T ](./images/nsx-t/nsx-t-router-port.png)
+![alt-text=""](./images/nsx-t/nsx-t-router-port.png)
 
 1. Advertise the routes of the T1 routers to the T0 router, so the T0 router can correctly route incoming requests based on their destination IP address:
   1. Select your T1 Router and navigate to **Routing**, then **Route Advertisement**.
   1. Under **Edit Route Advertisement Configuration**, enable route advertisement by setting **Status** to **Enabled**.
   1. Set **Advertise All Connected Routes** to **Yes**.
   1. Set **Advertise All LB VIP Routes** to **Yes** (necessary if Load Balancing service is configured).
-![NSX-T ](./images/nsx-t/nsx-t-route-advertise.png)
+![alt-text=""](./images/nsx-t/nsx-t-route-advertise.png)
 
 1. Allocate an IP block for <%= vars.app_runtime_abbr %> orgs.
   1. From the NSX-T Manager, navigate to **Advanced Networking & Security**, then **Networking**, and **IPAM**. and click **+Add**.
   1. Enter a name (for example, `<%= vars.app_runtime_abbr %>-container-ip-block`). This IP block name is also used in the **VMware NSX-T** tile in the **NCP** section under **IP Blocks of Container Networks**.
   1. Enter a description, such as `Subnets are allocated from this pool to each newly-created org`.
   1. Enter a CIDR to allocate an address block large enough to accommodate all <%= vars.app_runtime_abbr %> apps. A `/14` CIDR is large enough for ~1,000 Orgs with ~250 apps each. If you are planning such a large foundation, see [VMware NSX-T <%= vars.app_runtime_abbr %> limits](https://configmax.vmware.com/guest?vmwareproduct=VMware%20NSX-T&release=NSX-T%20Data%20Center%202.4.0&categories=31-0) in the VMware documentation.
-![NSX-T ](./images/nsx-t/nsx-t-ip-block.png)
+![alt-text=""](./images/nsx-t/nsx-t-ip-block.png)
 
 ### <a id='nsx-t-load-balancer'></a> Configure Load Balancer
 
@@ -278,11 +278,11 @@ To configure <%= vars.app_runtime_abbr %> for external container networking:
 
 1. If you have not already done so, download the <%= vars.app_runtime_abbr %> tile from [VMware Tanzu Network](https://network.tanzu.vmware.com/products/elastic-runtime) and import it to the **Installation Dashboard**. For instructions, see [Adding and Importing Products](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-add-delete.html#add-import).
 
-    ![alt-text="Installation Dashboard with NSX-T tile]"](./images/nsx-t/nsx-t-install-dash.png)
+    ![alt-text="Installation Dashboard with NSX-T tile."](./images/nsx-t/nsx-t-install-dash.png)
 
 1. Configure <%= vars.app_runtime_abbr %>, following the directions in [Configuring <%= vars.app_runtime_abbr %>](./configure-pas.html). When you configure **Networking**, select **External** under **Container networking interface plugin**.
 
-    ![NSX-T ](./images/nsx-t/nsx-t-pas-cni.png)
+    ![alt-text=""](./images/nsx-t/nsx-t-pas-cni.png)
 
 1. Update the server pool membership for the NSX-T load balancers:
 
@@ -312,15 +312,14 @@ To install and configure the NSX-T Container Plug-In tile:
             <li>From the NSX-T Manager command line, run <code>get certificate api</code> to retrieve the certificate.</li>
         </ol>
 
-        ![Obtain the NSX Manager CA Cert](./images/nsx-t/nsx-t-tile-config-mgr.png)
+        ![alt-text="Obtain the NSX Manager CA Cert."](./images/nsx-t/nsx-t-tile-config-mgr.png)
 
 1. Open and configure the **NCP** (NSX-T Container Plugin) pane as follows:
   - **<%= vars.app_runtime_abbr %> Foundation Name**: If unsure, use `<%= vars.app_runtime_abbr %>`. If multiple foundations co-exist on the same NSX-T Manager, choose a unique string, such as `<%= vars.app_runtime_abbr %>-beta`. NCP creates artifacts, such as T1 routers and prefixes their names with this string for easy identification.
   - **Overlay Transport Zone**: A uniquely identifying string for the **Transport Zone** that you chose when you [created logical switches](#nsx-t-setup) for each network. This can be the name of the transport zone if no other zones in NSX-T share the same name, or else the UUID for the transport zone.
   - **Tier-0 Router**: A uniquely identifying string for the T0 router. This can be the tag string that you gave the router in NSX-T Manager if no other T0 routers in NSX-T share the same name, or else the UUID for the router.
   - **Subnet Prefix of Container Networks**: Subnet mask to set the address range size for apps in a single org. Defaults to `24`. This number must be higher than the mask for all <%= vars.app_runtime_abbr %> orgs in the NSX-T Manager **New IP Block** pane, to define each org's fraction of the total <%= vars.app_runtime_abbr %> address space.
-  - **Enable SNAT for Container Network**: Enable this checkbox.
-![NSX-T tile config: NCP](./images/nsx-t/nsx-t-tile-config-ncp.png)
+  - **Enable SNAT for Container Network**: Enable this check box.
 
     * **<%= vars.app_runtime_abbr %> Foundation Name**: If unsure, use `<%= vars.app_runtime_abbr %>`. If multiple foundations co-exist on the same NSX-T Manager, choose a unique string, such as `<%= vars.app_runtime_abbr %>-beta`. NCP creates artifacts, such as T1 routers and prefixes their names with this string for easy identification.
     * **Overlay Transport Zone**: A uniquely identifying string for the **Transport Zone** that you chose when you [created logical switches](#nsx-t-setup) for each network. This can be the name of the transport zone if no other zones in NSX-T share the same name, or else the UUID for the transport zone.
@@ -333,6 +332,6 @@ To install and configure the NSX-T Container Plug-In tile:
 2. In the **NSX Node Agent** pane, select the **Enable Debug Level of Logging for NSX Node Agent** check box.
     ![alt-text="Enable the Debug Level of Logging for NSX Node Agent."](./images/nsx-t/nsx-t-tile-config-agent.png)
 
-1. Click **Save** and return to the **Installation Dashboard**.
+3. Click **Save** and return to the **Installation Dashboard**.
 
-1. After you have configured both the **<%= vars.app_runtime_abbr %>** tile and the **VMware NSX-T** tile, click **Review Pending Changes**, then **Apply Changes** to deploy <%= vars.app_runtime_abbr %> with NSX-T networking.
+4. After you have configured both the **<%= vars.app_runtime_abbr %>** tile and the **VMware NSX-T** tile, click **Review Pending Changes**, then **Apply Changes** to deploy <%= vars.app_runtime_abbr %> with NSX-T networking.
