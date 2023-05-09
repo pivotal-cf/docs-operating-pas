@@ -62,7 +62,7 @@ After completing these steps, developers can use the cf CLI to create service in
 
 You can use ASGs and LDAP to secure your NFS server against traffic apps running on <%= vars.app_runtime_abbr %>:
 
-* **App Security Groups (ASGs):** Prevent apps from sending traffic directly to your NFS ports. Apps should never need to use NFS ports directly. <%= vars.company_name %> recommends defining an ASG that blocks direct access to your NFS server IP, especially ports 111 and 2049. For more information on setting up ASGs, see [App Security Groups](../concepts/asg.html).
+* **App Security Groups (ASGs):** Prevent apps from sending traffic directly to your NFS ports. Apps must never need to use NFS ports directly. <%= vars.company_name %> recommends defining an ASG that blocks direct access to your NFS server IP, especially ports 111 and 2049. For more information on setting up ASGs, see [App Security Groups](../concepts/asg.html).
 
 * **LDAP:** In addition to ASGs, secures the NFS volume service so that app developers cannot bind to the service using an arbitrary UID. App developers also cannot gain access to sensitive data. With LDAP support activated, app developers must provide credentials for any user they want to bind as.
 
@@ -75,7 +75,7 @@ The Diego Cells running on <%= vars.app_runtime_abbr %> must be able to reach yo
 
 To activate SMB volume services in <%= vars.app_runtime_abbr %>:
 
-1. Navigate to the <%= vars.ops_manager %> Installation Dashboard.
+1. Go to the <%= vars.ops_manager %> Installation Dashboard.
 
 1. Click the <%= vars.app_runtime_abbr %> tile.
 
@@ -100,4 +100,4 @@ To activate SMB volume services in <%= vars.app_runtime_abbr %>:
     ```
   	To limit access to a specific org, use the `-o` flag, followed by the name of the org where you want to enable access. For more information, see [Access Control](../services/access-control.html).
 
-After completing these steps, developers can use the cf CLI to create service instances of the `smb` service and bind them to their apps.
+After you complete these steps, developers can use the cf CLI to create service instances of the `smb` service and bind them to their apps.

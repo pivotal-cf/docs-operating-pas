@@ -54,7 +54,7 @@ In <%= vars.app_runtime_abbr %> deployments with internal MySQL clusters, a sing
 over 80% can be considered overloaded. When this happens, the MySQL VMs must be scaled up to prevent the added load of
 additional Cloud Controllers exacerbating the issue.
 
-Cloud Controller API VMs should primarily be scaled horizontally. Scaling up the number of cores on a single VM is not
+Cloud Controller API VMs can primarily be scaled horizontally. Scaling up the number of cores on a single VM is not
 effective. This is because Ruby's Global Interpreter Lock (GIL) limits the `cloud_controller_ng` process so that it can
 only effectively use a single CPU core on a multi-core machine.
 
@@ -215,7 +215,7 @@ You can find the heuristic failures in the following log files:
 
 The internal WebDAV blobstore cannot be scaled horizontally, not even for availability purposes, because of its
 reliance on the `singleton-blobstore` VM's persistent disk for file storage. For this reason, it is not recommended for
-environments that require high availability. For these environments, you should use an external blobstore. For more
+environments that require high availability. For these environments, you must use an external blobstore. For more
 information, see
 [Cloud Controller Blobstore Configuration](https://docs.cloudfoundry.org/deploying/common/cc-blobstore-config.html) in
 the open source Cloud Foundry documentation and [Blob Storage](../concepts/high-availability.html#blobstore) in
