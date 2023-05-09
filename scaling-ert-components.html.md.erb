@@ -37,18 +37,18 @@ To scale up <%= vars.app_runtime_abbr %> instances:
 
 1. Navigate to the <%= vars.ops_manager %> Installation Dashboard.
 
-1. Click the <%= vars.app_runtime_abbr %> tile.
+2. Click the <%= vars.app_runtime_abbr %> tile.
 
-1. Select **Resource Config**.
+3. Select **Resource Config**.
 <%= image_tag("images/scaling-ert.png", :alt => "'Resource Config pane lists 22 jobs. Each job has a dropdown for 'Instances,' 'Persistent Disk Type,' and 'VM Type.'") %>
 
 1. To scale your deployment horizontally, increase the number of **Instances** of a job. For guidance on the number of job instances required to ensure high availability, see [Scaling Recommendations](#scalingtable).
 
-1. To scale your deployment vertically, adjust the **Persistent Disk Type** and **VM Type** of a job to allocate more disk space and memory. If you choose **Automatic** from the dropdown, <%= vars.app_runtime_abbr %> uses the recommended amount of resources for the job.
+2. To scale your deployment vertically, adjust the **Persistent Disk Type** and **VM Type** of a job to allocate more disk space and memory. If you choose **Automatic** from the dropdown, <%= vars.app_runtime_abbr %> uses the recommended amount of resources for the job.
 
-1. Click **Save**.
+3. Click **Save**.
 
-1. Return to the <%= vars.ops_manager %> Installation Dashboard, click **Review Pending Changes**, and click **Apply Changes**.
+4. Return to the <%= vars.ops_manager %> Installation Dashboard, click **Review Pending Changes**, and click **Apply Changes**.
 
 
 ## <a id='scaledown'></a> Scaling Down <%= vars.app_runtime_abbr %>
@@ -74,7 +74,7 @@ To scale down your deployment:
 
 If you scale down or delete a job that uses persistent disk, <%= vars.app_runtime_abbr %> marks the disk as orphaned. Orphaned disks are not attached to any job, and <%= vars.app_runtime_abbr %> deletes them after five days.
 
-Use the BOSH CLI to list and recover orphaned disks. Follow the instructions in [Advanced Troubleshooting with the BOSH CLI](https://docs.pivotal.io/platform/<%= vars.current_major_version %>/customizing/trouble-advanced.html) to log in to the BOSH Director, and then follow the procedures in [Orphaned Disks](http://bosh.io/docs/persistent-disks.html#orphaned-disks) in the BOSH documentation.
+Use the BOSH CLI to list and recover orphaned disks. Follow the instructions in [Advanced Troubleshooting with the BOSH CLI](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/2.10/vmware-tanzu-ops-manager/install-trouble-advanced.html) to log in to the BOSH Director, and then follow the procedures in [Orphaned Disks](http://bosh.io/docs/persistent-disks.html#orphaned-disks) in the BOSH documentation.
 
 
 ## <a id="deployscenarios"></a> Scaling Recommendations for Specific Deployment Configurations
