@@ -62,14 +62,14 @@ For instructions, see [Generate and Register the NSX-T Management TLS Certificat
 To configure logical switches:
 
 1. In vSphere, create logical network switches to correspond to the networks that your foundation uses.
-   1. Log in to the **NSX-T Manager Dashboard**.
-   2. Navigate to **Advanced Networking & Security**.
-   3. Navigate to the **Switching** pane.
-   4. For each of these networks:
-       * **Infrastructure** (BOSH and <%= vars.ops_manager %>, defined in the **Assign AZs and Networks** pane of the BOSH Director tile)
-       * **Deployment** (<%= vars.app_runtime_abbr %>, defined in the **Assign AZs and Networks** pane of the <%= vars.app_runtime_abbr %> tile)
-       * **Services** and **Dynamic Services** (marketplace services and on-demand services, also defined in the <%= vars.app_runtime_abbr %> tile)
-       * **Isolation Segment** (optional, defined in the **Assign AZs and Networks** pane of the Isolation Segment tile)
+1. Log in to the **NSX-T Manager Dashboard**.
+2. Go to **Advanced Networking & Security**.
+3. Go to the **Switching** pane.
+4. For each of these networks:
+    * **Infrastructure** (BOSH and <%= vars.ops_manager %>, defined in the **Assign AZs and Networks** pane of the BOSH Director tile)
+    * **Deployment** (<%= vars.app_runtime_abbr %>, defined in the **Assign AZs and Networks** pane of the <%= vars.app_runtime_abbr %> tile)
+    * **Services** and **Dynamic Services** (marketplace services and on-demand services, also defined in the <%= vars.app_runtime_abbr %> tile)
+    * **Isolation Segment** (optional, defined in the **Assign AZs and Networks** pane of the Isolation Segment tile)
 
         Do the following:
             <ol>

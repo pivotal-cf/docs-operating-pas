@@ -19,7 +19,7 @@ By default, the <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) Goro
 
 To deploy a dedicated Gorouter:
 
-1. Add a load balancer in front of the <%= vars.app_runtime_abbr %> Gorouter. The steps to do this depend on your IaaS, but the setup of the load balancer should mirror the setup of the load balancer for the <%= vars.app_runtime_abbr %> Gorouter that you configured in the <%= vars.app_runtime_abbr %> tile.
+1. Add a load balancer in front of the <%= vars.app_runtime_abbr %> Gorouter. The steps to do this depend on your IaaS, but the setup of the load balancer must mirror the setup of the load balancer for the <%= vars.app_runtime_abbr %> Gorouter that you configured in the <%= vars.app_runtime_abbr %> tile.
 
 1. Create a wildcard DNS entry for traffic routed to any app in the isolation segment. For example, `*.iso.example.com`.
 
@@ -32,7 +32,7 @@ To install the <%= vars.segment_runtime_full %> tile:
 
 1. Download the product file from the [<%= vars.segment_runtime_full %>](https://network.tanzu.vmware.com/products/isolation-segment) page of <%= vars.product_network %>.
 
-1. Navigate to your <%= vars.ops_manager %> URL in a browser to log in to the <%= vars.ops_manager %> Installation Dashboard.
+1. Go to your <%= vars.ops_manager %> URL in a browser to log in to the <%= vars.ops_manager %> Installation Dashboard.
 
 1. Click **Import a Product** and select the downloaded product file.
 
@@ -53,7 +53,7 @@ To configure the **Assign AZ and Networks** pane:
 
 1. Select an AZ for your singleton jobs, and one or more AZs to balance other jobs in.
 
-1. Select a network. This network does not need to be the same network where you deployed <%= vars.app_runtime_abbr %>. For most deployments, operators should create unique networks in which to deploy the <%= vars.segment_runtime_full %> tile. These networks should maintain network reach-ability with the Diego components so that the Diego Cells can reach the Diego Brain and Diego Database VMs.
+1. Select a network. This network does not need to be the same network where you deployed <%= vars.app_runtime_abbr %>. For most deployments, operators can create unique networks in which to deploy the <%= vars.segment_runtime_full %> tile. These networks can maintain network reach with the Diego components because the Diego Cells can reach the Diego Brain and Diego Database VMs.
 
 1. Click **Save**.
 
@@ -82,7 +82,7 @@ verify app identity using TLS. This is the default option.
 
 1. (Optional) You can configure <%= vars.app_runtime_abbr %> to run app instances in Docker containers by provided a comma-separated list of their IP address ranges in the **Private Docker insecure registry allow list** field. For more information, see [Using Docker Registries](../operating/docker-registry.html).
 
-1. Select your preference for **Docker images disk cleanup scheduling on Diego Cell VMs**. If you choose **Clean up disk space once usage fills disk**, enter a value in MB for **Reserved disk space for other jobs**. This is the amount of space the garbage collection algorithm should keep free for other jobs. For more information about the configuration options and how to configure a reserved amount, see [Configuring Diego Cell Disk Cleanup Scheduling](../operating/config-cell-cleanup.html).
+3. Select your preference for disk cleanup scheduling. If you select **Clean up disk space once usage fills disk**, enter a value in MB for **Reserved disk space for other jobs**. This is the amount of space the garbage collection algorithm must keep free for other jobs. For more information about the configuration options and how to configure a reserved amount, see [Configuring Diego Cell Disk Cleanup Scheduling](../operating/config-cell-cleanup.html).
 
 1. The **Enable containerd delegation** check box governs whether or not Garden delegates container create and destroy operations to the containerd tool. By default, this option is enabled and Garden uses containerd. Disable this option by disabling the check box. For more information about the containerd tool, see [containerd](https://containerd.io).
 
@@ -159,10 +159,10 @@ The following table describes the three ways <%= vars.company_name %> recommends
 
 | Use case | Compute isolation | Gorouter sharding mode | Gorouters reject requests for isolation segments (<%= vars.app_runtime_abbr %> tile) | Other requirements | Scaling recommendations |
 | -------- | ----------------- | -------------------- | ---------------------------------------------------------------------------------- | ------------------ | ----------------------- |
-| Use compute isolation and network isolation | Enabled | Isolation segment only | Enabled | <%= vars.segment_runtime_full %> has its own load balancer and uses a different domain from <%= vars.app_runtime_abbr %> | Apps in the isolation segment should have their own Diego Cells and Gorouters. |
-| Use compute isolation and extra <%= vars.segment_runtime_full %> Gorouters | Enabled | Isolation segment only | Disabled | <%= vars.segment_runtime_full %> has its own load balancer and uses the same domain as <%= vars.app_runtime_abbr %> | Apps in the isolation segment should have their own Diego Cells and Gorouters. |
-| Use compute isolation only | Enabled | No isolation segment | Disabled | <%= vars.segment_runtime_full %> uses <%= vars.app_runtime_abbr %> load balancer and domain | Scale <%= vars.segment_runtime_full %> Gorouters to 0. |
-| Use network isolation in some cases | See other rows for guidance | See other rows for guidance | Enabled | Provide a comma-separated list of Isolation Segment names that should not have network isolation in the field titled **Always allow Gorouter to accept requests for these Isolation Segments**. See other rows for more guidance. | See other rows for guidance |
+| Use compute isolation and network isolation | Enabled | Isolation segment only | Reject requests for all isolation segments | <%= vars.segment_runtime_full %> has its own load balancer and uses a different domain from <%= vars.app_runtime_abbr %> | Apps in the isolation segment can have their own Diego Cells and Gorouters. |
+| Use compute isolation and extra <%= vars.segment_runtime_full %> Gorouters | Enabled | Isolation segment only | Accept requests for all isolation segments | <%= vars.segment_runtime_full %> has its own load balancer and uses the same domain as <%= vars.app_runtime_abbr %> | Apps in the isolation segment can have their own Diego Cells and Gorouters. |
+| Use compute isolation only | Enabled | No isolation segment | Accept requests for all isolation segments | <%= vars.segment_runtime_full %> uses <%= vars.app_runtime_abbr %> load balancer and domain | Scale <%= vars.segment_runtime_full %> Gorouters to 0. |
+| Use network isolation in some cases | See other rows for guidance | See other rows for guidance | Accept requests for some isolation segments | See other rows for guidance | See other rows for guidance |
 
 The use cases in the table above are described below:
 
@@ -172,7 +172,13 @@ The use cases in the table above are described below:
 
 * **Use compute isolation only**: To configure the <%= vars.app_runtime_abbr %> load balancer and apps domain route requests from your isolated apps, you can enable compute isolation, disable networking isolation, and disable the **Gorouters reject requests for isolation segments** check box in <%= vars.app_runtime_abbr %>. This configuration enables you to move Diego Cells out of <%= vars.app_runtime_abbr %> and into isolation segments, so you can upgrade <%= vars.app_runtime_abbr %> first and your <%= vars.segment_runtime_full %> tiles as time permits. This allows you to upgrade a large foundation in pieces, making it easier to upgrade within scheduled maintenance windows. This configuration is useful if your foundation has additional compute resource blocks, but no additional Gorouters for <%= vars.segment_runtime_full %> configured in the **Resource Config** pane.
 
-* **Use network isolation in some cases**: For this use case, enable the **Gorouters reject requests for isolation segments** check box in the **Networking** pane of the <%= vars.app_runtime_abbr %> tile. Then provide a comma-separated list of <%= vars.segment_runtime_full %> names that Gorouters should accept traffic to in the **Always allow Gorouter to accept requests for these Isolation Segments** field. See other cases for guidance on how to configure each <%= vars.segment_runtime_full %>.
+* **Use network isolation in some cases**:
+  For this use case, select "Accept some" for the **Gorouter isolation segment
+  request handling** radio button in the **Networking** pane of the
+  <%= vars.app_runtime_abbr %> tile. Then provide a comma-separated list of
+  <%= vars.segment_runtime_full %> names that Gorouters accept traffic
+  to. See other cases for guidance on how to configure each
+  <%= vars.segment_runtime_full %>.
 
 <p class='note warning'><strong>Caution:</strong> If you configure the <strong>Compute and Networking Isolation</strong> pane and the <strong>Gorouters reject requests for isolation segments</strong> check box in the <%= vars.app_runtime_abbr %> tile in a manner other than the use cases described above, the smoke tests fail. To deploy the tile anyway, you must disable the Smoke Test errand in the <strong>Errands</strong> pane of the <%= vars.app_runtime_abbr %> tile. <%= vars.company_name %> does not recommend disabling smoke tests. To configure the Smoke Test errand, see <a href="#errands">Configure Errands</a>.</p>
 
@@ -211,13 +217,13 @@ To configure the **Smoke Tests** pane:
 
 1. Select **Smoke Tests**.
 
-1. (Optional) In **Domain**, enter the name of the apps domain <%= vars.segment_runtime_full %> should use when pushing an app to run smoke tests.
+1. (Optional) In **Domain**, enter the name of the apps domain that <%= vars.segment_runtime_full %> uses when pushing an app to run smoke tests.
   * To configure routing from the isolation segment to either the <%= vars.app_runtime_abbr %> or <%= vars.segment_runtime_full %> Gorouters, enter the apps domain you configured in the **Domains** pane of the <%= vars.app_runtime_abbr %> tile.
   * To configure separate routing for the isolation segment, enter a different apps domain.
 
 1. If you have a shared apps domain, select **A temporary space within the system org**, which creates a temporary space within the system org for running smoke tests and deletes the space afterwards. Otherwise, select **A specified org and space** and complete these fields to configure where <%= vars.segment_runtime_full %> pushes an app to run smoke tests:
-  * For **Org**, enter the org <%= vars.segment_runtime_full %> should use when pushing an app to run smoke tests.
-  * For **Space**, enter the space <%= vars.segment_runtime_full %> should use when pushing an app to run smoke tests.
+  * For **Org**, enter the org <%= vars.segment_runtime_full %> uses when pushing an app to run smoke tests.
+  * For **Space**, enter the space <%= vars.segment_runtime_full %>  uses when pushing an app to run smoke tests.
 
 1. Click **Save**.
 
@@ -252,14 +258,20 @@ To configure the **Resource Config** pane:
   <p class="note"><strong>Note:</strong> The configuration settings available in <strong>Resource Config</strong> vary depending on your IaaS.</p>
   * **If you have the Load Balancers column in your Resource Config**:
       1. Enter the wildcard DNS entry attached to your load balancer into the **Router** row under **Load Balancers**.
-  * **If you do not have the Load Balancers column in your Resource Config**:
-      1. Navigate to the **Networking** pane.
-      1. Specify **Gorouter IPs**.
-      1. Attach the IP addresses to your load balancer manually.
+  If you do not have the Load Balancers column in your Resource Config**:
+      1. Go to the **Networking** pane.
+      2. Specify **Gorouter IPs**.
+      3. Attach the IP addresses to your load balancer manually.
 
-1. If you are not using HAProxy for this isolation segment, set the number of **Instances** to `0`.
+Enter the wildcard DNS entry attached to your load balancer into the Router row under Load Balancers.
 
-### <a id='after_config'></a> After Tile Configuration
+If you do not have the Load Balancers column in your Resource Config pane:
+
+1. Go to the Networking pane.
+2. Specify Gorouter IPs.
+3. Manually attach the IP addresses to your load balancer.
+
+### <a id='after_config'></a> After tile configuration
 
 After you configure the <%= vars.segment_runtime_full %> tile:
 
@@ -281,7 +293,7 @@ To create multiple isolation segments:
 
 1. Download the Replicator tool from the [<%= vars.segment_runtime_full %>](https://network.tanzu.vmware.com/products/isolation-segment) page of <%= vars.product_network %>.
 
-1. Navigate to the directory where you downloaded the Replicator tool.
+1. Go to the directory where you downloaded the Replicator tool.
 
 1. Replicate the tile by running:
 
