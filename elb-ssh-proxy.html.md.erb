@@ -17,8 +17,12 @@ Perform the steps below to create this ELB:
   * Ensure that the **Create an internal load balancer** checkbox is not selected.
 1. Under **Load Balancer Protocol**, ensure that this ELB is listening on TCP port `2222` and forwarding to TCP port `2222`.
 
-1. Under **Select Subnets**, select the public subnet.
-1. On the **Assign Security Groups** page, create a new Security Group. This Security Group should allow inbound traffic on TCP port `2222`.
+2. Under **Select Subnets**, select the public subnet.
+3. On the **Assign Security Groups** page, create a new Security Group. This Security Group does allow inbound traffic on TCP port `2222`.
+  * In **Security group name**, enter a name for the group.
+  * In **VPC**, keep the default selection, or make a new selection.
+  * In the table, configure the Inbound tab by selecting **Type** and **Source**.
+  * Click **Create**.
 
 	<%= image_tag("aws/aws_ssh_elb_securitygroup.png", :alt => "'Create Security Group' window has an inbound Custom TCP rule with 2222 port range.") %>
 
