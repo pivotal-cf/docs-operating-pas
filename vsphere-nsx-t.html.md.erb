@@ -92,25 +92,11 @@ To configure logical switches:
 1. Create T0 network address translation (NAT) rules to communicate with <%= vars.ops_manager %>:
 
 1. Create network address translation (NAT) rules to communicate with <%= vars.ops_manager %>:
-  1. Go to **Networking**.
-  1. Go to the **NAT** pane.
-  1. Select your T0 gateway.
-  1. Choose **ADD NAT RULE**.
-  1. Add a rule for destination NAT (DNAT) with:
-      - The externally-specified destination IP address of incoming requests. If your <%= vars.ops_manager %> has a DNS entry (for example, `opsmgr.example.com`), this is its IP address.
-      - The <%= vars.ops_manager %> internal network address.
-      - Firewall Setting bypass - the packet bypasses firewall rules.
-        ![alt-text=""](./images/nsx-t/nsx-t-dnat-rule.png)
-  1. Add the corresponding source NAT (SNAT) rule with:
-      - The externally-specified destination IP address.
-      - The <%= vars.ops_manager %> internal network address.
-      - Firewall Setting bypass - the packet bypasses firewall rules.
-        ![alt-text=""](./images/nsx-t/nsx-t-snat-rule.png)
-  1. Add a rule for source NAT (SNAT) for the infrastructure and deployment networks:
-      - The externally-specified destination IP address.
-      - The internal network address in CIDR notation.
-      - Firewall Setting bypass - the packet bypasses firewall rules.
-        ![alt-text=""](./images/nsx-t/nsx-t-snat-net-rule.png)
+    1. Go to **Networking**.
+    1. Go to the **NAT** pane.
+    1. Select your T0 gateway.
+    1. Click **ADD NAT RULE**.
+    1. Add a rule for destination NAT (DNAT) with:
 
 1. Create T1 routers for <%= vars.app_runtime_abbr %>, to connect from the T0 router. For each <%= vars.platform_name %> network, Infrastructure, Deployment, and so on, create a T1 router as follows:
 1. In the NSX-T Manager UI, navigate to **Advanced Networking & Security** > **Routing** > **Routers**.
@@ -131,55 +117,101 @@ To configure logical switches:
 
 1. Advertise the routes of the T1 routers to the T0 router, so the T0 router can correctly route incoming requests based on their destination IP address:
 
-1. Create T1 gateways for <%= vars.app_runtime_abbr %>, to connect from the T0 gateway. For each <%= vars.platform_name %> network, Infrastructure, Deployment, and so on, create a T1 gateway as follows:
-1. In the NSX-T Manager UI, navigate to **Networking**, then **Tier-1 Gateways**.
-  1. Click **ADD TIER-1 GATEWAY**.
-  2. Configure the gateway. Include the Edge Cluster as it is required to enable the Load Balancer. T
+1. Create T1 gateways for <%= vars.app_runtime_abbr %>, to connect from the T0 gateway. For each <%=
+   vars.platform_name %> network, Infrastructure, Deployment, and so on, create a T1 gateway as
+   follows:
+   1. In the NSX-T Manager UI, go to **Networking**, then **Tier-1 Gateways**.
+   1. Click **ADD TIER-1 GATEWAY**.
+   2. Configure the gateway. Include the Edge Cluster, as it is required to enable the Load
+      Balancer. The Infrastructure network gateway configuration looks similar to the following
+      image:
 
-2. Advertise the routes of the T1 gateways to the T0 gateway, so the T0 gateway can correctly route incoming requests based on their destination IP address:
-  1. Edit your T1 Gateway and navigate to **Route Advertisement**.
-  2. Enable **All Connected Segments & Service Ports**.
-  3. Enable **All LB VIP Routes**. (Required if Load Balancing service is configured.)
+![alt-text=""][def2]
+![alt-text=""](./images/nsx-t-t1-gateway.png)
+
+2. Advertise the routes of the T1 gateways to the T0 gateway, so the T0 gateway can correctly route
+   incoming requests based on their destination IP addresses:
+    1. Edit your T1 Gateway and go to **Route Advertisement**.
+    2. Activate **All Connected Segments & Service Ports**.
+    3. Activate **All LB VIP Routes**. (necessary if Load Balancing service is configured).
 
 3. Allocate an IP block for <%= vars.app_runtime_abbr %> orgs.
-  1. From the NSX-T Manager, navigate to **Networking**, then **IP Address Pools**, click "**IP ADDRESS BLOCKS** tab, and click **ADD IP ADDRESS BLOCK**.
+  1. From the NSX-T Manager, go to **Networking**, then **IP Address Pools**, click "**IP ADDRESS BLOCKS** tab, and click **ADD IP ADDRESS BLOCK**.
   2. Enter a name (for example, `<%= vars.app_runtime_abbr %>-container-ip-block`). This IP block name is also used in the **VMware NSX-T** tile in the **NCP** section under **IP Blocks of Container Networks**.
   3. Enter a description, such as `Subnets are allocated from this pool to each newly-created org`.
   4. Enter a CIDR to allocate an address block large enough to accommodate all <%= vars.app_runtime_abbr %> apps. A `/14` CIDR is large enough for ~1,000 Orgs with ~250 apps each. If you are planning such a large foundation, see [VMware NSX-T <%= vars.app_runtime_abbr %> limits](https://configmax.vmware.com/guest?vmwareproduct=VMware%20NSX-T&release=NSX-T%20Data%20Center%202.4.0&categories=31-0) in the VMware documentation.
 
-4. Create an external SNAT IP pool.
-  1. Navigate to **Networking**, then **IP Address Pools**, click "IP ADDRESS POOLS tab, and click **ADD IP ADDRESS POOL**.
-  2. Enter a name (such as `external-ip-pool`) and a description (such as `IP pool that provides 1 public IP for each <%= vars.app_runtime_abbr %> Org`). Later, you will enter this pool name on the **VMware NSX-T** tile in the **NCP** section under **IP Pools used to provide External (NAT) IP Addresses to Org Networks**.
-  3. Set a subnet of externally routable ip addresses for future NAT ip addresses
-    ![alt-text=""](./images/nsx-t/nsx-t-external-ip-pool.png)
+3. Allocate an IP block for <%= vars.app_runtime_abbr %> orgs.
+    1. From the NSX-T Manager, go to **Networking**, then **IP Address Pools**, click the **IP
+       Address Blocks** tab, and click **Add IP Address Block**.
+    2. Enter a name (for example, `<%= vars.app_runtime_abbr %>-container-ip-block`). This IP block
+       name is also used in the **VMware NSX-T** tile in the **NCP** section under **IP Blocks of
+       Container Networks**.
+    3. Enter a description, such as `Subnets are allocated from this pool to each newly-created
+       org`.
+    4. Enter a CIDR to allocate an address block large enough to accommodate all <%=
+       vars.app_runtime_abbr %> apps. A `/14` CIDR is large enough for approximately 1,000 Orgs with
+       about 250 apps each. If you are planning a large foundation, see [VMware NSX-T <%=
+       vars.app_runtime_abbr %>
+       limits](https://configmax.vmware.com/guest?vmwareproduct=VMware%20NSX-T&release=NSX-T%20Data%20Center%202.4.0&categories=31-0)
+       in the VMware documentation.
 
 #### <a id='nsx-t-segments'></a> Configure Segments
 
-To configure segments:
+4. Create an external SNAT IP pool:
+    1. Go to **Networking**, then **IP Address Pools**.
+    2. Click the **IP Address Pools** tab and then click **Add IP Address Pool**.
+    3. Enter a name (for example,  `external-ip-pool`).
+    4. Enter a description (for example, "IP pool that provides 1 public IP for each <%=
+       vars.app_runtime_abbr %> Org"). Later, you enter this pool name, on the **VMware NSX-T**
+       tile, in the **NCP** section, under **IP Pools used to provide External (NAT) IP Addresses to
+       Org Networks**.
+    5. Set a subnet of externally-routable IP addresses for future NAT IP addresses.
 
-1.  In vSphere, create segments that correspond to the networks that <%= vars.platform_name %> uses.
+        ![alt-text=""](./images/nsx-t/nsx-t-external-ip-pool.png)
+
+
+5.  In vSphere, create segments that correspond to the networks that <%= vars.platform_name %> uses.
+    1. Log in to the **NSX-T Manager Dashboard**.
+    2. Go to **Networking**.
+    3. Go to the **Segments** pane.
+    4. For each of these networks...
+         * **Infrastructure** (BOSH and <%= vars.ops_manager %>, defined in the **Assign AZs and
+           Networks** pane of the BOSH Director tile)
+        * **Deployment** (<%= vars.app_runtime_abbr %>, defined in the **Assign AZs and Networks**
+          pane of the <%= vars.app_runtime_abbr %> tile)
+        * **Services** and **Dynamic Services** (marketplace services and on-demand services, also
+          defined in the <%= vars.app_runtime_abbr %> tile)
+        * **Isolation Segment** (optional, defined in the **Assign AZs and Networks** pane of the
+    Isolation Segment tile) ...do the following:
+            1. Click **ADD SEGMENT**.
+            2. Enter a name for the segment.
+            3. Enter a Gateway to connect to.
+            4. Click **SAVE**.
+
+6.  In vSphere, create segments that correspond to the networks that <%= vars.platform_name %> uses.
   1. Log in to the **NSX-T Manager Dashboard**.
-  1. Go to **Networking**.
-  1. Go to the **Segments** pane.
-  1. For each of these networks...
+  2. Go to **Networking**.
+  3. Go to the **Segments** pane.
+  4. For each of these networks...
       - **Infrastructure** (BOSH and <%= vars.ops_manager %>, defined in the **Assign AZs and Networks** pane of the BOSH Director tile)
       - **Deployment** (<%= vars.app_runtime_abbr %>, defined in the **Assign AZs and Networks** pane of the <%= vars.app_runtime_abbr %> tile)
       - **Services** and **Dynamic Services** (marketplace services and on-demand services, also defined in the <%= vars.app_runtime_abbr %> tile)
       - **Isolation Segment** (optional, defined in the **Assign AZs and Networks** pane of the Isolation Segment tile)
     ...do the following:
           1. Click **ADD SEGMENT**.
-          1. Enter a name for the segment
-          1. Enter a Gateway to connect to.
-          1. Click **SAVE**.
+          2. Enter a name for the segment
+          3. Enter a Gateway to connect to.
+          4. Click **SAVE**.
 
 #### <a id='nsx-t-load-balancer'></a> Configure Load Balancer
 
-To configure a load balancer:
-
-1. Create Active Monitors (health checks) for use by the virtual servers later on. In the NSX-T Manager UI, navigate to **Networking**, then **Load Balancing**, and click the **Monitors** tab.
-    1. Create the health monitor for web load balancing:
-    2. Click **Add Active Monitor**.
-    3. Select **HTTP**.
+1. Create Active Monitors (health checks) for use by the virtual servers later.
+    1. In the NSX-T Manager UI, go to **Networking**, then **Load Balancing**, and click the
+       **Monitors** tab.
+    2. Create the health monitor for web load balancing:
+    3. Click **Add Active Monitor**.
+    4. Select **HTTP**.
         <ul>
            <li><strong>Name</strong>: <code>tas-web-monitor</code></li>
             <li><strong>Monitoring Port</strong>: 8080</li>
@@ -213,7 +245,9 @@ To configure a load balancer:
         </ul>
     1. Click **Save**.
 
-1. Create Server Pools (collections of VMs which handle traffic) for use by the virtual servers. In the NSX-T Manager UI, navigate to **Networking**, then **Load Balancing**, and click the **Server Pools** tab.
+4. Create Server Pools (collections of VMs that handle traffic) for use by the virtual servers.
+    1. In the NSX-T Manager UI, go to **Networking**, then **Load Balancing**, and click the
+       **Server Pools** tab.
     1. Create the server pool for web load balancing:
     2. Click **Add Server Pool** to add a new pool.
         <ul>
@@ -265,57 +299,9 @@ To configure a load balancer:
         </ul>
     1. Click **Save**.
 
-Create virtual servers:
-
-1. In the NSX-T Manager UI, navigate to **Advanced Networking & Security** > **Networking** > **Load Balancing** > **Virtual Servers**.
-2. Create the virtual server which forwards unencrypted web (HTTP) traffic to the foundation:
-
-  <p class="note"><strong>Note:</strong> Foundations requiring end-to-end encryption should not enable the virtual server on port 80, or, if enabled, should configure it to redirect traffic to the encrypted port (443).</p>
-
-    1. Click **+ADD**.
-    2. Enter **General Properties**:
-        - **Name**: `pas-web-vs`
-        - **Application Type**: `Layer 4 (TCP)`
-        - **Application Profile**: `nsx-default-lb-fast-tcp-profile`
-    3. Click **Next**.
-    4. Enter **Virtual Server Identifiers**:
-        - **IP Address**: use the address of the DNS record of `*.system.YOUR-SYSTEM-DOMAIN.com`
-        - **Port**: `80,443`
-    5. Enter **Server Pool and Rules**:
-        - **Default Server Pool**: `pas-web-pool`
-    6. Click **Next** several times, then click **Finish**.
-3. Create the virtual server which forwards traffic to apps with custom ports to the foundation:
-    1. Click **+ADD** to add a new virtual server.
-    2. Enter **General Properties**:
-        - **Name**: `pas-tcp-vs`
-        - **Application Type**: `Layer 4 (TCP)`
-        - **Application Profile**: `nsx-default-lb-fast-tcp-profile`
-    3. Click **Next**.
-    4. Enter **Virtual Server Identifiers**:
-        - **IP Address**: use the address of the DNS record of `tcp.apps.YOUR-SYSTEM-DOMAIN.com`
-        - **Port**: use the same ports as configured in the **<%= vars.app_runtime_abbr %> Tile** > **Networking** > **TCP Routing Ports**,
-          e.g. `1024-1123,5900`
-    5. Click **Next**.
-    6. Enter **Server Pool and Rules**:
-        - **Default Server Pool**: `pas-tcp-pool`
-    7. Click **Next**, then click **Finish**.
-4. Create the virtual server which forwards SSH traffic to the foundation:
-    1. Click **+ADD** to add a new virtual server.
-    2. Enter **General Properties**:
-        - **Name**: `pas-ssh-vs`
-        - **Application Type**: `Layer 4 (TCP)`
-        - **Application Profile**: `nsx-default-lb-fast-tcp-profile`
-    3. Click **Next**.
-    4. Enter **Virtual Server Identifiers**:
-        - **IP Address**: use the address of the DNS record of `ssh.system.YOUR-SYSTEM-DOMAIN.com`
-        - **Port**: `2222`
-    5. Click **Next**.
-    6. Enter **Server Pool and Rules**:
-        - **Default Server Pool**: `pas-ssh-pool`
-    7. Click **Next**, then click **Finish**.
-
-1. Create the load balancer. In the NSX-T Manager UI, navigate to **Networking**, then **Load Balancing**, and click the **Load Balancers** tab.
-    1. Click **ADD LOAD BALANCER**.
+5. Create the load balancer. In the NSX-T Manager UI, go to **Networking**, then **Load
+   Balancing**, and click the **Load Balancers** tab.
+    1. Click **Add Load Balancer**.
       1. Enter the fields:
             <ul>
                 <li><strong>Name</strong>: <code>tas-lb</code></li>
@@ -500,9 +486,9 @@ To install and configure the tile:
      - **IP Blocks of Container Networks**: Use the same IP block created [Configure Gateways](#nsx-t-gateways).
     - **Subnet Prefix of Container Networks**: Subnet mask to set the address range size for apps in a single org. Defaults to `24`. This number must be higher than the mask for all <%= vars.app_runtime_abbr %> orgs in the NSX-T Manager **New IP Block** pane, to define each org's fraction of the total <%= vars.app_runtime_abbr %> address space.
     - **IP Pools used to provide External (NAT) IP Addresses to Org Networks**: Use the same IP Pool created iin [Configure Gateways](#nsx-t-gateways).
-    - **Enable NSX-T Policy API**: Enable this checkbox to use the new Policy API.
+    - **Enable NSX-T Policy API**: Enable this check box to use the new Policy API.
 
-2. In the **NSX Node Agent** pane, enable the **Enable Debug Level of Logging for NSX Node Agent** checkbox.
+2. In the **NSX Node Agent** pane, enable the **Enable Debug Level of Logging for NSX Node Agent** check box.
     ![alt-text="NSX-T tile config: NSX-T Node Agent"](./images/nsx-t/nsx-t-tile-config-agent.png)
 
 3. Click **Save** and return to the **Installation Dashboard**.
@@ -512,7 +498,7 @@ To install and configure the tile:
 
 ## <a id='upgrade'></a> Upgrade <%= vars.app_runtime_abbr %> with NSX-T Networking
 
-After you have deployed <%= vars.app_runtime_abbr %> with NSX-T, you may need to upgrade either <%= vars.ops_manager %>, <%= vars.app_runtime_abbr %>, the NSX-T Container Plug-in or NSX-T Data Center. If you upgrade one of these components, you may need to upgrade the other components as well.
+After you have deployed <%= vars.app_runtime_abbr %> with NSX-T, you might need to upgrade either <%= vars.ops_manager %>, <%= vars.app_runtime_abbr %>, the NSX-T Container Plug-in or NSX-T Data Center. If you upgrade one of these components, you may need to upgrade the other components as well.
 
 For example, if you want to upgrade NSX-T Data Center, you may need to upgrade the NSX-T Container Plug-in first.
 
@@ -531,3 +517,7 @@ To upgrade <%= vars.app_runtime_abbr %> with NSX-T Networking:
 5. Click **Apply Changes**.
 
 1. Continue with the upgrade of <%= vars.ops_manager %>, <%= vars.app_runtime_abbr %>, or NSX-T Data Center. For more information, see [Upgrade NCP in a <%= vars.platform_name %> Environment](https://docs.vmware.com/en/VMware-NSX-T-Data-Center/2.4/com.vmware.nsxt.ncp_kubernetes.doc/GUID-4E269C79-1EF7-48E7-AFA4-D79B9F9C9202.html?hWord=N4IghgNiBcIK4AcDmAnMATApgAgHYGMEQBfIA) in the VMware NSX-T Data Center documentation.
+
+
+[def]: ./images/nsx-t/nsx-t-external-ip-pool-subnet.png
+[def2]: ./images/nsx-t/nsx-t-t1-gateway.png

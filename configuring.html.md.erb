@@ -101,7 +101,7 @@ Some more precise guidelines include:
 
 * Quorum-based components are components with odd-numbered settings in the manifest. For quorum-based components such as etcd and Diego BBS, set `max_in_flight` to 1. This preserves quorum and prevents a split-brain scenario from occurring as jobs restart. For more information, about split-brain scenarios, see [Split-brain (computing)](https://en.wikipedia.org/wiki/Split-brain_(computing)) on Wikipedia.
 
-* For other components, set `max_in_flight` to the number of instances that you can afford to have down at any one time. The best values for your deployment vary based on your capacity planning. In a highly redundant deployment, you can set the number to a higher value to allow updates to run faster. However, if your components are at high utilization, you should keep the number low to prevent downtime.
+* For other components, set `max_in_flight` to the number of instances that you can afford to have down at any one time. The best values for your deployment vary based on your capacity planning. In a highly redundant deployment, you can set the number to a higher value to allow updates to run faster. However, if your components are at high utilization, you can keep the number low to prevent downtime.
 
 * Setting `max_in_flight` to a value greater than or equal to the number of instances you have running may reduce functionality.
 
