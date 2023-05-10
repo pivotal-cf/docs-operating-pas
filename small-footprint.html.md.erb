@@ -51,7 +51,7 @@ Small Footprint <%= vars.app_runtime_abbr %> has the following limitations:
 
 * **Increasing platform capacity:** You cannot upgrade the Small Footprint <%= vars.app_runtime_abbr %> tile to the standard <%= vars.app_runtime_abbr %> tile. If you expect platform usage to increase beyond the capacity of Small Footprint <%= vars.app_runtime_abbr %>, <%= vars.company_name %> recommends using the standard <%= vars.app_runtime_abbr %> tile.
 
-* **Management plane availability during tile upgrades:** You may not be able to perform management plane operations like deploying new apps and accessing APIs for brief periods during tile upgrades. The management plane is located on the Control VM.
+* **Management plane availability during tile upgrades:** You might not be able to perform management plane operations like deploying new apps and accessing APIs for brief periods during tile upgrades. The management plane is located on the Control VM.
 
 * **App availability during tile upgrades:** If you require availability during your upgrades, you must scale your Compute VMs to a highly available configuration. Ensure sufficient capacity exists to move app instances between Compute VM instances during the upgrade.
 
@@ -123,7 +123,7 @@ To install Small Footprint <%= vars.app_runtime_abbr %>, see [Architecture and I
 
 Follow the same installation and configuration steps as for <%= vars.app_runtime_abbr %>, with these differences:
 
-* **Selecting a product in <%= vars.product_network %>:** When you navigate to the [<%= vars.app_runtime_full %>](https://network.tanzu.vmware.com/products/elastic-runtime) page on <%= vars.product_network %>, select the **Small Footprint** release.
+* **Selecting a product in <%= vars.product_network %>:** When you go to the [<%= vars.app_runtime_full %>](https://network.tanzu.vmware.com/products/elastic-runtime) page on <%= vars.product_network %>, select the **Small Footprint** release.
 
 * **Configuring resources:**
 	* The **Resource Config** pane in the Small Footprint <%= vars.app_runtime_abbr %> tile reflects the differences in VMs discussed in [Architecture](#arch).
@@ -211,7 +211,7 @@ To troubleshoot a job that runs on the Control or Database VMs:
 	System 'system\_localhost'           running
 	</pre>
 
-6. To access logs, navigate to `/vars/vcap/sys/log` by running:
+6. To access logs, go to `/vars/vcap/sys/log` by running:
 
 		cd /var/vcap/sys/log
 
@@ -219,7 +219,7 @@ To troubleshoot a job that runs on the Control or Database VMs:
 
 		ls
 
-8. Navigate to the directory of the process that you want to view logs for. For example, for the Cloud Controller process, run:
+8. Go to the directory of the process that you want to view logs for. For example, for the Cloud Controller process, run:
 
 		cd cloud_controller_ng/
 
