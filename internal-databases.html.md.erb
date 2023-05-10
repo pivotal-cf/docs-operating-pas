@@ -10,11 +10,11 @@ This topic describes two procedures for managing the internal MySQL databases us
 <%= vars.app_runtime_abbr %> components that use system databases include the Cloud Controller, Diego Brain, Gorouter, and the User Authorization and Authentication (UAA) server. For more information, see [<%= vars.app_runtime_abbr %> Components](../concepts/architecture/index.html).
 
 
-## <a id='scale-down'></a> Scale Down Your MySQL Cluster
+## <a id='scale-down'></a> Scale Down your MySQL Cluster
 
 This procedure explains how to safely scale your MySQL cluster down to a single node. If you are already running the MySQL cluster with a single node, you do not need to perform these steps.
 
-By default, internal MySQL deploys as a single node. To take advantage of the high availability features of MySQL, you may have scaled the configuration up to three or more server nodes.
+By default, internal MySQL deploys as a single node. To take advantage of the high availability features of MySQL, you might have scaled the configuration up to three or more server nodes.
 
 ### <a id="check-health"></a> Check the Health of Your Cluster
 
@@ -58,7 +58,7 @@ Before scaling down your MySQL cluster, you must ensure the cluster is healthy. 
 	  	  -H "Authorization: Bearer UAA-ACCESS-TOKEN"
 	  	```
 	    Where `UAA-ACCESS-TOKEN` is the access token you recorded in the previous step.
-	2. In the response to the above request, locate the product with an `installation_name` starting with `cf-` and copy its `guid`.
+	2. In the response to the preceding request, locate the product with an `installation_name` starting with `cf-` and copy its `guid`.
 	3. Run:
 
 		```
@@ -71,9 +71,9 @@ Before scaling down your MySQL cluster, you must ensure the cluster is healthy. 
 	    * `PRODUCT-GUID` is the `guid` value you recorded in the previous step.
 	    * `UAA-ACCESS-TOKEN` is the is the access token you recorded earlier.
 	4. Record the Cloud Controller database `username` and `password` from the response to the above request.
-5. SSH into the Ops Manager VM. For instructions specific to your IaaS, see <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html">SSH into Ops Manager section of the _Advanced Troubleshooting with the BOSH CLI_ topic.
+2. SSH into the Ops Manager VM. For instructions specific to your IaaS, see [Advanced Troubleshooting with the BOSH CLI](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html).
 
-1. For each of the MySQL server IP addresses recorded:
+3. For each of the MySQL server IP addresses recorded:
 	1. From the Ops Manager VM, query the new organization by running:
 
 		```
@@ -92,7 +92,9 @@ Before scaling down your MySQL cluster, you must ensure the cluster is healthy. 
 		+---------------------+----------------------------------+
 		</pre>
 
-2. If each MySQL server instance does not return the same `created_at` result, contact [VMware Tanzu Support](https://tanzu.vmware.com/support) before proceeding further or making any changes to your deployment. If each MySQL server instance does return the same result, then you can safely proceed to scaling down your cluster to a single node by performing the steps in the following section.
+   1. If each MySQL server instance does not return the same `created_at` result, contact [VMware Tanzu Support](https://tanzu.vmware.com/support) before proceeding further or making any changes to your deployment.
+
+  		If each MySQL server instance does return the same result, then you can safely proceed to scaling down your cluster to a single node by performing the steps in the following section.
 
 ### <a id="scale-down"></a> Set Server Instance Count to 1
 
@@ -100,7 +102,7 @@ Before scaling down your MySQL cluster, you must ensure the cluster is healthy. 
 
 1. Select **Resource Config**.
 
-1. Use the dropdown to change the **Instances** count for **MySQL Server** to `1`.
+1. Use the drop-down menu to change the **Instances** count for **MySQL Server** to `1`.
 
 1. Click **Save**, then **Review Pending Changes** and **Apply Changes** to apply the changes.
 
