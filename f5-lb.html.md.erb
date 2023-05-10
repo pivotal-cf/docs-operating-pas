@@ -157,12 +157,14 @@ This configuration stops client SSL at the F5 and forward standard HTTP traffic 
        <p class='note'><strong>Note:</strong> This must be set in one-arm configurations.</p>
        * **Default Pool:** `gorouter_pool`
        * **iRules:** `cf-xforward-for` and `cf-xforward-proto-http`
-    4. (Optional) Create a virtual server for `sshproxy`. This virtual server allows developers to SSH into Diego containers. Give it the following parameters:
+    4. (Optional) Create a virtual server for `sshproxy`. This virtual server allows developers to SSH into Diego containers.Give it the following parameters:
        * **Name:** `pcf-sshproxy`
        * **Type:** `Standard`
        * **Source Address:** `0.0.0.0/0`
        * **Destination Address/Mask:** `YOUR-SSH-PROXY-VIP`
-       <p class='note'><strong>Note:</strong> This VIP must be DNS-resolvable to ssh.[YOUR-<%= vars.platform_code %>-PAS-SYSTEM-DOMAIN].</p>
+
+       <p>This VIP must be DNS-resolvable to ssh.[YOUR-<%= vars.platform_code %>-PAS-SYSTEM-DOMAIN].</p>
+
        * **Service Port:** `2222`
        * **State:** `Enabled`
        * **Protocol:** `TCP`
@@ -172,9 +174,10 @@ This configuration stops client SSL at the F5 and forward standard HTTP traffic 
        * **SSL Profile:** `[NONE]`
        * **VLAN and Tunnel Traffic:** `Enabled on YOUR-CONFIGURED-F5-VPN`
        * **Source Address Translation:** `Auto Map`
+
        <p class='note'><strong>Note:</strong> This must be set in one-arm configurations.</p>
        * **Default Pool:** `diegobrain_pool`
-    5. (Optional) Create a virtual server for `tcprouter`.
+    1. (Optional) Create a virtual server for `tcprouter`.
        This virtual server allows access to the TCP app.
        Give it the following parameters:
        * **Name:** `pcf-tcprouter`
@@ -194,7 +197,7 @@ This configuration stops client SSL at the F5 and forward standard HTTP traffic 
        <p class='note'><strong>Note:</strong> This must be set in one-arm configurations.</p>
        * **Default Pool:** `tcprouter_pool`
 
-Once you have completed configuration, check the **Network Map** located in **Local Traffic Menu**. Everything should be green.
+Once you complete the configuration, verify that everything in **Network Map** located in **Local Traffic Menu** is green.
 
 
 ## <a id='scf'></a>  F5 Single Configuration Files
