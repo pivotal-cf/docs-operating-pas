@@ -172,7 +172,7 @@ pane of the <%= vars.app_runtime_abbr %> tile:
 | Use compute isolation only | Enabled | No isolation segment | Accept requests for all isolation segments | <%= vars.segment_runtime_full %> uses <%= vars.app_runtime_abbr %> load balancer and domain | Scale <%= vars.segment_runtime_full %> Gorouters to 0. |
 | Use network isolation in some cases | See other rows for guidance | See other rows for guidance | Accept requests for some isolation segments | See other rows for guidance | See other rows for guidance |
 
-The use cases in the table above are described below:
+The use cases from the previous table are described here:
 
 * **Use compute isolation and network isolation for all isolation segments**:
   This is the most common case. For this use case, select "Reject all" for the
@@ -245,7 +245,7 @@ To configure the **Compute and Networking Isolation** pane:
 ### <a id='smoke-tests'></a> Configure Smoke Tests
 
 In the **Smoke Tests** pane, you specify the org and space where smoke tests are run.
-In the org and space that you specify, the Smoke Test errand pushes an app to a <%= vars.platform_name %> org.
+In the org and space that you specify, the Smoke Test errand pushes the app to a <%= vars.platform_name %> org.
 The app runs basic functionality tests against both the <%= vars.app_runtime_abbr %> and <%= vars.segment_runtime_full %> tiles after an installation or update.
 
 The Smoke Test errand verifies that your deployment can:
