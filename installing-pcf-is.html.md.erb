@@ -124,7 +124,7 @@ To configure the **System Logging** pane:
 
 1. Paste the certificate for your TLS certificate authority (CA) in the **TLS CA certificate** field.
 
-1. (Optional) Enable the **Use TCP for file forwarding local transport** check box to transmit logs over TCP. This prevents log truncation, but may cause performance issues.
+1. (Optional) Enable the **Use TCP for file forwarding local transport** check box to transmit logs over TCP. This prevents log truncation, but might cause performance issues.
 
 1. (Optional) The **Do not forward debug logs** check box is activated by default. To forward `DEBUG` syslog messages to an external service, deactivate the check box.
   <p class="note"><strong>Note:</strong> Some <%= vars.segment_runtime_full %> components generate a high volume of <code>DEBUG</code> syslog messages. Activating the <strong>Do not forward debug logs</strong> check box prevents <%= vars.app_runtime_abbr %> components from forwarding the <code>DEBUG</code> syslog messages to external services. However, <%= vars.segment_runtime_full %> still writes the messages to the local disk.</p>
@@ -174,7 +174,7 @@ pane of the <%= vars.app_runtime_abbr %> tile:
 | Use compute isolation only | Enabled | No isolation segment | Accept requests for all isolation segments | <%= vars.segment_runtime_full %> uses <%= vars.app_runtime_abbr %> load balancer and domain | Scale <%= vars.segment_runtime_full %> Gorouters to 0. |
 | Use network isolation in some cases | See other rows for guidance | See other rows for guidance | Accept requests for some isolation segments | See other rows for guidance | See other rows for guidance |
 
-The use cases in the previous table are described here:
+The use cases from the previous table are described here:
 
 * **Use compute isolation and network isolation for all isolation segments**:
   This is the most common case. For this use case, select **Reject requests for all isolation segments** for the
@@ -246,7 +246,7 @@ To configure the **Compute and Networking Isolation** pane:
 ### <a id='smoke-tests'></a> Configure Smoke Tests
 
 In the **Smoke Tests** pane, you specify the org and space where smoke tests are run.
-In the org and space that you specify, the Smoke Test errand pushes an app to a <%= vars.platform_name %> org.
+In the org and space that you specify, the Smoke Test errand pushes the app to a <%= vars.platform_name %> org.
 The app runs basic functionality tests against both the <%= vars.app_runtime_abbr %> and <%= vars.segment_runtime_full %> tiles after an installation or update.
 
 The Smoke Test errand verifies that your deployment can:
