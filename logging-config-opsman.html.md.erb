@@ -8,7 +8,7 @@ This topic describes the types of logs that <%= vars.app_runtime_full %> (<%= va
 
 ## <a id='types'></a> System Logs, App Logs, App Traffic Logs
 
-<%= vars.app_runtime_abbr %> generates two types of logs, _system logs_ from <%= vars.app_runtime_abbr %> components and _app logs_ from hosted apps, as differentiated in the table below:
+<%= vars.app_runtime_abbr %> generates two types of logs, _system logs_ from <%= vars.app_runtime_abbr %> components and _app logs_ from hosted apps, as differentiated in the following table:
 
 <table id='log-types' border="1" class="nice" >
   <tr>
@@ -46,15 +46,15 @@ This topic describes the types of logs that <%= vars.app_runtime_full %> (<%= va
 
 ## <a id="log-cache"></a> Log Cache
 
-Log Cache is a Loggregator feature that lets you filter and query app logs through a CLI plugin or API endpoints. Cached app logs are available on demand; you do not need to stream them continuously.
+Log Cache is a Loggregator feature that lets you filter and query app logs through a CLI plug-in or API endpoints. Cached app logs are available on demand; you do not need to stream them continuously.
 
-### <a id="log-cache-cli-examples"></a> Example Uses of the Log Cache CLI Plugin
+### <a id="log-cache-cli-examples"></a> Example Uses of the Log Cache CLI Plug-in
 
-To access cached logs with the Log Cache CLI plugin, you must first download and install the plugin.
+To access cached logs with the Log Cache CLI plug-in, you must first download and install the plug-in.
 
-To download the Log Cache CLI plugin, see the [cf CLI Plugins](https://plugins.cloudfoundry.org/#log-cache) page on the Cloud Foundry website.
+To download the Log Cache CLI plug-in, see the [cf CLI Plug-ins](https://plugins.cloudfoundry.org/#log-cache) page on the Cloud Foundry website.
 
-After you have installed the plugin, the basic command to access cached app logs is:
+After you have installed the plug-in, the basic command to access cached app logs is:
 
 ```
 cf tail OPTIONS APP-NAME-OR-ID
@@ -113,7 +113,7 @@ More API parameters are available to customize retrieved app logs. For more info
 
 ## <a id='container-metrics'></a> Include Container Metrics in Syslog Drains
 
-Developers can monitor container metrics over the syslog protocol using the [CF Drain CLI plugin](https://github.com/cloudfoundry/cf-drain-cli). With the CF Drain CLI plugin, you can use the Cloud Foundry Command Line Interface (cf CLI) tool to set the app container to deliver container metrics to a syslog drain. Developers can then monitor the app container based on those metrics.
+Developers can monitor container metrics over the syslog protocol using the [CF Drain CLI plug-in](https://github.com/cloudfoundry/cf-drain-cli). With the CF Drain CLI plug-in, you can use the Cloud Foundry Command Line Interface (cf CLI) tool to set the app container to deliver container metrics to a syslog drain. Developers can then monitor the app container based on those metrics.
 
 For more information, see [Including Container Metrics in Syslog Drains](../devguide/deploy-apps/streaming-logs.html#container-metrics) in _App Logging in <%= vars.app_runtime_abbr %>_.
 
@@ -128,7 +128,7 @@ Apps constantly generate app logs and <%= vars.app_runtime_abbr %> platform comp
 
 * The Traffic Controller serves the aggregated data stream through the Firehose WebSocket endpoint.
 
-Follow the instructions below to scale the Loggregator system. For guidance on monitoring and capacity planning, see [Monitoring <%= vars.app_runtime_abbr %>](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/<%= vars.current_major_version %>/tas-for-vms/monitoring-index.html).
+Use the following instructions to scale the Loggregator system. For guidance on monitoring and capacity planning, see [Monitoring <%= vars.app_runtime_abbr %>](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/<%= vars.current_major_version %>/tas-for-vms/monitoring-index.html).
 
 ### <a id="instances"></a> Add Component VM Instances
 
