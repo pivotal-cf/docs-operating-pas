@@ -52,7 +52,7 @@ To configure <%= vars.app_runtime_abbr %> to use a SAML IDP:
 
     ![In the SAML Identity Provider section, fill in the fields as described in the following steps.](./images/sso-ert.png)
 
-    <p class='note'><strong>Note:</strong> You must manually disable a SAML IDP created by <%= vars.app_runtime_abbr %> when you no longer require it.</p>
+    <p class='note'><strong>Note:</strong> You must manually deactivate a SAML IDP created by <%= vars.app_runtime_abbr %> when you no longer require it.</p>
 
 1. Set the **Provider name**. This is a unique name you create for the IDP. This name can include only alphanumeric characters, `+`, `_`, and `-`. You should not change this name after deployment because all external users use it to link to the provider.
 
@@ -77,7 +77,7 @@ To configure <%= vars.app_runtime_abbr %> to use a SAML IDP:
 
 1. For **External groups attribute**, enter the attribute name in your SAML database that defines the groups that a user belongs to. For example, `group_memberships`. To map the groups from the SAML assertion to admin roles in <%= vars.app_runtime_abbr %>, see [Grant Admin Permissions to an External Group (SAML or LDAP)](../uaa/uaa-user-management.html#external-group) in _Creating and Managing Users with the UAA CLI (UAAC)_. This field is case-sensitive.
 
-1. By default, all SAML authentication requests from <%= vars.app_runtime_abbr %> are signed. To change this, disable the **Sign authentication requests** checkbox and configure your IDP to verify SAML authentication requests.
+1. By default, all SAML authentication requests from <%= vars.app_runtime_abbr %> are signed. To change this, deactivate the **Sign authentication requests** checkbox and configure your IDP to verify SAML authentication requests.
 
 1. To validate the signature for the incoming SAML assertions, enable the **Required signed assertions** checkbox and configure your IDP to send signed SAML assertions.
 

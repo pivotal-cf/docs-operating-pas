@@ -3,7 +3,7 @@ title: Configuring Load Balancing for TAS for VMs
 owner: Releng
 ---
 
-This topic describes how to configure load balancing for <%= vars.app_runtime_first %> by entering the names of your load balancers in the **Resource Config** pane of the <%= vars.app_runtime_abbr %> tile. This procedure varies by your IaaS and how you prepared ("paved") it for installing <%= vars.app_runtime_abbr %>. See the section below that corresponds to your use case.
+This topic tells you how to configure load balancing for <%= vars.app_runtime_first %> by entering the names of your load balancers in the **Resource Config** pane of the <%= vars.app_runtime_abbr %> tile. This procedure varies by your IaaS and how you prepared ("paved") it for installing <%= vars.app_runtime_abbr %>. See the section below that corresponds to your use case.
 
 
 ## <a id="aws"></a> AWS
@@ -211,7 +211,7 @@ To configure the Gorouter to use GCP load balancers:
 1. Under **LOAD BALANCERS** for the SSH job, enter the value of `ssh_router_pool` from your Terraform output, prepended with `tcp:`. For example, `tcp:<%= vars.platform_code %>-ssh-proxy`.
 
 1. Verify that the **Internet Connected** checkbox for every job is enabled. The Terraform templates do not provision a Network Address Translation (NAT) box for Internet connectivity to your VMs, so they are provided with ephemeral public IP addresses to allow the jobs to reach the Internet.
-   <p class="note"><strong>Note:</strong> If you want to provision a Network Address Translation (NAT) box to provide Internet connectivity to your VMs instead of providing them with public IP addresses, disable the <strong>Internet Connected</strong> checkboxes. For more information about using NAT in GCP, see <a href="https://cloud.google.com/compute/docs/networking">VPC network overview</a> in the GCP documentation.</p>
+   <p class="note"><strong>Note:</strong> If you want to provision a Network Address Translation (NAT) box to provide Internet connectivity to your VMs instead of providing them with public IP addresses, deactivate the <strong>Internet Connected</strong> checkboxes. For more information about using NAT in GCP, see <a href="https://cloud.google.com/compute/docs/networking">VPC network overview</a> in the GCP documentation.</p>
 
 1. Click **Save**.
 
@@ -219,7 +219,7 @@ To configure the Gorouter to use GCP load balancers:
 
 To configure the Gorouter to use GCP load balancers:
 
-1. Navigate to the GCP Console and select **Load balancing**.
+1. Go to the GCP Console and select **Load balancing**.
 
     ![alt-text="The load balancer table shows three load balancers: pcf-router HTTPS load balancer, pcf-ssh TCP load balancer, and pcf-websockets TCP load balancer."](./images/gcp/config-lb.png)
 
@@ -248,8 +248,8 @@ To configure the Gorouter to use GCP load balancers:
 
 1. Under **LOAD BALANCERS** for the SSH job, enter the value of `ssh_router_pool` from your Terraform output, prepended with `tcp:`. For example, `tcp:<%= vars.platform_code %>-ssh-proxy`.
 
-1. Verify that the **Internet Connected** checkbox for every job is disabled. When preparing your GCP environment, you provisioned a Network Address Translation (NAT) box to provide Internet connectivity to your VMs instead of providing them with public IP addresses to allow the jobs to reach the Internet.
-   <p class="note"><strong>Note:</strong> If you want to provision a Network Address Translation (NAT) box to provide Internet connectivity to your VMs instead of providing them with public IP addresses, disable the <strong>Internet Connected</strong> checkboxes. For more information about using NAT in GCP, see <a href="https://cloud.google.com/compute/docs/networking">VPC network overview</a> in the GCP documentation.</p>
+1. Verify that the **Internet Connected** checkbox for every job is deactivated. When preparing your GCP environment, you provisioned a Network Address Translation (NAT) box to provide Internet connectivity to your VMs instead of providing them with public IP addresses to allow the jobs to reach the Internet.
+   <p class="note"><strong>Note:</strong> If you want to provision a Network Address Translation (NAT) box to provide Internet connectivity to your VMs instead of providing them with public IP addresses, deactivate the <strong>Internet Connected</strong> checkboxes. For more information about using NAT in GCP, see <a href="https://cloud.google.com/compute/docs/networking">VPC network overview</a> in the GCP documentation.</p>
 
 1. Click **Save**.
 
