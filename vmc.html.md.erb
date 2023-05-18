@@ -3,12 +3,12 @@ title: Deploying TAS for VMs to VMC
 owner: dap-tas-vmc-vcf-anycloud
 ---
 
-This topic describes how to install <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) to VMware Cloud (VMC) on Amazon Web Services (AWS).
+This topic tells you how to install <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) to VMware Cloud (VMC) on Amazon Web Services (AWS).
 
 ## <a id='introduction'></a> Overview
 
 VMC provides Software Defined Data Centers (SDDCs) that run on AWS with a high-level management console to configure networking rules.
-This topic describes the procedures for configuring and installing <%=
+This topic tells you the procedures you need for configuring and installing <%=
 vars.app_runtime_abbr %> on VMC using public IP addresses for ingress.
 
 To install and configure <%= vars.app_runtime_abbr %> on VMC:
@@ -71,16 +71,16 @@ To enable browser access to vCenter:
 
 To gather login credentials for the vCenter instance in your SDDC:
 
-1. Navigate to the [VMC console](https://vmc.vmware.com/console/sddcs).
+1. Go to the [VMC console](https://vmc.vmware.com/console/sddcs).
 1. Select **SDDCs**.
 1. Click **Open vCenter** on your datacenter tile.
 1. A dialog box appears with the text:
    **Before you can log into vCenter, you must open network access to vCenter through the management gateway.**
-   Choose an option for opening network access.
+   Select an option for opening network access.
 1. Click **Show Credentials**.
 1. Record the credentials.
 
-After enabling browser access and recording your vCenter credentials, you can access and authenticate with your cluster's vCenter server.
+After you enable browser access and record your vCenter credentials, you can access and authenticate with your cluster's vCenter server.
 
 ## <a id='om-setup'></a> Install <%= vars.ops_manager %>
 
