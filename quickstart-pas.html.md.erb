@@ -46,6 +46,8 @@ To install <%= vars.app_runtime_abbr %> with minimal configuration:
   <p class="note"><strong>Note:</strong> If you configured <%= vars.ops_manager %> Front End without a certificate, you can use this new certificate to complete your <%= vars.ops_manager %> configuration. To configure your <%= vars.ops_manager %> Front End certificate, see <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/gcp-prepare-env-manual.html#config-frontend">Configure Front End</a> in <em> Preparing to Deploy Ops Manager on GCP</em>.</p>
   <p class="note"><strong>Note:</strong> Ensure that you add any certificates that you generate in this pane to your infrastructure load balancer.</p>
 
+1. Deactivate the **HAProxy forwards all requests to the Gorouter over TLS** check box. By default, <%= vars.app_runtime_abbr %> does not deploy HAProxy.
+
 1. Setting appropriate ASGs is critical for a secure deployment. To acknowledge that you are responsible for setting the appropriate ASGs after the <%= vars.app_runtime_abbr %> deployment completes:
   1. Select **App Security Groups**.
   2. In the **Type "X" to acknowledge this requirement** field, enter `X`.
@@ -65,7 +67,7 @@ To install <%= vars.app_runtime_abbr %> with minimal configuration:
 4. Under **Internal encryption provider keys**, specify one or more keys to use for encrypting and decrypting the values stored in the CredHub database:
 	* **Name:** This is the name of the encryption key.
 	* **Key:** This key is used for encrypting all data. The key must be at least 20 characters long.
-  * **Primary:** This checkbox is used for marking the key you specified above as the primary encryption key. You must mark one key as **Primary**. Do not mark more than one key as **Primary**.
+  * **Primary:** This check box is used for marking the key you specified above as the primary encryption key. You must mark one key as **Primary**. Do not mark more than one key as **Primary**.
 
 1. Go to the **Internal MySQL** pane.
 
