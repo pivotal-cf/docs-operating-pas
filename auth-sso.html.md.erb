@@ -36,7 +36,7 @@ To connect <%= vars.app_runtime_abbr %> with SAML, follow both of these procedur
 
 To configure <%= vars.app_runtime_abbr %> to use a SAML IDP:
 
-1. Navigate to the <%= vars.ops_manager_full %> Installation Dashboard.
+1. Go to the <%= vars.ops_manager_full %> Installation Dashboard.
 
 1. Click the <%= vars.app_runtime_abbr %> tile.
 
@@ -122,7 +122,7 @@ To configure a SAML IDP to designate <%= vars.app_runtime_abbr %> as an SP:
 
 To integrate the UAA with one or more LDAP servers:
 
-1. Navigate to the <%= vars.ops_manager %> Installation Dashboard.
+1. Go to the <%= vars.ops_manager %> Installation Dashboard.
 
 1. Click the <%= vars.app_runtime_abbr %> tile.
 
@@ -186,3 +186,60 @@ This is required if you are mapping LDAP groups to an admin role. To map the gro
 1. Click **Review Pending Changes**.
 
 1. Click **Apply Changes**.
+
+
+## <a id='configure-oidc'></a> Configure <%= vars.app_runtime_abbr %> to Use an OIDC Identity Provider
+
+To integrate the UAA with an external OIDC IDP:
+
+1. Go to the <%= vars.ops_manager %> Installation Dashboard.
+
+1. Click the <%= vars.app_runtime_abbr %> tile.
+
+1. Select **Authentication and Enterprise SSO**.
+
+1. Select **OIDC identity provider**.
+
+1. Set the **Provider name**. This is a unique name you create for the IDP. This name can include only alphanumeric characters, `+`, `_`, and `-`. You must not change this name after deployment because all external users use this name to link to the provider.
+
+1. Enter a **Display name**. Your identity provider display name appears as a link on your <%= vars.platform_name %> login page.
+
+1. For **Provider metadata URL**, enter the OpenID server endpoint URL that returns the configuration metadata for your OIDC identity provider. This URL usually has this format: `https://example-oidc-provider.com/.well-known/openid-configuration`. It serves as a JSON that contains the OIDC provider specifications. For example, its `issuer`, `authorization_endpoint`, and `token_endpoint` values.
+
+1. For **Client ID**, enter the ID of the client registered with the external OIDC provider for use by the UAA. This external OIDC client must be configured according to the following general requirements. If applicable, different OIDC providers might use slightly different naming for these configuration options:
+   * **Client**: Per security best practices, register a dedicated client for use by <%= vars.app_runtime_abbr %>. Some providers might refer to a "client" as an "app". Save the client secret for the next step.
+   * **Grant type**: Make sure that the client is allowed to perform the `Authorization Code` OAuth flow.
+   * **Sign-in redirect URIs**: Include a URL in this format: `https://login.SYSTEM-DOMAIN/login/callback/PROVIDER-NAME`, where:
+      * `SYSTEM-DOMAIN` is the domain for system level components. You can find this value under the **Domains** section of the <%= vars.app_runtime_abbr %> tile.
+      * `PROVIDER-NAME` is the unique name you create for the IDP in the UAA. This can match the **Provider name** value that you previously entered.
+   * **Users**: Make sure that the users to whom you want to grant access to <%= vars.app_runtime_abbr %> are allowed access to this client or app.
+   * **Groups**:  Make sure that this client is allowed to obtain all relevant OIDC user groups information that you need to perform mappings from external OIDC user groups to internal <%= vars.app_runtime_abbr %> scopes. For example, if you wish to grant <%= vars.app_runtime_abbr %> admin scopes to all external OIDC users belonging to the `example-inc-operators` group, you must make sure that this client is allowed to access this group memberships.
+
+   <p class="note"><strong>Note:</strong> For more information about how to perform external group mappings, see [Grant Admin Permissions to an External Group (SAML, LDAP, or OIDC)](../uaa/uaa-user-management.html#external-group). </p>
+
+1. For **Client secret**, enter the client secret of the client whose ID is entered in the previous step.
+
+1. For **Scopes**, enter a comma-separated list of scopes to request from the external OIDC provider. Per OIDC 1.0 specifications, requesting certain scopes from an OIDC provider can result in receiving additional claims. For example, requesting `openid, profile, email` scopes (the current default value for this input field) can allow the UAA to obtain claims containing the user's first name, last name, and email. Additionally, please include the scope or scopes, for example, `groups`) that allows the UAA to obtain the user's group memberships. Consult your OIDC provider's documentation to decide the exact scopes to request to obtain sufficient claims.
+
+1. For **Email domains**, enter a comma-separated list of the email domains for external users to invite to Apps Manager.
+
+1. For **Username claim**, enter the attribute in your OIDC provider claim that corresponds to the TAS for VMs username.
+
+1. For **First name claim**, enter the attribute in your OIDC provider claim that corresponds to the user's first name in TAS for VMs.
+
+1. For **Last name claim**, enter the attribute in your OIDC provider claim that corresponds to the user's last name in TAS for VMs.
+
+1. For **Email claim**, enter the attribute in your OIDC provider claim that corresponds to the user's email in TAS for VMs.
+
+1. For **External groups claims**, enter the attribute in your OIDC provider claim that defines the groups to which a user belongs.
+This can be a comma-separated list, and can be used to map to internal <%= vars.app_runtime_abbr %> scopes.
+
+1.  Click **Save**.
+
+1. Return to the <%= vars.ops_manager %> Installation Dashboard.
+
+1.  Click **Review Pending Changes**.
+
+1.  Click **Apply Changes**.
+
+<p class="note caution"><strong>Caution:</strong> As of <%= vars.app_runtime_abbr %> v4.0, when an external OIDC provider login is configured, and when you successfully log out from the UAA UI or other <%= vars.app_runtime_abbr %> UIs, the UAA attempts to log the users out of the OIDC provider as well. This external OIDC provider logout operation might fail due to a known issue, that results in producing an error page from the provider. If you do not want to log out of the external OIDC provider, you can ignore this error. If you want to log out of the external OIDC provider, navigate to the provider login page directly and log out from there.</p>
