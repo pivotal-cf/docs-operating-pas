@@ -6,7 +6,7 @@ owner:
 This topic describes several configuration options for <%= vars.app_runtime_first %> that can help ensure successful upgrades. In addition to following the [Upgrade Preparation Checklist](https://docs.pivotal.io/ops-manager/2-10/upgrade/checklist.html), review this topic to better understand how to prepare for <%= vars.app_runtime_abbr %> upgrades.
 
 <p class="note breaking">
-<strong>Breaking Change</strong>: The Service Mesh feature was removed in <%= vars.app_runtime_abbr %> v2.11. You must disable the Service Mesh feature before upgrading to <%= vars.app_runtime_abbr %> v2.11.
+<strong>Breaking Change</strong>: The Service Mesh feature was removed in <%= vars.app_runtime_abbr %> v2.11. You must deactivate the Service Mesh feature before upgrading to <%= vars.app_runtime_abbr %> v2.11.
 </p>
 
 ## <a id="jump-upgrades"></a> Jump Upgrades
@@ -100,7 +100,7 @@ Some more precise guidelines include:
 
 * Quorum-based components are components with odd-numbered settings in the manifest. For quorum-based components such as etcd and Diego BBS, set `max_in_flight` to 1. This preserves quorum and prevents a split-brain scenario from occurring as jobs restart. For more information, about split-brain scenarios, see [Split-brain (computing)](https://en.wikipedia.org/wiki/Split-brain_(computing)) on Wikipedia.
 
-* For other components, set `max_in_flight` to the number of instances that you can afford to have down at any one time. The best values for your deployment vary based on your capacity planning. In a highly redundant deployment, you can set the number to a higher value to allow updates to run faster. However, if your components are at high utilization, you should keep the number low to prevent downtime.
+* For other components, set `max_in_flight` to the number of instances that you can afford to have down at any one time. The best values for your deployment vary based on your capacity planning. In a highly redundant deployment, you can set the number to a higher value to allow updates to run faster. However, if your components are at high utilization, you can keep the number low to prevent downtime.
 
 * Setting `max_in_flight` to a value greater than or equal to the number of instances you have running may reduce functionality.
 

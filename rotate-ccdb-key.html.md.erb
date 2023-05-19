@@ -3,7 +3,7 @@ title: Rotating the Cloud Controller Database Encryption Key
 owner: CAPI
 ---
 
-This topic describes how to rotate the Cloud Controller database (CCDB) encryption key.
+This topic tells you how to rotate the Cloud Controller database (CCDB) encryption key.
 
 
 ## <a id="overview"></a> Overview
@@ -29,13 +29,13 @@ For example, you might want to perform this procedure if your existing key is le
 
 To rotate the CCDB encryption key:
 
-1. Navigate to the <%= vars.app_runtime_abbr %> tile in <%= vars.ops_manager %> and
+1. Go to the <%= vars.app_runtime_abbr %> tile in <%= vars.ops_manager %> and
    select the **Cloud Controller** pane.
 
 1. Review the **Encryption key ledger** field. If you previously added a key and
-   enabled the **Primary** checkbox, disable the checkbox.
+   enabled the **Primary** check box, deselect the check box.
    The <%= vars.app_runtime_abbr %> deploy fails if there is more than one key
-   with the **Primary** checkbox enabled.
+   with the **Primary** check box enabled.
 
 1. In the **Encryption key ledger** field:
 	<p class="note"><strong>Note:</strong> Do not remove any existing keys until
@@ -44,7 +44,7 @@ To rotate the CCDB encryption key:
         </p>
 	1. Click **Add**.
 	1. Enter values for **Encryption key label** and **Encryption key**.
-	1. Enable the checkbox to mark this as your **Primary** key.
+	1. Enable the check box to mark this as your **Primary** key.
 
 1. Click **Save**.
 

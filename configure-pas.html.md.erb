@@ -3,12 +3,12 @@ title: Configuring TAS for VMs
 owner: PAS Releng
 ---
 
-This topic describes how to configure <%= vars.app_runtime_first %> as part of deploying <%= vars.platform_name %>.
+This topic tells you how to configure <%= vars.app_runtime_first %> as part of deploying <%= vars.platform_name %>.
 
 
 ## <a id='prereqs'></a> Prerequisites
 
-Before beginning this procedure, you must:
+Before you begin this procedure, you must:
 
 * Ensure that you have successfully completed the steps to prepare your environment for <%= vars.platform_name %> and install and configure the BOSH Director. For more information, see the [<%= vars.ops_manager_full %> configuration topic for your IaaS](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/pcf-interface.html).
 
@@ -23,11 +23,11 @@ To add the <%= vars.app_runtime_abbr %> tile to your <%= vars.ops_manager %> Ins
 
 1. If you have not already downloaded <%= vars.app_runtime_abbr %>, log in to [<%= vars.product_network %>](https://network.tanzu.vmware.com/) and click **<%= vars.app_runtime_full %>**.
 
-1. From the **Releases** dropdown, select the release to install and choose one of the following:
+1. From the **Releases** drop-down menu, select the release to install and choose one of the following:
   1. Click **<%= vars.app_runtime_full %>** to download the Pivotal Application Service `.pivotal` file.
   1. Click **Small Footprint <%= vars.app_runtime_abbr %>** to download the Small Footprint PAS `.pivotal` file. For more information, see [Getting Started with Small Footprint <%= vars.app_runtime_abbr %>](./small-footprint.html).
 
-1. Navigate to the <%= vars.ops_manager %> Installation Dashboard.
+1. Go to the <%= vars.ops_manager %> Installation Dashboard.
 
 1. Click **Import a Product** to add your tile to Ops Manager. For more information, see [Adding and Deleting Products](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-add-delete.html).
 
@@ -45,17 +45,11 @@ To configure the **Assign AZ and Networks** pane:
 
 1. Select **Assign AZ and Networks**.
 
-1. Select the first AZ under **Place singleton jobs**. <%= vars.ops_manager %> runs any job with a single instance in this AZ.
-
-1. Select all AZs under **Balance other jobs**. <%= vars.ops_manager %> balances instances of jobs with more than one instance across the AZs that you specify.
-    <p class="note"><strong>Note:</strong> For production deployments, <%= vars.company_name %> recommends at least three AZs for a highly available installation.</p>
-
-1. From the **Network** dropdown, choose the runtime network that you created when configuring the BOSH Director tile.
+1. From the **Network** drop-down menu, select the network where you want to run <%= vars.app_runtime_abbr %>.
 
 1. Click **Save**.
 
-
-## <a id='domains'></a> Configure Domains
+## <a id='domains'></a> Configure domains
 
 In the **Domains** pane, you configure a wildcard DNS record for both the apps domain and system domain.
 
@@ -114,8 +108,10 @@ To configure the **App Developer Controls** pane:
 
 1. Enter the **Default app memory quota per org** in MB. This is the default memory limit for all apps in an org. The specified limit only applies to the first installation of <%= vars.app_runtime_abbr %>. After the initial installation, operators can use the cf CLI to change the default value.
 
-1. Enter the **Maximum disk quota per app** in MB. This is the maximum amount of disk allowed per app.
-	<p class="note"><strong>Note:</strong> If you allow developers to push large apps, <%= vars.app_runtime_abbr %> may have trouble placing them on Diego Cells. Additionally, in the event of a system upgrade or an outage that causes a rolling deploy, larger apps may not successfully re-deploy if there is insufficient disk capacity. Monitor your deployment to ensure your Diego Cells have sufficient disk to run your apps.</p>
+1. For **Maximum disk quota per app** in MB, enter in MB the maximum amount of disk allowed per app.
+	<p class="note"><strong>Note:</strong> If you allow developers to push large apps, <%= vars.app_runtime_abbr %> might have trouble placing them on Diego
+		Cells. Additionally, in the event of a system upgrade or an outage that causes a rolling deploy, larger apps might not successfully redeploy if there is
+		insufficient disk capacity. Monitor your deployment to ensure that your Diego Cells have sufficient disk to run your apps.</p>
 
 1. Enter the **Default disk quota per app** in MB. This is the amount of disk allocated by default to a newly-pushed app if no value is specified with `cf push`.
 
@@ -169,7 +165,7 @@ To configure the **CredHub** pane:
         * **Username:** Enter a unique username that can access your CredHub database on the database server.
         * **Password:** Enter the password for the provided username.
         * **Database CA certificate:** This certificate is used when encrypting traffic to and from the database.
-        * **Disable hostname verification:** Enable this check box to disable hostname verification for TLS connections to the targeted database server. You cannot disable hostname verification for TLS connections to Postgres databases. You must select this option if you are configuring an external database on GCP or Azure.
+        * **Disable hostname verification:** Activate this check box to deactivate hostname verification for TLS connections to the targeted database server. You cannot deactivate hostname verification for TLS connections to Postgres databases. You must select this option if you are configuring an external database on GCP or Azure.
       <div class="note"><strong>Note:</strong> If you deploy <%= vars.app_runtime_abbr %> on AWS using Terraform, you can locate these values in your Terraform output:
           <ul>
             <li><strong>Hostname:</strong> <code>rds_address</code></li>
@@ -228,7 +224,7 @@ To configure the **CredHub** pane:
 
 In the **Databases** pane, you can configure <%= vars.app_runtime_abbr %> to use an internal MySQL database provided with <%= vars.platform_name %>, or you can configure an external database provider for the databases required by <%= vars.app_runtime_abbr %>.
 
-<p class="note"><strong>Note:</strong> If you are performing an upgrade, do not modify your existing internal database configuration, or you may lose data. You must migrate your existing data first before changing the configuration. For additional upgrade information, see <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-upgrading-pcf.html">Upgrading <%= vars.platform_name %></a>.</p>
+<p class="note"><strong>Note:</strong> If you are performing an upgrade, do not modify your existing internal database configuration, or you might lose data. You must migrate your existing data first before changing the configuration. For additional upgrade information, see <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-upgrading-pcf.html">Upgrading <%= vars.platform_name %></a>.</p>
 
 ### <a id='internal-db'></a> Internal Database Configuration
 
@@ -316,7 +312,7 @@ To configure high availability for your internal MySQL databases, see [Configure
 
 In the **Resource Config** pane, you must associate load balancers with the VMs in your deployment to enable traffic. For more information, see [Configure Load Balancing for <%= vars.app_runtime_abbr %>](configure-lb.html).
 
-### <a name='scale-down'></a> (Optional) Scale Down and Disable Resources
+### <a name='scale-down'></a> (Optional) Scale Down and Deactivate Resources
 
 <%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
 

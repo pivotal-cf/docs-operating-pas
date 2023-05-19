@@ -5,7 +5,7 @@ owner: RelEng
 
 This topic describes how to scale <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) for different deployment scenarios.
 
-For information about capacity scaling indicators for <%= vars.app_runtime_abbr %>, see <a href="https://docs.vmware.com/en/VMware-Tanzu-Application-Service/2.12/tas-for-vms/monitoring-key-cap-scaling.html
+For information about capacity scaling indicators for <%= vars.app_runtime_abbr %>, see <a href="https://docs.vmware.com/en/VMware-Tanzu-Application-Service/4.0/tas-for-vms/monitoring-key-cap-scaling.html
 ">Key Capacity Scaling Indicators</a>.
 
 <%= vars.app_runtime_abbr %> defaults to a highly available resource configuration.
@@ -28,14 +28,11 @@ To increase the capacity and availability of the <%= vars.app_runtime_abbr %> pl
 
 ## <a id='scaleup'></a> Scaling Up <%= vars.app_runtime_abbr %>
 
-You can determine when to scale up <%= vars.app_runtime_abbr %> components by reviewing the capacity scaling indicators. For more information, see <a href="https://docs.vmware.com/en/VMware-Tanzu-Application-Service/2.12/tas-for-vms/monitoring-key-cap-scaling.html
-">Key Capacity Scaling Indicators</a>.
-
-
+You can determine when to scale up <%= vars.app_runtime_abbr %> components by reviewing the capacity scaling indicators. For more information, see [Key Capacity Scaling Indicators](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/4.0/tas-for-vms/monitoring-key-cap-scaling.html).
 
 To scale up <%= vars.app_runtime_abbr %> instances:
 
-1. Navigate to the <%= vars.ops_manager %> Installation Dashboard.
+1. Go to the <%= vars.ops_manager %> Installation Dashboard.
 
 2. Click the <%= vars.app_runtime_abbr %> tile.
 
@@ -57,7 +54,7 @@ If you are deploying a <%= vars.app_runtime_abbr %> configuration that does not 
 
 To scale down your deployment:
 
-1. Navigate to the <%= vars.ops_manager %> Installation Dashboard.
+1. Go to the <%= vars.ops_manager %> Installation Dashboard.
 
 1. Click the <%= vars.app_runtime_abbr %> tile.
 
@@ -67,6 +64,7 @@ To scale down your deployment:
 1. In the **Resource Config** screen, decrease the number of **Instances** for each job. Choose the suggested values outlined in [Scaling Recommendations](#scalingtable) or in the [Scaling Recommendations for Specific Deployment Configurations](#deployscenarios).
 
 1. Click **Save**.
+2. In the **Resource Config** page, decrease the number of **Instances** for each job. Choose the suggested values outlined in [Scaling Recommendations](#scalingtable) or in the [Scaling Recommendations for Specific Deployment Configurations](#deployscenarios).
 
 1. Return to the <%= vars.ops_manager %> Installation Dashboard, click **Review Pending Changes**, and click **Apply Changes**.
 
@@ -101,7 +99,7 @@ Select the following values in the **Resource Config** pane:
 
 If you use the internal MySQL database on a clean install, or on an upgrade from a configuration that previously used internal MySQL databases, you do not need to change the default values shown in the table below.
 
-To change back to this configuration, choose the values shown below in the **Resource Config** pane.
+To revert back to this configuration, choose the values shown in the **Resource Config** pane.
 
 <p class="note"><strong>Note:</strong> Changing back to this configuration deletes any data written to your other database option.</p>
 
@@ -116,7 +114,7 @@ For more information, see the [MySQL for VMware Tanzu](https://docs.pivotal.io/p
 
 ### <a id='external-blobstore'></a> Deployments Using an External Blobstore
 
-If you use an external blobstore, choose the following value in the **Resource Config** pane:
+If you use an external blobstore, select the following value in the **Resource Config** pane:
 
 | Job | Instance Count |
 | --- | -------------- |
@@ -124,7 +122,7 @@ If you use an external blobstore, choose the following value in the **Resource C
 
 ### <a id='external-lb'></a> Deployments Using External Load Balancers
 
-If you use an external load balancer, choose the following values in the **Resource Config** pane:
+If you use an external load balancer, select the following values in the **Resource Config** pane:
 
 | Job | Instance Count |
 | --- | -------------- |

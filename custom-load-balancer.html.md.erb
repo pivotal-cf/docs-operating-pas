@@ -16,15 +16,15 @@ If you have requirements that are not fulfilled by the <%= vars.app_runtime_abbr
 
 If you use your own Layer 7 load balancer, it must fulfill the following requirements:
 
-* Provides load balancing to each of the <%= vars.app_runtime_abbr %> router IP addresses
+* Provides load balancing to each of the <%= vars.app_runtime_abbr %> router IP addresses.
 
-* Supports TLS termination for wildcard hostnames
+* Supports TLS termination for wildcard hostnames.
 
-* Adds appropriate `x-forwarded-for` and `x-forwarded-proto` HTTP headers to incoming requests
+* Adds appropriate `x-forwarded-for` and `x-forwarded-proto` HTTP headers to incoming requests.
 
-* Sets an HTTP keepalive connection timeout greater than five seconds
+* Sets an HTTP keepalive connection timeout greater than five seconds.
 
-* (Optional) Supports WebSocket
+* (Optional) Supports WebSocket.
 
 The choice to use HAProxy or your own load balancer depends on what features you need out of a load balancer, and whether you want the ability to configure it yourself.
 
