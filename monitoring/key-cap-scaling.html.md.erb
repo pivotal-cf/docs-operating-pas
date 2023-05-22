@@ -300,7 +300,7 @@ There are three key capacity scaling indicators <%= vars.company_name %> recomme
     <tr>
       <th width="25">Description</th>
         <td>The Slow Consumer Drops indicator is the <code>slow_consumer</code> metric incremented for each connection the Firehose closes because a consumer could not keep up.<br>
-          This indicator shows how fast a Firehose consumer, such as a monitoring tool nozzle, is ingesting data. If this number is anomalous, it may result in the downstream monitoring tool not having all expected data, even though that data was successfully transported through the Firehose.</td>
+          This indicator shows how fast a Firehose consumer, such as a monitoring tool nozzle, is ingesting data. If this number is anomalous, it might result in the downstream monitoring tool not having all expected data, even though that data was successfully transported through the Firehose.</td>
     </tr>
     <tr>
       <th>Source ID</th>
@@ -320,7 +320,7 @@ There are three key capacity scaling indicators <%= vars.company_name %> recomme
     </tr>
     <tr>
       <th>How to scale</th>
-        <td>Scale up the number of nozzle instances. You can scale a nozzle using the subscription ID specified when the nozzle connects to the Firehose. If you use the same subscription ID on each nozzle instance, the Firehose evenly distributes data across all instances of the nozzle. For example, if you have two nozzle instances with the same subscription ID, the Firehose sends half of the data to one nozzle instance and half to the other. Similarly, if you have three nozzle instances with the same subscription ID, the Firehose sends one-third of the data to each instance. If you want to scale a nozzle, the number of nozzle instances should match the number of Traffic Controller instances.</td>
+        <td>Scale up the number of nozzle instances. You can scale a nozzle using the subscription ID specified when the nozzle connects to the Firehose. If you use the same subscription ID on each nozzle instance, the Firehose evenly distributes data across all instances of the nozzle. For example, if you have two nozzle instances with the same subscription ID, the Firehose sends half of the data to one nozzle instance and half to the other. Similarly, if you have three nozzle instances with the same subscription ID, the Firehose sends one-third of the data to each instance. If you want to scale a nozzle, the number of nozzle instances must match the number of Traffic Controller instances.</td>
     </tr>
     <tr>
       <th>Additional details</th>
@@ -364,7 +364,7 @@ There are three key capacity scaling indicators <%= vars.company_name %> recomme
     </tr>
     <tr>
       <th>How to scale</th>
-        <td>Scale up the number of nozzle instances. The number of nozzle instances should match the number of Traffic Controller instances. You can scale a nozzle using the subscription ID specified when the nozzle connects to the RLP. If you use the same subscription ID on each nozzle instance, the RLP evenly distributes data across all instances of the nozzle. For example, if you have two nozzle instances with the same subscription ID, the RLP sends half of the data to one nozzle instance and half to the other. Similarly, if you have three nozzle instances with the same subscription ID, the RLP sends one-third of the data to each instance.</td>
+        <td>Scale up the number of nozzle instances. The number of nozzle instances must match the number of Traffic Controller instances. You can scale a nozzle using the subscription ID specified when the nozzle connects to the RLP. If you use the same subscription ID on each nozzle instance, the RLP evenly distributes data across all instances of the nozzle. For example, if you have two nozzle instances with the same subscription ID, the RLP sends half of the data to one nozzle instance and half to the other. Similarly, if you have three nozzle instances with the same subscription ID, the RLP sends one-third of the data to each instance.</td>
     </tr>
     <tr>
       <th>Additional details</th>
@@ -411,7 +411,7 @@ There are three key capacity scaling indicators <%= vars.company_name %> recomme
     </tr>
     <tr>
       <th>How to scale</th>
-        <td>Scale up the number of nozzle instances. The number of nozzle instances should match the number of Traffic Controller instances. You can scale a nozzle using the subscription ID specified when the nozzle connects to the RLP. If you use the same subscription ID on each nozzle instance, the RLP evenly distributes data across all instances of the nozzle. For example, if you have two nozzle instances with the same subscription ID, the RLP sends half of the data to one nozzle instance and half to the other. Similarly, if you have three nozzle instances with the same subscription ID, the RLP sends one-third of the data to each instance.</td>
+        <td>Scale up the number of nozzle instances. The number of nozzle instances must match the number of Traffic Controller instances. You can scale a nozzle using the subscription ID specified when the nozzle connects to the RLP. If you use the same subscription ID on each nozzle instance, the RLP evenly distributes data across all instances of the nozzle. For example, if you have two nozzle instances with the same subscription ID, the RLP sends half of the data to one nozzle instance and half to the other. Similarly, if you have three nozzle instances with the same subscription ID, the RLP sends one-third of the data to each instance.</td>
     </tr>
     <tr>
       <th>Additional details</th>
@@ -462,7 +462,7 @@ There is a single key capacity scaling indicator <%= vars.company_name %> recomm
     <tr>
       <th>Recommended thresholds</th>
         <td>
-          The scaling indicator <%= vars.company_name %> recommends is the minimum Syslog Agent loss rate per minute within a five-minute window. You should scale up if the loss rate is greater than <code>0.1</code> for five minutes or longer.<br><br>
+          The scaling indicator <%= vars.company_name %> recommends is the minimum Syslog Agent loss rate per minute within a five-minute window. You can scale up if the loss rate is greater than <code>0.1</code> for five minutes or longer.<br><br>
           <strong>Scale indicator:</strong> &ge; 0.1</br>
           If alerting:<br>
           <strong>Yellow warning:</strong> &ge; 0.01<br>
@@ -615,7 +615,7 @@ There is one key capacity scaling indicator <%= vars.company_name %> recommends 
     </tr>
     <tr>
       <th>How to scale</th>
-        <td>Scale UAA horizontally or vertically. To scale UAA, navigate to the <strong>Resource Config</strong> pane of the <%= vars.app_runtime_abbr %> tile and edit the number of your <strong>UAA</strong> VM instances or change the VM type to a type that utilizes more CPU cores.<br>
+        <td>Scale UAA horizontally or vertically. To scale UAA, go to the <strong>Resource Config</strong> pane of the <%= vars.app_runtime_abbr %> tile and edit the number of your <strong>UAA</strong> VM instances or change the VM type to a type that utilizes more CPU cores.<br>
         </td>
     </tr>
     <tr>
@@ -636,7 +636,8 @@ There is one key capacity scaling indicator for external S3 external storage.
 <p class="note"><strong>Note:</strong> This metric is only relevant if your deployment does not use an external S3 repository for
   external storage with no capacity constraints.</p>
 
-<p class= "note"><strong>Note:</strong> The following metric appears in the Firehose in two different formats. The below table lists both formats. For more information, see <a href="https://docs.pivotal.io/application-service/2-8/release-notes/runtime-rn.html#duplicate-metrics">Duplicate Metrics Appear in the Firehose</a> in <em><%= vars.app_runtime_full %> v2.8 Release Notes</em>.</p>
+<p class= "note"><strong>Note:</strong> The following metric appears in the Firehose in two different formats. The following table lists both formats.
+</p>
 
 <table>
   <tr><th colspan="2" style="text-align: center;"><br>External S3 External Storage<br><br></th></tr>
