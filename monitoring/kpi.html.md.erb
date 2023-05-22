@@ -11,7 +11,7 @@ The KPIs in this topic are provided for operators to give general guidance on mo
 
 This alerting and response guidance has been shown to apply to most deployments. <%= vars.company_name %> recommends that operators continue to fine-tune the alert measures to their deployment by observing historical trends. <%= vars.company_name %> also recommends that operators expand beyond this guidance and create new, deployment-specific monitoring metrics, thresholds, and alerts based on learning from their deployments.
 
-<p class="note"><strong>Note:</strong> Thresholds noted as "dynamic" in the tables below indicate that while a metric is highly important to watch, the relative numbers to set threshold warnings at are specific to a given <%= vars.app_runtime_abbr %> deployment and its use cases. These dynamic thresholds should be occasionally revisited because the foundation and its usage continue to evolve. For more information, see <a href="metrics.html#thresholds">Warning and Critical Thresholds</a> in <em>Selecting and Configuring a Monitoring System</em>.</p>
+<p class="note"><strong>Note:</strong> Thresholds noted as "dynamic" in the following tables indicate that while a metric is highly important to watch, the relative numbers to set threshold warnings at are specific to a given <%= vars.app_runtime_abbr %> deployment and its use cases. These dynamic thresholds can be occasionally revisited because the foundation and its usage continue to evolve. For more information, see <a href="metrics.html#thresholds">Warning and Critical Thresholds</a> in <em>Selecting and Configuring a Monitoring System</em>.</p>
 
 While the performance impact on TAS for VMs is considered when building new features, VMware does not perform discrete load and scale testing on a regular basis.
 It is impossible to test each configuration of TAS for VMs with every type of infrastructure and app workload.
@@ -193,7 +193,7 @@ These sections describe Diego BBS metrics.
           <strong>Use:</strong> If the convergence run begins taking too long, apps or tasks may be crashing without restarting. This symptom can also indicate loss of connectivity to the BBS database.<br><br>
           <strong>Origin:</strong> Firehose<br>
           <strong>Type:</strong> Gauge (Integer in ns)<br>
-          <strong>Frequency:</strong> During event, every 30 seconds when LRP convergence runs, emission should be near-constant on a running deployment
+          <strong>Frequency:</strong> During event, every 30 seconds when LRP convergence runs, emission must be near-constant on a running deployment
         </td>
     </tr>
     <tr>
@@ -310,7 +310,7 @@ These sections describe Diego BBS metrics.
         <td>
           Total number of LRP instances that are no longer desired but still have a BBS record. When Diego wants to add more apps, the BBS sends a request to the Auctioneer to spin up additional LRPs. LRPsExtra is the total number of LRP instances that are no longer desired but still have a BBS record.<br><br>
           <strong>Use:</strong> If Diego has more LRPs running than expected, there may be problems with the BBS.<br><br>
-          Deleting an app with many instances can temporarily spike this metric. However, a sustained spike in <code>bbs.LRPsExtra</code> is unusual and should be investigated.<br><br>
+          Deleting an app with many instances can temporarily spike this metric. However, a sustained spike in <code>bbs.LRPsExtra</code> is unusual and must be investigated.<br><br>
           <strong>Origin:</strong> Firehose<br>
           <strong>Type:</strong> Gauge (Float)<br>
           <strong>Frequency:</strong> 30 s<br>
@@ -347,7 +347,7 @@ These sections describe Diego BBS metrics.
         <td>
           Total number of LRP instances that are desired but have no record in the BBS. When Diego wants to add more apps, the BBS sends a request to the Auctioneer to spin up additional LRPs. LRPsMissing is the total number of LRP instances that are desired but have no BBS record.<br><br>
           <strong>Use:</strong> If Diego has less LRP running than expected, there may be problems with the BBS.<br><br>
-          An app push with many instances can temporarily spike this metric. However, a sustained spike in <code>bbs.LRPsMissing</code> is unusual and should be investigated.<br><br>
+          An app push with many instances can temporarily spike this metric. However, a sustained spike in <code>bbs.LRPsMissing</code> is unusual and must be investigated.<br><br>
           <strong>Origin:</strong> Firehose<br>
           <strong>Type:</strong> Gauge (Float)<br>
           <strong>Frequency:</strong> 30 s<br>
@@ -422,7 +422,7 @@ These sections describe Diego BBS metrics.
           <strong>Use:</strong> Delta reflects upward or downward trend for app instances started or stopped. Helps to provide a picture of the overall growth trend of the environment for capacity planning. You may want to alert on delta values outside of the expected range.<br><br>
           <strong>Origin:</strong> Firehose<br>
           <strong>Type:</strong> Gauge (Float)<br>
-          <strong>Frequency:</strong> During event, emission should be constant on a running deployment<br>
+          <strong>Frequency:</strong> During event, emission must be constant on a running deployment<br>
         </td>
     </tr>
     <tr>
@@ -450,7 +450,7 @@ These sections describe Diego BBS metrics.
       <th width="25%">Description</th>
         <td>
           Indicates when there is a BBS master election. A BBS master election takes place when a BBS instance has taken over as the active instance. A value of <code>1</code> is emitted when the election takes place.<br><br>
-          <strong>Use:</strong> This metric emits when a redeployment of the BBS occurs. If this metric is emitted frequently outside of a deployment, this may be a signal of underlying problems that should be investigated. If the active BBS is continually changing, this can cause app push downtime.<br><br>
+          <strong>Use:</strong> This metric emits when a redeployment of the BBS occurs. If this metric is emitted frequently outside of a deployment, this might be a signal of underlying problems that can be investigated. If the active BBS is continually changing, this can cause app push downtime.<br><br>
           <strong>Origin:</strong> Firehose<br>
           <strong>Type:</strong> Gauge (Float)<br>
           <strong>Frequency:</strong> On event<br>
@@ -494,7 +494,7 @@ These sections describe Diego Cell metrics.
           Remaining amount of memory in MiB available for this Diego Cell to allocate to containers.<br><br>
           <strong>Use:</strong> Indicates the available Diego Cell memory. Insufficient Diego Cell memory can prevent pushing and scaling apps.<br><br>
           The strongest operational value of this metric is to understand a deployment's average app size and monitor/alert on ensuring that at least some Cells have large enough capacity to accept standard app size pushes. For example, if pushing a 4&nbsp;GB app, Diego would have trouble placing that app if there is no one Diego Cell with sufficient capacity of 4&nbsp;GB or greater.<br><br>
-          As an example, <%= vars.company_name %> Cloud Ops uses a standard of 4&nbsp;GB, and computes and monitors for the number of Diego Cells with at least 4&nbsp;GB free. When the number of Diego Cells with at least 4&nbsp;GB falls below a defined threshold, this is a scaling indicator alert to increase  capacity. This <em>free chunk</em> count threshold should be tuned to the deployment size and the standard size of apps being pushed to the deployment.<br><br>
+          As an example, <%= vars.company_name %> Cloud Ops uses a standard of 4&nbsp;GB, and computes and monitors for the number of Diego Cells with at least 4&nbsp;GB free. When the number of Diego Cells with at least 4&nbsp;GB falls below a defined threshold, this is a scaling indicator alert to increase  capacity. This <em>free chunk</em> count threshold must be tuned to the deployment size and the standard size of apps being pushed to the deployment.<br><br>
           <strong>Origin:</strong> Firehose<br>
           <strong>Type:</strong> Gauge (Integer in MiB)<br>
           <strong>Frequency:</strong> 60 s<br>
@@ -591,7 +591,7 @@ These sections describe Diego Cell metrics.
           Remaining amount of disk in MiB available for this Diego Cell to allocate to containers.<br><br>
           <strong>Use:</strong> Indicates the available Diego Cell disk. Insufficient free disk on Diego Cells prevents the staging or starting of apps or tasks, resulting in error messages like <code>ERR Failed to stage app: insufficient resources</code>.<br><br>
           Because Diego fails to stage without at least 6&nbsp;GB free, unreserved disk space on a given Diego Cell, the strongest operational value of this metric is to ensure that at least some Diego Cells have a large enough disk capacity to support the staging of apps and tasks.<br><br>
-  	      <%= vars.company_name %> recommends computing and monitoring for the number of Diego Cells with at least 6&nbsp;GB Disk free. When the number of Diego Cells with at least 6&nbsp;GB falls below a defined threshold, this is a scaling indicator alert to increase capacity. The alerting threshold value for the amount of <em>free chunks</em> of Disk should be tuned to the deployment size and the standard size of apps being pushed to the deployment.<br><br>
+  	      <%= vars.company_name %> recommends computing and monitoring for the number of Diego Cells with at least 6&nbsp;GB Disk free. When the number of Diego Cells with at least 6&nbsp;GB falls below a defined threshold, this is a scaling indicator alert to increase capacity. The alerting threshold value for the amount of <em>free chunks</em> of Disk must be tuned to the deployment size and the standard size of apps being pushed to the deployment.<br><br>
           <strong>Origin:</strong> Firehose<br>
           <strong>Type:</strong> Gauge (Integer in MiB)<br>
           <strong>Frequency:</strong> 60 s<br>
@@ -723,9 +723,9 @@ These sections describe Diego Cell metrics.
       <th width="25%">Description</th>
         <td>
           The Diego Cell periodically checks its health against the Garden back end. For Diego Cells, <code>0</code> means healthy, and <code>1</code> means unhealthy.<br><br>
-          <strong>Use:</strong> Set an alert for further investigation if multiple unhealthy Diego Cells are detected in the given time window. If one Diego Cell is impacted, it does not participate in auctions, but end-user impact is usually low. If multiple Diego Cells are impacted, this can indicate a larger problem with Diego, and should be considered a more critical investigation need.<br><br>
+          <strong>Use:</strong> Set an alert for further investigation if multiple unhealthy Diego Cells are detected in the given time window. If one Diego Cell is impacted, it does not participate in auctions, but end-user impact is usually low. If multiple Diego Cells are impacted, this can indicate a larger problem with Diego, and can be considered a more critical investigation need.<br><br>
       		Suggested alert threshold based on multiple unhealthy Diego Cells in the given time window.<br><br>
-      		Although end-user impact is usually low if only one Diego Cell is impacted, this should still be investigated. Particularly in a lower capacity environment, this situation could result in negative end-user impact if left unresolved.<br><br>
+      		Although end-user impact is usually low if only one Diego Cell is impacted, this must still be investigated. Particularly in a lower capacity environment, this situation could result in negative end-user impact if left unresolved.<br><br>
           <strong>Origin:</strong> Firehose<br>
           <strong>Type:</strong> Gauge (Float, 0-1)<br>
           <strong>Frequency:</strong> 30 s<br>
@@ -806,7 +806,7 @@ These sections describe Diego Locket metrics.
               </ul>
             <li>If the BBS appears healthy, then check the Auctioneer to ensure it is processing auction payloads.</li>
               <ul>
-                <li>Recent logs for Auctioneer should show all but one of its instances are currently waiting on locks, and the active Auctioneer should show a record of when it last attempted to execute work. This attempt should correspond to app development activity, such as <code>cf push</code>.</li>
+                <li>Recent logs for Auctioneer must show all but one of its instances are currently waiting on locks, and the active Auctioneer must show a record of when it last attempted to execute work. This attempt must correspond to app development activity, such as <code>cf push</code>.</li>
                 <li>Reference the Auctioneer-level Locket metric <code>auctioneer.LockHeld</code>. A value of 0 indicates Locket issues at the Auctioneer level. For more information, see <a href="#AuctioneerActiveLocks">Locks Held by Auctioneer</a>.</li>
               </ul>
             <li>The TPS Watcher is primarily active when app instances crash. Therefore, if the TPS Watcher is suspected, review the most recent logs.</li>
@@ -889,7 +889,7 @@ These sections describe Diego Locket metrics.
             <li>Run <code>monit status</code> on the Diego Database VM to check for failing processes.</li>
             <li>If there are no failing processes, then review the logs for Auctioneer.
               <ul>
-                <li>Recent logs for Auctioneer should show all but one of its instances are currently waiting on locks, and the active Auctioneer should show a record of when it last attempted to execute work. This attempt should correspond to app development activity, such as <code>cf push</code>.</li>
+                <li>Recent logs for Auctioneer must show all but one of its instances are currently waiting on locks, and the active Auctioneer must show a record of when it last attempted to execute work. This attempt must correspond to app development activity, such as <code>cf push</code>.</li>
               </ul>
             <li>If you are unable to resolve the issue, pull logs from the Diego BBS and Auctioneer VMs, which includes the Locket service component logs, and contact Support.</li>
           </ol>
@@ -906,7 +906,7 @@ These sections describe Diego Locket metrics.
         <td>
           Total count of active presences. Presences are defined as the registration records that the Diego Cells maintain to advertise themselves to the platform.<br><br>
           <strong>Use:</strong> If the Active Presences count is far from the expected, there might be a problem with Diego.<br><br>
-          The number of active presences varies according to the number of Diego Cells deployed. Therefore, during purposeful scale adjustments to <%= vars.app_runtime_abbr %>, this alerting threshold should be adjusted.<br>
+          The number of active presences varies according to the number of Diego Cells deployed. Therefore, during purposeful scale adjustments to <%= vars.app_runtime_abbr %>, this alerting threshold can be adjusted.<br>
           Establish an initial threshold by observing the historical trends for the deployment over a brief period of time, Increase the threshold as more Diego Cells are deployed. During a rolling deploy, this metric shows variance during the BOSH lifecycle when Diego Cells are evacuated and restarted. Tolerable variance is within the bounds of the BOSH maximum in-flight range for the instance group.<br><br>
           <strong>Origin:</strong> Firehose<br>
           <strong>Type:</strong> Gauge<br>
@@ -950,7 +950,7 @@ These sections describe Diego Route Emitter metrics.
       <th width="25%">Description</th>
         <td>
           Time in ns that the active Route Emitter took to perform its synchronization pass.<br><br>
-          <strong>Use:</strong> Increases in this metric indicate that the Route Emitter may have trouble maintaining an accurate routing table to broadcast to the Gorouters. Tune alerting values to your deployment based on historical data and adjust based on observations over time. The suggested starting point is &ge; 5 for the yellow threshold and &ge; 10 for the critical threshold.<br><br>
+          <strong>Use:</strong> Increases in this metric indicate that the Route Emitter might have trouble maintaining an accurate routing table to broadcast to the Gorouters. Tune alerting values to your deployment based on historical data and adjust based on observations over time. The suggested starting point is &ge; 5 for the yellow threshold and &ge; 10 for the critical threshold.<br><br>
           <strong>Origin:</strong> Firehose<br>
           <strong>Type:</strong> Gauge (Float in ns)<br>
           <strong>Frequency:</strong> 60 s<br>
@@ -975,7 +975,7 @@ These sections describe Diego Route Emitter metrics.
               <li>Investigate the Route Emitter and Diego BBS logs for errors.</li>
               <li>Verify that app routes are functional by making a request to an app, pushing an app and pinging it, or if applicable, checking that your smoke tests have passed.</li>
             </ol>
-		      If one or a few jobs showing as impacted, there is likely a connectivity issue and the impacted job should be investigated further.
+		      If one or a few jobs showing as impacted, there is likely a connectivity issue and the impacted job must be investigated further.
         </td>
     </tr>
 </table>
@@ -1004,11 +1004,11 @@ These sections describe Gorouter metrics.
         <td>
           The number of file descriptors currently used by the Gorouter job.<br><br>
           <strong>Use:</strong> Indicates an impending issue with the Gorouter. Without proper mitigation, it is possible for an unresponsive app to eventually exhaust available Gorouter file descriptors and cause route starvation for other apps running on <%= vars.app_runtime_abbr %>. Under heavy load, this unmitigated situation can also result in the Gorouter losing its connection to NATS and all routes being pruned.<br><br>
-          While a drop in <code>gorouter.total_routes</code> or an increase in <code>gorouter.ms_since_last_registry_update</code> helps to surface that the issue may already be occurring, alerting on <code>gorouter.file_descriptors</code> indicates that such an issue is impending.<br><br>
+          While a drop in <code>gorouter.total_routes</code> or an increase in <code>gorouter.ms_since_last_registry_update</code> helps to surface that the issue might already be occurring, alerting on <code>gorouter.file_descriptors</code> indicates that such an issue is impending.<br><br>
           The Gorouter limits the number of file descriptors to 100,000 per job. Once the limit is met, the Gorouter is unable to establish any new connections.<br><br>
           To reduce the risk of DDoS attacks, <%= vars.company_name %> recommends doing one or both of the following:<br><br>
             <ul>
-              <li>Within <%= vars.app_runtime_abbr %>, set <strong>Maximum connections per back end</strong> to define how many requests can be routed to any particular app instance. This prevents a single app from using all Gorouter connections. The value specified should be determined by the operator based on the use cases for that foundation.</li>
+              <li>Within <%= vars.app_runtime_abbr %>, set <strong>Maximum connections per back end</strong> to define how many requests can be routed to any particular app instance. This prevents a single app from using all Gorouter connections. The value specified can be determined by the operator based on the use cases for that foundation.</li>
               <li>Add rate limiting at the load balancer level.</li>
             </ul>
           <strong>Origin:</strong> Firehose<br>
@@ -1047,7 +1047,7 @@ These sections describe Gorouter metrics.
       <th width="25%">Description</th>
         <td>
           The lifetime number of requests that have been rejected by the Gorouter VM due to the <code>Max Connections Per Backend</code> limit being reached across all tried back ends. The limit controls the number of concurrent TCP connections to any particular app instance and is configured within <%= vars.app_runtime_abbr %>.<br><br>
-          <strong>Use:</strong> Indicates that <%= vars.app_runtime_abbr %> is mitigating risk to other apps by self-protecting the platform against one or more unresponsive apps. Increases in this metric indicate the need to investigate and resolve issues with potentially unresponsive apps. A rapid rate of change upward is concerning and should be assessed further.<br><br>
+          <strong>Use:</strong> Indicates that <%= vars.app_runtime_abbr %> is mitigating risk to other apps by self-protecting the platform against one or more unresponsive apps. Increases in this metric indicate the need to investigate and resolve issues with potentially unresponsive apps. A rapid rate of change upward is concerning and can be assessed further.<br><br>
           <strong>Origin:</strong> Firehose<br>
           <strong>Type:</strong> Counter (Integer) <br>
           <strong>Frequency:</strong> 5 s<br>
@@ -1117,10 +1117,10 @@ These sections describe Gorouter metrics.
       <th width="25%">Description</th>
         <td>
           The time in milliseconds that represents the length of a request from the Gorouter's point of view. This timing starts when Gorouter recieves a request and stops when Gorouter finishes processing the response from the app. Long uploads, downloads, or app responses increase this time. This metric includes the request time to all back end endpoints, including both apps and routable system components like Cloud Controller and UAA.<br><br>
-          <strong>Use:</strong> Indicates the traffic profile of <%= vars.app_runtime_abbr %>. An alert value on this metric should be tuned to the specifics of the deployment and its underlying network considerations; a suggested starting point is 100 ms.<br><br>
+          <strong>Use:</strong> Indicates the traffic profile of <%= vars.app_runtime_abbr %>. An alert value on this metric must be tuned to the specifics of the deployment and its underlying network considerations; a suggested starting point is 100 ms.<br><br>
           <strong>Origin:</strong> Firehose<br>
           <strong>Type:</strong> Gauge (Float in ms)<br>
-          <strong>Frequency:</strong> Emitted per Gorouter request, emission should be constant on a running deployment
+          <strong>Frequency:</strong> Emitted per Gorouter request, emission must be constant on a running deployment
         </td>
     </tr>
     <tr>
@@ -1140,7 +1140,7 @@ These sections describe Gorouter metrics.
           Extended periods of high latency can point to several factors. The Gorouter latency measure includes network and back end latency impacts as well.<br><br>
             <ol>
               <li>First inspect logs for network issues and indications of misbehaving back ends.</li>
-              <li>If it appears that the Gorouter needs to scale due to ongoing traffic congestion, do not scale on the latency metric alone. You should also look at the CPU utilization of the Gorouter VMs and keep it within a maximum 60-70% range.</li>
+              <li>If it appears that the Gorouter needs to scale due to ongoing traffic congestion, do not scale on the latency metric alone. You can also look at the CPU utilization of the Gorouter VMs and keep it within a maximum 60-70% range.</li>
               <li>Resolve high utilization by scaling the Gorouter.</li>
 	      <li>Follow steps in the doc <a href="https://docs.cloudfoundry.org/adminguide/troubleshooting_slow_requests.html">Troubleshooting Slow Requests in CF</a>.
             </ol>
@@ -1271,8 +1271,8 @@ These sections describe Gorouter metrics.
         <td>
           The current total number of routes registered with the Gorouter, emitted per Gorouter instance<br><br>
           <strong>Use:</strong> The aggregation of these values across all Gorouters indicates uptake and gives a picture of the overall growth of the environment for capacity planning.<br><br>
-		      <%= vars.company_name %> also recommends alerting on this metric if the number of routes falls outside of the normal range for your deployment. Dramatic decreases in this metric volume may indicate a problem with the route registration process, such as an app outage, or that something in the route register management plane has failed.<br><br>
-          If visualizing these metrics on a dashboard, <code>gorouter.total_routes</code> can be helpful for visualizing dramatic drops. However, for alerting purposes, the <code>gorouter.ms_since_last_registry_update</code> metric is more valuable for quicker identification of Gorouter issues. Alerting thresholds for <code>gorouter.total_routes</code> should focus on dramatic increases or decreases out of expected range.<br><br>
+		      <%= vars.company_name %> also recommends alerting on this metric if the number of routes falls outside of the normal range for your deployment. Dramatic decreases in this metric volume might  indicate a problem with the route registration process, such as an app outage, or that something in the route register management plane has failed.<br><br>
+          If visualizing these metrics on a dashboard, <code>gorouter.total_routes</code> can be helpful for visualizing dramatic drops. However, for alerting purposes, the <code>gorouter.ms_since_last_registry_update</code> metric is more valuable for quicker identification of Gorouter issues. Alerting thresholds for <code>gorouter.total_routes</code> must focus on dramatic increases or decreases out of expected range.<br><br>
           <strong>Origin:</strong> Firehose<br>
           <strong>Type:</strong> Gauge (Float)<br>
           <strong>Frequency:</strong> 30 s<br>
@@ -1315,8 +1315,8 @@ These sections describe Gorouter metrics.
       <th width="25%">Description</th>
         <td>
           The lifetime number of requests completed by the UAA VM, emitted per UAA instance. This number includes health checks.<br><br>
-          <strong>Use:</strong> For capacity planning purposes, the aggregation of these values across all UAA instances can provide insight into the overall load that UAA is processing. <%= vars.company_name %> recommends alerting on unexpected spikes per UAA instance. Unusually high spikes, if they are not associated with an expected increase in demand, could indicate a DDoS risk and should be investigated.<br><br>
-          For performance and capacity management, look at the UAA Throughput metric as either a requests-completed-per-second or requests-completed-per-minute rate to determine the throughput per UAA instance. This helps you see trends in the throughput rate that may indicate a need to scale UAA instances. Use the trends you observe to tune the threshold alerts for this metric.<br><br>
+          <strong>Use:</strong> For capacity planning purposes, the aggregation of these values across all UAA instances can provide insight into the overall load that UAA is processing. <%= vars.company_name %> recommends alerting on unexpected spikes per UAA instance. Unusually high spikes, if they are not associated with an expected increase in demand, could indicate a DDoS risk and can be investigated.<br><br>
+          For performance and capacity management, look at the UAA Throughput metric as either a requests-completed-per-second or requests-completed-per-minute rate to determine the throughput per UAA instance. This helps you see trends in the throughput rate that might indicate a need to scale UAA instances. Use the trends you observe to tune the threshold alerts for this metric.<br><br>
           From performance and load testing of UAA, <%= vars.company_name %> has observed that while UAA endpoints can have different throughput behavior, once throughput reaches its peak value per VM, it stays constant and latency increases.<br><br>
           <strong>Origin:</strong> Firehose<br>
           <strong>Type:</strong> Gauge (Integer), emitted value increments over the lifetime of the VM like a counter<br>
@@ -1350,7 +1350,7 @@ These sections describe Gorouter metrics.
       <th width="25%">Description</th>
         <td>
           Time in milliseconds that UAA took to process a request that the Gorouter sent to UAA endpoints.<br><br>
-          <strong>Use:</strong> Indicates how responsive UAA has been to requests sent from the Gorouter. Some operations may take longer to process, such as creating bulk users and groups. It is important to correlate latency observed with the endpoint and evaluate this data in the context of overall historical latency from that endpoint. Unusual spikes in latency could indicate the need to scale UAA VMs.<br><br>
+          <strong>Use:</strong> Indicates how responsive UAA has been to requests sent from the Gorouter. Some operations might take longer to process, such as creating bulk users and groups. It is important to correlate latency observed with the endpoint and evaluate this data in the context of overall historical latency from that endpoint. Unusual spikes in latency could indicate the need to scale UAA VMs.<br><br>
           This metric is emitted only for the routers serving the UAA system component and is not emitted per isolation segment even if you are using isolated routers.<br><br>
           <strong>Origin:</strong> Firehose<br>
           <strong>Type:</strong> Gauge (Float in ms)<br>
@@ -1374,8 +1374,8 @@ These sections describe Gorouter metrics.
           Latency depends on the endpoint and operation being used. It is important to correlate the latency with the endpoint and evaluate this data in the context of the historical latency from that endpoint.
             <ol>
               <li>Inspect which endpoints requests are hitting. Use historical data to determine if the latency is unusual for that endpoint. For a list of UAA endpoints, see the <a href="http://docs.cloudfoundry.org/api/uaa/version/4.8.0/index.html">UAA API documentation</a>.</li>
-              <li>If it appears that UAA needs to be scaled due to ongoing traffic congestion, do not scale based on the latency metric alone. You should also ensure that the <code>system.cpu.user</code> metric for UAA stays in the suggested range of 80-90% maximum CPU utilization.</li>
-              <li>Resolve high utilization by scaling UAA VMs horizontally. To scale UAA, navigate to the <strong>Resource Config</strong> pane of the <%= vars.app_runtime_abbr %> tile and edit the number of your <strong>UAA</strong> VM instances.</li>
+              <li>If it appears that UAA needs to be scaled due to ongoing traffic congestion, do not scale based on the latency metric alone. You must also ensure that the <code>system.cpu.user</code> metric for UAA stays in the suggested range of 80-90% maximum CPU utilization.</li>
+              <li>Resolve high utilization by scaling UAA VMs horizontally. To scale UAA, go to the <strong>Resource Config</strong> pane of the <%= vars.app_runtime_abbr %> tile and edit the number of your <strong>UAA</strong> VM instances.</li>
             </ol>
         </td>
     </tr>
@@ -1390,7 +1390,7 @@ These sections describe Gorouter metrics.
         <td>
           The number of requests UAA is currently processing (in-flight requests), emitted per UAA instance.<br><br>
           <strong>Use:</strong> Indicates how many concurrent requests are currently in flight for the UAA instance. Unusually high spikes, if they are not associated with an expected increase in demand, could indicate a DDoS risk.<br><br>
-          From performance and load testing of the UAA component, <%= vars.company_name %> has observed that the number of concurrent requests impacts throughput and latency. The UAA Requests In Flight metric helps you see trends in the request rate that may indicate the need to scale UAA instances. Use the trends you observe to tune the threshold alerts for this metric.<br><br>
+          From performance and load testing of the UAA component, <%= vars.company_name %> has observed that the number of concurrent requests impacts throughput and latency. The UAA Requests In Flight metric helps you see trends in the request rate that might indicate the need to scale UAA instances. Use the trends you observe to tune the threshold alerts for this metric.<br><br>
           <strong>Origin:</strong> Firehose<br>
           <strong>Type:</strong> Gauge (Integer)<br>
           <strong>Frequency:</strong> 5 s<br>
@@ -1517,7 +1517,7 @@ These sections describe system metrics, or BOSH metrics.
       <th>Recommended response</th>
         <td>
           Investigate what is filling the jobs system partition.<br>
-          This partition should not typically fill because BOSH deploys jobs to use ephemeral and persistent disks.
+          This partition must not typically fill because BOSH deploys jobs to use ephemeral and persistent disks.
         </td>
     </tr>
 </table>
