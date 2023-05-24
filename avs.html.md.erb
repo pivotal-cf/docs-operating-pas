@@ -317,8 +317,8 @@ To install and configure the NSX-T Container Plug-In tile:
     * **NSX Manager Address**: The NSX-T Manager host address or IP address.
     * **Use Client Certificates or Username/Password**: Configure this setting as follows:
         <ol>
-            <li>If you are using VMware Workspace ONE Access, formerly called VMware Identity Manager (vIDM), then select **Client Certificate Authentication**.</li>
-            <li>Otherwise, select **Basic Authentication with Username and Password** and enter **NSX Manager Admin Username** and **Admin Password** credentials in the fields underneath.</li>
+            <li>If you are using VMware Workspace ONE Access, formerly called VMware Identity Manager (vIDM), then select <strong>Client Certificate Authentication</strong>.</li>
+            <li>Otherwise, select <strong>Basic Authentication with Username and Password</strong> and enter <strong>NSX Manager Admin Username</strong> and <strong>Admin Password</strong> credentials in the fields underneath.</li>
         </ol>
     * **NSX Manager CA Cert**: Obtain this certificate from NSX-T Manager as follows:
         <ol>
@@ -327,7 +327,7 @@ To install and configure the NSX-T Container Plug-In tile:
         </ol>
         ![alt-text="Obtain the NSX Manager CA Cert"](./images/nsx-t/nsx-t-tile-config-mgr.png)
 
-1. Open and configure the **NCP** (NSX-T Container Plugin) pane as follows:
+2. Open and configure the **NCP** (NSX-T Container Plugin) pane as follows:
   - **<%= vars.app_runtime_abbr %> Foundation Name**: If unsure, use `<%= vars.app_runtime_abbr %>`. If multiple foundations co-exist on the same NSX-T Manager, choose a unique string, such as `<%= vars.app_runtime_abbr %>-beta`. NCP creates artifacts, such as T1 routers and prefixes their names with this string for easy identification.
   - **Overlay Transport Zone**: A uniquely identifying string for the **Transport Zone** that you chose when you [created logical switches](#nsx-t-setup) for each network. This can be the name of the transport zone if no other zones in NSX-T share the same name, or else the UUID for the transport zone.
   - **Tier-0 Router**: A uniquely identifying string for the T0 router. This can be the tag string that you gave the router in NSX-T Manager if no other T0 routers in NSX-T share the same name, or else the UUID for the router.
@@ -343,9 +343,9 @@ To install and configure the NSX-T Container Plug-In tile:
 
     ![alt-text="NSX-T tile config: NCP"](./images/nsx-t/nsx-t-tile-config-ncp.png)
 
-2. In the **NSX Node Agent** pane, select the **Enable Debug Level of Logging for NSX Node Agent** check box.
+1. In the **NSX Node Agent** pane, select the **Enable Debug Level of Logging for NSX Node Agent** check box.
     ![alt-text="Enable the Debug Level of Logging for NSX Node Agent."](./images/nsx-t/nsx-t-tile-config-agent.png)
 
-1. Click **Save** and return to the **Installation Dashboard**.
+2. Click **Save** and return to the **Installation Dashboard**.
 
-1. After you have configured both the **<%= vars.app_runtime_abbr %>** tile and the **VMware NSX-T** tile, click **Review Pending Changes**, then **Apply Changes** to deploy <%= vars.app_runtime_abbr %> with NSX-T networking.
+3. After you have configured both the **<%= vars.app_runtime_abbr %>** tile and the **VMware NSX-T** tile, click **Review Pending Changes**, then **Apply Changes** to deploy <%= vars.app_runtime_abbr %> with NSX-T networking.
