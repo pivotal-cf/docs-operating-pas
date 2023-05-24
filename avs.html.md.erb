@@ -332,8 +332,8 @@ To install and configure the NSX-T Container Plug-In tile:
     * **NSX Manager Address**: The NSX-T Manager host address or IP address.
     * **Use Client Certificates or Username/Password**: Configure this setting as follows:
         <ol>
-            <li>If you are using VMware Workspace ONE Access, formerly called VMware Identity Manager (vIDM), then select **Client Certificate Authentication**.</li>
-            <li>Otherwise, select **Basic Authentication with Username and Password** and enter **NSX Manager Admin Username** and **Admin Password** credentials in the fields underneath.</li>
+            <li>If you are using VMware Workspace ONE Access, formerly called VMware Identity Manager (vIDM), then select <strong>Client Certificate Authentication</strong>.</li>
+            <li>Otherwise, select <strong>Basic Authentication with Username and Password</strong> and enter <strong>NSX Manager Admin Username</strong> and <strong>Admin Password</strong> credentials in the fields underneath.</li>
         </ol>
     * **NSX Manager CA Cert**: Obtain this certificate from NSX-T Manager as follows:
         <ol>
@@ -352,10 +352,9 @@ To install and configure the NSX-T Container Plug-In tile:
 
     ![alt-text="NSX-T tile config: NCP"](./images/nsx-t/nsx-t-tile-config-ncp.png)
 
-4. In the **NSX Node Agent** pane, select the **Enable Debug Level of Logging for NSX Node Agent** check box.
+1. In the **NSX Node Agent** pane, select the **Enable Debug Level of Logging for NSX Node Agent** check box.
     ![alt-text="Enable the Debug Level of Logging for NSX Node Agent."](./images/nsx-t/nsx-t-tile-config-agent.png)
 
-5. Click **Save** and return to the **Installation Dashboard**.
+2. Click **Save** and return to the **Installation Dashboard**.
 
-6. After you have configured both the **<%= vars.app_runtime_abbr %>** tile and the **VMware NSX-T** tile, click **Review Pending Changes**.
-7. Click **Apply Changes** to deploy <%= vars.app_runtime_abbr %> with NSX-T networking.
+3. After you have configured both the **<%= vars.app_runtime_abbr %>** tile and the **VMware NSX-T** tile, click **Review Pending Changes**, then **Apply Changes** to deploy <%= vars.app_runtime_abbr %> with NSX-T networking.
