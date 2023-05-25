@@ -221,7 +221,7 @@ To configure the Gorouter to use GCP Load Balancers:
 
     ![alt-text="The load balancer table shows three Load Balancers: pcf-router HTTPS load balancer, pcf-ssh TCP load balancer, and pcf-websockets TCP load balancer."](./images/gcp/config-lb.png)
 
-    You can see the SSH load balancer, the HTTP(S) load balancer, the TCP WebSockets load balancer, and the TCP router that you created in [Preparing to Deploy Ops Manager on GCP](https://docs.pivotal.io/ops-manager/2-10/gcp/prepare-env-manual.html).
+    You can see the SSH load balancer, the HTTP(S) load balancer, the TCP WebSockets load balancer, and the TCP router that you created in [Preparing to Deploy Ops Manager on GCP](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/2.10/vmware-tanzu-ops-manager/gcp-prepare-env-manual.html).
 
 2. Record the name of your SSH load balancer and your TCP WebSockets load balancer, `<%= vars.platform_code %>-wss-logs` and `<%= vars.platform_code %>-ssh-proxy`.
 
@@ -235,6 +235,7 @@ To configure the Gorouter to use GCP Load Balancers:
 
 6. Click the icon next to the **Router** job name to expand the row, showing a **Load Balancers** field and **INTERNET CONNECTED** check box underneath.
 
+7. In the **LOAD BALANCERS** field, enter a comma-separated list consisting of the name of your TCP WebSockets load balancer and the name of your HTTP(S) load balancer back end with the protocol prepended. For example, `tcp:<%= vars.platform_code %>-wss-logs,http:<%= vars.platform_code %>-http-lb-backend`.
 7. In the **Load Balancers** field, enter  consisting of the name of your TCP WebSockets load balancer and the name of your HTTP(S) load balancer back end with the protocol prepended. For example, `tcp:<%= vars.platform_code %>-wss-logs,http:<%= vars.platform_code %>-http-lb-backend`.
     <p class="note"><strong>Note:</strong> Do not add a space between key and value pairs in the <code>LOAD BALANCER</code> field, or it fails.</p>
 
