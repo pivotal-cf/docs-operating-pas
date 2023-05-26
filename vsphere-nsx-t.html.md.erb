@@ -25,9 +25,9 @@ Before deploying <%= vars.app_runtime_abbr %> with NSX-T networking, you must ha
    * [Product Interoperability Matrix: <%= vars.app_runtime_abbr %>, VMware NSX-T, and VMware NSX-T Container Plug-in for <%= vars.platform_name %>](https://interopmatrix.vmware.com) for supported version combinations.
    * [VMware NSX-T Data Center Documentation](https://docs.vmware.com/en/VMware-NSX-T-Data-Center/). In particular, review the _NSX Container Plug-in (NCP) Release Notes_ and _NSX-T Data Center Installation Guide_ for the versions of NCP and NSX-T that you want to install.
 
-* BOSH and <%= vars.ops_manager %> installed and configured on vSphere. For more information, see [Deploying <%= vars.ops_manager %> on vSphere](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/vsphere-deploy.html) and [Configuring BOSH Director on vSphere](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/vsphere-config.html).
+* BOSH and <%= vars.ops_manager %> installed and configured on vSphere. For more information, see [Deploying <%= vars.ops_manager %> on vSphere](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/2.10/vmware-tanzu-ops-manager/vsphere-deploy.html) and [Configuring BOSH Director on vSphere](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/2.10/vmware-tanzu-ops-manager/vsphere-config.html).
 
-* The [VMware NSX-T Container Plug-in for <%= vars.platform_name %> tile](https://network.tanzu.vmware.com/products/vmware-nsx-t) is downloaded from VMware Tanzu Network and imported to the <%= vars.ops_manager %> **Installation Dashboard**. For information about downloading and importing VMware Tanzu products to the Installation Dashboard, see [Add and Import Products](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-add-delete.html#add-import) in _Adding and Deleting Products_.
+* The [VMware NSX-T Container Plug-in for <%= vars.platform_name %> tile](https://network.tanzu.vmware.com/products/vmware-nsx-t) is downloaded from VMware Tanzu Network and imported to the <%= vars.ops_manager %> **Installation Dashboard**. For information about downloading and importing VMware Tanzu products to the Installation Dashboard, see [Add and Import Products](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/2.10/vmware-tanzu-ops-manager/install-add-delete.html#add-import) in _Adding and Deleting Products_.
 
 * The [<%= vars.app_runtime_abbr %> tile](https://network.tanzu.vmware.com/products/elastic-runtime) is downloaded from VMware Tanzu Network and imported to the <%= vars.ops_manager %> Installation Dashboard. The <%= vars.app_runtime_abbr %> tile must be in one of these states:
   * Configured but not currently deployed. You did not click **Review Pending Changes**, then **Apply Changes** on this version of <%= vars.app_runtime_abbr %>.
@@ -399,7 +399,7 @@ To enable NSX-T mode in the BOSH Director:
 
 1. Select **NSX Networking** below.
 
-2. Configure BOSH Director authentication to the NSX Manager by following the **NSX Networking** instructions in the [Step 2: Configure vCenter](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/vsphere-config.html#vcenter-config) section of _Configuring BOSH Director on vSphere_.
+2. Configure BOSH Director authentication to the NSX Manager by following the **NSX Networking** instructions in the [Step 2: Configure vCenter](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/2.10/vmware-tanzu-ops-manager/vsphere-config.html#vcenter-config) section of _Configuring BOSH Director on vSphere_.
 
 3. Verify that the **Use NSX-T Policy API** option is selected.
 
@@ -409,7 +409,7 @@ To enable NSX-T mode in the BOSH Director:
 
 1. If you have not already done so, download the <%= vars.app_runtime_abbr %> tile from [VMware Tanzu Network](https://network.tanzu.vmware.com/products/elastic-runtime) and import it to the **Installation Dashboard**.
   <br><br>
-  For instructions, see [Add and Import Products](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-add-delete.html#add-and-import-products-0).
+  For instructions, see [Add and Import Products](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/2.10/vmware-tanzu-ops-manager/install-add-delete.html#add-and-import-products-0).
 
     ![alt-text="Ops Manager Installation Dashboard with NSX-T tile"](./images/nsx-t/nsx-t-install-dash.png)
 
@@ -432,7 +432,7 @@ To enable NSX-T mode in the BOSH Director:
 
 To install and configure the tile:
 
-1. If you have not already done so, download the VMware NSX-T Container Plug-in for <%= vars.platform_name %> tile from [VMware Tanzu Network](https://network.tanzu.vmware.com/products/vmware-nsx-t) and import it to the **Installation Dashboard**. For instructions, see [Add and Import Products](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-add-delete.html#add-import).
+1. If you have not already done so, download the VMware NSX-T Container Plug-in for <%= vars.platform_name %> tile from [VMware Tanzu Network](https://network.tanzu.vmware.com/products/vmware-nsx-t) and import it to the **Installation Dashboard**. For instructions, see [Add and Import Products](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/2.10/vmware-tanzu-ops-manager/install-add-delete.html#add-import).
 ![alt-text="Installation Dashboard with NSX-T tile."](./images/nsx-t/nsx-t-install-dash.png)
 
     1. If you are using VMware Workspace ONE Access, formerly called VMware Identity Manager (vIDM), then select **Client Certificate Authentication**.
@@ -476,7 +476,7 @@ To upgrade <%= vars.app_runtime_abbr %> with NSX-T Networking:
 
 2. Download the desired version of VMware NSX-T Container Plug-in for <%= vars.platform_name %> tile from [VMware Tanzu Network](https://network.tanzu.vmware.com/products/vmware-nsx-t).
 
-3. In <%= vars.ops_manager %>, import the new version of the tile to the **Installation Dashboard**. For instructions, see [Adding and Importing Products](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-add-delete.html#add-import).
+3. In <%= vars.ops_manager %>, import the new version of the tile to the **Installation Dashboard**. For instructions, see [Adding and Importing Products](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/2.10/vmware-tanzu-ops-manager/install-add-delete.html#add-import).
 
 4. Click **Review Pending Changes** and review your changes.
 
