@@ -1,16 +1,16 @@
 ---
-title: Diego Network Communications
+title: Diego network communications
 owner: Diego
 ---
 
-This topic describes Diego internal network communication paths with other <%= vars.app_runtime_first %> components.
+The tables here show Diego internal network communication paths with other <%= vars.app_runtime_first %> (<%= app_runtime_abbr %>) components.
 
-For more information about Diego components and architecture, see [How Diego Pushes an App](../../concepts/diego/diego-architecture.html#diagram) in _Diego Components and Architecture_.
+For more information about Diego components and architecture, see [How Diego pushes an app](../../concepts/diego/diego-architecture.html#diagram) in _Diego Components and Architecture_.
 
 
-## <a id="inbound"></a> Inbound Communications
+## <a id="inbound"></a> Inbound communications
 
-The following table lists network communication paths that are inbound to Diego:
+The table below lists network communication paths that are inbound to Diego:
 
 | Source VM | Destination VM | Port | Transport Layer Protocol | App Layer Protocol | Security and Authentication |
 | --------- | -------------- | ---- | ------------------------ | ------------------ | ---------------------------- |
@@ -18,9 +18,9 @@ The following table lists network communication paths that are inbound to Diego:
 | cloud_controller (Routing API) | diego_database (Locket) | 8891 | TCP | HTTPS | Mutual TLS |
 
 
-## <a id="internal"></a> Diego Internal Communications
+## <a id="internal"></a> Diego internal communications
 
-The following table lists network communication paths that are internal for Diego:
+The table below lists network communication paths that are internal for Diego:
 
 | Source VM | Destination VM | Port | Transport Layer Protocol | App Layer Protocol | Security and Authentication |
 | --------- | -------------- | ---- | ------------------------ | ------------------ | ---------------------------- |
@@ -44,9 +44,9 @@ The following table lists network communication paths that are internal for Dieg
 <sup>&#8258;</sup>The Diego File Server is responsible for distributing non-sensitive, static platform assets to internal platform components.
 
 
-## <a id="outbound"></a> Outbound Communications
+## <a id="outbound"></a> Outbound communications
 
-The following table lists network communication paths that are outbound from Diego:
+The table below lists network communication paths that are outbound from Diego:
 
 | Source VM | Destination VM | Port | Transport Layer Protocol | App Layer Protocol | Security and Authentication |
 | --------- | -------------- | ---- | ------------------------ | ------------------ | ---------------------------- |
