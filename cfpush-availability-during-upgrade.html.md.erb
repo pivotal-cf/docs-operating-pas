@@ -1,24 +1,20 @@
 ---
-title: cf push Availability During TAS for VMs Upgrades
+title: cf push availability during TAS for VMs upgrades
 ---
 
-This topic describes what you can expect regarding the availability of the  `cf push` command during upgrades of <%= vars.app_runtime_first %>.
+
+Availability of `cf push` during <%= vars.app_runtime_abbr %> upgrades varies from release to release. Considerations that can affect `cf push` availability include Cloud Controller database (CCDB) migrations and the number of VMs in use. However, `cf push` is generally available for the duration of an upgrade.
 
 
-## <a id='overview'></a> Overview
+## <a id='single-vs-ha'></a> Impact on single VMs vs. high-availability infrastructure
 
-Availability of `cf push` during <%= vars.app_runtime_abbr %> upgrades varies from release to release. There are various considerations, such as Cloud Controller database (CCDB) migrations or the number of VMs in use, that can impact `cf push` availability. However, `cf push` is mostly available for the duration of an upgrade.
-
-
-## <a id='single-vs-ha'></a> Impact on Single VMs vs. High-Availability Infrastructure
-
-Having a single VM in use, such as a WebDAV, a Gorouter, a UAA, or a Cloud Controller, impacts whether `cf push` is unavailable during an upgrade.
+Having a single VM in use, such as a WebDAV, a Gorouter, a UAA, or a Cloud Controller, affects whether `cf push` is available during an upgrade.
 
 If you have scaled out your app to achieve high availability and are not using WebDAV, `cf push` is available for the entire duration of the upgrade. However, upgrades to certain versions of <%= vars.app_runtime_abbr %> sometimes require a CCDB schema or data migration, which might cause `cf push` to be unavailable while Cloud Controllers are rolling during the upgrade.
 
 
-## <a id='bbr-backup'></a> Availability During a BBR Backup
+## <a id='bbr-backup'></a> Availability during a BBR backup
 
-The Cloud Controller API is taken down during the `pre-backup-lock` stage of a BBR backup and put back up again during the `post-backup-unlock` stage. As a result, the `cf push` command becomes unavailable during that time. However, the backup that takes place between those stages is very short, no longer than a few minutes. The bulk of the BBR backup operation happens after the `post-backup-unlock` stage, so the Cloud Controller API and `cf push` are available for most of the duration of a BBR backup.
+The Cloud Controller API is taken down during the `pre-backup-lock` stage of a BBR backup and put back up again during the `post-backup-unlock` stage. As a result, the `cf push` command becomes unavailable during that time. However, the backup that takes place between those stages is very short, generally only a few minutes. The bulk of the BBR backup operation happens after the `post-backup-unlock` stage, so the Cloud Controller API and `cf push` are available for most of the duration of a BBR backup.
 
-The Uptimer tool can help you measure the  availability of the`cf push` command during an upgrade. For more information, see the [Uptimer](https://github.com/cloudfoundry/uptimer) repository on GitHub.
+The Uptimer tool can help you measure the availability of the`cf push` command during an upgrade. For more information, see the [Uptimer  repository](https://github.com/cloudfoundry/uptimer) on GitHub.
