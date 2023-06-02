@@ -98,9 +98,9 @@ This section describes how the Gorouter handles app requests when:
 
 In this case, when the Gorouter receives the request, it sends the traffic back to the load balancer to resolve DNS. The load balancer then sends the traffic back to the Gorouter.
 
-The following diagram illustrates the flow of the request and numbers the steps to indicate order of occurrence:
+The diagram below illustrates the flow of the request and numbers the steps to indicate order of occurrence.
 
-![A request makes multiple trips between the load balancer and Gorouter before reaching the route service. Four boxes are labeled as follows: Load Balancer, Gorouter, Route Service, and <%= vars.app_runtime_abbr %>. The Gorouter and route service box are inside of the <%= vars.app_runtime_abbr %> box to show that they are running inside of <%= vars.app_runtime_abbr %>. Arrows numbered 1-5 indicate the flow of the request in the following order: load balancer, Gorouter, load balancer, Gorouter, Gorouter service.](./images/default-internal.png)
+![alt-text="The flow of the Gorouter request."](./images/default-internal.png)
 
 ### <a id="bypass-internal"></a> Bypass Mode and Internal Route Service
 
@@ -111,7 +111,7 @@ This section describes how the Gorouter handles app requests when:
 
 In this case, when the Gorouter receives the request, it sends it directly to the route service. This assumes the Gorouter finds an existing route for the route service.
 
-The following diagram illustrates the flow of the request:
+The diagram below illustrates the flow of the request. Arrows indicate the flow of the request through platform components. A request goes directly from the load balancer to the Gorouter to the route service.
 
 ![alt-text=""](./images/bypass-internal.png)
 
@@ -139,6 +139,6 @@ This section describes how the Gorouter handles app requests when:
 
 In this case, the Gorouter sends traffic directly to the external route service without checking for an existing route.
 
-The following diagram illustrates the flow of the request:
+The diagram below illustrates the flow of the request. The arrows indicate the flow of the request through platform components. A request goes directly from the load balancer to the Gorouter to the route service.
 
 ![Arrows indicate the flow of the request through platform components. A request goes directly from the load balancer to the Gorouter to the route service.](./images/default-external.png)
