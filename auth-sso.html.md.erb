@@ -1,14 +1,11 @@
 ---
 breadcrumb: TAS for VMs Documentation
-title: Configuring Authentication and Enterprise SSO for TAS for VMs
+title: Configuring authentication and enterprise SSO for TAS for VMs
 owner: Identity
 ---
 
-This topic describes <%= vars.app_runtime_first %> authentication and single sign-on configuration with Lightweight Directory Access Protocol (LDAP) and Security Assertion Markup Language (SAML).
 
-## <a id='overview'></a> Overview
-
-By connecting <%= vars.app_runtime_abbr %> to SAML, LDAP, or OIDC external user store you can use the User Account and Authentication (UAA) server to delegate authentication to existing enterprise user stores.
+By connecting <%= vars.app_runtime_abbr %> to SAML, LDAP, or OIDC external user store, you can use the User Account and Authentication (UAA) server to delegate authentication to existing enterprise user stores.
 
 If your enterprise user store is exposed as a SAML, LDAP, or OIDC identity provider (IDP) for single sign-on (SSO), you can configure SSO to access Apps Manager and the Cloud Foundry Command Line Interface (cf CLI) without creating a new account or, if you use SAML or OIDC, without re-enter credentials.
 
@@ -18,6 +15,7 @@ For an explanation of the process used by the UAA server when it attempts to aut
 
 <p class='note'><strong>Note:</strong> When you integrate with an external IDP, such as LDAP, authentication within the UAA becomes chained. An authentication attempt with user credentials is first attempted against the UAA user store before the external provider, LDAP. For more information, see <a href="https://github.com/cloudfoundry/uaa/blob/master/docs/UAA-LDAP.md#chained-authentication">Chained Authentication</a> in the <em>User Account and Authentication LDAP Integration</em> documentation on GitHub.</p>
 
+<br>
 Use one of the following procedures to configure your deployment with SAML, LDAP, or OIDC.
 
 ## <a id="configure-saml"></a> Configure <%= vars.app_runtime_abbr %> to Use a SAML identity provider
