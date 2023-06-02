@@ -3,11 +3,9 @@ title: Key Performance Indicators
 owner: PCF Metrics Platform Monitoring
 ---
 
-This topic describes Key Performance Indicators (KPIs) that operators may want to monitor with their <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) deployment to help ensure it is in a good operational state.
 
-## <a id="overview"></a> Overview
 
-The KPIs in this topic are provided for operators to give general guidance on monitoring a <%= vars.app_runtime_abbr %> deployment using platform component and system (BOSH) metrics. Although many metrics are emitted from the platform, the KPIs are high-signal-value metrics that can indicate emerging platform issues.
+The KPIs described here are provided for operators to give general guidance on monitoring a <%= vars.app_runtime_abbr %> deployment using platform component and system (BOSH) metrics. Although many metrics are emitted from the platform, the KPIs are high-signal-value metrics that can indicate emerging platform issues.
 
 This alerting and response guidance has been shown to apply to most deployments. <%= vars.company_name %> recommends that operators continue to fine-tune the alert measures to their deployment by observing historical trends. <%= vars.company_name %> also recommends that operators expand beyond this guidance and create new, deployment-specific monitoring metrics, thresholds, and alerts based on learning from their deployments.
 
@@ -19,11 +17,11 @@ Therefore, VMware recommends using the following KPIs to identify when to scale 
 
 For more information about accessing metrics used in these key performance indicators, see <a href="../../loggregator/data-sources.html">Overview of Logging and Metrics</a>.
 
-## <a id="auctioneer"></a> Diego Auctioneer Metrics
+## <a id="auctioneer"></a> Diego auctioneer metrics
 
 These sections describe Diego Auctioneer metrics.
 
-### <a id="AuctioneerLRPAuctionsFailed"></a> Auctioneer App Instance (AI) Placement Failures
+### <a id="AuctioneerLRPAuctionsFailed"></a> Auctioneer app instance (AI) placement failures
 
 <table>
   <tr><th colspan="2" style="text-align: center;"><br>auctioneer.AuctioneerLRPAuctionsFailed<br><br></th></tr>
@@ -63,7 +61,7 @@ These sections describe Diego Auctioneer metrics.
     </tr>
 </table>
 
-### <a id="AuctioneerFetchStatesDuration"></a> Auctioneer Time to Fetch Diego Cell State
+### <a id="AuctioneerFetchStatesDuration"></a> Auctioneer time to fetch Diego Cell state
 
 <table>
   <tr><th colspan="2" style="text-align: center;"><br>auctioneer.AuctioneerFetchStatesDuration<br><br></th></tr>
@@ -99,7 +97,7 @@ These sections describe Diego Auctioneer metrics.
     </tr>
 </table>
 
-### <a id="AuctioneerLRPAuctionsStarted"></a> Auctioneer App Instance Starts
+### <a id="AuctioneerLRPAuctionsStarted"></a> Auctioneer app instance starts
 
 <table>
   <tr><th colspan="2" style="text-align: center;"><br>auctioneer.AuctioneerLRPAuctionsStarted<br><br></th></tr>
@@ -137,7 +135,7 @@ These sections describe Diego Auctioneer metrics.
   </tr>
 </table>
 
-### <a id="AuctioneerTaskAuctionsFailed"></a> Auctioneer Task Placement Failures
+### <a id="AuctioneerTaskAuctionsFailed"></a> Auctioneer task placement failures
 
 <table>
   <tr><th colspan="2" style="text-align: center;"><br>auctioneer.AuctioneerTaskAuctionsFailed<br><br></th></tr>
@@ -178,11 +176,11 @@ These sections describe Diego Auctioneer metrics.
 </table>
 
 
-## <a id="bbs"></a> Diego BBS Metrics
+## <a id="bbs"></a> Diego BBS metrics
 
 These sections describe Diego BBS metrics.
 
-### <a id="ConvergenceLRPDuration"></a> BBS Time to Run LRP Convergence
+### <a id="ConvergenceLRPDuration"></a> BBS time to run LRP convergence
 
 <table>
    <tr><th colspan="2" style="text-align: center;"><br>bbs.ConvergenceLRPDuration<br><br></th></tr>
@@ -220,7 +218,7 @@ These sections describe Diego BBS metrics.
     </tr>
 </table>
 
-### <a id="RequestLatency"></a> BBS Time to Handle Requests
+### <a id="RequestLatency"></a> BBS time to handle requests
 
 <table>
   <tr><th colspan="2" style="text-align: center;"><br>bbs.RequestLatency<br><br></th></tr>
@@ -260,7 +258,7 @@ These sections describe Diego BBS metrics.
     </tr>
 </table>
 
-### <a id="cc-diego-sync"></a> Cloud Controller and Diego in Sync
+### <a id="cc-diego-sync"></a> Cloud Controller and Diego in sync
 
 <table>
   <tr><th colspan="2" style="text-align: center;"><br>bbs.Domain.cf-apps<br><br></th></tr>
@@ -301,7 +299,7 @@ These sections describe Diego BBS metrics.
     </tr>
 </table>
 
-### <a id="LRPsExtra"></a> More App Instances Than Expected
+### <a id="LRPsExtra"></a> More app instances than expected
 
 <table>
   <tr><th colspan="2" style="text-align: center;"><br>bbs.LRPsExtra<br><br></th></tr>
@@ -338,7 +336,7 @@ These sections describe Diego BBS metrics.
         </tr>
 </table>
 
-### <a id="LRPsMissing"></a> Fewer App Instances Than Expected
+### <a id="LRPsMissing"></a> Fewer app instances than expected
 
 <table>
   <tr><th colspan="2" style="text-align: center;"><br>bbs.LRPsMissing<br><br></th></tr>
@@ -375,7 +373,7 @@ These sections describe Diego BBS metrics.
     </tr>
 </table>
 
-### <a id="bbs.CrashedActualLRPs"></a> Crashed App Instances
+### <a id="bbs.CrashedActualLRPs"></a> Crashed app instances
 
 <table>
   <tr><th colspan="2" style="text-align: center;"><br>bbs.CrashedActualLRPs<br><br></th></tr>
@@ -411,7 +409,7 @@ These sections describe Diego BBS metrics.
     </tr>
 </table>
 
-### <a id="1hraverageofbbs.LRPsRunning"></a> Running App Instances, Rate of Change
+### <a id="1hraverageofbbs.LRPsRunning"></a> Running app instances, rate of change
 
 <table>
   <tr><th colspan="2" style="text-align: center;"><br>1hr average of bbs.LRPsRunning – prior 1hr average of bbs.LRPsRunning<br><br></th></tr>
@@ -442,7 +440,7 @@ These sections describe Diego BBS metrics.
     </tr>
 </table>
 
-### <a id="bbs.BBSMasterElected"></a> BBS Master Elected
+### <a id="bbs.BBSMasterElected"></a> BBS master elected
 
 <table>
   <tr><th colspan="2" style="text-align: center;"><br>bbs.BBSMasterElected<br><br></th></tr>
@@ -480,11 +478,11 @@ These sections describe Diego BBS metrics.
 </table>
 
 
-## <a id="Cell"></a> Diego Cell Metrics
+## <a id="Cell"></a> Diego Cell metrics
 
 These sections describe Diego Cell metrics.
 
-### <a id="rep.CapacityRemainingMemory"></a> Remaining Memory Available — Diego Cell Memory Chunks Available
+### <a id="rep.CapacityRemainingMemory"></a> Remaining memory available — Diego Cell memory chunks available
 
 <table>
   <tr><th colspan="2" style="text-align: center;"><br>rep.CapacityRemainingMemory<br><br></th></tr>
@@ -541,7 +539,7 @@ These sections describe Diego Cell metrics.
     </tr>
 </table>
 
-### <a id="rep.CapacityRemainingMemory2"></a> Remaining Memory Available — Overall Remaining Memory Available
+### <a id="rep.CapacityRemainingMemory2"></a> Remaining memory available — Overall remaining memory available
 
 <table>
   <tr><th colspan="2" style="text-align: center;"><br>rep.CapacityRemainingMemory<br>(Alternative Use)<br><br></th></tr>
@@ -581,7 +579,7 @@ These sections describe Diego Cell metrics.
     </tr>
 </table>
 
-### <a id="rep.CapacityRemainingDiskChunks"></a> Remaining Disk Available — Diego Cell Disk Chunks Available
+### <a id="rep.CapacityRemainingDiskChunks"></a> Remaining disk available — Diego Cell disk chunks available
 
 <table>
   <tr><th colspan="2" style="text-align: center;"><br>rep.CapacityRemainingDisk<br><br></th></tr>
@@ -638,7 +636,7 @@ These sections describe Diego Cell metrics.
     </tr>
 </table>
 
-### <a id="CapacityRemainingDisk"></a> Remaining Disk Available - Overall Remaining Disk Available
+### <a id="CapacityRemainingDisk"></a> Remaining disk available - Overall remaining disk available
 
 <table>
   <tr><th colspan="2" style="text-align: center;"><br> rep.CapacityRemainingDisk<br>(Alternative Use)<br><br></th></tr>
@@ -679,7 +677,7 @@ These sections describe Diego Cell metrics.
     </tr>
 </table>
 
-### <a id="RepBulkSyncDuration"></a> Diego Cell Rep Time to Sync
+### <a id="RepBulkSyncDuration"></a> Diego Cell rep time to sync
 
 <table>
   <tr><th colspan="2" style="text-align: center;"><br>rep.RepBulkSyncDuration<br><br></th></tr>
@@ -715,7 +713,7 @@ These sections describe Diego Cell metrics.
     </tr>
 </table>
 
-### <a id="GardenHealthCheckFailed"></a> Garden Health Check Failed
+### <a id="GardenHealthCheckFailed"></a> Garden health check failed
 
 <table>
   <tr><th colspan="2" style="text-align: center;"><br>rep.GardenHealthCheckFailed<br><br></th></tr>
@@ -763,7 +761,7 @@ These sections describe Diego Cell metrics.
 </table>
 
 
-## <a id="locket"></a> Diego Locket Metrics
+## <a id="locket"></a> Diego Locket metrics
 
 These sections describe Diego Locket metrics.
 
@@ -857,7 +855,7 @@ These sections describe Diego Locket metrics.
     </tr>
 </table>
 
-### <a id="AuctioneerActiveLocks"></a> Locks Held by Auctioneer
+### <a id="AuctioneerActiveLocks"></a> Locks held by auctioneer
 
 <table>
   <tr><th colspan="2" style="text-align: center;"><br>auctioneer.LockHeld<br><br></th></tr>
@@ -897,7 +895,7 @@ These sections describe Diego Locket metrics.
     </tr>
 </table>
 
-### <a id="ActivePresences"></a> Active Presences
+### <a id="ActivePresences"></a> Active presences
 
 <table>
   <tr><th colspan="2" style="text-align: center;"><br>locket.ActivePresences<br><br></th></tr>
@@ -938,11 +936,11 @@ These sections describe Diego Locket metrics.
 </table>
 
 
-## <a id="route_emitter"></a> Diego Route Emitter Metrics
+## <a id="route_emitter"></a> Diego Route Emitter metrics
 
 These sections describe Diego Route Emitter metrics.
 
-### <a id="RouteEmitterSyncDuration"></a> Route Emitter Time to Sync
+### <a id="RouteEmitterSyncDuration"></a> Route Emitter time to sync
 
 <table>
   <tr><th colspan="2" style="text-align: center;"><br>route_emitter.RouteEmitterSyncDuration<br><br></th></tr>
@@ -991,11 +989,11 @@ When <%= vars.app_runtime_abbr %> uses an internal MySQL database, as configured
 
 <%= partial vars.path_to_partials + '/mysql/monitoring/kpis-metrics/all-kpis' %>
 
-## <a id="gorouter"></a> Gorouter Metrics
+## <a id="gorouter"></a> Gorouter metrics
 
 These sections describe Gorouter metrics.
 
-### <a id="file_descriptors"></a> Router File Descriptors
+### <a id="file_descriptors"></a> Router file descriptors
 
 <table>
   <tr><th colspan="2" style="text-align: center;"><br>gorouter.file_descriptors<br><br></th></tr>
@@ -1039,7 +1037,7 @@ These sections describe Gorouter metrics.
     </tr>
 </table>
 
-### <a id="exhausted_connections"></a> Router Exhausted Connections
+### <a id="exhausted_connections"></a> Router exhausted connections
 
 <table>
   <tr><th colspan="2" style="text-align: center;"><br>gorouter.backend_exhausted_conns<br><br></th></tr>
@@ -1076,7 +1074,7 @@ These sections describe Gorouter metrics.
     </tr>
 </table>
 
-### <a id="total_requests"></a> Router Throughput
+### <a id="total_requests"></a> Router throughput
 
 <table>
   <tr><th colspan="2" style="text-align: center;"><br>gorouter.total_requests<br><br></th></tr>
@@ -1109,7 +1107,7 @@ These sections describe Gorouter metrics.
     </tr>
 </table>
 
-### <a id="latency"></a> Router Handling Latency
+### <a id="latency"></a> Router handling latency
 
 <table>
   <tr><th colspan="2" style="text-align: center;"><br>gorouter.latency<br><br></th></tr>
@@ -1148,7 +1146,7 @@ These sections describe Gorouter metrics.
     </tr>
 </table>
 
-### <a id="mssincelastregistryupdate"></a> Time Since Last Route Register Received
+### <a id="mssincelastregistryupdate"></a> Time since last route register received
 
 <table>
   <tr><th colspan="2" style="text-align: center;"><br>gorouter.ms_since_last_registry_update<br><br></th></tr>
@@ -1187,7 +1185,7 @@ These sections describe Gorouter metrics.
     </tr>
 </table>
 
-### <a id="bad_gateways"></a> Router Error: 502 Bad Gateway
+### <a id="bad_gateways"></a> Router Error: 502 bad gateway
 
 <table>
   <tr><th colspan="2" style="text-align: center;"><br>gorouter.bad_gateways<br><br></th></tr>
@@ -1226,7 +1224,7 @@ These sections describe Gorouter metrics.
     </tr>
 </table>
 
-### <a id="responses.5xx"></a> Router Error: Server Error
+### <a id="responses.5xx"></a> Router Error: server error
 
 <table>
   <tr><th colspan="2" style="text-align: center;"><br>gorouter.responses.5xx<br><br></th></tr>
@@ -1262,7 +1260,7 @@ These sections describe Gorouter metrics.
     </tr>
 </table>
 
-### <a id="total_routes"></a> Number of Gorouter Routes Registered
+### <a id="total_routes"></a> Number of Gorouter routes registered
 
 <table>
   <tr><th colspan="2" style="text-align: center;"><br>gorouter.total_routes<br><br></th></tr>
@@ -1305,9 +1303,9 @@ These sections describe Gorouter metrics.
 </table>
 
 
-## <a id="uaa"></a> UAA Metrics
+## <a id="uaa"></a> UAA metrics
 
-### <a id="uaa_throughput"></a> UAA Throughput
+### <a id="uaa_throughput"></a> UAA throughput
 
 <table>
   <tr><th colspan="2" style="text-align: center;"><br>uaa.requests.global.completed.count<br><br></th></tr>
@@ -1342,7 +1340,7 @@ These sections describe Gorouter metrics.
     </tr>
 </table>
 
-### <a id="uaa_latency"></a> UAA Request Latency
+### <a id="uaa_latency"></a> UAA request latency
 
 <table>
   <tr><th colspan="2" style="text-align: center;"><br>gorouter.latency.uaa<br><br></th></tr>
@@ -1381,7 +1379,7 @@ These sections describe Gorouter metrics.
     </tr>
 </table>
 
-### <a id="uaa_requests_inflight"></a> UAA Requests In Flight
+### <a id="uaa_requests_inflight"></a> UAA requests in flight
 
 <table>
   <tr><th colspan="2" style="text-align: center;"><br>uaa.server.inflight.count<br><br></th></tr>
@@ -1414,13 +1412,13 @@ These sections describe Gorouter metrics.
 </table>
 
 
-## <a id="bosh"></a> System (BOSH) Metrics
+## <a id="bosh"></a> System (BOSH) metrics
 
 These sections describe system metrics, or BOSH metrics.
 
 <p class= "note"><strong>Note:</strong> BOSH system metrics appear in the Firehose in two different formats. The tables in this section list both formats. For more information, see <a href="https://docs.pivotal.io/application-service/2-8/release-notes/runtime-rn.html#duplicate-metrics">Duplicate Metrics Appear in the Firehose</a> in <em><%= vars.app_runtime_full %> v2.8 Release Notes</em>.</p>
 
-### <a id="healthy"></a> VM Health
+### <a id="healthy"></a> Virtual Machine (VM) health
 
 <table>
   <tr><th colspan="2" style="text-align: center;"><br>system.healthy<br>system_healthy<br><br></th></tr>
@@ -1488,7 +1486,7 @@ These sections describe system metrics, or BOSH metrics.
     </tr>
 </table>
 
-### <a id="disk.system.percent"></a> VM Disk Used
+### <a id="disk.system.percent"></a> VM disk used
 
 <table>
   <tr><th colspan="2" style="text-align: center;"><br>system.disk.system.percent<br>system_disk_system_percent<br><br></th></tr>
@@ -1522,7 +1520,7 @@ These sections describe system metrics, or BOSH metrics.
     </tr>
 </table>
 
-### <a id="disk.ephemeral.percent"></a> VM Ephemeral Disk Used
+### <a id="disk.ephemeral.percent"></a> VM ephemeral disk used
 
 <table>
   <tr><th colspan="2" style="text-align: center;"><br>system.disk.ephemeral.percent<br>system_disk_ephemeral_percent<br><br></th></tr>
@@ -1558,7 +1556,7 @@ These sections describe system metrics, or BOSH metrics.
     </tr>
 </table>
 
-### <a id="disk.persistent.percent"></a> VM Persistent Disk Used
+### <a id="disk.persistent.percent"></a> VM persistent disk used
 
 <table>
   <tr><th colspan="2" style="text-align: center;"><br>system.disk.persistent.percent<br>system_disk_persistent_percent<br><br></th></tr>
