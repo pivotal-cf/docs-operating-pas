@@ -3,18 +3,15 @@ title: Configuring CA as an Identity Provider
 owner: Identity
 ---
 
-This topic explains how to configure single sign-on (SSO) between CA and <%= vars.platform_name %>.
+Here are instructions for configuring single sign-on (SSO) between <%= vars.platform_name %> and CA Identity and Access Management.
 
-
-## <a id='overview'></a> Overview
-
-Partnership creation between CA and <%= vars.platform_name %> involves the following steps:
+Creating a partnership between CA and <%= vars.platform_name %> involves the following steps:
 
 1. Installing and configuring the prerequisites. For more information, see [Prerequisites](#prerequisites).
 
-1. Configuring CA SSO as an identity provider (IDP). For more information, see [Configure CA as the SAML Identity Provider for <%= vars.platform_name %>](#identity-provider).
+2. Configuring CA SSO as an identity provider (IDP). For more information, see [Configure CA as the SAML identity provider for <%= vars.platform_name %>](#identity-provider).
 
-1. Configuring the service provider (SP). For more information, see [Configure <%= vars.platform_name %> as the SAML Service Provider for CA Single Sign-On](#service-provider).
+3. Configuring the service provider (SP). For more information, see [Configure <%= vars.platform_name %> as the SAML service provider for CA single sign-on](#service-provider).
 
 
 ## <a id='prerequisites'></a> Prerequisites
@@ -36,7 +33,7 @@ To configure SSO between CA and <%= vars.platform_name %>, you must have:
 * An <%= vars.platform_name %> environment at https://console.SYSTEM-DOMAIN, where `SYSTEM-DOMAIN` is the system domain of your <%= vars.platform_name %> installation.
 
 
-## <a id='identity-provider'></a> Configuring CA as the SAML Identity Provider for <%= vars.platform_name %>
+## <a id='identity-provider'></a> Configuring CA as the SAML identity provider for <%= vars.platform_name %>
 
 To configure CA SSO as the SAML IDP for <%= vars.platform_name %>:
 
@@ -61,11 +58,11 @@ To configure CA SSO as the SAML IDP for <%= vars.platform_name %>:
 1. Click **Apply Changes**.
 
 
-## <a id='service-provider'></a> Configuring <%= vars.platform_name %> as the SAML Service Provider for CA Single Sign-On
+## <a id='service-provider'></a> Configuring <%= vars.platform_name %> as the SAML service provider for CA Single sign-on
 
 This section explains how to configure <%= vars.platform_name %> as the SAML SP for CA SSO.
 
-### <a id='idp-sp-config'></a> Configure Identity Provider and Service Provider Entities
+### <a id='idp-sp-config'></a> Configure identity provider and service provider entities
 
 To configure IDP and SP entities in CA SSO:
 
@@ -101,7 +98,7 @@ To configure IDP and SP entities in CA SSO:
 	    <p class="note"><strong>Note:</strong> <%= vars.platform_name %> signs the outgoing SAML authentication requests.</p>
 	1. Click **Save**.
 
-### <a id='ca-sso-pcf-config'></a> Configure Partnership Between CA SSO and <%= vars.platform_name %>
+### <a id='ca-sso-pcf-config'></a> Configure partnership between CA SSO and <%= vars.platform_name %>
 
 To configure a partnership between CA SSO and <%= vars.platform_name %>:
 
