@@ -1,39 +1,39 @@
 ---
-title: Network Security
+title: Network security
 owner: Security
 ---
 
-This topic describes some of the networking and routing security options for your <%= vars.app_runtime_first %> deployment.
+Here is a list of the networking and routing security options for your <%= vars.app_runtime_first %> (<%= app_runtime_abbr %>) deployment.
 
 
-## <a id="secure_traffic"></a> Securing Traffic and Controlling Routes
+## <a id="secure_traffic"></a> Securing traffic and controlling routes
 
 You can enable and configure a number of customization options to secure traffic in and out of your <%= vars.app_runtime_abbr %> deployment.
 
-* [TLS Connections in <%= vars.app_runtime_abbr %> Deployments](tls-info.html)
-* [Securing Traffic into <%= vars.app_runtime_abbr %>](../../adminguide/securing-traffic.html)
-* [Providing a Certificate for Your TLS Termination Point](../security_config.html)
-* [Enabling TCP Routing](../../adminguide/enabling-tcp-routing.html)
+* [TLS connections in <%= vars.app_runtime_abbr %> Deployments](tls-info.html)
+* [Securing traffic into <%= vars.app_runtime_abbr %>](../../adminguide/securing-traffic.html)
+* [Providing a certificate for your TLS termination point](../security_config.html)
+* [Enabling TCP routing](../../adminguide/enabling-tcp-routing.html)
 
-## <a id="use_ipsec"></a> Using the IPsec Add-On
+## <a id="use_ipsec"></a> Using the IPsec add-On
 
 The IPsec add-on for VMware Tanzu provides additional security to the network layer for each BOSH-deployed virtual machine (VM).
 
 The IPsec add-on secures network traffic within a deployment and provides internal system protection if a malicious actor breaches your firewall.
 
-* [Securing Data in Transit with the IPsec Add-on](http://docs.pivotal.io/addon-ipsec/)
-* [Rotating IPsec Credentials](http://docs.pivotal.io/addon-ipsec/credentials.html)
+* [Securing data in transit with the IPsec add-on](http://docs.pivotal.io/addon-ipsec/)
+* [Rotating IPsec credentials](http://docs.pivotal.io/addon-ipsec/credentials.html)
 * [Installing IPsec](http://docs.pivotal.io/addon-ipsec/installing.html)
 
-## <a id="net_commpaths"></a> Network Communication Paths in <%= vars.app_runtime_abbr %>
+## <a id="net_commpaths"></a> Network communication paths in <%= vars.app_runtime_abbr %>
 
-* [BOSH DNS Network Communications](bosh-dns-network-paths.html)
-* [Cloud Controller Network Communications](cc-network-paths.html)
-* [Container-to-Container Network Communications](c2c-network-paths.html)
-* [CredHub Network Communications](credhub-network-paths.html)
-* [Diego Network Communications](diego-network-paths.html)
-* [Loggregator Network Communications](loggregator-network-paths.html)
-* [MySQL Network Communications](mysql-network-paths.html)
-* [NATS Network Communications](nats-network-paths.html)
-* [Routing Network Communications](routing-network-paths.html)
-* [UAA Network Communications](uaa-network-paths.html)
+* [BOSH DNS network communications](bosh-dns-network-paths.html)
+* [Cloud Controller network communications](cc-network-paths.html)
+* [Container-to-Container network communications](c2c-network-paths.html)
+* [CredHub network communications](credhub-network-paths.html)
+* [Diego network communications](diego-network-paths.html)
+* [Loggregator network communications](loggregator-network-paths.html)
+* [MySQL network communications](mysql-network-paths.html)
+* [NATS network communications](nats-network-paths.html)
+* [Routing network communications](routing-network-paths.html)
+* [UAA network communications](uaa-network-paths.html)
