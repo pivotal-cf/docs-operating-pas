@@ -1,16 +1,16 @@
 ---
-title: Container-to-Container Networking Communications
+title: Container-to-container networking communications
 owner: CF for VMs Networking
 ---
 
-This topic describes container-to-container networking internal network communication paths with other <%= vars.app_runtime_first %> components.
+The tables here show the network communication paths to container-to-container networking in <%= vars.app_runtime_first %> (<%= app_runtime_abbr %>).
 
-For more information about container-to-container networking, see [Container-to-Container Networking](../../concepts/understand-cf-networking.html).
+For more information about container-to-container networking, see [Container-to-container networking](../../concepts/understand-cf-networking.html).
 
 
-## <a id="inbound"></a> Inbound Communications
+## <a id="inbound"></a> Inbound communications
 
-The following table lists network communication paths that are inbound to container-to-container networking.
+The table below lists network communication paths that are inbound to container-to-container networking.
 
 | Source VM | Destination VM | Port | Transport Layer Protocol | App Layer Protocol | Security and Authentication |
 | --------- | -------------- | ---- | ------------------------ | ------------------ | ---------------------------- |
@@ -20,9 +20,9 @@ The following table lists network communication paths that are inbound to contai
 | diego_cell (BOSH DNS Adapter) | diego_brain (Service Discovery Controller) | 8054 | TCP | HTTP | Mutual TLS |
 
 
-## <a id="outbound"></a> Outbound Communications
+## <a id="outbound"></a> Outbound communications
 
-The following table lists network communication paths that are outbound from container-to-container networking:
+The table below lists network communication paths that are outbound from container-to-container networking:
 
 | Source VM | Destination VM | Port | Transport Layer Protocol | App Layer Protocol | Security and Authentication |
 | --------- | -------------- | ---- | ------------------------ | ------------------ | ---------------------------- |
