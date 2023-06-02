@@ -100,7 +100,7 @@ In this case, when the Gorouter receives the request, it sends the traffic back 
 
 A request makes multiple trips between the load balancer and Gorouter before reaching the route service. Four boxes are labeled as follows: Load Balancer, Gorouter, Route Service, and <%= vars.app_runtime_abbr %>. The Gorouter and route service box are inside of the <%= vars.app_runtime_abbr %> box to show that they are running inside of <%= vars.app_runtime_abbr %>. Arrows numbered 1-5 indicate the flow of the request in the following order: load balancer, Gorouter, load balancer, Gorouter, Gorouter service.
 
-The following diagram illustrates the flow of the request and numbers the steps to indicate order of occurrence.
+The diagram below illustrates the flow of the request and numbers the steps to indicate order of occurrence.
 
 ![alt-text="The flow of the Gorouter request."](./images/default-internal.png)
 
@@ -113,7 +113,7 @@ This section describes how the Gorouter handles app requests when:
 
 In this case, when the Gorouter receives the request, it sends it directly to the route service. This assumes the Gorouter finds an existing route for the route service.
 
-The following diagram illustrates the flow of the request. Arrows indicate the flow of the request through platform components. A request goes directly from the load balancer to the Gorouter to the route service.
+The diagram below illustrates the flow of the request. Arrows indicate the flow of the request through platform components. A request goes directly from the load balancer to the Gorouter to the route service.
 
 ![alt-text="Request flow."](./images/bypass-internal.png)
 
@@ -130,7 +130,7 @@ In this case, when the Gorouter receives the request, it checks for an existing 
 
 A fake route service inside of <%= vars.app_runtime_abbr %> intercepts traffic intended for a route service outside of <%= vars.app_runtime_abbr %>. Five boxes are labeled as follows: Load Balancer, Gorouter, Route Service (example.com), Fake Route Service (example.com), and <%= vars.app_runtime_abbr %>. The Gorouter and fake route service boxes are inside of the <%= vars.app_runtime_abbr %> box to show that they are running inside of <%= vars.app_runtime_abbr %>. The arrows point to the load balancer and then the Gorouter to indicate the flow of traffic. The two arrows then point from the Gorouter: one to the fake route service and another to the route service. A red "X" indicates that the traffic does not go to the route service. It instead goes to the fake route service.
 
-The following diagram illustrates the flow of the request in the case that it is intercepted.
+The diagram below illustrates the flow of the request in the case that it is intercepted.
 
 ![alt-text="Flow of the request in the case that it is intercepted"](./images/bypass-external.png)
 
@@ -143,6 +143,6 @@ This section describes how the Gorouter handles app requests when:
 
 In this case, the Gorouter sends traffic directly to the external route service without checking for an existing route.
 
-The following diagram illustrates the flow of the request The arrows indicate the flow of the request through platform components. A request goes directly from the load balancer to the Gorouter to the route service.
+The diagram below illustrates the flow of the request The arrows indicate the flow of the request through platform components. A request goes directly from the load balancer to the Gorouter to the route service.
 
 ![alt-text="The flow of the request through platform components."](./images/default-external.png)
