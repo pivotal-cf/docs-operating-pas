@@ -1,9 +1,9 @@
 ---
-title: Reporting Instance Usage with Apps Manager
+title: Reporting instance usage with Apps Manager
 owner: Apps Manager
 ---
 
-This topic describes how to retrieve app, task, and service instance usage information using Apps Manager.
+You can retrieve app, task, and service instance usage information using Apps Manager using the Accounting Report or the Usage Report for all apps in your <%= vars.app_runtime_first %>.
 
 You can also retrieve app, task, and service instance usage information using the Usage service API, or the Cloud Foundry API from the Cloud Foundry Command Line Interface (cf CLI). For more information, see [Monitoring App, Task, and Service Instance Usage](../operating/accounting-report.html).
 
@@ -16,7 +16,7 @@ The Accounting Report displays instance usage information for all orgs in your [
 
 To access the Accounting Report:
 
-1. Log in to the Apps Manager as an admin. For more information, see [Logging In to Apps Manager](../operating/console-login.html)
+1. Log in to the Apps Manager as an admin. For more information, see [Logging in to Apps Manager](../operating/console-login.html)
 
 2. Select **Accounting Report**.
 
@@ -24,7 +24,7 @@ To access the Accounting Report:
 	<br><br>
 	**Max Concurrent** displays the largest number of instances in use at a time over the indicated time period. The Accounting Report calculates these values from the `start`, `stop`, and `scale` app usage events in Cloud Controller.
 
-    ![alt-text="The Accounting report shows the monthly count of App instances in use for all orgs (not including the system org."](./images/accounting-report.png)
+    ![alt-text="The Accounting report shows the monthly count of App instances in use for all orgs, not including the system org."](./images/accounting-report.png)
 
 
 ## <a id="usage-report"></a> View the Usage Report
@@ -51,4 +51,4 @@ To access the Usage Report:
 
     To display more detailed information about app, task, and service instance usage in a space, click the name of the space for an expanded view.
 
-    ![alt-text="Detailed information ia available."](./images/service-details.png)
+    ![alt-text=""](./images/service-details.png)
