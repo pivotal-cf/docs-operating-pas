@@ -3,14 +3,16 @@ title: Deploying TAS for VMs to AVS
 owner: Ops Manager
 ---
 
-This topic describes how to install <%= vars.app_runtime_first %> on Azure VMware Solution (AVS) with NSX-T internal networking, using the VMware NSX-T Container Plug-in.
+You can install <%= vars.app_runtime_first %> on Azure VMware Solution (AVS) with NSX-T internal networking, using the VMware NSX-T Container Plug-in.
 
-For more information about AVS, see the [Azure VMware Solution documentation](https://docs.microsoft.com/en-us/azure/azure-vmware/).
 
-## <a id='introduction'></a> Overview
+## <a id='introduction'></a> Azure VMware Solution
 
 AVS provides you with private clouds that contain vSphere clusters built from dedicated bare-metal Azure infrastructure.
-AVS is a VMware-validated solution with ongoing validation and testing of enhancements and upgrades. Microsoft manages and maintains private cloud infrastructure and software.
+
+AVS is a VMware-validated solution with ongoing validation and testing of enhancements and upgrades. Microsoft Corporation manages and maintains private cloud infrastructure and software.
+
+For more information about AVS, see the [Azure VMware Solution documentation](https://docs.microsoft.com/en-us/azure/azure-vmware/).
 
 All provisioned private clouds have vCenter Server, vSAN, vSphere, and NSX-T.
 
@@ -38,8 +40,7 @@ Before deploying <%= vars.app_runtime_abbr %> with NSX-T networking, you must ha
 
 * The URLs and user credentials for your AVS private cloud vCenter and NSX-T Manager. See [Connect to the local vCenter of your private cloud](https://docs.microsoft.com/en-us/azure/azure-vmware/tutorial-access-private-cloud#connect-to-the-local-vcenter-of-your-private-cloud) in the AVS documentation.
 
-
-## <a id='nsx-t-setup'></a> Configure NSX-T to Integrate with <%= vars.app_runtime_abbr %>
+## <a id='nsx-t-setup'></a> Configure NSX-T to integrate with <%= vars.app_runtime_abbr %>
 
 To set up NSX-T to integrate with <%= vars.app_runtime_abbr %>, complete these procedures:
 
@@ -51,13 +52,13 @@ To set up NSX-T to integrate with <%= vars.app_runtime_abbr %>, complete these p
 
 - [Configure Load Balancer](#nsx-t-load-balancer)
 
-### <a id='regenerate-nsx-t-cert'></a> Regenerate NSX-T Management TLS Certificate with a Valid SAN
+### <a id='regenerate-nsx-t-cert'></a> Regenerate NSX-T management TLS certificate with a valid SAN
 
 The AVS-deployed NSX-T Manager includes a self-signed TLS certificate with an invalid Subject Alternative Name (SAN). This causes issues when connecting from Ops Manager and the BOSH Director, so you must create a new certificate using the NSX-T Manager's fully qualified domain name (FQDN) or IP address as the new SAN.
 
 For instructions, see [Generate and Register the NSX-T Management TLS Certificate and Private Key](https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/1.12/tkgi/GUID-nsxt-install-tls-certs.html) in the <%= vars.k8s_runtime_full %> (<%= vars.k8s_runtime_abbr %>) documentation.
 
-### <a id='nsx-t-logical-switches'></a> Configure Logical Switches
+### <a id='nsx-t-logical-switches'></a> Configure logical switches
 
 To configure logical switches:
 
@@ -80,7 +81,7 @@ To configure logical switches:
 
 ![alt-text="Add a new logical switch."](./images/nsx-t/nsx-t-logical-switch.png)
 
-### <a id='nsx-t-routers'></a> Configure Routers
+### <a id='nsx-t-routers'></a> Configure routers
 
 To configure routers:
 
@@ -105,13 +106,15 @@ To configure routers:
 ![alt-text=""](./images/nsx-t/nsx-t-route-advertise.png)
 
 1. Allocate an IP block for <%= vars.app_runtime_abbr %> orgs.
-  1. From the NSX-T Manager, navigate to **Advanced Networking & Security**, then **Networking**, and **IPAM**. and click **+Add**.
+  1. From the NSX-T Manager, go to **Advanced Networking & Security**, then **Networking**, and **IPAM**. and click **+Add**.
   1. Enter a name (for example, `<%= vars.app_runtime_abbr %>-container-ip-block`). This IP block name is also used in the **VMware NSX-T** tile in the **NCP** section under **IP Blocks of Container Networks**.
   1. Enter a description, such as `Subnets are allocated from this pool to each newly-created org`.
   1. Enter a CIDR to allocate an address block large enough to accommodate all <%= vars.app_runtime_abbr %> apps. A `/14` CIDR is large enough for ~1,000 Orgs with ~250 apps each. If you are planning such a large foundation, see [VMware NSX-T <%= vars.app_runtime_abbr %> limits](https://configmax.vmware.com/guest?vmwareproduct=VMware%20NSX-T&release=NSX-T%20Data%20Center%202.4.0&categories=31-0) in the VMware documentation.
 ![alt-text=""](./images/nsx-t/nsx-t-ip-block.png)
 
-### <a id='nsx-t-load-balancer'></a> Configure Load Balancer
+![alt-text="Add a new IP block."](./images/nsx-t/nsx-t-ip-block.png)
+
+### <a id='nsx-t-load-balancer'></a> Configure load balancer
 
 To configure a load balancer:
 
@@ -258,8 +261,7 @@ Create the load balancer.
 10. Click **Actions** > **Attach to a Virtual Server**, and then select `pas-web-vs`. Repeat this procedure for the Virtual Servers `pas-tcp-vs` and `pas-ssh-vs`.
 11. Click **Action** > **Attach to a Logical Router**, and then select `T1-Router-<%= vars.app_runtime_abbr %>-Deployment`.
 
-
-## <a id='nsx-t-mode'></a> Enable NSX-T Mode in the BOSH Director
+## <a id='nsx-t-mode'></a> Enable NSX-T mode in the BOSH Director
 
 To enable NSX-T mode in the BOSH Director:
 
@@ -272,7 +274,7 @@ To enable NSX-T mode in the BOSH Director:
 1. Configure BOSH Director authentication to the NSX Manager by following the **NSX Networking** instructions
 in the [Step 2: Configure vCenter](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/vsphere-config.html#step-2-configure-vcenter-2) section of _Configuring BOSH Director on vSphere_.
 
-## <a id='external-net'></a> Configure <%= vars.app_runtime_abbr %> for External Container Networking
+## <a id='external-net'></a> Configure <%= vars.app_runtime_abbr %> for external container networking
 
 To configure <%= vars.app_runtime_abbr %> for external container networking:
 
@@ -290,7 +292,7 @@ To configure <%= vars.app_runtime_abbr %> for external container networking:
     2. Click the arrow next to each job to reveal the **NSX-T CONFIGURATION** column. See [Step 10: Resource Config Pane](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/vsphere-config.html#step-10-resource-config-pane-10) in _Configuring BOSH Director on vSphere_.
     3. Under **Logical Load Balancer**, enter a JSON-formatted structure to defining a list of `server_pools`  a VM extension for each of the three server pools: `pas-web-pool`, `pas-tcp-pool`, and `pas-ssh-pool`.
 
-## <a id='nsx-t-tile'></a> Install and Configure the NSX-T Container Plug-In
+## <a id='nsx-t-tile'></a> Install and configure the NSX-T container plug-in
 
 To install and configure the NSX-T Container Plug-In tile:
 
