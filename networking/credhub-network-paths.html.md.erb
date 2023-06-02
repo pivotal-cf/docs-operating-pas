@@ -1,17 +1,16 @@
 ---
-title: CredHub network communications
+title: CredHub Network Communications
 owner: CredHub
 ---
 
-
-The tables here show CredHub internal network communication paths with other <%= vars.app_runtime_first %> (<%= app_runtime_abbr %>) components.
+This topic describes CredHub internal network communication paths with other <%= vars.app_runtime_first %> components.
 
 For more information about CredHub, see [CredHub](https://docs.pivotal.io/credhub/index.html).
 
 
-## <a id="inbound"></a> Inbound communications
+## <a id="inbound"></a> Inbound Communications
 
-The table below lists network communication paths that are inbound to CredHub:
+The following table lists network communication paths that are inbound to CredHub:
 
 | Source VM | Destination VM | Port | Transport Layer Protocol | App Layer Protocol | Security and Authentication |
 | --------- | -------------- | ---- | ------------------------ | ------------------ | ---------------------------- |
@@ -23,9 +22,9 @@ The table below lists network communication paths that are inbound to CredHub:
 †Diego Cells use the certificate pairs generated for individual containers to authenticate with CredHub on behalf of apps.
 
 
-## <a id="outbound"></a> Outbound communications
+## <a id="outbound"></a> Outbound Communications
 
-The table below lists network communication paths that are outbound from CredHub:
+The following table lists network communication paths that are outbound from CredHub:
 
 | Source VM | Destination VM | Port | Transport Layer Protocol | App Layer Protocol | Security and Authentication |
 | --------- | -------------- | ---- | ------------------------ | ------------------ | ---------------------------- |
