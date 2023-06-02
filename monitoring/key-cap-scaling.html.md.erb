@@ -1,18 +1,14 @@
 ---
-title: Key Capacity Scaling Indicators
+title: Key capacity scaling indicators
 owner: PCF Metrics Platform Monitoring
 ---
-This topic describes key capacity scaling indicators that operators monitor to determine when they need to scale their
-<%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) deployments.
 
-
-## <a id='overview'></a> Overview
 
 <%= vars.company_name %> provides these indicators to operators as general guidance for capacity scaling. Each indicator is based on all platform metrics from all components. <br><br>This guidance is applicable to most <%= vars.app_runtime_abbr %> deployments. <%= vars.company_name %> recommends that operators fine-tune the suggested alert thresholds by observing historical trends for their deployments.
 
 For more information about accessing metrics used in these key capacity scaling indicators, see <a href="https://docs.vmware.com/en/VMware-Tanzu-Application-Service/3.0/tas-for-vms/data-sources.html">Overview of Logging and Metrics</a>.
 
-## <a id="cell"></a> Diego Cell Capacity Scaling Indicators
+## <a id="cell"></a> Diego Cell capacity scaling indicators
 
 There are three key capacity scaling indicators <%= vars.company_name %> recommends for a Diego Cell.
 
@@ -145,7 +141,7 @@ There are three key capacity scaling indicators <%= vars.company_name %> recomme
 </table>
 
 
-## <a id="doppler-server"></a> Firehose Performance Scaling Indicators
+## <a id="doppler-server"></a> Firehose performance scaling indicators
 
 <%= vars.company_name %> recommends three key capacity scaling indicators for monitoring Firehose performance.
 
@@ -291,7 +287,7 @@ There are three key capacity scaling indicators <%= vars.company_name %> recomme
 </table>
 
 
-## <a id="firehose-consumer"></a> Firehose Consumer Scaling Indicator
+## <a id="firehose-consumer"></a> Firehose consumer scaling indicator
 
 <%= vars.company_name %> recommends the following scaling indicator for monitoring the performance of consumers of the Firehose.
 
@@ -424,7 +420,7 @@ There are three key capacity scaling indicators <%= vars.company_name %> recomme
 </table>
 
 
-## <a id="scalable-syslog"></a> Syslog Drain Performance Scaling Indicators
+## <a id="scalable-syslog"></a> Syslog drain performance scaling indicators
 
 There is a single key capacity scaling indicator <%= vars.company_name %> recommends for Syslog Drain performance.
 
@@ -482,9 +478,9 @@ There is a single key capacity scaling indicator <%= vars.company_name %> recomm
 </table>
 
 
-## <a id="log-cache"></a> Log Cache Scaling Indicator
+## <a id="log-cache"></a> Log cache scaling indicator
 
-<%= vars.company_name %> recommends the following scaling indicator for monitoring the performance of Log Cache.
+<%= vars.company_name %> recommends the following scaling indicator for monitoring the performance of log cache.
 
 <table>
   <tr><th id="cache-duration" colspan="2" style="text-align: center;"><br>Log Cache Caching Duration<br><br></th></tr>
@@ -525,7 +521,7 @@ There is a single key capacity scaling indicator <%= vars.company_name %> recomm
 </table>
 
 
-## <a id="router"></a> Gorouter Performance Scaling Indicator
+## <a id="router"></a> Gorouter performance scaling indicator
 
 There is one key capacity scaling indicator <%= vars.company_name %> recommends for Gorouter performance.
 
@@ -578,7 +574,7 @@ There is one key capacity scaling indicator <%= vars.company_name %> recommends 
 </table>
 
 
-## <a id="UAA"></a> UAA Performance Scaling Indicator
+## <a id="UAA"></a> UAA performance scaling indicator
 
 There is one key capacity scaling indicator <%= vars.company_name %> recommends for UAA performance.
 
@@ -629,7 +625,7 @@ There is one key capacity scaling indicator <%= vars.company_name %> recommends 
 </table>
 
 
-## <a id="systemdiskpersist"></a> NFS/WebDAV Backed Blobstore
+## <a id="systemdiskpersist"></a> NFS/WebDAV backed blobstore
 
 There is one key capacity scaling indicator for external S3 external storage.
 
