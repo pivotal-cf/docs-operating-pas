@@ -1,13 +1,13 @@
 ---
-title: Restricting App Access to Internal TAS for VMs Components
+title: Restricting app access to internal TAS for VMs components
 owner: Security
 ---
 
-This topic describes how to secure the component virtual machines (VMs) of your <%= vars.app_runtime_first %> deployment from being accessed by apps.
+You can secure the virtual machines (VMs) component of your <%= vars.app_runtime_first %> deployment from being accessed by apps. Here are the instructions.
 
-## <a id='overview'></a> Overview
+## <a id='overview'></a> App access basics
 
-See the following list to understand the concepts for this topic:
+See the list below to interpert the concepts for this topic:
 
 * **How <%= vars.app_runtime_abbr %> determines where apps can send traffic**:
   * <%= vars.app_runtime_abbr %> uses _App Security Groups (ASGs)_, which are network policy rules specifying protocols, ports, and IP ranges that apply to outbound network connections initiated from apps. For more information, see [App Security Groups](../concepts/asg.html).
@@ -58,7 +58,7 @@ The following procedure requires that you have the latest release of [ASG Creato
 
 This procedure outlines how to apply ASGs that prevent apps running on your deployment from accessing internal <%= vars.app_runtime_abbr %> components.
 
-### <a name='network'></a> Step 1: Determine Your Network Layout
+### <a name='network'></a> Step 1: Determine your network layout
 
 The procedure for securing your deployment with ASGs varies depending on your network layout. To determine your network layout:
 
@@ -100,7 +100,7 @@ The procedure for securing your deployment with ASGs varies depending on your ne
 
 1. If your network layout includes two or more networks, continue to [Step 2: Ensure Access for <%= vars.app_runtime_abbr %> System Apps](#bind-default).
 
-### <a name='bind-default'></a> Step 2: Ensure Access for <%= vars.app_runtime_abbr %> System Apps
+### <a name='bind-default'></a> Step 2: Ensure access for <%= vars.app_runtime_abbr %> system apps
 
 Applying the default ASG to the `system` org provides network access to <%= vars.app_runtime_abbr %> system apps without restrictions, which enables them to continue functioning properly after you perform [Step 4: Remove the Deployment-wide Default ASG Binding](#unbind-default). To apply the default ASG to the `system` org:
 
@@ -118,7 +118,7 @@ Applying the default ASG to the `system` org provides network access to <%= vars
 
 For more information about staging and running sets, see the [ASG Sets](../concepts/asg.html#asg-sets) section of the _App Security Groups_ topic.
 
-### <a name='initial'></a> Step 3: Create New ASGs
+### <a name='initial'></a> Step 3: Create new ASGs
 
 This step outlines how to create ASGs that block apps from accessing <%= vars.app_runtime_abbr %> components and create any additional ASGs that allow apps to access the services they require.
 
@@ -132,7 +132,7 @@ To gather the CIDRs for each network in your deployment:
 
 1. Record the **CIDR** for each network.
 
-#### <a name='initial-asgs'></a> Part B: Create and Bind ASGs that Block Network Access
+#### <a name='initial-asgs'></a> Part B: Create and bind ASGs that block network access
 
 To create ASGs that block apps from sending traffic to the networks that host <%= vars.ops_manager %>,
 <%= vars.app_runtime_abbr %>, and, optionally, any installed services:
@@ -217,7 +217,7 @@ To create ASGs that block apps from sending traffic to the networks that host <%
 
 <p class="note"><strong>Note:</strong> To create and bind additional ASGs, see the <a href="../concepts/asg.html#asg-individual">Create ASGs</a> and <a href="../concepts/asg.html#binding-groups">Bind ASGs</a> sections of the <em>App Security Groups</em> topic.</p>
 
-#### <a name='service-access'></a> Part C: Create and Bind ASGs for Service Access
+#### <a name='service-access'></a> Part C: Create and bind ASGs for service access
 
 <p class="note"><strong>Note:</strong> This part is only necessary if you blocked apps from a network that hosts services in the previous part. If you did not block apps from a network that hosts services, proceed to <a href="#unbind-default">Step 4: Remove the Default ASG</a>.</p>
 
@@ -227,7 +227,7 @@ Now that you have created ASGs to secure the <%= vars.ops_manager %>, <%= vars.a
 
 For more information about creating and binding ASGs, see the [Managing ASGs with the cf CLI](../concepts/asg.html#procedures) and [Typical ASGs](../concepts/asg.html#typical-groups) sections of the _App Security Groups_ topic.
 
-### <a name='unbind-default'></a> Step 4: Remove the Default ASG
+### <a name='unbind-default'></a> Step 4: Remove the default ASG
 
 Now that you have bound new ASGs to determine outbound traffic rules, you no longer need the default ASG bindings that allow apps to send traffic to any IP address. To remove the default ASG:
 
@@ -243,7 +243,7 @@ Now that you have bound new ASGs to determine outbound traffic rules, you no lon
     cf unbind-running-security-group default_security_group
     ```
 
-### <a name='restart'></a> Step 5: Restart your Apps
+### <a name='restart'></a> Step 5: Restart your apps
 
 To apply the ASG changes, you must restart all of the apps in your deployment.
 To mitigate app downtime during the restart, <%= vars.company_name %> recommends a blue-green deployment strategy.
