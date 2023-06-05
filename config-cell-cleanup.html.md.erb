@@ -1,23 +1,23 @@
 ---
-title: Configuring Diego Cell Disk Cleanup Scheduling
+title: Configuring Diego Cell disk cleanup scheduling
 owner: Garden
 ---
 
-This topic describes how to configure disk cleanup scheduling on Diego Cells in <%= vars.platform_name %>.
-
-
-## <a id='overview'></a> Overview
-
-<%= vars.platform_name %> isolates app instances (AIs) from each other using containers that run inside Diego Cells. Containers enforce a set of isolation layers, including file system isolation. A <%= vars.platform_name %> container file system can either be a <%= vars.platform_name %> stack or the result of pulling a Docker image.
-
-For performance reasons, the Diego Cells cache the Docker image layers and the <%= vars.platform_name %> stacks used by running AIs. When <%= vars.platform_name %> destroys an AI or reschedules an AI to a different Diego Cell, a chance exist that certain Docker image layers or an old <%= vars.platform_name %> stack becomes unused. If <%= vars.platform_name %> does not clean these unused layers, the cell ephemeral disk slowly fills.
-
-Disk cleanup is the process of removing unused layers from the Diego Cell disk. The disk cleanup process removes all unused Docker image layers and old <%= vars.platform_name %> Stacks, regardless of their size or age.
+Disk cleanup is the process of removing unused layers from the Diego Cell disk. The disk cleanup process removes all unused Docker image layers and old <%= vars.platform_name %> stacks, regardless of their size or age.
 
 To perform a detailed analysis of disk usage in your <%= vars.app_runtime_full %> deployment, see [Examining GrootFS Disk Usage](../adminguide/examining_grootfs_disk.html).
 
+This article describes how to configure disk cleanup scheduling on Diego Cells in <%= vars.platform_name %>.
 
-## <a id='options'></a> Options for Disk Cleanup
+
+## <a id='overview'></a> Why disk cleanup is needed
+
+<%= vars.platform_name %> isolates app instances (AIs) from each other using containers that run inside Diego Cells. Containers enforce a set of isolation layers, including file system isolation. A <%= vars.platform_name %> container file system can either be a <%= vars.platform_name %> stack or the result of pulling a Docker image.
+
+For performance reasons, the Diego Cells cache the Docker image layers and the <%= vars.platform_name %> stacks used by running AIs. When <%= vars.platform_name %> destroys an AI or reschedules an AI to a different Diego Cell, certain Docker image layers or an old <%= vars.platform_name %> stack becomes unused. If <%= vars.platform_name %> does not clean these unused layers, the cell ephemeral disk slowly fills.
+
+
+## <a id='options'></a> Options for disk cleanup
 
 <%= vars.platform_name %> provides the following options for scheduling the disk cleanup process on Diego Cells in the **App Containers** pane of the <%= vars.app_runtime_abbr %> tile:
 
@@ -37,7 +37,7 @@ For <%= vars.platform_name %> installations that primarily run buildpack-based a
 
 For <%= vars.platform_name %> installations that primarily run Docker images, or both Docker images and buildpack-based apps, <%= vars.company_name %> recommends selecting the **Clean up disk space once usage fills disk** option.
 
-### <a id='choosing-a-reserve'></a> Calculating a Reserve
+### <a id='choosing-a-reserve'></a> Calculating a reserve
 
 By default, the space reserved for other jobs is set to a reasonable value for the majority of <%= vars.platform_name %> deployments. The reserve default value accounts for the most typical deployment case where the only other component that writes to `/var/vcap/data` is the Diego executor cache.
 
@@ -49,7 +49,7 @@ For more information on disk usage and garbage collection in GrootFS, see [Groot
 </p>
 
 
-## <a id='applying-configuration'></a> Configure Disk Cleanup Scheduling
+## <a id='applying-configuration'></a> Configure disk cleanup scheduling
 
 1. Go to the <%= vars.platform_name %> Ops Manager **Installation Dashboard**.
 
@@ -61,7 +61,7 @@ For more information on disk usage and garbage collection in GrootFS, see [Groot
 
 1. Click **Save**.
 
-### <a id="next"></a> Next Steps
+### <a id="next"></a> Next steps
 
 If you are configuring <%= vars.app_runtime_abbr %> for the first time, return to your specific IaaS configuration to continue the installation process.
 

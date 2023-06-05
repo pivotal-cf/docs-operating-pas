@@ -1,19 +1,15 @@
 ---
-title: Configuring Proxy Settings for All Apps
+title: Configuring proxy settings for all apps
 owner: CF for VMs Networking
 ---
 
-This topic describes how to globally configure proxy settings for all apps in your <%= vars.platform_name %> deployment.
-
-
-## <a id='overview'></a> Overview
 
 Some environments restrict access to the Internet by requiring traffic to pass through an HTTP or HTTPS proxy. <%= vars.platform_name %> operators can use the Cloud Foundry Command Line Interface (cf CLI) to provide the proxy settings to all apps, including system apps and service brokers.
 
 <p class="note"><strong>Note:</strong> Incorrectly configuring proxy settings can prevent apps from connecting to the Internet or accessing required resources. They can also cause errands to fail and break system apps and service brokers. Although errands, system apps, and service brokers do not need to connect to the Internet, they often need to access other resources in <%= vars.platform_name %>. Incorrect proxy settings can break these connections.</p>
 
 
-## <a id='set-env-variables'></a> Set Environment Variables
+## <a id='set-env-variables'></a> Set environment variables
 
 To globally configure proxy settings for <%= vars.platform_name %> apps, you must set three environment variables for both the staging environment variable group and the running environment variable group.
 
@@ -99,7 +95,7 @@ To globally configure proxy settings for <%= vars.platform_name %> apps:
 
 This section describes solutions to try if an app fails after you apply the global proxy settings.
 
-### <a id='exclude-app'></a> Exclude an App From Global Proxy Settings
+### <a id='exclude-app'></a> Exclude an app from global proxy settings
 
 If your app fails, try instructing the app to ignore the global proxy settings.
 
@@ -126,9 +122,9 @@ To manually unset the proxy environment variables for the failing app:
     ```
     Where `APP-NAME` is the name of your app.
 
-### <a id='change-case'></a> Change Case of HTTP
+### <a id='change-case'></a> Change case of HTTP environment variables
 
-Your app and language runtime might be case-sensitive. Try using the steps in [Set Environment Variables](#set-env-variables) using uppercase for `HTTP_PROXY`, `HTTPS_PROXY`, and `NO_PROXY` instead of lowercase, as in the following example:
+Your app and language runtime might be case-sensitive. Try using the steps in [Set environment variables](#set-env-variables) using uppercase for `HTTP_PROXY`, `HTTPS_PROXY`, and `NO_PROXY` instead of lowercase, as in the following example:
 
 ```
 cf set-staging-environment-variable-group '{"HTTP_PROXY": "http://PROXY:8080/", "HTTPS_PROXY": "http://PROXY:8080/", "NO_PROXY": "DNS-SUFFIX-OR-IP-ADDRESS,DNS-SUFFIX-OR-IP-ADDRESS"}'.
@@ -139,10 +135,10 @@ Where:
 * `PROXY` is your proxy.
 * `DNS-SUFFIX-OR-IP-ADDRESS` is a DNS suffix or IP address that can be accessed without passing through the proxy.
 
-### <a id='check-proxy-settings'></a> Check Proxy Settings
+### <a id='check-proxy-settings'></a> Check proxy settings
 
 If you have set up your proxy so that it can only send traffic to the Internet, a request to an internal resource like <%= vars.platform_name %> fails. You must set `no_proxy` so that traffic destined for <%= vars.platform_name %> and other internal resources is sent directly and does not go through the proxy. For instance, setting `no_proxy` to include your system and app domains will ensure that requests destined for those domains are sent directly.
 
-### <a id='verify'></a> Verify Interpretation
+### <a id='verify'></a> Verify interpretation
 
 The interpretation of `no_proxy` depends on the app and the language runtime. Most support `no_proxy`, but the specific implementation can vary. For example, some match DNS names that end with the value set in `no_proxy`: `example.com` can match `test.example.com`. Others support the use of the asterisk as a wildcard to provide basic pattern matching in DNS names: `*.example.com` can match `test.example.com`. Most apps and language runtimes do not support pattern matching and wildcards for IP addresses.
