@@ -1,9 +1,9 @@
 ---
-title: Customizing Platform Log Forwarding
+title: Customizing platform log forwarding
 owner: Platform Logging
 ---
 
-You can configure <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) to forward logs to remote endpoints using the syslog protocol defined in [RFC 5424](https://tools.ietf.org/html/rfc5424). For more information about enabling log forwarding, see [Configure System Logging](configure-pas.html#sys-logging) in _Configuring <%= vars.app_runtime_abbr %>_.
+You can configure <%= vars.app_runtime_first%> to forward logs to remote endpoints using the syslog protocol defined in [RFC 5424](https://tools.ietf.org/html/rfc5424). For more information about enabling log forwarding, see [Configure system logging](configure-pas.html#sys-logging) in _Configuring <%= vars.app_runtime_abbr %>_.
 
 <%= vars.app_runtime_abbr %> annotates forwarded messages with structured data. This structured data identifies the originating BOSH Director, deployment, instance group, availability zone, and instance ID. All logs forwarded from BOSH jobs have their PRI set to `14`, representing **Facility: user-level messages** and **Informational: informational messages**, as defined in [RFC 5424 Section 6.2.1](https://tools.ietf.org/html/rfc5424#section-6.2.1). This PRI value might not reflect the originally intended PRI of the log.
 
@@ -73,7 +73,7 @@ Logs filtered out before forwarding remain on the local disk, where the BOSH job
 
 <p class='note'><strong>Note:</strong> <%= vars.app_runtime_abbr %> requires a valid custom rule to forward logs. If your custom rule contains syntax errors, <%= vars.app_runtime_abbr %> forwards no logs.</p>
 
-### <a id='forward-job'></a> Forward Only Logs From a Certain Job
+### <a id='forward-job'></a> Forward only logs from a certain job
 
 This rule filters out logs unless they originate from the `uaa` job:
 
@@ -81,7 +81,7 @@ This rule filters out logs unless they originate from the `uaa` job:
 if ($app-name != "uaa") then stop
 ```
 
-### <a id='exclude-content'></a> Exclude Logs With Certain Content
+### <a id='exclude-content'></a> Exclude logs with certain content
 
 This rule filters out logs that contain "DEBUG" in the body.
 
