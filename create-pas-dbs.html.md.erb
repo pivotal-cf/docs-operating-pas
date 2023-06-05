@@ -1,19 +1,16 @@
 ---
-title: Creating Databases for TAS for VMs
+title: Creating databases for TAS for VMs
 owner: Releng
 ---
 
-This topic provides an example procedure for creating the necessary databases
-on your external database instance so that you can deploy <%= vars.app_runtime_full %>
-(<%= vars.app_runtime_abbr %>) with an external database.
+Here is an example procedure for creating the necessary databases
+on your external database instance so that you can deploy <%= vars.app_runtime_first %> with an external database.
 
-<p class="note warning"><strong>Caution:</strong> Protect whichever database you use in your deployment
-   with a password.
-</p>
+<p class="note warning"><strong>Caution:</strong> Use a password to protect the database you use in your deployment.</p>
 
 To create your <%= vars.app_runtime_abbr %> databases, do the following:
 
-<p class='note'><strong>Note:</strong> Exact configurations depend on your database provider. The following procedure uses AWS RDS as an example.</p>
+<p class='note'><strong>Note:</strong> Exact configurations depend on your database provider. The following example procedure is for AWS RDS.</p>
 
 1. Add the `ubuntu` account key pair from your IaaS deployment to your local SSH profile
    so that you can access the <%= vars.ops_manager_full %> VM.
@@ -21,15 +18,15 @@ To create your <%= vars.app_runtime_abbr %> databases, do the following:
 
     <pre class="terminal">$ ssh-add aws-keypair.pem</pre>
 
-1. SSH in to your <%= vars.ops_manager %> using the <%= vars.ops_manager %> FQDN and the username `ubuntu`:
+2. SSH in to your <%= vars.ops_manager %> using the <%= vars.ops_manager %> FQDN and the username `ubuntu`:
 
     <pre class="terminal">$ ssh ubuntu@OPS-MANAGER-FQDN</pre>
 
-1. Log in to your MySQL database instance using the appropriate hostname and user login values configured in your IaaS account. For example, to log in to your AWS RDS instance, run the following MySQL command:
+3. Log in to your MySQL database instance using the appropriate hostname and user login values configured in your IaaS account. For example, to log in to your AWS RDS instance, run the following MySQL command:
 
      <pre class="terminal">$ mysql --host=RDSHOSTNAME --user=RDSUSERNAME --password=RDSPASSWORD</pre>
 
-1. Run the following MySQL commands to create databases for the eleven
+4. Run the following MySQL commands to create databases for the eleven
    <%= vars.app_runtime_abbr %> components that require a relational database:
   <pre class="terminal">CREATE database ccdb;
   CREATE database notifications;
