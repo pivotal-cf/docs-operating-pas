@@ -1,21 +1,18 @@
 ---
-title: Configuring PingFederate as an Identity Provider
+title: Configuring PingFederate as an identity provider
 owner: Identity
 ---
 
-This topic explains how to configure single sign-on (SSO) between PingFederate and <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>).
+Here are instructions for configuring single sign-on (SSO) between PingFederate and <%= vars.app_runtime_first %>.
 
-
-## <a id='overview'></a> Overview
-
-Partnership creation between PingFederate and <%= vars.app_runtime_abbr %> involves the following steps:
+You can create an SSO partnership between PingFederate and <%= vars.app_runtime_abbr %> using the following steps:
 
 1. Configuring PingFederate as an identity provider (IDP). For more information, see [Configure PingFederate as the SAML Identity Provider for <%= vars.app_runtime_abbr %>](#pas).
 
-1. Configuring the service provider (SP). For more information, see [Configure <%= vars.app_runtime_abbr %> as the SAML Service Provider for PingFederate](#ping-federate).
+2. Configuring the service provider (SP). For more information, see [Configure <%= vars.app_runtime_abbr %> as the SAML Service Provider for PingFederate](#ping-federate).
 
 
-## <a id='pas'></a> Configure PingFederate as the SAML Identity Provider for <%= vars.app_runtime_abbr %>
+## <a id='pas'></a> Configure PingFederate as the SAML identity provider for <%= vars.app_runtime_abbr %>
 
 To configure PingFederate as the SAML IDP for your <%= vars.app_runtime_abbr %> tile:
 
@@ -29,7 +26,7 @@ To configure PingFederate as the SAML IDP for your <%= vars.app_runtime_abbr %> 
 1. Follow the procedure in [Configure <%= vars.app_runtime_abbr %> as a Service Provider for SAML](auth-sso.html#configure-pcf-for-saml) in _Configuring Authentication and Enterprise SSO for <%= vars.app_runtime_abbr %>_ to set the IDP metadata on <%= vars.app_runtime_abbr %>.
 
 
-## <a id='ping-federate'></a> Configure <%= vars.app_runtime_abbr %> as the SAML Service Provider for PingFederate
+## <a id='ping-federate'></a> Configure <%= vars.app_runtime_abbr %> as the SAML service provider for PingFederate
 
 To configure <%= vars.app_runtime_abbr %> as the SAML SP for PingFederate:
 
