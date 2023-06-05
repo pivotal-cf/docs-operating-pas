@@ -3,21 +3,17 @@ title: Scaling TAS for VMs
 owner: RelEng
 ---
 
-This topic describes how to scale <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) for different deployment scenarios.
+Here are instructions for scaling <%= vars.app_runtime_first %> for different deployment scenarios.
 
-For information about capacity scaling indicators for <%= vars.app_runtime_abbr %>, see <a href="https://docs.vmware.com/en/VMware-Tanzu-Application-Service/2.11/tas-for-vms/monitoring-key-cap-scaling.html
-">Key Capacity Scaling Indicators</a>.
+For information about capacity scaling indicators for <%= vars.app_runtime_abbr %>, see [Key capacity scaling indicators](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/<% vars.current_major_version %>/tas-for-vms/monitoring-key-cap-scaling.html).
 
 <%= vars.app_runtime_abbr %> defaults to a highly available resource configuration.
 For more information, see [High Availability in <%= vars.app_runtime_abbr %>](./../concepts/high-availability.html).
 
-
-## <a id='overview'></a> Overview
-
-To increase the capacity and availability of the <%= vars.app_runtime_abbr %> platform, and to decrease the chances of downtime, you can scale a deployment up using the instructions below.
+To increase the capacity and availability of the <%= vars.app_runtime_abbr %> platform, and to decrease the chances of downtime, you can scale a deployment up using the following instructions.
 
 
-## <a id='scalingtable'></a> Scaling Recommendations
+## <a id='scalingtable'></a> Scaling recommendations
 
 <% if vars.platform_code == 'CF' %>
 <%= partial 'oss_scale_table' %>
@@ -26,7 +22,7 @@ To increase the capacity and availability of the <%= vars.app_runtime_abbr %> pl
 <% end %>
 
 
-## <a id='scaleup'></a> Scaling Up <%= vars.app_runtime_abbr %>
+## <a id='scaleup'></a> Scaling up <%= vars.app_runtime_abbr %>
 
 You can determine when to scale up <%= vars.app_runtime_abbr %> components by reviewing the capacity scaling indicators. For more information, see [Key Capacity Scaling Indicators](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/2.11/tas-for-vms/monitoring-key-cap-scaling.html).
 
@@ -48,7 +44,7 @@ To scale up <%= vars.app_runtime_abbr %> instances:
 4. Return to the <%= vars.ops_manager %> Installation Dashboard, click **Review Pending Changes**, and click **Apply Changes**.
 
 
-## <a id='scaledown'></a> Scaling Down <%= vars.app_runtime_abbr %>
+## <a id='scaledown'></a> Scaling down <%= vars.app_runtime_abbr %>
 
 If you are deploying a <%= vars.app_runtime_abbr %> configuration that does not need to be highly available, <%= vars.company_name %> recommends scaling down job instances to the minimum number required for a functional deployment.
 
@@ -67,14 +63,16 @@ To scale down your deployment:
 
 2. Return to the <%= vars.ops_manager %> Installation Dashboard, click **Review Pending Changes**, and click **Apply Changes**.
 
-### <a id="diskscale"></a> Scaling Down Jobs with Persistent Disk
+4. Return to the <%= vars.ops_manager %> Installation Dashboard, click **Review Pending Changes**, and click **Apply Changes**.
+
+### <a id="diskscale"></a> Scaling down jobs with persistent disk
 
 If you scale down or delete a job that uses persistent disk, <%= vars.app_runtime_abbr %> marks the disk as orphaned. Orphaned disks are not attached to any job, and <%= vars.app_runtime_abbr %> deletes them after five days.
 
 Use the BOSH CLI to list and recover orphaned disks. Follow the instructions in [Advanced Troubleshooting with the BOSH CLI](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/2.10/vmware-tanzu-ops-manager/install-trouble-advanced.html) to log in to the BOSH Director, and then follow the procedures in [Orphaned Disks](http://bosh.io/docs/persistent-disks.html#orphaned-disks) in the BOSH documentation.
 
 
-## <a id="deployscenarios"></a> Scaling Recommendations for Specific Deployment Configurations
+## <a id="deployscenarios"></a> Scaling recommendations for specific deployment configurations
 
 If you use one of the following configurations, choose the values in the corresponding table to scale instances for your particular deployment:
 
@@ -83,7 +81,7 @@ If you use one of the following configurations, choose the values in the corresp
 * [Deployments Using an External Blobstore](#external-blobstore)
 * [Deployments Using External Load Balancers](#external-lb)
 
-### <a id='external-databases'></a> Deployments Using External Databases
+### <a id='external-databases'></a> Deployments using external Databases
 
 If you use an external database, you can scale down the instance counts for internal MySQL jobs.
 
@@ -94,7 +92,7 @@ Select the following values in the **Resource Config** pane:
 | MySQL Server | 0 |
 | MySQL Proxy | 0 |
 
-### <a id='internal-mysql'></a> Deployments Using Internal MySQL
+### <a id='internal-mysql'></a> Deployments using internal MySQL
 
 If you use the internal MySQL database on a clean install, or on an upgrade from a configuration that previously used internal MySQL databases, you do not need to change the default values shown in the table below.
 
@@ -111,7 +109,7 @@ To revert back to this configuration, choose the values shown in the **Resource 
 
 For more information, see the [MySQL for VMware Tanzu](https://docs.pivotal.io/p-mysql/index.html) documentation.
 
-### <a id='external-blobstore'></a> Deployments Using an External Blobstore
+### <a id='external-blobstore'></a> Deployments using an external blobstore
 
 If you use an external blobstore, select the following value in the **Resource Config** pane:
 
@@ -119,7 +117,7 @@ If you use an external blobstore, select the following value in the **Resource C
 | --- | -------------- |
 | File Storage | 0 |
 
-### <a id='external-lb'></a> Deployments Using External Load Balancers
+### <a id='external-lb'></a> Deployments using external load balancers
 
 If you use an external load balancer, select the following values in the **Resource Config** pane:
 
@@ -129,4 +127,4 @@ If you use an external load balancer, select the following values in the **Resou
 | Router | &ge; 1 |
 | Diego Brain |&ge; 1 |
 
-For more information about configuring load balancers in the **Resource Config** pane of the <%= vars.app_runtime_abbr %> tile, see [Configuring Load Balancing for <%= vars.app_runtime_abbr %>](../operating/configure-lb.html).
+For more information about configuring load balancers in the **Resource Config** pane of the <%= vars.app_runtime_abbr %> tile, see [Configuring load balancing for <%= vars.app_runtime_abbr %>](../operating/configure-lb.html).
