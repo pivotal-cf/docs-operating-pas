@@ -1,9 +1,9 @@
 ---
-title: Configuring Load Balancing for TAS for VMs
+title: Configuring load balancing for TAS for VMs
 owner: Releng
 ---
 
-This topic tells you how to configure load balancing for <%= vars.app_runtime_first %> by entering the names of your load balancers in the **Resource Config** pane of the <%= vars.app_runtime_abbr %> tile. This procedure varies by your IaaS and how you prepared ("paved") it for installing <%= vars.app_runtime_abbr %>. See the section below that corresponds to your use case.
+You can configure load balancing for <%= vars.app_runtime_first %> by entering the names of your Load Balancers in the **Resource Config** pane of the <%= vars.app_runtime_abbr %> tile. This procedure varies by your IaaS and how you prepared ("paved") it for installing <%= vars.app_runtime_abbr %>. See the section below that corresponds to your use case.
 
 
 ## <a id="aws"></a> AWS
@@ -103,7 +103,7 @@ To set up load balancing for <%= vars.app_runtime_abbr %> on AWS using Terraform
     </ul>
 
 
-### <a id="aws-manual"></a> AWS Paved Manually
+### <a id="aws-manual"></a> AWS paved manually
 
 To configure the Gorouter or HAProxy to use AWS Elastic Load Balancers:
 
@@ -157,7 +157,7 @@ To configure the Gorouter to use Azure load balancers:
 1. Scale the number of instances as appropriate for your deployment.
   <p class="note"><strong>Note:</strong> For a high-availability deployment of Ops Manager on Azure, <%= vars.company_name %> recommends scaling the number of each <%= vars.app_runtime_abbr %> job to a minimum of three instances. Using three or more instances for each job creates a sufficient number of availability sets and fault domains for your deployment. For more information, see <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/2.10/vmware-tanzu-ops-manager/refarch-azure-azure_ref_arch.html">Azure Reference Architecture</a>.</p>
 
-### <a id="azure-manual"></a> Azure Paved Manually
+### <a id="azure-manual"></a> Azure paved manually
 
 To configure the Gorouter to use Azure load balancers:
 
@@ -215,7 +215,7 @@ To configure the Gorouter to use GCP load balancers:
 
 1. Click **Save**.
 
-### <a id="gcp-manual"></a> GCP Paved Manually
+### <a id="gcp-manual"></a> GCP paved manually
 
 To configure the Gorouter to use GCP load balancers:
 
