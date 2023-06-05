@@ -1,11 +1,9 @@
 ---
-title: Configuring File Storage for TAS for VMs
+title: Configuring file storage for TAS for VMs
 owner: Releng
 ---
 
-This topic provides instructions for configuring file storage for <%= vars.app_runtime_full %>
-(<%= vars.app_runtime_abbr %>) based on your IaaS and installation method. See the section that
-applies to your use case.
+Here are instructions for configuring file storage for <%= vars.app_runtime_first %> based on your IaaS and installation method. See the section that applies to your use case.
 
 To minimize system downtime, <%= vars.company_name %> recommends using highly resilient and
 redundant _external_ filestores for your <%= vars.app_runtime_abbr %> file storage. For more
@@ -17,7 +15,7 @@ factors to consider when selecting file storage, see [Configure File Storage](co
 </p>
 
 
-## <a id="internal"></a> Internal File Storage
+## <a id="internal"></a> Internal file storage
 
 <%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
 <%= partial "/pcf/core/filestore_internal" %>
@@ -37,12 +35,12 @@ For instructions, see [Fog with AWS IAM Instance Profiles](#fog-aws-iam).
 For more information about production-level
 <%= vars.platform_name %> deployments on AWS, see [AWS Reference Architecture](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/refarch-aws-aws_ref_arch.html).
 
-### <a id="aws-s3"></a>External S3-Compatible Filestore
+### <a id="aws-s3"></a>External S3-Compatible filestore
 
 <%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
 <%= partial "/pcf/core/filestore_s3_config", :locals => { :aws => true } %>
 
-### <a id="fog-aws-iam"></a> Fog with AWS IAM Instance Profiles
+### <a id="fog-aws-iam"></a> Fog with AWS IAM instance profiles
 
 To configure Fog blobstores to use AWS IAM instance profiles:
 
