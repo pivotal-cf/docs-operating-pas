@@ -1,79 +1,74 @@
 ---
-title: Day 2 Configurations
+title: Day 2 configurations
 ---
 
-The topics in this section explain how to configure various functions of an installed and running <%= vars.platform_name %> platform, and how integrate them with external systems and resources.
 
-
-## <a id='overview'></a> Overview
-
-"Day 2" configurations are configurations that set up the internal operations and external integrations of a <%= vars.platform_name %> platform that is newly deployed and running, but not yet ready to use.
+"Day 2" configurations set up the internal operations and external integrations of a <%= vars.platform_name %> platform that is newly deployed and running, but not yet ready to use.
 
 Examples include front end configuration; setting up user accounts; configuring logging, monitoring, and internal security infrastructure; and specifying container and stemcell images.
 
+The articles in this list describe how to configure various functions of an installed and running <%= vars.platform_name %> platform, and how integrate them with external systems and resources.
 
-## <a id='contents'></a> Contents
+## <a id='front'></a> Perimeter access and security
 
-### <a id='front'></a> Perimeter Access and Security
+* [Configuring proxy settings for all apps](./config-proxy.html)
 
-* [Configuring Proxy Settings for All Apps](./config-proxy.html)
+* [Creating a proxy ELB for Diego SSH](./elb-ssh-proxy.html)
 
-* [Creating a Proxy ELB for Diego SSH](./elb-ssh-proxy.html)
+* [Supporting websockets](../adminguide/supporting-websockets.html)
 
-* [Supporting WebSockets](../adminguide/supporting-websockets.html)
+* [Enabling TCP routing](../adminguide/enabling-tcp-routing.html)
 
-* [Enabling TCP Routing](../adminguide/enabling-tcp-routing.html)
+* [Enabling IPv6 for hosted apps](../adminguide/enabling_ipv6.html)
 
-* [Enabling IPv6 for Hosted Apps](../adminguide/enabling_ipv6.html)
+* [Securing traffic into <%= vars.app_runtime_abbr %>](../adminguide/securing-traffic.html)
 
-* [Securing Traffic into PAS](../adminguide/securing-traffic.html)
+* [Using Docker in <%= vars.app_runtime_abbr %>](../adminguide/docker.html)
 
-* [Using Docker in PAS](../adminguide/docker.html)
+* [Using Docker registries](./docker-registry.html)
 
-* [Using Docker Registries](./docker-registry.html)
+## <a id='accounts'></a> User accounts and permissions
 
-### <a id='accounts'></a> User Accounts and Permissions
+* [Creating and Managing Ops Manager User and Client Accounts](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-opsman-users.html)
 
-* [Creating and Managing Ops Manager User Accounts](https://docs.pivotal.io/platform/<%= vars.current_major_version %>/customizing/opsman-users.html)
+* [Configuring RBAC in Ops Manager](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/opsguide-config-rbac.html)
 
-* [Configuring RBAC in Ops Manager](https://docs.pivotal.io/platform/<%= vars.current_major_version %>/customizing/config-rbac.html)
+* [Creating <%= vars.app_runtime_abbr %> user accounts](./creating-account.html)
 
-* [Creating <%= vars.app_runtime_abbr %> User Accounts](./creating-account.html)
+* [Feature flags](../adminguide/listing-feature-flags.html)
 
-* [Feature Flags](../adminguide/listing-feature-flags.html)
+* [Configuring UAA password policy](./pw-policy.html)
 
-* [Configuring UAA Password Policy](./pw-policy.html)
+* [Adding existing SAML or LDAP users](./external-user-management.html)
 
-* [Adding Existing SAML or LDAP Users](./external-user-management.html)
+* [Getting started with the notification service](../adminguide/notifications.html)
 
-* [Getting Started with the Notifications Service](../adminguide/notifications.html)
+* [Creating UAA Clients for BOSH Director](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-opsmanager-create-bosh-client.html)
 
-* [Creating UAA Clients for BOSH Director](https://docs.pivotal.io/platform/<%= vars.current_major_version %>/customizing/opsmanager-create-bosh-client.html)
+## <a id='internal'></a> Internal network security
 
-### <a id='internal'></a> Internal Network Security
+* [Restricting app access to internal <%= vars.platform_name %> components](./app-sec-groups.html)
 
-* [Restricting App Access to Internal <%= vars.platform_name %> Components](./app-sec-groups.html)
+* [Configuring app security groups for email notifications](./notifications-asg.html)
 
-* [Configuring App Security Groups for Email Notifications](./notifications-asg.html)
+* [Configuring SSH access for <%= vars.platform_name %>](./config-ssh.html)
 
-* [Configuring SSH Access for <%= vars.platform_name %>](./config-ssh.html)
+* [IPsec add-on for <%= vars.platform_name %>](https://docs.pivotal.io/addon-ipsec/index.html)
 
-* [IPsec Add-on for <%= vars.platform_name %>](https://docs.pivotal.io/addon-ipsec/index.html)
+## <a id='monitor'></a> Monitoring
 
-### <a id='monitor'></a> Monitoring
+* [Selecting and configuring a monitoring system](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/<%= vars.current_major_version %>/tas-for-vms/monitoring-metrics.html)
 
-* [Selecting and Configuring a Monitoring System](https://docs.pivotal.io/platform/<%= vars.current_major_version %>/monitoring/metrics.html)
+* [Configuring logging in <%= vars.app_runtime_abbr %>](./logging-config-opsman.html)
 
-* [Configuring Logging in PAS](./logging-config-opsman.html)
+* [Deploying a nozzle to the Loggregator Firehose](../loggregator/nozzle-tutorial.html)
 
-* [Deploying a Nozzle to the Loggregator Firehose](../loggregator/nozzle-tutorial.html)
+* [Installing the Loggregator plug-in for cf CLI](../loggregator/cli-plugin.html)
 
-* [Installing the Loggregator Plugin for cf CLI](../loggregator/cli-plugin.html)
+* [Configuring load balancer health checks for <%= vars.app_runtime_abbr %>](../adminguide/configure-lb-healthcheck.html)
 
-* [Configuring Load Balancer Health Checks for PAS](../adminguide/configure-lb-healthcheck.html)
+ <a id='maintenance'></a> Maintenance and customization
 
-### <a id='maintenance'></a> Maintenance and Customization
+* [Configuring Diego Cell disk cleanup scheduling](./config-cell-cleanup.html)
 
-* [Configuring Diego Cell Disk Cleanup Scheduling](./config-cell-cleanup.html)
-
-* [Custom Branding Apps Manager](./custom-branding.html)
+* [Custom branding Apps Manager](./custom-branding.html)
