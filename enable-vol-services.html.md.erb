@@ -1,12 +1,9 @@
 ---
-title: Enabling Volume Services
+title: Enabling volume services
 owner: Diego Persistence
 ---
 
-This topic describes how <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) operators can deploy NFS or SMB volume services.
-
-
-## <a id='overview'></a> Overview
+Here you will learn how <%= vars.app_runtime_first %> operators can deploy NFS or SMB volume services.
 
 A volume service gives apps access to a persistent filesystem, such as NFS or SMB. By performing the procedures in this topic, operators can add a volume service to the Marketplace that provides an NFS filesystem or an SMB share. For more information about adding a volume service to the Marketplace, see [Services](../services/overview.html).
 
@@ -15,7 +12,7 @@ Developers can then use the Cloud Foundry Command Line Interface (cf CLI) to cre
 <p class="note"><strong>Note:</strong> You must have a running NFS or SMB server to test NFS or SMB volume services. <%= vars.app_runtime_abbr %> packages the necessary software to provide app connectivity to remote network-attached storage (NAS), but does not supply the NAS itself.</p>
 
 
-## <a id='nfs-enable'></a> Enable NFS Volume Services
+## <a id='nfs-enable'></a> Enable NFS volume services
 
 To activate NFS volume services in <%= vars.app_runtime_abbr %>:
 
@@ -58,7 +55,7 @@ To activate NFS volume services in <%= vars.app_runtime_abbr %>:
 
 After completing these steps, developers can use the cf CLI to create service instances of the `nfs` service and bind them to their apps.
 
-### <a id='nfs-security'></a> NFS Security
+### <a id='nfs-security'></a> NFS security
 
 You can use ASGs and LDAP to secure your NFS server against traffic apps running on <%= vars.app_runtime_abbr %>:
 
@@ -69,7 +66,7 @@ You can use ASGs and LDAP to secure your NFS server against traffic apps running
 The Diego Cells running on <%= vars.app_runtime_abbr %> must be able to reach your LDAP server on the port you use for connections, which are typically 389 or 636. You cannot limit which Diego Cells have access to your NFS or LDAP servers.
 
 
-## <a id='smb-enable'></a> Activate SMB Volume Services
+## <a id='smb-enable'></a> Activate SMB volume services
 
 <p class="note"><strong>Note:</strong> In a clean install, SMB volume services are activated by default. In an upgrade, SMB volume services match the setting of the previous deployment.</p>
 
