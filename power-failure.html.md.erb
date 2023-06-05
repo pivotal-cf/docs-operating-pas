@@ -1,20 +1,15 @@
 ---
-title: Checking Ops Manager After a Power Failure on vSphere
+title: Checking Ops Manager after a power failure on vSphere
 owner:
 ---
 
-This topic describes how to check the state of <%= vars.platform_name %> after a power failure in an
+Here are instructions for checking the state of <%= vars.platform_name %> after a power failure in an
 on-premises vSphere installation.
 
 If you have a procedure at your company for handling power failure scenarios and want to add steps
 for checking the state of <%= vars.platform_name %>, use this procedure as a template.
 
-## <a id="overview"></a> Overview
-
-This section describes the process used by <%= vars.platform_name %> to recover from power failures
-and exceptions to that process.
-
-### <a id="recovery-process"></a> Automatic Recovery Process
+## <a id="recovery-process"></a> Automatic recovery process
 
 When power returns after a failure, vSphere and <%= vars.platform_name %> automatically do the
 following to recover your environment:
@@ -29,7 +24,7 @@ and manage its VMs. For more information, see the [BOSH documentation](https://b
 that were running on the VMs. For more information, see [Diego Components and Architecture
 ](../concepts/diego/diego-architecture.html).
 
-### <a id="manual-recovery-scenarios"></a> Scenarios that Require Manual Intervention
+## <a id="manual-recovery-scenarios"></a> Scenarios that require manual intervention
 
 Two scenarios exist that can require manual intervention when recovering your environment after a
 power failure:
@@ -96,12 +91,12 @@ for vSphere HA and that you have the BOSH Resurrector enabled.
   </tr>
 </table>
 
-## <a id="check-vSphere"></a> Phase 1: Ensure vSphere is Running
+## <a id="check-vSphere"></a> Phase 1: Ensure vSphere is running
 
 Ensure that vSphere is running and has fully recovered from the power failure. Check your internal
 vSphere monitoring dashboard.
 
-## <a id="check-ops-manager"></a> Phase 2: Ensure <%= vars.platform_name %> is Running
+## <a id="check-ops-manager"></a> Phase 2: Ensure <%= vars.platform_name %> is running
 
 To ensure that <%= vars.platform_name %> is running, do the following:
 
@@ -116,7 +111,7 @@ deployment.
 <%= vars.platform_name %> is running, the columns show **Powered On** and **Normal**. If the
 columns do not show **Powered On** and **Normal**, restart the VM.
 
-## <a id="check-bosh"></a> Phase 3: Ensure BOSH Director is Running
+## <a id="check-bosh"></a> Phase 3: Ensure BOSH Director is running
 
 To ensure that BOSH Director is running, do the following:
 
@@ -158,7 +153,7 @@ To resolve this issue, do the following:
       monit restart UAA
       ```
 
-## <a id="resurrector"></a> Phase 4: Ensure BOSH Resurrector Finished Recovering
+## <a id="resurrector"></a> Phase 4: Ensure BOSH Resurrector finished recovering
 
 If enabled, the BOSH Resurrector re-creates any VMs in a problematic state after being recovered by
 vSphere HA.
@@ -180,7 +175,7 @@ activity:
     Review the task description for `scan` and `fix`. If no task are running, the BOSH Director has
     probably finished recovering. Run `bosh tasks --recent --all -d ''` to view finished tasks.
 
-## <a id="check-pas"></a> Phase 5: Ensure the VMs for <%= vars.app_runtime_abbr %> are Running
+## <a id="check-pas"></a> Phase 5: Ensure the VMs for <%= vars.app_runtime_abbr %> are running
 
 <p class="note"><strong>Note</strong>: You can also apply the steps in this section to any
 <%= vars.platform_name %> services. To further ensure the health of <%= vars.platform_name %>
@@ -215,7 +210,7 @@ assistance. Provide the following information:
   * A list of failing VMs
   * Your <%= vars.platform_name %> version
 
-### <a id="check-mysql"></a> Manually Recover MySQL (Clusters Only)
+### <a id="check-mysql"></a> Manually recover MySQL (clusters only)
 
 To manually recover MySQL, do the following:
 
@@ -228,7 +223,7 @@ To manually recover MySQL, do the following:
 greater than `1`, manually recover MySQL by following
 [Recovering From MySQL Cluster Downtime](../mysql/bootstrap-mysql.html).
 
-## <a id="check-apps"></a> Phase 7: Ensure Apps Hosted on <%= vars.app_runtime_abbr %> are Running
+## <a id="check-apps"></a> Phase 7: Ensure apps hosted on <%= vars.app_runtime_abbr %> are running
 
 To ensure apps hosted on <%= vars.app_runtime_abbr %> are running, do the following:
 
@@ -237,7 +232,7 @@ the app has or visit the URL of the app to verify that it is working.
 
 1. Push an app to <%= vars.platform_name %>.
 
-## <a id="check-hw"></a> Phase 8: Check the Healthwatch Dashboard
+## <a id="check-hw"></a> Phase 8: Check the Healthwatch dashboard
 
 You can use <%= vars.platform_name %> Healthwatch to further assess the state of
 <%= vars.platform_name %>. For more information, see
