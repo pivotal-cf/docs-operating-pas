@@ -1,21 +1,18 @@
 ---
-title: Logging In to Apps Manager
+title: Logging in to Apps Manager
 owner: Apps Manager
 ---
 
-This topic describes how to log in to Apps Manager.
-
-
-## <a id='admin'></a> Log In as Admin User
 
 To log in to Apps Manager as the Admin user:
 
 1. If you do not know the system domain for the deployment, select the **Domains** pane in the <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) tile and see the value configured in the **System domain** field.
 
-1. Open a browser and go to `apps.SYSTEM-DOMAIN`, where `SYSTEM-DOMAIN` is the system domain you retrieved in the previous step. For example, if the system domain is `system.example.com`, then point your browser to `apps.system.example.com`.
+2. Open a browser and go to `apps.SYSTEM-DOMAIN`, where `SYSTEM-DOMAIN` is the system domain you retrieved in the previous step. For example, if the system domain is `system.example.com`, then point your browser to `apps.system.example.com`.
 
-1. Log in using UAA credentials for the Admin user. To obtain these credentials:
+3. Log in using UAA credentials for the Admin user. To obtain these credentials:
 	1. In the <%= vars.app_runtime_abbr %> tile, select the **Credentials** tab.
-	1. Under **UAA**, see the **Admin Credentials**.
-    ![alt-text="To the right of 'UAA', a row containing 'Admin Credentials' is highlighted. In the same row, 'Link to Credential' is a hyperlink blue."](./images/uaa_admin_link.png)
+	2. In **UAA**, go to  **Admin Credentials**.
+	3. Click **Link to Credential** in the row showing the credentials you want to see.
 
+	![alt-text="Click Link to Credential in the Admin Credentials section."](images/uaa_admin_link.png)
