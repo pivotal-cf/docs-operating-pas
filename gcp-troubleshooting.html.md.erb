@@ -4,10 +4,10 @@ owner: Ops Manager
 ---
 
 
-This topic describes how to troubleshoot known issues when deploying <%= vars.platform_name %> on Google Cloud Platform (GCP).
+Learn how to troubleshoot known issues when deploying <%= vars.platform_name %> on Google Cloud Platform (GCP).
 
 
-## <a id='sso'></a> Problems Connecting with Single Sign-On (SSO) for VMware Tanzu
+## <a id='sso'></a> Problems connecting with single sign-on (SSO) for VMware Tanzu
 
 Users may be unable to connect to applications running on <%= vars.platform_name %> using SSO for VMware Tanzu.
 
@@ -21,7 +21,7 @@ Ensure that you have configured only one subnet. See [Preparing to Deploy <%= va
 
 <hr>
 
-## <a id='ert-install'></a> Uploading <%= vars.app_runtime_abbr %> Tile Causes <%= vars.platform_name %> Rails Application Crash
+## <a id='ert-install'></a> Uploading <%= vars.app_runtime_abbr %> tile causes <%= vars.platform_name %> rails application crash
 
 Uploading the <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) tile causes the <%= vars.platform_name %> Rails application to crash.
 
@@ -35,7 +35,7 @@ Ensure that the boot disk is allocated at least 50&nbsp;GB of space. See [Create
 
 <hr>
 
-## <a id="mysql_rep_canary"></a> <%= vars.app_runtime_abbr %> Deployment Fails - MySQL Monitor replication-canary Job
+## <a id="mysql_rep_canary"></a> <%= vars.app_runtime_abbr %> deployment fails - MySQL Monitor replication-canary job
 
 During installation of the <%= vars.app_runtime_abbr %> tile, the replication-canary job fails to start. The error reported in the installation log resembles the following:
 
@@ -66,6 +66,6 @@ This error can appear as a result of incorrect configuration of network traffic 
 
 <hr>
 
-## <a id="database-permissions"></a> Insufficient External Database Permissions
+## <a id="database-permissions"></a> Insufficient external database permissions
 
 Upgrade issues can be caused when the external database user used for the network policy DB is given insufficient permissions. To avoid this upgrade issue, ensure that the networkpolicyserver database user has the `ALL PRIVILEGES` permission.
