@@ -3,15 +3,12 @@ title: General Data Protection Regulation and TAS for VMs
 owner: Legal
 ---
 
-This topic provides an overview of the General Data Protection Regulation (GDPR) and where <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) may store personal data.
+Here you will learn about the General Data Protection Regulation (GDPR) and where <%= vars.app_runtime_first %> might store personal data.
+
+GDPR came into effect on May 25, 2018 and affects any company processing the data of EU citizens or residents, even if the company is not EU-based. The GDPR sets forth how companies can handle privacy issues, securely store data, and respond to security breaches.
 
 
-## <a id='overview'></a> Overview
-
-GDPR came into effect on May 25, 2018 and impacts any company processing the data of EU citizens or residents, even if the company is not EU-based. The GDPR sets forth how companies can handle privacy issues, securely store data, and respond to security breaches.
-
-
-## <a id='personal-data'></a> Understand Personal Data
+## <a id='personal-data'></a> Understand personal data
 
 The GDPR grants data subjects certain rights, such as the right to obtain a copy of their personal data, object to the processing of personal data, and the right to have their personal data erased. Organizations subject to GDPR need to ensure that they can address and respond to requests by data subjects if they are processing their personal data.
 
@@ -32,7 +29,7 @@ Personal data can be collected, stored, and processed in a <%= vars.app_runtime_
 + [Notifications Service](#cf-notifications)
 
 
-## <a id='where'></a> Where Personal Data May Reside
+## <a id='where'></a> Where personal data might reside
 
 The following sections explain how different <%= vars.app_runtime_abbr %> components collect personal data.
 
@@ -329,7 +326,7 @@ The Cloud Foundry API release contains several components, including the Cloud C
 
 By default, the [Gorouter](../concepts/http-routing.html#http-headers) logs include the `X-Forwarded-For` header, which may include the originating client IP. Under GDPR, client IP addresses should be considered personal data.
 
-#### <a id='disable-client-ip-logging'></a> Deactivate Client IP Logging
+#### <a id='disable-client-ip-logging'></a> Deactivate client IP logging
 
 In <%= vars.app_runtime_abbr %> v2.0 and later and Elastic Runtime v1.12, operators can deactivate logging of client IP addresses in the Gorouter.
 
