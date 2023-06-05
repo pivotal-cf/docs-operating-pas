@@ -3,7 +3,7 @@ title: Scaling Cloud Controller
 owner: CAPI
 ---
 
-This topic describes how and when to scale BOSH jobs in CAPI, and includes details about some key metrics, heuristics, and logs.
+This is how and when to scale BOSH jobs in CAPI, and includes details about some key metrics, heuristics, and logs.
 
 
 ## <a id='cloud_controller_ng'></a> cloud_controller_ng
@@ -15,11 +15,11 @@ to serving external clients, `cloud_controller_ng` also provides APIs for intern
 
 <p class='note'><strong>Note:</strong> Running <code>bosh instances --vitals</code> returns CPU values. The <strong>CPU User</strong> value corresponds with the <code>system.cpu.user</code> metric and is scaled by the number of CPUs. For example, on a 4-core <code>api</code> VM, a <code>cloud_controller_ng</code> process that is using 100% of a core is listed as using 25% in the <code>system.cpu.user</code> metric.</p>
 
-### When to Scale
+### When to scale
 
 When determining whether to scale `cloud_controller_ng`, look for the following:
 
-#### Key Metrics
+#### Key metrics
 
 Cloud Controller emits the following metrics:
 
@@ -28,7 +28,7 @@ Cloud Controller emits the following metrics:
 * `cc.vitals.cpu_load_avg` is 1 or higher.
 * `cc.vitals.uptime` is consistently low, indicating frequent restarts, possibly due to memory pressure.
 
-#### Heuristic Failures
+#### Heuristic failures
 
 The following behaviors might occur:
 
@@ -36,14 +36,14 @@ The following behaviors might occur:
 * Web UI responsiveness or timeouts are degraded.
 * `bosh is --ps --vitals` has elevated CPU usage for the `cloud_controller_ng` job in the API instance group.
 
-#### Relevant Log Files
+#### Relevant log files
 
 You can find the heuristic failures in the following log files:
 
 * `/var/vcap/sys/log/cloud_controller_ng/cloud_controller_ng.log`
 * `/var/vcap/sys/log/cloud_controller_ng/nginx-access.log`
 
-### How to Scale
+### How to scale
 
 Before and after scaling Cloud Controller API VMs, verify that the Cloud Controller database is not overloaded. All
 Cloud Controller processes are backed by the same database, so heavy load on the database impacts API performance
@@ -67,31 +67,31 @@ good indicator of scaling issues, but always defer to the documentation specific
 This job, also called "local workers", is primarily responsible for handling files uploaded to the API VMs
 during `cf push`, such as `packages`, `droplets`, and resource matching.
 
-### When to Scale
+### When to scale
 
 When determining whether to scale `cloud_controller_worker_local`, look for the following:
 
-#### Key Metrics
+#### Key metrics
 
 Cloud Controller emits the following metrics:
 
 * `cc.job_queue_length.cc-VM_NAME-VM_INDEX` is continuously growing.
 * `cc.job_queue_length.total` is continuously growing.
 
-#### Heuristic Failures
+#### Heuristic failures
 
 The following behaviors might occur:
 
 * `cf push` is intermittently failing.
 * `cf push` average time is elevated.
 
-#### Relevant Log files
+#### Relevant log files
 
 You can find the heuristic failures in the following log files:
 
 * `/var/vcap/sys/log/cloud_controller_ng/cloud_controller_ng.log`
 
-### How to Scale
+### How to scale
 
 Because local workers are located with the Cloud Controller API job, they are scaled horizontally along with the API.
 
@@ -101,18 +101,18 @@ Because local workers are located with the Cloud Controller API job, they are sc
 Colloquially known as "generic workers" or just "workers", this job and VM are responsible for handling asynchronous
 work, batch deletes, and other periodic tasks scheduled by the `cloud_controller_clock`.
 
-### When to Scale
+### When to scale
 
 When determining whether to scale `cloud_controller_worker`, look for the following:
 
-#### Key Metrics
+#### Key metrics
 
 Cloud Controller emits the following metrics:
 
 * `cc.job_queue_length.cc-VM_TYPE-VM_INDEX` is continuously growing. For example, `cc.job_queue_length.cc-cc-worker-0`.
 * `cc.job_queue_length.total` is continuously growing.
 
-#### Heuristic Failures
+#### Heuristic failures
 
 The following behaviors can occur:
 
@@ -120,13 +120,13 @@ The following behaviors can occur:
 * Users report a slow delete action for other resources.
 * cf-acceptance-tests succeed generally, but fail during cleanup.
 
-#### Relevant Log Files
+#### Relevant log files
 
 You can find the heuristic failures in the following log files:
 
 * `/var/vcap/sys/log/cloud_controller_worker/cloud_controller_worker.log`
 
-### How to Scale
+### How to scale
 
 The cc-worker VM can safely scale horizontally in all deployments, but if your worker VMs have CPU/memory headroom, you
 can also use the `cc.jobs.generic.number_of_workers` BOSH property to increase the number of worker processes on each
@@ -144,18 +144,18 @@ The `cloud_controller_clock` job runs Diego sync process and schedules periodic 
 CPUs. For example, on a 4-core <code>api</code> VM, a <code>cloud_controller_ng</code> process that is using 100% of a
 core is listed as using 25% in the <code>system.cpu.user</code> metric.</p>
 
-### When to Scale
+### When to scale
 
 When determining whether to scale `cloud_controller_clock` and `cc_deployment_updater`, look for the following:
 
-#### Key Metrics
+#### Key metrics
 
 Cloud Controller emits the following metrics:
 
 * `cc.Diego_sync.duration` is continuously increasing over time.
 * `system.cpu.user` is high on the scheduler VM.
 
-#### Heuristic Failures
+#### Heuristic failures
 
 The following behaviors can occur:
 
@@ -166,14 +166,14 @@ _Overview of Domains_ in the BBS Server repository on GitHub.
 APIs.
 * Deployments are slow to increase and decrease instance count.
 
-#### Relevant Log Files
+#### Relevant log files
 
 You can find the heuristic failures in the following log files:
 
 * `/var/vcap/sys/log/cloud_controller_clock/cloud_controller_clock.log`
 * `/var/vcap/sys/log/cc_deployment_updater/cc_deployment_updater.log`
 
-### How to Scale
+### How to scale
 
 Both of these jobs are singletons, so extra instances are for failover HA rather than scalability. Performance issues
 are likely due to database overloading or greedy neighbors on the scheduler VM.
@@ -186,18 +186,18 @@ platform to store `packages`, staged `droplets`, `buildpacks`, and cached app re
 to the internal blobstore through the Cloud Controller local workers and downloaded by Diego when app instances are
 started.
 
-### When to Scale
+### When to scale
 
 When determining whether to scale `blobstore_nginx`, look for the following:
 
-#### Key Metrics
+#### Key metrics
 
 Cloud Controller emits the following metrics:
 
 * `system.cpu.user` is consistently high on the `singleton-blobstore` VM.
 * `system.disk.persistent.percent` is high, indicating that the blobstore is running out of room for additional files.
 
-#### Heuristic Failures
+#### Heuristic failures
 
 The following behaviors can occur:
 
@@ -205,13 +205,13 @@ The following behaviors can occur:
 * `cf push` average time is elevated.
 * App droplet downloads are timing out or failing on Diego.
 
-#### Relevant Log Files
+#### Relevant log files
 
 You can find the heuristic failures in the following log files:
 
 * `/var/vcap/sys/log/blobstore/internal_access.log`
 
-### How to Scale
+### How to scale
 
 The internal WebDAV blobstore cannot be scaled horizontally, not even for availability purposes, because of its
 reliance on the `singleton-blobstore` VM's persistent disk for file storage. For this reason, it is not recommended for

@@ -1,14 +1,11 @@
 ---
-title: Rotating the Cloud Controller Database Encryption Key
+title: Rotating the Cloud Controller database encryption key
 owner: CAPI
 ---
 
-This topic describes how to rotate the Cloud Controller database (CCDB) encryption key.
+Here is how to rotate the Cloud Controller database (CCDB) encryption key.
 
-
-## <a id="overview"></a> Overview
-
-The Cloud Controller is the primary API of <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>).
+The Cloud Controller is the primary API of <%= vars.app_runtime_first %>.
 It has its own database, the CCDB, in which it stores information about objects
 in <%= vars.app_runtime_abbr %> such as apps.
 The CCDB encryption key is used to encrypt sensitive data at rest in the CCDB
@@ -19,7 +16,7 @@ You can rotate the CCDB encryption key as described in this topic.
 For example, you might want to perform this procedure if your existing key is leaked.
 
 
-##  <a id="rotate"></a> Rotate the CCDB Encryption Key
+##  <a id="rotate"></a> Rotate the CCDB encryption key
 
 <p class="note warning"><strong>Caution:</strong> Do not edit the <strong>Cloud Controller
    database encryption key</strong> field in the <%= vars.app_runtime_abbr %> tile.
@@ -59,7 +56,7 @@ To rotate the CCDB encryption key:
    you can remove any previously specified CCDB encryption keys in the ledger.
 
 
-## <a id="troubleshoot"></a> Troubleshoot Failed Rotation
+## <a id="troubleshoot"></a> Troubleshoot failed rotation
 
 This section describes how to troubleshoot errors that you might encounter while rotating the CCDB encryption key.
 
@@ -110,7 +107,7 @@ This section describes how to troubleshoot errors that you might encounter while
 </tr>
 </table>
 
-###  <a id="view"></a> View Encryption Keys
+###  <a id="view"></a> View encryption keys
 
 The section describes how to retrieve the value of an existing or previous encryption key. You might need to do this when troubleshooting a failed key rotation.
 
