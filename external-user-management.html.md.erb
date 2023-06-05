@@ -1,11 +1,9 @@
 ---
-title: Adding Existing SAML or LDAP Users to a TAS for VMs Deployment
+title: Adding Existing SAML or LDAP users to a TAS for VMs deployment
 owner: Identity
 ---
 
-This topic describes the procedure for adding existing SAML or LDAP users to a <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) deployment enabled with SAML or LDAP.
-
-The following two ways exist to add existing SAML or LDAP users to your <%= vars.app_runtime_abbr %> deployment:
+There are two ways to add existing SAML or LDAP users to a <%= vars.app_runtime_first %> deployment enabled with SAML or LDAP.
 
 * [Option 1: Import Users in Bulk](#bulk-import)
 * [Option 2: Add Users Manually](#manual)
@@ -20,16 +18,16 @@ To perform the procedures in this topic, you must have:
 * The [Cloud Foundry Command Line Interface](../cf-cli/install-go-cli.html) (cf CLI) v6.23.0 or later
 
 
-## <a id='bulk-import'></a> Option 1: Import Users in Bulk
+## <a id='bulk-import'></a> Option 1: Import users in bulk
 
 You can import SAML or LDAP users in bulk by using the CF-MGMT Tool. For instructions about installing and using the tool, see [the CF-MGMT README](https://github.com/pivotalservices/cf-mgmt).
 
 
-## <a id='manual'></a> Option 2: Add Users Manually
+## <a id='manual'></a> Option 2: Add users manually
 
 The following sections describe how to add existing SAML or LDAP users to your <%= vars.app_runtime_abbr %> deployment manually.
 
-### <a id='step-id'></a> Step 1: Create User
+### <a id='step-id'></a> Step 1: Create user
 
 To add a SAML or LDAP user:
 
@@ -61,13 +59,13 @@ To add a SAML or LDAP user:
     </ul>
 
 
-### <a id='user-role'></a> Step 2: Associate User with Org or Space Role
+### <a id='user-role'></a> Step 2: Associate user with org or space role
 
 After creating the SAML or LDAP user, you must associate the user with either an Org or Space role.
 
 For more information about roles, see [Roles and Permissions](../concepts/roles.html#roles) in _Orgs, Spaces, Roles, and Permissions_.
 
-#### <a id='org-role'></a> Associate User with Org Role
+#### <a id='org-role'></a> Associate user with org role
 
 To associate the SAML or LDAP user with an Org role:
 
@@ -96,9 +94,9 @@ To associate the SAML or LDAP user with an Org role:
     cf set-org-role j.smith@example.com example-org OrgManager
     </pre>
 
-#### <a id='space-role'></a> Associate User with Space Role
+#### <a id='space-role'></a> Associate user with space role
 
-To associate the SAML or LDAP user with a Space role:
+To associate the SAML or LDAP user with a space role:
 
 1. Run:
 
