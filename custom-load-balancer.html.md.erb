@@ -1,16 +1,15 @@
 ---
-title: Using Your Own Load Balancer
+title: Using your own load balancer
 owner: Ops Manager
 ---
 
-This topic describes how to use your own load balancer and forward traffic to your <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) router IP address.
-
-
-## <a id='overview'></a> Overview
+Here are instructions for using your own load balancer and forwarding traffic to your <%= vars.app_runtime_first %> router IP address.
 
 <%= vars.app_runtime_abbr %> includes a tier of reverse proxies that dynamically track the location of app containers and system components, enabling routing of requests to those endpoints even as IPs and ports change.
 
-In order for the <%= vars.app_runtime_abbr %> routers to be horizontally scalable and highly available, a load balancer must be deployed in front of them. The simplest solution is to use a Layer 4 TCP load balancer, provided by your IaaS or IT team, which passes all HTTP and TLS handling to the <%= vars.app_runtime_abbr %> routers. For more information about TLS termination, see [Securing Traffic into <%= vars.app_runtime_abbr %>](../adminguide/securing-traffic.html). For a description of features supported by the <%= vars.app_runtime_abbr %> routing tier, see [HTTP Routing](../concepts/http-routing.html).
+## <a id='why-lb'></a> Why you need a load balancer
+
+For the <%= vars.app_runtime_abbr %> routers to be horizontally scalable and highly available, a load balancer must be deployed in front of them. The simplest solution is to use a Layer 4 TCP load balancer, provided by your IaaS or IT team, which passes all HTTP and TLS handling to the <%= vars.app_runtime_abbr %> routers. For more information about TLS termination, see [Securing Traffic into <%= vars.app_runtime_abbr %>](../adminguide/securing-traffic.html). For a description of features supported by the <%= vars.app_runtime_abbr %> routing tier, see [HTTP Routing](../concepts/http-routing.html).
 
 If you have requirements that are not fulfilled by the <%= vars.app_runtime_abbr %> routers alone, you can choose to use your own Layer 7 load balancer provided by your IaaS or IT team.
 
@@ -43,12 +42,12 @@ To integrate your own load balancer with <%= vars.app_runtime_abbr %>, you must 
 Follow the procedure below to use your own load balancer.
 
 
-## <a id='deploy'></a> Step 1: Deploy <%= vars.ops_manager %> Installation VM
+## <a id='deploy'></a> Step 1: Deploy <%= vars.ops_manager %> installation VM
 
 Deploy an <%= vars.ops_manager %> Installation VM. For more information, see [Deploying <%= vars.ops_manager %> on vSphere](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/vsphere-deploy.html).
 
 
-## <a id='register'></a> Step 2: Register <%= vars.ops_manager %> IP Address
+## <a id='register'></a> Step 2: Register <%= vars.ops_manager %> IP address
 
 In your load balancer, register the IP addresses that you assigned to <%= vars.ops_manager %>.
 
@@ -60,12 +59,12 @@ Configure <%= vars.ops_manager %> and the BOSH Director as described in [Configu
 Do not click **Install** after adding <%= vars.app_runtime_abbr %>.
 
 
-## <a id='configure-networking'></a> Step 4: Configure Networking
+## <a id='configure-networking'></a> Step 4: Configure networking
 
 Configure the **Networking** pane in <%= vars.app_runtime_abbr %>. Load balancer configuration in <%= vars.app_runtime_abbr %> varies depending on which IaaS you are using for <%= vars.ops_manager %>. For more information, see [Configure Networking](configure-pas.html#networking) in _Configuring <%= vars.app_runtime_abbr %>_.
 
 
-## <a id='finalize'></a> Step 5: Finalize Changes
+## <a id='finalize'></a> Step 5: Finalize changes
 
 To finalize the changes to your deployment:
 
