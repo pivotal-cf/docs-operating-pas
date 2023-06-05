@@ -1,19 +1,19 @@
 ---
-title:  Identifying the Source Deployment of Metrics
+title:  Identifying the source deployment of metrics
 owner:
 ---
 
-This topic explains how to read app metrics metadata to identify which <%= vars.platform_name %> product generated the metrics, and to retrieve other information about the metrics source.
+You can read app metrics metadata to identify which <%= vars.platform_name %> product generated the metrics, and to retrieve other information about the metrics source.
 
 For example, you might want to distinguish between metrics coming from apps hosted by <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) itself and apps hosted by an <%= vars.segment_runtime_full %> deployment.
 
 
-## <a id="metrics-prefix"></a> Source Deployment from Tile GUID
+## <a id="metrics-prefix"></a> Source deployment from tile GUID
 
 Metrics identify their source deployment with a `deployment` tag followed by `cf-` prefixed to the GUID of the source <%= vars.platform_name %> tile. You can use this GUID to identify which tile deployed the Diego Cells generating the metrics.
 
 
-## <a id="human-friendly-metric-tags"></a> Human-Friendly Metadata
+## <a id="human-friendly-metric-tags"></a> Human-friendly metadata
 
 <%= vars.app_runtime_abbr %> and other runtime tiles tag metrics with additional metadata to help users parse metrics coming from different deployments. Downstream monitoring products such as Healthwatch also use this metadata to display human-readable names.
 

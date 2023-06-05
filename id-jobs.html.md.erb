@@ -1,16 +1,16 @@
 ---
-title: Identifying TAS for VMs Jobs Using vCenter
+title: Identifying TAS for VMs jobs using vCenter
 owner: RelEng
 ---
 
-To effectively monitor, control, and manage the virtual machines making up your <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) deployment, you might have to identify which VM corresponds to a particular job in <%= vars.app_runtime_abbr %>. You can find the CID of a particular VM from <%= vars.ops_manager %> by navigating to the **Status** tab in the <%= vars.app_runtime_abbr %> tile.
+To effectively monitor, control, and manage the virtual machines making up your <%= vars.app_runtime_first %> deployment, you might have to identify which VM corresponds to a particular job in <%= vars.app_runtime_abbr %>. You can find the CID of a particular VM from <%= vars.ops_manager %> by navigating to the **Status** tab in the <%= vars.app_runtime_abbr %> tile.
 
 If you have deployed <%= vars.app_runtime_abbr %> to VMware vSphere, you can also identify which <%= vars.app_runtime_abbr %> job corresponds to which VM using the vCenter vSphere client.
 
 <p class="note"><strong>Note:</strong> The CID shown in <%= vars.ops_manager %> is the name of the machine in vCenter.</p>
 
 
-## <a id='id-jobs'></a> Identifying <%= vars.app_runtime_abbr %> Jobs Using vCenter
+## <a id='id-jobs'></a> Identifying <%= vars.app_runtime_abbr %> jobs using vCenter
 
 To identify <%= vars.app_runtime_abbr %> jobs using vCenter:
 
@@ -18,7 +18,7 @@ To identify <%= vars.app_runtime_abbr %> jobs using vCenter:
 
 1. Select the **Inventory > Hosts and Clusters** view.
 
-    ![alt-text="Use the Inventory, Hosts and Clusters view."](images/id/host-cluster.jpg)
+    ![alt-text="Use the Inventory, Hosts, and Clusters view."](images/id/host-cluster.jpg)
 
 2. Select the Resource Pool containing your <%= vars.app_runtime_abbr %> deployment.
 
