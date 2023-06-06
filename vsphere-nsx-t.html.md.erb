@@ -3,12 +3,11 @@ title: Deploying TAS for VMs with NSX-T Networking
 owner: Ops Manager
 ---
 
-This topic describes how to install <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) on
-vSphere with NSX-T internal networking, using the VMware NSX-T Container Plug-in for <%=
+Here are instructions for installing <%= vars.app_runtime_first %> on
+vSphere with NSX-T internal networking, using the VMware NSX-T Container plug-in for <%=
 vars.platform_name %>.
-<p class="note"><strong>Note:</strong> These instructions were updated to use the NSX-T Policy API, the next-generation interface for integrating with the NSX-T networking and security framework.</p>
 
-## <a id='introduction'></a> Overview
+<p class="note"><strong>Note:</strong> These instructions were updated to use the NSX-T Policy API, the next-generation interface for integrating with the NSX-T networking and security framework.</p>
 
 <%= vars.app_runtime_abbr %> uses a Container Network Interface (CNI) plug-in to support secure and
 direct internal communication between containers.
@@ -66,11 +65,11 @@ Before you deploy <%= vars.app_runtime_abbr %> with NSX-T networking, you must h
 The following graphic shows how to deploy an NSX-T machine to run <%= vars.app_runtime_abbr %>
 across multiple vSphere hardware clusters. NSX-T runs a Tier-0 (T0) gateway and multiple Tier-1 (T1)
 gateways, each connecting to a network within <%= vars.platform_name %>. Each vSphere hardware
-column cluster corresponds to an Availability Zone (AZ) in <%= vars.platform_name %>:
-
-![alt-text="The NXT T0 Router is connected between the IP Backbone and the T1 Routers. The T1
+column cluster corresponds to an Availability Zone (AZ) in <%= vars.platform_name %>: The NXT T0 Router is connected between the IP Backbone and the T1 Routers. The T1
 Routers each terminate on a network. Three network types are shown: On-demand Orgs, Isolation
-Segments, and On-demand Services."](./images/nsx-t/nsx-t-refarch.png)
+Segments, and On-demand Services.
+
+![alt-text=""](./images/nsx-t/nsx-t-refarch.png)
 
 When you push an app to a new org for the first time, the NSX-T plug-in triggers NSX-T to create a
 new T1 gateway and allocate an address range for the org, on demand.
@@ -378,16 +377,19 @@ To enable NSX-T mode in the BOSH Director:
 
 To configure <%= vars.app_runtime_abbr %> for external  container networking:
 
-1. If you have not already done so, download the <%= vars.app_runtime_abbr %> tile from [VMware Tanzu Network](https://network.tanzu.vmware.com/products/elastic-runtime) and import it to the **Installation Dashboard**.
-  <br>
-  For instructions, see [Add and Import Products](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-add-delete.html#add-and-import-products-0).
+1. If you have not already done so, download the <%= vars.app_runtime_abbr %> tile from [VMware
+  Tanzu Network](https://network.tanzu.vmware.com/products/elastic-runtime) and import it to the
+  **Installation Dashboard**.
 
-  ![alt-text="Ops Manager Installation Dashboard with NSX-T tile"](./images/nsx-t/nsx-t-install-dash.png)
+  For instructions, see [Add and Import
+  Products](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-add-delete.html#add-and-import-products-0).
+  ![alt-text="Ops Manager Installation Dashboard with NSX-T
+  tile"](./images/nsx-t/nsx-t-install-dash.png)
 
 1. Configure <%= vars.app_runtime_abbr %>, following the procedure in [Configuring <%= vars.app_runtime_abbr %>](./configure-pas.html). When you configure **Networking**, select **External** under **Container networking interface plugin**.<br>
     ![alt-text=""](./images/nsx-t/nsx-t-tas-cni.png)
 
-### <a id='nsx-t-tile'></a> Install and configure the NSX-T Container Plug-In
+### <a id='nsx-t-tile'></a> Install and configure the NSX-T container plug-In
 
 1. Configure <%= vars.app_runtime_abbr %> to add router, diego_brain, and tcp_router instances to
    the corresponding NSX-T server pools upon deployment.
@@ -458,7 +460,7 @@ To configure <%= vars.app_runtime_abbr %> for external  container networking:
    click **Review Pending Changes**.
 8. Click **Apply Changes** to deploy <%= vars.app_runtime_abbr %> with NSX-T networking.
 
-## <a id='upgrade'></a> Upgrade <%= vars.app_runtime_abbr %> with NSX-T Networking
+## <a id='upgrade'></a> Upgrade <%= vars.app_runtime_abbr %> with NSX-T networking
 
 After you deploy <%= vars.app_runtime_abbr %> with NSX-T, you might need to upgrade <%=
 vars.ops_manager %>, <%= vars.app_runtime_abbr %>, the NSX-T Container Plug-in or NSX-T Data Center.
