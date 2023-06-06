@@ -1,64 +1,9 @@
 ---
-title: Configuring SSL Termination for Ops Manager on vSphere
+title: Configuring SSL termination for Ops Manager on vSphere
 owner: Ops Manager
 ---
 
 To use SSL termination in <%= vars.platform_name %>, you must configure the HAProxy load balancer or your own load balancer.
-
-<%= vars.company_name %> recommends that you use HAProxy in lab and test environments only. Production environments should instead use a highly-available customer-provided load balancing solution.
-
-Choose an SSL termination method to determine the steps you must take to configure <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>).
-
-
-## <a id="haproxy"></a> Use the HAProxy Load Balancer
-
-<%= vars.platform_name %> deploys with a single instance of HAProxy for use in lab and test environments. You can use this HAProxy instance for SSL termination and load balancing to the <%= vars.app_runtime_abbr %> Gorouters. HAProxy can generate a self-signed certificate if you do not want to obtain a signed certificate from a well-known certificate authority (CA).
-<%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
-<%= partial "/pcf/core/known-issue-self-signed-certs" %>
-
-To use the HAProxy load balancer:
-
-1. Create an A record in your DNS that points to the HAProxy IP address. The A record associates the **System domain** and **Apps domain** that you configure in the **Domains** pane of the <%= vars.app_runtime_abbr %> tile with the HAProxy IP address.
-    <br />
-    <br />
-    For example, with `<%= vars.platform_name_lc %>.example.com` as the main subdomain for your <%= vars.platform_name %> installation and an HAProxy IP address `203.0.113.1`, you must create an A record in your DNS that serves `example.com` and points `*.platform_name_lc` to `203.0.113.1`.
-
-    <table >
-        <tr>
-            <th>Name</th>
-			<th>Type</th>
-			<th>Data</th>
-			<th>Domain</th>
-		</tr>
-		<tr>
-		    <td>*.<%= vars.platform_name_lc %></td>
-		    <td>A</td>
-		    <td>203.0.113.1</td>
-		    <td>example.com</td>
-        </tr>
-	</table>
-
-1. Test your DNS entry by running:
-
-	```
-	host
-	```
-	This command should return your HAProxy IP address.
-
-1. Navigate to the <%= vars.ops_manager %> Installation Dashboard.
-
-1. Click the <%= vars.app_runtime_abbr %> tile.
-
-1. Select **Networking**.
-
-1. Leave the **Gorouter IPs** field blank. HAProxy assigns the Gorouter IPs internally.
-
-1. Enter the IP address for HAProxy in the **HAProxy IPs** field.
-
-1. Provide your SSL certificate in the **Certificates and private keys for the Gorouter and HAProxy** fields. For more information, see [Providing a Certificate for Your TLS Termination Point](./security_config.html).
-
-
-## <a id="other"></a> Use Another Load Balancer
 
 Production environments must use a highly-available customer-provided load balancing solution that:
 
