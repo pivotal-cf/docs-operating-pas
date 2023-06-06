@@ -3,13 +3,10 @@ title: Deploying TAS for VMs to VCF
 owner: dap-tas-vmc-vcf-anycloud
 ---
 
-This topic describes how to install <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) to VMware Cloud Foundation (VCF).
-
-
-## <a id='introduction'></a> Overview
+Here are instructions for installing <%= vars.app_runtime_first %> to VMware Cloud Foundation (VCF).
 
 VCF is the hybrid cloud platform for managing VMs and orchestrating containers.
-You can install and configure <%= vars.ops_manager %> and <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) after launching the vSphere client through VCF.
+You can install and configure <%= vars.ops_manager %> and (<%= vars.app_runtime_abbr %>) after launching the vSphere client through VCF.
 
 ## <a id='requirements'></a> Prerequisites
 
@@ -21,7 +18,7 @@ See [About VI Workload Domains](https://docs.vmware.com/en/VMware-Cloud-Foundati
 * Download <%= vars.app_runtime_abbr %> from [<%= vars.product_network %>](https://network.tanzu.vmware.com/products/elastic-runtime).
 * Install the govc CLI to your local workstation or jump host. See [govmomi](https://github.com/vmware/govmomi/blob/master/govc/README.md) on GitHub.
 
-## <a id='prepare'></a> Prepare to Deploy <%= vars.app_runtime_abbr %> to VCF
+## <a id='prepare'></a> Prepare to deploy <%= vars.app_runtime_abbr %> to VCF
 
 To prepare VCF before you install <%= vars.app_runtime_abbr %>:
 
@@ -62,7 +59,7 @@ Collect your vCenter information:
 
 If you are using NSX-T, select **Workload Domains** and select the **Summary** tab. Record the IP address listed for **NSX Manager IP Address**.
 
-## <a id='next-steps'></a> Next Step
+## <a id='next-steps'></a> Next step
 
 After you complete the procedures in this topic, continue to [Installing <%= vars.ops_manager %> on vSphere](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/2.10/vmware-tanzu-ops-manager/install-vsphere.html).
 
