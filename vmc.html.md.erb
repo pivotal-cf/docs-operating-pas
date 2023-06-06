@@ -3,11 +3,9 @@ title: Deploying TAS for VMs to VMC
 owner: dap-tas-vmc-vcf-anycloud
 ---
 
-This topic describes how to install <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) to VMware Cloud (VMC) on Amazon Web Services (AWS).
+Here are instructions for installing <%= vars.app_runtime_first %> to VMware Cloud (VMC) on Amazon Web Services (AWS).
 
-## <a id='introduction'></a> Overview
-
-VMC provides Software Defined Data Centers (SDDCs) that run on AWS with a high-level management console to configure networking rules.
+VMC provides Software Defined Data Centers (SDDCs) that run on AWS with a high level management console to configure networking rules.
 This topic describes the procedures for configuring and installing <%=
 vars.app_runtime_abbr %> on VMC using public IP addresses for ingress.
 
@@ -15,9 +13,9 @@ To install and configure <%= vars.app_runtime_abbr %> on VMC:
 
   1. [Install <%= vars.ops_manager %>](#om-setup)
 
-  1. [Configure BOSH Director](#bosh-setup)
+  2. [Configure BOSH Director](#bosh-setup)
 
-  1. [Install and Configure <%= vars.app_runtime_abbr %>](#tas-tile)
+  3. [Install and Configure <%= vars.app_runtime_abbr %>](#tas-tile)
 
 ## <a id='requirements'></a> Prerequisites
 
@@ -37,7 +35,7 @@ See [Configure a VPN Connection Between Your SDDC and On-Premises Data Center](h
 * To use VIFs to connect your network to the VMC SDDC, configure the VIFs before you install <%= vars.app_runtime_abbr %>.
 See [Configure AWS Direct Connect Between Your SDDC and On-Premises Data Center](https://docs.vmware.com/en/VMware-Cloud-on-AWS/services/com.vmware.vmc-aws.networking-security/GUID-417EE2F1-0EA5-4808-BDB3-6FF622EECB95.html).
 
-### <a id='vcenter-access'></a> Enable Browser Access to vCenter
+### <a id='vcenter-access'></a> Activate browser access to vCenter
 
 By default, ingress to vCenter is not enabled. If you are not using a VPN or other network,
 you must create a firewall rule in SDDC to allow vCenter access from your workstation's public IP address.
@@ -67,7 +65,7 @@ To enable browser access to vCenter:
     * **Services**: Enter `HTTPS, ICMP, SSO`.
 1. Click **Publish**.
 
-### <a id='vcenter-creds'></a> Record vCenter Credentials
+### <a id='vcenter-creds'></a> Record vCenter credentials
 
 To gather login credentials for the vCenter instance in your SDDC:
 
