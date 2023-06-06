@@ -1,12 +1,12 @@
 ---
-title: Providing a Certificate for Your TLS Termination Point
+title: Providing a certificate for your TLS termination point
 owner: RelEng
 ---
 
-This topic describes how to configure Transport Layer Security (TLS) termination for HTTP traffic in <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) with a TLS certificate, as part of the process of configuring <%= vars.app_runtime_abbr %> for deployment.
+You can configure Transport Layer Security (TLS) termination for HTTP traffic in <%= vars.app_runtime_first %> with a TLS certificate, as part of the process of configuring <%= vars.app_runtime_abbr %> for deployment.
 
 
-## <a id="ssl_term"></a> Configure TLS Termination
+## <a id="ssl_term"></a> Configure TLS termination
 
 When you deploy <%= vars.platform_name %>, you must configure the TLS termination for HTTP traffic in your <%= vars.app_runtime_abbr %> configuration. You can terminate TLS at all of these points:
 
@@ -16,7 +16,7 @@ When you deploy <%= vars.platform_name %>, you must configure the TLS terminatio
 
 To choose and configure the TLS termination option for your deployment, see [TLS Termination Options for HTTP Routing](../adminguide/securing-traffic.html#ssl_options) in _Securing Traffic into <%= vars.app_runtime_abbr %>_.
 
-## <a id="certs"></a> Obtain TLS Certificates
+## <a id="certs"></a> Obtain TLS certificates
 
 To secure traffic into <%= vars.platform_name %>, you must obtain at least one TLS certificate. For general certificate requirements for deploying <%= vars.platform_name %>, see [Certificate Requirements](../adminguide/securing-traffic.html#certtypes) in _Securing Traffic into <%= vars.app_runtime_abbr %>_.
 
@@ -29,7 +29,7 @@ For additional IaaS-specific certificate requirements:
 * **vSphere:** [Certificate Requirements on vSphere](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/vsphere-index.html)
 
 
-## <a id="create_or_obtain_certs"></a> Create a Wildcard Certificate for <%= vars.platform_name %> Deployments
+## <a id="create_or_obtain_certs"></a> Create a wildcard certificate for <%= vars.platform_name %> deployments
 
 This section describes how to create or generate a certificate for your <%= vars.app_runtime_abbr %> environment. If you are deploying to a production environment, you must obtain a certificate from a trusted Certificate Authority (CA).
 
@@ -55,7 +55,7 @@ In either case for either self-signed or trusted single certificates, apply thes
     * `*.uaa.sys.DOMAIN.com`
     <p class="note"><strong>Note:</strong> TLS certificates generated for wildcard DNS records only work for a single domain name component or component fragment. For example, a certificate generated for <code>&#42;.DOMAIN.com</code> does not work for <code>&#42;.apps.DOMAIN.com</code> and <code>&#42;.sys.DOMAIN.com</code>. The certificate must have both <code>&#42;.apps.DOMAIN.com</code> and <code>&#42;.sys.DOMAIN.com</code> attributed to it.</p>
 
-### <a id="ert_certgen"></a> Generate an RSA Certificate in <%= vars.app_runtime_abbr %>
+### <a id="ert_certgen"></a> Generate an RSA certificate in <%= vars.app_runtime_abbr %>
 
 To generate an RSA certificate in <%= vars.app_runtime_abbr %>:
 
