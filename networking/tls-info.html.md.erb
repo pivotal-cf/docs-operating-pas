@@ -20,7 +20,7 @@ The diagram below illustrates the flow of communication from a client making a r
 ![alt-text="The Gorouter and app are grouped as TAS for VMs."](./images/ingress-traffic.png)
 [//]: https://docs.google.com/drawings/d/113hdlLwssAj_0I7WdTCaQ9Oz_Nf2f-6vXGSD8nccabE/edit?usp=sharing
 
-The table below describes each component involved in receiving a client request and where their certificates for TLS termination originate:
+The following table describes each component involved in receiving a client request and where their certificates for TLS termination originate:
 
 | Component | Certificate Source |
 | --------- | ------------------ |
@@ -30,7 +30,7 @@ The table below describes each component involved in receiving a client request 
 
 ### <a id="component-to-component"></a> Between platform components
 
-The diagram below illustrates communication between platform components, secured with TLS. The BOSH Director, with CredHub, feeds into Loggregator and Cloud Controller, which also communicate with each other. Loggregrator and Cloud Controller feed into Deigo Cell and Gorouter, respectively, and all of the components communicate with each other.
+The following diagram illustrates communication between platform components, secured with TLS. The BOSH Director, with CredHub, feeds into Loggregator and Cloud Controller, which also communicate with each other. Loggregrator and Cloud Controller feed into Deigo Cell and Gorouter, respectively, and all of the components communicate with each other.
 
 ![alt-text="Connection diagram of communication paths."](./images/platform-components.png)
 [//]: https://docs.google.com/drawings/d/1_6GsjdOZT6Z_5MNeCV5LEXaJLmUqAMAM0kh7Xy0qJFI/edit?usp=sharing
@@ -59,7 +59,7 @@ These topics list the paths, ports, and protocols that subsystems within <%= var
 
 ### <a id="app-to-app"></a> Between apps
 
-The diagram below illustrates TLS communications between apps running on <%= vars.app_runtime_abbr %>:
+The following diagram illustrates TLS communications between apps running on <%= vars.app_runtime_abbr %>:
 
 ![alt-text="The TLS communications between apps."](./images/between-app-traffic.png)
 [//]: https://docs.google.com/drawings/d/1Shng1QbrXZbjRTOCJGldvXghUnlHl8Qy9nIT5k0w9wI/edit?usp=sharing
@@ -72,7 +72,7 @@ Developers specify which apps are allowed to communicate using container network
 
 ### <a id="app-to-service"></a> Between apps and on-platform services
 
-The diagram below illustrates TLS communication between apps and managed, on-platform services. It uses Cloud Cache as an example of a managed service.
+The following diagram illustrates TLS communication between apps and managed, on-platform services. It uses Cloud Cache as an example of a managed service.
 
 ![alt-text="Certificates are copied to each element (Cache Server, Locator, App) from CredHub.
  TLS traffic flows between the App and the Cache Server and Locator."](./images/apps-services.png)
@@ -84,7 +84,7 @@ Separately, <%= vars.app_runtime_abbr %> Runtime CredHub might store credentials
 
 ### <a id="app-to-external-service"></a> Between apps and external services
 
-The diagram below illustrates communications between apps and external, brokered services secured with TLS:
+The following diagram illustrates communications between apps and external, brokered services secured with TLS:
 
 ![alt-text="The TAS Block (internal) includes App1 and App2, along with CredHub.
  The off-platform backend block (external) includes Oracle DB and a TIBCO block."](./images/apps-external-services.png)
