@@ -1,19 +1,14 @@
 ---
-title: Configuring Multi-Foundation Support in Apps Manager
+title: Configuring multi-foundation support in Apps Manager
 owner:
 ---
 
-This topic tells you how to configure multi-foundation support in Apps Manager.
+Configuring multi-foundation support in Apps Manager allows you to search, view, and manage orgs, spaces, apps, and service instances across multiple foundations from a single interface.
 
 <p class="note warning"><strong>Caution</strong>: Multi-foundation support in Apps Manager is in beta. You can use this feature to connect foundations that use the same major and minor version of <%= vars.app_runtime_first %>. If you connect foundations that use different <%= vars.app_runtime_abbr %> versions, Apps Manager functionality might not work.</p>
 
 
-## <a id="overview"></a> Overview
-
-Configuring multi-foundation support in Apps Manager allows you to search, view, and manage orgs, spaces, apps, and service instances across multiple foundations from a single interface.
-
-
-## <a id="configure"></a> Configure Multi-Foundation Support
+## <a id="configure"></a> Configure multi-foundation support
 
 This section explains the procedures for configuring multi-foundation support in Apps Manager.
 
@@ -56,13 +51,13 @@ To configure multi-foundation support in Apps Manager:
     ```
     Where `FOUNDATION-SYSTEM-DOMAIN` is the system domain of the foundation on which you enabled multi-foundation support.
 
-### <a id="certificates"></a> Add Trusted Certificate Authorities
+### <a id="certificates"></a> Add trusted certificate authorities
 
 Apps Manager must be able to validate the certificate authorities (CAs) used by all foundations.
 
 If any foundation uses a certificate for TLS termination that is not signed by a globally-trusted CA, add the CA that signed the TLS certificate as a trusted CA on the foundation on which you enabled multi-foundation support.
 
-### <a id="saml"></a> Configure the SAML Identity Provider (Optional)
+### <a id="saml"></a> Configure the SAML Identity Provider (optional)
 
 <%= vars.company_name %> recommends that all foundations use the same external SAML identity provider. This allows Apps Manager to automatically authenticate with the identity provider.
 
