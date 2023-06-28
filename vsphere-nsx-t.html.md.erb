@@ -464,7 +464,7 @@ To install and configure the tile:
   - **IP Blocks of Container Networks**: Use the same IP block created [Configure Gateways](#nsx-t-gateways).
   - **Subnet Prefix of Container Networks**: Subnet mask to set the address range size for apps in a single org. Defaults to `24`. This number must be higher than the mask for all <%= vars.app_runtime_abbr %> orgs in the NSX-T Manager **New IP Block** pane, to define each org's fraction of the total <%= vars.app_runtime_abbr %> address space.
   - **IP Pools used to provide External (NAT) IP Addresses to Org Networks**: Use the same IP Pool created iin [Configure Gateways](#nsx-t-gateways).
-  - **Enable NSX-T Policy API**: Enable this checkbox to use the new Policy API.
+  - **Enable NSX-T Policy API**: Enable this check box to use the new Policy API.
     ![alt-text="NSX-T tile config: NCP"](./images/nsx-t/nsx-t-tile-config-ncp-policy.png)
 
 1. In the **NSX Node Agent** pane, enable the **Enable Debug Level of Logging for NSX Node Agent** checkbox.
