@@ -1,18 +1,15 @@
 ---
-title: TAS for VMs on vSphere Requirements
+title: TAS for VMs on vSphere requirements
 owner:
 iaas: vSphere
 ---
 
-This topic tells you about the requirements for installing <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) on vSphere.
+Here are the requirements for installing <%= vars.app_runtime_first %> on vSphere.
+For general resource requirements, see [<%= vars.app_runtime_abbr %> resource requirements](./requirements.html).
 
-For general resource requirements, see [<%= vars.app_runtime_abbr %> Resource Requirements](./requirements.html).
+## <a id='vsphere-reqs'></a> vSphere requirements
 
-## <a id='vsphere-reqs'></a> vSphere Requirements
-
-The following are requirements for installing <%= vars.app_runtime_abbr %> that are specific to vSphere.
-
-### <a id='pcf-deployment'></a> Minimum Resource Requirements for <%= vars.platform_name %> Deployment with <%= vars.app_runtime_abbr %>
+### <a id='pcf-deployment'></a> Minimum resource Requirements for <%= vars.platform_name %> Deployment with <%= vars.app_runtime_abbr %>
 
 The following are the minimum resource requirements for maintaining a [<%= vars.platform_name %>](https://network.tanzu.vmware.com/products/ops-manager) deployment with <%= vars.app_runtime_abbr %> on vSphere:
 
@@ -31,7 +28,7 @@ The following are the minimum resource requirements for maintaining a [<%= vars.
 ote"><strong>Note:</strong> If you are deploying <%= vars.platform_name %> behind a firewall, see <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/2.10/vmware-tanzu-ops-manager/install-config_firewall.html
 <p class="n">Preparing Your Firewall for Deploying <%= vars.platform_name %></a>.</p>
 
-### <a id='small-footprint-deployment'></a> Minimum Resource Requirements for <%= vars.platform_name %> Deployment with Small Footprint <%= vars.app_runtime_abbr %>
+### <a id='small-footprint-deployment'></a> Minimum resource requirements for <%= vars.platform_name %> deployment with Small Footprint <%= vars.app_runtime_abbr %>
 
 The following are the minimum resource requirements for maintaining a <%= vars.platform_name %> deployment with Small Footprint <%= vars.app_runtime_abbr %> on vSphere:
 
@@ -44,7 +41,7 @@ The following are the minimum resource requirements for maintaining a <%= vars.p
 * 4 large edge VMs in a cluster
 * <%= vars.platform_name %>: <%= vars.ops_manager %>, the BOSH Director, and Small Footprint <%= vars.app_runtime_abbr %>
 
-### <a id='instance-number-scaling-reqs'></a> Instance Number and Scaling Requirements
+### <a id='instance-number-scaling-reqs'></a> Instance number and scaling requirements
 
 By default, <%= vars.app_runtime_abbr %> deploys the number of VM instances required to run a highly available configuration of <%= vars.platform_name %>. If you are deploying a test or sandbox <%= vars.platform_name %> that does not require HA, then you can scale down the number of instances in your deployment.
 

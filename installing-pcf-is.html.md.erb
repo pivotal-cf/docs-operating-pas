@@ -1,12 +1,12 @@
 ---
-title: Installing Isolation Segment
+title: Installing Isolation Segment (IS)
 owner: RelEng
 deployment: IST
 ---
 
-This topic tells you how to install the <%= vars.segment_runtime_full %> tile, which allows operators to isolate deployment workloads into dedicated resource pools called _isolation segments_.
+Use these instructions to install the <%= vars.segment_runtime_full %> tile, which allows you to isolate deployment workloads into dedicated resource pools called _isolation segments_.
 
-Installing the tile installs a single isolation segment. However, you can install multiple isolation segments using the Replicator tool documented in [Step 4](#copy).
+Installing the tile installs a single isolation segment. However, you can install multiple isolation segments using the Replicator tool shown in [Step 4](#copy).
 
 After installing the tile, you must follow the procedure in [Register an Isolation Segment](../adminguide/isolation-segments.html#register-an-is) in _Managing Isolation Segments_ to create the isolation segment in the Cloud Controller database (CCDB). The topic also includes information about managing an isolation segment.
 
@@ -43,7 +43,7 @@ To install the <%= vars.segment_runtime_full %> tile:
 
 Click the orange **<%= vars.segment_runtime_full %>** tile to start the configuration process.
 
-### <a id='az_networks'></a> Assign AZs and Networks
+### <a id='az_networks'></a> Assign AZs and networks
 
 In the **Assign AZ and Networks** pane, you assign jobs to your Availability Zones (AZs) and networks.
 
@@ -62,7 +62,7 @@ To configure the **Assign AZ and Networks** pane:
 <%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
 <%= partial "/pcf/core/networking-is" %>
 
-### <a id='application_containers'></a> Configure App Containers
+### <a id='application_containers'></a> Configure app containers
 
 In the **App Containers** pane, you enable microservice frameworks, private Docker registries, and other services that support your apps at the container level.
 
@@ -102,7 +102,7 @@ verify app identity using TLS. This is the default option.
 
 1. Click **Save**.
 
-### <a id='syslog'></a> Configure System Logging
+### <a id='syslog'></a> Configure system logging
 
 In the **System Logging** pane, you can configure system logging in <%= vars.app_runtime_abbr %> to forward log messages from <%= vars.app_runtime_abbr %> component VMs to an external service. <%= vars.company_name %> recommends forwarding logs to an external service for use in troubleshooting. If you do not fill these fields, platform logs are not forwarded but remain available on the component VMs and for download through <%= vars.ops_manager %>.
 
@@ -133,7 +133,7 @@ To configure the **System Logging** pane:
 
 1. (Optional) To specify a custom syslog rule, enter it in the **Custom rsyslog configuration** field in RainerScript syntax. For more information about customizing syslog rules, see [Customizing Syslog Rules](./custom-syslog-rules.html). For more information about RainerScript, see the [RainerScript](http://www.rsyslog.com/doc/v8-stable/rainerscript/index.html) documentation.
 
-1. Select the **Enable system metrics** check box to emit system-level metrics about all VMs in the deployment. For a list of the VM metrics that the System Metric Agent emits, see [VM Metrics](https://github.com/cloudfoundry/system-metrics-release/blob/develop/docs/system-metrics-agent.md#vm-metrics) in GitHub. When you enable this check box, ensure that you open port `9100` for the isolation segment. For more information, see [Configure Firewall Rules](../adminguide/routing-is.html#config-firewall) in _Routing for Isolation Segments_.
+1. Select the **Enable system metrics** check box to emit system-level metrics about all VMs in the deployment. For a list of the VM metrics that the System Metric Agent emits, see [VM Metrics](https://github.com/cloudfoundry/system-metrics-release/blob/main/docs/system-metrics-agent.md) in GitHub. When you activate this check box, ensure that you open port `9100` for the isolation segment. For more information, see [Configure Firewall Rules](../adminguide/routing-is.html#config-firewall) in _Routing for Isolation Segments_.
 
 1. Click **Save**.
 
@@ -143,7 +143,7 @@ To configure the **System Logging** pane:
 
 <%= partial "/pcf/core/advanced-features" %>
 
-### <a id='compute-networking-isolation'></a> Configure Compute and Networking Isolation
+### <a id='compute-networking-isolation'></a> Configure compute and networking Isolation
 
 In the **Compute and Networking Isolation** pane, you can activate or deactivate compute isolation and configure Gorouter sharding for isolation segments.
 
@@ -153,9 +153,12 @@ Networking isolation, or Gorouter sharding, is when traffic to an app instance u
 
 In the <%= vars.segment_runtime_full %> tile, you cannot deactivate compute isolation and enable networking isolation at the same time. This is because networking isolation configures the route by which traffic goes to the <%= vars.segment_runtime_full %> tile. Both compute and networking isolation are enabled by default.
 
-#### <a id='compute-networking-isolation-configs'></a> Options for Configuring Compute and Networking Isolation
+#### <a id='compute-networking-isolation-configs'></a> Options for configuring compute and networking isolation
 
-The following table describes the three ways <%= vars.company_name %> recommends configuring the **Compute and Networking Isolation** pane and the **Gorouters reject requests for isolation segments** check box in the **Networking** pane of the <%= vars.app_runtime_abbr %> tile:
+The table below describes the ways <%= vars.company_name %>
+recommends configuring the **Compute and Networking Isolation** pane and the
+**Gorouter isolation segment request handling** property in the **Networking**
+pane of the <%= vars.app_runtime_abbr %> tile:
 
 | Use case | Compute isolation | Gorouter sharding mode | Gorouters reject requests for isolation segments (<%= vars.app_runtime_abbr %> tile) | Other requirements | Scaling recommendations |
 | -------- | ----------------- | -------------------- | ---------------------------------------------------------------------------------- | ------------------ | ----------------------- |
@@ -182,7 +185,7 @@ The use cases from the previous table are described here:
 
 <p class='note warning'><strong>Caution:</strong> If you configure the <strong>Compute and Networking Isolation</strong> pane and the <strong>Gorouters reject requests for isolation segments</strong> check box in the <%= vars.app_runtime_abbr %> tile in a manner other than the use cases described previously, the smoke tests fail. To deploy the tile anyway, you must deactivate the Smoke Test errand in the <strong>Errands</strong> pane of the <%= vars.app_runtime_abbr %> tile. <%= vars.company_name %> does not recommend disabling smoke tests. To configure the Smoke Test errand, see <a href="#errands">Configure Errands</a>.</p>
 
-#### <a id='pane-config'></a> Configure Pane
+#### <a id='pane-config'></a> Configure compute and networking isolation pane
 
 To configure the **Compute and Networking Isolation** pane:
 
@@ -197,7 +200,7 @@ To configure the **Compute and Networking Isolation** pane:
   * **Isolation segment only**: The Gorouters for the <%= vars.app_runtime_abbr %> tile acknowledge requests only for apps deployed within the Diego Cells of the tile. All other requests fail.
   * **No isolation segment**: The Gorouters for the <%= vars.app_runtime_abbr %> tile reject requests for any isolation segment. Choose this option to add a group of Gorouters for the <%= vars.app_runtime_abbr %> tile, such as when you want a private point of entry for the system domain or to configure a group of Gorouters to receive requests from your corporate intranet.
 
-### <a id='smoke-tests'></a> Configure Smoke Tests
+### <a id='smoke-tests'></a> Configure smoke tests
 
 In the **Smoke Tests** pane, you specify the org and space where smoke tests are run.
 In the org and space that you specify, the Smoke Test errand pushes the app to a <%= vars.platform_name %> org.
@@ -256,18 +259,10 @@ To configure the **Resource Config** pane:
   <p class="note"><strong>Note:</strong> The configuration settings available in <strong>Resource Config</strong> vary depending on your IaaS.</p>
   * **If you have the Load Balancers column in your Resource Config**:
       1. Enter the wildcard DNS entry attached to your load balancer into the **Router** row under **Load Balancers**.
-  If you do not have the Load Balancers column in your Resource Config**:
+  * **If you do not have the Load Balancers column in your Resource Config**:
       1. Go to the **Networking** pane.
       2. Specify **Gorouter IPs**.
       3. Attach the IP addresses to your load balancer manually.
-
-Enter the wildcard DNS entry attached to your load balancer into the Router row under Load Balancers.
-
-If you do not have the Load Balancers column in your Resource Config pane:
-
-1. Go to the Networking pane.
-2. Specify Gorouter IPs.
-3. Manually attach the IP addresses to your load balancer.
 
 ### <a id='after_config'></a> After tile configuration
 
@@ -283,7 +278,7 @@ After you configure the <%= vars.segment_runtime_full %> tile:
 After the tile finishes deploying, see [Managing Isolation Segments](../adminguide/isolation-segments.html) for more information about managing an isolation segment.
 
 
-## <a id='copy'></a> (Optional) Step 4: Copy the Tile
+## <a id='copy'></a>  Step 4: Copy the tile (optional)
 
 To create multiple isolation segments, you can copy the <%= vars.segment_runtime_full %> tile with the Replicator tool.
 

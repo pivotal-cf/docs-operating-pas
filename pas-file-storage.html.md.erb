@@ -1,11 +1,9 @@
 ---
-title: Configuring File Storage for TAS for VMs
+title: Configuring file storage for TAS for VMs
 owner: Releng
 ---
 
-This topic provides instructions for configuring file storage for <%= vars.app_runtime_full %>
-(<%= vars.app_runtime_abbr %>) based on your IaaS and installation method. See the section that
-applies to your use case.
+Here are instructions for configuring file storage for <%= vars.app_runtime_first %> based on your IaaS and installation method. See the section that applies to your use case.
 
 To minimize system downtime, <%= vars.company_name %> recommends using highly resilient and
 redundant _external_ filestores for your <%= vars.app_runtime_abbr %> file storage. For more
@@ -17,7 +15,7 @@ factors to consider when selecting file storage, see [Configure File Storage](co
 </p>
 
 
-## <a id="internal"></a> Internal File Storage
+## <a id="internal"></a> Internal file storage
 
 <%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
 <%= partial "/pcf/core/filestore_internal" %>
@@ -28,25 +26,25 @@ factors to consider when selecting file storage, see [Configure File Storage](co
 This section describes how to configure file storage for AWS.
 
 <p class="note"><strong>Note:</strong> If you followed the procedure in
-  <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/aws-prepare-env-manual.html"> Preparing to Deploy <%= vars.ops_manager %> on AWS</a>, you created the necessary
+  <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/2.10/vmware-tanzu-ops-manager/aws-prepare-env-manual.html"> Preparing to Deploy <%= vars.ops_manager %> on AWS</a>, you created the necessary
   resources for external S3-compatible file storage.</p>
 
 For production-level <%= vars.platform_name %> deployments on AWS, <%= vars.company_name %>
 recommends selecting **External S3-compatible filestore**.
-For instructions, see [External S3-Compatible Filestore](#aws-s3) below.
+For instructions, see [External S3-Compatible Filestore ](#aws-s3) below.
 
 You can also configure Fog blobstores to use AWS IAM instance profiles.
 For instructions, see [Fog with AWS IAM Instance Profiles](#fog-aws-iam) below.
 
 For more information about production-level
-<%= vars.platform_name %> deployments on AWS, see [AWS Reference Architecture](https://docs.pivotal.io/ops-manager/2-10/refarch/aws/aws_ref_arch.html).
+<%= vars.platform_name %> deployments on AWS, see [AWS Reference Architecture](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/2.10/vmware-tanzu-ops-manager/refarch-aws-aws_ref_arch.html).
 
-### <a id="aws-s3"></a>External S3-Compatible Filestore
+### <a id="aws-s3"></a>External S3-Compatible filestore
 
 <%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
 <%= partial "/pcf/core/filestore_s3_config", :locals => { :aws => true } %>
 
-### <a id="fog-aws-iam"></a> Fog with AWS IAM Instance Profiles
+### <a id="fog-aws-iam"></a> Fog with AWS IAM instance profiles
 
 To configure Fog blobstores to use AWS IAM instance profiles:
 
@@ -85,7 +83,7 @@ To configure Fog blobstores to use AWS IAM instance profiles:
       name: cloud-controller-iam
     ```
 
-    <p class="note"><strong>Note</strong>: You can also create a VM extension using the Ops Manager API. For more information, see <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-custom-vm-extensions.html#create-or-update-a-vm-extension-2">Create or Update a VM Extension</a> in <em>Managing Custom VM Extensions</em>.</p>
+    <p class="note"><strong>Note</strong>: You can also create a VM extension using the Ops Manager API. For more information, see <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/2.10/vmware-tanzu-ops-manager/install-custom-vm-extensions.html#create-or-update-a-vm-extension-2">Create or Update a VM Extension</a> in <em>Managing Custom VM Extensions</em>.</p>
 
 1. In your <%= vars.app_runtime_abbr %> deployment manifest, use the `cloud-controller-iam` VM extension you created for the instance groups containing `cloud_controller`, `cloud_controller_worker`, and `cloud_controller_clock`, as in the example below:
 
@@ -148,7 +146,7 @@ corresponds to your installation method:
 
 For production-level <%= vars.platform_name %> deployments on GCP, <%= vars.company_name %>
 recommends selecting **External Google Cloud Storage**. For more information about production-level
-<%= vars.platform_name %> deployments on GCP, see [GCP Reference Architecture](https://docs.pivotal.io/ops-manager/2-10/refarch/gcp/gcp_ref_arch.html).
+<%= vars.platform_name %> deployments on GCP, see [GCP Reference Architecture](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/2.10/vmware-tanzu-ops-manager/refarch-gcp-gcp_ref_arch.html).
 
 ### <a id="gcp-manual"></a> Manual
 
@@ -173,7 +171,7 @@ This section describes how to configure file storage for Azure.
 
 For production-level <%= vars.platform_name %> deployments on Azure, <%= vars.company_name %>
 recommends selecting **External Azure Storage**. For more information about production-level
-<%= vars.platform_name %> deployments on Azure, see [Azure Reference Architecture](https://docs.pivotal.io/ops-manager/2-10/refarch/azure/azure_ref_arch.html).
+<%= vars.platform_name %> deployments on Azure, see [Azure Reference Architecture](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/2.10/vmware-tanzu-ops-manager/refarch-azure-azure_ref_arch.html).
 
 For more factors to consider when selecting file storage, see [Configure File Storage](configuring.html#file-storage) in _Configuring <%= vars.app_runtime_abbr %> for Upgrades_.
 
@@ -185,7 +183,7 @@ For more factors to consider when selecting file storage, see [Configure File St
 
 For production-level <%= vars.platform_name %> deployments on OpenStack, <%= vars.company_name %>
 recommends selecting **External S3-compatible filestore**. For more information about production-level
-<%= vars.platform_name %> deployments on OpenStack, see [OpenStack Reference Architecture](https://docs.pivotal.io/ops-manager/2-10/refarch/openstack/openstack_ref_arch.html).
+<%= vars.platform_name %> deployments on OpenStack, see [OpenStack Reference Architecture](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/2.10/vmware-tanzu-ops-manager/refarch-openstack-openstack_ref_arch.html).
 
 For more factors to consider when selecting file storage, see [Configure File Storage](configuring.html#file-storage) in _Configuring <%= vars.app_runtime_abbr %> for Upgrades_.
 
@@ -198,7 +196,7 @@ For more factors to consider when selecting file storage, see [Configure File St
 For production-level <%= vars.platform_name %> deployments on vSphere, <%= vars.company_name %>
 recommends selecting **External S3-compatible filestore** and using an external filestore.
 For more information about production-level <%= vars.platform_name %> deployments on vSphere,
-see [vSphere Reference Architecture](https://docs.pivotal.io/ops-manager/2-10/refarch/vsphere/vsphere_ref_arch.html).
+see [vSphere Reference Architecture](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/2.10/vmware-tanzu-ops-manager/refarch-vsphere-vsphere_ref_arch.html).
 
 For more factors to consider when selecting file storage, see [Configure File Storage](configuring.html#file-storage) in _Configuring <%= vars.app_runtime_abbr %> for Upgrades_.
 

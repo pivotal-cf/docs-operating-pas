@@ -3,12 +3,12 @@ title: Getting Started with Small Footprint TAS for VMs
 owner: RelEng
 ---
 
-This topic describes the Small Footprint <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) tile for <%= vars.platform_name %>.
+Here are the details of the Small Footprint <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) tile for <%= vars.platform_name %>.
 
 The Small Footprint <%= vars.app_runtime_abbr %> is a repackaging of the <%= vars.app_runtime_abbr %> components into a smaller deployment with fewer virtual machines (VMs). For a description of the limitations that come with a smaller deployment, see [Limitations](#limits).
 
 
-## <a id='compare'></a> Differentiate Small Footprint <%= vars.app_runtime_abbr %> and <%= vars.app_runtime_abbr %>
+## <a id='compare'></a> Differentiate small footprint <%= vars.app_runtime_abbr %> and <%= vars.app_runtime_abbr %>
 
 A standard <%= vars.app_runtime_abbr %> deployment must have at least 13 VMs, but Small Footprint <%= vars.app_runtime_abbr %> requires only four.
 
@@ -18,7 +18,9 @@ The following image displays a comparison of the number of VMs deployed by <%= v
 
 [//]: https://docs.google.com/drawings/d/19V1SY4BGW2T--c4Y8Jm26CkA8C-6jIHXl7gpEzYlTmY/edit?usp=sharing
 
-### <a id='usecase'></a> Use Cases
+![alt-text=""](./images/ert-vms-2.0.png)
+
+### <a id='usecase'></a> Use cases
 
 Use Small Footprint <%= vars.app_runtime_abbr %> for smaller <%= vars.platform_name %> deployments on which you intend to host 2500 or fewer apps, as described in [Limitations](#limits). If you want to use Small Footprint <%= vars.app_runtime_abbr %> in a production environment, ensure the limitations described below are not an issue in your use case.
 
@@ -63,9 +65,9 @@ For more information about the components mentioned on this page, see [<%= vars.
 
 The Control VM includes the <%= vars.app_runtime_abbr %> jobs that handle management plane operations, app lifecycles, logging, and user authorization and authentication. Additionally, all errands run on the Control VM, eliminating the need for a VM for each errand and significantly reducing the time it takes to run errands.
 
-The following image shows all the jobs from <%= vars.app_runtime_abbr %> that are colocated on the Control VM in Small Footprint <%= vars.app_runtime_abbr %>.
+The following image shows all the jobs from <%= vars.app_runtime_abbr %> that are co-located on the Control VM in Small Footprint <%= vars.app_runtime_abbr %>. Small Footprint TAS for VMs co-locates 11 VMs onto 1 VM called Control. The 11 VMs are Cloud Controller, Cloud Controller Worker, Clock Global, Diego BBS, Diego Brain, Doppler Server, Loggregator Traffic Controller, Syslog Adapter, Syslog Scheduler, UAA, and optionally, CredHub.
 
-![alt-text="Small Footprint TAS for VMs co-locates 11 VMs onto 1 VM called Control. The 11 VMs are Cloud Controller, Cloud Controller Worker, Clock Global, Diego BBS, Diego Brain, Doppler Server, Loggregator Traffic Controller, Syslog Adapter, Syslog Scheduler, UAA, and optionally, CredHub."](./images/control-vms-2.0.png)
+![alt-text=""](./images/control-vms-2.0.png)
 
 [//]: https://docs.google.com/a/pivotal.io/drawings/d/17AZ5xT_K8O0cATDZARPtgTEDV2cy6OfEbZybv81gqAg/edit?usp=sharing
 
@@ -73,9 +75,9 @@ The following image shows all the jobs from <%= vars.app_runtime_abbr %> that ar
 
 The Database VM includes the <%= vars.app_runtime_abbr %> jobs that handle internal storage and messaging.
 
-The following image shows all the jobs from <%= vars.app_runtime_abbr %> that are colocated on the Database VM in Small Footprint <%= vars.app_runtime_abbr %>.
+The following image shows all the jobs from <%= vars.app_runtime_abbr %> that are co-located on the Database VM in Small Footprint <%= vars.app_runtime_abbr %>. Small Footprint TAS for VMs Condenses 3 VMs onto 1 VM called Database. The three TAS for VMs VMs are NATS, MySQL Proxy, and MySQL Server. The MySQL Proxy and MySQL Server are optional VMs.
 
-![alt-text="Small Footprint TAS for VMs Condenses 3 VMs onto 1 VM called Database. The three TAS for VMs VMs are NATS, MySQL Proxy, and MySQL Server. MySQL Proxy and MySQL Server are optional VMs."](./images/db-vms.png)
+![alt-text=""](./images/db-vms.png)
 
 [//]: https://docs.google.com/a/pivotal.io/drawings/d/12UkinQ58ejlq9AZQvwq6r7Ghtp4RnTopI_-gTGerpU4/edit?usp=sharing
 
@@ -87,7 +89,7 @@ The Compute VM is the same as the Diego Cell VM in <%= vars.app_runtime_abbr %>.
 
 [//]: https://docs.google.com/drawings/d/1XHhPz9CBy1ZotSrEBj8TAfkPaXqiHxOQMQHzUr_Rmn4/edit?usp=sharing
 
-### <a id='othervms'></a> Other VMs (Unchanged)
+### <a id='othervms'></a> Other VMs (unchanged)
 
 The following image shows the VMs performs the same functions in both versions of the <%= vars.app_runtime_abbr %> tile.
 
@@ -125,7 +127,7 @@ Follow the same installation and configuration steps as for <%= vars.app_runtime
 * **Configuring load balancers:** If you are using an SSH load balancer, you must enter its name in the **Control VM** row of the **Resource Config** pane. There is no **Diego Brain** row in Small Footprint <%= vars.app_runtime_abbr %> because the Diego Brain is colocated on the Control VM. You can still enter the appropriate load balancers in the **Router** and **TCP Router** rows as normal.
 
 
-## <a id='logs'></a> Troubleshooting Colocated Jobs Using Logs
+## <a id='logs'></a> Troubleshooting co-located jobs using logs
 
 To troubleshoot a job that runs on the Control or Database VMs:
 
@@ -222,6 +224,6 @@ To troubleshoot a job that runs on the Control or Database VMs:
 	</pre>
 
 
-## <a id='rn'></a> Release Notes
+## <a id='rn'></a> Release notes
 
-The Small Footprint <%= vars.app_runtime_abbr %> tile releases alongside the <%= vars.app_runtime_abbr %> tile. For more information, see [<%= vars.app_runtime_full %> <%= vars.v_major_version %> Release Notes](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/<%= vars.current_major_version %>/tas-for-vms/runtime-rn.html).
+The Small Footprint <%= vars.app_runtime_abbr %> tile releases alongside the <%= vars.app_runtime_abbr %> tile. For more information, see [<%= vars.app_runtime_full %> <%= vars.v_major_version %> Release Notes](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/2.13/tas-for-vms/runtime-rn.html).

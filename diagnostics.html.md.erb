@@ -1,10 +1,10 @@
 ---
-title: Diagnosing Deployment Problems
+title: Diagnosing <%= vars.app_runtime_abbr %> deployment problems
 owner: Ops Manager
 ---
 
-This topic provides guidance for diagnosing issues encountered
-when installing products such as <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>)
+Here you will learn how to diagnose issues that you encounter
+when installing products such as <%= vars.app_runtime_first %>
 with <%= vars.ops_manager_full %>.
 
 An important consideration when diagnosing
@@ -16,7 +16,7 @@ one of the VMs must deploy a test app
 to the cloud during post-installation testing.
 The installation fails if the resulting traffic cannot be routed to the HA Proxy load balancer.
 
-## <a id='debug'></a> Viewing the Debug Endpoint
+## <a id='debug'></a> Viewing the debug endpoint
 
 The debug endpoint is a web page that provides diagnostics information. If you have superuser
 privileges and can view the <%= vars.ops_manager %> Installation Dashboard, you can access the
@@ -44,9 +44,9 @@ component is used by <%= vars.platform_name %> to perform installations and upda
 as a Rails app, is running, as recorded in the `production.log` file. To explore other logs, see
 [Logging Tips](#tips).
 
-## <a id='tips'> </a> Logging Tips
+## <a id='tips'> </a> Logging tips
 
-### <a id='starting'> </a> Identifying Where to Start
+### <a id='starting'> </a> Identifying where to start
 
 This section contains general tips for locating where a particular problem is called out in the log
 files. For guidance regarding specific logs, such as those for <%= vars.app_runtime_abbr %>
@@ -56,7 +56,7 @@ components, see the sections below.
 * Identify logs that contain `err` in the name.
 * Scan the file contents for a "failed" or "error" string.
 
-### <a id='component_logs'></a> Viewing Logs for <%= vars.app_runtime_abbr %> Components
+### <a id='component_logs'></a> Viewing logs for <%= vars.app_runtime_abbr %> components
 
 To troubleshoot specific <%= vars.app_runtime_abbr %> components by viewing their log files:
 
@@ -69,7 +69,7 @@ To troubleshoot specific <%= vars.app_runtime_abbr %> components by viewing thei
 
 1. In the **Logs** column for the component, click the download icon.
 
-    ![alt-text="Tile configuration screen on Status tab. A table shows information for each job. The download icon is in the Logs column."](./images/troubleshooting/status.png)
+    ![alt-text="Tile configuration is in the Status tab and has information for each job. The download icon is in the Logs column."](./images/troubleshooting/status.png)
 
 1. Select the **Logs** tab.
 
@@ -85,7 +85,7 @@ Diego Cell log directory contains subdirectories for the `metron_agent` `rep`, `
 `garden` processes. To view the standard error stream for `garden`, download the Diego Cell logs
 and open `diego.0.job > garden > garden.stderr.log`.
 
-### <a id='view_in_terminal'></a> Viewing Web App and BOSH Failure Logs in a Terminal Window
+### <a id='view_in_terminal'></a> Viewing web app and BOSH failure logs in a terminal window
 
 You can obtain diagnostic information by logging in to the VM where the BOSH Director job is running. To log in to the BOSH Director VM, you need:
 
@@ -103,7 +103,7 @@ To log in to the VM:
     ```
     ssh IMPORT-USERNAME@<%= vars.platform_code %>-VM-IP-ADDRESS
     ```
-    
+
     Where:
     <ul>
       <li><code>IMPORT-USERNAME</code> is the username you used to import the <code>.ova</code> or <code>.ovf</code> file into your
@@ -142,7 +142,7 @@ MicroBOSH installation is required to install <%= vars.app_runtime_abbr %> and a
 <%= vars.platform_name %> overwrites manual changes to this manifest. In addition, manually
 changing the manifest may cause future deployments to fail.</p>
 
-## <a id='view-vms'></a> Viewing the VMs in Your Deployment
+## <a id='view-vms'></a> Viewing the VMs in your deployment
 
 To view the VMs in your deployment, follow the procedure specific to your
 IaaS.
@@ -205,7 +205,7 @@ example, select **Cluster**, **Datastore**, or **Resource Pool**.
 
 1. Select the **job**, **deployment**, **director**, and **index** boxes.
 
-## <a id='console-logs'></a> Viewing Apps Manager Logs in a Terminal Window
+## <a id='console-logs'></a> Viewing Apps Manager logs in a terminal window
 
 Apps Manager provides a graphical user interface to help manage organizations, users, apps, and
 spaces. For more information about Apps Manager, see
@@ -236,7 +236,7 @@ Apps Manager app logs:
     cf logs apps-manager
     ```
 
-### <a id='changing-log-level'></a> Changing Logging Levels for Apps Manager
+### <a id='changing-log-level'></a> Changing logging levels for Apps Manager
 
 Apps Manager recognizes the `LOG_LEVEL` environment variable. The `LOG_LEVEL` environment variable
 allows you to filter the messages reported in Apps Manager log files by severity level. Apps
@@ -265,6 +265,6 @@ You can set `LOG_LEVEL` to one of the six severity levels defined by the Ruby Lo
 Once set, Apps Manager log files only include messages at the set severity level and above. For
 example, if you set `LOG_LEVEL` to `fatal`, the log only includes `fatal` and `unknown` level messages.
 
-## <a id='disk-space-diagnostics'></a> Analyzing Disk Usage on Containers and Diego Cell VMs
+## <a id='disk-space-diagnostics'></a> Analyzing disk usage on containers and Diego Cell VMs
 
 To obtain disk usage statistics by Diego Cell VMs and containers, see [Examining GrootFS Disk Usage](../adminguide/examining_grootfs_disk.html).

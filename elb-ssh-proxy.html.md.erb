@@ -3,9 +3,9 @@ title: Creating a Proxy ELB for Diego SSH
 owner: Diego
 ---
 
-If you want to allow SSH connections to application containers, you may want to use an Elastic Load Balancer (ELB) as the SSH proxy.
+If you want to allow SSH connections to application containers, you can use an Elastic Load Balancer (ELB) as the SSH proxy.
 
-Perform the steps below to create this ELB:
+Use the following steps to create an ELB:
 
 1. On the EC2 Dashboard, click **Load Balancers**.
 
@@ -52,4 +52,4 @@ Perform the steps below to create this ELB:
 
 2. In <%= vars.app_runtime_abbr %>, select **Resource Config** and enter the ELB that you just created in the **Diego Brain** row, under the Load Balancers column.
 
-	<%= image_tag("aws/aws_ssh_er_diego_brain_config.png", :alt => "Screenshot of a section of the Resource Config, where Diego Brain is between UAA and Diego Cell.") %>
+  ![alt-text=" Enter the ELB that you just created into the Diego Brain row."](./images/aws/aws_ssh_er_diego_brain_config.png)

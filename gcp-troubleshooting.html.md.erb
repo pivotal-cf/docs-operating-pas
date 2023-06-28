@@ -4,10 +4,10 @@ owner: Ops Manager
 ---
 
 
-This topic describes how to troubleshoot known issues when deploying <%= vars.platform_name %> on Google Cloud Platform (GCP).
+Learn how to troubleshoot known issues when deploying <%= vars.platform_name %> on Google Cloud Platform (GCP).
 
 
-## <a id='sso'></a> Problems Connecting with Single Sign-On (SSO) for VMware Tanzu
+## <a id='sso'></a> Problems connecting with single sign-on (SSO) for VMware Tanzu
 
 Users may be unable to connect to applications running on <%= vars.platform_name %> using SSO for VMware Tanzu.
 
@@ -17,11 +17,11 @@ SSO for VMware Tanzu does not support multi-subnets.
 
 ### Solution
 
-Ensure that you have configured only one subnet. See [Preparing to Deploy <%= vars.platform_name %> on GCP Manually](https://docs.pivotal.io/platform/ops-manager/gcp/prepare-env-manual.html).
+Ensure that you have configured only one subnet. See [Preparing to Deploy <%= vars.platform_name %> on GCP Manually](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/2.10/vmware-tanzu-ops-manager/gcp-prepare-env-manual.html).
 
 <hr>
 
-## <a id='ert-install'></a> Uploading <%= vars.app_runtime_abbr %> Tile Causes <%= vars.platform_name %> Rails Application Crash
+## <a id='ert-install'></a> Uploading <%= vars.app_runtime_abbr %> tile causes <%= vars.platform_name %> rails application crash
 
 Uploading the <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) tile causes the <%= vars.platform_name %> Rails application to crash.
 
@@ -31,11 +31,11 @@ In compressed format, the <%= vars.app_runtime_abbr %> tile is 5&nbsp;GB in size
 
 ### Solution
 
-Ensure that the boot disk is allocated at least 50&nbsp;GB of space. See [Create the <%= vars.platform_name %> VM Instance](https://docs.pivotal.io/platform/ops-manager/gcp/deploy-manual.html#start-vm) in _Deploying <%= vars.platform_name %> on GCP Manually_.
+Ensure that the boot disk is allocated at least 50&nbsp;GB of space. See [Create the <%= vars.platform_name %> VM Instance](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/2.10/vmware-tanzu-ops-manager/gcp-deploy-manual.html) in _Deploying <%= vars.platform_name %> on GCP Manually_.
 
 <hr>
 
-## <a id="mysql_rep_canary"></a> <%= vars.app_runtime_abbr %> Deployment Fails - MySQL Monitor replication-canary Job
+## <a id="mysql_rep_canary"></a> <%= vars.app_runtime_abbr %> deployment fails - MySQL Monitor replication-canary job
 
 During installation of the <%= vars.app_runtime_abbr %> tile, the replication-canary job fails to start. The error reported in the installation log resembles the following:
 
@@ -58,14 +58,14 @@ This error can appear as a result of incorrect configuration of network traffic 
 
 1. Make sure you have selected the **Forward SSL to <%= vars.app_runtime_abbr %> Router** option in your [<%= vars.app_runtime_abbr %> Network Configuration](configure-pas.html#networking).
 
-1. Verify that you have configured the firewall rules properly and that TCP ports `80`, `443`, `2222`, and `8080` are accessible on your GCP load balancers. See [Create Firewall Rules for the Network](https://docs.pivotal.io/platform/ops-manager/gcp/prepare-env-manual.html#firewall_rules) in _Preparing to Deploy <%= vars.platform_name %> on GCP Manually_.
+1. Verify that you have configured the firewall rules properly and that TCP ports `80`, `443`, `2222`, and `8080` are accessible on your GCP load balancers. See [Create Firewall Rules for the Network](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/2.10/vmware-tanzu-ops-manager/gcp-prepare-env-manual.html#firewall_rules) in _Preparing to Deploy <%= vars.platform_name %> on GCP Manually_.
 
-1. Verify that you have configured the proper SSL certificates on your HTTP(S) load balancer in GCP. See [Create HTTP Load Balancer](https://docs.pivotal.io/platform/ops-manager/gcp/prepare-env-manual.html#loadbalancer) in _Preparing to Deploy <%= vars.platform_name %> on GCP Manually_.
+2. Verify that you have configured the proper SSL certificates on your HTTP(S) load balancer in GCP. See [Create HTTP Load Balancer](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/2.10/vmware-tanzu-ops-manager/gcp-prepare-env-manual.html#loadbalancer) in _Preparing to Deploy <%= vars.platform_name %> on GCP Manually_.
 
-1. If necessary, re-upload a new certificate and update any required SSL Certificate and SSH Key fields in your [<%= vars.app_runtime_abbr %> Network Configuration](configure-pas.html#networking).
+3. If necessary, re-upload a new certificate and update any required SSL Certificate and SSH Key fields in your [<%= vars.app_runtime_abbr %> Network Configuration](configure-pas.html#networking).
 
 <hr>
 
-## <a id="database-permissions"></a> Insufficient External Database Permissions
+## <a id="database-permissions"></a> Insufficient external database permissions
 
 Upgrade issues can be caused when the external database user used for the network policy DB is given insufficient permissions. To avoid this upgrade issue, ensure that the networkpolicyserver database user has the `ALL PRIVILEGES` permission.

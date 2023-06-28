@@ -1,38 +1,18 @@
 ---
-breadcrumb: TAS for VMs Documentation
+breadcrumb: TAS for VMs documentation
 title: Configuring UAA Password Policy
 owner: Identity
 ---
 
-If your <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) deployment uses the internal user store for authentication, you can configure its password policy within the <%= vars.app_runtime_abbr %> tile.
+If your <%= vars.app_runtime_first %> deployment uses the internal user store for authentication, you can configure its password policy in the <%= vars.app_runtime_abbr %> tile.
 
-
-## <a id="config-access"></a> Open the Internal UAA Configuration
-
-To open the internal UAA configuration for your deployment:
+To open the internal user store (formerly called internal UAA) configuration for your deployment:
 
 1. In a browser, go to the fully qualified domain name (FQDN) of your Ops Manager and log in.
 
-1. Click the **<%= vars.app_runtime_abbr %>** tile.
+2. Click the **<%= vars.app_runtime_abbr %>** tile.
 
-1. Select **Authentication and Enterprise SSO**.
-
-    ![alt-text=""](./images/er-config-auth-enterprise-sso-uaa.png)
-
-1. Confirm that the **Internal UAA** option is selected.
-
-
-## <a id="pw-requirements"></a> Set Password Requirements and Entry Attempts
-
-To set password requirements and the maximum password entry attempts allowed:
-
-1. For **Minimum password length**, enter the minimum number of characters for a valid password.
-
-1. For **Minimum uppercase characters**, enter the minimum number of uppercase characters required for a valid password.
-
-1. For **Minimum lowercase characters**, enter the minimum number of lowercase characters required for a valid password.
-
-1. For **Minimum numerical digits**, enter the minimum number of digits required for a valid password.
+3. Select **Authentication and Enterprise SSO**. For help configuring these fields, see the **Configure Authentication and Enterprise SSO** section of the **Configuring TAS** topic.
 
 1. For **Minimum special characters**, enter the minimum number of special characters required for a valid password.
 
