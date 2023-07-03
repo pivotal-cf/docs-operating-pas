@@ -3,7 +3,8 @@ title: Deploying TAS for VMs to AVS
 owner: Ops Manager
 ---
 
-You can install <%= vars.app_runtime_first %> on Azure VMware Solution (AVS) with NSX-T internal networking, using the VMware NSX-T Container Plug-in.
+You can install <%= vars.app_runtime_first %> on Azure VMware Solution (AVS) with NSX-T internal networking, using the
+VMware NSX-T Container Plug-in.
 
 
 ## <a id='introduction'></a> Azure VMware Solution
@@ -232,8 +233,11 @@ Create virtual servers.
 
 1. In the NSX-T Manager UI, navigate to **Advanced Networking & Security** > **Networking** > **Load Balancing** > **Virtual Servers**.
 1. Create the virtual server which forwards unencrypted web (HTTP) traffic to the foundation:
-
-<p class="note"><strong>Note:</strong> Foundations requiring end-to-end encryption cannot activate the virtual server on port 80, or, if activated, configure it to redirect traffic to the encrypted port (443).</p>
+<p class="note important">
+<span class="note__title">Important</span>
+Foundations requiring end-to-end encryption cannot activate the virtual
+server on port 80, or, if activated, configure it to redirect traffic to the encrypted port (443).
+</p>
 
   1. Click **+Add**.
   2. Enter **General Properties**:
@@ -248,7 +252,7 @@ Create virtual servers.
       * **Default Server Pool**: `pas-web-pool`
   6. Click **Next** several times, then click **Finish**.
 
-Create the virtual server which forwards traffic to apps with custom ports to the foundation.
+Create the virtual server which forwards traffic to apps with custom ports to the foundation:
 
 1. Click **+Add** to add a new virtual server.
 2. Enter **General Properties**:
@@ -280,7 +284,7 @@ Create the virtual server which forwards SSH traffic to the foundation:
        * **Default Server Pool**: `pas-ssh-pool`
 7. Click **Next**, then click **Finish**.
 
-Create the load balancer.
+Create the load balancer:
 
 1. In the NSX-T Manager UI, navigate to **Advanced Networking & Security** > **Networking** > **Load Balancing** > **Load Balancers**.
     1. Click **+Add**.
@@ -342,7 +346,7 @@ To install and configure the NSX-T Container Plug-In tile:
             <li>SSH into NSX-T Manager using the admin account that you created when you deployed NSX-T Manager.</li>
             <li>From the NSX-T Manager command line, run <code>get certificate api</code> to retrieve the certificate.</li>
         </ol>
-        ![alt-text="Obtain the NSX Manager CA Cert"](./images/nsx-t/nsx-t-tile-config-mgr.png)
+    ![alt-text="Obtain the NSX Manager CA Cert"](./images/nsx-t/nsx-t-tile-config-mgr.png)
 
 3. Open and configure the **NCP** (NSX-T Container Plugin) pane as follows:
 

@@ -5,9 +5,11 @@ owner: BAM
 
 You can use the Cloud Foundry Command Line Interface (cf CLI) to retrieve historical system-level and org-level usage information about your <%= vars.app_runtime_abbr %> apps, tasks, and service instances through the Cloud Controller and Usage Service APIs.
 
-Usage reports are compiled from the `/v2/app_usage_events` endpoint. For more information, see [List all app usage events](https://apidocs.cloudfoundry.org/6.7.0/app_usage_events/list_all_app_usage_events.html) in the Cloud Foundry API documentation.
+Usage reports are compiled from the `/v2/app_usage_events` endpoint.
+For more information, see [List all app usage events](https://apidocs.cloudfoundry.org/6.7.0/app_usage_events/list_all_app_usage_events.html) in the Cloud Foundry API documentation.
 
-You can also access usage information by using Apps Manager. For more information, see [Reporting instance usage with Apps Manager](accounting-report-apps-man.html).
+You can also access usage information by using Apps Manager.
+For more information, see [Reporting instance usage with Apps Manager](accounting-report-apps-man.html).
 
 To retrieve current app and event information from the Cloud Controller, see [Retrieving app and event information](https://docs.cloudfoundry.org/running/managing-cf/app-event.html) in the open-source Cloud Foundry documentation.
 
@@ -296,11 +298,14 @@ $ curl "https://app-usage.YOUR-SYSTEM-DOMAIN/organizations/YOUR-ORG-GUID/app_usa
 }
 </pre>
 
-You might see results with `"instance_count": 0`. This happens when a v3 app is pushed but has processes that are not scaled up.  The memory configuration and duration are still stored and can be useful for resource management. Apps with '0' instances are not counted in the App Usages System Report.
+You might see results with `"instance_count": 0`. This happens when a v3 app is pushed but has processes that are not scaled up.
+The memory configuration and duration are still stored and can be useful for resource management. Apps with '0' instances are not
+counted in the App Usages System Report.
 
 ### <a id='org-task-usage'></a> Task usage
 
-Use `curl` to make a request to `/task_usages` on the Usage Service endpoint to show task usage in an org. You must complete the placeholders in `start=YYYY-MM-DD&end=YYYY-MM-DD` to define a date range.
+Use `curl` to make a request to `/task_usages` on the Usage Service endpoint to show task usage in an org.
+You must complete the placeholders in `start=YYYY-MM-DD&end=YYYY-MM-DD` to define a date range.
 
 <pre class="terminal">
 $ curl "https://app-usage.YOUR-SYSTEM-DOMAIN/organizations/YOUR-ORG-GUID/task_usages?start=YYYY-MM-DD&end=YYYY-MM-DD" \
@@ -341,7 +346,8 @@ $ curl "https://app-usage.YOUR-SYSTEM-DOMAIN/organizations/YOUR-ORG-GUID/task_us
 }
 </pre>
 
-<p class="note"><strong>Note:</strong> In the <code>/task_usages</code> endpoint, <code>memory_in_mb_per_instance</code> is the memory of the task.</p>
+In the <code>/task_usages</code> endpoint, <code>memory_in_mb_per_instance</code> is the
+memory of the task.
 
 ### <a id='org-service-usage'></a> Service usage
 
