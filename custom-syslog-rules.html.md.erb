@@ -9,7 +9,7 @@ You can configure <%= vars.app_runtime_first%> to forward logs to remote endpoin
 
 Logs forwarded from other sources, such as kernel logs, retain their original PRI value.
 
-The table below describes the log line Structured Data:
+The following table describes the log line Structured Data:
 
 | Structured Data | Description |
 | --------------- | ----------- |
@@ -67,11 +67,15 @@ To configure <%= vars.app_runtime_abbr %> to forward a subset of logs instead of
 
 1. Click **Save**.
 
-The custom rsyslog rules shown here are written in [RainerScript](http://www.rsyslog.com/doc/v8-stable/rainerscript/index.html). The custom rules are inserted before the rule that forwards logs. The _stop_ command, `stop`, prevents logs from reaching the forwarding rule. This filters out these logs.
+The custom rsyslog rules shown here are written in [RainerScript](http://www.rsyslog.com/doc/v8-stable/rainerscript/index.html).
+The custom rules are inserted before the rule that forwards logs. The _stop_ command, `stop`, prevents logs from reaching the
+forwarding rule. This filters out these logs.
 
-Logs filtered out before forwarding remain on the local disk, where the BOSH job originally wrote them. These logs remain on the local disk only until BOSH Director recreates the VMs. You can access these logs from <%= vars.ops_manager %> or through SSH.
+Logs filtered out before forwarding remain on the local disk, where the BOSH job originally wrote them. These logs remain on the
+local disk only until BOSH Director recreates the VMs. You can access these logs from <%= vars.ops_manager %> or through SSH.
 
-<p class='note'><strong>Note:</strong> <%= vars.app_runtime_abbr %> requires a valid custom rule to forward logs. If your custom rule contains syntax errors, <%= vars.app_runtime_abbr %> forwards no logs.</p>
+<%= vars.app_runtime_abbr %> requires a valid custom rule to forward logs. If your custom rule contains
+syntax errors, <%= vars.app_runtime_abbr %> forwards no logs.
 
 ### <a id='forward-job'></a> Forward only logs from a certain job
 
@@ -88,5 +92,5 @@ This rule filters out logs that contain "DEBUG" in the body.
 ```
 if ($msg contains "DEBUG") then stop
 ```
-
-<p class='note'><strong>Note:</strong> The previous example contains "DEBUG" in the message body. Not all logs intended for debugging purposes contain the string "DEBUG" in the message body.</p>
+The previous example contains "DEBUG" in the message body. Not all logs
+intended for debugging purposes contain the string "DEBUG" in the message body.

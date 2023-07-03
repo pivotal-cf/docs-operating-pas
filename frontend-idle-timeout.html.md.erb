@@ -5,11 +5,12 @@ owner: Releng, CF for VMs Networking
 
 You can configure the **Front end idle timeout** field in the  **Networking** pane of the <%= vars.app_runtime_first %> tile.
 
-You can use the **Front end idle timeout** field if you want to prevent connections from your load balancer to the Gorouter from being closed prematurely. The value you enter sets the duration, in seconds, that the Gorouter maintains an idle open connection from a load balancer that supports keep-alive.
+You can use the **Front end idle timeout** field if you want to prevent connections from your load balancer to the
+Gorouter from being closed prematurely. The value you enter sets the duration, in seconds, that the Gorouter maintains an idle open connection from a load balancer that supports keep-alive.
 
 As a general rule, set the value higher than your load balancer's back end idle timeout to avoid the race condition in which the load balancer sends a request before it discovers that the Gorouter has closed the connection.
 
-For specific guidance and exceptions to this rule, see the table below:
+For specific guidance and exceptions to this rule, see the following table:
 
 | IaaS | Guidance |
 | ---- | -------- |

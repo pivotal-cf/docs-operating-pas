@@ -3,12 +3,13 @@ title: Deploying Service Mesh (Beta)
 owner: CF Networking Service Mesh
 ---
 
-Here you will learn how to deploy service mesh for <%= vars.app_runtime_first %>.
+You can deploy a service mesh for <%= vars.app_runtime_first %>.
 
 
 ## <a id='prerequisite'></a> Prerequisite
 
-To deploy service mesh for <%= vars.app_runtime_abbr %>, you must download and install the `om` CLI. To download and install `om`, see the [Om](https://github.com/pivotal-cf/om) repository on GitHub.
+To deploy service mesh for <%= vars.app_runtime_abbr %>, you must download and install the `om` CLI.
+To download and install `om`, see the [Om](https://github.com/pivotal-cf/om) repository on GitHub.
 
 
 ## <a id="create-load-balancer"></a> Configure load balancer
@@ -23,10 +24,10 @@ To configure a load balancer for service mesh:
 		* HTTP on port 8002
 		* TLS on port 443
 
-1. Navigate to your DNS provider and create a DNS name that resolves to the IP of the load balancer:
-	* If you did not configure the **External domain** field in the **Networking - Service Mesh (Beta)** pane of the <%= vars.app_runtime_abbr %> tile, create the DNS name using the default value of `*.mesh.APPS-DOMAIN`, where `APPS-DOMAIN` is the name of the external domain.
+1. Go to your DNS provider and create a DNS name that resolves to the IP of the load balancer:
+	* If you did not configure the **External domain** field in the **Networking - Service Mesh (Beta)** pane of the <%= vars.app_runtime_abbr %> tile,
+	create the DNS name using the default value of `*.mesh.APPS-DOMAIN`, where `APPS-DOMAIN` is the name of the external domain.
 	* If you configured the **External domain** field in the **Networking - Service Mesh (Beta)** pane of the <%= vars.app_runtime_abbr %> tile, create the DNS name using the value you configured.
-
 
 ## <a id="configuring-pas"></a> Deploy service mesh in <%= vars.app_runtime_abbr %>
 

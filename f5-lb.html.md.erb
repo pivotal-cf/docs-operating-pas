@@ -2,7 +2,7 @@
 title: Configuring an F5 load balancer for TAS for VMs
 ---
 
-Here you will learn how to configure an [F5 BIG-IP Local Traffic Manager
+You can configure an [F5 BIG-IP Local Traffic Manager
 (LTM)](https://f5.com/products/big-ip/local-traffic-manager-ltm) as a load balancer
 for <%= vars.app_runtime_first %>.
 
@@ -15,19 +15,18 @@ These instructions assume you are familiar with the following concepts:
 
 For guidance about the previous topics, see [AskF5](https://support.f5.com/csp/knowledge-center/software/BIG-IP?module=BIG-IP%20LTM).
 
-<p class='note'><strong>Note:</strong> You must configure your F5 load balancer before installing <%= vars.app_runtime_abbr %>.</p>
+<p> You must configure your F5 load balancer before you install <%= vars.app_runtime_abbr %>.</p>
 
-To use your F5 deployment as a load balancer, you must configure it to forward unencrypted HTTP following these steps. This procedure assumes that you are running F5 v12.1.2 or v13.0.0.
+To use your F5 deployment as a load balancer, you must configure it to forward unencrypted HTTP following these steps.
+This procedure assumes that you are running F5 v12.1.2 or v13.0.0.
 
-
-## <a id='unencrypted-http'></a> Procedure
-
-This <%= vars.app_runtime_abbr %> configuration option forwards unencrypted traffic to the Gorouter.
+The following <%= vars.app_runtime_abbr %> configuration option forwards unencrypted traffic to the Gorouter.
 It assumes an external load balancer is configured to forward unencrypted traffic.
 
 ![alt-text="To use your F5 deployment as a load balancer, you must configure it to forward unencrypted HTTP."](images/f5-config-1.png)
 
-This configuration stops client SSL at the F5 and forward standard HTTP traffic to the backend Gorouters from the LTM. All TCP back ends accept forwarded traffic from the LTM.
+This configuration stops client SSL at the F5 and forward standard HTTP traffic to the backend Gorouters from the LTM.
+All TCP back ends accept forwarded traffic from the LTM:
 
 1. In the F5 UI, go to **Local Traffic**.
 
@@ -161,7 +160,7 @@ This configuration stops client SSL at the F5 and forward standard HTTP traffic 
        * **Source Address:** `0.0.0.0/0`
        * **Destination Address/Mask:** `YOUR-SSH-PROXY-VIP`
 
-       <p>This VIP must be DNS-resolvable to ssh.[YOUR-<%= vars.platform_code %>-PAS-SYSTEM-DOMAIN].</p>
+       <p>This VIP must be DNS resolvable to ssh.[YOUR-<%= vars.platform_code %>-PAS-SYSTEM-DOMAIN].</p>
 
        * **Service Port:** `2222`
        * **State:** `Enabled`
@@ -173,7 +172,8 @@ This configuration stops client SSL at the F5 and forward standard HTTP traffic 
        * **VLAN and Tunnel Traffic:** `Enabled on YOUR-CONFIGURED-F5-VPN`
        * **Source Address Translation:** `Auto Map`
 
-       <p class='note'><strong>Note:</strong> This must be set in one-arm configurations.</p>
+       <p> This must be set in one-arm configurations.</p>
+
        * **Default Pool:** `diegobrain_pool`
     1. (Optional) Create a virtual server for `tcprouter`.
        This virtual server allows access to the TCP app.
@@ -192,7 +192,7 @@ This configuration stops client SSL at the F5 and forward standard HTTP traffic 
        * **SSL Profile:** `[NONE]`
        * **VLAN and Tunnel Traffic:** `Enabled on YOUR-CONFIGURED-F5-VPN`
        * **Source Address Translation:** `Auto Map`
-       <p class='note'><strong>Note:</strong> This must be set in one-arm configurations.</p>
+       <p> This must be set in one-arm configurations.</p>
        * **Default Pool:** `tcprouter_pool`
 
 Once you complete the configuration, verify that everything in **Network Map** located in **Local Traffic Menu** is green.

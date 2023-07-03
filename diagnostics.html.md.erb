@@ -3,17 +3,17 @@ title: Diagnosing <%= vars.app_runtime_abbr %> deployment problems
 owner: Ops Manager
 ---
 
-Here you will learn how to diagnose issues that you encounter
+You can diagnose issues that you encounter
 when installing products such as <%= vars.app_runtime_first %>
 with <%= vars.ops_manager_full %>.
 
-An important consideration when diagnosing
+An important consideration when you are diagnosing
 issues is communication between VMs deployed by <%= vars.platform_name %>.
 Communication takes the form of messaging, routing, or both. If either of
 these go wrong, an installation can fail.
 For example, after installing <%= vars.app_runtime_abbr %>,
 one of the VMs must deploy a test app
-to the cloud during post-installation testing.
+to the cloud during post installation testing.
 The installation fails if the resulting traffic cannot be routed to the HA Proxy load balancer.
 
 ## <a id='debug'></a> Viewing the debug endpoint
@@ -30,7 +30,7 @@ https://OPS-MANAGER-FQDN/debug
 Where `OPS-MANAGER-FQDN` is the fully-qualified domain name (FQDN) of your
 <%= vars.platform_name %> installation.
 
-The debug endpoint offers three links:
+The debug endpoint offers the following links:
 
 * **Files** allows you to view the YAML files that <%= vars.platform_name %> uses to configure
 products that you install. The most important YAML file, `installation.yml`, provides networking
@@ -41,8 +41,7 @@ component is used by <%= vars.platform_name %> to perform installations and upda
 * **Components** describes the components in detail.
 
 * **Rails log** shows errors thrown by the VM where the web app, such
-as a Rails app, is running, as recorded in the `production.log` file. To explore other logs, see
-[Logging Tips](#tips).
+as a Rails app, is running, as recorded in the `production.log` file.
 
 ## <a id='tips'> </a> Logging tips
 
@@ -60,7 +59,7 @@ components, see the following sections.
 
 To troubleshoot specific <%= vars.app_runtime_abbr %> components by viewing their log files:
 
-1. Go to your <%= vars.platform_name %> Installation Dashboard and click on the
+1. Go to your <%= vars.platform_name %> Installation Dashboard and click the
 <%= vars.app_runtime_abbr %> tile.
 
 1. Select the **Status** tab.
@@ -87,7 +86,8 @@ and open `diego.0.job > garden > garden.stderr.log`.
 
 ### <a id='view_in_terminal'></a> Viewing web app and BOSH failure logs in a terminal window
 
-You can obtain diagnostic information by logging in to the VM where the BOSH Director job is running. To log in to the BOSH Director VM, you need:
+You can obtain diagnostic information by logging in to the VM where the BOSH Director job is running. To log in to the
+BOSH Director VM, you need the following:
 
 * The IP address of the VM shown in the **Settings** tab of the
 BOSH Director tile.
@@ -123,7 +123,7 @@ To log in to the VM:
 You can also verify that the `microbosh` component is successfully installed. A successful
 MicroBOSH installation is required to install <%= vars.app_runtime_abbr %> and any products like databases and messaging services.
 
-1. Navigate to the BOSH installation log home directory by running:
+1. Go to the BOSH installation log home directory by running:
 
     ```
     cd /var/tempest/workspaces/default/deployments/micro
@@ -138,9 +138,11 @@ MicroBOSH installation is required to install <%= vars.app_runtime_abbr %> and a
     problems, you can troubleshoot further by running BOSH diagnostic commands with the BOSH
     Command Line Interface (CLI).
 
-<p class="note"><strong>Note:</strong> Do not manually edit the deployment manifest.
-<%= vars.platform_name %> overwrites manual changes to this manifest. In addition, manually
-changing the manifest might cause future deployments to fail.</p>
+    <p class="note important">
+    <span class="note__title">Important</span> Do not manually edit the deployment manifest.
+    <%= vars.platform_name %> overwrites manual changes to this manifest. In addition, manually
+    changing the manifest might cause future deployments to fail.
+    </p
 
 ## <a id='view-vms'></a> Viewing the VMs in your deployment
 
@@ -211,8 +213,9 @@ Apps Manager provides a graphical user interface to help manage organizations, u
 spaces. For more information about Apps Manager, see
 [Getting Started with Apps Manager](../console/dev-console.html)
 
-When troubleshooting Apps Manager performance, you can view the Apps Manager app logs. To view the
-Apps Manager app logs:
+When troubleshooting Apps Manager performance, you can view the Apps Manager app logs.
+
+To view the Apps Manager app logs:
 
 1. From a command line, log in to <%= vars.platform_name %> by running:
 

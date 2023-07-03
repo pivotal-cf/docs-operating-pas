@@ -3,9 +3,10 @@ title: Using your own load balancer
 owner: Ops Manager
 ---
 
-Here are instructions for using your own load balancer and forwarding traffic to your <%= vars.app_runtime_first %> router IP address.
+You can use a load balancer and forward traffic to your <%= vars.app_runtime_first %> router IP address.
 
-<%= vars.app_runtime_abbr %> includes a tier of reverse proxies that dynamically track the location of app containers and system components, enabling routing of requests to those endpoints even as IPs and ports change.
+<%= vars.app_runtime_abbr %> includes a tier of reverse proxies that dynamically track the location of app containers
+and system components, enabling routing of requests to those endpoints even as IPs and ports change.
 
 ## <a id='why-lb'></a> Why you need a load balancer
 
@@ -25,9 +26,9 @@ If you use your own Layer 7 load balancer, it must fulfill the following require
 
 * (Optional) Supports WebSocket.
 
-The choice to use your own load balancer depends on what features you need out of a load balancer, and whether you want the ability to configure it yourself.
-
-<p class='note'><strong>Note:</strong> App logging with Loggregator requires WebSocket. To use another logging service, see <a href="../devguide/services/log-management.html">Streaming App Logs to Log Management Services</a>.</p>
+The choice to use your own load balancer depends on what features you need out of a load balancer, and whether you want the ability
+to configure it yourself.
+App logging with Loggregator requires WebSocket. To use another logging service, see <a href="../devguide/services/log-management.html">Streaming App Logs to Log Management Services</a>.
 
 For information about how to install an F5 Local Traffic Manager (LTM) as a load balancer for <%= vars.ops_manager %> and <%= vars.app_runtime_abbr %>, see [Configuring an F5 Load Balancer for <%= vars.app_runtime_abbr %>](f5-lb.html). For more information about F5 LTMs, see the [F5](https://f5.com/products/big-ip/local-traffic-manager-ltm) documentation.
 
@@ -39,7 +40,7 @@ To integrate your own load balancer with <%= vars.app_runtime_abbr %>, you must 
 * WebSocket connections are not blocked for Loggregator functionality.
 * The load balancer must be able to reach the Gorouter IP addresses.
 
-Follow this procedure to use your own load balancer.
+Use the following procedure to use your own load balancer:
 
 
 ## <a id='deploy'></a> Step 1: Deploy <%= vars.ops_manager %> installation VM

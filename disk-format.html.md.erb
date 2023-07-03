@@ -3,15 +3,13 @@ title: vSphere Virtual disk types
 owner: Ops Manager
 ---
 
-
-
 When you create a virtual machine in VMware vSphere, vSphere creates a new virtual hard
 drive for that virtual machine.
 The virtual hard drive is contained in a virtual machine disk (VMDK).
 The disk format you choose for the new virtual hard drive can have a significant
 impact on performance.
 
-You can choose one of three formats when creating a virtual hard drive:
+You can choose one of the following formats when creating a virtual hard drive:
 
 * Thin-provisioned
 * Thin-provisioned lazy-zeroed
@@ -28,7 +26,7 @@ Disadvantages:
 
 * Slowest performance due to metadata allocation overhead and additional
 overhead during initial write operations
-* Over-commitment of storage can lead to application disruption or downtime if
+* Over commitment of storage can lead to application disruption or downtime if
 resources are actually used
 * Does not support clustering features
 

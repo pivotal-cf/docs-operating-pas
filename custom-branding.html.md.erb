@@ -1,12 +1,13 @@
 ---
-title: Custom-branding Apps Manager
+title: Custom branding Apps Manager
 owner: VMware Tanzu Application Service for VMs
 ---
 
-As a <%= vars.platform_name %> operator, you can brand Apps Manager by changing certain text, colors, and images on the interface. Developers see the customized interface when logging in, creating an account, resetting a password, or using Apps Manager.
+As a <%= vars.platform_name %> operator, you can brand Apps Manager by changing certain text, colors, and images on the
+interface. Developers see the customized interface when logging in, creating an account, resetting a password, or using Apps Manager.
 
-Operators customize Apps Manager by configuring the **Custom Branding** and **Apps Manager Config** pages of the <%= vars.app_runtime_first %> tile.
-
+You can customize Apps Manager by configuring the **Custom Branding** and **Apps Manager Config** pages of
+the <%= vars.app_runtime_first %> tile.
 
 ## <a id='generic'></a> Custom Branding pane
 
@@ -22,27 +23,28 @@ To customize your Apps Manager interface:
 
 1. For **Accent color**, enter the hexadecimal code for the color used to accent various visual elements, such as the currently selected space in the sidebar. For example, `#71ffda`.
 
-1. For **Main logo**, enter a Base64-encoded URL string for a PNG image to use as your main logo. The image can be square or wide. For example, `data:image/png;base64,iVBORw0...`. If left blank, the image defaults to the <%= vars.company_name %> logo.
+1. For **Main logo**, enter a Base64 encoded URL string for a PNG image to use as your main logo. The image can be square or wide. For example, `data:image/png;base64,iVBORw0...`. If left blank, the image defaults to the <%= vars.company_name %> logo.
 
-1. For **Square logo**, enter a Base64-encoded URL string for a PNG image to use in the Apps Manager header and in places that require a smaller logo. For example, `data:image/png;base64,iVBORw0...`. If left blank, the image defaults to the <%= vars.company_name %> logo.
+1. For **Square logo**, enter a Base64 encoded URL string for a PNG image to use in the Apps Manager header and in places that require a smaller logo. For example, `data:image/png;base64,iVBORw0...`. If left blank, the image defaults to the <%= vars.company_name %> logo.
 
-1. For **Favicon**, enter a Base64-encoded URL string for a PNG image to use as your favicon. For example, `data:image/png;base64,iVBORw0...`. If left blank, the image defaults to the <%= vars.company_name %> logo.
+1. For **Favicon**, enter a Base64 encoded URL string for a PNG image to use as your favicon. For example, `data:image/png;base64,iVBORw0...`. If left blank, the image defaults to the <%= vars.company_name %> logo.
 
 1. For **Footer text**, enter a string to be displayed as the footer. If left blank, the footer text defaults to **<%= vars.company_name %> Software, Inc; All rights reserved.**
 
 1. To add up to three footer links that appear to the right of the footer text:
-	* Click **Add**.
-	* For **Link text**, enter a label for the link.
-	* For **URL**, enter an external or relative URL. For example, `http://docs.pivotal.io` or `/tools.html`.
+
+* Click **Add**.
+* For **Link text**, enter a label for the link.
+* For **URL**, enter an external or relative URL. For example, `http://docs.pivotal.io` or `/tools.html`.
 
 1. For special notification purposes such as governmental or restricted usage, use the **Classification** fields to create a special header and footer:
     * For **Header and footer background color**, enter the hexadecimal code for the desired background color of the header and footer.
-	* For **Header and footer text color**, enter the hexadecimal code for the desired color of header and footer text.
-	* For **Header text**, enter content for the header in either plain text or HTML. If you enter HTML content, eliminate white spaces and new lines. If you do not provide any content, the custom header does not appear.
-	* For **Footer text**, enter content for the footer in either plain text or HTML. If you enter HTML content, eliminate white spaces and new lines. If you do not provide any content, the custom footer does not appear. This footer appears below the normal footer, which you can customize in the **Footer text** and  **Footer links** fields.
 
-	<p class="note"><strong>Note:</strong> The header and footer do not appear on the UAA login page.</p>
+* For **Header and footer text color**, enter the hexadecimal code for the desired color of header and footer text.
+* For **Header text**, enter content for the header in either plain text or HTML. If you enter HTML content, eliminate white spaces and new lines. If you do not provide any content, the custom header does not appear.
+* For **Footer text**, enter content for the footer in either plain text or HTML. If you enter HTML content, eliminate white spaces and new lines. If you do not provide any content, the custom footer does not appear. This footer appears under the normal footer, which you can customize in the **Footer text** and  **Footer links** fields.
 
+<p>The header and footer do not appear on the UAA log in page.</p>
 
 ## <a id='apps-man'></a> Apps Manager pane
 
@@ -59,7 +61,9 @@ To continue customizing your Apps Manager interface:
 1. For **Marketplace name**, enter text to replace the header in the Marketplace pages. This text defaults to **Marketplace** if left blank.
 
 1. By default, Apps Manager includes three secondary navigation links: **Marketplace**, **Docs**, and **Tools**. You can edit existing secondary navigation links by clicking the name of the link and editing the **Link text** and **URL** fields. You can also remove the link by clicking the trash icon next to its name. If you want to add a new secondary navigation link, click **Add** and complete the **Link text** and **URL** fields.
-	<p class="note"><strong>Note:</strong> Removing any of the default links will remove them from the secondary navigation for all users.</p>
+
+     <p class="note important">
+       <span class="note__title">Important</span> Removing any of the default links removes them from the secondary navigation for allusers.</p>
 
 1. For **Apps Manager buildpack**, enter a static content-compatible buildpack you want <%= vars.app_runtime_abbr %> to use when deploying the Apps Manager app. By default, this is `staticfile_buildpack`.
 
@@ -73,12 +77,23 @@ To continue customizing your Apps Manager interface:
 
 1. (Optional) Enter in MB your desired **Invitations memory usage**. This is the memory limit used to deploy the Invitations app. The minimum number you can enter is `256`. Leave this field blank to use the default value of 256&nbsp;MB.
 
-1. The **Apps Manager polling interval** field provides a temporary fix if Apps Manager usage degrades Cloud Controller response times. In this case, you can use this field to reduce the load on the Cloud Controller and ensure Apps Manager remains available while you troubleshoot the Cloud Controller. <%= vars.company_name %> recommends that you do not keep this field modified as a long-term fix because it can degrade Apps Manager performance. Optionally, you can:
-	* Increase the polling interval to the default of 30 seconds.
-		<p class="note"><strong>Note:</strong> If you enter a value between <code>0</code> and <code>30</code>, the field is automatically set to <code>30</code>.</p>
-	* Deactivate polling by entering `0`. This stops Apps Manager from refreshing data automatically, but you can update displayed data by reloading Apps Manager manually.
+2. The **Apps Manager polling interval** field provides a temporary fix if Apps Manager usage degrades Cloud Controller response times. In this case, you can use this field to reduce the load on the Cloud Controller and ensure Apps Manager remains available while you troubleshoot the Cloud Controller.
 
-1. The **App details polling interval** field provides an additional way to reduce the load on the Cloud Controller when the **Apps Manager polling interval** field is not sufficient. This field controls the rate at which Apps Manager polls for data when a user views the **Overview** page of an app. <%= vars.company_name %> recommends that you do not keep this field modified as a long-term fix because it can degrade Apps Manager performance. Optionally, you can:
-	* Increase the polling interval to the default of 10 seconds.
-		<p class="note"><strong>Note:</strong> If you enter a value between <code>0</code> and <code>30</code>, the field is automatically set to <code>10</code>.</p>
-	* Deactivate polling by entering `0`. This stops Apps Manager from refreshing data automatically, but you can update displayed data by reloading Apps Manager manually.
+	<%= vars.company_name %> recommends that you do not keep this field modified as a long term fix because it can degrade Apps Manager performance.
+
+	Optionally, you can:
+
+* Increase the polling interval to the default of 30 seconds.
+
+  <p class="note"><strong>Note:</strong> If you enter a value between <code>0</code> and <code>30</code>, the field is automatically set to <code>30</code>.</p>
+ * Deactivate polling by entering `0`. This stops Apps Manager from refreshing data automatically, but you can update displayed data by reloading Apps Manager manually.
+
+14. The **App details polling interval** field provides an additional way to reduce the load on the Cloud Controller when the **Apps Manager polling interval** field is not sufficient. This field controls the rate at which Apps Manager polls for data when a user views the **Overview** page of an app.
+
+	<%= vars.company_name %> recommends that you do not keep this field modified as a long term fix because it can degrade Apps Manager performance.
+
+	Optionally, you can:
+
+* Increase the polling interval to the default of 10 seconds. If you enter a value between <code>0</code> and <code>30</code>, the field is automatically set to <code>10</code>.
+
+ * Deactivate polling by entering `0`. This stops Apps Manager from refreshing data automatically, but you can update displayed data by reloading Apps Manager manually.

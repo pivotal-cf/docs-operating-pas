@@ -3,7 +3,8 @@ title: Creating new TAS for VMs user accounts
 owner: Identity
 ---
 
-When you first deploy <%= vars.app_runtime_first %>, there is only one user: an administrator. At this point, you can add accounts for new users who can then push apps using the Cloud Foundry Command Line Interface (cf CLI).
+When you first deploy <%= vars.app_runtime_first %>, there is only one user: an administrator. At this point, you can add
+accounts for new users who can then push apps using the Cloud Foundry Command Line Interface (cf CLI).
 
 How you add users depends on whether or not you have SMTP activated, as described in the following options:
 
@@ -12,7 +13,7 @@ How you add users depends on whether or not you have SMTP activated, as describe
 
 If you have activated SMTP, your users can sign up for accounts and create their own orgs. They do this using the [<%= vars.platform_name %>](https://network.tanzu.vmware.com/) Apps Manager, a self-service tool for managing organizations, users, app, and app spaces.
 
-Instruct users to complete the following steps to log in and get started using Apps Manager.
+Complete the following steps to log in and get started using Apps Manager:
 
 1. Browse to `apps.YOUR-SYSTEM-DOMAIN`. See the **Domains** pane in the <%= vars.app_runtime_abbr %> tile to locate your system domain.
 
@@ -29,6 +30,7 @@ You now have access to the Apps Manager. For more information about using Apps M
 
 ## <a id='admin'></a> Option 2: Adding new users when SMTP is not activated
 
-If you have not activated SMTP, only an administrator can create new users, and there is no self-service facility for users to sign up for accounts or create orgs.
+If you have not activated SMTP, only an administrator can create new users, and there is no self service facility for users to
+sign up for accounts or create orgs.
 
 The administrator creates users with the cf CLI. For more information, see [Creating and Managing Users with the cf CLI](../adminguide/cli-user-management.html).

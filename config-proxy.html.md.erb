@@ -4,18 +4,23 @@ owner: CF for VMs Networking
 ---
 
 
-Some environments restrict access to the Internet by requiring traffic to pass through an HTTP or HTTPS proxy. <%= vars.platform_name %> operators can use the Cloud Foundry Command Line Interface (cf CLI) to provide the proxy settings to all apps, including system apps and service brokers.
+Some environments restrict access to the Internet by requiring traffic to pass through an HTTP or HTTPS proxy.
+<%= vars.platform_name %> operators can use the Cloud Foundry Command Line Interface (cf CLI) to provide the proxy settings
+to all apps, including system apps and service brokers.
 
-<p class="note"><strong>Note:</strong> Incorrectly configuring proxy settings can prevent apps from connecting to the Internet or accessing required resources. They can also cause errands to fail and break system apps and service brokers. Although errands, system apps, and service brokers do not need to connect to the Internet, they often need to access other resources in <%= vars.platform_name %>. Incorrect proxy settings can break these connections.</p>
-
+Incorrectly configuring proxy settings can prevent apps from connecting to the internet or
+accessing required resources. It can also cause errands to fail and break system apps, and service brokers.
+Although errands, system apps, and service brokers do not need to connect to the internet, they often need to access other resources in <%= vars.platform_name %>. Incorrect proxy settings can break these connections.
 
 ## <a id='set-env-variables'></a> Set environment variables
 
-To globally configure proxy settings for <%= vars.platform_name %> apps, you must set three environment variables for both the staging environment variable group and the running environment variable group.
+To globally configure proxy settings for <%= vars.platform_name %> apps, you must set three environment variables for both the
+staging environment variable group and the running environment variable group.
 
 For more information about variable groups, see [Environment Variable Groups](../devguide/deploy-apps/environment-variable.html#evgroups) in _<%= vars.app_runtime_abbr %> Environment Variables_.
 
-This procedure explains how to set proxy information for both staging and running apps. However, you can also set proxy settings for only staging or only running apps.
+The following procedure explains how to set proxy information for both staging and running apps.
+However, you can also set proxy settings for only staging or only running apps.
 
 To globally configure proxy settings for <%= vars.platform_name %> apps:
 
@@ -24,16 +29,17 @@ To globally configure proxy settings for <%= vars.platform_name %> apps:
     ```
     cf api api.SYSTEM-DOMAIN
     ```
+
     Where `SYSTEM-DOMAIN` is your system domain.
 
 1. Log in with your UAA administrator credentials.
-  1. To retrieve these credentials:
-      1. Navigate to the <%= vars.ops_manager %> Installation Dashboard.
+1. To retrieve these credentials:
+      1. Go to the <%= vars.ops_manager %> Installation Dashboard.
       1. Click the <%= vars.app_runtime_first %> tile.
       1. Select the **Credentials** tab.
       1. Under **UAA**, next to **Admin Credentials**, click **Link to Credential**.
       1. Record the password.
-  1. Run:
+1. Run:
 
       ```
       cf login
@@ -44,19 +50,20 @@ To globally configure proxy settings for <%= vars.platform_name %> apps:
     ```
     cf set-staging-environment-variable-group '{"http_proxy": "http://PROXY:8080/", "https_proxy": "http://PROXY:8080/", "no_proxy": "DNS-SUFFIX-OR-IP-ADDRESS,DNS-SUFFIX-OR-IP-ADDRESS"}'
     ```
+
     Where:
     <ul>
       <li><code>http_proxy</code> is the proxy to use for HTTP requests.</li>
       <li><code>https_proxy</code> is the proxy to use for HTTPS requests. In most cases, this is the same as <code>http_proxy</code>.</li>
       <li><code>PROXY</code> is your proxy.</li>
-      <li><code>no_proxy</code> is a comma-separated list of DNS suffixes or IP addresses that can be accessed without passing through the proxy. <%= vars.company_name %> recommends this value contains the domain <code>.cf.internal</code>, which is used by the platform to communicate with CredHub.</li>
+      <li><code>no_proxy</code> is a comma separated list of DNS suffixes or IP addresses that can be accessed without passing through the proxy. <%= vars.company_name %> recommends this value contains the domain <code>.cf.internal</code>, which is used by the platform to communicate with CredHub.</li>
       <li><code>DNS-SUFFIX-OR-IP-ADDRESS</code> is a DNS suffix or IP address that can be accessed without passing through the proxy.</li>
     </ul>
 
     From now on, the proxy settings are applied to apps during staging.
 
 1. To configure proxy access for apps that are running:
-    * Non-Java-based apps:
+    * Non Java-based apps:
 
         ```
         cf set-running-environment-variable-group '{"http_proxy": "http://PROXY:8080/", "https_proxy": "http://PROXY:8080/", "no_proxy": "DNS-SUFFIX-OR-IP-ADDRESS,DNS-SUFFIX-OR-IP-ADDRESS"}'
@@ -67,7 +74,7 @@ To globally configure proxy settings for <%= vars.platform_name %> apps:
           <li><code>http_proxy</code> is the proxy to use for HTTP requests.</li>
           <li><code>https_proxy</code> is the proxy to use for HTTPS requests. In most cases, this is the same as <code>http_proxy</code>.</li>
           <li><code>PROXY</code> is your proxy.</li>
-          <li><code>no_proxy</code> is a comma-separated list of DNS suffixes or IP addresses that can be accessed without passing through the proxy. <%= vars.company_name %> recommends this value contains the domain <code>.cf.internal</code>, which is used by the platform to communicate with CredHub.</li>
+          <li><code>no_proxy</code> is a comma separated list of DNS suffixes or IP addresses that can be accessed without passing through the proxy. <%= vars.company_name %> recommends this value contains the domain <code>.cf.internal</code>, which is used by the platform to communicate with CredHub.</li>
           <li><code>DNS-SUFFIX-OR-IP-ADDRESS</code> is a DNS suffix or IP address that can be accessed without passing through the proxy.</li>
         </ul>
     * Java-based apps:
@@ -84,12 +91,13 @@ To globally configure proxy settings for <%= vars.platform_name %> apps:
           <li><code>-Dhttp.nonProxyHosts</code> is a pipe-separated list of DNS suffixes or IP addresses that can be accessed without passing through the proxy. <%= vars.company_name %> recommends this value contains the domain <code>.cf.internal</code>, which is used by the platform to communicate with CredHub.</li>
           <li><code>DNS-SUFFIX-OR-IP-ADDRESS</code> is a DNS suffix or IP address that can be accessed without passing through the proxy.</li>
         </ul>
+        <p class="note">
+    <span class="note__title">Note</span>
+System environment variables can only be strings. This is enforced on the API. For more information about these Java proxy settings, see [Java Networking and
+        Proxies](http://docs.oracle.com/javase/8/docs/technotes/guides/net/proxies.html).
+</p>
 
-        <p class="note"><strong>Note:</strong> System environment variables can only be strings. This is enforced on the API. </p>
-        For more information about these Java proxy settings, see [Java Networking and Proxies](http://docs.oracle.com/javase/8/docs/technotes/guides/net/proxies.html) in the Oracle documentation.
-
-1. To apply the proxy configuration for the running environment variable group, start each app again for the new configuration.
-
+7. To apply the proxy configuration for the running environment variable group, start each app again for the new configuration.
 
 ## <a id='troubleshooting'></a> Troubleshooting
 
@@ -106,6 +114,7 @@ To manually unset the proxy environment variables for the failing app:
     ```
     cf set-env APP-NAME http_proxy ''
     ```
+
     Where `APP-NAME` is the name of your app.
 
 1. Set the proxy environment variables for `https_proxy` to an empty value by running:
@@ -113,6 +122,7 @@ To manually unset the proxy environment variables for the failing app:
     ```
     cf set-env APP-NAME https_proxy ''
     ```
+
     Where `APP-NAME` is the name of your app.
 
 1. Set the proxy environment variables for `no_proxy` to an empty value by running:
@@ -120,6 +130,7 @@ To manually unset the proxy environment variables for the failing app:
     ```
     cf set-env APP-NAME no_proxy ''
     ```
+
     Where `APP-NAME` is the name of your app.
 
 ### <a id='change-case'></a> Change case of HTTP environment variables
@@ -137,8 +148,8 @@ Where:
 
 ### <a id='check-proxy-settings'></a> Check proxy settings
 
-If you have set up your proxy so that it can only send traffic to the Internet, a request to an internal resource like <%= vars.platform_name %> fails. You must set `no_proxy` so that traffic destined for <%= vars.platform_name %> and other internal resources is sent directly and does not go through the proxy. For instance, setting `no_proxy` to include your system and app domains will ensure that requests destined for those domains are sent directly.
+If you have set up your proxy so that it can only send traffic to the Internet, a request to an internal resource like <%= vars.platform_name %> fails. You must set `no_proxy` so that traffic destined for <%= vars.platform_name %> and other internal resources is sent directly and does not go through the proxy. For example, setting `no_proxy` to include your system and app domains will ensure that requests destined for those domains are sent directly.
 
 ### <a id='verify'></a> Verify interpretation
 
-The interpretation of `no_proxy` depends on the app and the language runtime. Most support `no_proxy`, but the specific implementation can vary. For example, some match DNS names that end with the value set in `no_proxy`: `example.com` can match `test.example.com`. Others support the use of the asterisk as a wildcard to provide basic pattern matching in DNS names: `*.example.com` can match `test.example.com`. Most apps and language runtimes do not support pattern matching and wildcards for IP addresses.
+The interpretation of `no_proxy` depends on the app and the language runtime. Most support `no_proxy`, but the specific implementation can vary. For example, some match DNS names that end with the value set in `no_proxy`: `example.com` can match `test.example.com`. Others support the use of the asterisk as a wildcard to provide basic pattern matching in DNS names: `*.example.com` can match `test.example.com`. Most apps and language run times do not support pattern matching and wildcards for IP addresses.
