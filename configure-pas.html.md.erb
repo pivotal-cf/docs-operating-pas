@@ -33,7 +33,8 @@ To add the <%= vars.app_runtime_abbr %> tile to your <%= vars.ops_manager %> Ins
 
 ## <a id='assign-azs-networks'></a> Assign AZs and networks
 
-<p class="note"><strong>Note:</strong> For Azure environments, this configuration pane is <strong>Assign Networks</strong> and does not include AZ configuration.</p>
+<p> For Azure environments, this configuration pane is <strong>Assign Networks</strong> and does not include AZ
+configuration.</p>
 
 In the **Assign AZ and Networks** pane, you assign jobs to your Availability Zones (AZs) and networks.
 
@@ -74,7 +75,11 @@ For additional guidance based on your installation method, see the table below:
    <td>Enter the values for <code>sys\_domain</code> and <code>apps\_domain</code> from the Terraform output.</td>
   </tr>
  </table>
- <p class="note"><strong>Note:</strong> <%= vars.company_name %> recommends that you use the same domain name but different subdomain names for your system and app domains. Doing so allows you to use a single wildcard certificate for the domain while preventing apps from creating routes that overlap with system routes.</p>
+ <p class="note important">
+<span class="note__title">Important</span> <%= vars.company_name %> recommends that you use the same domain name but different subdomain names for your system
+and app domains. Doing so allows you to use a single wildcard certificate for the domain while preventing apps from
+creating routes that overlap with system routes.
+</p>
 
 ## <a id='networking'></a> Configure networking
 
