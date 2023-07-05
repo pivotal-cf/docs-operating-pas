@@ -3,7 +3,8 @@ title: Managing internal databases
 owner: MySQL
 ---
 
-Here are two procedures for managing the internal MySQL databases used by <%= vars.app_runtime_first %> system components: scaling down your MySQL cluster, and migrating the cluster to a database stack that uses TLS encryption. It also provides example sizing data from two environments that have significant load on their MySQL clusters.
+Here are two procedures for managing the internal MySQL databases used by <%= vars.app_runtime_first %> system
+components: scaling down your MySQL cluster, and migrating the cluster to a database stack that uses TLS encryption. It also provides example sizing data from two environments that have significant load on their MySQL clusters.
 
 <p> The procedures do not apply to databases configured as external in the <strong>Databases</strong> pane of the <%= vars.app_runtime_abbr %> tile.</p>
 
@@ -101,7 +102,7 @@ Before scaling down your MySQL cluster, you must ensure the cluster is healthy. 
 
 1. Select **Resource Config**.
 
-1. Use the drop down menu to change the **Instances** count for **MySQL Server** to `1`.
+1. Use the drop-down menu to change the **Instances** count for **MySQL Server** to `1`.
 
 1. Click **Save**, then **Review Pending Changes** and **Apply Changes** to apply the changes.
 
@@ -129,7 +130,7 @@ The information in this section comes from an environment used by Diego to test 
 
 #### <a id="diego-sizing"></a> VM sizing
 
-The table below displays MySQL VM settings for this environment:
+The following table displays MySQL VM settings for this environment:
 
 | Setting | Value |
 | ------- | ----- |

@@ -100,9 +100,10 @@ see [Configuring <%= vars.app_runtime_abbr %>](../operating/configure-pas.html).
 
 ## <a id='asgs'></a> Step 2: Create app security groups
 
-App Security Groups (ASGs) are network policy rules specifying protocols, ports, and IP ranges that apply to outbound network connections initiated from apps.
+App Security Groups (ASGs) are network policy rules specifying protocols, ports, and IP ranges that apply to
+outbound network connections initiated from apps.
 
-<p class="note"><strong>Note:</strong> The default ASGs in <%= vars.platform_name %> allow apps
+<p> The default ASGs in <%= vars.platform_name %> allow apps
 running on your deployment to send traffic to almost any IP address.
 This step is only required if your ASGs restrict network access from apps to the network
 on which <%= vars.app_runtime_abbr %> runs.
@@ -147,7 +148,10 @@ To ensure the ASGs for your deployment allow apps to communicate with the runtim
 
 For any service instance bindings that existed before runtime CredHub was supported for that service, you must work with your developers to unbind and rebind the service instances to their apps. If you do not unbind and rebind the service, apps continue functioning as normal and fetching credentials from the Cloud Controller database.
 
-<p class="note"><strong>Note:</strong> This step is not required for bindings created after you installed the new version of the service tile that supports CredHub and you completed the procedures in steps 1 and 2 of this topic.</p>
+  <p class="note important">
+  <span class="note__title">Important</span> This step is not required for bindings created after you installed the new version of the service tile
+  that supports CredHub and you completed the procedures in steps 1 and 2 of this topic.
+  </p>
 
 To unbind and rebind your service instances to their apps:
 
@@ -187,7 +191,7 @@ To unbind and rebind your service instances to their apps:
     For help parsing the output of the `cf-env` command, see [VCAP_SERVICES](../devguide/deploy-apps/environment-variable.html#VCAP-SERVICES)
      in _<%= vars.app_runtime_abbr %> Environment Variables_.
 
-1. Restart the app to apply the service instance binding by running:
+1. Start the app again to apply the service instance binding by running:
 
     ```
     cf restart YOUR-APP
@@ -195,4 +199,5 @@ To unbind and rebind your service instances to their apps:
     Where `YOUR-APP` is the app to which you bound the service instance.
     <br>
 
-    If you run `cf-env` again, you can see the `VCAP-SERVICES` environment variable now contains the credentials for the service instance binding.
+    If you run `cf-env` again, you can see the `VCAP-SERVICES` environment variable now contains the
+    credentials for the service instance binding.

@@ -3,15 +3,17 @@ title: Getting Started with Small Footprint TAS for VMs
 owner: RelEng
 ---
 
-Here are the details of the Small Footprint <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) tile for <%= vars.platform_name %>.
+Learn about the Small Footprint <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) tile
+for <%= vars.platform_name %>.
 
-The Small Footprint <%= vars.app_runtime_abbr %> is a repackaging of the <%= vars.app_runtime_abbr %> components into a smaller deployment with fewer virtual machines (VMs). For a description of the limitations that come with a smaller deployment, see [Limitations](#limits).
+The Small Footprint <%= vars.app_runtime_abbr %> is a repackaging of the <%= vars.app_runtime_abbr %> components into a
+smaller deployment with fewer virtual machines (VMs). For a description of the limitations that come with a
+smaller deployment, see [Limitations](#limits).
 
 
 ## <a id='compare'></a> Differentiate small footprint <%= vars.app_runtime_abbr %> and <%= vars.app_runtime_abbr %>
 
 A standard <%= vars.app_runtime_abbr %> deployment must have at least 13 VMs, but Small Footprint <%= vars.app_runtime_abbr %> requires only four.
-
 
 
 * Required VMs: Cloud Controller, Cloud Controller Worker, Clock Global, Diego BBS, Diego Brain, Diego Cell, Doppler Server, Loggregator Traffic Controller, NATS, Router, Syslog Adapter, Syslog Scheduler, and UAA.
@@ -33,7 +35,7 @@ For TAS for VMs:
 
 Use Small Footprint <%= vars.app_runtime_abbr %> for smaller <%= vars.platform_name %> deployments on which you intend to host 2500 or fewer apps, as described in [Limitations](#limits). If you want to use Small Footprint <%= vars.app_runtime_abbr %> in a production environment, ensure the limitations described are not an issue in your use case.
 
-<p class="note"><strong>Note:</strong> Small Footprint <%= vars.app_runtime_abbr %> is compatible with <%= vars.platform_name %> service tiles.</p>
+<p> Small Footprint <%= vars.app_runtime_abbr %> is compatible with <%= vars.platform_name %> service tiles.</p>
 
 Small Footprint <%= vars.app_runtime_abbr %> is also ideal for the following use cases:
 
@@ -60,7 +62,7 @@ Small Footprint <%= vars.app_runtime_abbr %> has the following limitations:
 
 You can deploy Small Footprint <%= vars.app_runtime_abbr %> with a minimum of four VMs, as shown in the following image.
 
-<p class="note"><strong>Note:</strong> The following image assumes that you are using an external blobstore.</p>
+<p> The following image assumes that you are using an external blobstore.</p>
 
 ![alt-text="Small Footprint TAS for VMs has 4 required VMs and 5 optional VMs."](./images/srt-vms.png)
 
@@ -152,7 +154,9 @@ To troubleshoot a job that runs on the Control or Database VMs:
 	Where:
 	* `BOSH-ENV` is the name of your BOSH environment.
 	* `TAS-DEPLOYMENT` is the name of your Small Footprint <%= vars.app_runtime_abbr %> deployment.
-	<p class="note"><strong>Note:</strong> If you do not know the name of your deployment, you can run <code>bosh -e BOSH-ENV deployments</code> to list the deployments for your BOSH Director.</p>
+
+	<p> If you do not know the name of your deployment, you can run
+		<code>bosh -e BOSH-ENV deployments</code> to list the deployments for your BOSH Director.</p>
 
 3. Use BOSH to SSH into one of the Small Footprint <%= vars.app_runtime_abbr %> VMs. Run:
 

@@ -3,7 +3,7 @@ title: Configuring PingFederate as an identity provider
 owner: Identity
 ---
 
-Here are instructions for configuring single sign-on (SSO) between PingFederate and <%= vars.app_runtime_first %>.
+You can configure single sign-on (SSO) between PingFederate and <%= vars.app_runtime_first %>.
 
 You can create an SSO partnership between PingFederate and <%= vars.app_runtime_abbr %> using the following steps:
 
@@ -67,6 +67,9 @@ To configure <%= vars.app_runtime_abbr %> as the SAML SP for PingFederate:
     1. Select **Configure Browser SSO**.
     1. On the **Summary** pane, select **SAML Profiles**.
     1. Ensure that the **IdP-Initiated SSO** and **SP-Initiated SSO** check boxes are activated.
-    <p class='note'><strong>Note:</strong> <%= vars.app_runtime_abbr %> does not support SLO profiles at this time. You can leave them deactivated.</p>
+
+    <p class="note important">
+<span class="note__title">Important</span> <%= vars.app_runtime_abbr %> does not support SLO profiles at
+this time. You can leave them deactivated.
 
 1. Activate the SP Connection.

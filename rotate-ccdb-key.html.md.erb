@@ -3,7 +3,7 @@ title: Rotating the Cloud Controller database encryption key
 owner: CAPI
 ---
 
-Here is how to rotate the Cloud Controller database (CCDB) encryption key.
+You can rotate the Cloud Controller database (CCDB) encryption key.
 
 The Cloud Controller is the primary API of <%= vars.app_runtime_first %>.
 It has its own database, the CCDB, in which it stores information about objects
@@ -12,17 +12,18 @@ The CCDB encryption key is used to encrypt sensitive data at rest in the CCDB
 such as app environment variables.
 
 The CCDB encryption key is automatically generated when you first deploy <%= vars.app_runtime_abbr %>.
-You can rotate the CCDB encryption key as described in this topic.
 For example, you might want to perform this procedure if your existing key is leaked.
 
 
 ##  <a id="rotate"></a> Rotate the CCDB encryption key
 
-<p class="note warning"><strong>Caution:</strong> Do not edit the <strong>Cloud Controller
-   database encryption key</strong> field in the <%= vars.app_runtime_abbr %> tile.
-   This field is only for use when restoring <%= vars.app_runtime_abbr %> from a backup.
-   If you edit this value at a time other than restore, commands such as <code>cf push</code> might fail.
-   Instead, change keys using the <strong>Encryption key ledger</strong>.</p>
+<p class="note important">
+<span class="note__title">Important</span>  Do not edit the <strong>Cloud Controller
+database encryption key</strong> field in the <%= vars.app_runtime_abbr %> tile.
+This field is only for use when restoring <%= vars.app_runtime_abbr %> from a backup.
+If you edit this value at a time other than restore, commands such as <code>cf push</code> might fail.
+Instead, change keys using the <strong>Encryption key ledger</strong>.
+</p>
 
 To rotate the CCDB encryption key:
 
@@ -35,10 +36,12 @@ To rotate the CCDB encryption key:
    with the **Primary** check box selected.
 
 1. In the **Encryption key ledger** field:
-	<p class="note"><strong>Note:</strong> Do not remove any existing keys until
-           after you complete the last step of this procedure.
-           Removing keys now causes the <%= vars.app_runtime_abbr %> deploy to fail.
-        </p>
+      <p class="note important">
+      <span class="note__title">Important</span>  Do not remove any existing keys until
+      after you complete the last step of this procedure.
+      Removing keys now causes the <%= vars.app_runtime_abbr %> deploy to fail.
+      </p>
+
 	1. Click **Add**.
 	1. Enter values for **Encryption key name** and **Encryption key**.
 	1. Activate the check box to mark this as your **Primary** key.
@@ -54,7 +57,6 @@ To rotate the CCDB encryption key:
 1. Redeploy <%= vars.app_runtime_abbr %>.
    After <%= vars.app_runtime_abbr %> deploys and the errand runs successfully,
    you can remove any previously specified CCDB encryption keys in the ledger.
-
 
 ## <a id="troubleshoot"></a> Troubleshoot failed rotation
 
@@ -109,7 +111,7 @@ This section describes how to troubleshoot errors that you might encounter while
 
 ###  <a id="view"></a> View encryption keys
 
-The section describes how to retrieve the value of an existing or previous encryption key. You might need to do this when troubleshooting a failed key rotation.
+You can retrieve the value of an existing or previous encryption key. You might need to do this when troubleshooting a failed key rotation.
 
 #### <a id="actual-installation"></a> <%= vars.ops_manager %> actual-installation.yml
 

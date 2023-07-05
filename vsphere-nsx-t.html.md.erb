@@ -3,11 +3,14 @@ title: Deploying TAS for VMs with NSX-T Networking
 owner: Ops Manager
 ---
 
-Here are instructions for installing <%= vars.app_runtime_first %> on
+You can install <%= vars.app_runtime_first %> on
 vSphere with NSX-T internal networking, using the VMware NSX-T Container plug-in for <%=
 vars.platform_name %>.
 
-<p class="note"><strong>Note:</strong> These instructions were updated to use the NSX-T Policy API, the next-generation interface for integrating with the NSX-T networking and security framework.</p>
+<p class="note important">
+<span class="note__title">Important</span> These instructions were updated to use the NSX-T Policy API, the next-generation interface for
+integrating with the NSX-T networking and security framework.
+</p>
 
 <%= vars.app_runtime_abbr %> uses a Container Network Interface (CNI) plug-in to support secure and
 direct internal communication between containers.
@@ -57,7 +60,9 @@ Before you deploy <%= vars.app_runtime_abbr %> with NSX-T networking, you must h
     **Apply Changes** on this version of <%= vars.app_runtime_abbr %>.
   * Deployed previously, with the **Container network interface plug-in** field set to **External**
     in the **Networking** pane of the <%= vars.app_runtime_abbr %> tile.
-  <p class="note"><strong>Note:</strong> If you deploy <%= vars.app_runtime_abbr %> with its container network interface (CNI) set to <strong>Silk</strong>, Diego Cells are configured to use an internally-managed container network. If you subsequently switch the CNI interface to <strong>External</strong> NSX-T, this leads to errors.</p>
+
+<p> If you deploy <%= vars.app_runtime_abbr %> with its container network interface (CNI) set to
+  <strong>Silk</strong>, Diego Cells are configured to use an internally managed container network. If you subsequently switch the CNI interface to <strong>External</strong> NSX-T, this leads to errors.</p>
 
 
 ## <a id='architecture'></a> Architecture
@@ -65,13 +70,15 @@ Before you deploy <%= vars.app_runtime_abbr %> with NSX-T networking, you must h
 The following graphic shows how to deploy an NSX-T machine to run <%= vars.app_runtime_abbr %>
 across multiple vSphere hardware clusters. NSX-T runs a Tier-0 (T0) gateway and multiple Tier-1 (T1)
 gateways, each connecting to a network within <%= vars.platform_name %>. Each vSphere hardware
-column cluster corresponds to an Availability Zone (AZ) in <%= vars.platform_name %>: The NXT T0 Router is connected between the IP Backbone and the T1 Routers. The T1
-Routers each terminate on a network. Three network types are shown: On-demand Orgs, Isolation
+column cluster corresponds to an Availability Zone (AZ) in <%= vars.platform_name %>: The NXT T0 Router is
+connected between the IP Backbone and the T1 Routers. The T1
+Routers each end on a network.
+Three network types are shown: On-demand Orgs, Isolation
 Segments, and On-demand Services.
 
 ![alt-text=""](./images/nsx-t/nsx-t-refarch.png)
 
-When you push an app to a new org for the first time, the NSX-T plug-in triggers NSX-T to create a
+When you push an app to a new org for the first time, the NSX-T plug-in starts NSX-T to create a
 new T1 gateway and allocate an address range for the org, on demand.
 
 ## <a id='install'></a> Install and configure <%= vars.app_runtime_abbr %> and NSX-T
@@ -90,13 +97,13 @@ To install NSX-T to run with <%= vars.app_runtime_abbr %>, follow these procedur
 
 To set up NSX-T to integrate with <%= vars.app_runtime_abbr %>, follow these procedures:
 
-* [Configure NAT Rules](#nsx-t-nats)
+* [Configure NAT Rules](#nsx-t-nats).
 
-* [Configure Gateways](#nsx-t-gateways)
+* [Configure Gateways](#nsx-t-gateways).
 
-* [Configure Segments](#nsx-t-segments)
+* [Configure Segments](#nsx-t-segments).
 
-* [Configure a Load Balancer](#nsx-t-load-balancer)
+* [Configure a Load Balancer](#nsx-t-load-balancer).
 
 ### <a id='nsx-t-nats'></a> Configure NAT Rules
 
@@ -317,8 +324,11 @@ To configure Tier-1 (T1) gateways:
     * **HTTP Response Code**: 200.
 9.  Click **Save**.
 
-To create the virtual server that forwards unencrypted web (HTTP) traffic to the foundation.
-<p class="note"><strong>Note:</strong> For foundations requiring end-to-end encryption, do not enable the virtual server on port 80. If it must be enabled, configure it to redirect traffic to the encrypted port (443).</p>
+
+<p> For foundations requiring end-to-end encryption, do not enable the virtual server on port 80. If it
+    must be enabled, configure it to redirect traffic to the encrypted port (443).</p>
+
+To create the virtual server that forwards unencrypted web (HTTP) traffic to the foundation:
 
 1. Click **Virtual Servers Set**.
 2. Click **Add Virtual Server**.
@@ -375,7 +385,7 @@ To activate NSX-T mode in the BOSH Director:
 
 ### <a id='external-net'></a> Configure <%= vars.app_runtime_abbr %> for external container networking
 
-To configure <%= vars.app_runtime_abbr %> for external  container networking:
+To configure <%= vars.app_runtime_abbr %> for external container networking:
 
 1. If you have not already done so, download the <%= vars.app_runtime_abbr %> tile from [VMware
   Tanzu Network](https://network.tanzu.vmware.com/products/elastic-runtime) and import it to the
@@ -389,6 +399,7 @@ To configure <%= vars.app_runtime_abbr %> for external  container networking:
 1. Configure <%= vars.app_runtime_abbr %>, following the directions in [Configuring <%=
    vars.app_runtime_abbr %>](./configure-pas.html). When you configure **Networking**, select
    **External** under **Container networking interface plugin**.<br>
+
     ![alt-text=""](./images/nsx-t/nsx-t-tas-cni.png)
 
 ### <a id='nsx-t-tile'></a> Install and configure the NSX-T container plug-In

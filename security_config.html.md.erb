@@ -31,7 +31,8 @@ For additional IaaS-specific certificate requirements:
 
 ## <a id="create_or_obtain_certs"></a> Create a wildcard certificate for <%= vars.platform_name %> deployments
 
-This section describes how to create or generate a certificate for your <%= vars.app_runtime_abbr %> environment. If you are deploying to a production environment, you must obtain a certificate from a trusted Certificate Authority (CA).
+You can create or generate a certificate for your <%= vars.app_runtime_abbr %> environment. If you are
+deploying to a production environment, you must obtain a certificate from a trusted Certificate Authority (CA).
 
 For internal development or testing environments, you have two options for creating a required TLS certificates:
 
@@ -40,7 +41,7 @@ For internal development or testing environments, you have two options for creat
 
 To create a certificate, you can use a wide variety of tools including OpenSSL, Java's keytool, Adobe Reader, and Apple's Keychain to generate a Certificate Signing Request (CSR).
 
-In either case for either self-signed or trusted single certificates, apply these rules when creating the CSR:
+In either case for either self signed or trusted single certificates, apply these rules when creating the CSR:
 
 * Specify your registered wildcard domain as the `Common Name`, where `DOMAIN` is your registered wildcard domain. For example, `*.DOMAIN.com`.
 
@@ -53,7 +54,9 @@ In either case for either self-signed or trusted single certificates, apply thes
 * If you are using a single domain configuration, use these values as the `Subject Alternative Name` of the certificate, where `DOMAIN` is your registered wildcard domain:
     * `*.login.sys.DOMAIN.com`
     * `*.uaa.sys.DOMAIN.com`
-    <p class="note"><strong>Note:</strong> TLS certificates generated for wildcard DNS records only work for a single domain name component or component fragment. For example, a certificate generated for <code>&#42;.DOMAIN.com</code> does not work for <code>&#42;.apps.DOMAIN.com</code> and <code>&#42;.sys.DOMAIN.com</code>. The certificate must have both <code>&#42;.apps.DOMAIN.com</code> and <code>&#42;.sys.DOMAIN.com</code> attributed to it.</p>
+
+    <p> TLS certificates generated for wildcard DNS records only work for a single domain name component or
+    component fragment. For example, a certificate generated for <code>&#42;.DOMAIN.com</code> does not work for <code>&#42;.apps.DOMAIN.com</code> and <code>&#42;.sys.DOMAIN.com</code>. The certificate must have both <code>&#42;.apps.DOMAIN.com</code> and <code>&#42;.sys.DOMAIN.com</code> attributed to it.</p>
 
 ### <a id="ert_certgen"></a> Generate an RSA certificate in <%= vars.app_runtime_abbr %>
 

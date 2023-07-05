@@ -3,8 +3,8 @@ title: TAS for VMs Resource Requirements
 owner:
 ---
 
-
-The general requirements for deploying and managing an installation of <%= vars.ops_manager %> and <%= vars.app_runtime_first %> are:
+The general requirements for deploying and managing an installation
+of <%= vars.ops_manager %> and <%= vars.app_runtime_first %> are:
 
 * A wildcard DNS record that points to your Gorouter or load balancer. Also, you can use a service such as xip.io. For example, `203.0.113.0.xip.io`.
   * <%= vars.app_runtime_abbr %> gives each app its own hostname in your app domain.
@@ -28,14 +28,17 @@ The general requirements for deploying and managing an installation of <%= vars.
       * TCP Router
   * One IP for each VM instance created by the service.
   * An additional IP address for each compilation worker. The formula for total IPs needed is `IPs needed = static IPs + VM instances + compilation workers`.
-    <p class="note"><strong>Note:</strong> <%= vars.company_name %> recommends that you allocate at least 36 dynamic IP addresses when installing <%= vars.app_runtime_abbr %>. BOSH requires additional dynamic IP addresses during installation to compile and deploy VMs, install <%= vars.app_runtime_abbr %>, and connect to services.</p>
+
+    <p> <%= vars.company_name %> recommends that you allocate at least 36 dynamic IP addresses when installing <%= vars.app_runtime_abbr %>. BOSH requires additional dynamic IP addresses during installation to compile and deploy VMs, install <%= vars.app_runtime_abbr %>, and connect to services.</p>
 
 * One or more NTP servers if not already provided by your IaaS.
 
 * (**Recommended**) A network without DHCP available for deploying the <%= vars.app_runtime_abbr %> VMs.
-  <p class="note"><strong>Note:</strong> If you have DHCP, see <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-troubleshooting.html">Troubleshooting Deployment Problems</a> in the <%= vars.ops_manager %> documentation for information about avoiding issues with your installation.</p>
+  <p> If you have DHCP, see <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-troubleshooting.html">Troubleshooting Deployment Problems</a> in the <%= vars.ops_manager %> documentation for information about avoiding issues with your installation.</p>
 
-* (**Optional**) External storage. When you deploy <%= vars.app_runtime_abbr %>, you can select internal file storage or external file storage, either network-accessible or IaaS-provided, as an option in the <%= vars.app_runtime_abbr %> tile. <%= vars.company_name %> recommends using external storage whenever possible. For more information about how file storage location affects platform performance and stability during upgrades, see [Configure File Storage](./configuring.html#file-storage) in _Configuring <%= vars.app_runtime_abbr %> for Upgrades_.
+* (**Optional**) External storage. When you deploy <%= vars.app_runtime_abbr %>, you can select internal file storage or external file storage, either network-accessible or IaaS-provided, as an option in the <%= vars.app_runtime_abbr %> tile.
+
+  <%= vars.company_name %> recommends using external storage whenever possible. For more information about how file storage location affects platform performance and stability during upgrades, see [Configure File Storage](./configuring.html#file-storage) in _Configuring <%= vars.app_runtime_abbr %> for Upgrades_.
 
 * (**Optional**) External databases. When you install <%= vars.app_runtime_abbr %>, you can select internal or external databases for the BOSH Director and for <%= vars.app_runtime_abbr %>. <%= vars.company_name %> recommends using external databases in production deployments. An external database must be configured to use the UTC timezone.
 

@@ -92,7 +92,8 @@ To change the domain of an existing <%= vars.platform_name %> installation:
       <li><code>NEW-DOMAIN</code> is the domain to which you want to map your app.</li>
       <li><code>HOST-NAME</code> is the hostname of the URL for the route you are mapping.</li>
     </ul>
-    Note: When you map a TCP route to an app, a random port is assigned to the route by default.
+
+    When you map a TCP route to an app, a random port is assigned to the route by default.
     To specify a port for a TCP route, use the --port flag.
 
     The command returns output similar to the following example:
@@ -113,7 +114,10 @@ To change the domain of an existing <%= vars.platform_name %> installation:
     ![alt-text="Apps Manager space shows an application status at 100%."](./images/switching_domains/new_domain_confirmed1.png)
 
 8. Repeat the previous steps for each space in your <%= vars.platform_name %> installation except for the System org, beginning with logging into the org and space and ending with confirming the URL update.
-	<p class='note'><strong>Note:</strong> Ordinarily the System org contains only <%= vars.platform_name %> apps that perform utility functions for your installation. <%= vars.company_name %> does not recommend pushing apps to this org. However, if you have pushed apps to the System org, you must also repeat the previous steps for these apps.</p>
+	<p> Ordinarily the System org contains only <%= vars.platform_name %>
+    apps that perform utility functions for your installation. <%= vars.company_name %> does not recommend
+    pushing apps to this org. However, if you have pushed apps to the System org, you must also repeat the
+    previous steps for these apps.</p>
 
 9. Once you confirm that every app in every space has been mapped to the new domain, delete the old domain by running:
 
@@ -134,7 +138,7 @@ To change the domain of an existing <%= vars.platform_name %> installation:
     Are you sure you want to delete the domain yourapps.yourdomain.com?
     </pre>
 
-    When prompted, type `yes` to confirm that you want to delete the domain.
+    When you are prompted, type `yes` to confirm that you want to delete the domain.
 
 10. In the **Domains** pane of the <%= vars.app_runtime_abbr %> tile, enter the new domain in the **Apps domain** field. This configures <%= vars.app_runtime_abbr %> to use the new domain.
 

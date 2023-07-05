@@ -3,8 +3,8 @@ title: Checking Ops Manager after a power failure on vSphere
 owner:
 ---
 
-Here are instructions for checking the state of <%= vars.platform_name %> after a power failure in an
-on-premises vSphere installation.
+Learn how to check the state of <%= vars.platform_name %> after a power failure in an
+on premises vSphere installation.
 
 If you have a procedure at your company for handling power failure scenarios and want to add steps
 for checking the state of <%= vars.platform_name %>, use this procedure as a template.
@@ -118,8 +118,8 @@ To ensure that BOSH Director is running, do the following:
 1. In a browser, go to <%= vars.platform_name %> UI and select the
 **BOSH Director for vSphere** tile.
 
-    <p class="note"><strong>Note</strong>: If you do not know the URL of the
-    <%= vars.platform_name %> VM, you can use the IP address that you obtain from vCenter.</p>
+    <p> If you do not know the URL of the
+      <%= vars.platform_name %> VM, you can use the IP address that you obtain from vCenter.</p>
 
 1. Select **Status**.
 
@@ -144,12 +144,14 @@ To resolve this issue, do the following:
     1. SSH into the BOSH Director VM using the instructions in [SSH into the BOSH Director VM](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-ssh-login.html).
 
     1. Run the following command to see that all processes are running:
-      ```
+
+      ```console
       monit summary
       ```
 
     1. If the `uaa` process is not running, run the following command:
-      ```
+
+      ```console
       monit restart UAA
       ```
 
@@ -165,18 +167,19 @@ To ensure BOSH Resurrector finished recovering, do the following:
 
 1. Authenticate with the BOSH Director VM using the instructions in [Authenticate with the BOSH Director VM](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html#log-in).
 
-2. Run the following command to see if there is any currently running or queued Resurrector
+1. Run the following command to see if there is any currently running or queued Resurrector
 activity:
 
     ```
     bosh tasks --all -d ''
     ```
+
     Review the task description for `scan` and `fix`. If no task are running, the BOSH Director has
     probably finished recovering. Run `bosh tasks --recent --all -d ''` to view finished tasks.
 
 ## <a id="check-pas"></a> Phase 5: Ensure the VMs for <%= vars.app_runtime_abbr %> are running
 
-<p class="note"><strong>Note</strong>: You can also apply the steps in this section to any
+<p> You can also apply the steps in this section to any
 <%= vars.platform_name %> services. To further ensure the health of <%= vars.platform_name %>
 services, use the <%= vars.platform_name %> Healthwatch dashboard and the documentation for each
 service.</p>
@@ -188,6 +191,7 @@ To ensure that the VMs for <%= vars.app_runtime_abbr %> are running, do the foll
     ```
     bosh vms
     ```
+
     BOSH lists VMs by deployment. The deployment with the `cf-` prefix is the
     <%= vars.app_runtime_abbr %> deployment.
 
@@ -197,17 +201,19 @@ cluster, see [Manually Recover MySQL (Clusters Only)](#check-mysql).
 
 1. If any other VMs are not running, run the following command:
 
-    ```
+    ```console
     bosh cck -d DEPLOYMENT
     ```
+
     This command scans for problems and provides options for recovering VMs. For more information,
     see [IaaS Reconciliation](https://bosh.io/docs/cck/) in the BOSH documentation.
 
 1. If you cannot get all VMs running, contact [VMware Tanzu Support](https://tanzu.vmware.com/support) for
 assistance. Provide the following information:
-  * You have started this checklist to recover from a power failure on vSphere
-  * A list of failing VMs
-  * Your <%= vars.platform_name %> version
+
+* You have started this checklist to recover from a power failure on vSphere.
+* A list of failing VMs.
+* Your <%= vars.platform_name %> version.
 
 ### <a id="check-mysql"></a> Manually recover MySQL (clusters only)
 

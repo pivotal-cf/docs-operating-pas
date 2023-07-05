@@ -5,15 +5,14 @@ owner: Ops Manager
 
 You can configure App Security Groups (ASGs) to give network access to the Notifications Service.
 
-To allow the Notifications Service to have network access, you must create App Security Groups (ASG). You cannot use the Notifications Service without ASGs.
+To allow the Notifications Service to have network access, you must create App Security Groups (ASG).
+You cannot use the Notifications Service without ASGs.
 
 For more information, see [App Security Groups](../concepts/asg.html).
-
 
 ## <a id='notifications-service'></a> Prerequisite
 
 Before configuring ASGs for the Notifications Service, you must first set up the Notifications Service. To set up the Notifications Service, see [Getting Started with the Notifications Service](../adminguide/notifications.html).
-
 
 ## <a id="notifications-service-network-connections"></a> Configure network connections
 
@@ -25,7 +24,8 @@ The Notifications Service is deployed as a suite of apps to the `notifications-w
 | `LOAD_BALANCER_IP` | 80, 443 | tcp | This service accesses the load balancer. |
 | `ASSIGNED_NETWORK` | 3306 | tcp | This service requires access to internal services. `ASSIGNED_NETWORK` is the CIDR of the network assigned to this service. |
 
-<p class="note"><strong>Note:</strong> The SMTP server port and protocol are dependent on how you configure your server.</p>
+<p> The SMTP server port and protocol are dependent on how you
+configure your server. </p>
 
 ### <a id="smtp"></a> Create a SMTP server ASG
 
@@ -55,13 +55,13 @@ To create an ASG for your SMTP server:
 
 1. Create an ASG called `smtp-server` by running:
 
-    ```
+    ```console
     cf create-security-group smtp-server smtp-server.json
     ```
 
 ### <a id="assigned-network"></a> Create an assigned network ASG
 
-<p class="note"><strong>Note:</strong> If you use external services, the IP addresses, ports, and protocols depend on the service.</p>
+If you use external services, the IP addresses, ports, and protocols depend on the service.
 
 To create an ASG for an assigned network:
 
@@ -95,10 +95,9 @@ To create an ASG for an assigned network:
 
 1. Create an ASG called `assigned-network` by running:
 
-    ```
+    ```console
     cf create-security-group assigned-network assigned-network.json
     ```
-
 
 ## <a id="pre-installation-asg-binding"></a> Bind the ASGs
 

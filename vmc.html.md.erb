@@ -3,19 +3,20 @@ title: Deploying TAS for VMs to VMC
 owner: dap-tas-vmc-vcf-anycloud
 ---
 
-Here are instructions for installing <%= vars.app_runtime_first %> to VMware Cloud (VMC) on Amazon Web Services (AWS).
+You can install <%= vars.app_runtime_first %> to VMware Cloud (VMC) on Amazon Web Services (AWS).
 
 VMC provides Software Defined Data Centers (SDDCs) that run on AWS with a high level management console to configure networking rules.
+
 This topic describes the procedures for configuring and installing <%=
 vars.app_runtime_abbr %> on VMC using public IP addresses for ingress.
 
 To install and configure <%= vars.app_runtime_abbr %> on VMC:
 
-  1. [Install <%= vars.ops_manager %>](#om-setup)
+  1. [Install <%= vars.ops_manager %>](#om-setup).
 
-  2. [Configure BOSH Director](#bosh-setup)
+  2. [Configure BOSH Director](#bosh-setup).
 
-  3. [Install and Configure <%= vars.app_runtime_abbr %>](#tas-tile)
+  3. [Install and Configure <%= vars.app_runtime_abbr %>](#tas-tile).
 
 ## <a id='requirements'></a> Prerequisites
 
@@ -57,7 +58,7 @@ To activate browser access to vCenter:
           - Click **Set Members**.
           - Select **IP Addresses**.
           - Enter your public IP address. For example, `66.170.99.1`.
-              <p class="note"><strong>Note</strong>: You can locate your public IP address by navigating to <code>https://ifconfig.me/</code>.</p>
+              <p> You can locate your public IP address by going to <code>https://ifconfig.me/</code>.</p>
           - Press **Enter**.
           - Click **Apply**.
         1. Click **Save**.
@@ -86,14 +87,14 @@ To install <%= vars.ops_manager %> on VMC:
 
 1. Find the VMC pre-installed network to use for the BOSH infrastructure network:
   1. Go to the [VMC console](https://vmc.vmware.com/console/sddcs).
-  1. Select **SDDCs**.
-  1. Click **View Details** on your datacenter tile.
-  1. Select **Networking & Security**.
-  1. Select **Network**, and then select **Segments**.
-  1. Record the segment name for **sddc-cgw-nework-1**.
-  1. Record the subnet **192.168.1.1/24**. SDDC combines the gateway IP address and CIDR into a single value.
+  2. Select **SDDCs**.
+  3. Click **View Details** on your datacenter tile.
+  4. Select **Networking & Security**.
+  5. Select **Network**, and then select **Segments**.
+  6. Record the segment name for **sddc-cgw-nework-1**.
+  7. Record the subnet **192.168.1.1/24**. SDDC combines the gateway IP address and CIDR into a single value.
 
-1. If nothing has changed, create a file named `options.json` with the following contents:
+2. If nothing has changed, create a file named `options.json` with the following contents:
 
     ```
     {
@@ -128,7 +129,7 @@ To install <%= vars.ops_manager %> on VMC:
     }
     ```
 
-1. Replace the example text in the following code, then run the commands to upload the <%= vars.ops_manager %> file to VMC:
+3. Replace the example text in the following code, then run the commands to upload the <%= vars.ops_manager %> file to VMC:
   - `EXAMPLE-PASSWORD`: the vCenter password you recorded in [Record vCenter Credentials](#vcenter-creds).
   - `<%= vars.example_domain %>`: your vCenter URL.
   - `PATH-TO-OPS-MANAGER`: the path to your <%= vars.ops_manager %> OVA file.
@@ -145,8 +146,9 @@ To install <%= vars.ops_manager %> on VMC:
     govc library.deploy -options options.json /tas/ops-manager-vsphere-2.##.#-build.### ops-manager
     govc pool.create /SDDC-Datacenter/host/Cluster-1/Resources/az{1,2,3}
     ```
-    <p class="note"><strong>Note:</strong> <%= vars.recommended_by %> recommends using <code>govc library.*</code> commands
-    instead of <code>govc import.ova</code>.<br><br>
+    <p> <%= vars.recommended_by %> recommends using <code>govc library.*</code> commands
+    instead of <code>govc import.ova</code>.
+    <br><br>
     The <code>govc import.ova</code> commands depend on access to the ESXi
     hosts, which is not configured by default in VMC.
     Using these commands can cause errors like the following:
@@ -155,66 +157,66 @@ To install <%= vars.ops_manager %> on VMC:
     tcp 10.2.32.4:443: i/o timeout</code>
     </p>
 
-1. Log in to vCenter:
+4. Log in to vCenter:
     1. Go to the [VMC console](https://vmc.vmware.com/console/sddcs).
-    1. Select **SDDCs**.
-    1. Click **Open vCenter** on your datacenter tile.
-    1. Select **Show Credentials**, and then click **Open vCenter**.
-    1. Find the <%= vars.ops_manager %> VM.
-    1. Open the **Hosts & Clusters** view.
-    1. Open the `Compute-ResourcePool` and select the `ops-manager` VM.
-    1. Click ▶ to power on the <%= vars.ops_manager %> VM.
+    2. Select **SDDCs**.
+    3. Click **Open vCenter** on your datacenter tile.
+    4. Select **Show Credentials**, and then click **Open vCenter**.
+    5. Find the <%= vars.ops_manager %> VM.
+    6. Open the **Hosts & Clusters** view.
+    7. Open the `Compute-ResourcePool` and select the `ops-manager` VM.
+    8. Click ▶ to power on the <%= vars.ops_manager %> VM.
 
-1. Create public IP addresses for <%= vars.ops_manager %> and HAProxy:
+5. Create public IP addresses for <%= vars.ops_manager %> and HAProxy:
     1. Go to the [VMC console](https://vmc.vmware.com/console/sddcs).
-    1. Select **SDDCs**.
-    1. Click **View Details** on your datacenter tile.
-    1. Select **Networking & Security**.
-    1. Select **Public IPs**, and then select **Request New IP**.
+    2. Select **SDDCs**.
+    3. Click **View Details** on your datacenter tile.
+    4. Select **Networking & Security**.
+    5. Select **Public IPs**, and then select **Request New IP**.
       1. For **Notes**, enter `ops-manager` and click **Save**.
-      1. Record the IP address. For example, `54.190.190.190`.
-    1. Click **Request New IP**.
+      2. Record the IP address. For example, `54.190.190.190`.
+    6. Click **Request New IP**.
       1. For **Notes**, enter `HAProxy` and click **Save**.
-      1. Record the IP address. For example, `54.180.180.180`.
+      2. Record the IP address. For example, `54.180.180.180`.
 
-1. Create a second network segment to use as the BOSH deployment network:
+6. Create a second network segment to use as the BOSH deployment network:
     1. Go to the [VMC console](https://vmc.vmware.com/console/sddcs).
-    1. Select **SDDCs**.
-    1. Click **View Details** on your datacenter tile.
-    1. Select **Networking & Security**.
-    1. Select **Network**, and then select **Segments**.
-    1. Click **Add Segment**:
+    2. Select **SDDCs**.
+    3. Click **View Details** on your datacenter tile.
+    4. Select **Networking & Security**.
+    5. Select **Network**, and then select **Segments**.
+    6. Click **Add Segment**:
         1. For **Segment Name**, enter `bosh-network`.
-        1. For **Type**, enter `routed`.
-        1. For **Subnets**, enter a subnet. For example, `192.168.2.1/24`.
+        2. For **Type**, enter `routed`.
+        3. For **Subnets**, enter a subnet. For example, `192.168.2.1/24`.
 
-1. Assign public IP addresses to <%= vars.ops_manager %> and HAProxy:
+7. Assign public IP addresses to <%= vars.ops_manager %> and HAProxy:
     1. Go to the [VMC console](https://vmc.vmware.com/console/sddcs).
-    1. Select **SDDCs**.
-    1. Click **View Details** on your datacenter tile.
-    1. Select **Networking & Security**.
-    1. Select **NAT**, and then click **Add NAT Rule**.
+    2. Select **SDDCs**.
+    3. Click **View Details** on your datacenter tile.
+    4. Select **Networking & Security**.
+    5. Select **NAT**, and then click **Add NAT Rule**.
         1. For **Rule Name**, enter `ops-manager`.
-        1. For **Public IP**, enter the IP address you created for <%= vars.ops_manager %> in a previous step. For example, `54.190.190.190`.
-        1. For **Internal IP**, enter `192.168.1.10`.
-        1. Click **Save**.
-    1. Select **Add NAT Rule**.
+        2. For **Public IP**, enter the IP address you created for <%= vars.ops_manager %> in a previous step. For example, `54.190.190.190`.
+        3. For **Internal IP**, enter `192.168.1.10`.
+        4. Click **Save**.
+    6. Select **Add NAT Rule**.
         1. For **Rule Name**, enter `HAProxy`.
-        1. For **Public IP**, enter the IP address you created for HAProxy in a previous step. For example, `54.180.180.180`.
-        1. For **Internal IP**, enter `192.168.2.2`.
-        1. Click **Save**.
+        2. For **Public IP**, enter the IP address you created for HAProxy in a previous step. For example, `54.180.180.180`.
+        3. For **Internal IP**, enter `192.168.2.2`.
+        4. Click **Save**.
 
-1. Add firewall rules that allow ingress to <%= vars.ops_manager %> and HAProxy:
+8. Add firewall rules that allow ingress to <%= vars.ops_manager %> and HAProxy:
     1. Go to the [VMC console](https://vmc.vmware.com/console/sddcs).
-    1. Select **SDDCs**.
-    1. Click **View Details** on your datacenter tile.
-    1. Select **Networking & Security**, and then select **Security**.
-    1. Select **Gateway Firewall**, and then **Compute Gateway**.
-    1. Click **Add Rule**.
-    1. Select the newly-created rule:
+    2. Select **SDDCs**.
+    3. Click **View Details** on your datacenter tile.
+    4. Select **Networking & Security**, and then select **Security**.
+    5. Select **Gateway Firewall**, and then **Compute Gateway**.
+    6. Click **Add Rule**.
+    7. Select the newly-created rule:
         1. For **Rule Name**, enter `opsman-ingress`.
-        1. For **Sources**, select **Any**.
-        1. Configure **Destinations**:
+        2. For **Sources**, select **Any**.
+        3. Configure **Destinations**:
           - Click **Add Group**.
               - For **Group name**, enter `OM`.
               - Click **Set Members**.
@@ -225,11 +227,11 @@ To install <%= vars.ops_manager %> on VMC:
           - Click **Save**.
           - Click **Apply**.
           - Click **Publish**.
-    1. Click **Add Rule**.
-    1. Select the newly-created rule:
+    8. Click **Add Rule**.
+    9. Select the newly-created rule:
         1. For **Rule Name**, enter `HAProxy-ingress`.
-        1. For **Sources**, select **Any**.
-        1. Configure **Destinations**:
+        2. For **Sources**, select **Any**.
+        3. Configure **Destinations**:
           - Click **Add Group**.
               - For **Group name**, enter `HAProxy`.
               - Click **Set Members**.
@@ -241,16 +243,16 @@ To install <%= vars.ops_manager %> on VMC:
           - Click **Apply**.
           - Click **Publish**.
 
-1. Add a firewall rule that allows egress for the 192.168.1.x and 192.168.2.x subnets:
+9.  Add a firewall rule that allows egress for the 192.168.1.x and 192.168.2.x subnets:
     1. Go to the [VMC console](https://vmc.vmware.com/console/sddcs).
-    1. Select **SDDCs**.
-    1. Click **View Details** on your datacenter tile.
-    1. Select **Networking & Security**, and then select **Security**.
-    1. Select **Gateway Firewall**, and then select **Compute Gateway**.
-    1. Click **Add Rule**.
-    1. Select the newly-created rule:
+    2. Select **SDDCs**.
+    3. Click **View Details** on your datacenter tile.
+    4. Select **Networking & Security**, and then select **Security**.
+    5. Select **Gateway Firewall**, and then select **Compute Gateway**.
+    6. Click **Add Rule**.
+    7. Select the newly-created rule:
         1. For **Rule Name**, enter `tas-egress`.
-        1. Edit **Sources**.
+        2. Edit **Sources**.
             - Click **Add Group**.
               - For **Group name**, enter `tas`.
               - Click **Set Members**.
@@ -261,20 +263,20 @@ To install <%= vars.ops_manager %> on VMC:
               - Press **Enter**.
               - Click **Apply**.
             - Click **Save**.
-        1. Click **Apply**.
-        1. For **Destinations**, select **Any**.
+        3. Click **Apply**.
+        4. For **Destinations**, select **Any**.
     - Click **Publish**.
 
-1. Add a firewall rule that allows ingress to vCenter from the <%= vars.app_runtime_abbr %> control plane:
+10. Add a firewall rule that allows ingress to vCenter from the <%= vars.app_runtime_abbr %> control plane:
     1. Go to the [VMC console](https://vmc.vmware.com/console/sddcs).
-    1. Select **SDDCs**.
-    1. Click **View Details** on your datacenter tile.
-    1. Select **Networking & Security**, and then select **Security**.
-    1. Click **Gateway Firewall**, and then select  **Management Gateway**.
-    1. Click **Add Rule**.
-    1. Select the newly-created rule:
+    2. Select **SDDCs**.
+    3. Click **View Details** on your datacenter tile.
+    4. Select **Networking & Security**, and then select **Security**.
+    5. Click **Gateway Firewall**, and then select  **Management Gateway**.
+    6. Click **Add Rule**.
+    7. Select the newly-created rule:
         1. For **Rule Name**, enter `vCenter Inbound Rule`.
-        1. Edit **Sources**:
+        2. Edit **Sources**:
             - Click **User Defined Groups**.
             - Click **Add Group**.
                 - For **Group name**, enter `<%= vars.ops_manager %> public IP`.
@@ -289,25 +291,25 @@ To install <%= vars.ops_manager %> on VMC:
                 - Click **Set Members**.
                 - Select **IP Addresses**.
                 - Enter your Workloads Compute NAT public IP address. For example, `44.232.216.160`.
-                    <p class="note"><strong>Note</strong>: You can locate your Workloads Compute NAT public IP address in the Networking & Security Overview.</p>
+                    <p> You can locate your Workloads Compute NAT public IP address in the Networking & Security Overview.</p>
                 - Press **Enter**.
                 - Click **Apply**.
             - Click **Save**.
-        1. Edit **Destinations**: Select **vCenter** and then click **Apply**.
-        1. Edit **Services**: Enter `HTTPS, ICMP, SSO`.
-    1. Click **Publish**.
+        3. Edit **Destinations**: Select **vCenter** and then click **Apply**.
+        4. Edit **Services**: Enter `HTTPS, ICMP, SSO`.
+    8. Click **Publish**.
 
-1. Add a firewall rule that allows ingress to ESXi from the <%= vars.app_runtime_abbr %> control plane:
+11. Add a firewall rule that allows ingress to ESXi from the <%= vars.app_runtime_abbr %> control plane:
 	1. Go to the [VMC console](https://vmc.vmware.com/console/sddcs).
-	1. Select **SDDCs**.
-	1. Click **View Details** on your datacenter tile.
-	1. Select **Networking & Security**, and then select **Security**.
-	1. Click **Gateway Firewall**, and then select  **Management Gateway**.
-	1. Click **Add Rule**.
-	1. Select the newly-created rule:
+	2. Select **SDDCs**.
+	3. Click **View Details** on your datacenter tile.
+	4. Select **Networking & Security**, and then select **Security**.
+	5. Click **Gateway Firewall**, and then select  **Management Gateway**.
+	6. Click **Add Rule**.
+	7. Select the newly-created rule:
 
 	  1. For **Rule Name**, enter `ESXi Inbound Rule`.
-	  1. Edit **Sources**:
+	  2. Edit **Sources**:
 	        - Click **User Defined Groups**.
 	        - Click **Add Group**.
 	          - For **Group name**, enter `<%= vars.ops_manager %> private IP`.
@@ -325,18 +327,19 @@ To install <%= vars.ops_manager %> on VMC:
 	          - Press **Enter**.
 	          - Click **Apply**.
 	        - Click **Save**.
-	   1. Edit **Destinations**: Select **vCenter** and then click **Apply**.
-	   1. Edit **Services**: Enter `HTTPS, ICMP, SSO`.
-	1. Click **Publish**.
+	   3. Edit **Destinations**: Select **vCenter** and then click **Apply**.
+	   4. Edit **Services**: Enter `HTTPS, ICMP, SSO`.
+	8. Click **Publish**.
 
 ## <a id='bosh-setup'></a> Configure BOSH Director
 
-<p class="note"><strong>Note:</strong> The procedure in this section contains only the configuration information that is specific to VMC. For more information about configuring BOSH on vSphere, see <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/vsphere-config.html">Configuring BOSH Director on vSphere</a>.</p>
+<p> The procedure in this section contains only the configuration information that is specific to VMC.
+
+For more information about configuring BOSH on vSphere, see <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/vsphere-config.html">Configuring BOSH Director on vSphere</a>.</p>
+
+<p>When you configure the BOSH Director, do not configure NSX-T networking. Instead, select <strong>Standard vCenter Networking</strong>.</p>
 
 To configure BOSH Director for VMC:
-
-<p class="note"><strong>Note:</strong> When configuring the BOSH Director, do not configure NSX-T networking. Instead, select <strong>Standard vCenter Networking</strong>.</p>
-
 1. Log in to <%= vars.ops_manager %>:
     - Go to the IP address you configured for <%= vars.ops_manager %>. For example, [https://54.190.190.190/](https://54.190.190.190/).
     - Enter a **Username**, **Password**, and **Password confirmation** to create an Admin user.

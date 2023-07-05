@@ -3,9 +3,10 @@ title: Configuring Route Service lookup
 owner: CF for VMs Networking
 ---
 
-Here is how to configure route service lookup in <%= vars.app_runtime_first %>.
+You can configure route service lookup in <%= vars.app_runtime_first %>.
 
-You can bind your app to a route service to pre-process requests before they reach an app. Example use cases include authentication, rate limiting, and caching services. For more information, see [Route Services](../services/route-services.html).
+You can bind your app to a route service to pre process requests before they reach an app. Example use
+cases include authentication, rate limiting, and caching services. For more information, see [Route Services](../services/route-services.html).
 
 The **Bypass security checks for route service lookup** check box in the **Networking** pane of the <%= vars.app_runtime_abbr %> tile allows you to configure how the Gorouter handles traffic for apps that are bound to route services. The configuration options are:
 
@@ -53,7 +54,8 @@ To prevent users from intercepting traffic for externally-hosted route services:
 	```
 	cf curl /v2/user_provided_service_instances
 	```
-	<p class="note"><strong>Note:</strong> Because route services can be added by any space developer, this might be difficult to manage.</p>
+	<p> Because route services can be added by any space developer, this might be
+	difficult to manage.</p>
 
 ### <a id="disable"></a> Configure <%= vars.app_runtime_abbr %> for default lookup
 
@@ -119,11 +121,13 @@ This section describes how the Gorouter handles app requests when:
 
 In this case, when the Gorouter receives the request, it checks for an existing route and then sends the request directly to the route service. This activates external clients to intercept route service traffic. A developer can register the external route service domain as a private domain in <%= vars.app_runtime_abbr %> and map it to their own, malicious app. When the Gorouter receives a request for the original app bound to the external route service, it finds the domain internally and sends the request to the malicious app.
 
-<p class="note"><strong>Note:</strong> This vulnerability exists for both externally hosted route services and route services hosted on a separate foundation. If all of your route services are hosted internally on the same foundation, you are not at risk. However, you might be at risk if externally hosted route services are later configured.</p>
+<p> This vulnerability exists for both externally hosted route services and route services hosted on a
+separate foundation. If all of your route services are hosted internally on the same foundation, you are
+not at risk. However, you might be at risk if externally hosted route services are later configured.</p>
 
 A fake route service inside of <%= vars.app_runtime_abbr %> intercepts traffic intended for a route service outside of <%= vars.app_runtime_abbr %>. Five boxes are labeled as follows: Load Balancer, Gorouter, Route Service (example.com), Fake Route Service (example.com), and <%= vars.app_runtime_abbr %>. The Gorouter and fake route service boxes are inside of the <%= vars.app_runtime_abbr %> box to show that they are running inside of <%= vars.app_runtime_abbr %>. The arrows point to the load balancer and then the Gorouter to indicate the flow of traffic. The two arrows then point from the Gorouter: one to the fake route service and another to the route service. A red "X" indicates that the traffic does not go to the route service. It instead goes to the fake route service.
 
-The diagram below illustrates the flow of the request in the case that it is intercepted.
+The following diagram illustrates the flow of the request in the case that it is intercepted.
 
 ![alt-text="Flow of the request in the case that it is intercepted"](./images/bypass-external.png)
 
@@ -136,6 +140,8 @@ This section describes how the Gorouter handles app requests when:
 
 In this case, the Gorouter sends traffic directly to the external route service without checking for an existing route.
 
-The diagram below illustrates the flow of the request The arrows indicate the flow of the request through platform components. A request goes directly from the load balancer to the Gorouter to the route service.
+The following diagram illustrates the flow of the request The arrows indicate the flow of the request
+through platform components. A request goes directly from the load balancer to the Gorouter to the
+route service.
 
 ![alt-text="The flow of the request through platform components."](./images/default-external.png)

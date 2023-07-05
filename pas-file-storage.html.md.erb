@@ -9,30 +9,28 @@ To minimize system downtime, <%= vars.company_name %> recommends using highly re
 redundant _external_ filestores for your <%= vars.app_runtime_abbr %> file storage. For more
 factors to consider when selecting file storage, see [Configure File Storage](configuring.html#file-storage) in _Configuring <%= vars.app_runtime_abbr %> for Upgrades_.
 
-<p class="note">
-    <strong>Note:</strong> After initial installation, do not change file storage
-      configuration without first migrating existing files to the new provider.
+<p class="note important">
+<span class="note__title">Important</span> After initial installation, do not change file storage
+  configuration without first migrating existing files to the new provider.
 </p>
-
 
 ## <a id="internal"></a> Internal file storage
 
 <%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
 <%= partial "/pcf/core/filestore_internal" %>
 
-
 ## <a id="aws"></a> AWS
 
 This section describes how to configure file storage for AWS.
 
-For production-level <%= vars.platform_name %> deployments on AWS, <%= vars.company_name %>
+For production level <%= vars.platform_name %> deployments on AWS, <%= vars.company_name %>
 recommends selecting **External S3-compatible filestore**.
 For instructions, see [External S3-Compatible Filestore](#aws-s3).
 
 You can also configure Fog blobstores to use AWS IAM instance profiles.
 For instructions, see [Fog with AWS IAM Instance Profiles](#fog-aws-iam).
 
-For more information about production-level
+For more information about production level
 <%= vars.platform_name %> deployments on AWS, see [AWS Reference Architecture](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/refarch-aws-aws_ref_arch.html).
 
 ### <a id="aws-s3"></a>External S3-Compatible filestore
@@ -79,7 +77,8 @@ To configure Fog blobstores to use AWS IAM instance profiles:
       name: cloud-controller-iam
     ```
 
-    <p class="note"><strong>Note</strong>: You can also create a VM extension using the Ops Manager API. For more information, see <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-custom-vm-extensions.html#create-or-update-a-vm-extension-2">Create or Update a VM Extension</a> in <em>Managing Custom VM Extensions</em>.</p>
+    You can also create a VM extension using the Ops Manager API. For more information, see
+    <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-custom-vm-extensions.html#create-or-update-a-vm-extension-2">Create or Update a VM Extension</a> in <em>Managing Custom VM Extensions</em>.
 
 1. In your <%= vars.app_runtime_abbr %> deployment manifest, use the `cloud-controller-iam` VM extension you created for the instance groups containing `cloud_controller`, `cloud_controller_worker`, and `cloud_controller_clock`, as in the following example:
 
@@ -131,7 +130,6 @@ To configure Fog blobstores to use AWS IAM instance profiles:
 
 1. (Optional) Provide other configuration with the `fog_connection` hash, which is passed through to the Fog gem.
 
-
 ## <a id="gcp"></a> GCP
 
 This section describes how to configure file storage for GCP. Follow the procedure that
@@ -160,7 +158,6 @@ with Terraform.
 <%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
 <%= partial "/pcf/core/filestore_gcp_config_terraform" %>
 
-
 ## <a id="azure"></a> Azure
 
 This section describes how to configure file storage for Azure.
@@ -174,7 +171,6 @@ For more factors to consider when selecting file storage, see [Configure File St
 <%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
 <%= partial "/pcf/core/filestore_azure_config" %>
 
-
 ## <a id="openstack"></a> OpenStack
 
 For production-level <%= vars.platform_name %> deployments on OpenStack, <%= vars.company_name %>
@@ -185,7 +181,6 @@ For more factors to consider when selecting file storage, see [Configure File St
 
 <%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
 <%= partial "/pcf/core/filestore_s3_config", :locals => { :aws => false } %>
-
 
 ## <a id="vsphere"></a> vSphere
 

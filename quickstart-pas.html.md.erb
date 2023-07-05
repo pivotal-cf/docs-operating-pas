@@ -3,15 +3,15 @@ title: Quick Start TAS for VMs configuration
 owner: Docs
 ---
 
-This is how to minimally configure <%= vars.app_runtime_first %> for evaluation or testing purposes. It does not include optional configurations such as external databases or external file storage.
+You can minimally configure <%= vars.app_runtime_first %> for evaluation or testing purposes. It does not
+include optional configurations such as external databases or external file storage.
 
-For production deployments, <%= vars.company_name %> recommends following the procedure in [Configuring <%= vars.app_runtime_abbr %>](configure-pas.html).
-
+For production deployments, <%= vars.company_name %> recommends following the
+procedure in [Configuring <%= vars.app_runtime_abbr %>](configure-pas.html).
 
 ## <a id="prerequisites"></a> Prerequisites
 
-Before you begin this procedure, ensure that you have successfully completed the steps to prepare your environment for <%= vars.platform_name %> and install and configure the BOSH Director.
-
+Before you begin, ensure that you have successfully completed the steps to prepare your environment for <%= vars.platform_name %> and install and configure the BOSH Director.
 
 ## <a id='om-add'></a> Add <%= vars.app_runtime_abbr %> to <%= vars.ops_manager_full %>
 
@@ -20,15 +20,14 @@ To add <%= vars.app_runtime_abbr %> to <%= vars.ops_manager %>:
 1. If you have not already downloaded <%= vars.app_runtime_abbr %>, log in to [<%= vars.product_network %>](https://network.tanzu.vmware.com) and click **<%= vars.app_runtime_full %>**.
 
 1. From the **Releases** drop-down menu, select the release to install and choose one of the following:
-  1. Click **<%= vars.app_runtime_full %>** to download the <%= vars.app_runtime_abbr %> `.pivotal` file.
-  1. Click **Small Footprint <%= vars.app_runtime_abbr %>** to download the Small Footprint <%= vars.app_runtime_abbr %> `.pivotal` file. For more information, see [Getting Started with Small Footprint <%= vars.app_runtime_abbr %>](./small-footprint.html).
+1. Click **<%= vars.app_runtime_full %>** to download the <%= vars.app_runtime_abbr %> `.pivotal` file.
+1. Click **Small Footprint <%= vars.app_runtime_abbr %>** to download the Small Footprint <%= vars.app_runtime_abbr %> `.pivotal` file. For more information, see [Getting Started with Small Footprint <%= vars.app_runtime_abbr %>](./small-footprint.html).
 
 1. Go to the <%= vars.ops_manager %> Installation Dashboard.
 
-2. Click **Import a Product** to add your tile to <%= vars.ops_manager %>. For more information, see [Adding and Deleting Products](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-add-delete.html).
+1. Click **Import a Product** to add your tile to <%= vars.ops_manager %>. For more information, see [Adding and Deleting Products](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-add-delete.html).
 
-3. Click the <%= vars.app_runtime_abbr %> tile.
-
+1. Click the <%= vars.app_runtime_abbr %> tile.
 
 ## <a id='configure'></a> Configure <%= vars.app_runtime_abbr %>
 
@@ -41,41 +40,52 @@ To install <%= vars.app_runtime_abbr %> with minimal configuration:
 1. Select **Networking**.
 
 1. Under **Certificates and private keys for the Gorouter**, you must provide at least one certificate and private key name and certificate key pair for the Gorouter. The Gorouter is activated to receive TLS communication by default. You can configure multiple certificates for the Gorouter.
-  <p class="note"><strong>Note:</strong> When providing custom certificates, enter them in this order: <code>wildcard</code>, <code>Intermediate</code>, <code>CA</code>. For more information, see <a href="https://www.digicert.com/ssl-support/pem-ssl-creation.htm">Creating a .pem File for SSL Certificate Installations</a> in the DigiCert documentation.</p>
-  1. Click **Add** to add a name for the certificate chain and its private key pair. This certificate is the default used by the Gorouter. You can either provide a certificate signed by a Certificate Authority (CA) or click **Generate RSA Certificate** to generate a self-signed certificate in <%= vars.ops_manager %>.
-  <p class="note"><strong>Note:</strong> If you configured <%= vars.ops_manager %> Front End without a certificate, you can use this new certificate to complete your <%= vars.ops_manager %> configuration. To configure your <%= vars.ops_manager %> Front End certificate, see <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/gcp-prepare-env-manual.html#config-frontend">Configure Front End</a> in <em> Preparing to Deploy Ops Manager on GCP</em>.</p>
-  <p class="note"><strong>Note:</strong> Ensure that you add any certificates that you generate in this pane to your infrastructure load balancer.</p>
 
-1. Setting appropriate ASGs is critical for a secure deployment.
+  <p class="note important">
+<span class="note__title">Important</span> When providing custom certificates, enter them in this order: <code>wildcard</code>, <code>Intermediate</code>, <code>CA</code>. For more information, see <a href="https://www.digicert.com/ssl-support/pem-ssl-creation.htm">Creating a .pem File for SSL Certificate Installations</a> in the DigiCert documentation.
+</p>
+  <p> Click **Add** to add a name for the certificate chain and its private key pair. This certificate is the default used by the Gorouter. You can either provide a certificate signed by a Certificate Authority (CA) or click **Generate RSA Certificate** to generate a self-signed certificate in <%= vars.ops_manager %>.</p>
+
+  <p> If you configured <%= vars.ops_manager %> Front End without a certificate, you can use this new certificate to complete your <%= vars.ops_manager %> configuration. To configure your <%= vars.ops_manager %> Front End certificate, see <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/gcp-prepare-env-manual.html#config-frontend">Configure Front End</a> in <em> Preparing to Deploy Ops Manager on GCP</em>.</p>
+  <p> Ensure that you add any certificates that you generate in this pane to your infrastructure load balancer.</p>
+
+Setting appropriate ASGs is critical for a secure deployment.
+
+Follow these steps to set ASGs:
+
   1. Select **App Security Groups**.
   2. Acknowledge **You are responsible for setting the appropriate ASGs after TAS for VMs finishes deploying**.
   3. Click **Save**.
   <br><br>
-  For more information about ASGs, see [App Security Groups](../concepts/asg.html). For more information about setting ASGs, see [Restricting App Access to Internal <%= vars.app_runtime_abbr %> Components](../operating/app-sec-groups.html).
+  For more information about ASGs, see [App Security Groups](../concepts/asg.html).
 
-1. Under **SAML service provider credentials**, enter a certificate and private key for the User Account and Authentication (UAA) server to use as a SAML service provider for signing outgoing SAML authentication requests. You can provide an existing certificate and private key from your trusted CA or generate a self-signed certificate. The domain `*.login.SYSTEM-DOMAIN` must be associated with the certificate, where `SYSTEM-DOMAIN` is the system domain you configured in the **Domains** pane.
+      For more information about setting ASGs, see [Restricting App Access to Internal <%= vars.app_runtime_abbr %> Components](../operating/app-sec-groups.html).
 
-  <p class="note"><strong>Note:</strong> The Single Sign-On for VMware Tanzu service and Spring Cloud Services for VMware Tanzu tiles require the <code>*.login.SYSTEM-DOMAIN</code>.</p>
+  1. Under **SAML service provider credentials**, enter a certificate and private key for the User Account and Authentication (UAA) server to use as a SAML service provider for signing outgoing SAML authentication requests. You can provide an existing certificate and private key from your trusted CA or generate a self-signed certificate. The domain `*.login.SYSTEM-DOMAIN` must be associated with the certificate, where `SYSTEM-DOMAIN` is the system domain you configured in the **Domains** pane.
 
-1. Select **UAA**.
+      <p class="note important">
+    <span class="note__title">Important</span> The Single Sign-On for VMware Tanzu service and Spring Cloud Services for VMware Tanzu tiles require the <code>*.login.SYSTEM-DOMAIN</code>.
+</p>
+
+5. Select **UAA**.
 
 2. If the private key specified under **SAML service provider credentials** is password-protected, enter the password in **Private key password**.
 
 3. Select **CredHub**.
 
 4. Under **Internal encryption provider keys**, specify one or more keys to use for encrypting and decrypting the values stored in the CredHub database:
-	* **Name:** This is the name of the encryption key.
-	* **Key:** This key is used for encrypting all data. The key must be at least 20 characters long.
-  * **Primary:** This check box is used for marking the key you specified as the primary encryption key. You must mark one key as **Primary**. Do not mark more than one key as **Primary**.
+ * **Name:** This is the name of the encryption key.
+ * **Key:** This key is used for encrypting all data. The key must be at least 20 characters long.
+
+* **Primary:** This check box is used for marking the key you specified as the primary encryption key. You must mark one key as **Primary**. Do not mark more than one key as **Primary**.
 
 5. Go to the **Internal MySQL** pane.
 
-6. In the **Email address** field, enter the email address where the MySQL service sends alerts when the cluster experiences a replication issue or when a node is not allowed to auto-rejoin the cluster.
+6. In the **Email address** field, enter the email address where the MySQL service sends alerts when the cluster experiences a replication issue or when a node is not allowed to auto rejoin the cluster.
 
 7. Select **Resource Config**.
 
 8. In the **Resource Config** pane, you must associate load balancers with the VMs in your deployment to activate traffic. For more information, see [Configure Load Balancing for <%= vars.app_runtime_abbr %>](configure-lb.html).
-
 
 ## <a id='complete'></a> Complete the <%= vars.app_runtime_abbr %> installation
 
