@@ -1,5 +1,5 @@
 ---
-title: Installing Isolation Segment (IS)
+title: Installing Isolation Segment
 owner: RelEng
 deployment: IST
 ---
@@ -98,7 +98,6 @@ setting as it was in the previous deployment.</p>
 * (Optional) For **LDAP server CA certificate**, you can enter a certificate if your LDAP server supports TLS and you want to enable TLS connections from the NFS driver to your LDAP server. This is the CA certificate that your LDAP server uses to verify the TLS certificates for NFS. Paste in the root certificate from your CA certificate or your self-signed certificate.
 
   <p class="note important">
-
 <span class="note__title">Important</span>  UAA can only parse one certificate entered into this field. If you enter multiple certificates, UAA only uses the first one you entered and ignores the rest. You only need to include one root certificate or self-signed certificate
 </p>
 
@@ -134,7 +133,8 @@ To configure the **System Logging** pane:
 
   <p> Some <%= vars.segment_runtime_full %> components generate a high volume of <code>DEBUG</code> syslog messages. Activating the <strong>Do not forward debug logs</strong> check box prevents <%= vars.app_runtime_abbr %> components from forwarding the <code>DEBUG</code> syslog messages to external services. However, <%= vars.segment_runtime_full %> still writes the messages to the local disk.</p>
 
-1. (Optional) To specify a custom syslog rule, enter it in the **Custom rsyslog configuration** field in RainerScript syntax. For more information about customizing syslog rules, see [Customizing Syslog Rules](./custom-syslog-rules.html). For more information about RainerScript, see the [RainerScript](http://www.rsyslog.com/doc/v8-stable/rainerscript/index.html) documentation.
+1. (Optional) To specify a custom syslog rule, enter it in the **Custom rsyslog configuration** field in RainerScript syntax. For more information about customizing syslog rules, see [Customizing Syslog Rules](./custom-syslog-rules.html).
+For more information about RainerScript, see the [RainerScript](http://www.rsyslog.com/doc/v8-stable/rainerscript/index.html) documentation.
 
 1. Select the **Enable system metrics** check box to emit system-level metrics about all VMs in the deployment. For a list of the VM metrics that the System Metric Agent emits, see [VM Metrics](https://github.com/cloudfoundry/system-metrics-release/blob/main/docs/system-metrics-agent.md) in GitHub. When you activate this check box, ensure that you open port `9100` for the isolation segment. For more information, see [Configure Firewall Rules](../adminguide/routing-is.html#config-firewall) in _Routing for Isolation Segments_.
 
@@ -247,7 +247,8 @@ To configure the **Compute and Networking Isolation** pane:
 1. Under **Networking isolation**, activate or deactivate networking isolation by selecting a sharding mode. For more information, see [Sharding Gorouters for Isolation Segments](../adminguide/routing-is.html#sharding-routers-isolation-segment) in _Routing for Isolation Segments_.
 
 * **Isolation segment only**: The Gorouters for the <%= vars.app_runtime_abbr %> tile acknowledge requests only for apps deployed within the Diego Cells of the tile. All other requests fail.
-* **No isolation segment**: The Gorouters for the <%= vars.app_runtime_abbr %> tile reject requests for any isolation segment. Choose this option to add a group of Gorouters for the <%= vars.app_runtime_abbr %> tile, such as when you want a private point of entry for the system domain or to configure a group of Gorouters to receive requests from your corporate intranet.
+* **No isolation segment**: The Gorouters for the <%= vars.app_runtime_abbr %> tile reject requests for any isolation segment. Choose this option to add a group of Gorouters for the <%= vars.app_runtime_abbr %> tile, such as when you want a private point of entry for the system domain or to configure a
+group of Gorouters to receive requests from your corporate intranet.
 
 ### <a id='smoke-tests'></a> Configure smoke tests
 
@@ -278,6 +279,7 @@ To configure the **Smoke Tests** pane:
 * For **Space**, enter the space <%= vars.segment_runtime_full %>  uses when pushing an app to run smoke tests.
 
 1. Click **Save**.
+
 <p class="note important">
 <span class="note__title">Important</span>  If you configure the
 <strong>Compute and Networking Isolation</strong> pane and the
@@ -331,7 +333,9 @@ If you do not have the Load Balancers column in your Resource Config pane:
 After you configure the <%= vars.segment_runtime_full %> tile:
 
 1. Register the isolation segment in the CCDB by following the procedure in [Register an Isolation Segment](../adminguide/isolation-segments.html#register-an-is) in _Managing Isolation Segments_.
-    <p> If you run smoke tests as a post-deploy errand in the <%= vars.segment_runtime_full %> tile, the smoke tests check if your isolation segment in registered in the Cloud Controller database (CCDB). If not, the smoke tests register it in the CCDB. This eliminates the need to manually register the isolation segment with the <code>cf create-isolation-segment</code> command. For more information about running smoke tests, see <a href="#smoke-tests">Configure Smoke Tests</a>.</p>
+    <p> If you run smoke tests as a post-deploy errand in the <%= vars.segment_runtime_full %> tile, the smoke tests check if your isolation segment in registered in the Cloud Controller database (CCDB). If not, the smoke tests register it in the CCDB.
+    This eliminates the need to manually register the isolation segment with the <code>cf create-isolation-segment</code> command.
+    For more information about running smoke tests, see <a href="#smoke-tests">Configure Smoke Tests</a>.</p>
 
 1. Return to the <%= vars.ops_manager %> Installation Dashboard.
 
