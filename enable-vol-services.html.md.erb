@@ -3,13 +3,13 @@ title: Enabling volume services
 owner: Diego Persistence
 ---
 
-Here you will learn how <%= vars.app_runtime_first %> operators can deploy NFS or SMB volume services.
+Learn how <%= vars.app_runtime_first %> operators can deploy NFS or SMB volume services.
 
 A volume service gives apps access to a persistent filesystem, such as NFS or SMB. By performing the procedures in this topic, operators can add a volume service to the Marketplace that provides an NFS filesystem or an SMB share. For more information about adding a volume service to the Marketplace, see [Services](../services/overview.html).
 
 Developers can then use the Cloud Foundry Command Line Interface (cf CLI) to create service instances of the volume service and bind them to their apps. For more information, see [Using an External File System (Volume Services)](../devguide/services/using-vol-services.html).
 
-<p class="note"><strong>Note:</strong> You must have a running NFS or SMB server to test NFS or SMB volume services. <%= vars.app_runtime_abbr %> packages the necessary software to provide app connectivity to remote network-attached storage (NAS), but does not supply the NAS itself.</p>
+<p> You must have a running NFS or SMB server to test NFS or SMB volume services. <%= vars.app_runtime_abbr %> packages the necessary software to provide app connectivity to remote network-attached storage (NAS), but does not supply the NAS itself.</p>
 
 
 ## <a id='nfs-enable'></a> Enable NFS volume services
@@ -22,18 +22,18 @@ To enable NFS volume services in <%= vars.app_runtime_abbr %>:
 
 1. Select **App Containers**.
 
-1. Under **NFSv3 volume services**, select **Allow**.
-  <p class="note"><strong>Note:</strong> In a clean install, NFS volume services are activated by default. In an upgrade, NFS volume services match the setting of the previous deployment.</p>
+1. Under **NFSv3 volume services**, select **Enable**.
+  <p> In a clean install, NFS volume services are enabled by default. In an upgrade, NFS volume services match the setting of the previous deployment.</p>
 
 1. (Optional) To configure LDAP for NFS volume services:
-  <p class="note"><strong>Note:</strong> If you already use an LDAP server with your network-attached storage (NAS) file server, enter its information. This ensures that the identities known to the file server match those checked by the NFS driver.</p>
+  <p> If you already use an LDAP server with your network-attached storage (NAS) file server, enter its information. This ensures that the identities known to the file server match those checked by the NFS driver.</p>
   * For **LDAP service account user**, enter either the full domain name for the service account or the user name of the service account that manages volume services. This value must be what you enter when binding the account to your LDAP server.
   * For **LDAP service account password**, enter the password for the service account.
   * For **LDAP server host**, enter the hostname or IP address of the LDAP server.
   * For **LDAP server port**, enter the LDAP server port number. The default port is 389.
   * For **LDAP user search base**, enter the location in the LDAP directory tree from which any LDAP user search begins. The typical LDAP search base matches your domain name. For example, a domain named `cloud.example.com` typically uses the following LDAP user search base: `ou=Users,dc=example,dc=com`.
-      <p class="note"><strong>Note:</strong> Additionally, your LDAP user records must be configured with an attribute <code>objectClass: User</code>, which is used by the NFS driver to identify records as user records. They must also have <code>uidNumber</code> and <code>gidNumber</code> fields, which are used to establish the correct UID for a named user.</p>
-  * (Optional) For **LDAP server CA certificate**, you can enter a Certificate Authority (CA) certificate if your LDAP server supports TLS. Enter a certificate if you want to enable TLS connections from the NFS driver to your LDAP server. This is the CA certificate that your LDAP server uses to verify the TLS certificates for NFS. Paste in the root certificate from your CA certificate or your self-signed certificate.
+      <p> Additionally, your LDAP user records must be configured with an attribute <code>objectClass: User</code>, which is used by the NFS driver to identify records as user records. They must also have <code>uidNumber</code> and <code>gidNumber</code> fields, which are used to establish the correct UID for a named user.</p>
+  * (Optional) For **LDAP server CA certificate**, you can enter a Certificate Authority (CA) certificate if your LDAP server supports TLS. Enter a certificate if you want to enable TLS connections from the NFS driver to your LDAP server. Paste in the root certificate from your CA certificate or your self-signed certificate.
 
 1. Click **Save**.
 
@@ -68,7 +68,7 @@ The Diego Cells running on <%= vars.app_runtime_abbr %> must be able to reach yo
 
 ## <a id='smb-enable'></a> Activate SMB volume services
 
-<p class="note"><strong>Note:</strong> In a clean install, SMB volume services are enabled by default. In an upgrade, SMB volume services match the setting of the previous deployment.</p>
+<p> In a clean install, SMB volume services are activated by default. In an upgrade, SMB volume services match the setting of the previous deployment.</p>
 
 To enable SMB volume services in <%= vars.app_runtime_abbr %>:
 

@@ -15,7 +15,7 @@ These instructions assume you are familiar with the following concepts:
 
 For guidance about the previous topics, see [AskF5](https://support.f5.com/csp/knowledge-center/software/BIG-IP?module=BIG-IP%20LTM).
 
-<p class='note'><strong>Note:</strong> You must configure your F5 load balancer before installing <%= vars.app_runtime_abbr %>.</p>
+<p> You must configure your F5 load balancer before installing <%= vars.app_runtime_abbr %>.</p>
 
 To use your F5 deployment as a load balancer, you must configure it to forward unencrypted HTTP following these steps. This procedure assumes that you are running F5 v12.1.2 or v13.0.0.
 
@@ -113,7 +113,7 @@ This configuration stops client SSL at the F5 and forward standard HTTP traffic 
        * Add a certificate key chain.
            - **Certificate:** `pcf-pas-cert`
            - **Key:** `pcf-pas-key`
-           <p class='note'><strong>Note:</strong> Your deployment might require additional root or intermediate certificates. You can select them here. Additionally, you can also enter passphrases for certificates.</p>
+           <p> Your deployment might require additional root or intermediate certificates. You can select them here. Additionally, you can also enter passphrases for certificates.</p>
 
 9. Create four LTM virtual servers. One is required, while three are optional.
     1. Go to **Local Traffic**, click **Virtual Servers**, and click **Virtual Server List**.
@@ -122,9 +122,8 @@ This configuration stops client SSL at the F5 and forward standard HTTP traffic 
        * **Type:** `Standard`
        * **Source Address:** `0.0.0.0/0`
        * **Destination Address/Mask:** `YOUR-PCF-VIP`
-       <p class='note'><strong>Note:</strong> This VIP must be DNS-resolvable to your system domain
-          and default apps domains:</p>
-
+       <p> This VIP must be DNS-resolvable to your system domain
+          and default apps domains.</p>
        * **Service Port:** `443`
        * **State:** `Enabled`
        * **Protocol:** `TCP`
@@ -134,8 +133,7 @@ This configuration stops client SSL at the F5 and forward standard HTTP traffic 
        * **SSL Profile:** `pcf-ssl-client-certs-profile`
        * **VLAN and Tunnel Traffic:** `Enabled on YOUR-CONFIGURED-F5-VPN`
        * **Source Address Translation:** `Auto Map`
-       <p class='note'><strong>Note:</strong> This must be set in one-arm configurations.</p>
-
+       <p> This must be set in one-arm configurations.</p>
        * **Default Pool:** `gorouter_pool`
        * **iRules:** `cf-xforward-for` and `cf-xforward-proto-https`
     3. (Optional) Create a virtual server for HTTP access to apps and give it the following parameters:
@@ -143,9 +141,8 @@ This configuration stops client SSL at the F5 and forward standard HTTP traffic 
        * **Type:** `Standard`
        * **Source Address:** `0.0.0.0/0`
        * **Destination Address/Mask:** `YOUR-<%= vars.platform_code %>-VIP`
-       <p class='note'><strong>Note:</strong> This VIP must be DNS-resolvable to your system domain
-          and default apps domains:</p>
-
+       <p> This VIP must be DNS-resolvable to your system domain
+          and default apps domains.</p>
        * **Service Port:** `80`
        * **State:** `Enabled`
        * **Protocol:** `TCP`
@@ -155,8 +152,7 @@ This configuration stops client SSL at the F5 and forward standard HTTP traffic 
        * **SSL Profile:** `[NONE]`
        * **VLAN and Tunnel Traffic:** `Enabled on YOUR-CONFIGURED-F5-VPN`
        * **Source Address Translation:** `Auto Map`
-       <p class='note'><strong>Note:</strong> This must be set in one-arm configurations.</p>
-
+       <p> This must be set in one-arm configurations.</p>
        * **Default Pool:** `gorouter_pool`
        * **iRules:** `cf-xforward-for` and `cf-xforward-proto-http`
     4. (Optional) Create a virtual server for `sshproxy`. This virtual server allows developers to SSH into Diego containers.Give it the following parameters:
@@ -164,8 +160,7 @@ This configuration stops client SSL at the F5 and forward standard HTTP traffic 
        * **Type:** `Standard`
        * **Source Address:** `0.0.0.0/0`
        * **Destination Address/Mask:** `YOUR-SSH-PROXY-VIP`
-
-       <p>This VIP must be DNS-resolvable to ssh.[YOUR-<%= vars.platform_code %>-PAS-SYSTEM-DOMAIN].</p>
+       <p> This VIP must be DNS-resolvable to ssh.[YOUR-<%= vars.platform_code %>-PAS-SYSTEM-DOMAIN].</p>
 
        * **Service Port:** `2222`
        * **State:** `Enabled`
@@ -176,8 +171,7 @@ This configuration stops client SSL at the F5 and forward standard HTTP traffic 
        * **SSL Profile:** `[NONE]`
        * **VLAN and Tunnel Traffic:** `Enabled on YOUR-CONFIGURED-F5-VPN`
        * **Source Address Translation:** `Auto Map`
-
-       <p class='note'><strong>Note:</strong> This must be set in one-arm configurations.</p>
+       <p> This must be set in one-arm configurations.</p>
 
        * **Default Pool:** `diegobrain_pool`
     1. (Optional) Create a virtual server for `tcprouter`.
@@ -187,8 +181,7 @@ This configuration stops client SSL at the F5 and forward standard HTTP traffic 
        * **Type:** `Standard`
        * **Source Address:** `0.0.0.0/0`
        * **Destination Address/Mask:** `[YOUR-TCP-ROUTER-VIP]`
-       <p class='note'><strong>Note:</strong> This VIP must be DNS-resolvable to tcp.[YOUR-CONFIGURED-TCP-DOMAIN].</p>
-
+       <p> This VIP must be DNS-resolvable to tcp.[YOUR-CONFIGURED-TCP-DOMAIN].</p>
        * **Service Port:** `*/0`
        * **State:** `Enabled`
        * **Protocol:** `TCP`
@@ -198,7 +191,7 @@ This configuration stops client SSL at the F5 and forward standard HTTP traffic 
        * **SSL Profile:** `[NONE]`
        * **VLAN and Tunnel Traffic:** `Enabled on YOUR-CONFIGURED-F5-VPN`
        * **Source Address Translation:** `Auto Map`
-       <p class='note'><strong>Note:</strong> This must be set in one-arm configurations.</p>
+       <p> This must be set in one-arm configurations.</p>
 
        * **Default Pool:** `tcprouter_pool`
 
