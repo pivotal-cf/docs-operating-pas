@@ -215,7 +215,7 @@ To integrate the UAA with an external OIDC identity provider (IDP):
    * **Users**: Make sure that the users to whom you want to grant access to <%= vars.app_runtime_abbr %> are allowed access to this client or application.
    * **Groups**:  Make sure that this client can obtain all relevant OIDC user groups information that you need to perform mappings from external OIDC user groups to internal <%= vars.app_runtime_abbr %> scopes. For example, if you wish to grant <%= vars.app_runtime_abbr %> admin scopes to all external OIDC users belonging to the `example-inc-operators` group, you must make sure that this client can access this group memberships.
 
-   <p class="note"><strong>Note:</strong> For more information about how to perform external group mappings, see [Grant Admin Permissions to an External Group (SAML, LDAP, or OIDC)](../uaa/uaa-user-management.html#external-group). </p>
+   <p> For more information about how to perform external group mappings, see [Grant Admin Permissions to an External Group (SAML, LDAP, or OIDC)](../uaa/uaa-user-management.html#external-group). </p>
 
 5. For **Client secret**, enter the client secret of the client whose ID is entered in the previous step.
 
