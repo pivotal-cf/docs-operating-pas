@@ -190,7 +190,7 @@ There are three key capacity scaling indicators <%= vars.company_name %> recomme
       <th>How to scale</th>
         <td>
           Scale up the number of Traffic Controller and Doppler instances.
-          <p class="note"><strong>Note:</strong> At approximately 40 Doppler instances and 20 Traffic Controller instances, horizontal scaling is no longer useful for improving Firehose performance. To improve performance, add vertical scale to the existing Doppler and Traffic Controller instances by increasing CPU resources.</p>
+          <p> At approximately 40 Doppler instances and 20 Traffic Controller instances, horizontal scaling is no longer useful for improving Firehose performance. To improve performance, add vertical scale to the existing Doppler and Traffic Controller instances by increasing CPU resources.</p>
         </td>
     </tr>
     <tr>
@@ -378,8 +378,9 @@ There are three key capacity scaling indicators <%= vars.company_name %> recomme
       <th width="25">Description</th>
         <td>
           The Doppler Egress Dropped Messages indicator shows the number of messages that the Dopplers drop when consumers of the RLP, such as monitoring tool nozzles, ingest the exiting stream of logs and metrics too slowly.
-          For more information about how the Dopplers transport logs and metrics through Loggregator, see <a href="https://docs.vmware.com/en/VMware-Tanzu-Application-Service/2.13/tas-for-vms/loggregator-architecture.html">Loggregator Architecture</a> in <em>Loggregator Architecture</em>.
-          <p class="note"><strong>Note:</strong> The <code>doppler.dropped</code> metric includes both <code>ingress</code> and <code>egress</code> directions. To differentiate between <code>ingress</code> and <code>egress</code>, refer to the <code>direction</code> tag on the metric.</p>
+          For more information about how the Dopplers transport logs and metrics through Loggregator, see <a href="https://docs.vmware.com/en/VMware-Tanzu-Application-Service/4.0/tas-for-vms/loggregator-architecture.html">Loggregator Architecture</a> in <em>Loggregator Architecture</em>.
+          <p> The <code>doppler.dropped</code> metric includes both <code>ingress</code> and <code>egress</code> directions.
+          To differentiate between <code>ingress</code> and <code>egress</code>, refer to the <code>direction</code> tag on the metric.</p>
         </td>
     </tr>
     <tr>
@@ -424,7 +425,7 @@ There are three key capacity scaling indicators <%= vars.company_name %> recomme
 
 There is a single key capacity scaling indicator <%= vars.company_name %> recommends for Syslog Drain performance.
 
-<p class="note"><strong>Note:</strong> These Syslog Drain scaling indicators are relevant for forwarding to Log Cache and for any configured syslog drains.</p>
+<p> These Syslog Drain scaling indicators are only relevant if your deployment contains apps using the syslog drain binding feature.</p>
 
 <table>
   <tr><th id="syslog-agent-ksi" colspan="2" style="text-align: center;"><br>Syslog Agent Loss Rate<br><br></th></tr>
@@ -529,7 +530,7 @@ There is a single key capacity scaling indicator <%= vars.company_name %> recomm
 
 There is one key capacity scaling indicator <%= vars.company_name %> recommends for Gorouter performance.
 
-<p class= "note"><strong>Note:</strong> The following metric appears in the Firehose in two different formats. The following table lists both formats.</p>
+<p> The following metric appears in the Firehose in two different formats. The following table lists both formats.</p>
 
 <table>
   <tr><th id="system.cpu.user" colspan="2" style="text-align: center;"><br>Gorouter VM CPU Utilization<br><br></th></tr>
@@ -563,7 +564,8 @@ There is one key capacity scaling indicator <%= vars.company_name %> recommends 
     <tr>
       <th>How to scale</th>
         <td>
-        Scale the Gorouters horizontally or vertically by editing the Router VM in the Resource Config pane of the TAS for VMs tile. At greater than 8 CPUs, vertical scaling is no longer beneficial for increasing throughput.
+        Scale the Gorouters horizontally or vertically by editing the Router VM in the Resource Config pane of the TAS for
+        VMs tile.
         </td>
     </tr>
     <tr>
@@ -581,7 +583,7 @@ There is one key capacity scaling indicator <%= vars.company_name %> recommends 
 
 There is one key capacity scaling indicator <%= vars.company_name %> recommends for UAA performance.
 
-<p class= "note"><strong>Note:</strong> The following metric appears in the Firehose in two different formats. The following table lists both formats.</p>
+<p> The following metric appears in the Firehose in two different formats. The following table lists both formats.</p>
 
 <table>
   <tr><th id="uaa-system.cpu.user" colspan="2" style="text-align: center;"><br>UAA VM CPU Utilization<br><br></th></tr>
@@ -633,7 +635,7 @@ There is one key capacity scaling indicator for external S3 external storage.
 <p class="note"><strong>Note:</strong> This metric is only relevant if your deployment does not use an external S3 repository for
   external storage with no capacity constraints.</p>
 
-<p class= "note"><strong>Note:</strong> The following metric appears in the Firehose in two different formats. The following table lists both formats.</p>
+<p> The following metric appears in the Firehose in two different formats. The following table lists both formats.</p>
 
 <table>
   <tr><th colspan="2" style="text-align: center;"><br>External S3 External Storage<br><br></th></tr>
