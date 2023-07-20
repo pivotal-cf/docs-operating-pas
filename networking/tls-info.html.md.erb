@@ -37,7 +37,7 @@ The following diagram illustrates communication between platform components, sec
 
 The CredHub instance in BOSH generates certificates for all components in <%= vars.ops_manager %>. The certificates are self-signed by default. To issue certificates signed by your enterprise, you can add a custom CA to CredHub.
 
-<p class="note"><strong>Note:</strong> Traffic between the Gorouter and Windows stemcells is not encrypted with TLS.</p>
+<p> Traffic between the Gorouter and Windows stemcells is not encrypted with TLS.</p>
 
 #### <a id="components"></a> Component communication details
 
@@ -197,7 +197,7 @@ For more information about instance identity credentials, see [Instance Identity
 
 By default, <%= vars.ops_manager %> uses a limited set of cipher suites to secure its internal communications. However, some components used in <%= vars.ops_manager %>, like the Gorouter, may support additional TLS cipher suites to accommodate older clients outside of <%= vars.ops_manager %>.
 
-<p class="note"><strong>Note:</strong> The AWS Classic load balancer does not support the recommended TLS cipher suites. For details and mitigations, see <a href="https://docs.vmware.com/en/VMware-Tanzu-Application-Service/<%= vars.current_major_version %>/tas-for-vms/securing-traffic.html#ciphers">TLS Cipher Suite Support</a> in <em>Securing Traffic into <%= vars.app_runtime_abbr %></em>.</p>
+<p> The AWS Classic load balancer does not support the recommended TLS cipher suites. For details and mitigations, see <a href="https://docs.vmware.com/en/VMware-Tanzu-Application-Service/<%= vars.current_major_version %>/tas-for-vms/securing-traffic.html#ciphers">TLS Cipher Suite Support</a> in <em>Securing Traffic into <%= vars.app_runtime_abbr %></em>.</p>
 
 For components that allow you to configure TLS cipher suites, only specify the TLS cipher suites that you need.
 
