@@ -76,7 +76,21 @@ To continue customizing your Apps Manager interface:
 		<p> If you enter a value between <code>0</code> and <code>30</code>, the field is automatically set to <code>30</code>.</p>
 	* Disable polling by entering `0`. This stops Apps Manager from refreshing data automatically, but users can update displayed data by reloading Apps Manager manually.
 
-1. The **App details polling interval** field provides an additional way to reduce the load on the Cloud Controller when the **Apps Manager polling interval** field is not sufficient. This field controls the rate at which Apps Manager polls for data when a user views the **Overview** page of an app. <%= vars.company_name %> recommends that you do not keep this field modified as a long-term fix because it can degrade Apps Manager performance. Optionally, you can:
-	* Increase the polling interval above the default of 10 seconds.
-		<p> If you enter a value between <code>0</code> and <code>30</code>, the field is automatically set to <code>10</code>.</p>
-	* Disable polling by entering `0`. This stops Apps Manager from refreshing data automatically, but users can update displayed data by reloading Apps Manager manually.
+	<%= vars.company_name %> recommends that you do not keep this field modified as a long term fix because it can degrade Apps Manager performance.
+
+	Optionally, you can:
+
+* Increase the polling interval to the default of 30 seconds.
+
+  <p> If you enter a value between <code>0</code> and <code>30</code>, the field is automatically set to <code>30</code>.</p>
+ * Deactivate polling by entering `0`. This stops Apps Manager from refreshing data automatically, but you can update displayed data by reloading Apps Manager manually.
+
+14. The **App details polling interval** field provides an additional way to reduce the load on the Cloud Controller when the **Apps Manager polling interval** field is not sufficient. This field controls the rate at which Apps Manager polls for data when a user views the **Overview** page of an app.
+
+	<%= vars.company_name %> recommends that you do not keep this field modified as a long term fix because it can degrade Apps Manager performance.
+
+	Optionally, you can:
+
+* Increase the polling interval to the default of 10 seconds. If you enter a value between <code>0</code> and <code>30</code>, the field is automatically set to <code>10</code>.
+
+ * Deactivate polling by entering `0`. This stops Apps Manager from refreshing data automatically, but you can update displayed data by reloading Apps Manager manually.
