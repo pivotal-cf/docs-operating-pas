@@ -3,11 +3,8 @@ title: TAS for VMs Resource Requirements
 owner:
 ---
 
-This topic describes the resource requirements for installing <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>).
 
-## <a id='general'></a> General Requirements
-
-The general requirements for deploying and managing an installation of <%= vars.ops_manager %> and <%= vars.app_runtime_abbr %> are:
+The general requirements for deploying and managing an installation of <%= vars.ops_manager %> and <%= vars.app_runtime_first %> are:
 
 * A wildcard DNS record that points to your Gorouter or load balancer. Alternatively, you can use a service such as xip.io. For example, `203.0.113.0.xip.io`.
   * <%= vars.app_runtime_abbr %> gives each app its own hostname in your app domain.
@@ -37,7 +34,7 @@ The general requirements for deploying and managing an installation of <%= vars.
 * One or more NTP servers if not already provided by your IaaS.
 
 * (**Recommended**) A network without DHCP available for deploying the <%= vars.app_runtime_abbr %> VMs.
-  <p class="note"><strong>Note:</strong> If you have DHCP, see <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-troubleshooting.html">Troubleshooting Deployment Problems</a> in the <%= vars.ops_manager %> documentation for information about avoiding issues with your installation.</p>
+  <p class="note"><strong>Note:</strong> If you have DHCP, see <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/2.10/vmware-tanzu-ops-manager/install-troubleshooting.html">Troubleshooting Deployment Problems</a> in the <%= vars.ops_manager %> documentation for information about avoiding issues with your installation.</p>
 
 * (**Optional**) External storage. When you deploy <%= vars.app_runtime_abbr %>, you can select internal file storage or external file storage, either network-accessible or IaaS-provided, as an option in the <%= vars.app_runtime_abbr %> tile. <%= vars.company_name %> recommends using external storage whenever possible. For more information about how file storage location affects platform performance and stability during upgrades, see [Configure File Storage](./configuring.html#file-storage) in _Configuring <%= vars.app_runtime_abbr %> for Upgrades_.
 
@@ -47,7 +44,7 @@ The general requirements for deploying and managing an installation of <%= vars.
 
 * The most recent version of the [Cloud Foundry Command Line Interface](https://github.com/cloudfoundry/cli#downloads) (cf CLI).
 
-## <a id='instance-number-scaling-reqs'></a> Instance Number and Scaling Requirements
+## <a id='instance-number-scaling-reqs'></a> Instance number and scaling requirements
 
 By default, <%= vars.app_runtime_abbr %> deploys the number of VM instances required to run a highly available configuration. If you are deploying a test or sandbox <%= vars.app_runtime_abbr %> that does not require HA, then you can scale down the number of instances in your deployment.
 

@@ -1,14 +1,11 @@
 ---
-title: Configuring App Security Groups for Email Notifications
+title: Configuring App Security Groups for email notifications
 owner: Ops Manager
 ---
 
-This topic describes configuring App Security Groups (ASGs) to give network access to the Notifications Service.
+You can configure App Security Groups (ASGs) to give network access to the Notifications Service.
 
-
-## <a id='overview'></a> Overview
-
-To allow the Notifications Service to have network access, you must create ASGs. Without ASGS, you cannot use the Notifications Service.
+To allow the Notifications Service to have network access, you must create App Security Groups (ASG). You cannot use the Notifications Service without ASGs.
 
 For more information, see [App Security Groups](../concepts/asg.html).
 
@@ -18,7 +15,7 @@ For more information, see [App Security Groups](../concepts/asg.html).
 Before configuring ASGs for the Notifications Service, you must first set up the Notifications Service. To set up the Notifications Service, see [Getting Started with the Notifications Service](../adminguide/notifications.html).
 
 
-## <a id="notifications-service-network-connections"></a> Configure Network Connections
+## <a id="notifications-service-network-connections"></a> Configure network connections
 
 The Notifications Service is deployed as a suite of apps to the `notifications-with-ui` space in the `system` org. It requires the following outbound network connections:
 
@@ -30,7 +27,7 @@ The Notifications Service is deployed as a suite of apps to the `notifications-w
 
 <p class="note"><strong>Note:</strong> The SMTP server port and protocol are dependent on how you configure your server.</p>
 
-### <a id="smtp"></a> Create a SMTP Server ASG
+### <a id="smtp"></a> Create a SMTP server ASG
 
 To create an ASG for your SMTP server:
 
@@ -62,41 +59,7 @@ To create an ASG for your SMTP server:
     cf create-security-group smtp-server smtp-server.json
     ```
 
-### <a id="load-balancer"></a> Create a Load Balancer ASG
-
-<p class="note"><strong>Note:</strong> If you already have an ASG set up for a load balancer, you do not need to do this step. To check which groups you have set up, see <a href="../concepts/asg.html">App Security Groups</a>.</p>
-
-If you are using the internal HAProxy as your load balancer, follow this procedure. If you are using an external load balancer, you must obtain your HAProxy IPs from the service you are using.
-
-To create an ASG for a load balancer:
-
-1. Navigate to the <%= vars.ops_manager %> Installation Dashboard.
-
-1. Click the <%= vars.app_runtime_abbr %> tile.
-
-1. Select **Networking**.
-
-1. Record the values in the **HAProxy IPs** field.
-
-1. Create a `load-balancer-https.json` file. For `destination`, use the **HAProxy IPs** you recorded above.
-
-    ```
-    [
-        {
-            "protocol": "tcp",
-            "destination": "10.68.196.250",
-            "ports": "80,443"
-        }
-    ]
-    ```
-
-1. Create an ASG called `load-balancer-https` by running:
-
-    ```
-    cf create-security-group load-balancer-https load-balancer-https.json
-    ```
-
-### <a id="assigned-network"></a> Create an Assigned Network ASG
+### <a id="assigned-network"></a> Create an assigned network ASG
 
 <p class="note"><strong>Note:</strong> If you use external services, the IP addresses, ports, and protocols depend on the service.</p>
 

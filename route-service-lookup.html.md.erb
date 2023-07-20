@@ -1,14 +1,11 @@
 ---
-title: Configuring Route Service Lookup
+title: Configuring Route Service lookup
 owner: CF for VMs Networking
 ---
 
-This topic describes configuring route service lookup in <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>).
+You can configure route service lookup in <%= vars.app_runtime_first %>.
 
-
-## <a id="overview"></a> Overview
-
-You can bind your app to a route service to preprocess requests before they reach an app. Example use cases include authentication, rate limiting, and caching services. For more information, see [Route Services](../services/route-services.html).
+You can bind your app to a route service to pre-process requests before they reach an app. Example use cases include authentication, rate limiting, and caching services. For more information, see [Route Services](../services/route-services.html).
 
 The **Bypass security checks for route service lookup** check box in the **Networking** pane of the <%= vars.app_runtime_abbr %> tile allows you to configure how the Gorouter handles traffic for apps that are bound to route services. The configuration options are:
 
@@ -16,12 +13,8 @@ The **Bypass security checks for route service lookup** check box in the **Netwo
 
 * **Bypass mode:** Bypass mode is configured when you enable the **Bypass security checks for route service lookup** check box. The Gorouter checks for an existing route. If the Gorouter finds the route and the route service is internal, it sends the traffic directly to the route service and skips the load balancer. This improves performance, but introduces the security risk described in [Bypass Mode and External Route Service (Security Risk)](#bypass-external).
 
-For more information, see [Summary of Behavior in Different Configurations](#summary).
 
-For configuration guidance and procedures, see [Configure Route Service Lookup](#configure).
-
-
-## <a id="configure"></a> Configure Route Service Lookup
+## <a id="configure"></a> Configure Route Service lookup
 
 These sections provide guidance and configuration steps for route service lookup.
 
@@ -31,7 +24,7 @@ These sections provide guidance and configuration steps for route service lookup
 
 If your load balancer requires mutual TLS from clients and <%= vars.app_runtime_abbr %> is configured for default lookup, the Gorouter cannot handle traffic successfully for internal route services. This is because the Gorouter does not have the necessary certificates from the client to communicate back with the load balancer for DNS lookup. Therefore you must configure bypass mode so the Gorouter can send the traffic directly to the route service.
 
-### <a id="enable"></a> Configure <%= vars.app_runtime_abbr %> for Bypass Mode
+### <a id="enable"></a> Configure <%= vars.app_runtime_abbr %> for bypass mode
 
 To configure bypass mode:
 
@@ -47,7 +40,7 @@ To configure bypass mode:
 
 1. Follow the procedure in [Mitigate Security Risk](#mitigate-risk).
 
-#### <a id="mitigate-risk"></a> Mitigate Security Risk
+#### <a id="mitigate-risk"></a> Mitigate security risk
 
 To prevent users from intercepting traffic for externally-hosted route services:
 
@@ -60,9 +53,9 @@ To prevent users from intercepting traffic for externally-hosted route services:
 	```
 	cf curl /v2/user_provided_service_instances
 	```
-	<p class="note"><strong>Note:</strong> Since route services can be added by any space developer, this can be difficult to manage.</p>
+	<p> Since route services can be added by any space developer, this can be difficult to manage.</p>
 
-### <a id="disable"></a> Configure <%= vars.app_runtime_abbr %> for Default Lookup
+### <a id="disable"></a> Configure <%= vars.app_runtime_abbr %> for default lookup
 
 To configure <%= vars.app_runtime_abbr %> for default lookup behavior, with bypass mode deactivated:
 
@@ -85,11 +78,11 @@ To configure <%= vars.app_runtime_abbr %> for default lookup behavior, with bypa
 1. Work with developers of route services to verify that their internal route service apps are reachable. You can do this by visiting the HTTPS URL of the route service directly and confirming that the app received the request with the `cf logs` output for the route service app.
 
 
-## <a id="summary"></a> Summary of Behavior in Different Configurations
+## <a id="summary"></a> Summary of behavior in different configurations
 
 These sections describe how the Gorouter behaves when bypass mode is activated or deactivated and when a route service is internal or external.
 
-### <a id="default-internal"></a> Default Lookup and Internal Route Service
+### <a id="default-internal"></a> Default lookup and internal route service
 
 This section describes how the Gorouter handles app requests when:
 
@@ -100,9 +93,9 @@ In this case, when the Gorouter receives the request, it sends the traffic back 
 
 The following diagram illustrates the flow of the request and numbers the steps to indicate order of occurrence:
 
-![A request makes multiple trips between the load balancer and Gorouter before reaching the route service. Four boxes are labeled as follows: Load Balancer, Gorouter, Route Service, and <%= vars.app_runtime_abbr %>. The Gorouter and route service box are inside of the <%= vars.app_runtime_abbr %> box to show that they are running inside of <%= vars.app_runtime_abbr %>. Arrows numbered 1-5 indicate the flow of the request in the following order: load balancer, Gorouter, load balancer, Gorouter, Gorouter service.](./images/default-internal.png)
+![alt-text="The flow of the Gorouter request."](./images/default-internal.png)
 
-### <a id="bypass-internal"></a> Bypass Mode and Internal Route Service
+### <a id="bypass-internal"></a> Bypass mode and internal route service
 
 This section describes how the Gorouter handles app requests when:
 
@@ -115,7 +108,7 @@ The following diagram illustrates the flow of the request:
 
 ![alt-text=""](./images/bypass-internal.png)
 
-### <a id="bypass-external"></a> Bypass Mode and External Route Service (Security Risk)
+### <a id="bypass-external"></a> Bypass mode and external route service (security risk)
 
 This section describes how the Gorouter handles app requests when:
 
@@ -124,14 +117,14 @@ This section describes how the Gorouter handles app requests when:
 
 In this case, when the Gorouter receives the request, it checks for an existing route and then sends the request directly to the route service. This enables external clients to intercept route service traffic. A developer can register the external route service domain as a private domain in <%= vars.app_runtime_abbr %> and map it to their own, malicious app. When the Gorouter receives a request for the original app bound to the external route service, it finds the domain internally and sends the request to the malicious app.
 
-<p class="note"><strong>Note:</strong> This vulnerability exists for both externally hosted route services and route services hosted on a separate foundation. If all of your route services are hosted internally on the same foundation, you are not at risk. However, you would be at risk if externally hosted route services are later configured.</p>
+<p> This vulnerability exists for both externally hosted route services and route services hosted on a separate foundation. If all of your route services are hosted internally on the same foundation, you are not at risk. However, you would be at risk if externally hosted route services are later configured.</p>
 
 The following diagram illustrates the flow of the request in the case that it is intercepted.
 A fake route service inside of <%= vars.app_runtime_abbr %> intercepts traffic intended for a route service outside of <%= vars.app_runtime_abbr %>. Five boxes are labeled as follows: Load Balancer, Gorouter, Route Service (example.com), Fake Route Service (example.com), and <%= vars.app_runtime_abbr %>. The Gorouter and fake route service boxes are inside of the <%= vars.app_runtime_abbr %> box to show that they are running inside of <%= vars.app_runtime_abbr %>. Arrows point to the load balancer and then the Gorouter to indicate the flow of traffic. Two arrows then point from the Gorouter: one to the fake route service and another to the route service. A red "X" indicates that the traffic does not go to the route service. It goes to the fake route service instead.
 
 ![A fake route service inside of <%= vars.app_runtime_abbr %> intercepts traffic intended for a route service outside of <%= vars.app_runtime_abbr %>. Five boxes are labeled as follows: Load Balancer, Gorouter, Route Service (example.com), Fake Route Service (example.com), and <%= vars.app_runtime_abbr %>. The Gorouter and fake route service boxes are inside of the <%= vars.app_runtime_abbr %> box to show that they are running inside of <%= vars.app_runtime_abbr %>. Arrows point to the load balancer and then the Gorouter to indicate the flow of traffic. Two arrows then point from the Gorouter: one to the fake route service and another to the route service. A red "X" indicates that the traffic does not go to the route service. It goes to the fake route service instead.](./images/bypass-external.png)
 
-### <a id="default-external"></a> Default Lookup and External Route Service
+### <a id="default-external"></a> Default lookup and external route service
 
 This section describes how the Gorouter handles app requests when:
 
@@ -140,6 +133,6 @@ This section describes how the Gorouter handles app requests when:
 
 In this case, the Gorouter sends traffic directly to the external route service without checking for an existing route.
 
-The following diagram illustrates the flow of the request Arrows indicate the flow of the request through platform components. A request goes directly from the load balancer to the Gorouter to the route service.
+The following diagram illustrates the flow of the request. The arrows indicate the flow of the request through platform components. A request goes directly from the load balancer to the Gorouter to the route service.
 
 ![Arrows indicate the flow of the request through platform components. A request goes directly from the load balancer to the Gorouter to the route service.](./images/default-external.png)

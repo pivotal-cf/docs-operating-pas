@@ -1,13 +1,13 @@
 ---
-title: Configuring Front End Idle Timeout for Gorouter and HAProxy
+title: Configuring front end idle timeout for Gorouter and HAProxy
 owner: Releng, CF for VMs Networking
 ---
 
-This topic describes how to configure the **Front end idle timeout for the Gorouter and HAProxy** field in the  **Networking** pane of the <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) tile.
+You can configure the **Front end idle timeout** field in the  **Networking** pane of the <%= vars.app_runtime_first %> tile.
 
-You can optionally use the **Front end idle timeout for the Gorouter and HAProxy** field to help prevent connections from your load balancer to the Gorouter or HAProxy from being closed prematurely. The value you enter sets the duration, in seconds, that the Gorouter or HAProxy maintains an idle open connection from a load balancer that supports keep-alive.
+You can use the **Front end idle timeout** field if you want to prevent connections from your load balancer to the Gorouter from being closed prematurely. The value you enter sets the duration, in seconds, that the Gorouter maintains an idle open connection from a load balancer that supports keep-alive.
 
-In general, set the value higher than your load balancer's back end idle timeout to avoid the race condition where the load balancer sends a request before it discovers that the Gorouter or HAProxy has closed the connection.
+As a general rule, set the value higher than your load balancer's back end idle timeout to avoid the race condition in which the load balancer sends a request before it discovers that the Gorouter has closed the connection.
 
 For specific guidance and exceptions to this rule, see the table below:
 

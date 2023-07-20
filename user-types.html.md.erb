@@ -1,28 +1,26 @@
 ---
-title: TAS for VMs User Types
+title: TAS for VMs user types
 owners: CAPI, Identity
 ---
 
-This topic describes the types of <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) users. It also describes the roles and permissions for <%= vars.app_runtime_abbr %> users and who creates and manages their user accounts.
+Here are the types of <%= vars.app_runtime_first %> users, the roles and permissions for <%= vars.app_runtime_abbr %> users, and who creates and manages user accounts.
 
-## <a id="overview"></a> Overview
+<%= vars.app_runtime_abbr %> users are app developers, managers, and auditors who work within orgs and spaces. There are virtual compartments within a deployment where <%= vars.app_runtime_abbr %> users can run apps and locally manage their roles and permissions.
 
-<%= vars.app_runtime_abbr %> users are app developers, managers, and auditors who work within orgs and spaces, the virtual compartments within a deployment where <%= vars.app_runtime_abbr %> users can run apps and locally manage their roles and permissions.
-
-A Role-Based Access Control (RBAC) system defines and maintains the different <%= vars.app_runtime_abbr %> user roles:
+A Role-based Access Control (RBAC) system defines and maintains the different <%= vars.app_runtime_abbr %> user roles:
 
 * Org Manager, Org Auditor, Org Billing Manager
 * Space Manager, Space Developer, Space Auditor
 
-For more information about <%= vars.app_runtime_abbr %> user roles and what actions they can take within the orgs and spaces they belong to, see [Orgs, Roles, Spaces, Permissions](../concepts/roles.html).
+For more information about <%= vars.app_runtime_abbr %> user roles and what actions users with these roles can take within the orgs and spaces they belong to, see [Orgs, roles, spaces, permissions](../concepts/roles.html).
 
-## <a id="er-user-tools-tasks"></a> <%= vars.app_runtime_abbr %> User Tools
+## <a id="er-user-tools-tasks"></a> <%= vars.app_runtime_abbr %> user tools
 
 All <%= vars.app_runtime_abbr %> users use system tools such as the Cloud Foundry Command Line Interface (cf CLI), <%= vars.platform_name %> Metrics, and Apps Manager, a dashboard for managing <%= vars.app_runtime_abbr %> users, orgs, spaces, and apps. Space Developer <%= vars.app_runtime_abbr %> users work with their software development tools and the apps deployed on host VMs.
 
 For more information about Apps Manager, see [Using Apps Manager](../console/index.html).
 
-## <a id="er-user-accounts"></a> <%= vars.app_runtime_abbr %> User Accounts
+## <a id="er-user-accounts"></a> <%= vars.app_runtime_abbr %> user accounts
 
 When an operator configures <%= vars.app_runtime_abbr %> for the first time, they specify one of the following authentication systems for <%= vars.app_runtime_abbr %> user accounts:
 
@@ -35,9 +33,9 @@ In either case, <%= vars.app_runtime_abbr %> user role settings are saved intern
 Org and Space Managers then use Apps Manager to invite and manage additional <%= vars.app_runtime_abbr %> users within their orgs and spaces. <%= vars.app_runtime_abbr %> users with proper permissions can also use the cf CLI to assign user roles. For more information, see [Managing User Roles with Apps Manager](../console/console-roles.html).
 
 
-## <a id='table'></a> User Types Summary
+## <a id='table'></a> User types summary
 
-The following table summarizes <%= vars.app_runtime_abbr %> user types, their roles, the tools they use, the System of Record (SOR) that stores their accounts, and what accounts they can provision.
+The table below summarizes <%= vars.app_runtime_abbr %> user types, their roles, the tools they use, the System of Record (SOR) that stores their accounts, and what accounts they can provision.
 
 <table id='users-summary' border='1' class='nice'>
 	<col width="20%">

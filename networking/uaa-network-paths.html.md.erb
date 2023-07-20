@@ -3,14 +3,15 @@ title: UAA Network Communications
 owner: UAA
 ---
 
-This topic describes User Account and Authentication (UAA) internal network communication paths with other <%= vars.app_runtime_first %> components.
+
+The tables here show the User Account and Authentication (UAA) internal network communication paths with other <%= vars.app_runtime_first %> components.
 
 For more information about UAA, see [User Account and Authentication (UAA) Server](../../concepts//architecture/uaa.html).
 
 
-## <a id="inbound"></a> Inbound Communications
+## <a id="inbound"></a> Inbound communications
 
-The following table lists network communication paths that are inbound to UAA:
+The table below lists network communication paths that are inbound to UAA:
 
 | Source VM | Destination VM | Port | Transport Layer Protocol | App Layer Protocol | Security and Authentication |
 | --------- | -------------- | ---- | ------------------------ | ------------------ | ---------------------------- |
@@ -23,9 +24,9 @@ The following table lists network communication paths that are inbound to UAA:
 <sup>&#42;</sup>The authentication method depends on the type of request.
 
 
-## <a id="outbound-internal"></a> Outbound Communications: Internal to <%= vars.app_runtime_abbr %>
+## <a id="outbound-internal"></a> Outbound communications: Internal to <%= vars.app_runtime_abbr %>
 
-The following table lists network communication paths that are outbound from UAA:
+The table below lists network communication paths that are outbound from UAA:
 
 | Source VM | Destination VM | Port | Transport Layer Protocol | App Layer Protocol | Security and Authentication |
 | --------- | -------------- | ---- | ------------------------ | ------------------ | ---------------------------- |
@@ -37,9 +38,9 @@ The following table lists network communication paths that are outbound from UAA
 <sup>&#42;&#42;</sup> MySQL authentication uses the MySQL native password method.
 
 
-## <a id="outbound-external"></a> Outbound Communications: External to <%= vars.app_runtime_abbr %>
+## <a id="outbound-external"></a> Outbound communications: External to <%= vars.app_runtime_abbr %>
 
-The following table lists network communication paths from UAA that are outbound to external systems:
+The table below lists network communication paths from UAA that are outbound to external systems:
 
 | Source VM | Destination VM | Port | Transport Layer Protocol | App Layer Protocol | Security and Authentication |
 | --------- | -------------- | ---- | ------------------------ | ------------------ | ---------------------------- |
