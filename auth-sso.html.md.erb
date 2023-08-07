@@ -7,21 +7,24 @@ owner: Identity
 
 By connecting <%= vars.app_runtime_abbr %> to SAML, LDAP, or OIDC external user store, you can use the User Account and Authentication (UAA) server to delegate authentication to existing enterprise user stores.
 
-If your enterprise user store is exposed as a SAML, LDAP, or OIDC identity provider (IDP) for single sign-on (SSO), you can configure SSO to allow users to access Apps Manager and the Cloud Foundry Command Line Interface (cf CLI) without creating a new account or, if you use SAML or OIDC, without re-entering credentials.
+If your enterprise user store is exposed as a SAML, LDAP, or OIDC identity provider (IDP) for single sign-on (SSO), you can configure SSO to access Apps Manager and the Cloud Foundry Command Line Interface (cf CLI) without creating a new account, or if you use SAML or OIDC, without re-entering credentials.
 
-For information about managing user identity and pre-provisioning user roles with SAML or LDAP, see [Adding Existing SAML or LDAP Users to an <%= vars.platform_name %> Deployment](external-user-management.html).
+For information about managing user identity and pre-provisioning user roles with SAML or LDAP, see [Adding existing SAML or LDAP users to an <%= vars.platform_name %> deployment](external-user-management.html).
 
-For an explanation of the process used by the UAA server when it attempts to authenticate a user through LDAP, see [Configuring LDAP Integration with <%= vars.platform_name %>](https://community.pivotal.io/s/article/Configuring-LDAP-Integration-with-Pivotal-Cloud-Foundry) in the Knowledge Base.
+For an explanation of the process used by the UAA server when it attempts to authenticate a user through LDAP, see [VMware Tanzu Support documentation](https://community.pivotal.io/s/article/Configuring-LDAP-Integration-with-Pivotal-Cloud-Foundry?language=en_US) in the Knowledge Base.
 
-<p class='note'><strong>Note:</strong> When you integrate with an external IDP, such as LDAP, authentication within the UAA becomes chained. An authentication attempt with user credentials is first attempted against the UAA user store before the external provider, LDAP. For more information, see <a href="https://github.com/cloudfoundry/uaa/blob/master/docs/UAA-LDAP.md#chained-authentication">Chained Authentication</a> in the <em>User Account and Authentication LDAP Integration</em> documentation on GitHub.</p>
+When you integrate with an external IdP (identity provider), such as LDAP,
+authentication within the UAA becomes chained. An authentication attempt with user credentials is first attempted against the UAA
+user store before the external provider, LDAP. For more information about authentication,
+see <a href="https://github.com/cloudfoundry/uaa/blob/master/docs/UAA-LDAP.md#chained-authentication">Chained Authentication</a> in
+the <em>User Account and Authentication LDAP Integration</em> documentation on GitHub.
 
 <br>
 Use one of the following procedures to configure your deployment with SAML, LDAP, or OIDC.
 
+## <a id="configure-saml"></a> Configure <%= vars.app_runtime_abbr %> to use a SAML identity provider
 
-## <a id='configure-saml'></a> Configure <%= vars.app_runtime_abbr %> to Use a SAML Identity Provider
-
-In SAML terminology, the SAML protocol communicates user data between an IDP and a service provider (SP).
+In SAML terminology, the SAML protocol communicates user data between an IdP (identity provider)| and a service provider (SP).
 
 To connect <%= vars.app_runtime_abbr %> with SAML, follow both of these procedures:
 
@@ -31,7 +34,7 @@ To connect <%= vars.app_runtime_abbr %> with SAML, follow both of these procedur
 
 ### <a id='configure-pcf-for-saml'></a> Configure <%= vars.app_runtime_abbr %> as a Service Provider for SAML
 
-To configure <%= vars.app_runtime_abbr %> to use a SAML IDP:
+To configure <%= vars.app_runtime_abbr %> to use a SAML IdP (identity provider):
 
 1. Go to the <%= vars.ops_manager_full %> Installation Dashboard.
 
@@ -42,53 +45,51 @@ To configure <%= vars.app_runtime_abbr %> to use a SAML IDP:
 1. Record your system domain.
     ![alt-text="In Domains, enter the System domain and Apps domain. Click Save.](./images/domains.png)
 
-1. Click **Authentication and Enterprise SSO**.
-
-1. Select **SAML Identity Provider**.
+2. Click **Authentication and Enterprise SSO** and select **SAML Identity Provider**.
 
     ![alt-text="In the SAML Identity Provider section, fill in the required fields."](./images/sso-ert.png)
 **Note**: You must manually deactivate a SAML IDP that was created by <%= vars.app_runtime_abbr %> when you no longer require it.
 
 1. Set the **Provider name**. This is a unique name you create for the identity provider. This name can include only alphanumeric characters, `+`, `_`, and `-`. You must not change this name after deployment because all external users use this name to link to the provider.
+2. Enter a **Display name**. Your identity provider display name appears as a link on your <%= vars.platform_name %> login page. You can access this link at `https://login.SYSTEM-DOMAIN`, where `SYSTEM-DOMAIN` is the system domain you recorded from the **Domains** pane.
 
-1. Enter a **Display name**. Your identity provider display name appears as a link on your <%= vars.platform_name %> login page. You can access this link at `https://login.SYSTEM-DOMAIN`, where `SYSTEM-DOMAIN` is the system domain you recorded from the **Domains** pane.
-
-1. Retrieve the metadata from your IDP and copy it into the **Provider metadata** or the **Provider metadata URL** fields, depending on whether your IDP exposes a metadata URL or not. For more information, see [Configure SAML as an Identity Provider for <%= vars.app_runtime_abbr %>](#configure-saml-for-pcf). <%= vars.company_name %> recommends that you use the provider metadata URL rather than provider metadata because the metadata can change. Do one of these:
+3. Retrieve the metadata from your IDP and copy it into the **Provider metadata** or the **Provider metadata URL** text boxes, depending on whether your IDP exposes a metadata URL or not. For more information, see [Configure SAML as an Identity Provider for <%= vars.app_runtime_abbr %>](#configure-saml-for-pcf). <%= vars.company_name %> recommends that you use the provider metadata URL rather than provider metadata because the metadata can change. Do one of the following:
     * If your IDP exposes a metadata URL, provide the metadata URL.
-    * Download your IDP metadata and paste this XML into the **Provider metadata** field.
+    * Download your IDP metadata and paste this XML into the **Provider metadata** text box.
 
-    <p class='note'><strong>Note:</strong> You only need to select one of the configurations. If you configure both, your IDP defaults to the <strong>Provider metadata URL</strong>.</p>
-    <p class="note"><strong>Note:</strong> For information about onboarding SAML users and mapping them to <%= vars.app_runtime_abbr %> user roles, see <a href="external-user-management.html">Adding Existing SAML or LDAP Users to an <%= vars.platform_name %> Deployment</a>.</p>
+    You must select one of the previous configurations. If you configure both, your IDP by default goes to the <strong>Provider metadata URL</strong>.
 
-1. Select the **Name ID format** for your SAML IDP. This translates to `username` in <%= vars.app_runtime_abbr %>. The default is **Email Address**.
+    For information about onboarding SAML users and mapping them to <%= vars.app_runtime_abbr %> user roles, see <a href="external-user-management.html">Adding existing SAML or LDAP users to an <%= vars.platform_name %> deployment</a>.
 
-1. For ****, enter a comma-separated list of the email domains for external users who are to receive invitations to Apps Manager.
+4. Select the **Name ID format** for your SAML IdP (identity provider). This translates to `username` in <%= vars.app_runtime_abbr %>. The default is **Email Address**.
 
-1. For **First name attribute** and **Last name attribute**, enter the attribute names in your SAML database that correspond to the first and last names in each user record. For example, `first_name` and `last_name`. This field is case-sensitive.
+5. For ****, enter a comma-separated list of the email domains for external users who are to receive invitations to Apps Manager.
 
-1. For **Email attribute**, enter the attribute name in your SAML assertion that corresponds to the email address in each user record. For example, `EmailID`. This field is case-sensitive.
+6. For **First name attribute** and **Last name attribute**, enter the attribute names in your SAML database that correspond to the first and last names in each user record. For example, `first_name` and `last_name`. This text box is case-sensitive.
 
-1. For **External groups attribute**, enter the attribute name in your SAML database that defines the groups that a user belongs to. For example, `group_memberships`. To map the groups from the SAML assertion to admin roles in <%= vars.app_runtime_abbr %>, see [Grant Admin Permissions to an External Group (SAML or LDAP)](../uaa/uaa-user-management.html#external-group) in _Creating and Managing Users with the UAA CLI (UAAC)_. This field is case-sensitive.
+7. For **Email attribute**, enter the attribute name in your SAML assertion that corresponds to the email address in each user record. For example, `EmailID`. This text box is case-sensitive.
 
-1. By default, all SAML authentication requests from <%= vars.app_runtime_abbr %> are signed. To change this, deselect the **Sign authentication requests** check box and configure your IDP to verify SAML authentication requests.
+8. For **External groups attribute**, enter the attribute name in your SAML database that defines the groups that a user belongs to. For example, `group_memberships`. To map the groups from the SAML assertion to admin roles in <%= vars.app_runtime_abbr %>, see [Grant Admin Permissions to an External Group (SAML or LDAP)](../uaa/uaa-user-management.html#external-group) in _Creating and Managing Users with the UAA CLI (UAAC)_. This text box is case-sensitive.
 
-1. To validate the signature for the incoming SAML assertions, activate the **Required signed assertions** check box and configure your IDP to send signed SAML assertions.
+9. By default, all SAML authentication requests from <%= vars.app_runtime_abbr %> are signed. To change this, deselect the **Sign authentication requests** check box and configure your IdP (identity provider) to verify SAML authentication requests.
 
-1.  Click **Save** and return to the <%= vars.ops_manager %> Installation Dashboard.
+10. To validate the signature for the incoming SAML assertions, activate the **Required signed assertions** check box and configure your IdP (identity provider) to send signed SAML assertions.
 
-1. Click **Review Pending Changes**.
+11. Click **Save** and return to the <%= vars.ops_manager %> Installation Dashboard.
 
-1. Click **Apply Changes**.
+12. Click **Review Pending Changes**.
 
-### <a id='configure-saml-for-pcf'></a> Configure SAML as an Identity Provider for <%= vars.app_runtime_abbr %>
+13. Click **Apply Changes**.
 
-To configure a SAML IDP to designate <%= vars.app_runtime_abbr %> as an SP:
+### <a id="configure-saml-for-pcf"></a> Configure SAML as an identity provider for <%= vars.app_runtime_abbr %>
+
+To configure a SAML identity provider to designate <%= vars.app_runtime_abbr %> as an SP:
 
 1. Download the SP metadata from `https://login.SYSTEM-DOMAIN/saml/metadata`, where `SYSTEM-DOMAIN` is the system domain you recorded from the **Domains** pane.
 
-   For configuration instructions, see the documentation from your IDP.
+   For configuration instructions, see the documentation from your identity provider.
 
-2. See the table below for information about certain industry-standard IDPs and how to integrate them with <%= vars.app_runtime_abbr %>:
+2. See the following table for information about certain industry standard identity providers and how to integrate them with <%= vars.app_runtime_abbr %>:
     <table border="1">
       <tr>
         <th>Solution Name</th>
@@ -108,7 +109,7 @@ To configure a SAML IDP to designate <%= vars.app_runtime_abbr %> as an SP:
       </tr>
     </table>
 
-<p class="note"><strong>Note:</strong> Some IDPs allow uploads of SP metadata while other providers require you to manually enter the SP metadata into a form. If your IDP requires manual entry but is not listed in the previous table, see <a href="ca-sso-config.html">Configuring CA as an Identity Provider</a>.</p>
+Some identity providers permit uploads of SP metadata while other providers require you to manually enter the SP metadata into a form. If your identity provider requires manual entry but is not listed in the previous table, see <a href="ca-sso-config.html">Configuring CA as an identity provider.
 
 
 ## <a id='configure-ldap'></a> Configure LDAP as an Identity Provider for <%= vars.app_runtime_abbr %>
@@ -119,21 +120,24 @@ To integrate the UAA with one or more LDAP servers:
 
 1. Click the <%= vars.app_runtime_abbr %> tile.
 
-1. Select **Authentication and Enterprise SSO**.
+2. Click **Authentication and Enterprise SSO**.
 
     ![alt-text="The LDAP Server is selected. Fill in the required fields."](./images/uaa/ldap-config.png)
 
-1. In **User authentication mechanism**, select **LDAP server**.
+3. In **User authentication mechanism**, click  **LDAP server**.
 
-1. For **Server URLs**, enter the URL that points to your LDAP server. For multiple LDAP servers, enter a space-separated list. Each URL must include one of the following protocols:
+4. For **Server URLs**, enter the URL that points to your LDAP server. For multiple LDAP servers, enter a space-separated list. Each URL must include one of the following protocols:
     * `ldap://`: This specifies that the LDAP server uses an unencrypted connection.
-    * `ldaps://`: This specifies that the LDAP server uses SSL for an encrypted connection and requires that the LDAP server holds a trusted certificate or that you import a trusted certificate to the JVM truststore.
+    * `ldaps://`: This specifies that the LDAP server uses SSL for an encrypted connection and requires that the LDAP server holds a trusted certificate or that you import a trusted certificate to the JVM trust store.
 
-1. For **LDAP credentials**, enter the LDAP distinguished name (DN) and password for binding to the LDAP server. For example, `cn=administrator,ou=Users,dc=example,dc=com`.
-    <p class="note"><strong>Note:</strong> <%= vars.company_name %> recommends that you provide LDAP credentials that grant read-only permissions on the LDAP search base and the LDAP group search base. Additionally, if the bind user belongs to a different search base, you must use the full DN.</p>
-    <p class="note warning"><strong>Caution:</strong> <%= vars.company_name %> recommends against reusing LDAP service accounts across environments. LDAP service accounts cannot be subject to manual lockouts, such as lockouts that result from users utilizing the same account. Also, LDAP service accounts cannot be subject to automated deletions, since disruption to these service accounts might prevent user logins.</p>
+5. For **LDAP credentials**, enter the LDAP distinguished name (DN) and password for binding to the LDAP server. For example, `cn=administrator,ou=Users,dc=example,dc=com`.
 
-1. For **User search base**, enter the location in the LDAP directory tree from which any LDAP user search begins. The typical LDAP search base matches your domain name.
+   <%= vars.company_name %> recommends that you provide LDAP credentials that grant read only permissions on the LDAP search base and the LDAP group search base. Additionally, if the bind user belongs to a different search base, you must use the full DN.
+
+      <p class="note caution">
+        <span class="note__title">Caution</span>
+       VMware discourages for closed source and Cloud Foundry discourages for open source the reusing of LDAP service accounts across environments. LDAP service accounts cannot be subject to manual lockouts, such as lockouts that result from users using the same account. Also, LDAP service accounts cannot be subject to automated deletions, because disruption to these service accounts might prevent user logins.</p>
+6. For **User search base**, enter the location in the LDAP directory tree from which any LDAP user search begins. The typical LDAP search base matches your domain name.
 <br>
 <br>
 For example, a domain named "cloud.example.com" typically uses the following LDAP user search base: `ou=Users,dc=example,dc=com`
@@ -141,7 +145,9 @@ For example, a domain named "cloud.example.com" typically uses the following LDA
 1. For **User search filter**, enter a string that defines LDAP user search criteria. This search criteria allows LDAP to use more effective and efficient searches. For example, the standard LDAP search filter `cn=Smith` returns all objects with a common name equal to `Smith`.
 <br>
 <br>
-In the LDAP search filter string that you use to configure <%= vars.app_runtime_abbr %>, use `{0}` instead of the username. For example, use `cn={0}` to return all LDAP objects with the same common name as the username.
+In the LDAP search filter string that you use to configure <%= vars.app_runtime_abbr %>, use `{0}` instead of the user name.
+
+    For example, use `cn={0}` to return all LDAP objects with the same common name as the user name.
 <br>
 <br>
 In addition to `cn`, other attributes commonly searched for and returned are `mail`, `uid` and, in the case of Active Directory, `sAMAccountName`.
@@ -160,7 +166,7 @@ This is required if you are mapping LDAP groups to an admin role. To map the gro
 
 1. For **Maximum group search depth**, enter a value between `1` and `10` that sets the maximum LDAP group search depth. The default value is `1`, which turns off nested group search.
 
-1. For **Server SSL certificate**, copy and paste in the root certificate from your CA certificate or your self-signed certificate. This is required only for `ldaps://` URLs.
+3. For **Server SSL certificate**, copy and paste, in the root certificate, from your CA certificate or your self-signed certificate. This is required only for `ldaps://` URLs.
 
 1. For **First name attribute** and **Last name attribute**, enter the attribute names in your LDAP directory that correspond to the first and last names in each user record. For example, `cn` and `sn`.
 
@@ -188,43 +194,43 @@ To integrate the UAA with an external OIDC IDP:
 
 1. Click the <%= vars.app_runtime_abbr %> tile.
 
-1. Select **Authentication and Enterprise SSO**.
+2. Click **Authentication and Enterprise SSO**.
 
-1. Select **OIDC identity provider**.
+3. Click **OIDC identity provider**.
 
-1. Set the **Provider name**. This is a unique name you create for the IDP. This name can include only alphanumeric characters, `+`, `_`, and `-`. You must not change this name after deployment because all external users use this name to link to the provider.
+4. Set the **Provider name**. This is a unique name you create for the identity provider. This name can include only alphanumeric characters, `+`, `_`, and `-`. Do not change this name after deployment because all external users use this name to link to the provider.
 
-1. Enter a **Display name**. Your identity provider display name appears as a link on your <%= vars.platform_name %> login page.
+5. Enter a **Display name**. Your identity provider display name appears as a link on your <%= vars.platform_name %> login page.
 
-1. For **Provider metadata URL**, enter the OpenID server endpoint URL that returns the configuration metadata for your OIDC identity provider. This URL usually has this format: `https://example-oidc-provider.com/.well-known/openid-configuration`. It serves as a JSON that contains the OIDC provider specifications. For example, its `issuer`, `authorization_endpoint`, and `token_endpoint` values.
+6. For **Provider metadata URL**, enter the OpenID server endpoint URL that returns the configuration metadata for your OIDC identity provider. This URL usually has this format: `https://<example-oidc-provider>.com/.well-known/openid-configuration`. It serves as a JSON that contains the OIDC provider specifications. For example, its `issuer`, `authorization_endpoint`, and `token_endpoint` values.
 
-1. For **Client ID**, enter the ID of the client registered with the external OIDC provider for use by the UAA. This external OIDC client must be configured according to the following general requirements. If applicable, different OIDC providers might use slightly different naming for these configuration options:
-   * **Client**: Per security best practices, register a dedicated client for use by <%= vars.app_runtime_abbr %>. Some providers might refer to a "client" as an "app". Save the client secret for the next step.
-   * **Grant type**: Make sure that the client is allowed to perform the `Authorization Code` OAuth flow.
-   * **Sign-in redirect URIs**: Include a URL in this format: `https://login.SYSTEM-DOMAIN/login/callback/PROVIDER-NAME`, where:
+7. For **Client ID**, enter the ID of the client registered with the external OIDC provider for use by the UAA. This external OIDC client must be configured according to the following general requirements. If applicable, different OIDC providers might use slightly different naming for these configuration options:
+   * **Client**: Per security best practices, register a dedicated client for use by <%= vars.app_runtime_abbr %>. Some providers might refer to a "client" as an "application". Save the client secret for the next step.
+   * **Grant type**:  Make sure that the client can do the `Authorization Code` OAuth flow.
+   * **Sign-in redirect URIs**:  Include a URL in this format: `https://login.<SYSTEM-DOMAIN>/login/callback/<PROVIDER-NAME>` where:
       * `SYSTEM-DOMAIN` is the domain for system level components. You can find this value under the **Domains** section of the <%= vars.app_runtime_abbr %> tile.
-      * `PROVIDER-NAME` is the unique name you create for the IDP in the UAA. This can match the **Provider name** value that you previously entered.
-   * **Users**: Make sure that the users to whom you want to grant access to <%= vars.app_runtime_abbr %> are allowed access to this client or app.
-   * **Groups**:  Make sure that this client is allowed to obtain all relevant OIDC user groups information that you need to perform mappings from external OIDC user groups to internal <%= vars.app_runtime_abbr %> scopes. For example, if you wish to grant <%= vars.app_runtime_abbr %> admin scopes to all external OIDC users belonging to the `example-inc-operators` group, you must make sure that this client is allowed to access this group memberships.
+      * `PROVIDER-NAME` is the unique name you create for the identity provider in the UAA. This can match the **Provider name** value that you previously entered.
+   * **Users**: Make sure that the users to whom you want to grant access to <%= vars.app_runtime_abbr %> are allowed access to this client or application.
+   * **Groups**:  Verify that this client can obtain all relevant OIDC user groups information that you need to use mappings from external OIDC user groups to internal <%= vars.app_runtime_abbr %> scopes. For example, if you want to grant <%= vars.app_runtime_abbr %> admin scopes to all external OIDC users belonging to the `example-inc-operators` group, make sure that this client can access this group memberships.
 
    <p> For more information about how to perform external group mappings, see [Grant Admin Permissions to an External Group (SAML, LDAP, or OIDC)](../uaa/uaa-user-management.html#external-group). </p>
 
-1. For **Client secret**, enter the client secret of the client whose ID is entered in the previous step.
+8. For **Client secret**, enter the client secret of the client whose ID was entered earlier in the procedure.
 
-1. For **Scopes**, enter a comma-separated list of scopes to request from the external OIDC provider. Per OIDC 1.0 specifications, requesting certain scopes from an OIDC provider can result in receiving additional claims. For example, requesting `openid, profile, email` scopes (the current default value for this input field) can allow the UAA to obtain claims containing the user's first name, last name, and email. Additionally, please include the scope or scopes, for example, `groups`) that allows the UAA to obtain the user's group memberships. Consult your OIDC provider's documentation to decide the exact scopes to request to obtain sufficient claims.
+9. For **Scopes**, enter a comma-separated list of scopes to request from the external OIDC provider. In accordance with OIDC 1.0 specifications, requesting certain scopes from an OIDC provider can cause additional claims. For example, requesting `openid, profile, email` scopes (the current default value for this input field) can allow the UAA to obtain claims containing the user's first name, last name, and email. Additionally, please include the scope or scopes, for example, `groups`) that allows the UAA to obtain the user's group memberships. Consult your OIDC provider's documentation to decide the exact scopes to request to obtain sufficient claims.
 
-1. For **Email domains**, enter a comma-separated list of the email domains for external users to invite to Apps Manager.
+10. For **Email domains**, enter a comma-separated list of the email domains for external users to invite to Apps Manager.
 
-1. For **Username claim**, enter the attribute in your OIDC provider claim that corresponds to the TAS for VMs username.
+11. For **Username claim**, enter the attribute in your OIDC provider claim that corresponds to the TAS for VMs user name.
 
-1. For **First name claim**, enter the attribute in your OIDC provider claim that corresponds to the user's first name in TAS for VMs.
+12. For **First name claim**, enter the attribute in your OIDC provider claim that corresponds to the user's first name in TAS for VMs.
 
-1. For **Last name claim**, enter the attribute in your OIDC provider claim that corresponds to the user's last name in TAS for VMs.
+13. For **Last name claim**, enter the attribute in your OIDC provider claim that corresponds to the user's last name in TAS for VMs.
 
-1. For **Email claim**, enter the attribute in your OIDC provider claim that corresponds to the user's email in TAS for VMs.
+14. For **Email claim**, enter the attribute in your OIDC provider claim that corresponds to the user's email in TAS for VMs.
 
-1. For **External groups claims**, enter the attribute in your OIDC provider claim that defines the groups to which a user belongs.
-This can be a comma-separated list, and can be used to map to internal <%= vars.app_runtime_abbr %> scopes.
+15. For **External groups claims**, enter the attribute in your OIDC provider claim that defines the groups to which a user belongs.
+This is a comma separated list, and is used to map to internal <%= vars.app_runtime_abbr %> scopes.
 
 1.  Click **Save**.
 
@@ -232,6 +238,14 @@ This can be a comma-separated list, and can be used to map to internal <%= vars.
 
 1.  Click **Review Pending Changes**.
 
-1.  Click **Apply Changes**.
+<p class="note important">
+<span class="note__title">Important</span>
+As of VMware Tanzu Application Service v4.0.0, when an external OIDC provider log in is configured, and when you log out from the UAA UI or other <%= vars.app_runtime_abbr %> UIs, the UAA attempts to log users out of the OIDC provider as well.
 
-<p class="note caution"><strong>Caution:</strong> As of <%= vars.app_runtime_abbr %> v4.0, when an external OIDC provider login is configured, and when you successfully log out from the UAA UI or other <%= vars.app_runtime_abbr %> UIs, the UAA attempts to log the users out of the OIDC provider as well. This external OIDC provider logout operation might fail due to a known issue, that results in producing an error page from the provider. If you do not want to log out of the external OIDC provider, you can ignore this error. If you want to log out of the external OIDC provider, navigate to the provider login page directly and log out from there.</p>
+This external OIDC provider log out operation might fail due to a known issue, that causes an error page from the provider.
+
+If you do not want to log out of the external OIDC provider, this error is ignored.
+
+If you want to log out of the external OIDC provider, go to the provider log in page directly and log out from there.
+
+This issue is addressed in a future release.
