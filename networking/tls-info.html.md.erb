@@ -17,7 +17,7 @@ Within an <%= vars.app_runtime_abbr %> deployment, TLS secures connections betwe
 
 The diagram below illustrates the flow of communication from a client making a request to an app. The Client Request goes to the External Load Balancer, and then through Gorouter to the app.
 
-<%= image_tag("ingress-traffic.png", :class => "no-border") %>
+![alt-text=""](images/ingress-traffic.png)
 [//]: https://docs.google.com/drawings/d/1gMYrcGpr-srWAv-ZvCs-9UHaV0JG2jpbre5cG2XoLRg/edit?usp=sharing
 
 The table below describes each component involved in receiving a client request and where their certificates for TLS termination originate:
@@ -32,7 +32,7 @@ The table below describes each component involved in receiving a client request 
 
 The diagram below illustrates communication between platform components, secured with TLS. The BOSH Director, with CredHub, feeds into Loggregator and Cloud Controller, which also communicate with each other. Loggregrator and Cloud Controller feed into Deigo Cell and Gorouter, respectively, and all of the components communicate with each other.
 
-<%= image_tag("platform-components.png", :class => "no-border") %>
+![alt-text=""](images/platform-components.png)
 [//]: https://docs.google.com/drawings/d/1Nr9dRH72PphVq_iW23yceqq2lzrR4mGvpWdTItTQuqU/edit?usp=sharing
 
 The CredHub instance in BOSH generates certificates for all components in <%= vars.ops_manager %>. The certificates are self-signed by default. To issue certificates signed by your enterprise, you can add a custom CA to CredHub.
@@ -61,7 +61,7 @@ These topics list the paths, ports, and protocols that subsystems within <%= var
 
 The diagram below illustrates TLS communications between apps running on <%= vars.app_runtime_abbr %>:
 
-<%= image_tag("between-app-traffic.png", :class => "no-border") %>
+![alt-text=""](images/between-app-traffic.png)
 [//]: https://docs.google.com/drawings/d/1h4x8vNf2xiCZMVpFLb11Dx-PmMmcYOMWBHAHfbzNbUQ/edit?usp=sharing
 
 In this example, the `frontend-blue` and `frontend-green` apps both receive client requests, but only the `frontend-green` app is allowed to communicate with the `backend` app.
@@ -86,8 +86,7 @@ Separately, <%= vars.app_runtime_abbr %> Runtime CredHub might store credentials
 
 The diagram below illustrates communications between apps and external, brokered services secured with TLS:
 
-![alt-text="The TAS Block (internal) includes App1 and App2, along with CredHub.
- The off-platform backend block (external) includes Oracle DB and a TIBCO block."](./images/apps-external-services.png)
+![alt-text="The TAS Block (internal) includes App1 and App2, along with CredHub.  The off-platform backend block (external) includes Oracle DB and a TIBCO block."](./images/apps-external-services.png)
 [//]: https://docs.google.com/drawings/d/1LNneD74qBvbFF0x4B9x3BYNYD5A8m9luXNoR895bwj8/edit?usp=sharing
 
 The developer must retrieve the certificate from the external service and provide it to their app. One way to do this is by placing the certificate in Runtime CredHub and editing your app to consume the certificate through CredHub Service Broker. For more information, see the [CredHub Service Broker](https://docs.vmware.com/en/CredHub-Service-Broker/index.html) documentation.
