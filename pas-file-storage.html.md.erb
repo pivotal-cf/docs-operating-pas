@@ -27,7 +27,7 @@ This section describes how to configure file storage for AWS.
 
 <p class="note"><strong>Note:</strong> If you followed the procedure in
 <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/aws-prepare-env-manual.html
-">Preparing to Deploy Ops Manager on AWS</a>, you created the necessary resources for external S3-compatible file storage.</p>
+">Preparing to Deploy Tanzu Operations Manager on AWS</a>, you created the necessary resources for external S3-compatible file storage.</p>
 
 For production-level <%= vars.platform_name %> deployments on AWS, <%= vars.company_name %>
 recommends selecting **External S3-compatible filestore**.
@@ -83,7 +83,7 @@ To configure Fog blobstores to use AWS IAM instance profiles:
       name: cloud-controller-iam
     ```
 
-    <p class="note"><strong>Note</strong>: You can also create a VM extension using the Ops Manager API. For more information, see <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-custom-vm-extensions.html#create-or-update-a-vm-extension-2">Create or Update a VM Extension</a> in <em>Managing Custom VM Extensions</em>.</p>
+    <p class="note"><strong>Note</strong>: You can also create a VM extension using the Tanzu Operations Manager API. For more information, see <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-custom-vm-extensions.html#create-or-update-a-vm-extension-2">Create or Update a VM Extension</a> in <em>Managing Custom VM Extensions</em>.</p>
 
 1. In your <%= vars.app_runtime_abbr %> deployment manifest, use the `cloud-controller-iam` VM extension you created for the instance groups containing `cloud_controller`, `cloud_controller_worker`, and `cloud_controller_clock`, as in the following example:
 

@@ -48,8 +48,8 @@ Before scaling down your MySQL cluster, you must ensure the cluster is healthy. 
 	1. Select the **Status** tab in the <%= vars.app_runtime_abbr %> tile.
 	1. Record the IP addresses for all instances of the **MySQL Server** job.
 
-1. To retrieve Cloud Controller database credentials from CredHub using the Ops Manager API:
-	1. Follow the procedures in [Using the Ops Manager API](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-ops-man-api.html) to authenticate and access the Ops Manager API.
+1. To retrieve Cloud Controller database credentials from CredHub using the VMware Tanzu Operations Manager API:
+	1. Follow the procedures in [Using the Tanzu Operations Manager API](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-ops-man-api.html) to authenticate and access the Tanzu Operations Manager API.
 	1. Use the `GET /api/v0/deployed/products` endpoint to retrieve a list of deployed products by running:
 
 	  	```
@@ -67,14 +67,14 @@ Before scaling down your MySQL cluster, you must ensure the cluster is healthy. 
 	      -H "Authorization: Bearer UAA-ACCESS-TOKEN"
 	    ```
 	    Where:
-	    * `OPS-MAN-FQDN` is the fully-qualified domain name (FQDN) of your Ops Manager installation.
+	    * `OPS-MAN-FQDN` is the fully-qualified domain name (FQDN) of your Tanzu Operations Manager installation.
 	    * `PRODUCT-GUID` is the `guid` value you recorded in the previous step.
 	    * `UAA-ACCESS-TOKEN` is the is the access token you recorded earlier.
 	4. Record the Cloud Controller database `username` and `password` from the response to the above request.
-2. SSH into the Ops Manager VM. For instructions specific to your IaaS, see [Advanced Troubleshooting with the BOSH CLI](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html).
+2. SSH into the Tanzu Operations Manager VM. For instructions specific to your IaaS, see [Advanced Troubleshooting with the BOSH CLI](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html).
 
 3. For each of the MySQL server IP addresses recorded:
-	1. From the Ops Manager VM, query the new organization by running:
+	1. From the Tanzu Operations Manager VM, query the new organization by running:
 
 		```
 		mysql -h YOUR-IP -u YOUR-IDENTITY -D ccdb -p -e "select created_at, name from organizations where name = 'data-integrity-test-organization'"

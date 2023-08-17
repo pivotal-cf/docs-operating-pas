@@ -94,7 +94,7 @@ To set up load balancing for <%= vars.app_runtime_abbr %> on AWS using Terraform
 
     Where:
     <ul>
-      <li><code>OPS-MANAGER-FQDN</code> is the URL at which you access your Ops Manager instance. This corresponds to <code>ops_manager_dns</code> in the Terraform output.</li>
+      <li><code>OPS-MANAGER-FQDN</code> is the URL at which you access your Tanzu Operations Manager instance. This corresponds to <code>ops_manager_dns</code> in the Terraform output.</li>
       <li><code>USERNAME</code> is the user name you entered when configuring internal authentication.</li>
       <li>
         <code>PASSWORD</code> is the password you entered when configuring internal authentication.
@@ -107,7 +107,7 @@ To set up load balancing for <%= vars.app_runtime_abbr %> on AWS using Terraform
 
 To configure the Gorouter to use AWS Elastic Load Balancers:
 
-1. Record the names of your ELBs. If you followed the procedures in [Preparing to Deploy Ops Manager on AWS](https://docs.pivotal.io/ops-manager/aws/prepare-env-manual.html), you created:
+1. Record the names of your ELBs. If you followed the procedures in [Preparing to Deploy Tanzu Operations Manager on AWS](https://docs.pivotal.io/ops-manager/aws/prepare-env-manual.html), you created:
   * `<%= vars.platform_name_lc %>-ssh-elb`: An SSH load balancer. This is a Classic Load Balancer.
   * `<%= vars.platform_name_lc %>-tcp-elb`: A TCP load balancer. This is a Classic Load Balancer.
   * `<%= vars.platform_name_lc %>-web-elb`: A web load balancer. This is an Application Load Balancer.
@@ -124,7 +124,7 @@ To configure the Gorouter to use AWS Elastic Load Balancers:
 1. Click to expand the **Router** row, and fill in the **Load Balancers** field with a value determined by the type of load balancer you are using:
   * **Application Load Balancer**: Enter a comma-separated list of the names of the target group
     of your web load balancer, prefixed with `alb:`: `alb:<%= vars.platform_name_lc %>-web-elb-target-group`.
-    The prefix indicates to Ops Manager that you entered the name of a target group.
+    The prefix indicates to Tanzu Operations Manager that you entered the name of a target group.
     The prefix is required for AWS Application Load Balancers and Network Load Balancers.
   * **Classic Load Balancer**: Enter the name of the load balancer: `<%= vars.platform_name_lc %>-web-elb`.
 
@@ -154,7 +154,7 @@ To configure the Gorouter to use Azure Load Balancers:
 1. Ensure that the **INTERNET CONNECTED** checkboxes are deselected for all jobs.
 
 1. Scale the number of instances as appropriate for your deployment.
-  <p class="note"><strong>Note:</strong> For a high-availability deployment of Ops Manager on Azure, <%= vars.company_name %> recommends scaling the number of each <%= vars.app_runtime_abbr %> job to a minimum of three instances. Using three or more instances for each job creates a sufficient number of availability sets and fault domains for your deployment. For more information, see <a href="https://docs.pivotal.io/ops-manager/refarch/azure/azure_ref_arch.html">Azure Reference Architecture</a>.</p>
+  <p class="note"><strong>Note:</strong> For a high-availability deployment of Tanzu Operations Manager on Azure, <%= vars.company_name %> recommends scaling the number of each <%= vars.app_runtime_abbr %> job to a minimum of three instances. Using three or more instances for each job creates a sufficient number of availability sets and fault domains for your deployment. For more information, see <a href="https://docs.pivotal.io/ops-manager/refarch/azure/azure_ref_arch.html">Azure Reference Architecture</a>.</p>
 
 ### <a id="azure-manual"></a> Azure paved manually
 
@@ -184,7 +184,7 @@ To configure the Gorouter to use Azure Load Balancers:
 1. Ensure that the **INTERNET CONNECTED** checkboxes are deselected for all jobs.
 
 1. Scale the number of instances as appropriate for your deployment.
-  <p class="note"><strong>Note:</strong> For a high availability deployment of Ops Manager on Azure, <%= vars.company_name %> recommends scaling the number of each <%= vars.app_runtime_abbr %> job to a minimum of three instances. Using three or more instances for each job creates a sufficient number of availability sets and fault domains for your deployment. For more information, see <a href="https://docs.pivotal.io/ops-manager/refarch/azure/azure_ref_arch.html">Azure Reference Architecture</a>.</p>
+  <p class="note"><strong>Note:</strong> For a high availability deployment of Tanzu Operations Manager on Azure, <%= vars.company_name %> recommends scaling the number of each <%= vars.app_runtime_abbr %> job to a minimum of three instances. Using three or more instances for each job creates a sufficient number of availability sets and fault domains for your deployment. For more information, see <a href="https://docs.pivotal.io/ops-manager/refarch/azure/azure_ref_arch.html">Azure Reference Architecture</a>.</p>
 
 
 ## <a id="gcp"></a> GCP
@@ -209,7 +209,7 @@ To configure the Gorouter to use GCP Load Balancers:
 1. Under **Load Balancers** for the SSH job, enter the value of `ssh_router_pool` from your Terraform output, prepended with `tcp:`. For example, `tcp:<%= vars.platform_code %>-ssh-proxy`.
 
 1. Verify that the **Internet Connected** check box for every job is enabled. The Terraform templates do not provision a Network Address Translation (NAT) box for Internet connectivity to your VMs, so they are provided with ephemeral public IP addresses to allow the jobs to reach the Internet.
-   <p class="note"><strong>Note:</strong> If you want to provision a Network Address Translation (NAT) box to provide Internet connectivity to your VMs instead of providing them with public IP addresses,deactivate the <strong>Internet Connected</strong> checkboxes. For more information about using NAT in GCP, see <a href="https://cloud.google.com/compute/docs/networking">VPC network overview</a> in the GCP documentation.</p>
+   <p class="note"><strong>Note:</strong> If you want to provision a Network Address Translation (NAT) box to provide Internet connectivity to your VMs instead of providing them with public IP addresses,deactivate the <strong>Internet Connected</strong> check boxes. For more information about using NAT in GCP, see <a href="https://cloud.google.com/compute/docs/networking">VPC network overview</a> in the GCP documentation.</p>
 
 1. Click **Save**.
 
@@ -221,7 +221,7 @@ To configure the Gorouter to use GCP Load Balancers:
 
     ![alt-text="The load balancer table shows three Load Balancers: pcf-router HTTPS, pcf-ssh TCP, and pcf-websockets TCP."](./images/gcp/config-lb.png)
 
-    You can see the SSH load balancer, the HTTP(S) load balancer, the TCP WebSockets load balancer, and the TCP router that you created in [Preparing to Deploy Ops Manager on GCP](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/gcp-prepare-env-manual.html).
+    You can see the SSH load balancer, the HTTP(S) load balancer, the TCP WebSockets load balancer, and the TCP router that you created in [Preparing to Deploy Tanzu Operations Manager on GCP](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/gcp-prepare-env-manual.html).
 
 2. Record the name of your SSH load balancer and your TCP WebSockets load balancer, `<%= vars.platform_code %>-wss-logs` and `<%= vars.platform_code %>-ssh-proxy`.
 
