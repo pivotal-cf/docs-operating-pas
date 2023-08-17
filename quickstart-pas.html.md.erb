@@ -42,11 +42,11 @@ To install <%= vars.app_runtime_abbr %> with minimal configuration:
 1. Under **Certificates and private keys for the Gorouter**, you must provide at least one certificate and private key name and certificate key pair for the Gorouter. The Gorouter is activated to receive TLS communication by default. You can configure multiple certificates for the Gorouter.
 
   <p class="note important">
-<span class="note__title">Important</span> When providing custom certificates, enter them in this order: <code>wildcard</code>, <code>Intermediate</code>, <code>CA</code>. For more information, see <a href="https://www.digicert.com/ssl-support/pem-ssl-creation.htm">Creating a .pem File for SSL Certificate Installations</a> in the DigiCert documentation.
-</p>
+  <span class="note__title">Important</span> When providing custom certificates, enter them in this order: <code>wildcard</code>, <code>Intermediate</code>, <code>CA</code>. For more information, see <a href="https://www.digicert.com/ssl-support/pem-ssl-creation.htm">Creating a .pem File for SSL Certificate Installations</a> in the DigiCert documentation.
+  </p>
   <p> Click **Add** to add a name for the certificate chain and its private key pair. This certificate is the default used by the Gorouter. You can either provide a certificate signed by a Certificate Authority (CA) or click **Generate RSA Certificate** to generate a self-signed certificate in <%= vars.ops_manager %>.</p>
 
-  <p> If you configured <%= vars.ops_manager %> Front End without a certificate, you can use this new certificate to complete your <%= vars.ops_manager %> configuration. To configure your <%= vars.ops_manager %> Front End certificate, see <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/gcp-prepare-env-manual.html#config-frontend">Configure Front End</a> in <em> Preparing to Deploy Ops Manager on GCP</em>.</p>
+  <p> If you configured <%= vars.ops_manager %> Front End without a certificate, you can use this new certificate to complete your <%= vars.ops_manager %> configuration. To configure your <%= vars.ops_manager %> Front End certificate, see <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/gcp-prepare-env-manual.html#config-frontend">Configure Front End</a> in <em> Preparing to Deploy Tanzu Operations Manager on GCP</em>.</p>
   <p> Ensure that you add any certificates that you generate in this pane to your infrastructure load balancer.</p>
 
 Setting appropriate ASGs is critical for a secure deployment.
@@ -57,9 +57,7 @@ Follow these steps to set ASGs:
   2. Acknowledge **You are responsible for setting the appropriate ASGs after TAS for VMs finishes deploying**.
   3. Click **Save**.
   <br><br>
-  For more information about ASGs, see [App Security Groups](../concepts/asg.html).
-
-      For more information about setting ASGs, see [Restricting App Access to Internal <%= vars.app_runtime_abbr %> Components](../operating/app-sec-groups.html).
+  For more information about ASGs, see [App Security Groups](../concepts/asg.html) and [Restricting app access to internal <%= vars.app_runtime_abbr %> components](../operating/app-sec-groups.html).
 
   1. Under **SAML service provider credentials**, enter a certificate and private key for the User Account and Authentication (UAA) server to use as a SAML service provider for signing outgoing SAML authentication requests. You can provide an existing certificate and private key from your trusted CA or generate a self-signed certificate. The domain `*.login.SYSTEM-DOMAIN` must be associated with the certificate, where `SYSTEM-DOMAIN` is the system domain you configured in the **Domains** pane.
 

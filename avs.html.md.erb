@@ -55,7 +55,7 @@ To set up NSX-T to integrate with <%= vars.app_runtime_abbr %>, complete these p
 
 ### <a id='regenerate-nsx-t-cert'></a> Regenerate NSX-T management TLS certificate with a valid SAN
 
-The AVS-deployed NSX-T Manager includes a self-signed TLS certificate with an invalid Subject Alternative Name (SAN). This causes issues when connecting from Ops Manager and the BOSH Director, so you must create a new certificate using the NSX-T Manager's fully qualified domain name (FQDN) or IP address as the new SAN.
+The AVS-deployed NSX-T Manager includes a self-signed TLS certificate with an invalid Subject Alternative Name (SAN). This causes issues when connecting from VMware Tanzu Operations Manager and the BOSH Director, so you must create a new certificate using the NSX-T Manager's fully qualified domain name (FQDN) or IP address as the new SAN.
 
 For instructions, see [Generate and Register the NSX-T Management TLS Certificate and Private Key](https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/1.12/tkgi/GUID-nsxt-install-tls-certs.html) in the <%= vars.k8s_runtime_full %> (<%= vars.k8s_runtime_abbr %>) documentation.
 
@@ -330,7 +330,7 @@ To install and configure the NSX-T Container Plug-In tile:
 
 1. If you have not already done so, download the VMware NSX-T Container Plug-in tile from [VMware Tanzu Network](https://network.tanzu.vmware.com/products/vmware-nsx-t) and import it to the **Installation Dashboard**. For instructions, see [Adding and Importing Products](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-add-delete.html#add-import).
 
-    ![alt-text="Ops Manager Installation Dashboard with NSX-T tile."](./images/nsx-t/nsx-t-install-dash.png)
+    ![alt-text="Tanzu Operations Manager Installation Dashboard with NSX-T tile."](./images/nsx-t/nsx-t-install-dash.png)
 
 2. Click the **VMware NSX-T** tile to open its **Settings** tab, and configure the **NSX Manager** pane as follows:
 
