@@ -54,7 +54,7 @@ These sections describe Diego Auctioneer metrics.
           <ol>
             <li>To best determine the root cause, examine the Auctioneer logs. Depending on the specific error and resource constraint, you may also find a failure reason in the Cloud Controller (CC) API.</li>
             <li>Investigate the health of your Diego Cells to determine if they are the resource type causing the problem.</li>
-            <li>Consider scaling additional Diego Cells using Ops Manager.</li>
+            <li>Consider scaling additional Diego Cells using Tanzu Operations Manager.</li>
             <li>If scaling Diego Cells does not solve the problem, pull Diego Brain logs and BBS node logs and contact Support telling them that LRP auctions are failing.</li>
           </ol>
         </td>
@@ -168,7 +168,7 @@ These sections describe Diego Auctioneer metrics.
             <ol>
         	    <li>In order to best determine the root cause, examine the Auctioneer logs. Depending on the specific error or resource constraint, you may also find a failure reason in the CC API.</li>
               <li>Investigate the health of Diego Cells.</li>
-              <li>Consider scaling additional Diego Cells using Ops Manager.</li>
+              <li>Consider scaling additional Diego Cells using Tanzu Operations Manager.</li>
               <li>If scaling Diego Cells does not solve the problem, pull Diego Brain logs and BBS logs for troubleshooting and contact Support for additional troubleshooting. Inform Support that Task auctions are failing.</li>
             </ol>
           </td>
@@ -248,7 +248,7 @@ These sections describe Diego BBS metrics.
       <th>Recommended response</th>
       <td>
         <ol>
-          <li>Check CPU and memory statistics in Ops Manager.</li>
+          <li>Check CPU and memory statistics in Tanzu Operations Manager.</li>
           <li>Check BBS logs for faults and errors that can indicate issues with BBS.</li>
           <li>Try scaling the BBS VM resources up. For example, add more CPUs and memory depending on its <code>system.cpu</code>/<code>system.memory</code> metrics.</li>
           <li>Consider vertically scaling the <%= vars.app_runtime_abbr %> backing database, if <code>system.cpu</code> and <code>system.memory</code> metrics for the database instances are high.</li>
@@ -529,7 +529,7 @@ These sections describe Diego Cell metrics.
         <td>
           <ol>
             <li>Assign more resources to the Diego Cells or assign more Diego Cells.</li>
-            <li>Scale additional Diego Cells using Ops Manager.</li>
+            <li>Scale additional Diego Cells using Tanzu Operations Manager.</li>
           </ol>
         </td>
     </tr>
@@ -569,7 +569,7 @@ These sections describe Diego Cell metrics.
         <td>
           <ol>
             <li>Assign more resources to the Diego Cells or assign more Diego Cells.</li>
-            <li>Scale additional Diego Cells using Ops Manager.</li>
+            <li>Scale additional Diego Cells using Tanzu Operations Manager.</li>
           </ol>
         </td>
     </tr>
@@ -626,7 +626,7 @@ These sections describe Diego Cell metrics.
         <td>
           <ol>
             <li>Assign more resources to the Diego Cells or assign more Diego Cells.</li>
-            <li>Scale additional Diego Cells using Ops Manager.</li>
+            <li>Scale additional Diego Cells using Tanzu Operations Manager.</li>
           </ol>
         </td>
     </tr>
@@ -667,7 +667,7 @@ These sections describe Diego Cell metrics.
         <td>
           <ol>
             <li>Assign more resources to the Diego Cells or assign more Diego Cells.</li>
-            <li>Scale additional Diego Cells using Ops Manager.</li>
+            <li>Scale additional Diego Cells using Tanzu Operations Manager.</li>
           </ol>
         </td>
     </tr>
