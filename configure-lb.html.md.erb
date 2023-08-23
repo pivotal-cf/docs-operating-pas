@@ -107,11 +107,12 @@ To set up load balancing for <%= vars.app_runtime_abbr %> on AWS using Terraform
 
 To configure the Gorouter or HAProxy to use AWS Elastic Load Balancers:
 
-1. Record the names of your ELBs. If you followed the procedures in [Preparing to Deploy Ops Manager on AWS](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/2.10/vmware-tanzu-ops-manager/aws-prepare-env-manual.html), you created:
-  * `<%= vars.platform_name_lc %>-ssh-elb`: An SSH load balancer. This is a Classic Load Balancer.
-  * `<%= vars.platform_name_lc %>-tcp-elb`: A TCP load balancer. This is a Classic Load Balancer.
-  * `<%= vars.platform_name_lc %>-web-elb`: A web load balancer. This is an Application Load Balancer.
-    * `<%= vars.platform_name_lc %>-web-elb-target-group`: A target group for the web load balancer.
+1. Record the names of your ELBs. If you followed the procedures in [Preparing to deploy Tanzu Operations Manager on AWS](hhttps://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/aws-prepare-env-manual.html), you created:
+
+* `<%= vars.platform_name_lc %>-ssh-elb`: An SSH load balancer. This is a Classic Load Balancer.
+* `<%= vars.platform_name_lc %>-tcp-elb`: A TCP load balancer. This is a Classic Load Balancer.
+* `<%= vars.platform_name_lc %>-web-elb`: A web load balancer. This is an Application Load Balancer.
+  * `<%= vars.platform_name_lc %>-web-elb-target-group`: A target group for the web load balancer.
 
 2. In the <%= vars.app_runtime_abbr %> tile, select **Resource Config**.
 
@@ -155,7 +156,11 @@ To configure the Gorouter to use Azure load balancers:
 1. Ensure that the **INTERNET CONNECTED** checkboxes are deselected for all jobs.
 
 1. Scale the number of instances as appropriate for your deployment.
-  <p> For a high-availability deployment of Ops Manager on Azure, <%= vars.company_name %> recommends scaling the number of each <%= vars.app_runtime_abbr %> job to a minimum of three instances. Using three or more instances for each job creates a sufficient number of availability sets and fault domains for your deployment. For more information, see <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/2.10/vmware-tanzu-ops-manager/refarch-azure-azure_ref_arch.html">Azure Reference Architecture</a>.</p>
+    <p class="note">
+    <span class="note__title">Note</span>
+    For a high availability deployment of Tanzu Operations Manager on Azure, <%= vars.company_name %> recommends scaling the number of each <%= vars.app_runtime_abbr %> job to a minimum of three instances. Using three or more instances for each job creates a sufficient number of availability sets and fault domains for your deployment. For more information, see <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/2.10/vmware-tanzu-ops-manager/refarch-azure-azure_ref_arch.html">Azure reference architecture</a>
+
+</p>
 
 ### <a id="azure-manual"></a> Azure paved manually
 
@@ -188,7 +193,10 @@ To configure the Gorouter to use Azure load balancers:
   <p> For a high availability deployment of Ops Manager on Azure, <%= vars.company_name %> recommends scaling the number of each <%= vars.app_runtime_abbr %> job to a minimum of three instances. Using three or more instances for each job creates a sufficient number of availability sets and fault domains for your deployment. For more information, see <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/2.10/vmware-tanzu-ops-manager/refarch-azure-azure_ref_arch.html">Azure Reference Architecture</a>.</p>
 
 
-## <a id="gcp"></a> GCP
+<p class="note">
+<span class="note__title">Note</span>
+For a high availability deployment of Tanzu Operations Manager on Azure, <%= vars.company_name %> recommends scaling the number of each <%= vars.app_runtime_abbr %> job to a minimum of three instances. Using three or more instances for each job creates a sufficient number of availability sets and fault domains for your deployment. For more information, see <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/refarch-azure-azure_ref_arch.html">Azure reference architecture</a>.
+</p>
 
 ### <a id="gcp-terraform"></a> GCP with Terraform
 
