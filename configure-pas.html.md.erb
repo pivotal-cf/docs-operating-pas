@@ -25,7 +25,7 @@ To add the <%= vars.app_runtime_abbr %> tile to your <%= vars.ops_manager %> Ins
    1. Click **<%= vars.app_runtime_full %>** to download the Pivotal Application Service `.pivotal` file.
    2. Click **Small Footprint <%= vars.app_runtime_abbr %>** to download the Small Footprint TAS for VMs `.pivotal` file. For more information, see [Getting Started with Small Footprint <%= vars.app_runtime_abbr %>](./small-footprint.html).
 
-2. Go to the <%= vars.ops_manager %> Installation Dashboard.
+2. Go to <%= vars.ops_manager %> Installation Dashboard.
 
 3. Click **Import a Product** to add your tile to VMware Tanzu Operations Manager. For more information, see [Adding and Deleting Products](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-add-delete.html).
 
@@ -41,6 +41,10 @@ In the **Assign AZ and Networks** pane, you assign jobs to your Availability Zon
 To configure the **Assign AZ and Networks** pane:
 
 1. Select **Assign AZ and Networks**.
+1. Under **Balance other jobs**, select all AZs. <%= vars.ops_manager %> balances instances of jobs with more than one instance across the AZs that you
+specify.
+    <p> For production deployments, <%= vars.company_name %> recommends at least three AZs for a highly available
+      installation of <%= vars.app_runtime_abbr %>.</p>
 
 1. From the **Network** drop-down menu, select the network where you want to run <%= vars.app_runtime_abbr %>.
 
@@ -111,6 +115,10 @@ To configure the **App Developer Controls** pane:
 
 1. For **Maximum disk quota per app** in MB, enter in MB the maximum amount of disk allowed per app.
 
+ <p> If you allow developers to push large apps, <%= vars.app_runtime_abbr %> might have trouble placing them on Diego
+  Cells. Additionally, in the event of a system upgrade or an outage that causes a rolling deploy, larger apps might not successfully redeploy if there is
+  insufficient disk capacity. Monitor your deployment to ensure that your Diego Cells have sufficient disk to run your apps.</p>
+
     <p>If you allow developers to push large apps, <%= vars.app_runtime_abbr %> might have trouble placing them on Diego Cells. Additionally, in the event of a system upgrade or an outage that causes a rolling deploy, larger apps might not successfully redeploy if there is insufficient disk capacity. Monitor your deployment to ensure that your Diego Cells have sufficient disk to run your apps.</p>
 
 1. Enter the **Default disk quota per app** in MB. This is the amount of disk allocated by default to a newly-pushed app if no value is specified when pushing the app.
@@ -172,13 +180,14 @@ To configure the **CredHub** pane:
         * **CA certificate:** This certificate is used when encrypting traffic to and from the UAA database.
         * **Skip hostname verification:** Select if you don't want CredHub to verify the identity of your database server during TLS connections.You cannot deactivate hostname verification for TLS connections to Postgres databases. You must select this option if you are configuring an external database on GCP or Azure.
 
-            If you deploy <%= vars.app_runtime_abbr %> on AWS using Terraform, you can locate these values in your Terraform output:
+      <p> If you deploy <%= vars.app_runtime_abbr %> on AWS using Terraform, you can locate these values in your Terraform output:
           <ul>
             <li><strong>Hostname:</strong> <code>rds_address</code></li>
             <li><strong>TCP port:</strong> <code>rds_port</code></li>
             <li><strong>Username:</strong> <code>rds_username</code></li>
             <li><strong>Password:</strong> <code>rds_password</code></li>
           </ul>
+      </p>
 
 2. (Optional) Under **KMS providers**, specify one or more Key Management Service (KMS) providers:
     * **Name:** Enter the name of the KMS provider.
@@ -194,8 +203,7 @@ To configure the **CredHub** pane:
         * **Name:** Enter a key name that already exists on your HSM or a new key name. For each new key name, CredHub generates a key in **HSM provider partition** that you configure.
         * **Key:** Enter a placeholder value under **Key**. CredHub does not use this key for encryption. However, you cannot leave the **Key** field blank.
         * **Primary:** This check box is used for marking the key you specified as the primary encryption key. You must mark one key as primary. Do not mark more than one key as primary.
-
-     For information about using additional keys for key rotation, see <a href="credential-rotation.html">Rotating Runtime CredHub Encryption Keys</a>.
+    <p> For information about using additional keys for key rotation, see <a href="credential-rotation.html">Rotating Runtime CredHub Encryption Keys</a>.</p>
 
 4. (Optional) To configure CredHub to use an HSM, configure these fields:
     * **HSM provider partition:** Enter the name of the HSM provider partition.
@@ -230,13 +238,11 @@ To configure the **CredHub** pane:
 
 In the **Databases** pane, you can configure <%= vars.app_runtime_abbr %> to use an internal MySQL database provided with <%= vars.platform_name %>, or you can configure an external database provider for the databases required by <%= vars.app_runtime_abbr %>.
 
-If you are performing an upgrade, do not modify your existing internal database configuration, or you might lose data. You must migrate your existing data first before changing the configuration.
+<p> If you are performing an upgrade, do not modify your existing internal database configuration, or you might lose data. You must migrate your existing data first before changing the configuration. For additional upgrade information, see <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-upgrading-pcf.html">Upgrading <%= vars.platform_name %></a>.</p>
 
 For additional upgrade information, see <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-upgrading-pcf.html">Upgrading <%= vars.platform_name %></a>.
 
-### <a id='internal-db'></a> Internal database configuration
-
- For GCP installations, <%= vars.company_name %> recommends selecting <strong>External</strong> and using Google Cloud SQL. Only use internal MySQL for non-production or test installations on GCP.
+<p> For GCP installations, <%= vars.company_name %> recommends selecting <strong>External</strong> and using Google Cloud SQL. Only use internal MySQL for non-production or test installations on GCP.</p>
 
 <%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
 
@@ -257,11 +263,11 @@ To configure high availability for your internal MySQL databases, see [Configure
 <%= partial "/pcf/core/mysql_proxy_config" %>
 
 ## <a id='file-storage'></a> Configure File Storage
+
 <p class="note important">
-<span class="note__title"> Important</span> Some blobstores, for example, Oracle Cloud Infrastructure Object Storage, do not support
-    [S3 Signature v4 Streaming](https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-streaming.html). To use blobstores without S3 Signature v4 Streaming support
-    with VMware Tanzu Application Service for VMs, deselect the **Signature v4 streaming** check box .
-</p>
+  <span class="note__title"> Important</span> Some blobstores, for example, Oracle Cloud Infrastructure Object Storage, do not support S3 Signature v4 Streaming. To use blobstores without S3 Signature v4 Streaming support with VMware Tanzu Application Service for VMs, deselect the Signature v4 streaming check box.
+  </p>
+  For more information, see [AWS-S3 Signature v4 Streaming](https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-streaming.html).
 
 <%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
 
