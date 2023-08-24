@@ -1,5 +1,5 @@
 ---
-title: Troubleshooting Ops Manager on GCP
+title: Troubleshooting Tanzu Operations Manager on GCP
 owner: Ops Manager
 ---
 
@@ -17,7 +17,7 @@ SSO for VMware Tanzu does not support multi-subnets.
 
 ### Solution
 
-Ensure that you have configured only one subnet. See [Preparing to Deploy <%= vars.platform_name %> on GCP Manually](https://docs.pivotal.io/platform/ops-manager/gcp/prepare-env-manual.html).
+Ensure that you have configured only one subnet. See [Preparing to deploy Tanzu Operations Manager on GCP](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/gcp-prepare-env-manual.html).
 
 <hr>
 
@@ -31,7 +31,7 @@ In compressed format, the <%= vars.app_runtime_abbr %> tile is 5&nbsp;GB in size
 
 ### Solution
 
-Ensure that the boot disk is allocated at least 50&nbsp;GB of space. See [Create the <%= vars.platform_name %> VM Instance](https://docs.pivotal.io/platform/ops-manager/gcp/deploy-manual.html#start-vm) in _Deploying <%= vars.platform_name %> on GCP Manually_.
+Ensure that the boot disk is allocated at least 50&nbsp;GB of space. See [Create the <%= vars.platform_name %> VM Instance](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/gcp-deploy-manual.html#start-vm) in _Deploying Tanzu Operations Manager on GCP_.
 
 <hr>
 
@@ -58,11 +58,11 @@ This error can appear as a result of incorrect configuration of network traffic 
 
 1. Make sure you have selected the **Forward SSL to <%= vars.app_runtime_abbr %> Router** option in your [<%= vars.app_runtime_abbr %> Network Configuration](configure-pas.html#networking).
 
-1. Verify that you have configured the firewall rules properly and that TCP ports `80`, `443`, `2222`, and `8080` are accessible on your GCP load balancers. See [Create Firewall Rules for the Network](https://docs.pivotal.io/platform/ops-manager/gcp/prepare-env-manual.html#firewall_rules) in _Preparing to Deploy <%= vars.platform_name %> on GCP Manually_.
+2. Verify that you have configured the firewall rules properly and that TCP ports `80`, `443`, `2222`, and `8080` are accessible on your GCP load balancers. See [Create Firewall Rules for the Network](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/gcp-deploy-manual.html) in _Preparing to deploy Tanzu Operations Manager on GCP_.
 
-1. Verify that you have configured the proper SSL certificates on your HTTP(S) load balancer in GCP. See [Create HTTP Load Balancer](https://docs.pivotal.io/platform/ops-manager/gcp/prepare-env-manual.html#loadbalancer) in _Preparing to Deploy <%= vars.platform_name %> on GCP Manually_.
+3. Verify that you have configured the proper SSL certificates on your HTTP(S) load balancer in GCP. See [Create HTTP load balancer](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/gcp-prepare-env-manual.html#loadbalancer) in _Preparing to deploy Tanzu Operations Manager on GCP_.
 
-1. If necessary, re-upload a new certificate and update any required SSL Certificate and SSH Key fields in your [<%= vars.app_runtime_abbr %> Network Configuration](configure-pas.html#networking).
+4. If necessary, upload a new certificate again and update any required SSL Certificate and SSH Key fields in your [<%= vars.app_runtime_abbr %> Network Configuration](configure-pas.html#networking).
 
 <hr>
 

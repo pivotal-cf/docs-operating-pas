@@ -74,8 +74,7 @@ Developers specify which apps are allowed to communicate using container network
 
 The following diagram illustrates TLS communication between apps and managed, on-platform services. It uses Cloud Cache as an example of a managed service.
 
-![alt-text="Certificates are copied to each element (Cache Server, Locator, App) from CredHub.
- TLS traffic flows between the App and the Cache Server and Locator."](./images/apps-services.png)
+![alt-text="Certificates are copied to each element (Cache Server, Locator, App) from CredHub. TLS traffic flows between the App and the Cache Server and Locator."](./images/apps-services.png)
 [//]: https://docs.google.com/drawings/d/10UxDZPwFDmU9X2RUZRw-y_WwGcwqTHEOQCBGjJhiEg8/edit?usp=sharing
 
 BOSH CredHub issues certificates to the VMware Tanzu GemFire components. For the app, the developer must retrieve a copy of this certificate using the CredHub API and place it in the trust store for the app. For more information, see the [VMware Tanzu GemFire documentation](https://docs.vmware.com/en/VMware-GemFire-for-Tanzu-Application-Service/1.14/gf-tas/content-index.html).
@@ -86,8 +85,7 @@ Separately, <%= vars.app_runtime_abbr %> Runtime CredHub might store credentials
 
 The following diagram illustrates communications between apps and external, brokered services secured with TLS:
 
-![alt-text="The TAS Block (internal) includes App1 and App2, along with CredHub.
- The off-platform backend block (external) includes Oracle DB and a TIBCO block."](./images/apps-external-services.png)
+![alt-text="The TAS Block (internal) includes App1 and App2, along with CredHub. The off-platform backend block (external) includes Oracle DB and a TIBCO block."](./images/apps-external-services.png)
 [//]: https://docs.google.com/drawings/d/1LNneD74qBvbFF0x4B9x3BYNYD5A8m9luXNoR895bwj8/edit?usp=sharing
 
 The developer must retrieve the certificate from the external service and provide it to their app. One way to do this is by placing the certificate in Runtime CredHub and editing your app to consume the certificate through CredHub Service Broker. For more information, see the [CredHub Service Broker](https://docs.vmware.com/en/CredHub-Service-Broker/index.html) documentation.

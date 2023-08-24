@@ -1,5 +1,5 @@
 ---
-title: Checking Ops Manager after a power failure on vSphere
+title: Checking Tanzu Operations Manager after a power failure on vSphere
 owner:
 ---
 
@@ -26,15 +26,11 @@ that were running on the VMs. For more information, see [Diego Components and Ar
 
 ## <a id="manual-recovery-scenarios"></a> Scenarios that require manual intervention
 
-Two scenarios exist that can require manual intervention when recovering your environment after a
+You might require manual intervention when recovering your environment after a
 power failure:
 
 * If <%= vars.app_runtime_abbr %> is configured to use a MySQL cluster instead of a single node,
 the cluster does not recover automatically.
-
-* If you run <%= vars.platform_name %> v2.5.3 or earlier and encounter the following known issue in
-the BOSH Director:
-[Monit inaccurately reports the health of UAA](https://docs.pivotal.io/pivotalcf/2-5/pcf-release-notes/opsmanager-rn.html#monit).
 
 The procedure in this topic includes more detail about addressing these scenarios.
 
@@ -137,9 +133,7 @@ deployment.
 **Powered On**, restart the VM.
 
 1. If the **State** column shows that the VM is **Powered On** but the **Status** column does not
-does not show **Normal**, it may be due the following known issue: [Monit inaccurately reports the
-health of UAA](https://docs.pivotal.io/pivotalcf/2-5/pcf-release-notes/opsmanager-rn.html#monit).
-To resolve this issue, do the following:
+does not show **Normal**, try the following:
 
     1. SSH into the BOSH Director VM using the instructions in [SSH into the BOSH Director VM](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-ssh-login.html).
 
@@ -238,4 +232,4 @@ the app has or visit the URL of the app to verify that it is working.
 
 You can use <%= vars.platform_name %> Healthwatch to further assess the state of
 <%= vars.platform_name %>. For more information, see
-[Using <%= vars.platform_name %> Healthwatch](https://docs.pivotal.io/healthwatch/1-8/installing.html).
+[Using <%= vars.platform_name %> Healthwatch](https://docs.vmware.com/en/Healthwatch-for-VMware-Tanzu/index.html).
