@@ -251,6 +251,11 @@ To configure high availability for your internal MySQL databases, see [Configure
 <%= partial "/pcf/core/mysql_proxy_config" %>
 
 ## <a id='file-storage'></a> Configure File Storage
+<p class="note important">
+<span class="note__title"> Important</span> Some blobstores, for example, Oracle Cloud Infrastructure Object Storage, do not support
+    [S3 Signature v4 Streaming](https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-streaming.html). To use blobstores without S3 Signature v4 Streaming support
+    with VMware Tanzu Application Service for VMs, deselect the **Signature v4 streaming** check box .
+</p>
 
 <%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
 
