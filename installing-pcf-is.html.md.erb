@@ -138,6 +138,12 @@ For more information about RainerScript, see the [RainerScript](http://www.rsysl
 
 1. Select the **Enable system metrics** check box to emit system-level metrics about all VMs in the deployment. For a list of the VM metrics that the System Metric Agent emits, see [System Metrics Agent](https://github.com/cloudfoundry/system-metrics-release/blob/main/docs/system-metrics-agent.md) in GitHub. When you activate this check box, ensure that you open port `53035` for the isolation segment. For more information, see [Configure Firewall Rules](../adminguide/routing-is.html#config-firewall) in _Routing for Isolation Segments_.
 
+1. (Optional) For **OpenTelemetry Collector Metric Exporters (beta)**, the default value is empty, which disables the beta OpenTelemetry Aggregate Metric Egress
+support. To configure the <%= vars.segment_runtime_full %> tile to send metrics over the OpenTelemetry protocol, enter valid OpenTelemetry Collector Exporter YAML
+configuration in this field. Refer to the [OpenTelemetry Collector documentation](https://opentelemetry.io/docs/collector/configuration/#exporters) for examples
+of how to configure exporters. Currently the <%= vars.segment_runtime_full %> tile provides support for a limited number of OpenTelemetry Collector Exporters,
+including the OTLP exporter. Note that this feature is in beta and may still change in significant ways.
+
 1. Click **Save**.
 
 ### <a id='advanced_features'></a> Configure advanced features
