@@ -92,6 +92,7 @@ To configure the **App Containers** pane:
     In a fresh installation, NFSv3 volume services are activated by default. In an upgrade, NFSv3 volume services is set to the same setting as it was in the previous deployment.</p>
 
 1. (Optional) To configure LDAP for NFSv3 volume services:
+
      * For **LDAP service account user**, enter the user name of the service account in LDAP that manages volume services.
      * For **LDAP service account password**, enter the password for the service account.
      * For **LDAP server host**, enter the hostname or IP address of the LDAP server.
@@ -101,7 +102,7 @@ To configure the **App Containers** pane:
 
     <p class="note important">
     <span class="note__title">Important</span>
-    UAA can only parse one certificate entered into this field. If you enter multiple certificates, UAA only uses the first one you entered and ignores the rest. You only need to include one root certificate or self-signed certificate
+    UAA can only parse one certificate entered into this field. If you enter multiple certificates, UAA only uses the first one you entered and ignores the rest. You only need to include one root certificate or self-signed certificate.
     </p>
 
 2. Click **Save**.
@@ -114,7 +115,7 @@ To configure the **System Logging** pane:
 
 1. Select **System Logging**.
 
-1. Select an option under **Configure syslog for system components?**. Do not use** is selected by default. This setting only affects Diego Cell and Gorouter components within the isolation segment. This setting does not affect shared <%= vars.app_runtime_abbr %> system components.
+1. Select an option under **Configure syslog for system components?**. **Do not use** is selected by default. This setting only affects Diego Cell and Gorouter components within the isolation segment. This setting does not affect shared <%= vars.app_runtime_abbr %> system components.
 
 1. To use syslog, select **Use**.
 
