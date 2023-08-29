@@ -23,14 +23,14 @@ For more information about Loggregator components, see [Loggregator architecture
     <th>Can stream out to (configurable)</th>
     <th>Visible to</th>
   </tr><tr>
-  	<th>System Logs</th>
+    <th>System Logs</th>
     <td>Platform components</td>
     <td>Syslog standard</td>
     <td>rsyslog agent</td>
     <td>Component syslog drain</td>
     <td>Operators</td>
   </tr><tr>
-  	<th rowspan=3>App Logs</th>
+    <th rowspan=3>App Logs</th>
     <td rowspan=3>Hosted apps</td>
     <td>Format is up to the developer</td>
     <td>Firehose<sup>1</sup></td>
@@ -80,7 +80,7 @@ Some flags you can use Log Cache to filter app logs are:
 
 * `--follow`: Append exported logs to `stdout`.
 
-For more information on using the Log Cache CLI, see [Log Cache CLI: Usage](https://github.com/cloudfoundry/log-cache-cli/blob/develop/README.md) on GitHub.
+For more information on<!--฿ |information about| is preferred. ฿--> using the Log Cache CLI, see [Log Cache CLI: Usage](https://github.com/cloudfoundry/log-cache-cli/blob/develop/README.md) on GitHub.
 
 ### <a id="log-cache-api-examples"></a> Example uses of the Log Cache API
 
@@ -91,7 +91,7 @@ The basic call to access and filter cached app logs is:
 ```
 GET https://log-cache.SYSTEM-DOMAIN/v1/read/APP-ID
 ```
-
+<!--฿ Verify that no placeholders above require explanation in the style of |Where PLACEHOLDER is...| ฿--><!--฿ |APP-NAME| is preferred. ฿-->
 Where:
 
 * `SYSTEM-DOMAIN` is your system domain.
@@ -99,13 +99,13 @@ Where:
 
 Append the following parameters to your `GET` call to customize app logs:
 
-* `start_time`: Displays the start of the cache or the start of a time period you specify. Results display as a UNIX timestamp, in nanoseconds. Pair with `end_time` to view logs within a time period.
+* `start_time`: Displays the start of the cache or the start of a time period you specify. Results display as a UNIX timestamp, in nanoseconds. Pair with `end_time` <!--฿ If this is a placeholder, use dashes for spaces instead of underscores. ฿-->to view logs within a time period.
 
-* `end_time`: Displays the end of the cache or the end of a time period you specify. Results display as a UNIX timestamp, in nanoseconds. Pair with `start_time` to view logs within a time period.
+* `end_time`: Displays the end of the cache or the end of a time period you specify. Results display as a UNIX timestamp, in nanoseconds. Pair with `start_time` <!--฿ If this is a placeholder, use dashes for spaces instead of underscores. ฿-->to view logs within a time period.
 
 * `envelope_types`: Filters by Envelope Type. The available filters are: `LOG`, `COUNTER`, `GAUGE`, `TIMER`, and `EVENT`. Set an envelope type filter to emit logs of only that type. Specify this parameter multiple times to include more types.
 
-* `limit`: Sets a maximum number of envelopes to request. The max limit is 1000. This value defaults to 100.
+* `limit`: Sets a maximum number of envelopes to request. The max<!--฿ |maximum| is preferred. ฿--> limit is 1000. This value defaults<!--฿ |by default| is usually better. ฿--> to 100.
 
 More API parameters are available to customize retrieved app logs. For more information, see [Log Cache: RESTful API Gateway](https://github.com/cloudfoundry/log-cache#restful-api-via-gateway).
 
@@ -119,7 +119,7 @@ More API parameters are available to customize retrieved app logs. For more info
 
 ## <a id='container-metrics'></a> Include container metrics in syslog drains
 
-Developers can monitor container metrics over the syslog protocol using the [CF drain CLI plug-in](https://github.com/cloudfoundry/cf-drain-cli). With the CF Drain CLI plugin, you can use the Cloud Foundry Command Line Interface (cf CLI) tool to set the app container to deliver container metrics to a syslog drain. Developers can then monitor the app container based on those metrics.
+Developers can monitor container metrics over the syslog protocol using the [CF drain CLI plug-in](https://github.com/cloudfoundry/cf-drain-cli). With the CF <!--฿ |Cloud Foundry| is preferred. ฿-->Drain CLI plugin<!--฿ |plug-in| is the noun or adjective. |plug in| is the verb. ฿-->, you can use the Cloud Foundry Command Line Interface (cf CLI) tool to set the app container<!--฿ |application container| is preferred. ฿--> to deliver container metrics to a syslog drain. Developers can then monitor the app container<!--฿ |application container| is preferred. ฿--> based on those metrics.
 
 For more information, see [Including container metrics in syslog drains](../devguide/deploy-apps/streaming-logs.html#container-metrics) in _App Logging in <%= vars.app_runtime_abbr %>_.
 
@@ -130,26 +130,26 @@ Apps constantly generate app logs and <%= vars.app_runtime_abbr %> platform comp
 
 * The Loggregator agent running on each component or app VM collects and sends this data out to Doppler components.
 
-* Doppler components temporarily buffer the data before periodically forwarding it to the Traffic Controller. When the log and metrics data input to a Doppler exceeds its buffer size for a given interval, data can be lost.
+* Doppler components temporarily buffer the data before periodically forwarding it to the Traffic Controller. When the log and metrics data input to a Doppler exceeds its buffer size for a given<!--฿ Redundant? ฿--> interval, data can be<!--฿ Consider switching to active voice. ฿--> lost.
 
 * The Traffic Controller serves the aggregated data stream through the Firehose WebSocket endpoint.
 
 Use the following instructions to scale the Loggregator system. For guidance on monitoring and capacity planning, see [Monitoring <%= vars.app_runtime_abbr %>](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/<%= vars.current_major_version %>/tas-for-vms/monitoring-index.html).
 
-### <a id="instances"></a> Add component VM instances
+### <a id="instances"></a> Add component VM<!--฿ All VMs are component VMs except for the host VMs. ฿--> instances
 
-To add component VM instances for Loggregator components:
+To add component VM<!--฿ All VMs are component VMs except for the host VMs. ฿--> instances for Loggregator components:
 
 1. Go to the <%= vars.ops_manager %> Installation Dashboard.
 
 1. Click the <%= vars.app_runtime_abbr %> tile.
 
-1. Select **Resource Config**.
+1. Select<!--฿ Use |click| with arrows, buttons, files, hyperlinks, icons, menus, and menu items in a UI context that does not use a menu cascade, progressive disclosure controls, or spin boxes. ฿--> **Resource Config**.
 
 1. Increase the number in the **Instances** column of the component you want to scale. You can add instances for the following Loggregator components:
-	* **Loggregator Traffic Controller**
-	* **Doppler Server**
-	* **Log Cache**
+  * **Loggregator Traffic Controller**
+  * **Doppler Server**
+  * **Log Cache**
 
 1. Click **Save**.
 
@@ -162,7 +162,7 @@ To add component VM instances for Loggregator components:
 
 ## <a id="app-traffic-log"></a> App traffic logging
 
-App traffic logging generates logs when app containers communicate with each other directly, or attempt to communicate, by container-to-container networking (C2C) policies and App Security Groups (ASGs). For more information about C2C policies, see [Container-to-Container Networking versus ASGs](../concepts/understand-cf-networking.html#c2cvsasg) in _Container-to-Container Networking_. For more information about ASGs, see [App Security Groups](../concepts/asg.html).
+App traffic logging generates logs when app containers communicate with each other directly, or attempt to communicate, by container-to-container networking<!--฿ |CF Networking| is preferred. ฿--> (C2C) policies and App Security Groups (ASGs). For more information about C2C policies, see [Container-to-Container Networking versus ASGs](../concepts/understand-cf-networking.html#c2cvsasg) in _Container-to-Container Networking_. For more information about ASGs, see [App Security Groups](../concepts/asg.html).
 
 With App traffic logging, network security teams audit C2C traffic, by seeing allowed and denied packets, without needing access to the Cloud Controller or the apps themselves.
 
@@ -188,23 +188,23 @@ To activate app traffic logging:
 
 ### <a id="log-behavior"></a> App logging behavior
 
-App traffic logging generates log messages as follows:
+App traffic logging generates log messages<!--฿ |log entries| is preferred. ฿--> as follows:
 
 * **TCP traffic:** Logs the first packet of every new TCP connection.
 
-* **UDP traffic:** Logs UDP packets sent and received, up to a maximum per-second rate for each container. Set this rate limit in the **UDP logging interval** field in the **Networking** pane of the <%= vars.app_runtime_abbr %> tile. The default rate limit is `100` packets per second.
+* **UDP traffic:** Logs UDP packets sent and received, up to a maximum per-second rate for each container. Set this rate limit in the **UDP logging interval** field<!--฿ If referring to a UI, |text box| is preferred. ฿--> in the **Networking** pane of the <%= vars.app_runtime_abbr %> tile. The default rate limit is `100` packets per second.
 
-* **Packets denied:** Logs packets blocked by either a container-specific networking policy or by ASG rules applied across the space, org, or deployment. Logs packet denials up to a maximum per-second rate for each container, set in the **Denied logging interval** field in the **Networking** pane of the <%= vars.app_runtime_abbr %> tile. The default rate is `1` (packet per second). For more information about container-specific networking policies, see [Policies](../concepts/understand-cf-networking.html#policies) in _Container-to-Container Networking_.
+* **Packets denied:** Logs packets blocked by either a container-specific networking policy or by ASG rules applied across the space, org, or deployment. Logs packet denials up to a maximum per-second rate for each container, set in the **Denied logging interval** field<!--฿ If referring to a UI, |text box| is preferred. ฿--> in the **Networking** pane of the <%= vars.app_runtime_abbr %> tile. The default rate is `1` (packet per second). For more information about container-specific networking policies, see [Policies](../concepts/understand-cf-networking.html#policies) in _Container-to-Container Networking_.
 
 ### <a id="log-format"></a> App traffic log format and contents
 
 App traffic logs are formatted as described in the [silk-release Traffic logging](https://github.com/cloudfoundry/silk-release/blob/develop/docs/traffic_logging.md) documentation, following the `iptables-logger` format but without line breaks.
 
-For example, the first part of an app traffic log line looks like:
+For example, the first part of an app traffic log line<!--฿ |log entry| is preferred. ฿--> looks like:
 
 `{"timestamp": "2020-06-23T11:36:01.710452019Z", "source": "cfnetworking.iptables", "message": "cfnetworking.iptables.ingress-allowed", "log_level": 1, "data": { "destination": { "container_id": "d5978989-1401-49ff-46cd-33e5","app_guid": "bc6f229d-5e4a-4c41-a63f-e8795496c283",`.
 
-Each log message includes:
+Each log message<!--฿ |log entry| is preferred. ฿--> includes:
 
 * A timestamp, either in RFC3339 format or in epoch format. The format depends upon the configuration of the **Timestamp format for component logs** in the **System Logging** pane of the <%= vars.app_runtime_abbr %> tile
 
@@ -216,7 +216,7 @@ Each log message includes:
 
 * IP addresses and ports for both source and destination apps
 
-* A `message` field recording whether the packet was allowed or denied, with one of the following four possibilities:
+* A `message` field<!--฿ If referring to a UI, |text box| is preferred. ฿--> recording whether the packet was allowed or denied, with one of the following four possibilities:
   * `ASG allowed packet to exit source app container`
   * `C2C policy allowed packet to enter destination app container`
   * `ASG prevented packet from exiting source app container`
@@ -226,16 +226,16 @@ Each log message includes:
 
 #### <a id="denied-packet"></a> Causes of denied packet
 
-You can determine whether a denied-packet log results from a container networking policy or an ASG rule as follows:
+You can determine<!--฿ |determine| has two meanings. Consider if the univocal |discover| or |verify| would be better. ฿--> whether a denied-packet log results from a container networking<!--฿ |CF Networking| is preferred. ฿--> policy or an ASG rule as follows:
 
 * **Container networking policy:** Log `message` string includes `ingress-denied` and `packet direction` is `ingress`.
 
 * **ASG rule:** Log `message` string includes `egress-denied` and `packet direction` is `egress`.
 
-### <a id="scope-app-traffic-log"></a> Global vs. ASG-level app traffic logging
+### <a id="scope-app-traffic-log"></a> Global vs<!--฿ |compared to|, |and|, or |or| are preferred. If you must use this term, spell out |versus|. ฿-->. ASG-level app traffic logging
 
 <%= vars.app_runtime_abbr %> supports two mechanisms for enabling app traffic logging. Enabling the **Log traffic for all accepted and denied app packets** check box in the **Networking** pane of the <%= vars.app_runtime_abbr %> tile activates app traffic logging globally for all ASGs and container policies. Setting the `log` property of an ASG to `true` activates app traffic logging at the individual ASG level. For more information about setting the `log` property of an ASG to `true`, see [The Structure and Attributes of ASGs](../concepts/asg.html#creating-groups) in _App Security Groups_.
 
-Because these two mechanisms operate independently, <%= vars.app_runtime_abbr %> generates duplicate logs when app traffic logging is activated globally and an ASG's `log` property is set to `true`. To avoid duplicate logs, <%= vars.company_name %> recommends setting the `log` property to `false` for all ASGs, or leaving it out entirely, when app traffic logging is activated globally. For more information, see [App Traffic Logging](#app-traffic-log).
+Because these two mechanisms operate independently, <%= vars.app_runtime_abbr %> generates duplicate logs when app traffic logging is activated globally and an ASG's<!--฿ To make an abbreviation a plural, just add a lowercase |s| without an apostrophe. ฿--> `log` property is set to `true`. To avoid duplicate logs, <%= vars.company_name %> recommends setting the `log` property to `false` for all ASGs, or leaving it out entirely, when app traffic logging is activated globally. For more information, see [App Traffic Logging](#app-traffic-log)<!--฿ If this file is a partial, do not use relative links. ฿-->.
 
 To focus on specific ASGs for log analysis, <%= vars.company_name %> recommends enabling app traffic logs globally and using a logging platform to filter traffic logs by ASG, rather than setting `log` at the individual ASG level.
