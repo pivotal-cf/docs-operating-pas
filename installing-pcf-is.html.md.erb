@@ -96,20 +96,10 @@ To configure the **App Containers** pane:
   * For **LDAP user search base**, enter the location in the LDAP directory tree from which any LDAP user search begins. The typical LDAP search base matches your domain name. <br>For example, a domain named `cloud.example.com` typically uses the following LDAP user search base: `ou=Users,dc=example,dc=com`.
   * (Optional) For **LDAP server CA certificate**, you can enter a certificate if your LDAP server supports TLS and you want to enable TLS connections from the NFS driver to your LDAP server. This is the CA certificate that your LDAP server uses to verify the TLS certificates for NFS. Paste in the root certificate from your CA certificate or your self-signed certificate.
 
-  <p class='note'><strong>Note:</strong> UAA can only parse one certificate entered into this field. If you enter multiple certificates, UAA only uses the first one you entered and ignores the rest. You only need to include one root certificate or self-signed certificate.</p>
+    <p class='note'><strong>Note:</strong> UAA can only parse one certificate entered into this field. If you enter multiple certificates, UAA only uses the first one you entered and ignores the rest. You only need to include one root certificate or self-signed certificate.
+    </p>
 
-* For **LDAP service account user**, enter the user name of the service account in LDAP that manages volume services.
-* For **LDAP service account password**, enter the password for the service account.
-* For **LDAP server host**, enter the hostname or IP address of the LDAP server.
-* For **LDAP server port**, enter the LDAP server port number. The default port is 389.
-* For **LDAP user search base**, enter the location in the LDAP directory tree from which any LDAP user search begins. The typical LDAP search base matches your domain name. <br>For example, a domain named `cloud.example.com` typically uses the following LDAP user search base: `ou=Users,dc=example,dc=com`.
-* (Optional) For **LDAP server CA certificate**, you can enter a certificate if your LDAP server supports TLS and you want to enable TLS connections from the NFS driver to your LDAP server. This is the CA certificate that your LDAP server uses to verify the TLS certificates for NFS. Paste in the root certificate from your CA certificate or your self-signed certificate.
-
-  <p class="note important">
-<span class="note__title">Important</span>  UAA can only parse one certificate entered into this field. If you enter multiple certificates, UAA only uses the first one you entered and ignores the rest. You only need to include one root certificate or self-signed certificate
-</p>
-
-9. Click **Save**.
+2. Click **Save**.
 
 ### <a id='syslog'></a> Configure system logging
 
@@ -119,7 +109,7 @@ To configure the **System Logging** pane:
 
 1. Select **System Logging**.
 
-1. Select an option under **Configure syslog for system components?**. Do not use** is selected by default. This setting only affects Diego Cell and Gorouter components within the isolation segment. This setting does not affect shared <%= vars.app_runtime_abbr %> system components.
+1. Select an option under **Configure syslog for system components?**. **Do not use** is selected by default. This setting only affects Diego Cell and Gorouter components within the isolation segment. This setting does not affect shared <%= vars.app_runtime_abbr %> system components.
 
 1. To use syslog, select **Use**.
 
@@ -142,8 +132,6 @@ To configure the **System Logging** pane:
 
 1. (Optional) To specify a custom syslog rule, enter it in the **Custom rsyslog configuration** field in RainerScript syntax. For more information about customizing syslog rules, see [Customizing Syslog Rules](./custom-syslog-rules.html).
 For more information about RainerScript, see the [RainerScript](http://www.rsyslog.com/doc/v8-stable/rainerscript/index.html) documentation.
-
-1. Select the **Enable system metrics** check box to emit system-level metrics about all VMs in the deployment. For a list of the VM metrics that the System Metric Agent emits, see [System Metrics Agent](https://github.com/cloudfoundry/system-metrics-release/blob/main/docs/system-metrics-agent.md) in GitHub. When you activate this check box, ensure that you open port `9100` for the isolation segment. For more information, see [Configure Firewall Rules](../adminguide/routing-is.html#config-firewall) in _Routing for Isolation Segments_.
 
 1. Click **Save**.
 
@@ -285,8 +273,7 @@ To configure the **Smoke Tests** pane:
 
 1. Click **Save**.
 
-<p class="note important">
-<span class="note__title">Important</span>  If you configure the
+<p class='note'><strong>Note:</strong> If you configure the
 <strong>Compute and Networking Isolation</strong> pane and the
 <strong>Requests to isolation segments</strong> property in
 the <%= vars.app_runtime_abbr %> tile in a manner other than the use cases
