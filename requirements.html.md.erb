@@ -29,12 +29,18 @@ The general requirements for deploying and managing an installation of <%= vars.
       * TCP Router
   * One IP for each VM instance created by the service.
   * An additional IP address for each compilation worker. The formula for total IPs needed is `IPs needed = static IPs + VM instances + compilation workers`.
-    <p class="note"><strong>Note:</strong> <%= vars.company_name %> recommends that you allocate at least 36 dynamic IP addresses when installing <%= vars.app_runtime_abbr %>. BOSH requires additional dynamic IP addresses during installation to compile and deploy VMs, install <%= vars.app_runtime_abbr %>, and connect to services.</p>
+
+    <p class="note important">
+    <span class="note__title">Important</span>
+    <%= vars.company_name %> recommends that you allocate at least 36 dynamic IP addresses when installing <%= vars.app_runtime_abbr %>. BOSH requires additional dynamic IP addresses during installation to compile and deploy VMs, install <%= vars.app_runtime_abbr %>, and connect to services.</p>
 
 * One or more NTP servers if not already provided by your IaaS.
 
 * (**Recommended**) A network without DHCP available for deploying the <%= vars.app_runtime_abbr %> VMs.
-  <p class="note"><strong>Note:</strong> If you have DHCP, see <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/2.10/vmware-tanzu-ops-manager/install-troubleshooting.html">Troubleshooting Deployment Problems</a> in the <%= vars.ops_manager %> documentation for information about avoiding issues with your installation.</p>
+
+    <p class="note">
+    <span class="note__title">Note</span>
+    If you have DHCP, see <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/2.10/vmware-tanzu-ops-manager/install-troubleshooting.html">Troubleshooting Deployment Problems</a> in the <%= vars.ops_manager %> documentation for information about avoiding issues with your installation.</p>
 
 * (**Optional**) External storage. When you deploy <%= vars.app_runtime_abbr %>, you can select internal file storage or external file storage, either network-accessible or IaaS-provided, as an option in the <%= vars.app_runtime_abbr %> tile. <%= vars.company_name %> recommends using external storage whenever possible. For more information about how file storage location affects platform performance and stability during upgrades, see [Configure File Storage](./configuring.html#file-storage) in _Configuring <%= vars.app_runtime_abbr %> for Upgrades_.
 
