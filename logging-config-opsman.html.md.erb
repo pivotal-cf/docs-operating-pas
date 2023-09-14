@@ -142,17 +142,17 @@ To add component VM instances for Loggregator components:
 
 1. Increase the number in the **Instances** column of the component you want to scale. You can add instances for the following Loggregator components:
 	* **Loggregator Traffic Controller**
-		<p class="note"><strong>Note:</strong> The Reverse Log Proxy (RLP) BOSH job is co-located on the Traffic Controller VM. If you want to scale Loggregator to handle more logs for syslog drains, you can add instances of the Traffic Controller. For more information, see <a href="../loggregator/architecture.html">Loggregator Architecture</a>.</p>
-		<p class="note"><strong>Note:</strong> The BOSH System Metrics Forwarder</a> job is co-located on the Traffic Controller VM. If you want to scale Loggregator to handle more BOSH component metrics, you can add instances of the Traffic Controller. For more information, see <a href="../loggregator/architecture.html#bosh-metrics">Related BOSH Components</a> in <em>Loggregator Architecture</em>.</p>
+    	* The Reverse Log Proxy (RLP) BOSH job is co-located on the Traffic Controller VM. If you want to scale Loggregator to handle more logs for syslog drains, you can add instances of the Traffic Controller. For more information, see <a href="../loggregator/architecture.html">Loggregator Architecture</a>.
+    	* The BOSH System Metrics Forwarder</a> job is co-located on the Traffic Controller VM. If you want to scale Loggregator to handle more BOSH component metrics, you can add instances of the Traffic Controller. For more information, see <a href="../loggregator/architecture.html#bosh-metrics">Related BOSH Components</a> in <em>Loggregator Architecture</em>.
 	* **Doppler Server**
 
-1. Click **Save**.
+2. Click **Save**.
 
-1. Return to the <%= vars.ops_manager %> Installation Dashboard.
+3. Return to the <%= vars.ops_manager %> Installation Dashboard.
 
-1. Click **Review Pending Changes**.
+4. Click **Review Pending Changes**.
 
-1. Click **Apply Changes**.
+5. Click **Apply Changes**.
 
 
 ## <a id="app-traffic-log"></a> App traffic logging
