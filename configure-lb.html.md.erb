@@ -263,10 +263,12 @@ To configure the Gorouter to use GCP load balancers:
 
 11. Verify that the **Internet Connected** check box for every job is deactivated. When preparing your GCP environment, you provisioned a Network Address Translation (NAT) box to provide Internet connectivity to your VMs instead of providing them with public IP addresses to allow the jobs to reach the Internet.
 
-   <p class="note important">
+  <p class="note important">
   <span class="note__title">If you want to provision a Network Address Translation (NAT) box to provide Internet connectivity to your VMs instead of providing them with public IP addresses, deactivate the <strong>Internet Connected</strong> check boxes. For more information about using NAT in GCP, see <a href="https://cloud.google.com/compute/docs/networking">VPC network overview</a> in the GCP documentation.</p>
 
-1.  Click **Save**.
+    If you want to provision a Network Address Translation (NAT) box to provide Internet connectivity to your VMs instead of providing them with public IP addresses, disable the <strong>Internet Connected</strong> check boxes. For more information about using NAT in GCP, see <a href="https://cloud.google.com/compute/docs/networking">VPC network overview</a> in the GCP documentation.
+
+12. Click **Save**.
 
 
 ## <a id="openstack"></a> OpenStack
