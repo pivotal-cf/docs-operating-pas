@@ -35,23 +35,23 @@ To rotate the CCDB encryption key:
    with the **Primary** check box enabled.
 
 1. In the **Encryption key ledger** field:
-	<p> Do not remove any existing keys until
-           after you complete the last step of this procedure.
-           Removing keys now causes the <%= vars.app_runtime_abbr %> deploy to fail.
-        </p>
+
+	Do not remove any existing keys until after you complete the last step of this procedure.
+   Removing keys now causes the <%= vars.app_runtime_abbr %> deploy to fail.
+
 	1. Click **Add**.
-	1. Enter values for **Encryption key label** and **Encryption key**.
-	1. Enable the check box to mark this as your **Primary** key.
+	2. Enter values for **Encryption key label** and **Encryption key**.
+	3. Select the check box to mark this as your **Primary** key.
 
-1. Click **Save**.
+2. Click **Save**.
 
-1. Select the **Errands** pane.
+3. Select the **Errands** pane.
 
-1. Set the **Rotate CC Database Key** errand to **On**.
+4. Set the **Rotate CC Database Key** errand to **On**.
 
-1. Click **Save**.
+5. Click **Save**.
 
-1. Redeploy <%= vars.app_runtime_abbr %>.
+6. Redeploy <%= vars.app_runtime_abbr %>.
    After <%= vars.app_runtime_abbr %> deploys and the errand runs successfully,
    you can remove any previously specified CCDB encryption keys in the ledger.
 
