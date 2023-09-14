@@ -33,7 +33,7 @@ To add the <%= vars.app_runtime_abbr %> tile to your <%= vars.ops_manager %> Ins
 
 ## <a id='assign-azs-networks'></a> Assign AZs and Networks
 
-<p class="note"><strong>Note:</strong> For Azure environments, this configuration pane is <strong>Assign Networks</strong> and does not include AZ configuration.</p>
+For Azure environments, this configuration pane is <strong>Assign Networks</strong> and does not include AZ configuration.
 
 In the **Assign AZ and Networks** pane, you assign jobs to your Availability Zones (AZs) and networks.
 
@@ -41,9 +41,9 @@ To configure the **Assign AZ and Networks** pane:
 
 1. Select **Assign AZ and Networks**.
 
-1. From the **Network** drop-down menu, select the network where you want to run <%= vars.app_runtime_abbr %>.
+2. From the **Network** drop-down menu, select the network where you want to run <%= vars.app_runtime_abbr %>.
 
-1. Click **Save**.
+3. Click **Save**.
 
 ## <a id='domains'></a> Configure domains
 
@@ -60,21 +60,25 @@ To configure the **Domains** pane:
 1. Click **Save**.
 
 For additional guidance based on your installation method, see the table below:
- <table>
-  <tr>
-   <th>Installation Method</th>
-   <th>Guidance</th>
-  </tr>
-  <tr>
-   <td>Manual</td>
-   <td>Enter the domains you created when preparing your environment for <%= vars.platform_name %>.</td>
-  </tr>
-  <tr>
-   <td>Terraform</td>
-   <td>Enter the values for <code>sys\_domain</code> and <code>apps\_domain</code> from the Terraform output.</td>
-  </tr>
- </table>
- <p> <%= vars.company_name %> recommends that you use the same domain name but different subdomain names for your system and app domains. Doing so allows you to use a single wildcard certificate for the domain while preventing apps from creating routes that overlap with system routes.</p>
+	<table>
+		<tr>
+			<th>Installation Method</th>
+			<th>Guidance</th>
+		</tr>
+		<tr>
+			<td>Manual</td>
+			<td>Enter the domains you created when preparing your environment for <%= vars.platform_name %>.</td>
+		</tr>
+		<tr>
+			<td>Terraform</td>
+			<td>Enter the values for <code>sys\_domain</code> and <code>apps\_domain</code> from the Terraform output.</td>
+		</tr>
+	</table>
+
+	<p class="note">
+    <span class="note__title">Note</span>
+    <%= vars.company_name %> recommends that you use the same domain name but different subdomain names for your system and app domains. This allows you to use a single wildcard certificate for the domain while preventing apps from creating routes that overlap with system routes.</p>
+
 
 ## <a id='networking'></a> Configure Networking
 
@@ -104,22 +108,21 @@ To configure the **App Developer Controls** pane:
 1. Enter the **Default app memory quota per org** in MB. This is the default memory limit for all apps in an org. The specified limit only applies to the first installation of <%= vars.app_runtime_abbr %>. After the initial installation, operators can use the cf CLI to change the default value.
 
 1. For **Maximum disk quota per app** in MB, enter in MB the maximum amount of disk allowed per app.
-
- <p> If you allow developers to push large apps, <%= vars.app_runtime_abbr %> might have trouble placing them on Diego
-  Cells. Additionally, in the event of a system upgrade or an outage that causes a rolling deploy, larger apps might not successfully redeploy if there is
-  insufficient disk capacity. Monitor your deployment to ensure that your Diego Cells have sufficient disk to run your apps.</p>
+	If you allow developers to push large apps, <%= vars.app_runtime_abbr %> might have trouble placing them on Diego
+	Cells. Additionally, in the event of a system upgrade or an outage that causes a rolling deploy, larger apps might not successfully redeploy if there is
+	insufficient disk capacity. Monitor your deployment to ensure that your Diego Cells have sufficient disk to run your apps.
 
 1. Enter the **Default disk quota per app** in MB. This is the amount of disk allocated by default to a newly-pushed app if no value is specified with `cf push`.
 
-1. Enter the **Default service instance quota per org**. The specified limit only applies to the first installation of <%= vars.app_runtime_abbr %>. After the initial installation, operators can use the cf CLI to change the default value.
+4. Enter the **Default service instance quota per org**. The specified limit only applies to the first installation of <%= vars.app_runtime_abbr %>. After the initial installation, operators can use the cf CLI to change the default value.
 
-1. Enter the **Staging timeout** in seconds. When you stage an app droplet with the Cloud Controller, the server times out after the number of seconds you specify in this field.
+5. Enter the **Staging timeout** in seconds. When you stage an app droplet with the Cloud Controller, the server times out after the number of seconds you specify in this field.
 
-1. For **Internal domains**, enter one or more domains that apps use for internal DNS service discovery. If you specify a domain using `cf push -d`, other <%= vars.app_runtime_abbr %> apps can reach the pushed app at `APP-NAME.INTERNAL-DOMAIN`. This value defaults to `apps.internal`.
+6. For **Internal domains**, enter one or more domains that apps use for internal DNS service discovery. If you specify a domain using `cf push -d`, other <%= vars.app_runtime_abbr %> apps can reach the pushed app at `APP-NAME.INTERNAL-DOMAIN`. This value defaults to `apps.internal`.
 
-1. Enable the **Allow space developers to manage network policies** check box to permit developers to manage their own network policies for their apps.
+7. Enable the **Allow space developers to manage network policies** check box to permit developers to manage their own network policies for their apps.
 
-1. Click **Save**.
+8. Click **Save**.
 
 ## <a id='app-security'></a> Configure App Security Groups
 
@@ -162,7 +165,10 @@ To configure the **CredHub** pane:
         * **Password:** Enter the password for the provided username.
         * **Database CA certificate:** This certificate is used when encrypting traffic to and from the database.
         * **Disable hostname verification:** Activate this check box to deactivate hostname verification for TLS connections to the targeted database server. You cannot deactivate hostname verification for TLS connections to Postgres databases. You must select this option if you are configuring an external database on GCP or Azure.
-      <div class="note"><strong>Note:</strong> If you deploy <%= vars.app_runtime_abbr %> on AWS using Terraform, you can locate these values in your Terraform output:
+
+      <div class="note">
+        <span class="note__title">Note</span>
+        If you deploy <%= vars.app_runtime_abbr %> on AWS using Terraform, you can locate these values in your Terraform output:
           <ul>
             <li><strong>Hostname:</strong> <code>rds_address</code></li>
             <li><strong>TCP port:</strong> <code>rds_port</code></li>
@@ -171,12 +177,12 @@ To configure the **CredHub** pane:
           </ul>
       </div>
 
-1. (Optional) Under **KMS plugin providers**, specify one or more Key Management Service (KMS) providers:
+2. (Optional) Under **KMS plugin providers**, specify one or more Key Management Service (KMS) providers:
     * **Instance name:** Enter the name of the KMS provider.
     * **Endpoint:** Enter the Unix socket address for the KMS plugin.
     * **Primary:** Enable the **Primary** check box to indicate the primary KMS provider for your environment. You must mark one provider as primary. Do not mark more than one provider as primary.
 
-1. Under **Internal encryption provider keys**, specify one or more keys to use for encrypting and decrypting the values stored in the CredHub database.
+3. Under **Internal encryption provider keys**, specify one or more keys to use for encrypting and decrypting the values stored in the CredHub database.
     * If you plan to use internal encryption, configure these fields:
         * **Name:** Enter any key name.
         * **Key:** Enter a randomly generated value that is at least 20 characters long. This key is used for encrypting all data.
@@ -185,9 +191,9 @@ To configure the **CredHub** pane:
         * **Name:** Enter a key name that already exists on your HSM or a new key name. For each new key name, CredHub generates a key in **HSM provider partition** that you configure below.
         * **Key:** Enter a placeholder value under **Key**. CredHub does not use this key for encryption. However, you cannot leave the **Key** field blank.
         * **Primary:** This check box is used for marking the key you specified above as the primary encryption key. You must mark one key as primary. Do not mark more than one key as primary.
-    <p class="note"><strong>Note:</strong> For information about using additional keys for key rotation, see <a href="credential-rotation.html">Rotating Runtime CredHub Encryption Keys</a>.</p>
+    <p class="note"><span class="note__title">Note</span>For information about using additional keys for key rotation, see <a href="credential-rotation.html">Rotating Runtime CredHub Encryption Keys</a>.</p>
 
-1. (Optional) To configure CredHub to use an HSM, configure these fields:
+4. (Optional) To configure CredHub to use an HSM, configure these fields:
     * **HSM provider partition:** Enter the name of the HSM provider partition.
     * **HSM provider partition password:** Enter a password to use to access the HSM provider partition.
     * **HSM provider client certificate:** Enter the client certificate for the HSM. For more information, see [Create and Register HSM Clients](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/2.10/vmware-tanzu-ops-manager/install-hsm-config.html#create-register-hsm) in _Preparing CredHub HSMs for Configuration_.
@@ -200,31 +206,33 @@ To configure the **CredHub** pane:
         * **Partition serial number:** Enter the serial number of the HSM partition.
         * **HSM certificate:** Enter the certificate for the HSM server. The HSM presents this certificate to CredHub to establish a two-way TLS connection.
 
-2. If your deployment uses any <%= vars.platform_name %> services that support storing service instance credentials in CredHub and you want to enable this feature, enable the **Secure service instance credentials** check box. For more information about using CredHub for securing service instance credentials, see [Securing Service Instance Credentials with Runtime CredHub](secure-si-creds.html).
+5. If your deployment uses any <%= vars.platform_name %> services that support storing service instance credentials in CredHub and you want to enable this feature, enable the **Secure service instance credentials** check box. For more information about using CredHub for securing service instance credentials, see [Securing Service Instance Credentials with Runtime CredHub](secure-si-creds.html).
 
-3. Click **Save**.
+6. Click **Save**.
 
-4. Go to the **Resource Config** pane.
+7. Go to the **Resource Config** pane.
 
-5. Under the **Job** column of the **CredHub** row, ensure that the number of instances is set to `2`. This is the minimum instance count required for high availability.
+8. Under the **Job** column of the **CredHub** row, ensure that the number of instances is set to `2`. This is the minimum instance count required for high availability.
 
-6. To configure UAA so it recognizes a proxy, complete the following fields:
+9. To configure UAA so it recognizes a proxy, complete the following fields:
     * **List of proxy servers:** Enter a comma-separated list of router IP addresses for the first group of HTTP/TCP backends.
     * **http proxy:** Enter the `http_proxy` for all http requests across VMs.
     * **https proxy:** Enter the `https_proxy` for all http requests across VMs
     * **no proxy:** Enter a comma-separated list of either domains, IP addresses or DNS suffixes.
 
-7. Click **Save**.
+10. Click **Save**.
 
 ## <a id='sys-db'></a> Configure Databases
 
 In the **Databases** pane, you can configure <%= vars.app_runtime_abbr %> to use an internal MySQL database provided with <%= vars.platform_name %>, or you can configure an external database provider for the databases required by <%= vars.app_runtime_abbr %>.
 
-<p class="note"><strong>Note:</strong> If you are performing an upgrade, do not modify your existing internal database configuration, or you might lose data. You must migrate your existing data first before changing the configuration. For additional upgrade information, see <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/2.10/vmware-tanzu-ops-manager/install-upgrading-pcf.html">Upgrading <%= vars.platform_name %></a>.</p>
+<p class="note caution">
+<span class="note__title">Caution</span>
+If you are performing an upgrade, do not modify your existing internal database configuration, or you might lose data. You must migrate your existing data before changing the configuration. For additional upgrade information, see <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/2.10/vmware-tanzu-ops-manager/install-upgrading-pcf.html">Upgrading <%= vars.platform_name %></a>.</p>
 
 ### <a id='internal-db'></a> Internal Database Configuration
 
-<p class="note"><strong>Note:</strong> For GCP installations, <%= vars.company_name %> recommends selecting <strong>External</strong> and using Google Cloud SQL. Only use internal MySQL for non-production or test installations on GCP.</p>
+For GCP installations, <%= vars.company_name %> recommends selecting <strong>External</strong> and using Google Cloud SQL. Only use internal MySQL for non-production or test installations on GCP.
 
 <%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
 
