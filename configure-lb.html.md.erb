@@ -143,7 +143,7 @@ To configure the Gorouter to use Azure load balancers:
 
 1. Ensure a `Standard` VM type is selected for the **Router** VM. The <%= vars.app_runtime_abbr %> deployment fails if you select a `Basic` VM type.
 
-1. Click the icon next to the **Router** job name to expand the row, showing a **LOAD BALANCERS** field and **INTERNET CONNECTED** checkbox underneath.
+1. Click the icon next to the **Router** job name to expand the row, showing a **LOAD BALANCERS** field and **INTERNET CONNECTED** check box underneath.
 
 1. Enter the value of `web_lb_name` from your Terraform output in the **Resource Config** pane under **LOAD BALANCERS** for the **Router** job.
 
@@ -153,7 +153,7 @@ To configure the Gorouter to use Azure load balancers:
 
 1. For the SSH load balancer, enter the value of `diego_ssh_lb_name` from your Terraform output.
 
-1. Ensure that the **INTERNET CONNECTED** checkboxes are deselected for all jobs.
+1. Ensure that the **INTERNET CONNECTED** check boxes are deselected for all jobs.
 
 1. Scale the number of instances as appropriate for your deployment.
     <p class="note">
@@ -175,7 +175,7 @@ To configure the Gorouter to use Azure load balancers:
   <p class="note important">
   <span class="note__title">Important</span>The Azure portal sometimes displays the names of resources with incorrect capitalization. Always use the Azure CLI to retrieve the correctly capitalized name of a resource. To see the list of resources, run <code>az network lb list</code>.</p>
 
-1. In the **Resource Config** pane of the <%= vars.app_runtime_abbr %> tile, click the icon next to the **Router** job name to expand the row, showing a **LOAD BALANCERS** field and **INTERNET CONNECTED** checkbox underneath.
+1. In the **Resource Config** pane of the <%= vars.app_runtime_abbr %> tile, click the icon next to the **Router** job name to expand the row, showing a **LOAD BALANCERS** field and **INTERNET CONNECTED** check box underneath.
 
 1. Enter the name of your external ALB in the field under **LOAD BALANCERS**.
    If you have multiple, external ALBs, this field accepts a comma-separated list.
@@ -188,7 +188,7 @@ To configure the Gorouter to use Azure load balancers:
 
 1. Enter the name of the Diego SSH Load Balancer in the field under **LOAD BALANCERS**.
 
-1. Ensure that the **INTERNET CONNECTED** checkboxes are deselected for all jobs.
+1. Ensure that the **INTERNET CONNECTED** check boxes are deselected for all jobs.
 
 1. Scale the number of instances as appropriate for your deployment.
   <p class="note important"><span class="note__title">Important</span>For a high availability deployment of Ops Manager on Azure, <%= vars.company_name %> recommends scaling the number of each <%= vars.app_runtime_abbr %> job to a minimum of three instances. Using three or more instances for each job creates a sufficient number of availability sets and fault domains for your deployment. For more information, see <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/2.10/vmware-tanzu-ops-manager/refarch-azure-azure_ref_arch.html">Azure Reference Architecture</a>.</p>
@@ -205,7 +205,7 @@ To configure the Gorouter to use GCP load balancers:
 
 1. Select **Resource Config**.
 
-1. Click the icon next to the **Router** job name to expand the row, showing a **LOAD BALANCERS** field and **INTERNET CONNECTED** checkbox underneath.
+1. Click the icon next to the **Router** job name to expand the row, showing a **LOAD BALANCERS** field and **INTERNET CONNECTED** check box underneath.
 
 1. In the **Load Balancers** field, enter a comma-separated list consisting of the values of `ws_router_pool` and `http_lb_backend_name` from your Terraform output. For example, `tcp:<%= vars.platform_name_lc %>-cf-ws,http:<%= vars.platform_name_lc %>-httpslb`. These are the names of the TCP WebSockets and HTTP(S) load balancers for your deployment.
     <p class="note important">
@@ -245,7 +245,7 @@ To configure the Gorouter to use GCP load balancers:
 
 5. In the <%= vars.app_runtime_abbr %> tile, select **Resource Config**.
 
-6. Click the icon next to the **Router** job name to expand the row, showing a **LOAD BALANCERS** field and **INTERNET CONNECTED** checkbox underneath.
+6. Click the icon next to the **Router** job name to expand the row, showing a **LOAD BALANCERS** field and **INTERNET CONNECTED** check box underneath.
 
 7. In the **Load Balancers** field, enter a comma-separated list consisting of the name of your TCP WebSockets load balancer and the name of your HTTP(S) load balancer back end with the protocol prepended. For example, `tcp:<%= vars.platform_code %>-wss-logs,http:<%= vars.platform_code %>-http-lb-backend`.
     <p class="note important">
