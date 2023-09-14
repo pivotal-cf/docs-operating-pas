@@ -22,7 +22,7 @@ Use the `max_in_flight` API endpoint to configure the maximum value for componen
 
 Use the string `default` as the `max_in_flight` value to force the component to use the deployment's default value.
 
-<p class="note"><strong>Note:</strong> The following example lists three <code>JOB_GUID</code>s. These three GUIDs are examples of the three different types of values you can use to configure <code>max_in_flight</code>. The endpoint only requires one GUID.</p>
+The following example lists three `JOB_GUID`s. These three GUIDs are examples of the three different types of values you can use to configure <code>max_in_flight</code>. The endpoint only requires one GUID.
 
 <pre class="terminal">
 	curl "https://EXAMPLE.com/api/v0/staged/products/PRODUCT-TYPE1-GUID/max_in_flight" \
@@ -134,6 +134,8 @@ Whenever possible, <%= vars.recommended_by %> recommends using external file sto
 As a best-effort calculation, estimate the total number of bits needed to move during a system upgrade to determine the IOPS performance required of your file storage.
 
 * **Number of Diego Cells**: As a first calculation, determine the number of Diego Cells that your deployment currently uses. To view the number of Diego Cell instances currently running in your deployment, see the **Resource Config** pane of the <%= vars.app_runtime_abbr %> tile. If you expect to scale up the number of instances, use the anticipated scaled number.
-	<p class="note"><strong>Note:</strong> If your deployment uses more than 20 Diego Cells, avoid using internal file storage. Instead, always select external or IaaS-provided file storage.</p>
+
+  <p class="note important">
+  <span class="note__title">Important</span>If your deployment uses more than 20 Diego Cells, avoid using internal file storage. Instead, always select external or IaaS-provided file storage.</p>
 
 * **Maximum In-Flight Load and Container Starts for Diego Cells**: Operators can limit the number of containers and Diego Cell instances that Diego starts concurrently. If operators impose no limits, your file storage may experience exceptionally heavy load during an upgrade.
