@@ -5,7 +5,9 @@ owner: MySQL
 
 Here are two procedures for managing the internal MySQL databases used by <%= vars.app_runtime_first %> system components: scaling down your MySQL cluster, and migrating the cluster to a database stack that uses TLS encryption. It also provides example sizing data from two environments that have significant load on their MySQL clusters.
 
-<p class="note"><strong>Note:</strong> The procedures do not apply to databases configured as external in the <strong>Databases</strong> pane of the <%= vars.app_runtime_abbr %> tile.</p>
+<p class="note important">
+<span class="note__title">Important</span>
+These procedures do not apply to databases configured as external in the <strong>Databases</strong> pane of the <%= vars.app_runtime_abbr %> tile.</p>
 
 <%= vars.app_runtime_abbr %> components that use system databases include the Cloud Controller, Diego Brain, Gorouter, and the User Authorization and Authentication (UAA) server. For more information, see [<%= vars.app_runtime_abbr %> Components](../concepts/architecture/index.html).
 
