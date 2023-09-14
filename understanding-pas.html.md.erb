@@ -54,18 +54,21 @@ When a component is scaled at a single instance, it can experience downtime and 
 
 For more information about how the scale of each component affects upgrade behavior, see [Component Upgrade Order and Behavior](#order-behavior) below.
 
-<p> A full <%= vars.ops_manager %> upgrade might take close to two hours. You have limited ability to deploy an app during this time.</p>
+<p class="note">
+<span class="note__title">Note</span>
+A full <%= vars.ops_manager %> upgrade might take close to two hours. You have limited ability to deploy an app during this time.</p>
 
 #### <a id= "order-behavior"></a> Component upgrade order and behavior
 
 The following table lists components in the order that <%= vars.ops_manager %> upgrades each. It also lists which components are scalable and explains how component downtime affects <%= vars.app_runtime_abbr %> app and control availability. The table includes these columns:
 
 * **Scalable:** Indicates whether the component is scalable above a single instance.
-    <p> For components marked with a checkmark in this column, <%= vars.company_name %> recommends that you change the preconfigured instance value of <code>1</code> to a value that best supports your production environment. For more information about scaling a deployment, see <a href="../concepts/high-availability.html">High Availability in <%= vars.app_runtime_abbr %></a>.</p>
+
+    For components marked with a checkmark in this column, <%= vars.company_name %> recommends that you change the preconfigured instance value of <code>1</code> to a value that best supports your production environment. For more information about scaling a deployment, see <a href="../concepts/high-availability.html">High Availability in <%= vars.app_runtime_abbr %></a>.
 
 * **Extended Downtime:** Indicates that if there is only one instance of the component, that component is unavailable for up to five minutes during an upgrade.
 
-* **Downtime Affects...:** Indicates the plane of the <%= vars.app_runtime_abbr %> platform that component downtime affects, if the component is scaled at single instance:
+* **Downtime Affects:** Indicates the plane of the <%= vars.app_runtime_abbr %> platform that component downtime affects, if the component is scaled at single instance:
   * **Apps**: Downtime can affect app availability.
   * **Platform**: Apps remain available during component downtime, but you cannot push, stage, or restart apps, or run other Cloud Foundry command-line interface (cf CLI) commands.
 
