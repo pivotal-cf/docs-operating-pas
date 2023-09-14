@@ -25,7 +25,9 @@ The Notifications Service is deployed as a suite of apps to the `notifications-w
 | `LOAD_BALANCER_IP` | 80, 443 | tcp | This service accesses the load balancer. |
 | `ASSIGNED_NETWORK` | 3306 | tcp | This service requires access to internal services. `ASSIGNED_NETWORK` is the CIDR of the network assigned to this service. |
 
-<p class="note"><strong>Note:</strong> The SMTP server port and protocol are dependent on how you configure your server.</p>
+<p class="note">
+<span class="note__title">Note</span>
+The SMTP server port and protocol depend on how you configure your server.</p>
 
 ### <a id="smtp"></a> Create a SMTP server ASG
 
@@ -61,7 +63,7 @@ To create an ASG for your SMTP server:
 
 ### <a id="assigned-network"></a> Create an assigned network ASG
 
-<p class="note"><strong>Note:</strong> If you use external services, the IP addresses, ports, and protocols depend on the service.</p>
+If you use external services, the IP addresses, ports, and protocols depend on the service.
 
 To create an ASG for an assigned network:
 
