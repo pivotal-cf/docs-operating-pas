@@ -42,23 +42,25 @@ Before beginning your configuration, you must register three domains through you
 
 ## <a id="load-balancer"></a> Step 2: Secure Apps Domain with HAProxy
 
-<p class="warning note"><strong>Caution:</strong> This method is easy to implement but may not be the best option for your security needs. Contact Support if you seek a custom solution to building secure, internal services.</p>
+<p class="note caution">
+<span class="note__title">Caution</span>
+This method is easy to implement but may not be the best option for your security needs. Contact Support if you need a custom solution to building secure, internal services.</p>
 
-<p class="note"><strong>Note:</strong> <%= vars.company_name %> supports HAProxy by default. However, you may configure an internal domain using any load balancer you choose that supports host header filtering.</p>
+<%= vars.company_name %> supports HAProxy by default. However, you may configure an internal domain using any load balancer you choose that supports host header filtering.
 
 1. Navigate to the <%= vars.ops_manager %> Installation Dashboard.
 
-1. Click the <%= vars.app_runtime_abbr %> tile.
+2. Click the <%= vars.app_runtime_abbr %> tile.
 
-1. Select **Networking**.
+3. Select **Networking**.
 
-1. Enter **HAProxy protected domains**. The domain you enter should be the same domain as the **Apps domain** defined in [Prerequisites](#prerequisites).
+4. Enter **HAProxy protected domains**. The domain you enter should be the same domain as the **Apps domain** defined in [Prerequisites](#prerequisites).
 
-1. Enter **HAProxy trusted CIDRs**, separated by spaces. This specifies CIDRs allowed to make requests to the domains listed in the **HAProxy protected domains** field. For example, entering `10.0.1.0/24` would allow any requests originating at a host IP in that range to reach apps or services hosted on the **HAProxy protected domains** list.
+5. Enter **HAProxy trusted CIDRs**, separated by spaces. This specifies CIDRs allowed to make requests to the domains listed in the **HAProxy protected domains** field. For example, entering `10.0.1.0/24` would allow any requests originating at a host IP in that range to reach apps or services hosted on the **HAProxy protected domains** list.
 
-1. (Optional) <%# Find this partial in GitHub at `pivotal-cf/docs-partials` %><%= partial "/pcf/core/haproxy_hsts_config" %>
+6. (Optional) <%# Find this partial in GitHub at `pivotal-cf/docs-partials` %><%= partial "/pcf/core/haproxy_hsts_config" %>
 
-1. (Optional) Configure an additional HAProxy for BOSH to secure your public-facing domain with credentials. For more information, see [proxy-boshrelease](https://github.com/cloudfoundry-incubator/haproxy-boshrelease) on GitHub.
+7. (Optional) Configure an additional HAProxy for BOSH to secure your public-facing domain with credentials. For more information, see [proxy-boshrelease](https://github.com/cloudfoundry-incubator/haproxy-boshrelease) on GitHub.
 
 
 ## <a id="authentication"></a> Step 3: (Optional) Enable an Authentication Service
