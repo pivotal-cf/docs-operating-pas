@@ -14,7 +14,7 @@ Use the following steps to create an ELB:
 	<%= image_tag("aws/aws_ssh_elb_step1.png", :alt => "AWS screenshot of 'Define Load Balancer' page with Basic Configuration and Select Subnets.") %>
   * Enter a load balancer name.
   * **Create LB Inside**: Select the **<%= vars.platform_name_lc %>-vpc** VPC where your <%= vars.platform_name %> installation lives.
-  * Ensure that the **Create an internal load balancer** checkbox is not selected.
+  * Ensure that the **Create an internal load balancer** check box is not selected.
 1. Under **Load Balancer Protocol**, ensure that this ELB is listening on TCP port `2222` and forwarding to TCP port `2222`.
 
 2. Under **Select Subnets**, select the public subnet.
