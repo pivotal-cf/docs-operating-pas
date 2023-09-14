@@ -41,10 +41,14 @@ To install <%= vars.app_runtime_abbr %> with minimal configuration:
 1. Select **Networking**.
 
 1. Under **Certificates and private keys for the Gorouter**, you must provide at least one certificate and private key name and certificate key pair for the Gorouter. The Gorouter is enabled to receive TLS communication by default. You can configure multiple certificates for the Gorouter.
-  <p class="note"><strong>Note:</strong> When providing custom certificates, enter them in this order: <code>wildcard</code>, <code>Intermediate</code>, <code>CA</code>. For more information, see <a href="https://www.digicert.com/ssl-support/pem-ssl-creation.htm">Creating a .pem File for SSL Certificate Installations</a> in the DigiCert documentation.</p>
-  1. Click **Add** to add a name for the certificate chain and its private key pair. This certificate is the default used by the Gorouter. You can either provide a certificate signed by a Certificate Authority (CA) or click **Generate RSA Certificate** to generate a self-signed certificate in <%= vars.ops_manager %>.
-  <p class="note"><strong>Note:</strong> If you configured <%= vars.ops_manager %> Front End without a certificate, you can use this new certificate to complete your <%= vars.ops_manager %> configuration. To configure your <%= vars.ops_manager %> Front End certificate, see <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/gcp-prepare-env-manual.html#config-frontend">Configure Front End</a> in <em> Preparing to deploy Tanzu Operations Manager on GCP</em>.</p>
-  <p class="note"><strong>Note:</strong> Ensure that you add any certificates that you generate in this pane to your infrastructure load balancer.</p>
+
+  When providing custom certificates, enter them in this order: `wildcard`, `Intermediate`, `CA`. For more information, see <a href="https://www.digicert.com/ssl-support/pem-ssl-creation.htm">Creating a .pem File for SSL Certificate Installations</a> in the DigiCert documentation.
+
+1. Click **Add** to add a name for the certificate chain and its private key pair. This certificate is the default used by the Gorouter. You can either provide a certificate signed by a Certificate Authority (CA) or click **Generate RSA Certificate** to generate a self-signed certificate in <%= vars.ops_manager %>.
+
+  If you configured <%= vars.ops_manager %> Front End without a certificate, you can use this new certificate to complete your <%= vars.ops_manager %> configuration. To configure your <%= vars.ops_manager %> Front End certificate, see <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/gcp-prepare-env-manual.html#config-frontend">Configure Front End</a> in <em> Preparing to Deploy Tanzu Operations Manager on GCP</em>.
+
+  <p class="note important"><span class="note__title">Important</span>Add any certificates that you generate in this pane to your infrastructure load balancer.</p>
 
 1. Deactivate the **HAProxy forwards all requests to the Gorouter over TLS** check box. By default, <%= vars.app_runtime_abbr %> does not deploy HAProxy.
 
@@ -56,7 +60,8 @@ To install <%= vars.app_runtime_abbr %> with minimal configuration:
   For more information about ASGs, see [App Security Groups](../concepts/asg.html). For more information about setting ASGs, see [Restricting App Access to Internal <%= vars.app_runtime_abbr %> Components](../operating/app-sec-groups.html).
 
 1. Under **SAML service provider credentials**, enter a certificate and private key for the User Account and Authentication (UAA) server to use as a SAML service provider for signing outgoing SAML authentication requests. You can provide an existing certificate and private key from your trusted CA or generate a self-signed certificate. The domain `*.login.SYSTEM-DOMAIN` must be associated with the certificate, where `SYSTEM-DOMAIN` is the system domain you configured in the **Domains** pane.
-  <p class="note"><strong>Note:</strong> The Single Sign-On for VMware Tanzu service and Spring Cloud Services for VMware Tanzu tiles require the <code>*.login.SYSTEM-DOMAIN</code>.</p>
+
+  <p class="note important"><span class="note__title">Important</span>The Single Sign-On for VMware Tanzu service and Spring Cloud Services for VMware Tanzu tiles require the <code>*.login.SYSTEM-DOMAIN</code>.</p>
 
 1. Select **UAA**.
 

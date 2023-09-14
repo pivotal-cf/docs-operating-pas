@@ -86,8 +86,10 @@ verify app identity using TLS. This is the default option.
 
 1. The **Enable containerd delegation** check box governs whether or not Garden delegates container create and destroy operations to the containerd tool. By default, this option is enabled and Garden uses containerd. Deactivate this option by disabling the check box. For more information about the containerd tool, see [containerd](https://containerd.io).
 
-1. Under **NFSv3 volume services**, select **Enable** or **Disable**. NFS volume services allow app developers to bind existing NFS volumes to their apps for shared file access. For more information, see [Enabling Volume Services](../operating/enable-vol-services.html).
-  <p class="note"><strong>Note:</strong> In a fresh install, NFSv3 volume services is enabled by default. In an upgrade, NFSv3 volume services is set to the same setting as it was in the previous deployment.</p>
+5. Under **NFSv3 volume services**, select **Allow** or **Do not allow**. NFS volume services allow app developers to bind existing NFS volumes to their apps for shared file access. For more information, see [Enabling Volume Services](../operating/enable-vol-services.html).
+  <p class="note">
+  <span class="note__title">Note</span>
+  In a fresh installation, NFSv3 volume services are enabled by default. In an upgrade, NFSv3 volume services is set to the same setting as it was in the previous deployment.</p>
 
 1. (Optional) To configure LDAP for NFSv3 volume services:
   * For **LDAP service account user**, enter the username of the service account in LDAP that manages volume services.
@@ -129,7 +131,8 @@ To configure the **System Logging** pane:
 1. (Optional) Enable the **Use TCP for file forwarding local transport** check box to transmit logs over TCP. This prevents log truncation, but may cause performance issues.
 
 1. (Optional) The **Do not forward debug logs** check box is enabled by default. To forward `DEBUG` syslog messages to an external service, deselect the check box.
-  <p class="note"><strong>Note:</strong> Some <%= vars.segment_runtime_full %> components generate a high volume of <code>DEBUG</code> syslog messages. Enabling the <strong>Do not forward debug logs</strong> check box prevents <%= vars.app_runtime_abbr %> components from forwarding the <code>DEBUG</code> syslog messages to external services. However, <%= vars.segment_runtime_full %> still writes the messages to the local disk.</p>
+  <p class="note important">
+  <span class="note__title">Important</span>Some <%= vars.segment_runtime_full %> components generate a high volume of <code>DEBUG</code> syslog messages. Enabling the <strong>Do not forward debug logs</strong> check box prevents <%= vars.app_runtime_abbr %> components from forwarding the <code>DEBUG</code> syslog messages to external services. However, <%= vars.segment_runtime_full %> still writes the messages to the local disk.</p>
 
 1. (Optional) To specify a custom syslog rule, enter it in the **Custom rsyslog configuration** field in RainerScript syntax. For more information about customizing syslog rules, see [Customizing Syslog Rules](./custom-syslog-rules.html). For more information about RainerScript, see the [RainerScript](http://www.rsyslog.com/doc/v8-stable/rainerscript/index.html) documentation.
 
@@ -269,7 +272,8 @@ To configure the **Resource Config** pane:
 1. Select **Resource Config**.
 
 1. If you are using a dedicated Gorouter for your isolation segment:
-  <p class="note"><strong>Note:</strong> The configuration settings available in <strong>Resource Config</strong> vary depending on your IaaS.</p>
+  <p class="note">
+  <span class="note__title">Note</span>The configuration settings available in <strong>Resource Config</strong> vary depending on your IaaS.</p>
   * **If you have the Load Balancers column in your Resource Config**:
       1. Enter the wildcard DNS entry attached to your load balancer into the **Router** row under **Load Balancers**.
   * **If you do not have the Load Balancers column in your Resource Config**:
