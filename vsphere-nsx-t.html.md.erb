@@ -4,10 +4,10 @@ owner: Ops Manager
 ---
 
 Here are instructions for installing <%= vars.app_runtime_first %> on
-vSphere with NSX-T internal networking, using the VMware NSX-T Container plug-in for <%=
-vars.platform_name %>.
+vSphere with NSX-T internal networking, using the VMware NSX-T Container plug-in for
+<%= vars.platform_name %>.
 
-<p class="note"><strong>Note:</strong> These instructions were updated to use the NSX-T Policy API, the next-generation interface for integrating with the NSX-T networking and security framework.</p>
+These instructions use the NSX-T Policy API, the next-generation interface for integrating with the NSX-T networking and security framework.
 
 <%= vars.app_runtime_abbr %> uses a Container Network Interface (CNI) plug-in to support secure and
 direct internal communication between containers.
@@ -31,7 +31,10 @@ Before deploying <%= vars.app_runtime_abbr %> with NSX-T networking, you must ha
 * The [<%= vars.app_runtime_abbr %> tile](https://network.tanzu.vmware.com/products/elastic-runtime) is downloaded from VMware Tanzu Network and imported to the <%= vars.ops_manager %> Installation Dashboard. The <%= vars.app_runtime_abbr %> tile must be in one of these states:
   * Configured but not currently deployed. You did not click **Review Pending Changes**, then **Apply Changes** on this version of <%= vars.app_runtime_abbr %>.
   * Deployed previously, with the **Container network interface plugin** field set to **External** in the **Networking** pane of the <%= vars.app_runtime_abbr %> tile.
-  <p class="note"><strong>Note:</strong> Deploying <%= vars.app_runtime_abbr %> with its container network interface (CNI) set to <strong>Silk</strong> configures Diego Cells to use an internally-managed container network. Subsequently switching the CNI interface to <strong>External</strong> NSX-T leads to errors.</p>
+
+class="note important">
+<span class="note__title">Important</span>
+Deploying <%= vars.app_runtime_abbr %> with its container network interface (CNI) set to <strong>Silk</strong> configures Diego Cells to use an internally-managed container network. Subsequently switching the CNI interface to <strong>External</strong> NSX-T leads to errors.</p>
 
 
 ## <a id='architecture'></a> Architecture
@@ -356,8 +359,11 @@ To create the load balancer:
     2. Click **Save**.
     3. Click Yes, when prompted with, **Want to continue configuring this Load Balancer?**.
 
-To create the virtual server that forwards unencrypted web (HTTP) traffic to the foundation.
-<p class="note"><strong>Note:</strong> For foundations requiring end-to-end encryption, do not enable the virtual server on port 80. If it must be enabled, configure it to redirect traffic to the encrypted port (443).</p>
+To create the virtual server that forwards unencrypted web (HTTP) traffic to the foundation:
+
+<p class="note important">
+<span class="note__title">Important</span>
+For foundations requiring end-to-end encryption, do not enable the virtual server on port 80. If it must be enabled, configure it to redirect traffic to the encrypted port (443).</p>
 
 1. Click **Virtual Servers Set**.
 2. Click **Add Virtual Server**.
