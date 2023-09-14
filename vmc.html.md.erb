@@ -49,21 +49,20 @@ To enable browser access to vCenter:
 1. Click **Gateway Firewall**.
 1. Click **Management Gateway**.
 1. Click **+ Add Rule**.
-    * **Name**: Enter `vCenter Browser Inbound Rule`.
-    * **Sources**:
-        1. Click **User Defined Groups**.
-        1. Click **Add Group**.
-          - For **Group name**, enter `public ip address`.
-          - Click **Set Members**.
-          - Select **IP Addresses**.
-          - Enter your public IP address. For example, `66.170.99.1`.
-              <p class="note"><strong>Note</strong>: You can locate your public IP address by navigating to <code>https://ifconfig.me/</code>.</p>
-          - Press **Enter**.
-          - Click **Apply**.
-        1. Click **Save**.
-    * **Destinations**: Select **vCenter** and then click **Apply**.
-    * **Services**: Enter `HTTPS, ICMP, SSO`.
-1. Click **Publish**.
+  * **Name**: Enter `vCenter Browser Inbound Rule`.
+  * **Sources**:
+      1. Click **User Defined Groups**.
+      2. Click **Add Group**.
+        - For **Group name**, enter `public ip address`.
+        - Click **Set Members**.
+        - Select **IP Addresses**.
+        - Enter your public IP address. For example, `66.170.99.1`. You can locate your public IP address by navigating to https:ifconfig.me/.
+        - Press **Enter**.
+        - Click **Apply**.
+      3. Click **Save**.
+  * **Destinations**: Select **vCenter** and then click **Apply**.
+  * **Services**: Enter `HTTPS, ICMP, SSO`.
+2. Click **Publish**.
 
 ### <a id='vcenter-creds'></a> Record vCenter credentials
 
@@ -145,8 +144,11 @@ To install <%= vars.ops_manager %> on VMC:
     govc library.deploy -options options.json /tas/ops-manager-vsphere-2.##.#-build.### ops-manager
     govc pool.create /SDDC-Datacenter/host/Cluster-1/Resources/az{1,2,3}
     ```
-    <p class="note"><strong>Note:</strong> <%= vars.recommended_by %> recommends using <code>govc library.*</code> commands
-    instead of <code>govc import.ova</code>.<br><br>
+    <p class="note">
+    <span class="note__title">Note</span>
+    <%= vars.recommended_by %> recommends using <code>govc library.*</code> commands
+    instead of <code>govc import.ova</code>.
+    <br><br>
     The <code>govc import.ova</code> commands depend on access to the ESXi
     hosts, which is not configured by default in VMC.
     Using these commands can cause errors like the following:
@@ -289,7 +291,7 @@ To install <%= vars.ops_manager %> on VMC:
                 - Click **Set Members**.
                 - Select **IP Addresses**.
                 - Enter your Workloads Compute NAT public IP address. For example, `44.232.216.160`.
-                    <p class="note"><strong>Note</strong>: You can locate your Workloads Compute NAT public IP address in the Networking & Security Overview.</p>
+                  You can locate your Workloads Compute NAT public IP address in the **Networking & Security Overview**.
                 - Press **Enter**.
                 - Click **Apply**.
             - Click **Save**.
@@ -331,11 +333,10 @@ To install <%= vars.ops_manager %> on VMC:
 
 ## <a id='bosh-setup'></a> Configure BOSH Director
 
-<p class="note"><strong>Note:</strong> The procedure in this section contains only the configuration information that is specific to VMC. For more information about configuring BOSH on vSphere, see <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/vsphere-config.html">Configuring BOSH Director on vSphere</a>.</p>
+The procedure in this section contains only the configuration information that is specific to VMC. For more information about configuring BOSH on vSphere, see <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/vsphere-config.html">Configuring BOSH Director on vSphere</a>.
 
 To configure BOSH Director for VMC:
-
-<p class="note"><strong>Note:</strong> When configuring the BOSH Director, do not configure NSX-T networking. Instead, select <strong>Standard vCenter Networking</strong>.</p>
+When configuring the BOSH Director, do not configure NSX-T networking. Select **Standard vCenter Networking**.
 
 1. Log in to <%= vars.ops_manager %>:
     - Go to the IP address you configured for <%= vars.ops_manager %>. For example, [https://54.190.190.190/](https://54.190.190.190/).

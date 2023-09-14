@@ -24,7 +24,7 @@ The following image displays a comparison of the number of VMs deployed by <%= v
 
 Use Small Footprint <%= vars.app_runtime_abbr %> for smaller <%= vars.platform_name %> deployments on which you intend to host 2500 or fewer apps, as described in [Limitations](#limits). If you want to use Small Footprint <%= vars.app_runtime_abbr %> in a production environment, ensure the limitations described below are not an issue in your use case.
 
-<p class="note"><strong>Note:</strong> Small Footprint <%= vars.app_runtime_abbr %> is compatible with <%= vars.platform_name %> service tiles.</p>
+Small Footprint <%= vars.app_runtime_abbr %> is compatible with <%= vars.platform_name %> service tiles.
 
 Small Footprint <%= vars.app_runtime_abbr %> is also ideal for the following use cases:
 
@@ -49,9 +49,7 @@ Small Footprint <%= vars.app_runtime_abbr %> has the following limitations:
 
 ## <a id='arch'></a> Architecture
 
-You can deploy Small Footprint <%= vars.app_runtime_abbr %> with a minimum of four VMs, as shown in the image below.
-
-<p class="note"><strong>Note:</strong> The following image assumes that you are using an external blobstore.</p>
+You can deploy Small Footprint <%= vars.app_runtime_abbr %> with a minimum of four VMs, as shown in the following image. The configuration shown here assumes that you are using an external blobstore.
 
 ![alt-text="Small Footprint TAS for VMs has 4 required VMs and 5 optional VMs as described above."](./images/srt-vms.png)
 
@@ -138,16 +136,19 @@ To troubleshoot a job that runs on the Control or Database VMs:
 
 2. Use BOSH to list the VMs in your Small Footprint <%= vars.app_runtime_abbr %> deployment. Run:
 
-		bosh -e BOSH-ENV -d TAS-DEPLOYMENT vms
+		`bosh -e BOSH-ENV -d TAS-DEPLOYMENT vms`
 
 	Where:
 	* `BOSH-ENV` is the name of your BOSH environment.
 	* `TAS-DEPLOYMENT` is the name of your Small Footprint <%= vars.app_runtime_abbr %> deployment.
-	<p class="note"><strong>Note:</strong> If you do not know the name of your deployment, you can run <code>bosh -e BOSH-ENV deployments</code> to list the deployments for your BOSH Director.</p>
+
+	<p class="note">
+	<span class="note__title">Note</span>
+	If you do not know the name of your deployment, you can run <code>bosh -e BOSH-ENV deployments</code> to list the deployments for your BOSH Director.</p>
 
 3. Use BOSH to SSH into one of the Small Footprint <%= vars.app_runtime_abbr %> VMs. Run:
 
-		bosh -e BOSH-ENV -d TAS-DEPLOYMENT ssh VM-NAME/VM-GUID
+		`bosh -e BOSH-ENV -d TAS-DEPLOYMENT ssh VM-NAME/VM-GUID`
 
 	Where:
 	* `BOSH-ENV` is the name of your BOSH environment.
@@ -157,17 +158,18 @@ To troubleshoot a job that runs on the Control or Database VMs:
 
 	For example, to SSH into the Control VM, run:
 
-		bosh -e example-env -d example-deployment ssh control/12b1b027-7ffd-43ca-9dc9-7f4ff204d86a
+		`bosh -e example-env -d example-deployment ssh control/12b1b027-7ffd-43ca-9dc9-7f4ff204d86a`
 
 4. To act as a super user, run:
 
-		sudo su
+		`sudo su`
 
 5. To list the processes running on the VM, run:
 
-		monit summary
+		`monit summary`
 
-	The example output below lists the processes running on the Control VM. The processes listed reflect the colocation of jobs as outlined in [Architecture](#arch).
+	The following example output lists the processes running on the Control VM. The processes listed reflect the co-location of jobs as outlined in [Architecture](#arch).
+
 	<pre class="terminal">
 	control/12b1b027-7ffd-43ca-9dc9-7f4ff204d86a:/var/vcap/bosh\_ssh/bosh\_f9d2446b18b445e# monit summary
 	The Monit daemon 5.2.5 uptime: 5d 21h 10m
@@ -204,15 +206,15 @@ To troubleshoot a job that runs on the Control or Database VMs:
 
 6. To access logs, navigate to `/vars/vcap/sys/log` by running:
 
-		cd /var/vcap/sys/log
+		`cd /var/vcap/sys/log`
 
 7. To list the log directories for each process, run:
 
-		ls
+		`ls`
 
 8. Navigate to the directory of the process that you want to view logs for. For example, for the Cloud Controller process, run:
 
-		cd cloud_controller_ng/
+		`cd cloud_controller_ng/`
 
 	From the directory of the process, you can list and view its logs. See the following example output:
 	<pre class="terminal">
