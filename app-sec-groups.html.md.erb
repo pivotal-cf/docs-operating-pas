@@ -76,7 +76,7 @@ The procedure for securing your deployment with ASGs varies depending on your ne
     <tr>
       <td>One Network</td>
       <td><ul><li>One network for <%= vars.ops_manager %> and the BOSH Director, <%= vars.app_runtime_abbr %>, and services.</li></ul>
-      <p class="note"><strong>Note:</strong> You cannot secure your deployment with ASGs if you have this network layout. Because <%= vars.platform_name %> dynamically allocates IPs, they cannot be easily excluded in the case of a single network.</p>
+      <p class="note caution"><span class="note__title">Caution</span>You cannot secure your deployment with ASGs if you have this network layout. Because <%= vars.platform_name %> dynamically allocates IPs, they cannot be easily excluded in the case of a single network.</p>
       </td>
     </tr>
     <tr>
@@ -146,10 +146,9 @@ To create ASGs that block apps from sending traffic to the networks that host <%
         - YOUR-OPS-MANAGER-CIDR
         - YOUR-TAS-AND-SERVICES-CIDR
         ```
-* **Three Network Layout**:
-      <p class="note"><strong>Note:</strong> If you want to secure only the <%= vars.ops_manager %>
+* **Three Network Layout**: If you want to secure only the <%= vars.ops_manager %>
          and <%= vars.app_runtime_abbr %> components, you can remove the services CIDR
-         from the <code>exclude</code> section.</p>
+         from the `exclude` section.
 
          ```
           exclude:
@@ -158,11 +157,9 @@ To create ASGs that block apps from sending traffic to the networks that host <%
           - YOUR-SERVICES-CIDR
          ```
 
-    * **Three or More Network Layout**:
-      <p class="note"><strong>Note:</strong> If you want to secure only the <%= vars.ops_manager %>
+    * **Three or More Network Layout**: If you want to secure only the <%= vars.ops_manager %>
          and <%= vars.app_runtime_abbr %> components, you can remove the services CIDRs
-         from the <code>exclude</code> section.
-      </p>
+         from the `exclude`section.
 
         ```
         exclude:
@@ -179,49 +176,53 @@ To create ASGs that block apps from sending traffic to the networks that host <%
     asg-creator create --config config.yml
     ```
 
-1. Create the `public-networks` ASG by running:
+2. Create the `public-networks` ASG by running:
 
     ```
     cf create-security-group public-networks public-networks.json
     ```
 
-1. Bind the ASG to the default staging set by running:
+3. Bind the ASG to the default staging set by running:
 
     ```
     cf bind-staging-security-group public-networks
     ```
 
-1. Bind the ASG to the default running set by running:
+4. Bind the ASG to the default running set by running:
 
     ```
     cf bind-running-security-group public-networks
     ```
 
-1. Create the `private-networks` ASG by running:
+5. Create the `private-networks` ASG by running:
 
     ```
     cf create-security-group private-networks private-networks.json
     ```
 
-1. Bind the ASG to the default staging set by running:
+6. Bind the ASG to the default staging set by running:
 
     ```
     cf bind-staging-security-group private-networks
     ```
 
-1. Bind the ASG to the default running set by running:
+7. Bind the ASG to the default running set by running:
 
     ```
     cf bind-running-security-group private-networks
     ```
 
-<p class="note"><strong>Note:</strong> To create and bind additional ASGs, see the <a href="../concepts/asg.html#asg-individual">Create ASGs</a> and <a href="../concepts/asg.html#binding-groups">Bind ASGs</a> sections of the <em>App Security Groups</em> topic.</p>
+<p class="note">
+<span class="note__title">Note</span>
+To create and bind additional ASGs, see the <a href="../concepts/asg.html#asg-individual">Create ASGs</a> and <a href="../concepts/asg.html#binding-groups">Bind ASGs</a> sections of <em>App Security Groups</em>.</p>
 
 #### <a name='service-access'></a> Part C: Create and bind ASGs for service access
 
-<p class="note"><strong>Note:</strong> This part is only necessary if you blocked apps from a network that hosts services in the previous part. If you did not block apps from a network that hosts services, proceed to <a href="#unbind-default">Step 4: Remove the Default ASG</a>.</p>
+This part is necessary only if you blocked apps from a network that hosts services in the previous part. If you did not block apps from a network that hosts services, proceed to <a href="#unbind-default">Step 4: Remove the Default ASG</a>.
 
-<p class="note warning"><strong>Caution:</strong> In the two network layout, <%= vars.app_runtime_abbr %> and services share the same network. This means that each time you create an ASG that allows apps to access a new port and protocol within the network, you further expose the <%= vars.app_runtime_abbr %> component VMs. This is a limitation of a two network layout. For guidance on network topology, see <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/refarch-refarch-index.html">Reference Architecture</a>. </p>
+<p class="note caution">
+<span class="note__title">Caution</span>
+In the two network layout, <%= vars.app_runtime_abbr %> and services share the same network. This means that each time you create an ASG that allows apps to access a new port and protocol within the network, you further expose the <%= vars.app_runtime_abbr %> component VMs. This is a limitation of a two network layout. For guidance on network topology, see <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/refarch-refarch-index.html">Reference Architecture</a>. </p>
 
 Now that you have created ASGs to secure the <%= vars.ops_manager %>, <%= vars.app_runtime_abbr %>, and service components, work with developers to create additional ASGs that give apps access to the services they need.
 
@@ -251,10 +252,12 @@ For more information, see [Using Blue-Green Deployment to Reduce Downtime and Ri
 
 To restart all of the apps in your deployment:
 
-<p class="note"><strong>Note:</strong> You do not need to restart the apps in the <code>system</code> org.</p>
+<p class="note">
+<span class="note__title">Note</span>
+You do not need to restart the apps in the <code>system</code> org.</p>
 
 1. Work with developers to restart a few of their apps individually and test that they still work correctly with the new ASGs in place. If an app does not work as expected, you likely must create another ASG that allows the app to send traffic to a service it requires.
 
-  <p class="note"><strong>Note:</strong> To quickly roll back to the original overly-permissive state, you can re-bind the <code>default_security_group</code> ASG to the <code>default-staging</code> and <code>default-running</code> sets. You must then restart your apps to re-apply the original ASGs.</p>
+  To quickly roll back to the original overly-permissive state, you can re-bind the `default_security_group` ASG to the `default-staging` and `default-running` sets. You must then restart your apps to re-apply the original ASGs.
 
 1. Restart the rest of the apps running on your deployment. Optionally, you can use the [app-restarter cf CLI plugin](https://github.com/cloudfoundry-incubator/app-restarter) to restart all apps in a particular space, org, or deployment.
