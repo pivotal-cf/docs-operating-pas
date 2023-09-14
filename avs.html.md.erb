@@ -233,7 +233,9 @@ Create virtual servers.
 1. In the NSX-T Manager UI, navigate to **Advanced Networking & Security** > **Networking** > **Load Balancing** > **Virtual Servers**.
 1. Create the virtual server which forwards unencrypted web (HTTP) traffic to the foundation:
 
-<p class="note"><strong>Note:</strong> Foundations requiring end-to-end encryption should not enable the virtual server on port 80, or, if enabled, should configure it to redirect traffic to the encrypted port (443).</p>
+    class="note important">
+    <span class="note__title">Important</span>
+    For foundations requiring end-to-end encryption, do not enable the virtual server on port 80, or, if enabled, should configure it to redirect traffic to the encrypted port (443).</p>
 
   1. Click **+Add**.
   2. Enter **General Properties**:

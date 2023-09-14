@@ -148,7 +148,7 @@ In the LDAP search filter string that you use to configure <%= vars.app_runtime_
 <br>
 <br>
 In addition to `cn`, other attributes commonly searched for and returned are `mail`, `uid` and, in the case of Active Directory, `sAMAccountName`.
-    <p class="note"><strong>Note:</strong> For instructions for testing and troubleshooting your LDAP search filters, see <a href="https://community.pivotal.io/s/article/Configuring-LDAP-Integration-with-Pivotal-Cloud-Foundry">Configuring LDAP Integration with Pivotal Cloud Foundry</a> in the Knowledge Base.</p>
+For instructions for testing and troubleshooting your LDAP search filters, see <a href="https://community.pivotal.io/s/article/Configuring-LDAP-Integration-with-Pivotal-Cloud-Foundry">Configuring LDAP Integration with Pivotal Cloud Foundry</a> in the Knowledge Base.
 
 1. For **Group search base**, enter the location in the LDAP directory tree from which the LDAP group search begins.
 <br>
@@ -156,8 +156,10 @@ In addition to `cn`, other attributes commonly searched for and returned are `ma
 For example, a domain named "cloud.example.com" typically uses the following LDAP group search base: `ou=Groups,dc=example,dc=com`
 <br>
 <br>
-This is required if you are mapping LDAP groups to an admin role. To map the groups under this search base to admin roles in <%= vars.app_runtime_abbr %>, see [Grant Admin Permissions to an External Group (SAML or LDAP)](../uaa/uaa-user-management.html#external-group) in _Creating and Managing Users with the UAA CLI (UAAC)_.
-    <p class="note"><strong>Note:</strong> To onboard individual LDAP users and map them to <%= vars.app_runtime_abbr %> roles, see <a href="../operating/external-user-management.html">Adding Existing SAML or LDAP Users to a <%= vars.platform_name %> Deployment</a>.</p>
+This is required if you are mapping LDAP groups to an admin role.
+
+* To map the groups under this search base to admin roles in <%= vars.app_runtime_abbr %>, see [Grant Admin Permissions to an External Group (SAML or LDAP)](../uaa/uaa-user-management.html#external-group) in _Creating and Managing Users with the UAA CLI (UAAC)_.
+ * To onboard individual LDAP users and map them to <%= vars.app_runtime_abbr %> roles, see <a href="../operating/external-user-management.html">Adding Existing SAML or LDAP Users to a <%= vars.platform_name %> Deployment</a>.
 
 1. For **Group search filter**, enter a string that defines LDAP group search criteria. The standard value is `member={0}`. This is required if you are mapping LDAP groups to an admin role.
 
@@ -165,13 +167,13 @@ This is required if you are mapping LDAP groups to an admin role. To map the gro
 
 1. For **Server SSL certificate**, paste in the root certificate from your CA certificate or your self-signed certificate. This is required only for `ldaps://` URLs.
 
-1. For **First name attribute** and **Last name attribute**, enter the attribute names in your LDAP directory that correspond to the first and last names in each user record. For example, `cn` and `sn`.
+4. For **First name attribute** and **Last name attribute**, enter the attribute names in your LDAP directory that correspond to the first and last names in each user record. For example, `cn` and `sn`.
 
-1. For **Email attribute**, enter the attribute name in your LDAP directory that corresponds to the email address in each user record. For example, `mail`.
+5. For **Email attribute**, enter the attribute name in your LDAP directory that corresponds to the email address in each user record. For example, `mail`.
 
-1. For **Email domains**, enter a comma-separated list of the email domains for external users who are to receive invitations to Apps Manager.
+6. For **Email domains**, enter a comma-separated list of the email domains for external users who are to receive invitations to Apps Manager.
 
-1. For **LDAP referrals**, select how UAA handles LDAP server referrals out to other external user stores. UAA can:
+7. For **LDAP referrals**, select how UAA handles LDAP server referrals out to other external user stores. UAA can:
     * **Automatically follow any referrals**.
     * **Ignore referrals and return partial result**.
     * **Throw exception for each referral and abort**.
@@ -180,9 +182,9 @@ This is required if you are mapping LDAP groups to an admin role. To map the gro
 
 1. Return to the <%= vars.ops_manager %> Installation Dashboard.
 
-1. Click **Review Pending Changes**.
+9. Click **Review Pending Changes**.
 
-1. Click **Apply Changes**.
+10. Click **Apply Changes**.
 
 
 ## <a id='configure-oidc'></a> Configure <%= vars.app_runtime_abbr %> to Use an OIDC Identity Provider
