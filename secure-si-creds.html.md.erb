@@ -102,25 +102,25 @@ see [Configuring <%= vars.app_runtime_abbr %>](../operating/configure-pas.html).
 
 App Security Groups (ASGs) are network policy rules specifying protocols, ports, and IP ranges that apply to outbound network connections initiated from apps.
 
-<p class="note"><strong>Note:</strong> The default ASGs in <%= vars.platform_name %> allow apps
+The default ASGs in <%= vars.platform_name %> allow apps
 running on your deployment to send traffic to almost any IP address.
-This step is only required if your ASGs restrict network access from apps to the network
+This step is required only if your ASGs restrict network access from apps to the network
 on which <%= vars.app_runtime_abbr %> runs.
 For more information, see <a href="./app-sec-groups.html">Restricting App Access to
-Internal <%= vars.app_runtime_abbr %> Components</a>.</p>
+Internal <%= vars.app_runtime_abbr %> Components</a>.
 
 To ensure the ASGs for your deployment allow apps to communicate with the runtime CredHub API:
 
 1. From the <%= vars.app_runtime_abbr %> tile, click **Assign AZs and Networks** and
    record the selected network where the tile is installed.
 
-1. From the BOSH Director tile, in the **Settings** tab, click **Create Networks**.
+2. From the BOSH Director tile, in the **Settings** tab, click **Create Networks**.
 
-1. In the **Networks** section, click the name of the <%= vars.app_runtime_abbr %> network to expand it.
+3. In the **Networks** section, click the name of the <%= vars.app_runtime_abbr %> network to expand it.
 
-1. Record the CIDR for the <%= vars.app_runtime_abbr %> network.
+4. Record the CIDR for the <%= vars.app_runtime_abbr %> network.
 
-1. Create a file named `runtime-credhub.json` for specifying your ASG rules. Copy the following content into the file. Replace `YOUR-TAS-CIDR` with the CIDR you recorded in the previous step.
+5. Create a file named `runtime-credhub.json` for specifying your ASG rules. Copy the following content into the file. Replace `YOUR-TAS-CIDR` with the CIDR you recorded in the previous step.
 
     ```
     [
@@ -132,22 +132,24 @@ To ensure the ASGs for your deployment allow apps to communicate with the runtim
     ]
     ```
 
-1. Create an ASG that allows apps to access the CredHub API by running:
+6. Create an ASG that allows apps to access the CredHub API by running:
 
     ```
     cf create-security-group runtime-credhub ~/workspace/runtime-credhub runtime-credhub.json
     ```
 
-1. Bind this ASG to your deployment or the specific space in which you want apps to access CredHub. For more information about binding ASGs, see the [Bind ASGs](../concepts/asg.html#binding-groups) section of the _App Security Groups_ topic. Ensure that apps deployed as part of the service tile installation process have access to CredHub in addition to the apps pushed to the platform by developers. For example, the Spring Cloud Services for VMware Tanzu tile deploys the `spring-cloud-broker` app to the `p-spring-cloud-services` space of the `system` org.
+7. Bind this ASG to your deployment or the specific space in which you want apps to access CredHub. For more information about binding ASGs, see the [Bind ASGs](../concepts/asg.html#binding-groups) section of the _App Security Groups_ topic. Ensure that apps deployed as part of the service tile installation process have access to CredHub in addition to the apps pushed to the platform by developers. For example, the Spring Cloud Services for VMware Tanzu tile deploys the `spring-cloud-broker` app to the `p-spring-cloud-services` space of the `system` org.
 
-1. Restart apps for the ASGs to take effect. Optionally, you can use the [app-restarter cf CLI plugin](https://github.com/cloudfoundry-incubator/app-restarter) to restart all apps in a particular space, org, or deployment.
+8. Restart apps for the ASGs to take effect. Optionally, you can use the [app-restarter cf CLI plugin](https://github.com/cloudfoundry-incubator/app-restarter) to restart all apps in a particular space, org, or deployment.
 
 
 ## <a id='service-instances'></a> Step 3: Unbind and rebind service instances
 
 For any service instance bindings that existed before runtime CredHub was supported for that service, you must work with your developers to unbind and rebind the service instances to their apps. If you do not unbind and rebind the service, apps continue functioning as normal and fetching credentials from the Cloud Controller database.
 
-<p class="note"><strong>Note:</strong> This step is not required for bindings created after you installed the new version of the service tile that supports CredHub and you completed the procedures in steps 1 and 2 of this topic.</p>
+<p class="note">
+<span class="note__title">Note</span>
+This step is not required for bindings created after you installed the new version of the service tile that supports CredHub and you completed the procedures in steps 1 and 2 of this topic.</p>
 
 To unbind and rebind your service instances to their apps:
 
