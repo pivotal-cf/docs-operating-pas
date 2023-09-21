@@ -9,7 +9,9 @@ Cloud Native Buildpack project, that are installed with <%= vars.app_runtime_abb
 Application Service tile. These buildpacks are still in beta and have some limitations. For details,
 see [Limitations of Beta release](#limitations-during-beta-release).
 
-<p class='note warning'><strong>Caution: <%= vars.app_company_name %> does not recommend using these buildpacks in production use at this time.</p>
+<p class="note caution">
+<span class="note__title">Caution</span>
+VMware does not recommend using these buildpacks in production at this time.</p>
 
 Here is the list of supported Cloud Native Buildpacks.
 
@@ -36,7 +38,7 @@ they can make the change using the `cf` CLI with admin access:
 
 ## <a id="cnb-limitations"></a> Limitations of beta release
 
-Cloud Native Buildpacks currently  have these known limitations:
+Cloud Native Buildpacks currently have these known limitations:
 
 * **Procfiles:** Apps with Procfiles do not work correctly with the implementation of CNBs for TAS. Only the `web`
   process type is honored by Cloud Foundry. This is because the Procfile CNB, which ships as part of
