@@ -58,7 +58,7 @@ Before you deploy <%= vars.app_runtime_abbr %> with NSX-T networking, you must h
   * Deployed previously, with the **Container network interface plugin** field set to **External**
     in the **Networking** pane of the <%= vars.app_runtime_abbr %> tile.
 
-<class="note important">
+<p class="note important">
 <span class="note__title">Important</span>
 If you deploy <%= vars.app_runtime_abbr %> with its container network interface (CNI) set to <strong>Silk</strong>, Diego Cells are configured to use an internally-managed container network. If you subsequently switch the CNI interface to <strong>External</strong> NSX-T, this leads to errors.</p>
 
