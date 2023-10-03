@@ -435,11 +435,11 @@ To configure <%= vars.app_runtime_abbr %> for external  container networking:
 | Field | Description |
 |-------|-------------|
 | **<%= vars.app_runtime_abbr %> Foundation Name** | If unsure, use `<%= vars.app_runtime_abbr %>`. If multiple foundations co-exist on the same NSX-T Manager, choose a unique string, such as `<%= vars.app_runtime_abbr %>-beta`. NCP creates artifacts such as T1 gateways and prefixes their names with this string for easy identification. |
-| **Overlay Transport Zone** | A uniquely identifying string for the **Transport Zone** that you chose when you [created segments](#nsx-t-setu) for each network. This can be the name of the transport zone if no other zones in NSX-T share the same name, or else the UUID for the transport zone. |
+| **Overlay Transport Zone** | A uniquely identifying string for the **Transport Zone** that you chose when you [created segments](#configure-segments-6) for each network. This can be the name of the transport zone if no other zones in NSX-T share the same name, or else the UUID for the transport zone. |
 | **Tier-0 Router** | A uniquely identifying string for the T0 gateway. This can be the tag string that you gave the gateway in NSX-T Manager if no other T0 gateways in NSX-T share the same name, or else the UUID for the gateway. |
-| **IP Blocks of Container Networks** | Use the same IP block created in created segments [Configure Gateways](#nsx-t-gateways). |
+| **IP Blocks of Container Networks** | Use the same IP block created in created segments [Configure Gateways](#configure-gateways-5). |
 | **Subnet Prefix of Container Networks** | Subnet mask to set the address range size for apps in a single org. Defaults to `24``. This number must be higher than the mask for all <%= vars.app_runtime_abbr %> orgs in the **NSX-T Manager New IP Block** pane, to define the fraction of the total <%= vars.app_runtime_abbr %> address space for each org. |
-| **IP Pools used to provide External (NAT) IP Addresses to Org Networks** | Use the same IP Pool created in [Configure Gateways](#nsx-t-gateways). |
+| **IP Pools used to provide External (NAT) IP Addresses to Org Networks** | Use the same IP Pool created in [Configure Gateways](#configure-gateways-5). |
 | **Enable NSX-T Policy API** | Enable this check box to use the new Policy API. |
 
     
