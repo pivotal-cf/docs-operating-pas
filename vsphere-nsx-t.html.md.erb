@@ -430,7 +430,7 @@ To configure <%= vars.app_runtime_abbr %> for external  container networking:
         2. From the NSX-T Manager command line, run `get certificate api` to retrieve the
            certificate.
 
-4. Open and configure the **NCP** (NSX-T Container Plugin) pane using the fields described in the following note:
+4. Open and configure the **NCP** (NSX-T Container Plugin) pane. See the descriptions of the fields described in the following note:
 
 
     <p class="note caution">
@@ -439,8 +439,8 @@ To configure <%= vars.app_runtime_abbr %> for external  container networking:
       as <code><%= vars.app_runtime_abbr %>-beta</code>. NCP creates artifacts such as T1 gateways and prefixes
       their names with this string for easy identification.</li>
   
-<li><strong>Overlay Transport Zone</strong>: A uniquely identifying string for the <strong>Transport Zone</strong> that you
-      chose when you [created segments](#nsx-t-setup) for each network. This can be the name of the
+    <li><strong>Overlay Transport Zone</strong>: A uniquely identifying string for the <strong>Transport Zone</strong> that you
+      chose when you <a href="#nsx-t-setup">created segments</a>  for each network. This can be the name of the
       transport zone if no other zones in NSX-T share the same name, or else the UUID for the
       transport zone.</li>
 
@@ -448,7 +448,8 @@ To configure <%= vars.app_runtime_abbr %> for external  container networking:
       string that you gave the gateway in NSX-T Manager if no other T0 gateways in NSX-T share the
       same name, or else the UUID for the gateway.</li>
 
-    <li><strong>IP Blocks of Container Networks</strong>: Use the same IP block created in [Configure Gateways](#nsx-t-gateways).</li>
+    <li><strong>IP Blocks of Container Networks</strong>: Use the same IP block created in 
+    created segments <a href="#nsx-t-gateways">Configure Gateways</a>.</li>
 
     <li><strong>Subnet Prefix of Container Networks</strong>: Subnet mask to set the address range size for apps in
       a single org. Defaults to <code>24</code>. This number must be higher than the mask for all <%= vars.app_runtime_abbr %> orgs in the NSX-T Manager <strong>New IP Block</strong> pane, to define the
@@ -456,7 +457,7 @@ To configure <%= vars.app_runtime_abbr %> for external  container networking:
 
     <li><strong>IP Pools used to provide External (NAT) IP Addresses to Org Networks</strong>
     Use the same IP Pool
-      created in [Configure Gateways](#nsx-t-gateways).
+      created in <a href="#nsx-t-gateways">Configure Gateways</a>.
       </li>
       
     <li><strong>Enable NSX-T Policy API</strong> Enable this check box to use the new Policy API.</li> </ul>
