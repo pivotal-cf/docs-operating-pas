@@ -430,8 +430,10 @@ To configure <%= vars.app_runtime_abbr %> for external  container networking:
         2. From the NSX-T Manager command line, run `get certificate api` to retrieve the
            certificate.
 
-4. Open and configure the **NCP** (NSX-T Container Plugin) pane as follows:
+4. Open and configure the **NCP** (NSX-T Container Plugin) pane using the fields described in the following note:
 
+    <p class="note caution">
+    <span class="note__title">Note:</span>
     * **<%= vars.app_runtime_abbr %> Foundation Name**: If unsure, use `<%= vars.app_runtime_abbr
       %>`. If multiple foundations co-exist on the same NSX-T Manager, choose a unique string, such
       as `<%= vars.app_runtime_abbr %>-beta`. NCP creates artifacts such as T1 gateways and prefixes
@@ -443,8 +445,7 @@ To configure <%= vars.app_runtime_abbr %> for external  container networking:
     * **Tier-0 Router**: A uniquely identifying string for the T0 gateway. This can be the tag
       string that you gave the gateway in NSX-T Manager if no other T0 gateways in NSX-T share the
       same name, or else the UUID for the gateway.
-    * **IP Blocks of Container Networks**: Use the same IP block created in [Configure
-      Gateways](#nsx-t-gateways).
+    * **IP Blocks of Container Networks**: Use the same IP block created in [Configure Gateways](#nsx-t-gateways).
     * **Subnet Prefix of Container Networks**: Subnet mask to set the address range size for apps in
       a single org. Defaults to `24`. This number must be higher than the mask for all <%=
       vars.app_runtime_abbr %> orgs in the NSX-T Manager **New IP Block** pane, to define the
@@ -452,6 +453,7 @@ To configure <%= vars.app_runtime_abbr %> for external  container networking:
     * **IP Pools used to provide External (NAT) IP Addresses to Org Networks**: Use the same IP Pool
       created in [Configure Gateways](#nsx-t-gateways).
     * **Enable NSX-T Policy API**: Enable this check box to use the new Policy API.
+    </p>
 
       ![alt-text="NSX-T tile config: NCP"](./images/nsx-t/nsx-t-tile-config-ncp-policy.png)
 
