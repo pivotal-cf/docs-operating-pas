@@ -434,26 +434,35 @@ To configure <%= vars.app_runtime_abbr %> for external  container networking:
 
     <p class="note caution">
     <span class="note__title">Note:</span>
-    <ul><li><strong><%= vars.app_runtime_abbr %> Foundation Name</strong>: If unsure, use <code><%= vars.app_runtime_abbr
+
+    <ul><li><strong><%= vars.app_runtime_abbr %> Foundation Name</strong>: If unsure, use 
+    <code><%= vars.app_runtime_abbr
       %></code>. If multiple foundations co-exist on the same NSX-T Manager, choose a unique string, such
       as <code><%= vars.app_runtime_abbr %>-beta</code>. NCP creates artifacts such as T1 gateways and prefixes
       their names with this string for easy identification.</li>
+
       <li><strong>Overlay Transport Zone</strong>: A uniquely identifying string for the <strong>Transport Zone</strong> that you
       chose when you [created segments](#nsx-t-setup) for each network. This can be the name of the
       transport zone if no other zones in NSX-T share the same name, or else the UUID for the
       transport zone.</li>
+
     <li><strong>Tier-0 Router</strong>: A uniquely identifying string for the T0 gateway. This can be the tag
       string that you gave the gateway in NSX-T Manager if no other T0 gateways in NSX-T share the
       same name, or else the UUID for the gateway.</li>
+
     <li><strong>IP Blocks of Container Networks</strong>: Use the same IP block created in [Configure Gateways](#nsx-t-gateways).</li>
+
     <li><strong>Subnet Prefix of Container Networks</strong>: Subnet mask to set the address range size for apps in
       a single org. Defaults to <code>24</code>. This number must be higher than the mask for all <%=
       vars.app_runtime_abbr %> orgs in the NSX-T Manager <strong>New IP Block</strong> pane, to define the
       fraction of the total <%= vars.app_runtime_abbr %> address space for each org.</li>
+
     <li><strong>IP Pools used to provide External (NAT) IP Addresses to Org Networks</strong>: Use the same IP Pool
       created in [Configure Gateways](#nsx-t-gateways).</li>
-    <li><strong>Enable NSX-T Policy API</strong>: Enable this check box to use the new Policy API.</li></ul>
-    </p>
+
+    <li><strong>Enable NSX-T Policy API</strong>: Enable this check box to use the new Policy API.</li></ul></p>
+
+    
 
       ![alt-text="NSX-T tile config: NCP"](./images/nsx-t/nsx-t-tile-config-ncp-policy.png)
 
