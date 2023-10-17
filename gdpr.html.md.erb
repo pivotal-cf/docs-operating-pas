@@ -22,11 +22,11 @@ For more information, see the GDPR [text](http://www.privacy-regulation.eu/en/ar
 
 Personal data can be collected, stored, and processed in a <%= vars.app_runtime_abbr %> deployment. <%= vars.company_name %> has performed a review of <%= vars.app_runtime_abbr %> components and determined that personal data might reside in the following areas:
 
-+ [User Account and Authentication (UAA)](#uaa)
-+ [Cloud Foundry API](#capi)
-+ [Routing](#routing)
-+ [Diego](#diego)
-+ [Notifications Service](#cf-notifications)
+- [](#)
+		- [Routing](#routing)
+			- [ Deactivate client IP logging](#-deactivate-client-ip-logging)
+		- [ Diego](#-diego)
+		- [ Notifications Service](#-notifications-service)
 
 
 ## <a id='where'></a> Where personal data might reside
@@ -37,169 +37,19 @@ The following sections explain how different <%= vars.app_runtime_abbr %> compon
 
 UAA is an open-source Cloud Foundry component that provides identity management features and identity-based security for apps and APIs. For more information, see [User Account and Authentication](../uaa/index.html).
 
-<table>
-<tbody>
-<tr>
-<th>GDPR</th>
-<th>Workflow</th>
-<th>What personal data is collected?</th>
-<th>When is it collected?</th>
-<th>Where is it stored?</th>
-<th>How is it processed?</th>
-<th>Who has access to it?</th>
-</tr>
-<tr>
-<th rowspan="3" scope="rowgroup">Business Initiation</th>
-<td>User registers</td>
-<td> 
-<ul>
-<li>Username</li>
-<li>Email address</li>
-<li>First name (optional)</li>
-<li>Last name (optional)</li>
-<li>User ID (UAA GUID, generated)</li>
-</ul>
-</td>
-<td>User registration submission</td>
-<td>UAA DB</td>
-<td>Stored in UAA DB</td>
-<td>
-<ul>
-<li>End user</li>
-<li>UAA administrators</li>
-</ul>
-</td>
-</tr>
-<tr>
-<td>Just-in-time provisioning: create user on user login</td>
-<td>
-<ul>
-<li>Username</li>
-<li>Email address</li>
-<li>First name (optional)</li>
-<li>Last name (optional)</li>
-<li>User ID (UAA GUID, generated)</li>
-<li>Additional attributes as defined by the organization </li>
-</ul>
-</td>
-<td>User login </td>
-<td>UAA DB</td>
-<td>Stored in UAA DB </td>
-<td>UAA administrators</td>
-</tr>
-<tr>
-<td>Admin user makes a creation API call</td>
-<td> 
-<ul>
-<li>Username</li>
-<li>Email address</li>
-<li>First name (optional)</li>
-<li>Last name (optional)</li>
-<li>User ID (UAA GUID, generated)</li>
-<li>Additional attributes as defined by the organization</li>
-</ul>
-</td>
-<td>Admin API call </td>
-<td>UAA DB </td>
-<td>Stored in UAA DB </td>
-<td>UAA administrators</td>
-</tr>
-<tr>
-<th rowspan="4" scope="rowgroup">Business Execution</th>
-<td>User self-updates profile</td>
-<td>
-<ul>
-<li>Email address</li>
-<li>First name (optional)</li>
-<li>Last name (optional)</li>
-</ul>
-</td>
-<td>User registration submission</td>
-<td>UAA DB</td>
-<td>Stored in UAA DB</td>
-<td>
-<ul>
-<li>End user</li>
-<li>UAA administrators</li>
-</ul>
-</td>
-</tr>
-<tr>
-<td>Just-in-time provisioning: user update</td>
-<td>
-<ul>
-<li>Email address</li>
-<li>First name (optional)</li>
-<li>Last Name (optional)</li>
-<li>Additional attributes as defined by the organization </li>
-</ul>
-</td>
-<td>User login </td>
-<td>UAA DB </td>
-<td>Stored in UAA DB</td>
-<td>UAA administrators</td>
-</tr>
-<tr>
-<td>User logs in</td>
-<td>
-<ul>
-<li>Current account cookie (generated)</li>
-<li>Saved account cookie (generated)</li>
-</ul>
-</td>
-<td>User login</td>
-<td>User browser</td>
-<td>By UAA</td>
-<td>
-<ul>
-<li>End user</li>
-<li>UAA login page </li>
-</ul>
-</td>
-</tr>
-<tr>
-<td>Admin user makes an update API call</td>
-<td>
-<ul>
-<li>Email address</li>
-<li>First name (optional)</li>
-<li>Last name (optional)</li>
-<li>Additional attributes as defined by the organization</li>
-</ul>
-</td>
-<td> Admin API call</td>
-<td>UAA DB </td>
-<td>Stored in UAA DB</td>
-<td> UAA administrators</td>
-</tr>
-<tr>
-<th rowspan="2" scope="rowgroup">Delete User Flow</th>
-<td>Admin user makes a hard delete API call</td>
-<td>n/a</td>
-<td>n/a</td>
-<td>n/a</td>
-<td>Deleted from UAA DB</td>
-<td>UAA administrators</td>
-</tr>
-<tr>
-<td>Admin user makes a deactivation API call</td>
-<td>n/a</td>
-<td>n/a</td>
-<td>n/a</td>
-<td>Soft delete (records still held in database but user cannot login) </td>
-<td>UAA administrators</td>
-</tr>
-<tr>
-<th>Reports/Logs</th>
-<td>Event or debug logs</td>
-<td>Any information</td>
-<td>When event happens</td>
-<td>UAA logs</td>
-<td>Depends on setup of <a href="../loggregator/architecture.html">Loggregator</a> and log forwarding</td>
-<td>BOSH administrators</td>
-</tr>
-</tbody>
-</table>
+
+| GDPR | Workflow | What personal data is collected? | When is it collected? | Where is it stored? | How is it processed? | Who has access to it? |
+|------|----------|----------------------------------|----------------------|------------------|------------------------|-----------------------|
+| **Business Initiation** | User registers | <ul><li>Username</li><li>Email address</li><li>First name (optional)</li><li>Last name (optional)</li><li>User ID (UAA GUID, generated)</li></ul> | User registration submission | UAA DB | Stored in UAA DB | <ul><li>End user</li><li>UAA administrators</li></ul> |
+| | Just-in-time provisioning: create user on user login | <ul><li>Username</li><li>Email address</li><li>First name (optional)</li><li>Last name (optional)</li><li>User ID (UAA GUID, generated)</li><li>Additional attributes as defined by the organization </li></ul> | User login | UAA DB | Stored in UAA DB | UAA administrators |
+| | Admin user makes a creation API call | <ul><li>Username</li><li>Email address</li><li>First name (optional)</li><li>Last name (optional)</li><li>User ID (UAA GUID, generated)</li><li>Additional attributes as defined by the organization</li></ul> | Admin API call | UAA DB | Stored in UAA DB | UAA administrators |
+| **Business Execution** | User self-updates profile | <ul><li>Email address</li><li>First name (optional)</li><li>Last name (optional)</li></ul> | User registration submission | UAA DB | Stored in UAA DB | <ul><li>End user</li><li>UAA administrators</li></ul> |
+| | Just-in-time provisioning: user update | <ul><li>Email address</li><li>First name (optional)</li><li>Last Name (optional)</li><li>Additional attributes as defined by the organization </li></ul> | User login | UAA DB | Stored in UAA DB | UAA administrators
+| | User logs in | <ul> <li>Current account cookie (generated)</li><li>Saved account cookie (generated)</li></ul> | User login | User browser | By UAA |  <ul><li>End user</li><li>UAA login page </li></ul> |
+| | Admin user makes an update API call |<ul><li>Email address</li><li>First name (optional)</li><li>Last name (optional)</li><li>Additional attributes as defined by the organization</li></ul> | Admin API call | UAA DB | Stored in UAA DB | UAA administrators |
+| **Delete User Flow** | Admin user makes a hard delete API call | n/a | n/a | n/a | Deleted from UAA DB | UAA administrators |
+| Admin user makes a deactivation API call | n/a | n/a | n/a | Soft delete (records still held in database but user cannot login) | UAA administrators |
+| **Reports/Logs** | Event or debug logs | Any information | When event happens | UAA logs | Depends on setup of [Loggregator](../loggregator/architecture.html) and log forwarding | BOSH administrators |
 
 ### <a id="capi"></a> Cloud Foundry API
 
@@ -321,6 +171,15 @@ The Cloud Foundry API release contains several components, including the Cloud C
 </tr>
 </tbody>
 </table>
+=======
+| GDPR | Workflow | What personal data is collected? | When is it collected? |Where is it stored? | How is it processed? | Who has access to it? | How long is it kept? |
+|------|----------|----------------------------------|-----------------------|-------------------|------------------------|----------------------|------------|
+| **Business Initiation** | User makes a request for the first time | User ID | The first time a user makes a request to the API | Cloud Controller DB | It is used to identify permissions for the user | <%= vars.platform_name %> operator | As long as the user is part of the system |
+| **Business Execution** | Troubleshooting API requests |<ul><li>User ID </li><li>User agent</li><li>IP address</li></ul> | On each request | <ul><li>Local VM:<br />component and logs </li><li>Log aggregator used by <%= vars platform_name %> operator</li></ul> | n/a | <%= vars.platform_name %> operator | <ul><li>Local VM:<br />4 week maximum by default</li><li>Log aggregator as configured by <%= vars.platform_name %> operator</li></ul>
+| **Audit Trails** | Audit what changes a user makes | <ul><li>Name</li><li>User ID</li><li>Email address</li></ul> | On specific API requests that mutate the state of resources | Audit Event Table in the Cloud Controller DB |  n/a | <ul><li><%= vars.platform_name %> operator</li><li>Users that can view the resource that had an audited change</li></ul> | 31 days |
+| | Audit what changes a user makes |  <ul><li>IP Address</li><li>Email address</li><li>User ID</li><li>Username</li></ul> | On each request | <ul><li>Local VM:<br />CEF logs</li><li>Log aggregator used by <%= vars.platform_name %> operator</li></ul> | n/a | <%= vars.platform_name %> operator | <ul><li>Local VM:<br />4 week maximum by default</li><li>Log aggregator as configured by <%= vars.platform_name %> operator</li></ul>
+| | Audit what user created a resource | <ul><li>Name</li><li>User ID</li><li>Email address</li></ul> | When API resources are created | As part of the resource row in Cloud Controller DB | n/a | <ul><li><%= vars.platform_name %> operator</li><li>Users that can view the resource</li></ul> | As long as the resource exists |
+>>>>>>> 6813c2d (Convert four tables.)
 
 ### <a id='routing'></a>Routing
 
