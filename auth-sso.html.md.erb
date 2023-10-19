@@ -92,24 +92,12 @@ To configure a SAML identity provider to designate <%= vars.app_runtime_abbr %> 
    For configuration instructions, see the documentation from your identity provider.
 
 2. See the following table for information about certain industry standard identity providers and how to integrate them with <%= vars.app_runtime_abbr %>:
-    <table border="1">
-      <tr>
-        <th>Solution Name</th>
-        <th>Integration Guide</th>
-      </tr>
-      <tr>
-        <td><a href='http://www.ca.com/us/securecenter/ca-single-sign-on.aspx'>CA Single Sign-On aka CA SiteMinder</a></td>
-        <td><a href="ca-sso-config.html">Configuring CA as an Identity Provider</a></td>
-      </tr>
-      <tr>
-        <td><a href='https://www.pingidentity.com/en/products/pingfederate.html'>Ping Federate</a></td>
-        <td><a href="ping-federate-sso-configuration.html">Configuring PingFederate as an Identity Provider</a></td>
-      </tr>
-      <tr>
-        <td><a href='https://technet.microsoft.com/en-us/windowsserver/dd448613.aspx'>Active Directory Federation Services (AD FS)</a></td>
-        <td><a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/opsguide-adfs-sso-configuration.html">Configuring AD FS as an Identity Provider</a></td>
-      </tr>
-    </table>
+
+| Solution Name | Integration Guide | 
+|---------------|-------------------|
+| [CA Single Sign-On aka CA SiteMinder](http://www.ca.com/us/securecenter/ca-single-sign-on.aspx) | [Configuring CA as an Identity Provider](ca-sso-config.html) | 
+| [Ping Federate](https://www.pingidentity.com/en/products/pingfederate.html)|[Configuring PingFederate as an Identity Provider](ping-federate-sso-configuration.html) |
+| [Active Directory Federation Services (AD FS)](https://technet.microsoft.com/en-us/windowsserver/dd448613.aspx) | [Configuring AD FS as an Identity Provider](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/opsguide-adfs-sso-configuration.html) |
 
 Some identity providers permit uploads of SP metadata while other providers require you to manually enter the SP metadata into a form. If your identity provider requires manual entry but is not listed in the previous table, see <a href="ca-sso-config.html">Configuring CA as an identity provider.
 
