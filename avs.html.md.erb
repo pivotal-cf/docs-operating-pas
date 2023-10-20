@@ -105,15 +105,19 @@ For each T1 router you created, add a **New Router Port** as follows, to allow t
 ![alt-text="New Router port"](./images/nsx-t/nsx-t-router-port.png)
 
 1. Advertise the routes of the T1 routers to the T0 router, so the T0 router can correctly route incoming requests based on their destination IP address:
-2. Select your T1 Router and navigate to **Routing** > **Route Advertisement**.
-3. Under **Edit Route Advertisement Configuration**, enable route advertisement by setting **Status** to **Enabled**.
-4. Set **Advertise All Connected Routes** to **Yes**.
-5. Set **Advertise All LB VIP Routes** to **Yes** (necessary if Load Balancing service is configured).
+2. Click Router in the list. 
+3. Click the More Options menu and select Edit. 
+4. Expand **Route Advertisement**.
+   1. Turn on **All Connected Segments & Service Ports** by using the green switch.
+   2. Turn on All IPSec Local Endpoints. 
+   3. Turn on **All LB VIP Routes** by using the green switch(necessary if Load Balancing service is configured).
 ![alt-text="Edit the Route Advertisement Configuration"](./images/nsx-t/nsx-t-route-advertise.png)
 
-1. Allocate an IP block for <%= vars.app_runtime_abbr %> orgs.
-2. From the NSX-T Manager, navigate to **Advanced Networking & Security** > **Networking** > **IPAM** and click **+Add**.
-3. Enter a name (for example, `<%= vars.app_runtime_abbr %>-container-ip-block`). This IP block name is also used in the **VMware NSX-T** tile in the **NCP** section under **IP Blocks of Container Networks**.
+1. Navigate to IP Address Pools.
+2. Click IP Address Pools in the navigation. 
+3. Click IP Address Blocks to allocate an IP block for <%= vars.app_runtime_abbr %> orgs.
+4. Add IP Address Block.
+5.  Enter a name (for example, `<%= vars.app_runtime_abbr %>-container-ip-block`). This IP block name is also used in the **VMware NSX-T** tile in the **NCP** section under **IP Blocks of Container Networks**.
 4. Enter a description, such as `Subnets are allocated from this pool to each newly-created org`.
 5. Enter a CIDR to allocate an address block large enough to accommodate all <%= vars.app_runtime_abbr %> apps. A `/14` CIDR is large enough for ~1,000 Orgs with ~250 apps each. If you are planning such a large foundation, see [VMware NSX-T <%= vars.app_runtime_abbr %> limits](https://configmax.vmware.com/guest?vmwareproduct=VMware%20NSX-T&release=NSX-T%20Data%20Center%202.4.0&categories=31-0) in the VMware documentation.
 
