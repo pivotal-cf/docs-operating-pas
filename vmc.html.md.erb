@@ -333,19 +333,23 @@ To install <%= vars.ops_manager %> on VMC:
 
 ## <a id='bosh-setup'></a> Configure BOSH Director
 
-<p> The procedure in this section contains only the configuration information that is specific to VMC.
+The procedure in this section contains only the configuration information that is specific to VMC.
+For more information about configuring BOSH on vSphere, see [Configuring BOSH Director on vSphere](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/vsphere-config.html).
 
-For more information about configuring BOSH on vSphere, see <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/vsphere-config.html">Configuring BOSH Director on vSphere</a>.</p>
-
-<p>When you configure the BOSH Director, do not configure NSX-T networking. Instead, select <strong>Standard vCenter Networking</strong>.</p>
+<p class="note important">
+<span class="note__title">Important</span>
+When you configure the BOSH Director, do not configure NSX-T networking. Instead, select <strong>Standard vCenter Networking</strong>.</p>
 
 To configure BOSH Director for VMC:
+
 1. Log in to <%= vars.ops_manager %>:
+
     - Go to the IP address you configured for <%= vars.ops_manager %>. For example, [https://54.190.190.190/](https://54.190.190.190/).
     - Enter a **Username**, **Password**, and **Password confirmation** to create an Admin user.
     - Enter a **Decryption passphrase** and the **Decryption passphrase confirmation**. This passphrase encrypts the VMware Tanzu Operations Manager datastore and is not recoverable.
 
-1. Select the **BOSH Director for vSphere** tile and configure BOSH as follows:
+2. Select the **BOSH Director for vSphere** tile and configure BOSH as follows:
+
     - **Settings**, then **vCenter Config**
         - **vCenter Host**: your vCenter URL. For example, `vcenter.sddc-35-162-72-214.vmwarevmc.com`.
         - **vCenter Username**: `cloudadmin@vmc.local`
@@ -398,7 +402,7 @@ To configure BOSH Director for VMC:
     - **Settings**, then **Security**
         - **Include Tanzu Ops Manager Root CA in Trusted Certs**: Select the check box.
 
-1. After you finish configuration, click **Apply Changes**. The following warning appears:
+3. After you finish configuration, click **Apply Changes**. The following warning appears:
     ![alt-text="Review Pending Changes. Warning: Please review the warnings. IaaS default: Could not log in. Required Datacenter privileges not available."](images/opsman-warning.png)
 
     Click **Ignore Warnings & Apply Changes**.
