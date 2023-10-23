@@ -20,13 +20,15 @@ To use your own load balancer:
     <br />
     For example, with `<%= vars.platform_name_lc %>.example.com` as the main subdomain for your <%= vars.platform_name %> installation and a load balancer IP address `198.51.100.1`, you must create an A record in your DNS that serves `example.com` and points `*.<%= vars.platform_name_lc %>` to `198.51.100.1`.
 
-    <table border="1" class="nice" >
+    <table class="table" >
+		<thead>
     	<tr>
 	        <th>Name</th>
 			<th>Type</th>
 			<th>Data</th>
 			<th>Domain</th>
 		</tr>
+		</thead>
 		<tr>
 		    <td>*.<%= vars.platform_name_lc %></td>
 		    <td>A</td>
@@ -35,14 +37,14 @@ To use your own load balancer:
       	</tr>
     </table>
 
-1. Go to the <%= vars.ops_manager %> Installation Dashboard.
+2. Go to the <%= vars.ops_manager %> Installation Dashboard.
 
-1. Click the <%= vars.app_runtime_abbr %> tile.
+3. Click the <%= vars.app_runtime_abbr %> tile.
 
-1. Select **Networking**.
+4. Select **Networking**.
 
-1. In the **Gorouter IPs** field, enter the static IP address for <%= vars.platform_name %> that you have registered with your load balancer. Enter multiple IP addresses as a comma-separated list or as a range.
+5. In the **Gorouter IPs** field, enter the static IP address for <%= vars.platform_name %> that you have registered with your load balancer. Enter multiple IP addresses as a comma-separated list or as a range.
 
-1. Provide your SSL certificate in the **Certificates and private keys for the Gorouter** fields. For more information, see [Providing a Certificate for Your TLS Termination Point](./security_config.html).
+6. Provide your SSL certificate in the **Certificates and private keys for the Gorouter** fields. For more information, see [Providing a Certificate for Your TLS Termination Point](./security_config.html).
 
 <p class='note'><strong>Note:</strong> When adding or removing <%= vars.app_runtime_abbr %> Gorouters, you must update your load balancing solution configuration with the appropriate IP addresses.</p>
