@@ -7,14 +7,14 @@ During a <%= vars.app_runtime_abbr %> upgrade, BOSH drains all Diego Cell VMs th
 
 When BOSH triggers an upgrade, each upgrading Diego Cell enters evacuation mode. In evacuation mode, BOSH stops Diego Cells and then schedules replacements for its app instances.
 
-For more information, see [Specific Guidance for Diego Cells](configuring.html#diego-cells) in _Configuring <%= vars.app_runtime_abbr %> for Upgrades_.
+For more information, see [Specific guidance for Diego Cells](configuring.html#diego-cells) in _Configuring <%= vars.app_runtime_abbr %> for Upgrades_.
 
 
 ## <a id="cf-push"></a> The cf push command can become unavailable
 
 The `cf push`  command is mostly available for the duration of a <%= vars.app_runtime_abbr %> upgrade. However, `cf push` can become unavailable when a single VM is in use or during BOSH Backup and Restore (BBR).
 
-For more information, see [cf push Availability During <%= vars.app_runtime_abbr %> Upgrades](cfpush-availability-during-upgrade.html).
+For more information, see [cf push availability during <%= vars.app_runtime_abbr %> upgrades](cfpush-availability-during-upgrade.html).
 
 
 ## <a id="upgrade-limitations"></a> <%= vars.app_runtime_abbr %> components upgrade
@@ -70,8 +70,9 @@ The following table lists components in the order that <%= vars.ops_manager %> u
   * Component availability, behavior, and usage during an upgrade
   * Guidance on disabling the component before an upgrade
 
-<table border="1" class="nice" >
-<tr>
+<div class="wrap-table-overflow">
+<table class="table">
+<thead><tr>
   <th rowspan=2><strong>Component</strong></th>
   <th rowspan=2><strong>Scalable</strong></th>
   <th rowspan=2><strong>Extended Downtime</strong></th>
@@ -82,6 +83,8 @@ The following table lists components in the order that <%= vars.ops_manager %> u
   <th><strong>Apps</strong></th>
   <th><strong>Platform</strong></th>
 </tr>
+</thead>
+<tbody>
 <tr>
   <td>NATS</td>
   <td>&#10003;</td>
@@ -250,13 +253,15 @@ The following table lists components in the order that <%= vars.ops_manager %> u
   <td>&#10003;</td>
   <td>Downtime for this component only affects routes on mesh domains.</td>
 </tr>
+</tbody>
 </table>
+</div>
 
 ### <a id= "tasks"></a> One-time tasks
 
 After <%= vars.ops_manager %> upgrades components, it performs system checks and launches UI apps and other <%= vars.app_runtime_abbr %> components as Cloud Foundry apps. These tasks run in this order:
 
-<table>
+<table class="table">
 <tr>
   <td>1</td>
   <td>Apps Manager Errand - Push Apps Manager</td>
