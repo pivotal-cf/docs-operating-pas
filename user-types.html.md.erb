@@ -38,52 +38,6 @@ Org and Space Managers then use Apps Manager to invite and manage additional <%=
 
 The following table summarizes <%= vars.app_runtime_abbr %> user types, their roles, the tools they use, the System of Record (SOR) that stores their accounts, and what accounts they can provision.
 
-<table class='table'>
-	<col width="20%">
-	<col width="20%">
-	<col width="20%">
-	<col width="20%">
-	<col width="20%">
-	<thead><tr>
-		<th>User Type</th>
-		<th>Available Roles</th>
-		<th>Tools They Use</th>
-		<th>Account SOR</th>
-		<th>Accounts they can provision</th>
-	</tr>
-	</thead>
-	<tr>
-		<th><%= vars.app_runtime_abbr %> Users</th>
-			<td>
-				<ul>
-					<li>UAA Administrator</li>
-					<li>Org Manager</li>
-					<li>Org Auditor</li>
-					<li>Org Billing Manager</li>
-					<li>Space Manager</li>
-					<li>Space Developer</li>
-					<li>Space Auditor</li>
-				</ul>
-			</td>
-			<td>
-			 	<ul>
-					<li>cf CLI</li>
-					<li>CAPI</li>
-					<li>Apps Manager</li>
-					<li><%= vars.platform_name %> metrics</li>
-					<li>Marketplace</li>
-				</ul>
-			</td>
-			<td><%= vars.app_runtime_abbr %> user store through UAA<br>
-				&nbsp;&nbsp;<em>or</em><br>
-				External store through SAML or LDAP</td>
-			<td><%= vars.app_runtime_abbr %> users within permitted orgs and spaces, and<br>
-			end users of the app</td>
-	</tr>
-</table>
-
-# experiment
-
 <table id='users-summary' border='1' class='nice'>
 	<col width="50%">
 	<col width="50%">
@@ -91,11 +45,6 @@ The following table summarizes <%= vars.app_runtime_abbr %> user types, their ro
 		<th>User type</th>
 		<th>TAS for VMs users</th>
 	</tr>
-		
-
-		<th>Account SOR</th>
-		<th>Accounts they can provision</th>
-
 	<tr>
 		<th>Available roles</th>
 		<td>
@@ -130,6 +79,7 @@ The following table summarizes <%= vars.app_runtime_abbr %> user types, their ro
 		</td>
 	</tr>
 	<tr>
+		<th>Accounts they can provision</th>
 		<td><%= vars.app_runtime_abbr %> users within permitted orgs and spaces, and
 		end users of the app
 		</td>
