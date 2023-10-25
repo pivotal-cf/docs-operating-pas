@@ -42,6 +42,7 @@ To configure <%= vars.app_runtime_abbr %> to use a SAML IdP (identity provider):
 1. Click **Domains**.
 
 1. Record your system domain.
+
     ![alt-text="In Domains, enter the System domain and Apps domain. Click Save.](./images/domains.png)
 
 2. Click **Authentication and Enterprise SSO** and select **SAML Identity Provider**.
@@ -134,20 +135,18 @@ To integrate the UAA with one or more LDAP servers:
    <%= vars.company_name %> recommends that you provide LDAP credentials that grant read only permissions on the LDAP search base and the LDAP group search base. Additionally, if the bind user belongs to a different search base, you must use the full DN.
 
       <p class="note caution">
-        <span class="note__title">Caution</span>
-       VMware discourages for closed source and Cloud Foundry discourages for open source the reusing of LDAP service accounts across environments. LDAP service accounts cannot be subject to manual lockouts, such as lockouts that result from users using the same account. Also, LDAP service accounts cannot be subject to automated deletions, because disruption to these service accounts might prevent user logins.</p>
+      <span class="note__title">Caution</span>
+      VMware and Cloud Foundry discourage the reusing of LDAP service accounts across environments. LDAP service accounts cannot be subject to manual lockouts, such as lockouts that result from users using the same account. Also, LDAP service accounts cannot be subject to automated deletions, because disruption to these service accounts might prevent user logins.</p>
+
 6. For **User search base**, enter the location in the LDAP directory tree from which any LDAP user search begins. The typical LDAP search base matches your domain name.
-<br>
 <br>
 For example, a domain named "cloud.example.com" typically uses the following LDAP user search base: `ou=Users,dc=example,dc=com`
 
 1. For **User search filter**, enter a string that defines LDAP user search criteria. This search criteria allows LDAP to use more effective and efficient searches. For example, the standard LDAP search filter `cn=Smith` returns all objects with a common name equal to `Smith`.
 <br>
-<br>
 In the LDAP search filter string that you use to configure <%= vars.app_runtime_abbr %>, use `{0}` instead of the user name.
 
     For example, use `cn={0}` to return all LDAP objects with the same common name as the user name.
-<br>
 <br>
 In addition to `cn`, other attributes commonly searched for and returned are `mail`, `uid` and, in the case of Active Directory, `sAMAccountName`.
 
@@ -155,13 +154,11 @@ In addition to `cn`, other attributes commonly searched for and returned are `ma
 
 1. For **Group search base**, enter the location in the LDAP directory tree from which the LDAP group search begins.
 <br>
-<br>
 For example, a domain named "cloud.example.com" typically uses the following LDAP group search base: `ou=Groups,dc=example,dc=com`
 <br>
-<br>
-This is required if you are mapping LDAP groups to an admin role. To map the groups under this search base to admin roles in <%= vars.app_runtime_abbr %>, see [Grant Admin Permissions to an External Group (SAML or LDAP)](../uaa/uaa-user-management.html#external-group) in _Creating and Managing Users with the UAA CLI (UAAC)_.
+This is required if you are mapping LDAP groups to an admin role. To map the groups under this search base to admin roles in <%= vars.app_runtime_abbr %>, see [Grant Admin Permissions to an External Group (SAML or LDAP)](../uaa/uaa-user-management.html#external-group) in _Creating and managing users with the UAA CLI (UAAC)_.
 
-    To onboard individual LDAP users and map them to <%= vars.app_runtime_abbr %> roles, see <a href="../operating/external-user-management.html">Adding Existing SAML or LDAP Users to a <%= vars.platform_name %> Deployment
+    To onboard individual LDAP users and map them to <%= vars.app_runtime_abbr %> roles, see [Adding existing SAML or LDAP users to a <%= vars.platform_name %> deployment](../operating/external-user-management.html).
 
 1. For **Group search filter**, enter a string that defines LDAP group search criteria. The standard value is `member={0}`. This string is required if you are mapping LDAP groups to an admin role.
 
@@ -213,23 +210,23 @@ To integrate the UAA with an external OIDC identity provider (IDP):
    * **Users**: Make sure that the users to whom you want to grant access to <%= vars.app_runtime_abbr %> are allowed access to this client or application.
    * **Groups**:  Verify that this client can obtain all relevant OIDC user groups information that you need to use mappings from external OIDC user groups to internal <%= vars.app_runtime_abbr %> scopes. For example, if you want to grant <%= vars.app_runtime_abbr %> admin scopes to all external OIDC users belonging to the `example-inc-operators` group, make sure that this client can access this group memberships.
 
-   <p> For more information about how to perform external group mappings, see [Grant Admin Permissions to an External Group (SAML, LDAP, or OIDC)](../uaa/uaa-user-management.html#external-group). </p>
+  For more information about how to perform external group mappings, see [Grant Admin Permissions to an External Group (SAML, LDAP, or OIDC)](../uaa/uaa-user-management.html#external-group).
 
-8. For **Client secret**, enter the client secret of the client whose ID was entered earlier in the procedure.
+1. For **Client secret**, enter the client secret of the client whose ID was entered earlier in the procedure.
 
-9. For **Scopes**, enter a comma-separated list of scopes to request from the external OIDC provider. In accordance with OIDC 1.0 specifications, requesting certain scopes from an OIDC provider can cause additional claims. For example, requesting `openid, profile, email` scopes (the current default value for this input field) can allow the UAA to obtain claims containing the user's first name, last name, and email. Additionally, please include the scope or scopes, for example, `groups`) that allows the UAA to obtain the user's group memberships. Consult your OIDC provider's documentation to decide the exact scopes to request to obtain sufficient claims.
+2. For **Scopes**, enter a comma-separated list of scopes to request from the external OIDC provider. In accordance with OIDC 1.0 specifications, requesting certain scopes from an OIDC provider can cause additional claims. For example, requesting `openid, profile, email` scopes (the current default value for this input field) can allow the UAA to obtain claims containing the user's first name, last name, and email. Additionally, please include the scope or scopes, for example, `groups`) that allows the UAA to obtain the user's group memberships. Consult your OIDC provider's documentation to decide the exact scopes to request to obtain sufficient claims.
 
-10. For **Email domains**, enter a comma-separated list of the email domains for external users to invite to Apps Manager.
+3.  For **Email domains**, enter a comma-separated list of the email domains for external users to invite to Apps Manager.
 
-11. For **Username claim**, enter the attribute in your OIDC provider claim that corresponds to the TAS for VMs user name.
+4.  For **Username claim**, enter the attribute in your OIDC provider claim that corresponds to the TAS for VMs user name.
 
-12. For **First name claim**, enter the attribute in your OIDC provider claim that corresponds to the user's first name in TAS for VMs.
+5.  For **First name claim**, enter the attribute in your OIDC provider claim that corresponds to the user's first name in TAS for VMs.
 
-13. For **Last name claim**, enter the attribute in your OIDC provider claim that corresponds to the user's last name in TAS for VMs.
+6.  For **Last name claim**, enter the attribute in your OIDC provider claim that corresponds to the user's last name in TAS for VMs.
 
-14. For **Email claim**, enter the attribute in your OIDC provider claim that corresponds to the user's email in TAS for VMs.
+7.  For **Email claim**, enter the attribute in your OIDC provider claim that corresponds to the user's email in TAS for VMs.
 
-15. For **External groups claims**, enter the attribute in your OIDC provider claim that defines the groups to which a user belongs.
+8.  For **External groups claims**, enter the attribute in your OIDC provider claim that defines the groups to which a user belongs.
 This is a comma separated list, and is used to map to internal <%= vars.app_runtime_abbr %> scopes.
 
 1. Click **Save** and return to the <%= vars.ops_manager %> Installation Dashboard.
@@ -241,11 +238,6 @@ This is a comma separated list, and is used to map to internal <%= vars.app_runt
 <p class="note important">
 <span class="note__title">Important</span>
 As of VMware Tanzu Application Service v4.0.0, when an external OIDC provider log in is configured, and when you log out from the UAA UI or other <%= vars.app_runtime_abbr %> UIs, the UAA attempts to log users out of the OIDC provider as well.
-
 This external OIDC provider log out operation might fail due to a known issue, that causes an error page from the provider.
-
 If you do not want to log out of the external OIDC provider, this error is ignored.
-
-If you want to log out of the external OIDC provider, go to the provider log in page directly and log out from there.
-
-This issue is addressed in a future release.
+If you want to log out of the external OIDC provider, go to the provider log in page directly and log out from there.</p>
