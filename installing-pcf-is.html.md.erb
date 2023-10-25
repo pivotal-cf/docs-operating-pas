@@ -224,8 +224,9 @@ The use cases from the previous table are described here:
   to. See other cases for guidance on how to configure each
   <%= vars.segment_runtime_full %>.
 
-<p class='note warning'><strong>Caution:</strong> If you configure the
-<strong>Compute and Networking Isolation</strong> pane and
+<p class="note caution">
+<span class="note__title">Caution</span>
+If you configure the <strong>Compute and Networking Isolation</strong> pane and
 <strong>Requests to isolation segments</strong> setting in
 the <%= vars.app_runtime_abbr %> tile in a manner other than the use cases
 described, the smoke tests fail. To deploy the tile anyway, you must
@@ -241,11 +242,15 @@ To configure the **Compute and Networking Isolation** pane:
 1. Select **Compute and Networking Isolation**.
 
 1. Under **Compute isolation**, activate or deactivate compute isolation:
+
   * To deactivate compute isolation, select **Do not allow**. Select this option if you do not require compute isolation and you are deploying the <%= vars.segment_runtime_full %> tile for the purpose of making upgrades more manageable. For example, if you have a <%= vars.app_runtime_abbr %> tile with a large volume of Diego Cells. This approach helps separate the upgrade of the <%= vars.app_runtime_abbr %> control plane from the upgrade of the Diego Cells. Further, it splits the upgrade of the Diego Cells into smaller groups.
   * To activate compute isolation, select **Allow** and enter a placement tag for your Diego Cells in the **Segment name** field. This placement tag identifies the Diego Cells that run in your isolation segment and must be unique across your <%= vars.platform_name %> deployment. You use this placement tag when following the steps in [Register an Isolation Segment](../adminguide/isolation-segments.html#register-an-is) in _Managing Isolation Segments_ to create the isolation segment in the CCDB.
-    <p class='note'><strong>Note:</strong> If you deactivate compute isolation, you must set <strong>Gorouter sharding mode</strong> to <strong>No isolation segment</strong>. Otherwise, the <%= vars.segment_runtime_full %> tile fails to schedule the apps in your isolation segment.</p>
+    
+    <p class="note">
+    <span class="note__title">Note</span>
+    If you deactivate compute isolation, you must set <strong>Gorouter sharding mode</strong> to <strong>No isolation segment</strong>. Otherwise, the <%= vars.segment_runtime_full %> tile fails to schedule the apps in your isolation segment.</p>
 
-1. Under **Networking isolation**, activate or deactivate networking isolation by selecting a sharding mode. For more information, see [Sharding Gorouters for Isolation Segments](../adminguide/routing-is.html#sharding-routers-isolation-segment) in _Routing for Isolation Segments_.
+2. Under **Networking isolation**, activate or deactivate networking isolation by selecting a sharding mode. For more information, see [Sharding Gorouters for Isolation Segments](../adminguide/routing-is.html#sharding-routers-isolation-segment) in _Routing for Isolation Segments_.
 
 * **Isolation segment only**: The Gorouters for the <%= vars.app_runtime_abbr %> tile acknowledge requests only for apps deployed within the Diego Cells of the tile. All other requests fail.
 * **No isolation segment**: The Gorouters for the <%= vars.app_runtime_abbr %> tile reject requests for any isolation segment. Choose this option to add a group of Gorouters for the <%= vars.app_runtime_abbr %> tile, such as when you want a private point of entry for the system domain or to configure a
@@ -279,8 +284,9 @@ To configure the **Smoke Tests** pane:
 
 1. Click **Save**.
 
-<p class='note'><strong>Note:</strong> If you configure the
-<strong>Compute and Networking Isolation</strong> pane and the
+<p class="note">
+<span class="note__title">Note</span>
+If you configure the <strong>Compute and Networking Isolation</strong> pane and the
 <strong>Requests to isolation segments</strong> property in
 the <%= vars.app_runtime_abbr %> tile in a manner other than the use cases
 described in <a href="#compute-networking-isolation-configs">Options for
@@ -296,7 +302,9 @@ In the **Errands** pane, you can select **On** to always run an errand or **Off*
 
 For more information about how <%= vars.ops_manager %> manages errands, see [Managing Errands in <%= vars.ops_manager %>](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-managing_errands.html).
 
-<div class="note warning"><strong>Caution:</strong> You must deactivate the Smoke Test errand if:
+<div class="note caution">
+  <span class="note__title">Caution</span>
+  You must deactivate the Smoke Test errand if:
     <ul>
     <li>You configure the <strong>Compute and Networking Isolation</strong> pane and the <strong>Requests to isolation segments</strong> check box in the <%= vars.app_runtime_abbr %> tile in a manner other than the use cases described in <a href="#compute-networking-isolation-configs">Options for Configuring Compute and Networking Isolation</a>. Otherwise, apps fail to schedule in <%= vars.segment_runtime_full %>.</li>
     <li>Both the V2 and V1 Firehoses are deactivated in <%= vars.app_runtime_abbr %>. Otherwise, the deploy fails.</li>

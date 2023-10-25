@@ -13,7 +13,9 @@ Controller API that all users of <%= vars.app_runtime_full %> (<%= vars.app_runt
 to serving external clients, `cloud_controller_ng` also provides APIs for internal components within
 <%= vars.app_runtime_abbr %>, such as Loggregator and Networking subsystems.
 
-<p class='note'><strong>Note:</strong> Running <code>bosh instances --vitals</code> returns CPU values. The <strong>CPU User</strong> value corresponds with the <code>system.cpu.user</code> metric and is scaled by the number of CPUs. For example, on a 4-core <code>api</code> VM, a <code>cloud_controller_ng</code> process that is using 100% of a core is listed as using 25% in the <code>system.cpu.user</code> metric.</p>
+<p class="note">
+<span class="note__title">Note</span>
+Running <code>bosh instances --vitals</code> returns CPU values. The <strong>CPU User</strong> value corresponds with the <code>system.cpu.user</code> metric and is scaled by the number of CPUs. For example, on a 4-core <code>api</code> VM, a <code>cloud_controller_ng</code> process that is using 100% of a core is listed as using 25% in the <code>system.cpu.user</code> metric.</p>
 
 ### When to scale
 
@@ -58,7 +60,9 @@ Cloud Controller API VMs can primarily be scaled horizontally. Scaling up the nu
 effective. This is because Ruby's Global Interpreter Lock (GIL) limits the `cloud_controller_ng` process so that it can
 only effectively use a single CPU core on a multi-core machine.
 
-<p class='note'><strong>Note:</strong> Since Cloud Controller supports both PostgreSQL and MySQL external databases,
+<p class="note">
+<span class="note__title">Note</span>
+Since Cloud Controller supports both PostgreSQL and MySQL external databases,
 there is no absolute guidance on what a healthy database looks like. In general, high database CPU utilization is a
 good indicator of scaling issues, but always defer to the documentation specific to your database.</p>
 
@@ -139,7 +143,9 @@ The `cloud_controller_clock` job runs Diego sync process and schedules periodic 
 `cc_deployment_updater` job is responsible for handling v3 rolling app deployments. For more information, see
 [Rolling App Deployments](../devguide/deploy-apps/rolling-deploy.html).
 
-<p class='note'><strong>Note:</strong> Running <code>bosh instances --vitals</code> returns CPU values. The
+<p class="note">
+<span class="note__title">Note</span>
+Running <code>bosh instances --vitals</code> returns CPU values. The
 <strong>CPU User</strong> value corresponds with the <code>system.cpu.user</code> metric and is scaled by the number of
 CPUs. For example, on a 4-core <code>api</code> VM, a <code>cloud_controller_ng</code> process that is using 100% of a
 core is listed as using 25% in the <code>system.cpu.user</code> metric.</p>

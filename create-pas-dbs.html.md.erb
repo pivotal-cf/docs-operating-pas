@@ -6,11 +6,15 @@ owner: Releng
 Here is an example procedure for creating the necessary databases
 on your external database instance so that you can deploy <%= vars.app_runtime_first %> with an external database.
 
-<p class="note warning"><strong>Caution:</strong> Use a password to protect the database you use in your deployment.</p>
+<p class="note caution">
+<span class="note__title">Caution</span>
+Use a password to protect the database you use in your deployment.</p>
 
 To create your <%= vars.app_runtime_abbr %> databases, do the following:
 
-<p class='note'><strong>Note:</strong> Exact configurations depend on your database provider. The following example procedure is for AWS RDS.</p>
+<p class="note">
+<span class="note__title">Note</span>
+Exact configurations depend on your database provider. The following example procedure is for AWS RDS.</p>
 
 1. Add the `ubuntu` account key pair from your IaaS deployment to your local SSH profile
    so that you can access the <%= vars.ops_manager_full %> VM.

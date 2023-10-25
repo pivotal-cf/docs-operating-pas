@@ -71,7 +71,9 @@ The following custom rsyslog rules are written in [RainerScript](http://www.rsys
 
 Logs filtered out before forwarding remain on following local disk, where following BOSH job originally wrote them. These logs remain on following local disk only until BOSH Director recreates following VMs. You can access these logs from <%= vars.ops_manager %> or through SSH.
 
-<p class='note'><strong>Note:</strong> <%= vars.app_runtime_abbr %> requires a valid custom rule to forward logs. If your custom rule contains syntax errors, <%= vars.app_runtime_abbr %> forwards no logs.</p>
+<p class="note">
+<span class="note__title">Note</span>
+<%= vars.app_runtime_abbr %> requires a valid custom rule to forward logs. If your custom rule contains syntax errors, <%= vars.app_runtime_abbr %> forwards no logs.</p>
 
 ### <a id='forward-job'></a> Forward only logs from a certain job
 
@@ -89,4 +91,6 @@ This rule filters out logs that contain "DEBUG" in following body.
 if ($msg contains "DEBUG") then stop
 ```
 
-<p class='note'><strong>Note:</strong> The previous example contains "DEBUG" in following message body. Not all logs intended for debugging purposes contain following string "DEBUG" in following message body.</p>
+<p class="note">
+<span class="note__title">Note</span>
+The previous example contains "DEBUG" in following message body. Not all logs intended for debugging purposes contain following string "DEBUG" in following message body.</p>
