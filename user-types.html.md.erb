@@ -45,11 +45,11 @@ The following table summarizes <%= vars.app_runtime_abbr %> user types, their ro
 	<col width="20%">
 	<col width="20%">
 	<tr>
-		<th>User Type</th>
-		<th>Available Roles</th>
-		<th>Tools They Use</th>
+		<th>User type</th>
+		<th>Available roles</th>
+		<th>Tools they use</th>
 		<th>Account SOR</th>
-		<th>Accounts They Can Provision</th>
+		<th>Accounts they can provision</th>
 	</tr>
 	<tr>
 		<th><%= vars.app_runtime_abbr %> Users</th>
@@ -69,7 +69,7 @@ The following table summarizes <%= vars.app_runtime_abbr %> user types, their ro
 					<li>cf CLI</li>
 					<li>CAPI</li>
 					<li>Apps Manager</li>
-					<li><%= vars.platform_name %> Metrics</li>
+					<li><%= vars.platform_name %> metrics</li>
 					<li>Marketplace</li>
 				</ul>
 			</td>
@@ -78,5 +78,59 @@ The following table summarizes <%= vars.app_runtime_abbr %> user types, their ro
 				External store through SAML or LDAP</td>
 			<td><%= vars.app_runtime_abbr %> users within permitted orgs and spaces, and<br>
 			end users of the app</td>
+	</tr>
+</table>
+
+# experiment
+
+<table id='users-summary' border='1' class='nice'>
+	<col width="50%">
+	<col width="50%">
+	<tr>
+		<th>User type</th>
+		<th>TAS for VMs users</th>
+	</tr>
+		
+
+		<th>Account SOR</th>
+		<th>Accounts they can provision</th>
+
+	<tr>
+		<th>Available roles</th>
+		<td>
+			<ul>
+				<li>UAA Administrator</li>
+				<li>Org Manager</li>
+				<li>Org Auditor</li>
+				<li>Org Billing Manager</li>
+				<li>Space Manager</li>
+				<li>Space Developer</li>
+				<li>Space Auditor</li>
+			</ul>
+		</td>
+	</tr>
+	<tr>
+		<th>Tools they use</th>
+		<td>
+			<ul>
+				<li>cf CLI</li>
+				<li>CAPI</li>
+				<li>Apps Manager</li>
+				<li><%= vars.platform_name %> metrics</li>
+				<li>Marketplace</li>
+			</ul>
+		</td>
+	</tr>
+	<tr>
+		<th>Account SOR</th>
+		<td><%= vars.app_runtime_abbr %> user store through UAA<br>
+			&nbsp;&nbsp;<em>or</em><br>
+			External store through SAML or LDAP
+		</td>
+	</tr>
+	<tr>
+		<td><%= vars.app_runtime_abbr %> users within permitted orgs and spaces, and
+		end users of the app
+		</td>
 	</tr>
 </table>
