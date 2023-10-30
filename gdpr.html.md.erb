@@ -205,9 +205,13 @@ UAA is an open-source Cloud Foundry component that provides identity managementÂ
 
 The Cloud Foundry API release contains several components, including the Cloud Controller. For more information, see the Cloud Foundry API release [README](https://github.com/cloudfoundry/capi-release).
 
+<<<<<<< HEAD
 <table>
+=======
+<table class="table">
+>>>>>>> 91f0dc8 (Update table format.)
 <tbody>
-<tr>
+<thead><tr>
 <th>GDPR</th>
 <th>Workflow</th>
 <th>What personal data is collected?</th>
@@ -216,7 +220,7 @@ The Cloud Foundry API release contains several components, including the Cloud C
 <th>How is it processed?</th>
 <th>Who has access to it?</th>
 <th>How long is it kept?</th>
-</tr>
+</tr></thead>
 <tr>
 <th>Business Initiation</th>
 <td>User makes a request for the first time</td>
@@ -348,9 +352,13 @@ To deactivate logging of client IP addresses:
 
 Diego is the container management system for <%= vars.app_runtime_abbr %>. For more information, see [Diego Components and Architecture](../concepts/diego/diego-architecture.html).
 
+<<<<<<< HEAD
 <table>
+=======
+<table class="table">
+>>>>>>> 91f0dc8 (Update table format.)
 <tbody>
-<tr>
+<thead><tr>
 <th>GDPR</th>
 <th>Workflow</th>
 <th>What personal data is collected?</th>
@@ -359,7 +367,7 @@ Diego is the container management system for <%= vars.app_runtime_abbr %>. For m
 <th>How is it processed?</th>
 <th>Who has access to it?</th>
 <th>How can I delete it?</th>
-</tr>
+</tr></thead>
 <tr>
 <th>Business Execution</th>
 <td>Executing apps and tasks</td>
@@ -391,6 +399,7 @@ Diego is the container management system for <%= vars.app_runtime_abbr %>. For m
 
 The Notifications Service allows you to configure components of <%= vars.app_runtime_abbr %> to send emails to end users. For more information, see [Getting Started with the Notifications Service](../adminguide/notifications.html).
 
+<<<<<<< HEAD
 <table>
 <tbody>
 <tr>
@@ -445,3 +454,12 @@ The Notifications Service allows you to configure components of <%= vars.app_run
 <td>Loggregator Firehose users</td>
 </tr>
 </table>
+=======
+| GDPR | Workflow | What personal data is collected? | When is it collected? | Where is it stored? | How is it processed?| Who has access to it? |
+|------|----------|----------------------------------|-----------------------|--------------|-----------|----------------|
+| **Business Execution** | Sending email to UAA users | User ID | First email sent | The `receipts` table in the Notifications database | Stored in the Notifications database | Notifications operator making a database query |
+| | UAA user unsubscribes globally | User ID | When the UAA user unsubscribes | The `global_unsubscribes` table in the Notifications database | Stored in the Notifications database | Notifications operator making a database query |
+| | UAA user unsubscribes from a specific kind of email | User ID | When the UAA user unsubscribes | The `unsubscribes` table in the Notifications database | Stored in the Notifications database | Notifications operator making a database query |
+| | UAA user unsubscribes from a campaign in the v2 API | User ID | When the UAA user unsubscribes | The `unsubscribes` table in the Notifications database | Stored in the Notifications database | Notifications operator making a database query |
+| **Reports/Logs** | UAA user unsubscribes | User email address | When the UAA user unsubscribes | Log output | [Loggregator](../loggregator/architecture.html) | Loggregator Firehose users |
+>>>>>>> 91f0dc8 (Update table format.)
