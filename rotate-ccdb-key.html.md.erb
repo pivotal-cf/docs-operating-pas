@@ -62,15 +62,17 @@ This section describes how to troubleshoot errors that you may encounter while r
 
 ### <a id="values-changed"></a> Error: Encryption key(s) have had their values changed
 
-<table>
+<table class="table">
 <tr>
+<thead>
 	<th>Error</th>
-	<td>The <%= vars.app_runtime_abbr %> deploy fails with a Cloud Controller error.
-            The Cloud Controller logs include the following message:
-            <code>Encryption key(s) mykey have had their values changed.
-            Label and value pairs should not change, rather a new label and
-            value pair should be added.</code></td>
+   <td>The <%= vars.app_runtime_abbr %> deploy fails with a Cloud Controller error.
+   The Cloud Controller logs include the following message:
+   <code>Encryption key(s) mykey have had their values changed. Label and value pairs must not change, rather a new label and value pair can be added.</code></td>
  </tr>
+ </thead>
+
+<thead>
  <tr>
 	<th>Cause</th>
 	<td><%= vars.app_runtime_abbr %> does not support editing key names or values in the ledger.
@@ -78,15 +80,18 @@ This section describes how to troubleshoot errors that you may encounter while r
             For example, a key with the name <code>key-name</code> previously had the value <code>key-value-1</code>
             and now it is <code>key-value-2</code>.</td>
 </tr>
+ </thead>
+  <thead>
 <tr>
 	<th>Solution</th>
 	<td>Replace the value for the key with its original value and follow the rotation procedure to add a new key. <br>You may need to find the original value of the key using the steps in <a href="#view">View Encryption Keys</a>.</td>
 </tr>
+ </thead>
 </table>
 
 ### <a id="not-present"></a> Error: Encryption key(s) are still in use but not present in 'cc.database_encryption.keys'
 
-<table>
+<table class="table">
 <tr>
 	<th>Error</th>
 	<td>The <%= vars.app_runtime_abbr %> deploy fails with a Cloud Controller error.
