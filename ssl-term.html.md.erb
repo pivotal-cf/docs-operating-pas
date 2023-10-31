@@ -20,21 +20,21 @@ To use your own load balancer:
     <br />
     For example, with `<%= vars.platform_name_lc %>.example.com` as the main subdomain for your <%= vars.platform_name %> installation and a load balancer IP address `198.51.100.1`, you must create an A record in your DNS that serves `example.com` and points `*.<%= vars.platform_name_lc %>` to `198.51.100.1`.
 
-    <table class="table" >
-    	<thead>
-		<tr>
-	        <th>Name</th>
-			<th>Type</th>
-			<th>Data</th>
-			<th>Domain</th>
-		</tr>
-		</thead>
-		<tr>
-		    <td>*.<%= vars.app_runtime_abbr_lc %></td>
-		    <td>A</td>
-		    <td>198.51.100.1</td>
-		    <td>example.com</td>
-      	</tr>
+    <table class="table">
+    <thead>
+	<thead><tr>
+	<th>Name</th>
+	<th>Type</th>
+	<th>Data</th>
+	<th>Domain</th>
+	</tr></thead>
+	</thead>
+	<tr>
+	<td>*.<%= vars.app_runtime_abbr_lc %></td>
+	<td>A</td>
+	<td>198.51.100.1</td>
+	<td>example.com</td>
+    </tr>
     </table>
 
 1. Go to the <%= vars.ops_manager %> Installation Dashboard.
