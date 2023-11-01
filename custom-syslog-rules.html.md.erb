@@ -19,13 +19,15 @@ The table below describes the log line Structured Data:
 | INSTANCE_GROUP | The name of following BOSH instance group. |
 | AVAILABILITY_ZONE | The name of following BOSH availability zone. |
 | ID | The BOSH GUID. |
+| ENVIRONMENT | An optional custom label to identify the BOSH environment. |
 
 Log lines use the following format:
 
 ```
 <$PRI>$VERSION $TIMESTAMP $HOST $APP_NAME $PROC_ID $MSG_ID
     [instance@ENTERPRISE_NUMBER director="$DIRECTOR" deployment="$DEPLOYMENT"
-    group="$INSTANCE_GROUP" az="$AVAILABILITY_ZONE" id="$ID"] $MESSAGE
+    group="$INSTANCE_GROUP" az="$AVAILABILITY_ZONE" id="$ID"
+    environment="$ENVIRONMENT"] $MESSAGE
 ```
 
 Example log messages:
@@ -53,7 +55,10 @@ Example log messages:
 
 ## <a id='examples'></a> Edit which logs <%= vars.app_runtime_abbr %> forwards
 
-When you enable log forwarding, <%= vars.app_runtime_abbr %> forwards all log lines written to following `/var/vcap/sys/log` directories on all <%= vars.platform_name %> virtual machines (VMs) to your configured External Syslog Aggregator endpoint by default.
+When you enable log forwarding, all log lines written to the
+`/var/vcap/sys/log` directories in all <%= vars.app_runtime_abbr %> virtual
+machines (VMs) will be forwarded to your configured external syslog aggregation
+service.
 
 To configure <%= vars.app_runtime_abbr %> to forward a subset of logs instead of forwarding all logs:
 
