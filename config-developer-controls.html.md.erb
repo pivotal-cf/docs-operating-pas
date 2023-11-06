@@ -1,0 +1,57 @@
+---
+title: Configure app containers
+owner: PAS Releng
+---
+
+<a id='appdevctrl-config'></a>
+
+In the **App Developer Controls** pane, you configure restrictions and default settings for your apps.
+
+To configure the **App Developer Controls** pane:
+
+1. Select **App Developer Controls**.
+
+2. Enter the **Maximum file upload size** in MB. This is the maximum size of an app upload, including the buildpack.
+
+3. Enter the **Maximum package size** in MB. This is the maximum total size of an app's files.
+
+4. Enter the **Default app memory** in MB. This is the default amount of memory allocated to a newly-pushed app if no value is specified when pushing the app.
+
+5. Enter the **Default app memory quota per org** in MB. This is the default memory limit for all apps in an org. The specified limit only applies to the first installation of <%= vars.app_runtime_abbr %>. After the initial installation, operators can use the cf CLI to change the default value.
+
+6. For **Maximum disk quota per app** in MB, enter in MB the maximum amount of disk allowed per app.
+
+ <p> If you allow developers to push large apps, <%= vars.app_runtime_abbr %> might have trouble placing them on Diego
+  Cells. Additionally, in the event of a system upgrade or an outage that causes a rolling deploy, larger apps might not successfully redeploy if there is
+  insufficient disk capacity. Monitor your deployment to ensure that your Diego Cells have sufficient disk to run your apps.</p>
+
+<p>If you allow developers to push large apps, <%= vars.app_runtime_abbr %> might have trouble placing them on Diego Cells. Additionally, in the event of a system upgrade or an outage that causes a rolling deploy, larger apps might not successfully redeploy if there is insufficient disk capacity. Monitor your deployment to ensure that your Diego Cells have sufficient disk to run your apps.</p>
+
+1. Enter the **Default disk quota per app** in MB. This is the amount of disk allocated by default to a newly-pushed app if no value is specified when pushing the app.
+
+1. Enter the **Default log rate limit per app** in bytes per second. This is the number of logs that a newly-pushed app is allowed to send to Loggregator if no value is specified when pushing the app.
+
+   To deactivate this feature and allow app instances to send an unlimited number of logs to Loggregator, enter `-1`. App log rate limiting is deactivated by default. <%= vars.company_name %> recommends activating this feature to prevent app instances from overloading the Loggregator Agent with logs, so the Loggregator Agent does not drop logs for other app instances on the same Diego Cell.
+
+2. Enter the **Default service instance quota per org**. The specified limit only applies to the first installation of <%= vars.app_runtime_abbr %>. After the initial installation, operators can use the cf CLI to change the default value.
+
+3. Enter the **Staging timeout** in seconds. When you stage an app droplet with the Cloud Controller, the server times out after the number of seconds you specify in this field.
+
+4. For **Internal domains**, enter one or more domains that apps use for internal DNS service discovery. If the `-d` flag for domain is not available, you can specify a domain using the `routes` property in the manifest so other <%= vars.app_runtime_abbr %> apps can reach the pushed app at `APP-NAME.INTERNAL-DOMAIN`. This value defaults to `apps.internal`.
+
+5. Activate the **Allow space developers to manage network policies** check box to permit developers to manage their own network policies for their apps.
+
+6. Click **Save**.
+
+## <a id='app-security'></a> Configure App Security Groups
+
+Setting appropriate ASGs is critical for a secure deployment.
+
+1. Select **App Security Groups**.
+2. Acknowledge **You are responsible for setting the appropriate ASGs after TAS for VMs finishes deploying**.
+3. Click **Save**.
+
+For more information about ASGs, see [App Security Groups](../concepts/asg.html).
+
+For more information about setting
+ASGs, see [Restricting App Access to Internal <%= vars.app_runtime_abbr %> Components](app-sec-groups.html).
