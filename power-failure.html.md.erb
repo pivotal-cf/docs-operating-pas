@@ -42,15 +42,52 @@ a power failure.
 This checklist assumes that your <%= vars.platform_name %> on vSphere installation is configured
 for vSphere HA and that you have the BOSH Resurrector activated.
 
-| Phase | Component | Action |
-|-------|-----------|--------|
-| 1 | vSphere | [Ensure vSphere is Running](#check-vSphere) |
-| 2 | <%= vars.platform_name %> | [Ensure <%= vars.platform_name %> is Running](#check-ops-manager) |
-| 3 | BOSH Director | [Ensure BOSH Director is Running](#check-bosh) |
-| 4 | BOSH Director | [Ensure BOSH Resurrector Finished Recovering](#resurrector) |
-| 5 | <%= vars.app_runtime_abbr %> | [Ensure VMs for <%= vars.app_runtime_abbr %> are Running](#check-pas). This might include manually recovering the MySQL cluster. |
- | 6 | <%= vars.app_runtime_abbr %> | [Ensure Apps Hosted on <%= vars.app_runtime_abbr %> are Running](#check-apps) |
-| 7 | <%= vars.platform_name %> Healthwatch | [Check the Healthwatch Dashboard](#check-hw) |
+<table class="table">
+  <thead>
+  <tr>
+    <th>Phase</th>
+    <th>Component</th>
+    <th>Action</th>
+  </tr>
+  </thead>
+  <tr>
+    <td>1</td>
+    <td>vSphere</td>
+    <td><a href="#check-vSphere">Ensure vSphere is Running</a></td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td><%= vars.platform_name %></td>
+    <td><a href="#check-ops-manager">Ensure <%= vars.platform_name %> is Running</a></td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td>BOSH Director</td>
+    <td><a href="#check-bosh">Ensure BOSH Director is Running</a></td>
+  </tr>
+  <tr>
+    <td>4</td>
+    <td>BOSH Director</td>
+    <td><a href="#resurrector">Ensure BOSH Resurrector Finished Recovering</a></td>
+  </tr>
+  <tr>
+    <td>5</td>
+    <td><%= vars.app_runtime_abbr %></td>
+    <td><a href="#check-pas">Ensure VMs for <%= vars.app_runtime_abbr %> are Running</a>. This might
+        include manually recovering the MySQL cluster.</td>
+  </tr>
+  <tr>
+    <td>6</td>
+    <td><%= vars.app_runtime_abbr %></td>
+    <td><a href="#check-apps">Ensure Apps Hosted on <%= vars.app_runtime_abbr %> are
+        Running</a></td>
+  </tr>
+  <tr>
+    <td>7</td>
+    <td><%= vars.platform_name %> Healthwatch</td>
+    <td><a href="#check-hw">Check the Healthwatch Dashboard</a></td>
+  </tr>
+</table>
 
 ## <a id="check-vSphere"></a> Phase 1: Ensure vSphere is running
 

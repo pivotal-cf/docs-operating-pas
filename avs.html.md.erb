@@ -59,14 +59,14 @@ The AVS-deployed NSX-T Manager includes a self-signed TLS certificate with an in
 
 For instructions, see [Generate and Register the NSX-T Management TLS Certificate and Private Key](https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/1.12/tkgi/GUID-nsxt-install-tls-certs.html) in the <%= vars.k8s_runtime_full %> (<%= vars.k8s_runtime_abbr %>) documentation.
 
-### <a id='nsx-t-logical-switches'></a> Configure logical switches
+### <a id='nsx-t-logical-switches'></a> Configure segments
 
-To configure logical switches:
+To configure segments:
 
 1. In vSphere, create logical network switches to correspond to the networks that your foundation uses.
 1. Log in to the **NSX-T Manager Dashboard**.
 2. Go to **Advanced Networking & Security**.
-3. Go to the **Switching** pane.
+3. Go to the **Segment** page.
 4. For each of these networks:
     * **Infrastructure** (BOSH and <%= vars.ops_manager %>, defined in the **Assign AZs and Networks** pane of the BOSH Director tile)
     * **Deployment** (<%= vars.app_runtime_abbr %>, defined in the **Assign AZs and Networks** pane of the <%= vars.app_runtime_abbr %> tile)
@@ -76,46 +76,48 @@ To configure logical switches:
     Do the following:
         <ol>
             <li>Click **+Add**.</li>
-            <li>Enter a name for the logical switch (such as `<%= vars.app_runtime_abbr %>-Infrastructure`, `<%= vars.app_runtime_abbr %>-Deployment`).</li>
+            <li>Enter a name for the segment (such as `<%= vars.app_runtime_abbr %>-Infrastructure`, `<%= vars.app_runtime_abbr %>-Deployment`).</li>
             <li>Click **Add**.</li>
         </ol>
 
-![alt-text="Add a new logical switch."](./images/nsx-t/nsx-t-logical-switch.png)
+![alt-text="Add a new segment."](./images/nsx-t/nsx-t-logical-switch.png)
 
-### <a id='nsx-t-routers'></a> Configure routers
+### <a id='nsx-t-routers'></a> Configure gateways
 
-   Create T1 routers for <%= vars.app_runtime_abbr %>, to connect from the T0 router.
-   For each <%= vars.app_runtime_abbr %> network, Infrastructure, Deployment, and so on, create a T1 router as follows:
+   Create T1 gateways for <%= vars.app_runtime_abbr %>, to connect from the T0 gateways.
+   For each <%= vars.app_runtime_abbr %> network, Infrastructure, Deployment, and so on, create a T1 gateways as follows:
 
-1. In the NSX-T Manager UI, navigate to **Advanced Networking & Security** > **Routing** > **Routers**.
-2. Click **+Add** > **Tier-1 Router**.
-3. Configure the router. to include the Edge Cluster and Edge Cluster Members. They are required to enable the Load Balancer.
+1. In the NSX-T Manager UI, navigate to **Advanced Networking & Security** > **Routing** > **Gateways**.
+2. Click **+Add** > **Tier-1 Gateways**.
+3. Configure the gateway to include the Edge Cluster. They are required to enable the Load Balancer.
 
- The Infrastructure network router configuration might look like the following image:
+ The Infrastructure network gateway configuration might look like the following image:
 
-![alt-text="Add a Tier 1 Router and configure it."](./images/nsx-t/nsx-t-t1-router.png)
+![alt-text="Add a Tier 1 Gateway and configure it."](./images/nsx-t/nsx-t-t1-router.png)
 
-Create T1 router downlink ports for <%= vars.app_runtime_abbr %>.
+Create T1 gateway downlink ports for <%= vars.app_runtime_abbr %>.
 
-For each T1 router you created, add a **New Router Port** to allow traffic in and out:
+For each T1 gateway you created, add a **New Router Port** to allow traffic in and out:
 
-1. In the NSX-T Manager UI, select the T1 router.
-2. In **Configuration** > **Router Ports**, click **+Add** to add a new router port.
-3. For **Logical Switch**, enter the name of the logical switch you defined for the network in **Add New Logical Switch**.
-4. For **IP Address**, use the first IP of the appropriate subnet. In this example, 192.168.1.0/24 is set aside for Infrastructure (<%= vars.ops_manager %> and BOSH Director), and 192.168.2.0/24 for the Deployment, so 192.168.1.1 and 192.168.2.1 are used respectively.
+1. In the NSX-T Manager UI, select the T1 gateway.
+2. Click **Edit** in the hamburger icon.
+3. Go to **Services Interface**.
+4. Click **Set**.
+5. For **Segments**, enter the name of the segment you defined for the network in **Add New Segments**.
+6. For **IP Address**, use the first IP of the appropriate subnet. In this example, 192.168.1.0/24 is set aside for Infrastructure (<%= vars.ops_manager %> and BOSH Director), and 192.168.2.0/24 for the Deployment, so 192.168.1.1 and 192.168.2.1 are used respectively.
 ![alt-text="New Router port"](./images/nsx-t/nsx-t-router-port.png)
 
-1. Advertise the routes of the T1 routers to the T0 router, so the T0 router can correctly route incoming requests based on their destination IP address:
-2. Click Router in the list. 
-3. Click the More Options menu and select Edit. 
+1. Advertise the routes of the T1 gateways to the T0 gateway, so the T0 gateway can correctly route incoming requests based on their destination IP address:
+2. Click Gateway in the list.
+3. Click the More Options menu and select Edit.
 4. Expand **Route Advertisement**.
    1. Turn on **All Connected Segments & Service Ports** by using the green switch.
-   2. Turn on All IPSec Local Endpoints. 
+   2. Turn on All IPSec Local Endpoints.
    3. Turn on **All LB VIP Routes** by using the green switch(necessary if Load Balancing service is configured).
 ![alt-text="Edit the Route Advertisement Configuration"](./images/nsx-t/nsx-t-route-advertise.png)
 
 1. Navigate to IP Address Pools.
-2. Click IP Address Pools in the navigation. 
+2. Click IP Address Pools in the navigation.
 3. Click IP Address Blocks to allocate an IP block for <%= vars.app_runtime_abbr %> orgs.
 4. Add IP Address Block.
 5.  Enter a name (for example, `<%= vars.app_runtime_abbr %>-container-ip-block`). This IP block name is also used in the **VMware NSX-T** tile in the **NCP** section under **IP Blocks of Container Networks**.
@@ -354,7 +356,7 @@ To install and configure the NSX-T Container Plug-In tile:
 3. Open and configure the **NCP** (NSX-T Container Plugin) pane as follows:
 
     * **<%= vars.app_runtime_abbr %> Foundation Name**: If unsure, use `<%= vars.app_runtime_abbr %>`. If multiple foundations co-exist on the same NSX-T Manager, choose a unique string, such as `<%= vars.app_runtime_abbr %>-beta`. NCP creates artifacts, such as T1 routers and prefixes their names with this string for easy identification.
-    * **Overlay Transport Zone**: A uniquely identifying string for the **Transport Zone** that you chose when you [created logical switches](#nsx-t-setup) for each network. This can be the name of the transport zone if no other zones in NSX-T share the same name, or else the UUID for the transport zone.
+    * **Overlay Transport Zone**: A uniquely identifying string for the **Transport Zone** that you chose when you [created segments](#nsx-t-setup) for each network. This can be the name of the transport zone if no other zones in NSX-T share the same name, or else the UUID for the transport zone.
     * **Tier-0 Router**: A uniquely identifying string for the T0 router. This can be the tag string that you gave the router in NSX-T Manager if no other T0 routers in NSX-T share the same name, or else the UUID for the router.
     * **Subnet Prefix of Container Networks**: Subnet mask to set the address range size for apps in a single org. Defaults to `24`. This number must be higher than the mask for all <%= vars.app_runtime_abbr %> orgs in the NSX-T Manager **New IP Block** pane, to define each org's fraction of the total <%= vars.app_runtime_abbr %> address space.
     * **Enable SNAT for Container Network**: Select  this check box.
