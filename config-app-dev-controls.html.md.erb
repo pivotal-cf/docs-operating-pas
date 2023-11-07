@@ -1,5 +1,5 @@
 ---
-title: Configure app containers
+title: Configure App Developer Controls
 owner: PAS Releng
 ---
 
@@ -11,21 +11,21 @@ To configure the **App Developer Controls** pane:
 
 1. Select **App Developer Controls**.
 
-2. Enter the **Maximum file upload size** in MB. This is the maximum size of an app upload, including the buildpack.
+1. Enter the **Maximum file upload size** in MB. This is the maximum size of an app upload, including the buildpack.
 
-3. Enter the **Maximum package size** in MB. This is the maximum total size of an app's files.
+1. Enter the **Maximum package size** in MB. This is the maximum total size of an app's files.
 
-4. Enter the **Default app memory** in MB. This is the default amount of memory allocated to a newly-pushed app if no value is specified when pushing the app.
+1. Enter the **Default app memory** in MB. This is the default amount of memory allocated to a newly-pushed app if no value is specified when pushing the app.
 
-5. Enter the **Default app memory quota per org** in MB. This is the default memory limit for all apps in an org. The specified limit only applies to the first installation of <%= vars.app_runtime_abbr %>. After the initial installation, operators can use the cf CLI to change the default value.
+1. Enter the **Default app memory quota per org** in MB. This is the default memory limit for all apps in an org. The specified limit only applies to the first installation of <%= vars.app_runtime_abbr %>. After the initial installation, operators can use the cf CLI to change the default value.
 
-6. For **Maximum disk quota per app** in MB, enter in MB the maximum amount of disk allowed per app.
+1. For **Maximum disk quota per app** in MB, enter in MB the maximum amount of disk allowed per app.
 
  <p> If you allow developers to push large apps, <%= vars.app_runtime_abbr %> might have trouble placing them on Diego
   Cells. Additionally, in the event of a system upgrade or an outage that causes a rolling deploy, larger apps might not successfully redeploy if there is
   insufficient disk capacity. Monitor your deployment to ensure that your Diego Cells have sufficient disk to run your apps.</p>
 
-<p>If you allow developers to push large apps, <%= vars.app_runtime_abbr %> might have trouble placing them on Diego Cells. Additionally, in the event of a system upgrade or an outage that causes a rolling deploy, larger apps might not successfully redeploy if there is insufficient disk capacity. Monitor your deployment to ensure that your Diego Cells have sufficient disk to run your apps.</p>
+    <p>If you allow developers to push large apps, <%= vars.app_runtime_abbr %> might have trouble placing them on Diego Cells. Additionally, in the event of a system upgrade or an outage that causes a rolling deploy, larger apps might not successfully redeploy if there is insufficient disk capacity. Monitor your deployment to ensure that your Diego Cells have sufficient disk to run your apps.</p>
 
 1. Enter the **Default disk quota per app** in MB. This is the amount of disk allocated by default to a newly-pushed app if no value is specified when pushing the app.
 
@@ -43,9 +43,7 @@ To configure the **App Developer Controls** pane:
 
 6. Click **Save**.
 
-### Configure App Security Groups
-
-<a id='app-security'></a>
+## <a id='app-security'></a>
 
 Setting appropriate ASGs is critical for a secure deployment.
 
