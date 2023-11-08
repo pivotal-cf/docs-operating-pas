@@ -66,8 +66,6 @@ Most monitoring service tiles for <%= vars.platform_name %> come packaged with t
 
 The nozzles gather the component logs and metrics streaming from the Loggregator Firehose endpoint. For more information about the Firehose, see [Loggregator architecture](../../loggregator/architecture.html).
 
-As of <%= vars.platform_name_pivotal %> v2.0, both BOSH VM Health metrics and <%= vars.platform_name %> component metrics stream through the Firehose by default.
-
 * <%= vars.platform_name %> component metrics originate from the Metron agents on their source components, then travel through Dopplers to the Traffic Controller.
 
 * The Traffic Controller aggregates both metrics and log messages system-wide from all Dopplers, and emits them from its Firehose endpoint.
