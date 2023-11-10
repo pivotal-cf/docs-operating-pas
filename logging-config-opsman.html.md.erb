@@ -10,34 +10,11 @@ Here are the types of logs that <%= vars.app_runtime_first %> generates and how 
 
 <%= vars.app_runtime_abbr %> generates two types of logs, _system logs_ from <%= vars.app_runtime_abbr %> components and _app logs_ from hosted apps, as differentiated in the table below:
 
-<table id='log-types' border="1" class="nice" >
-  <tr>
-    <th>Log Type</th>
-    <th>Originate from</th>
-    <th>Follow format</th>
-    <th>Stream from</th>
-    <th>Can stream out to (configurable)</th>
-    <th>Visible to</th>
-  </tr><tr>
-  	<th>System Logs</th>
-    <td>Platform components</td>
-    <td>Syslog standard</td>
-    <td>rsyslog agent</td>
-    <td>Component syslog drain</td>
-    <td>Operators</td>
-  </tr><tr>
-  	<th rowspan=3>App Logs</th>
-    <td rowspan=3>Hosted apps</td>
-    <td>Format is up to the developer</td>
-    <td>Firehose<sup>1</sup></td>
-    <td>External data platform, optionally via nozzles</td>
-    <td rowspan=3>Developers and Operators</td>
-  </tr><tr>
-    <td bgcolor="#FBFBFB">Converted to syslog standard</td>
-    <td bgcolor="#FBFBFB">Syslog Agent</td>
-    <td bgcolor="#FBFBFB">External syslog drain</td>
-  </tr>
-</table>
+| Log Type | Originate from | Follow format | Stream from | Can stream out to (configurable) | Visible to |
+|----------|----------------|----------------|-------------|------------------|-----------|
+| **System Logs** | Platform components |Syslog standard | rsyslog agent| Component syslog drain | Operators |
+| **App Logs** | Hosted apps | Format is up to the developer | Firehose<sup>1</sup> | External data platform, optionally via nozzles | Developers and Operators |
+| | | Converted to syslog standard | Syslog Agent | External syslog drain | |
 
 <sup>1</sup>The Loggregator Firehose also streams component metrics.
 

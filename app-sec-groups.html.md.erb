@@ -1,4 +1,4 @@
----
+/Users/blora/Documents/GitHub/docs-operating-pas/app-sec-groups.html.md.erb/Users/blora/Documents/GitHub/docs-operating-pas/app-sec-groups.html.md.erb---
 title: Restricting app access to internal TAS for VMs components
 owner: Security
 ---
@@ -17,32 +17,14 @@ See the list below to interpret the concepts for this topic:
 
 * **How you can set up new rules**:
   * To help secure your component VMs against apps while ensuring your apps can access the services they need, follow the steps in the [Procedure](#procedure) section, which includes:
-    <table>
-    <tr>
-    <th>Step</th>
-    <th>Description</th
-    </tr>
-    <tr>
-      <td>1</td>
-      <td><a href="#network">Determine Your Network Layout</a>: <br>The procedure for securing your deployment with ASGs varies depending on your network layout, which you can determine using <%= vars.ops_manager %>.</td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td><a href="#bind-default">Ensure Access for <%= vars.app_runtime_abbr %> System Apps</a>: <br>Bind the default ASG to the <code>system</code> org so that <%= vars.app_runtime_abbr %> system apps can continue accessing the system components they need after you remove the deployment-wide default ASG in Step 4.</td>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td><a href="#initial">Create New ASGs</a>: <br>Block apps from sending traffic to system components, but allow them to send traffic to the services they need.</td>
-    </tr>
-    <tr>
-      <td>4</td>
-      <td><a href="#unbind-default">Remove the Default ASG</a>: <br>After you create and bind new ASGs, you no longer need the deployment-wide default ASG bindings that allow apps to send traffic to any IP.</td>
-    </tr>
-    <tr>
-      <td>5</td>
-      <td><a href="#restart">Restart Your Apps</a>: <br>To apply the ASG changes, you must restart all of the apps in your deployment.</td>
-    </tr>
-    </table>
+
+  | Step | Description |
+  |------|-------------|
+  | 1 | [Determine Your Network Layout](#network): <br>The procedure for securing your deployment with ASGs varies depending on your network layout, which you can determine using <%= vars.ops_manager %>. |
+  | 2 | [Ensure Access for <%= vars.app_runtime_abbr %> System Apps](#bind-default)<br>Bind the default ASG to the `system` org so that <%= vars.app_runtime_abbr %> system apps can continue accessing the system components they need after you remove the deployment-wide default ASG in Step 4. |
+  | 3 | [Create New ASGs](#initial): <br>Block apps from sending traffic to system components, but allow them to send traffic to the services they need. |
+  | 4 | [Remove the Default ASG](#unbind-default): <br>After you create and bind new ASGs, you no longer need the deployment-wide default ASG bindings that allow apps to send traffic to any IP. |
+  | 5 | [Restart Your Apps](#restart): <br>To apply the ASG changes, you must restart all of the apps in your deployment. |
 
 * **When to set up new rules**:
   * <%= vars.company_name %> recommends that you complete this procedure directly after installing <%= vars.app_runtime_abbr %>
@@ -68,35 +50,12 @@ The procedure for securing your deployment with ASGs varies depending on your ne
 
 1. Based on the information you gathered, determine which of the following network layouts you have:
 
-  <table>
-    <tr>
-      <th>Layout Name</th>
-      <th>Layout Description</th>
-    </tr>
-    <tr>
-      <td>One Network</td>
-      <td><ul><li>One network for <%= vars.ops_manager %> and the BOSH Director, <%= vars.app_runtime_abbr %>, and services.</li></ul>
-      <p class="note caution"><span class="note__title">Caution</span>You cannot secure your deployment with ASGs if you have this network layout. Because <%= vars.platform_name %> dynamically allocates IPs, they cannot be easily excluded in the case of a single network.</p>
-      </td>
-    </tr>
-    <tr>
-      <td>Two Networks</td>
-      <td><ul><li>One network for <%= vars.ops_manager %> and the BOSH Director.</li>
-          <li>One network for <%= vars.app_runtime_abbr %> and Services.</li></ul></td>
-    </tr>
-    <tr>
-      <td>Three Networks</td>
-      <td><ul><li>One network for <%= vars.ops_manager %> and the BOSH Director.</li>
-          <li>One network for <%= vars.app_runtime_abbr %>.</li>
-          <li>One network for all services.</li></ul></td>
-    </tr>
-    <tr>
-      <td>Three or More Networks</td>
-      <td><ul><li>One network for <%= vars.ops_manager %> and the BOSH Director.</li>
-          <li>One network for <%= vars.app_runtime_abbr %>.</li>
-          <li>One network for each service.</ul></td>
-    </tr>
-  </table>
+  | Layout Name | Layout Description |
+  |-------------|--------------------|
+  | One Network | <ul><li>One network for <%= vars.ops_manager %> and the BOSH Director, <%= vars.app_runtime_abbr %>, and services. <br></li></ul><p class="note caution"><span class="note__title">Caution</span> You cannot secure your deployment with ASGs if you have this network layout. Because <%= vars.platform_name %> dynamically allocates IPs, they cannot be easily excluded in the case of a single network.</p> |
+  | Two Networks | <ul><li>One network for <%= vars.ops_manager %> and the BOSH Director.</li><li>One network for <%= vars.app_runtime_abbr %> and Services.</li></ul> |
+  | Three Networks | <ul><li>One network for <%= vars.ops_manager %> and the BOSH Director.</li><li>One network for <%= vars.app_runtime_abbr %>.</li><li>One network for all services.</li></ul> |
+  | Three or More Networks | <ul><li>One network for <%= vars.ops_manager %> and the BOSH Director.</li><li>One network for <%= vars.app_runtime_abbr %>.</li><li>One network for each service.</ul> |
 
 1. If your network layout includes two or more networks, continue to [Step 2: Ensure Access for <%= vars.app_runtime_abbr %> System Apps](#bind-default).
 

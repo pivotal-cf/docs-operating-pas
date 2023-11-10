@@ -37,177 +37,27 @@ The following sections explain how different <%= vars.app_runtime_abbr %> compon
 
 UAA is an open-source Cloud Foundry component that provides identity management features and identity-based security for apps and APIs. For more information, see [User Account and Authentication](../uaa/index.html).
 
-<table>
-<tbody>
-<tr>
-<th>GDPR</th>
-<th>Workflow</th>
-<th>What personal data is collected?</th>
-<th>When is it collected?</th>
-<th>Where is it stored?</th>
-<th>How is it processed?</th>
-<th>Who has access to it?</th>
-</tr>
-<tr>
-<th rowspan="3" scope="rowgroup">Business Initiation</th>
-<td>User registers</td>
-<td> 
-<ul>
-<li>Username</li>
-<li>Email address</li>
-<li>First name (optional)</li>
-<li>Last name (optional)</li>
-<li>User ID (UAA GUID, generated)</li>
-</ul>
-</td>
-<td>User registration submission</td>
-<td>UAA DB</td>
-<td>Stored in UAA DB</td>
-<td>
-<ul>
-<li>End user</li>
-<li>UAA administrators</li>
-</ul>
-</td>
-</tr>
-<tr>
-<td>Just-in-time provisioning: create user on user login</td>
-<td>
-<ul>
-<li>Username</li>
-<li>Email address</li>
-<li>First name (optional)</li>
-<li>Last name (optional)</li>
-<li>User ID (UAA GUID, generated)</li>
-<li>Additional attributes as defined by the organization </li>
-</ul>
-</td>
-<td>User login </td>
-<td>UAA DB</td>
-<td>Stored in UAA DB </td>
-<td>UAA administrators</td>
-</tr>
-<tr>
-<td>Admin user makes a creation API call</td>
-<td> 
-<ul>
-<li>Username</li>
-<li>Email address</li>
-<li>First name (optional)</li>
-<li>Last name (optional)</li>
-<li>User ID (UAA GUID, generated)</li>
-<li>Additional attributes as defined by the organization</li>
-</ul>
-</td>
-<td>Admin API call </td>
-<td>UAA DB </td>
-<td>Stored in UAA DB </td>
-<td>UAA administrators</td>
-</tr>
-<tr>
-<th rowspan="4" scope="rowgroup">Business Execution</th>
-<td>User self-updates profile</td>
-<td>
-<ul>
-<li>Email address</li>
-<li>First name (optional)</li>
-<li>Last name (optional)</li>
-</ul>
-</td>
-<td>User registration submission</td>
-<td>UAA DB</td>
-<td>Stored in UAA DB</td>
-<td>
-<ul>
-<li>End user</li>
-<li>UAA administrators</li>
-</ul>
-</td>
-</tr>
-<tr>
-<td>Just-in-time provisioning: user update</td>
-<td>
-<ul>
-<li>Email address</li>
-<li>First name (optional)</li>
-<li>Last Name (optional)</li>
-<li>Additional attributes as defined by the organization </li>
-</ul>
-</td>
-<td>User login </td>
-<td>UAA DB </td>
-<td>Stored in UAA DB</td>
-<td>UAA administrators</td>
-</tr>
-<tr>
-<td>User logs in</td>
-<td>
-<ul>
-<li>Current account cookie (generated)</li>
-<li>Saved account cookie (generated)</li>
-</ul>
-</td>
-<td>User login</td>
-<td>User browser</td>
-<td>By UAA</td>
-<td>
-<ul>
-<li>End user</li>
-<li>UAA login page </li>
-</ul>
-</td>
-</tr>
-<tr>
-<td>Admin user makes an update API call</td>
-<td>
-<ul>
-<li>Email address</li>
-<li>First name (optional)</li>
-<li>Last name (optional)</li>
-<li>Additional attributes as defined by the organization</li>
-</ul>
-</td>
-<td> Admin API call</td>
-<td>UAA DB </td>
-<td>Stored in UAA DB</td>
-<td> UAA administrators</td>
-</tr>
-<tr>
-<th rowspan="2" scope="rowgroup">Delete User Flow</th>
-<td>Admin user makes a hard delete API call</td>
-<td>n/a</td>
-<td>n/a</td>
-<td>n/a</td>
-<td>Deleted from UAA DB</td>
-<td>UAA administrators</td>
-</tr>
-<tr>
-<td>Admin user makes a deactivation API call</td>
-<td>n/a</td>
-<td>n/a</td>
-<td>n/a</td>
-<td>Soft delete (records still held in database but user cannot login) </td>
-<td>UAA administrators</td>
-</tr>
-<tr>
-<th>Reports/Logs</th>
-<td>Event or debug logs</td>
-<td>Any information</td>
-<td>When event happens</td>
-<td>UAA logs</td>
-<td>Depends on setup of <a href="../loggregator/architecture.html">Loggregator</a> and log forwarding</td>
-<td>BOSH administrators</td>
-</tr>
-</tbody>
-</table>
+
+| GDPR | Workflow | What personal data is collected? | When is it collected? | Where is it stored? | How is it processed? | Who has access to it? |
+|------|----------|----------------------------------|----------------------|------------------|------------------------|-----------------------|
+| **Business Initiation** | User registers | <ul><li>Username</li><li>Email address</li><li>First name (optional)</li><li>Last name (optional)</li><li>User ID (UAA GUID, generated)</li></ul> | User registration submission | UAA DB | Stored in UAA DB | <ul><li>End user</li><li>UAA administrators</li></ul> |
+| | Just-in-time provisioning: create user on user login | <ul><li>Username</li><li>Email address</li><li>First name (optional)</li><li>Last name (optional)</li><li>User ID (UAA GUID, generated)</li><li>Additional attributes as defined by the organization </li></ul> | User login | UAA DB | Stored in UAA DB | UAA administrators |
+| | Admin user makes a creation API call | <ul><li>Username</li><li>Email address</li><li>First name (optional)</li><li>Last name (optional)</li><li>User ID (UAA GUID, generated)</li><li>Additional attributes as defined by the organization</li></ul> | Admin API call | UAA DB | Stored in UAA DB | UAA administrators |
+| **Business Execution** | User self-updates profile | <ul><li>Email address</li><li>First name (optional)</li><li>Last name (optional)</li></ul> | User registration submission | UAA DB | Stored in UAA DB | <ul><li>End user</li><li>UAA administrators</li></ul> |
+| | Just-in-time provisioning: user update | <ul><li>Email address</li><li>First name (optional)</li><li>Last Name (optional)</li><li>Additional attributes as defined by the organization </li></ul> | User login | UAA DB | Stored in UAA DB | UAA administrators
+| | User logs in | <ul> <li>Current account cookie (generated)</li><li>Saved account cookie (generated)</li></ul> | User login | User browser | By UAA |  <ul><li>End user</li><li>UAA login page </li></ul> |
+| | Admin user makes an update API call |<ul><li>Email address</li><li>First name (optional)</li><li>Last name (optional)</li><li>Additional attributes as defined by the organization</li></ul> | Admin API call | UAA DB | Stored in UAA DB | UAA administrators |
+| **Delete User Flow** | Admin user makes a hard delete API call | n/a | n/a | n/a | Deleted from UAA DB | UAA administrators |
+| Admin user makes a deactivation API call | n/a | n/a | n/a | Soft delete (records still held in database but user cannot login) | UAA administrators |
+| **Reports/Logs** | Event or debug logs | Any information | When event happens | UAA logs | Depends on setup of [Loggregator](../loggregator/architecture.html) and log forwarding | BOSH administrators |
 
 ### <a id="capi"></a> Cloud Foundry API
 
 The Cloud Foundry API release contains several components, including the Cloud Controller. For more information, see the Cloud Foundry API release [README](https://github.com/cloudfoundry/capi-release).
 
-<table>
+<table class="table">
 <tbody>
-<tr>
+<thead><tr>
 <th>GDPR</th>
 <th>Workflow</th>
 <th>What personal data is collected?</th>
@@ -216,7 +66,7 @@ The Cloud Foundry API release contains several components, including the Cloud C
 <th>How is it processed?</th>
 <th>Who has access to it?</th>
 <th>How long is it kept?</th>
-</tr>
+</tr></thead>
 <tr>
 <th>Business Initiation</th>
 <td>User makes a request for the first time</td>
@@ -348,9 +198,9 @@ To deactivate logging of client IP addresses:
 
 Diego is the container management system for <%= vars.app_runtime_abbr %>. For more information, see [Diego Components and Architecture](../concepts/diego/diego-architecture.html).
 
-<table>
+<table class="table">
 <tbody>
-<tr>
+<thead><tr>
 <th>GDPR</th>
 <th>Workflow</th>
 <th>What personal data is collected?</th>
@@ -359,7 +209,7 @@ Diego is the container management system for <%= vars.app_runtime_abbr %>. For m
 <th>How is it processed?</th>
 <th>Who has access to it?</th>
 <th>How can I delete it?</th>
-</tr>
+</tr></thead>
 <tr>
 <th>Business Execution</th>
 <td>Executing apps and tasks</td>
@@ -391,57 +241,10 @@ Diego is the container management system for <%= vars.app_runtime_abbr %>. For m
 
 The Notifications Service enables operators to configure components of <%= vars.app_runtime_abbr %> to send emails to end users. For more information, see [Getting Started with the Notifications Service](../adminguide/notifications.html).
 
-<table>
-<tbody>
-<tr>
-<th>GDPR</th>
-<th>Workflow</th>
-<th>What personal data is collected?</th>
-<th>When is it collected?</th>
-<th>Where is it stored?</th>
-<th>How is it processed?</th>
-<th>Who has access to it?</th>
-</tr>
-<tr>
-<th rowspan="4" scope="rowgroup">Business Execution</th>
-<td>Sending email to UAA users</td>
-<td>User ID</td>
-<td>First email sent</td>
-<td>The <code>receipts</code> table in the Notifications database</td>
-<td>Stored in the Notifications database</td>
-<td>Notifications operator making a database query</td>
-</tr>
-<tr>
-<td>UAA user unsubscribes globally</td>
-<td>User ID</td>
-<td>When the UAA user unsubscribes</td>
-<td>The <code>global_unsubscribes</code> table in the Notifications database</td>
-<td>Stored in the Notifications database</td>
-<td>Notifications operator making a database query</td>
-</tr>
-<tr>
-<td>UAA user unsubscribes from a specific kind of email</td>
-<td>User ID</td>
-<td>When the UAA user unsubscribes</td>
-<td>The <code>unsubscribes</code> table in the Notifications database</td>
-<td>Stored in the Notifications database</td>
-<td>Notifications operator making a database query</td>
-</tr>
-<tr>
-<td>UAA user unsubscribes from a campaign in the v2 API</td>
-<td>User ID</td>
-<td>When the UAA user unsubscribes</td>
-<td>The <code>unsubscribes</code> table in the Notifications database</td>
-<td>Stored in the Notifications database</td>
-<td>Notifications operator making a database query</td>
-</tr>
-<tr>
-<th>Reports/Logs</th>
-<td>UAA user unsubscribes</td>
-<td>User email address</td>
-<td>When the UAA user unsubscribes</td>
-<td>Log output</td>
-<td><a href="../loggregator/architecture.html">Loggregator</a></td>
-<td>Loggregator Firehose users</td>
-</tr>
-</table>
+| GDPR | Workflow | What personal data is collected? | When is it collected? | Where is it stored? | How is it processed?| Who has access to it? |
+|------|----------|----------------------------------|-----------------------|--------------|-----------|----------------|
+| **Business Execution** | Sending email to UAA users | User ID | First email sent | The `receipts` table in the Notifications database | Stored in the Notifications database | Notifications operator making a database query |
+| | UAA user unsubscribes globally | User ID | When the UAA user unsubscribes | The `global_unsubscribes` table in the Notifications database | Stored in the Notifications database | Notifications operator making a database query |
+| | UAA user unsubscribes from a specific kind of email | User ID | When the UAA user unsubscribes | The `unsubscribes` table in the Notifications database | Stored in the Notifications database | Notifications operator making a database query |
+| | UAA user unsubscribes from a campaign in the v2 API | User ID | When the UAA user unsubscribes | The `unsubscribes` table in the Notifications database | Stored in the Notifications database | Notifications operator making a database query |
+| **Reports/Logs** | UAA user unsubscribes | User email address | When the UAA user unsubscribes | Log output | [Loggregator](../loggregator/architecture.html) | Loggregator Firehose users |

@@ -62,14 +62,12 @@ This section describes how to troubleshoot errors that you may encounter while r
 
 ### <a id="values-changed"></a> Error: Encryption key(s) have had their values changed
 
-<table>
+<table class="table">
 <tr>
 	<th>Error</th>
-	<td>The <%= vars.app_runtime_abbr %> deploy fails with a Cloud Controller error.
-            The Cloud Controller logs include the following message:
-            <code>Encryption key(s) mykey have had their values changed.
-            Label and value pairs should not change, rather a new label and
-            value pair should be added.</code></td>
+   <td>The <%= vars.app_runtime_abbr %> deploy fails with a Cloud Controller error.
+   The Cloud Controller logs include the following message:
+   <code>Encryption key(s) mykey have had their values changed. Label and value pairs must not change, rather a new label and value pair can be added.</code></td>
  </tr>
  <tr>
 	<th>Cause</th>
@@ -86,7 +84,7 @@ This section describes how to troubleshoot errors that you may encounter while r
 
 ### <a id="not-present"></a> Error: Encryption key(s) are still in use but not present in 'cc.database_encryption.keys'
 
-<table>
+<table class="table">
 <tr>
 	<th>Error</th>
 	<td>The <%= vars.app_runtime_abbr %> deploy fails with a Cloud Controller error.
