@@ -222,9 +222,8 @@ To restart all of the apps in your deployment:
 
     <p class="note">
     <span class="note__title">Note</span>
-      You do not have to restart the apps in the <code>system</code> org.
+    You do not have to restart the apps in the <code>system</code> org.
     To quickly roll back to the original overly permissive state, you can rebind the <code>default_security_group</code> ASG to the <code>default-staging</code> and <code>default-running</code> sets. You must then restart your apps to reapply the original ASGs
-
-</p>
+    </p>
 
 2. Restart the rest of the apps running on your deployment. You can use the [app-restarter cf CLI plug-in](https://github.com/cloudfoundry-incubator/app-restarter) to restart all apps in a particular space, org, or deployment.
