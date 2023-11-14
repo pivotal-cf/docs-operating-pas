@@ -27,9 +27,9 @@ These sections describe Diego Auctioneer metrics.
 ### <a id="AuctioneerLRPAuctionsFailed"></a> Auctioneer app instance (AI) placement failures
 
 <table class="table">
-  <thead><tr><th colspan="2" style="text-align: center;"><br>auctioneer.AuctioneerLRPAuctionsFailed<br><br></th></tr></thead>
+  <thead><tr><th><br>auctioneer.AuctioneerLRPAuctionsFailed<br><br></th></tr></thead>
     <tr>
-      <th width="25%">Description</th>
+      <th>Description</th>
         <td>
           The number of Long Running Process (LRP) instances that the Auctioneer failed to place on Diego Cells. This metric is cumulative over the lifetime of the Auctioneer job.<br><br>
           <strong>Use:</strong> This metric can indicate that <%= vars.app_runtime_abbr %> is out of container space or that there is a lack of resources within your environment. This indicator also increases when the LRP is requesting an isolation segment, volume drivers, or a stack that is unavailable, either not deployed or lacking sufficient resources to accept the work.<br><br>
@@ -67,9 +67,9 @@ These sections describe Diego Auctioneer metrics.
 ### <a id="AuctioneerFetchStatesDuration"></a> Auctioneer time to fetch Diego Cell state
 
 <table class="table">
-  <thead><tr><th colspan="2" style="text-align: center;"><br>auctioneer.AuctioneerFetchStatesDuration<br><br></th></tr></thead>
+  <thead><tr><th><br>auctioneer.AuctioneerFetchStatesDuration<br><br></th></tr></thead>
     <tr>
-      <th width="25%">Description</th>
+      <th>Description</th>
         <td>
           Time in ns that the Auctioneer took to fetch state from all the Diego Cells when running its auction.<br><br>
           <strong>Use:</strong> Indicates how the Diego Cells themselves are performing. Alerting on this metric helps alert that app staging requests to Diego might be failing.<br><br>
@@ -103,9 +103,9 @@ These sections describe Diego Auctioneer metrics.
 ### <a id="AuctioneerLRPAuctionsStarted"></a> Auctioneer app instance starts
 
 <table class="table">
-  <thead><tr><th colspan="2" style="text-align: center;"><br>auctioneer.AuctioneerLRPAuctionsStarted<br><br></th></tr></thead>
+  <thead><tr><th><br>auctioneer.AuctioneerLRPAuctionsStarted<br><br></th></tr></thead>
     <tr>
-      <th width="25%">Description</th>
+      <th>Description</th>
         <td>
           The number of LRP instances that the Auctioneer successfully placed on Diego Cells. This metric is cumulative over the lifetime of the Auctioneer job.<br><br>
           <strong>Use:</strong> Provides a sense of running system activity levels in your environment. Can also give you a sense of how many app instances have been started over time. The measurement <%= vars.company_name %> recommends can help indicate a significant amount of container churn. However, for capacity planning purposes, it is more helpful to observe deltas over a long time window.<br><br>
@@ -141,9 +141,9 @@ These sections describe Diego Auctioneer metrics.
 ### <a id="AuctioneerTaskAuctionsFailed"></a> Auctioneer task placement failures
 
 <table class="table">
-  <thead><tr><th colspan="2" style="text-align: center;"><br>auctioneer.AuctioneerTaskAuctionsFailed<br><br></th></tr></thead>
+  <thead><tr><th><br>auctioneer.AuctioneerTaskAuctionsFailed<br><br></th></tr></thead>
     <tr>
-      <th width="25%">Description</th>
+      <th>Description</th>
         <td>
           The number of Tasks that the Auctioneer failed to place on Diego Cells. This metric is cumulative over the lifetime of the Auctioneer job.<br><br>
           <strong>Use:</strong> Failing Task auctions indicate a lack of resources within your environment and that you likely need to scale. This indicator also increases when the Task is requesting an isolation segment, volume drivers, or a stack that is unavailable, either not deployed or lacking sufficient resources to accept the work.<br><br>
@@ -186,9 +186,9 @@ These sections describe Diego BBS metrics.
 ### <a id="ConvergenceLRPDuration"></a> BBS time to run LRP convergence
 
 <table class="table">
-   <thead><tr><th colspan="2" style="text-align: center;"><br>bbs.ConvergenceLRPDuration<br><br></th></tr></thead>
+   <thead><tr><th><br>bbs.ConvergenceLRPDuration<br><br></th></tr></thead>
     <tr>
-      <th width="25%">Description</th>
+      <th>Description</th>
         <td>
           Time in ns that the BBS took to run its LRP convergence pass.<br><br>
           <strong>Use:</strong> If the convergence run begins taking too long, apps or tasks might fail without restarting. This symptom can also indicate loss of connectivity to the BBS database.<br><br>
@@ -224,9 +224,9 @@ These sections describe Diego BBS metrics.
 ### <a id="RequestLatency"></a> BBS time to handle requests
 
 <table class="table">
-  <thead><tr><th colspan="2" style="text-align: center;"><br>bbs.RequestLatency<br><br></th></tr></thead>
+  <thead><tr><th><br>bbs.RequestLatency<br><br></th></tr></thead>
     <tr>
-      <th width="25%">Description</th>
+      <th>Description</th>
         <td>
           The maximum observed latency time over the past 60 seconds that the BBS took to handle requests across all its API endpoints.<br><br>
           Diego now aggregates this metric to emit the maximum value observed over 60 seconds.<br><br>
@@ -264,9 +264,9 @@ These sections describe Diego BBS metrics.
 ### <a id="cc-diego-sync"></a> Cloud Controller and Diego in sync
 
 <table class="table">
-  <thead><tr><th colspan="2" style="text-align: center;"><br>bbs.Domain.cf-apps<br><br></th></tr><thead>
+  <thead><tr><th><br>bbs.Domain.cf-apps<br><br></th></tr><thead>
     <tr>
-      <th width="25%">Description</th>
+      <th>Description</th>
         <td>
           Indicates if the <code>cf-apps</code> Domain is up-to-date, meaning that <%= vars.app_runtime_abbr %> app requests from Cloud Controller are synchronized to <code>bbs.LRPsDesired</code> (Diego-desired AIs) for execution.
             <ul>
@@ -305,9 +305,9 @@ These sections describe Diego BBS metrics.
 ### <a id="LRPsExtra"></a> More app instances than expected
 
 <table class="table">
-  <thead><tr><th colspan="2" style="text-align: center;"><br>bbs.LRPsExtra<br><br></th></tr></thead>
+  <thead><tr><th><br>bbs.LRPsExtra<br><br></th></tr></thead>
     <tr>
-      <th width="25%">Description</th>
+      <th>Description</th>
         <td>
           Total number of LRP instances that are no longer desired but still have a BBS record. When Diego wants to add more apps, the BBS sends a request to the Auctioneer to spin up additional LRPs. LRPsExtra is the total number of LRP instances that are no longer desired but still have a BBS record.<br><br>
           <strong>Use:</strong> If Diego has more LRPs running than expected, there might be problems with the BBS.<br><br>
@@ -342,9 +342,9 @@ These sections describe Diego BBS metrics.
 ### <a id="LRPsMissing"></a> Fewer app instances than expected
 
 <table class="table">
-  <thead><tr><th colspan="2" style="text-align: center;"><br>bbs.LRPsMissing<br><br></th></tr></thead>
+  <thead><tr><th><br>bbs.LRPsMissing<br><br></th></tr></thead>
     <tr>
-      <th width="25%">Description</th>
+      <th>Description</th>
         <td>
           Total number of LRP instances that are desired but have no record in the BBS. When Diego wants to add more apps, the BBS sends a request to the Auctioneer to spin up additional LRPs. LRPsMissing is the total number of LRP instances that are desired but have no BBS record.<br><br>
           <strong>Use:</strong> If Diego has less LRP running than expected, there might be problems with the BBS.<br><br>
@@ -379,9 +379,9 @@ These sections describe Diego BBS metrics.
 ### <a id="bbs.CrashedActualLRPs"></a> Crashed app instances
 
 <table class="table">
- <thead><tr><th colspan="2" style="text-align: center;"><br>bbs.CrashedActualLRPs<br><br></th></tr></thead>
+ <thead><tr><th><br>bbs.CrashedActualLRPs<br><br></th></tr></thead>
     <tr>
-      <th width="25%">Description</th>
+      <th>Description</th>
         <td>
           Total number of LRP instances that have crashed.<br><br>
           <strong>Use:</strong> Indicates how many instances in the deployment are in a crashed state. An increase in <code>bbs.CrashedActualLRPs</code> can indicate several problems, from a bad app with many instances associated, to a platform issue that is resulting in app crashes. Use this metric to help create a baseline for your deployment. After you have a baseline, you can create a deployment-specific alert to notify of a spike in crashes higher than the trend line. Tune alert values to your deployment.<br><br>
@@ -415,9 +415,9 @@ These sections describe Diego BBS metrics.
 ### <a id="1hraverageofbbs.LRPsRunning"></a> Running app instances, rate of change
 
 <table class="table">
-  <thead><tr><th colspan="2" style="text-align: center;"><br>1hr average of bbs.LRPsRunning – prior 1hr average of bbs.LRPsRunning<br><br></th></tr></thead>
+  <thead><tr><th><br>1hr average of bbs.LRPsRunning – prior 1hr average of bbs.LRPsRunning<br><br></th></tr></thead>
     <tr>
-      <th width="25%">Description</th>
+      <th>Description</th>
         <td>
           Rate of change in app instances being started or stopped on the platform. It is derived from <code>bbs.LRPsRunning</code> and represents the total number of LRP instances that are running on Diego Cells.<br><br>
           <strong>Use:</strong> Delta reflects upward or downward trend for app instances started or stopped. Helps to provide a picture of the overall growth trend of the environment for capacity planning. You might want to alert on delta values outside of the expected range.<br><br>
@@ -446,9 +446,9 @@ These sections describe Diego BBS metrics.
 ### <a id="bbs.BBSMasterElected"></a> BBS master elected
 
 <table class="table">
-  <thead><tr><th colspan="2" style="text-align: center;"><br>bbs.BBSMasterElected<br><br></th></tr></thead>
+  <thead><tr><th><br>bbs.BBSMasterElected<br><br></th></tr></thead>
     <tr>
-      <th width="25%">Description</th>
+      <th>Description</th>
         <td>
           Indicates when there is a BBS master election. A BBS master election takes place when a BBS instance has taken over as the active instance. A value of <code>1</code> is emitted when the election takes place.<br><br>
           <strong>Use:</strong> This metric emits when a redeployment of the BBS occurs. If this metric is emitted frequently outside of a deployment, this might be a signal of underlying problems that should be investigated. If the active BBS is continually changing, this can cause app push downtime.<br><br>
@@ -488,9 +488,9 @@ These sections describe Diego Cell metrics.
 ### <a id="rep.CapacityRemainingMemory"></a> Remaining memory available — Diego Cell memory chunks available
 
 <table class="table">
-  <thead><tr><th colspan="2" style="text-align: center;"><br>rep.CapacityRemainingMemory<br><br></th></tr></thead>
+  <thead><tr><th><br>rep.CapacityRemainingMemory<br><br></th></tr></thead>
     <tr>
-      <th width="25%">Description</th>
+      <th>Description</th>
         <td>
           Remaining amount of memory in MiB available for this Diego Cell to allocate to containers.<br><br>
           <strong>Use:</strong> Indicates the available Diego Cell memory. Insufficient Diego Cell memory can prevent pushing and scaling apps.<br><br>
@@ -545,9 +545,9 @@ These sections describe Diego Cell metrics.
 ### <a id="rep.CapacityRemainingMemory2"></a> Remaining memory available — Overall remaining memory available
 
 <table class="table">
-  <thead><tr><th colspan="2" style="text-align: center;"><br>rep.CapacityRemainingMemory<br>(Alternative Use)<br><br></th></tr></thead>
+  <thead><tr><th><br>rep.CapacityRemainingMemory<br>(Alternative Use)<br><br></th></tr></thead>
     <tr>
-      <th width="25%">Description</th>
+      <th>Description</th>
         <td>
           Remaining amount of memory in MiB available for this Diego Cell to allocate to containers.<br><br>
           <strong>Use:</strong> Can indicate low memory capacity overall in the platform. Low memory can prevent app scaling and new deployments. The overall sum of capacity can indicate that you need to scale the platform. Observing capacity consumption trends over time helps with capacity planning.<br><br>
@@ -585,9 +585,9 @@ These sections describe Diego Cell metrics.
 ### <a id="rep.CapacityRemainingDiskChunks"></a> Remaining disk available — Diego Cell disk chunks available
 
 <table class="table">
-  <thead><tr><th colspan="2" style="text-align: center;"><br>rep.CapacityRemainingDisk<br><br></th></tr></thead>
+  <thead><tr><th><br>rep.CapacityRemainingDisk<br><br></th></tr></thead>
     <tr>
-      <th width="25%">Description</th>
+      <th>Description</th>
         <td>
           Remaining amount of disk in MiB available for this Diego Cell to allocate to containers.<br><br>
           <strong>Use:</strong> Indicates the available Diego Cell disk. Insufficient free disk on Diego Cells prevents the staging or starting of apps or tasks, resulting in error messages like <code>ERR Failed to stage app: insufficient resources</code>.<br><br>
@@ -642,9 +642,9 @@ These sections describe Diego Cell metrics.
 ### <a id="CapacityRemainingDisk"></a> Remaining disk available - Overall remaining disk available
 
 <table class="table">
-  <thead><tr><th colspan="2" style="text-align: center;"><br> rep.CapacityRemainingDisk<br>(Alternative Use)<br><br></th></tr></thead>
+  <thead><tr><th><br> rep.CapacityRemainingDisk<br>(Alternative Use)<br><br></th></tr></thead>
     <tr>
-      <th width="25%">Description</th>
+      <th>Description</th>
         <td>
           Remaining amount of disk in MiB available for this Diego Cell to allocate to containers.<br><br>
           <strong>Use:</strong> Low disk capacity can prevent app scaling and new deployments. Because Diego staging Tasks can fail without at least 6&nbsp;GB free, the red threshold <%= vars.company_name %> recommends is based on the minimum disk capacity across the deployment falling below 6&nbsp;GB in the previous 5 minutes.<br><br>
@@ -683,9 +683,9 @@ These sections describe Diego Cell metrics.
 ### <a id="RepBulkSyncDuration"></a> Diego Cell rep time to sync
 
 <table class="table">
- <thead> <tr><th colspan="2" style="text-align: center;"><br>rep.RepBulkSyncDuration<br><br></th></tr></thead>
+ <thead> <tr><th><br>rep.RepBulkSyncDuration<br><br></th></tr></thead>
     <tr>
-      <th width="25%">Description</th>
+      <th>Description</th>
         <td>
           Time in ns that the Diego Cell Rep took to sync the ActualLRPs that it claimed with its actual Garden containers.<br><br>
           <strong>Use:</strong> Sync times that are too high can indicate issues with the BBS.<br><br>
@@ -719,9 +719,9 @@ These sections describe Diego Cell metrics.
 ### <a id="GardenHealthCheckFailed"></a> Garden health check failed
 
 <table class="table">
-  <thead><tr><th colspan="2" style="text-align: center;"><br>rep.GardenHealthCheckFailed<br><br></th></tr></thead>
+  <thead><tr><th><br>rep.GardenHealthCheckFailed<br><br></th></tr></thead>
     <tr>
-      <th width="25%">Description</th>
+      <th>Description</th>
         <td>
           The Diego Cell periodically checks its health against the Garden back end. For Diego Cells, <code>0</code> means healthy, and <code>1</code> means unhealthy.<br><br>
           <strong>Use:</strong> Set an alert for further investigation if multiple unhealthy Diego Cells are detected in the given time window. If one Diego Cell is impacted, it does not participate in auctions, but end-user impact is usually low. If multiple Diego Cells are impacted, this can indicate a larger problem with Diego, and should be considered a more critical investigation need.<br><br>
@@ -771,7 +771,7 @@ These sections describe Diego Locket metrics.
 ### <a id="BBSActiveLocks"></a> Locks held by BBS
 
 <table class="table">
-  <thead><tr><th colspan="2" style="text-align: center;"><br>bbs.LockHeld<br><br></th></tr></thead>
+  <thead><tr><th><br>bbs.LockHeld<br><br></th></tr></thead>
     <tr>
       <th width="25%">Description</th>
         <td>
@@ -812,9 +812,9 @@ These sections describe Diego Locket metrics.
 ### <a id="AuctioneerActiveLocks"></a> Locks held by auctioneer
 
 <table class="table">
- <thead> <tr><th colspan="2" style="text-align: center;"><br>auctioneer.LockHeld<br><br></th></tr></thead>
+ <thead> <tr><th><br>auctioneer.LockHeld<br><br></th></tr></thead>
     <tr>
-      <th width="25%">Description</th>
+      <th>Description</th>
         <td>
           Whether an Auctioneer instance holds the expected Auctioneer lock (in Locket). 1 means the active Auctioneer holds the lock, and 0 means the lock was lost.<br><br>
           <strong>Use:</strong> This metric is complimentary to <a href="#ActiveLocks">Active Locks</a>, and it offers an Auctioneer-level version of the Locket metrics. Although it is emitted per Auctioneer instance, only 1 active lock is held by Auctioneer. Therefore, the expected value is 1. The metric might be 0 when the Auctioneer instances are performing a leader transition, but a prolonged value of 0 indicates an issue with Auctioneer.<br><br>
@@ -852,9 +852,9 @@ These sections describe Diego Locket metrics.
 ### <a id="ActivePresences"></a> Active presences
 
 <table class="table">
-  <thead><tr><th colspan="2" style="text-align: center;"><br>locket.ActivePresences<br><br></th></tr></thead>
+  <thead><tr><th><br>locket.ActivePresences<br><br></th></tr></thead>
     <tr>
-      <th width="25%">Description</th>
+      <th>Description</th>
         <td>
           Total count of active presences. Presences are defined as the registration records that the Diego Cells maintain to advertise themselves to the platform.<br><br>
           <strong>Use:</strong> If the Active Presences count is far from the expected, there might be a problem with Diego.<br><br>
@@ -897,9 +897,9 @@ These sections describe Diego Route Emitter metrics.
 ### <a id="RouteEmitterSyncDuration"></a> Route Emitter time to sync
 
 <table class="table">
-  <thead><tr><th colspan="2" style="text-align: center;"><br>route_emitter.RouteEmitterSyncDuration<br><br></th></tr></thead>
+  <thead><tr><th><br>route_emitter.RouteEmitterSyncDuration<br><br></th></tr></thead>
     <tr>
-      <th width="25%">Description</th>
+      <th>Description</th>
         <td>
           Time in ns that the active Route Emitter took to perform its synchronization pass.<br><br>
           <strong>Use:</strong> Increases in this metric indicate that the Route Emitter might have trouble maintaining an accurate routing table to broadcast to the Gorouters. Tune alerting values to your deployment based on historical data and adjust based on observations over time. The suggested starting point is &ge; 5 for the yellow threshold and &ge; 10 for the critical threshold.<br><br>
@@ -950,9 +950,9 @@ These sections describe Gorouter metrics.
 ### <a id="file_descriptors"></a> Router file descriptors
 
 <table class="table">
- <thead> <tr><th colspan="2" style="text-align: center;"><br>gorouter.file_descriptors<br><br></th></tr></thead>
+ <thead> <tr><th><br>gorouter.file_descriptors<br><br></th></tr></thead>
     <tr>
-      <th width="25%">Description</th>
+      <th>Description</th>
         <td>
           The number of file descriptors currently used by the Gorouter job.<br><br>
           <strong>Use:</strong> Indicates an impending issue with the Gorouter. Without proper mitigation, it is possible for an unresponsive app to eventually exhaust available Gorouter file descriptors and cause route starvation for other apps running on <%= vars.app_runtime_abbr %>. Under heavy load, this unmitigated situation can also result in the Gorouter losing its connection to NATS and all routes being pruned.<br><br>
@@ -994,9 +994,9 @@ These sections describe Gorouter metrics.
 ### <a id="exhausted_connections"></a> Router exhausted connections
 
 <table class="table">
-  <thead><tr><th colspan="2" style="text-align: center;"><br>gorouter.backend_exhausted_conns<br><br></th></tr></thead>
+  <thead><tr><th><br>gorouter.backend_exhausted_conns<br><br></th></tr></thead>
     <tr>
-      <th width="25%">Description</th>
+      <th>Description</th>
         <td>
           The lifetime number of requests that have been rejected by the Gorouter VM due to the <code>Max Connections Per Backend</code> limit being reached across all tried back ends. The limit controls the number of concurrent TCP connections to any particular app instance and is configured within <%= vars.app_runtime_abbr %>.<br><br>
           <strong>Use:</strong> Indicates that <%= vars.app_runtime_abbr %> is mitigating risk to other apps by self-protecting the platform against one or more unresponsive apps. Increases in this metric indicate the need to investigate and resolve issues with potentially unresponsive apps. A rapid rate of change upward is concerning and should be assessed further.<br><br>
@@ -1031,9 +1031,9 @@ These sections describe Gorouter metrics.
 ### <a id="total_requests"></a> Router throughput
 
 <table class="table">
- <thead> <tr><th colspan="2" style="text-align: center;"><br>gorouter.total_requests<br><br></th></tr></thead>
+ <thead> <tr><th><br>gorouter.total_requests<br><br></th></tr></thead>
     <tr>
-      <th width="25%">Description</th>
+      <th>Description</th>
         <td>
           The lifetime number of requests completed by the Gorouter VM, emitted per Gorouter instance<br><br>
           <strong>Use:</strong> The aggregation of these values across all Gorouters provide insight into the overall traffic flow of a deployment. Unusually high spikes, if not known to be associated with an expected increase in demand, can indicate a DDoS risk. For performance and capacity management, consider this metric a measure of router throughput per job, converting it to requests-per-second, by looking at the delta value of <code>gorouter.total_requests</code> and deriving back to 1s, or <code>gorouter.total_requests.delta)/5</code>, per Gorouter instance. This helps you see trends in the throughput rate that indicate a need to scale the Gorouter instances. Use the trends you observe to tune the threshold alerts for this metric.<br><br>
@@ -1064,9 +1064,9 @@ These sections describe Gorouter metrics.
 ### <a id="latency"></a> Router handling latency
 
 <table class="table">
-  <thead><tr><th colspan="2" style="text-align: center;"><br>gorouter.latency<br><br></th></tr></thead>
+  <thead><tr><th><br>gorouter.latency<br><br></th></tr></thead>
     <tr>
-      <th width="25%">Description</th>
+      <th>Description</th>
         <td>
           The time in milliseconds that represents the length of a request from the Gorouter's point of view. This timing starts when Gorouter recieves a request and stops when Gorouter finishes processing the response from the app. Long uploads, downloads, or app responses increase this time. This metric includes the request time to all back end endpoints, including both apps and routable system components like Cloud Controller and UAA.<br><br>
           <strong>Use:</strong> Indicates the traffic profile of <%= vars.app_runtime_abbr %>. An alert value on this metric should be tuned to the specifics of the deployment and its underlying network considerations; a suggested starting point is 100 ms.<br><br>
@@ -1103,9 +1103,9 @@ These sections describe Gorouter metrics.
 ### <a id="mssincelastregistryupdate"></a> Time since last route register received
 
 <table class="table">
-  <thead><tr><th colspan="2" style="text-align: center;"><br>gorouter.ms_since_last_registry_update<br><br></th></tr></thead>
+  <thead><tr><th><br>gorouter.ms_since_last_registry_update<br><br></th></tr></thead>
     <tr>
-      <th width="25%">Description</th>
+      <th>Description</th>
         <td>
           Time in milliseconds since the last route register was received, emitted per Gorouter instance<br><br>
           <strong>Use:</strong> Indicates if routes are not being registered to apps correctly.<br><br>
@@ -1142,9 +1142,9 @@ These sections describe Gorouter metrics.
 ### <a id="bad_gateways"></a> Router Error: 502 bad gateway
 
 <table class="table">
-  <thead><tr><th colspan="2" style="text-align: center;"><br>gorouter.bad_gateways<br><br></th></tr></thead>
+  <thead><tr><th><br>gorouter.bad_gateways<br><br></th></tr></thead>
     <tr>
-      <th width="25%">Description</th>
+      <th>Description</th>
         <td>
           The lifetime number of bad gateways, or 502 responses, from the Gorouter itself, emitted per Gorouter instance.<br>
           The Gorouter emits a 502 bad gateway error when it has a route in the routing table and, in attempting to make a connection to the back end, finds that the back end does not exist.<br><br>
@@ -1181,9 +1181,9 @@ These sections describe Gorouter metrics.
 ### <a id="responses.5xx"></a> Router Error: server error
 
 <table class="table">
-  <thead><tr><th colspan="2" style="text-align: center;"><br>gorouter.responses.5xx<br><br></th></tr></thead>
+  <thead><tr><th><br>gorouter.responses.5xx<br><br></th></tr></thead>
     <tr>
-      <th width="25%">Description</th>
+      <th>Description</th>
         <td>
           The lifetime number of requests completed by the Gorouter VM for HTTP status family 5xx, server errors, emitted per Gorouter instance.<br><br>
           <strong>Use:</strong> A repeatedly crashing app is often the cause of a big increase in 5xx responses. However, response issues from apps can also cause an increase in 5xx responses. Always investigate an unexpected increase in this metric.<br><br>
@@ -1217,9 +1217,9 @@ These sections describe Gorouter metrics.
 ### <a id="total_routes"></a> Number of Gorouter routes registered
 
 <table class="table">
- <thead> <tr><th colspan="2" style="text-align: center;"><br>gorouter.total_routes<br><br></th></tr></thead>
+ <thead> <tr><th><br>gorouter.total_routes<br><br></th></tr></thead>
     <tr>
-      <th width="25%">Description</th>
+      <th>Description</th>
         <td>
           The current total number of routes registered with the Gorouter, emitted per Gorouter instance<br><br>
           <strong>Use:</strong> The aggregation of these values across all Gorouters indicates uptake and gives a picture of the overall growth of the environment for capacity planning.<br><br>
@@ -1262,9 +1262,9 @@ These sections describe Gorouter metrics.
 ### <a id="uaa_throughput"></a> UAA throughput
 
 <table class="table">
-  <thead><tr><th colspan="2" style="text-align: center;"><br>uaa.requests.global.completed.count<br><br></th></tr></thead>
+  <thead><tr><th><br>uaa.requests.global.completed.count<br><br></th></tr></thead>
     <tr>
-      <th width="25%">Description</th>
+      <th>Description</th>
         <td>
           The lifetime number of requests completed by the UAA VM, emitted per UAA instance. This number includes health checks.<br><br>
           <strong>Use:</strong> For capacity planning purposes, the aggregation of these values across all UAA instances can provide insight into the overall load that UAA is processing. <%= vars.company_name %> recommends alerting on unexpected spikes per UAA instance. Unusually high spikes, if they are not associated with an expected increase in demand, might indicate a DDoS risk and should be investigated.<br><br>
@@ -1297,9 +1297,9 @@ These sections describe Gorouter metrics.
 ### <a id="uaa_latency"></a> UAA request latency
 
 <table class="table">
-  <thead><tr><th colspan="2" style="text-align: center;"><br>gorouter.latency.uaa<br><br></th></tr></thead>
+  <thead><tr><th><br>gorouter.latency.uaa<br><br></th></tr></thead>
     <tr>
-      <th width="25%">Description</th>
+      <th>Description</th>
         <td>
           Time in milliseconds that UAA took to process a request that the Gorouter sent to UAA endpoints.<br><br>
           <strong>Use:</strong> Indicates how responsive UAA has been to requests sent from the Gorouter. Some operations might take longer to process, such as creating bulk users and groups. It is important to correlate latency observed with the endpoint and evaluate this data in the context of overall historical latency from that endpoint. Unusual spikes in latency can indicate the need to scale UAA VMs.<br><br>
@@ -1336,9 +1336,9 @@ These sections describe Gorouter metrics.
 ### <a id="uaa_requests_inflight"></a> UAA requests in flight
 
 <table class="table">
- <thead> <tr><th colspan="2" style="text-align: center;"><br>uaa.server.inflight.count<br><br></th></tr></thead>
+ <thead> <tr><th><br>uaa.server.inflight.count<br><br></th></tr></thead>
     <tr>
-      <th width="25%">Description</th>
+      <th>Description</th>
         <td>
           The number of requests UAA is currently processing (in-flight requests), emitted per UAA instance.<br><br>
           <strong>Use:</strong> Indicates how many concurrent requests are currently in flight for the UAA instance. Unusually high spikes, if they are not associated with an expected increase in demand, might indicate a DDoS risk.<br><br>
@@ -1376,9 +1376,9 @@ list both formats.</p>
 ### <a id="healthy"></a> Virtual Machine (VM) health
 
 <table class="table">
-  <thead><tr><th colspan="2" style="text-align: center;"><br>system.healthy<br>system_healthy<br><br></th></tr></thead>
+  <thead><tr><th><br>system.healthy<br>system_healthy<br><br></th></tr></thead>
     <tr>
-      <th width="25%">Description</th>
+      <th>Description</th>
         <td>
           <code>1</code> means the system is healthy, and <code>0</code> means the system is not healthy.<br><br>
           <strong>Use:</strong> This is the most important BOSH metric to monitor. It indicates if the VM emitting the metric is healthy. Review this metric for all VMs to estimate the overall health of the system.<br><br>
@@ -1409,9 +1409,9 @@ list both formats.</p>
 ### <a id="disk.system.percent"></a> VM disk used
 
 <table class="table">
- <thead> <tr><th colspan="2" style="text-align: center;"><br>system.disk.system.percent<br>system_disk_system_percent<br><br></th></tr></thead>
+ <thead> <tr><th><br>system.disk.system.percent<br>system_disk_system_percent<br><br></th></tr></thead>
     <tr>
-      <th width="25%">Description</th>
+      <th>Description</th>
         <td>
           System disk — Percentage of the system disk used on the VM<br><br>
           <strong>Use:</strong> Set an alert to indicate when the system disk is almost full.<br><br>
@@ -1443,9 +1443,9 @@ list both formats.</p>
 ### <a id="disk.ephemeral.percent"></a> VM ephemeral disk used
 
 <table class="table">
-  <thead><tr><th colspan="2" style="text-align: center;"><br>system.disk.ephemeral.percent<br>system_disk_ephemeral_percent<br><br></th></tr></thead>
+  <thead><tr><th><br>system.disk.ephemeral.percent<br>system_disk_ephemeral_percent<br><br></th></tr></thead>
     <tr>
-      <th width="25%">Description</th>
+      <th>Description</th>
         <td>
           Ephemeral disk — Percentage of the ephemeral disk used on the VM<br><br>
           <strong>Use:</strong> Set an alert and investigate if the ephemeral disk usage is too high for a job over an extended period.<br><br>
@@ -1479,9 +1479,9 @@ list both formats.</p>
 ### <a id="disk.persistent.percent"></a> VM persistent disk used
 
 <table class="table">
-  <thead><tr><th colspan="2" style="text-align: center;"><br>system.disk.persistent.percent<br>system_disk_persistent_percent<br><br></th></tr></thead>
+  <thead><tr><th><br>system.disk.persistent.percent<br>system_disk_persistent_percent<br><br></th></tr></thead>
     <tr>
-      <th width="25%">Description</th>
+      <th>Description</th>
         <td>
           Persistent disk — Percentage of persistent disk used on the VM<br><br>
           <strong>Use:</strong> Set an alert and investigate further if the persistent disk usage for a job is too high over an extended period.<br><br>
