@@ -1,4 +1,4 @@
-/Users/blora/Documents/GitHub/docs-operating-pas/app-sec-groups.html.md.erb/Users/blora/Documents/GitHub/docs-operating-pas/app-sec-groups.html.md.erb---
+---
 title: Restricting app access to internal TAS for VMs components
 owner: Security
 ---
@@ -22,11 +22,11 @@ See the following list to interpret the concepts for this topic:
 
   | Step | Description |
   |------|-------------|
-  | 1 | [Determine Your Network Layout](#network): <br>The procedure for securing your deployment with ASGs varies depending on your network layout, which you can determine using <%= vars.ops_manager %>. |
-  | 2 | [Ensure Access for <%= vars.app_runtime_abbr %> System Apps](#bind-default)<br>Bind the default ASG to the `system` org so that <%= vars.app_runtime_abbr %> system apps can continue accessing the system components they need after you remove the deployment-wide default ASG in Step 4. |
-  | 3 | [Create New ASGs](#initial): <br>Block apps from sending traffic to system components, but allow them to send traffic to the services they need. |
-  | 4 | [Remove the Default ASG](#unbind-default): <br>After you create and bind new ASGs, you no longer need the deployment-wide default ASG bindings that allow apps to send traffic to any IP. |
-  | 5 | [Restart Your Apps](#restart): <br>To apply the ASG changes, you must restart all of the apps in your deployment. |
+  | 1 | [Determine your network layout](#network): <br>The procedure for securing your deployment with ASGs varies depending on your network layout, which you can determine using <%= vars.ops_manager %>. |
+  | 2 | [Ensure access for <%= vars.app_runtime_abbr %> system apps](#bind-default)<br>Bind the default ASG to the `system` org so that <%= vars.app_runtime_abbr %> system apps can continue accessing the system components they need after you remove the deployment-wide default ASG in Step 4. |
+  | 3 | [Create new ASGs](#initial): <br>Block apps from sending traffic to system components, but allow them to send traffic to the services they need. |
+  | 4 | [Remove the default ASG](#unbind-default): <br>After you create and bind new ASGs, you no longer need the deployment-wide default ASG bindings that allow apps to send traffic to any IP. |
+  | 5 | [Restart your apps](#restart): <br>To apply the ASG changes, you must restart all of the apps in your deployment. |
 
 * **When to set up new rules**:
   * <%= vars.company_name %> recommends that you complete this procedure directly after installing <%= vars.app_runtime_abbr %>
@@ -55,10 +55,10 @@ The procedure for securing your deployment with ASGs varies depending on your ne
 
   | Layout Name | Layout Description |
   |-------------|--------------------|
-  | One Network | <ul><li>One network for <%= vars.ops_manager %> and the BOSH Director, <%= vars.app_runtime_abbr %>, and services. <br></li></ul><p class="note caution"><span class="note__title">Caution</span> You cannot secure your deployment with ASGs if you have this network layout. Because <%= vars.platform_name %> dynamically allocates IPs, they cannot be easily excluded in the case of a single network.</p> |
-  | Two Networks | <ul><li>One network for <%= vars.ops_manager %> and the BOSH Director.</li><li>One network for <%= vars.app_runtime_abbr %> and Services.</li></ul> |
-  | Three Networks | <ul><li>One network for <%= vars.ops_manager %> and the BOSH Director.</li><li>One network for <%= vars.app_runtime_abbr %>.</li><li>One network for all services.</li></ul> |
-  | Three or More Networks | <ul><li>One network for <%= vars.ops_manager %> and the BOSH Director.</li><li>One network for <%= vars.app_runtime_abbr %>.</li><li>One network for each service.</ul> |
+  | One network | <ul><li>One network for <%= vars.ops_manager %> and the BOSH Director, <%= vars.app_runtime_abbr %>, and services. <br></li></ul><p class="note caution"><span class="note__title">Caution</span> You cannot secure your deployment with ASGs if you have this network layout. Because <%= vars.platform_name %> dynamically allocates IPs, they cannot be easily excluded in the case of a single network.</p> |
+  | Two networks | <ul><li>One network for <%= vars.ops_manager %> and the BOSH Director.</li><li>One network for <%= vars.app_runtime_abbr %> and Services.</li></ul> |
+  | Three networks | <ul><li>One network for <%= vars.ops_manager %> and the BOSH Director.</li><li>One network for <%= vars.app_runtime_abbr %>.</li><li>One network for all services.</li></ul> |
+  | Three or more networks | <ul><li>One network for <%= vars.ops_manager %> and the BOSH Director.</li><li>One network for <%= vars.app_runtime_abbr %>.</li><li>One network for each service.</ul> |
 
 1. If your network layout includes two or more networks, continue to [Step 2: Ensure Access for <%= vars.app_runtime_abbr %> System Apps](#bind-default).
 
