@@ -14,8 +14,8 @@ indicators, see
 
 There are three key capacity scaling indicators <%= vars.company_name %> recommends for a Diego Cell.
 
-<table>
-  <tr><th id="cell-memory" colspan="2" style="text-align: center;"><br>Diego Cell Memory Capacity<br><br></th></tr>
+<table class="table">
+  <thead><tr><th id="cell-memory" colspan="2" style="text-align: center;"><br>Diego Cell Memory Capacity<br><br></th></tr>
     <tr>
       <th width="25%">Description</th>
         <td>
@@ -24,7 +24,7 @@ There are three key capacity scaling indicators <%= vars.company_name %> recomme
           The metric <code>CapacityRemainingMemory</code> is the remaining memory, in MiB, available to a Diego Cell.<br>
           The metric <code>CapacityTotalMemory</code> is the total memory, in MiB, available to a Diego Cell.<br>
         </td>
-    </tr>
+    </tr></thead>
     <tr>
       <th>Source ID</th>
         <td>
@@ -57,11 +57,12 @@ There are three key capacity scaling indicators <%= vars.company_name %> recomme
     </tr>
 </table>
 
-<table>
-   <tr><th id="cell-disk" colspan="2" style="text-align: center;"><br>Diego Cell Disk Capacity<br><br></th></tr>
+<table class="table">
+   <thead><tr><th id="cell-disk" colspan="2" style="text-align: center;"><br>Diego Cell Disk Capacity<br><br></th></tr>
     <tr>
       <th width="25%">Description</th>
-        <td>
+      </tr></thead>
+      <tr>  <td>
           The Diego Cell Disk Capacity indicator is the percentage of remaining disk capacity a given Diego Cell can allocate to containers.<br>
           Divide the <code>CapacityRemainingDisk</code> metric by the <code>CapacityTotalDisk</code> metric to get this percentage. <br>
           The metric <code>CapacityRemainingDisk</code> is the remaining amount of disk avaiable, in MiB, for this Diego Cell.<br>
