@@ -107,7 +107,7 @@ To set up NSX-T to integrate with <%= vars.app_runtime_abbr %>, follow these pro
 
 * [Configure a Load Balancer](#nsx-t-load-balancer).
 
-### <a id='nsx-t-nats'></a> Configure NAT Rules
+### <a id='nsx-t-nats'></a> Configure NAT rules
 
 To configure Network Address Translation (NAT) rules:
 
@@ -134,7 +134,7 @@ To configure Network Address Translation (NAT) rules:
 
           ![alt-text=""](./images/nsx-t/nsx-t-snat-net-rule.png)
 
-### <a id='#nsx-t-gateways'></a> Configure Gateways
+### <a id='#nsx-t-gateways'></a> Configure gateways
 
 To configure Tier-1 (T1) gateways:
 
@@ -208,7 +208,7 @@ To configure Tier-1 (T1) gateways:
 
 ![alt-text=""](./images/nsx-t/nsx-t-segment.png)
 
-### <a id='nsx-t-segments'></a> Configure Segments
+### <a id='nsx-t-segments'></a> Configure segments
 
 1. Create Active Monitors (health checks) for use by the virtual servers later.
     1. In the NSX-T Manager UI, go to **Networking**, then **Load Balancing**, and click the
@@ -404,7 +404,7 @@ To configure <%= vars.app_runtime_abbr %> for external container networking:
 
     ![alt-text=""](./images/nsx-t/nsx-t-tas-cni.png)
 
-### <a id='nsx-t-tile'></a> Install and configure the NSX-T container plug-In
+### <a id='nsx-t-tile'></a> Install and configure the NSX-T container plug-in
 
 1. Configure <%= vars.app_runtime_abbr %> to add router, diego_brain, and tcp_router instances to
    the corresponding NSX-T server pools upon deployment.
