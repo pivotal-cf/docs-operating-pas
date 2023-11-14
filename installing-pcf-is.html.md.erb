@@ -8,13 +8,13 @@ Use these instructions to install the <%= vars.segment_runtime_full %> tile, whi
 
 Installing the tile installs a single isolation segment. However, you can install multiple isolation segments using the Replicator tool shown in [Step 4](#copy).
 
-After you install the tile, you must follow the procedure in [Register an Isolation Segment](../adminguide/isolation-segments.html#register-an-is) in _Managing Isolation Segments_ to create the isolation segment in the Cloud Controller database (CCDB). The topic also includes information about managing an isolation segment.
+After you install the tile, you must follow the procedure in [Register an isolation segment](../adminguide/isolation-segments.html#register-an-is) in _Managing isolation segments_ to create the isolation segment in the Cloud Controller database (CCDB). The topic also includes information about managing an isolation segment.
 
-For more information about how isolation segments work, see [Isolation Segments](../concepts/security.html#isolation-segments) in _<%= vars.app_runtime_abbr %> Security_.
+For more information about how isolation segments work, see [Isolation segments](../concepts/security.html#isolation-segments) in _<%= vars.app_runtime_abbr %> Security_.
 
 ## <a id='routing'></a> Step 1: Configure routing (Optional)
 
-By default, the <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) Gorouter handles traffic for your isolation segment. However, you can deploy a dedicated Gorouter for your isolation segment instead. For information about configuring and managing routing for isolation segments, see [Routing for Isolation Segments](../adminguide/routing-is.html).
+By default, the <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) Gorouter handles traffic for your isolation segment. However, you can deploy a dedicated Gorouter for your isolation segment instead. For information about configuring and managing routing for isolation segments, see [Routing for isolation segments](../adminguide/routing-is.html).
 
 To deploy a dedicated Gorouter:
 
@@ -247,11 +247,11 @@ To configure the **Compute and Networking Isolation** pane:
 1. Under **Compute isolation**, activate or deactivate compute isolation:
 
 * To deactivate compute isolation, select **Do not allow**. Select this option if you do not require compute isolation and you are deploying the <%= vars.segment_runtime_full %> tile for the purpose of making upgrades more manageable. For example, if you have a <%= vars.app_runtime_abbr %> tile with a large volume of Diego Cells. This approach helps separate the upgrade of the <%= vars.app_runtime_abbr %> control plane from the upgrade of the Diego Cells. Further, it splits the upgrade of the Diego Cells into smaller groups.
-* To activate compute isolation, select **Allow** and enter a placement tag for your Diego Cells in the **Segment name** field. This placement tag identifies the Diego Cells that run in your isolation segment and must be unique across your <%= vars.platform_name %> deployment. You use this placement tag when following the steps in [Register an Isolation Segment](../adminguide/isolation-segments.html#register-an-is) in _Managing Isolation Segments_ to create the isolation segment in the CCDB.
+* To activate compute isolation, select **Allow** and enter a placement tag for your Diego Cells in the **Segment name** field. This placement tag identifies the Diego Cells that run in your isolation segment and must be unique across your <%= vars.platform_name %> deployment. You use this placement tag when following the steps in [Register an isolation segment](../adminguide/isolation-segments.html#register-an-is) in _Managing isolation segments_ to create the isolation segment in the CCDB.
 
  If you deactivate compute isolation, you must set <strong>Gorouter sharding mode</strong> to <strong>No isolation segment</strong>. Otherwise, the <%= vars.segment_runtime_full %> tile fails to schedule the apps in your isolation segment.
 
-1. Under **Networking isolation**, activate or deactivate networking isolation by selecting a sharding mode. For more information, see [Sharding Gorouters for Isolation Segments](../adminguide/routing-is.html#sharding-routers-isolation-segment) in _Routing for Isolation Segments_.
+1. Under **Networking isolation**, activate or deactivate networking isolation by selecting a sharding mode. For more information, see [Sharding Gorouters for isolation segments](../adminguide/routing-is.html#sharding-routers-isolation-segment) in _Routing for isolation segments_.
 
 * **Isolation segment only**: The Gorouters for the <%= vars.app_runtime_abbr %> tile acknowledge requests only for apps deployed within the Diego Cells of the tile. All other requests fail.
 * **No isolation segment**: The Gorouters for the <%= vars.app_runtime_abbr %> tile reject requests for any isolation segment. Choose this option to add a group of Gorouters for the <%= vars.app_runtime_abbr %> tile, such as when you want a private point of entry for the system domain or to configure a
@@ -339,7 +339,7 @@ If you do not have the Load Balancers column in your Resource Config pane:
 
 After you configure the <%= vars.segment_runtime_full %> tile:
 
-1. Register the isolation segment in the CCDB by following the procedure in [Register an Isolation Segment](../adminguide/isolation-segments.html#register-an-is) in _Managing Isolation Segments_.
+1. Register the isolation segment in the CCDB by following the procedure in [Register an isolation segment](../adminguide/isolation-segments.html#register-an-is) in _Managing isolation segments_.
     <p> If you run smoke tests as a post-deploy errand in the <%= vars.segment_runtime_full %> tile, the smoke tests check if your isolation segment in registered in the Cloud Controller database (CCDB). If not, the smoke tests register it in the CCDB.
     This eliminates the need to manually register the isolation segment with the <code>cf create-isolation-segment</code> command.
     For more information about running smoke tests, see <a href="#smoke-tests">Configure Smoke Tests</a>.</p>
@@ -348,7 +348,7 @@ After you configure the <%= vars.segment_runtime_full %> tile:
 
 1. Click **Review Pending Changes**, then **Apply Changes** to deploy the tile.
 
-After the tile finishes deploying, see [Managing Isolation Segments](../adminguide/isolation-segments.html) for more information about managing an isolation segment.
+After the tile finishes deploying, see [Managing isolation segments](../adminguide/isolation-segments.html) for more information about managing an isolation segment.
 
 ## <a id='copy'></a>  Step 4: Copy the tile (optional)
 
