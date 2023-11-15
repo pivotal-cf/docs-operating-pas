@@ -75,9 +75,9 @@ The following table lists components in the order that <%= vars.ops_manager %> u
 <thead><tr>
   <th rowspan=2><strong>Component</strong></th>
   <th rowspan=2><strong>Scalable</strong></th>
-  <th rowspan=2><strong>Extended Downtime</strong></th>
-  <th colspan=2><strong>Downtime Affects...</strong></th>
-  <th rowspan=2><strong>Other Limitations and Information</strong></th>
+  <th rowspan=2><strong>Extended downtime</strong></th>
+  <th colspan=2><strong>Downtime affects...</strong></th>
+  <th rowspan=2><strong>Other limitations and information</strong></th>
 </tr>
 <tr>
   <th><strong>Apps</strong></th>
@@ -94,7 +94,7 @@ The following table lists components in the order that <%= vars.ops_manager %> u
   <td></td>
 </tr>
 <tr>
-  <td>File Storage</td>
+  <td>File storage</td>
   <td></td>
   <td>&#10003;</td>
   <td></td>
@@ -118,7 +118,7 @@ The following table lists components in the order that <%= vars.ops_manager %> u
   <td>The MySQL Server is responsible for persisting internal databases for the platform. If the MySQL Server becomes unavailable, then platform services that rely upon a database, such as Cloud Controller and UAA, also become unavailable.</td>
 </tr>
 <tr>
-  <td>Backup Restore Node</td>
+  <td>Backup Restore node</td>
   <td></td>
   <td></td>
   <td></td>
@@ -198,7 +198,7 @@ The following table lists components in the order that <%= vars.ops_manager %> u
   <td>If you only have one Diego Cell, upgrading causes downtime for all apps that run on it. These include apps pushed with <code>cf push</code> and apps automatically installed by <%= vars.app_runtime_abbr %>, such as Apps Manager and the App Usage Service.</td>
 </tr>
 <tr>
-  <td>Loggregator Trafficcontroller</td>
+  <td>Loggregator Traffic controller</td>
   <td>&#10003;</td>
   <td></td>
   <td></td>
