@@ -1,4 +1,4 @@
-/Users/blora/Documents/GitHub/docs-operating-pas/app-sec-groups.html.md.erb/Users/blora/Documents/GitHub/docs-operating-pas/app-sec-groups.html.md.erb---
+---
 title: Restricting app access to internal TAS for VMs components
 owner: Security
 ---
@@ -53,7 +53,7 @@ The procedure for securing your deployment with ASGs varies depending on your ne
 
 1. Based on the information you gathered, determine which of the following network layouts you have:
 
-  | Layout Name | Layout Description |
+  | Layout name | Layout description |
   |-------------|--------------------|
   | One Network | <ul><li>One network for <%= vars.ops_manager %> and the BOSH Director, <%= vars.app_runtime_abbr %>, and services. <br></li></ul><p class="note caution"><span class="note__title">Caution</span> You cannot secure your deployment with ASGs if you have this network layout. Because <%= vars.platform_name %> dynamically allocates IPs, they cannot be easily excluded in the case of a single network.</p> |
   | Two Networks | <ul><li>One network for <%= vars.ops_manager %> and the BOSH Director.</li><li>One network for <%= vars.app_runtime_abbr %> and Services.</li></ul> |
