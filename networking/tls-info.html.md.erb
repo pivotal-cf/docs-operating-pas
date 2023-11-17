@@ -104,11 +104,11 @@ Each app instance container in <%= vars.app_runtime_abbr %> has its own identity
 
 To learn about app instance identity credentials, see the table below:
 
-<table>
-  <tr>
+<table class="table">
+ <thead> <tr>
     <th style="width: 20%">Attribute</th>
     <th>Description</th>
-  </tr>
+  </tr></thead>
   <tr>
     <th>Purpose</th>
     <td>
@@ -168,21 +168,21 @@ To learn about app instance identity credentials, see the table below:
 If you want to activate secure TLS communications from an app using container instance identity credentials, ensure that you:
 
 * **Add the credentials to your development stack configuration:** The credentials must be present in your development stack configuration for your app to use them. You can retrieve the credentials through following environment variables, which <%= vars.ops_manager %> sets to the locations of key and certificate files.
-    <table id='instance-certs' border="1" class="nice" >
+    <table id='instance-certs' border="1" class="table">
+     <thead> <tr>
+      <th>Credential/keypair element</th>
+      <th>Environment variable</th>
+      <th>Command to retrieve credential value</th>
+      </tr></thead>
       <tr>
-        <th>Credential/Keypair Element</th>
-        <th>Environment Variable</th>
-        <th>Command to Retrieve Credential Value</th>
+      <td>Certificate xhain</td>
+      <td><code>CF_INSTANCE_CERT</code></td>
+      <td><code>cf ssh APP-NAME -c 'cat $CF_INSTANCE_CERT'</code></td>
       </tr>
       <tr>
-        <td>Certificate Chain</td>
-        <td><code>CF_INSTANCE_CERT</code></td>
-        <td><code>cf ssh APP-NAME -c 'cat $CF_INSTANCE_CERT'</code></td>
-      </tr>
-      <tr>
-        <td>Private Key</td>
-        <td><code>CF_INSTANCE_KEY</code></td>
-        <td><code>cf ssh APP-NAME -c 'cat $CF_INSTANCE_KEY'</code></td>
+      <td>Private key</td>
+      <td><code>CF_INSTANCE_KEY</code></td>
+      <td><code>cf ssh APP-NAME -c 'cat $CF_INSTANCE_KEY'</code></td>
       </tr>
     </table>
     Where `APP-NAME` is the name of your app.
