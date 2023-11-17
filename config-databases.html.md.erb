@@ -1,0 +1,27 @@
+---
+title: Databases
+owner: PAS Releng
+---
+
+<a id='sys-db'></a>
+
+In the **Databases** pane, you can configure <%= vars.app_runtime_abbr %> to use an internal MySQL database provided with <%= vars.platform_name %>, or you can configure an external database provider for the databases required by <%= vars.app_runtime_abbr %>.
+
+<p> If you are performing an upgrade, do not modify your existing internal database configuration, or you might lose data. You must migrate your existing data first before changing the configuration. For additional upgrade information, see <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-upgrading-pcf.html">Upgrading <%= vars.platform_name %></a>.</p>
+
+<p> For GCP installations, <%= vars.company_name %> recommends selecting <strong>External</strong> and using Google Cloud SQL. Only use internal MySQL for non-production or test installations on GCP.</p>
+
+<%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
+
+<%= partial "core/ert_database_internal" %>
+
+To configure high availability for your internal MySQL databases, see [Configure Internal MySQL](#internal-mysql).
+
+### External system database configuration
+
+<a id='create-dbs'></a>
+
+<%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
+
+<%= partial "core/ert_database_external" %>
+
