@@ -56,13 +56,13 @@ This error can appear as a result of incorrect configuration of network traffic 
 
 ### Solution
 
-1. Make sure you have selected the **Forward SSL to <%= vars.app_runtime_abbr %> Router** option in your [<%= vars.app_runtime_abbr %> Network Configuration](configure-pas.html#networking).
+1. Make sure you have selected the **Forward SSL to <%= vars.app_runtime_abbr %> Router** option in your [<%= vars.app_runtime_abbr %> Network Configuration](config-networking.html#networking).
 
 2. Verify that you have configured the firewall rules properly and that TCP ports `80`, `443`, `2222`, and `8080` are accessible on your GCP load balancers. See [Create Firewall Rules for the Network](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/gcp-deploy-manual.html) in _Preparing to deploy Tanzu Operations Manager on GCP_.
 
 3. Verify that you have configured the proper SSL certificates on your HTTP(S) load balancer in GCP. See [Create HTTP load balancer](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/gcp-prepare-env-manual.html#loadbalancer) in _Preparing to deploy Tanzu Operations Manager on GCP_.
 
-4. If necessary, upload a new certificate again and update any required SSL Certificate and SSH Key fields in your [<%= vars.app_runtime_abbr %> Network Configuration](configure-pas.html#networking).
+4. If necessary, upload a new certificate again and update any required SSL Certificate and SSH Key fields in your [<%= vars.app_runtime_abbr %> Network Configuration](config-networking.html#networking).
 
 <hr>
 

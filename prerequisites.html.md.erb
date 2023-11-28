@@ -1,0 +1,16 @@
+---
+title: VMware Tanzu Application Service for VMs Overview
+owner: PAS Releng
+---
+
+<a id='prereqs'></a>
+
+You can configure <%= vars.app_runtime_first %> as part of deploying <%= vars.platform_name %>.
+
+## Prerequisites
+
+Before you begin, you must:
+
+* Ensure that you have successfully completed the steps to prepare your environment for <%= vars.platform_name %> and install and configure the BOSH Director. For more information, see the [<%= vars.ops_manager_full %> configuration topic for your IaaS](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/pcf-interface.html).
+
+* If you plan to install the <%= vars.platform_name %> IPsec add-on, you must do so before installing any other tiles. <%= vars.company_name %> recommends installing IPsec immediately after <%= vars.ops_manager %> and before installing the <%= vars.app_runtime_abbr %> Runtime tile. For more information, see [Installing the IPsec for VMware Tanzu](https://docs.vmware.com/en/IPsec-for-VMware-Tanzu/1.9/documentation/GUID-installing.html).
