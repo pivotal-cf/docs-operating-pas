@@ -1,0 +1,76 @@
+---
+title: CredHub
+owner: PAS Releng
+---
+
+<a id='credhub'></a>
+
+In the **CredHub** pane, you configure the CredHub server.
+
+To configure the **CredHub** pane:
+
+1. Select **CredHub**.
+
+1. Under **CredHub database location**, select the location of your CredHub database. <%= vars.app_runtime_abbr %> includes this CredHub database for services to store their service instance credentials.
+    * **TAS for VMs database**: If you select this option, CredHub uses the same database as other <%= vars.app_runtime_abbr %> components, whether the database is internal or external. You configure this database in the **Databases** pane.
+    * **External database**: If you select this option, configure these fields:
+        * **Hostname:** Enter the IP address of your database server.
+        * **TCP port:** Enter the port of your database server, such as `3306`.
+        * **Username:** Enter a unique username to use to access your UAA database on the database server.
+        * **Password:** Enter the password for the provided username.
+        * **CA certificate:** This certificate is used when encrypting traffic to and from the UAA database.
+        * **Skip hostname verification:** Select if you don't want CredHub to verify the identity of your database server during TLS connections.You cannot deactivate hostname verification for TLS connections to Postgres databases. You must select this option if you are configuring an external database on GCP or Azure.
+
+      <p> If you deploy <%= vars.app_runtime_abbr %> on AWS using Terraform, you can locate these values in your Terraform output:
+          <ul>
+            <li><strong>Hostname:</strong> <code>rds_address</code></li>
+            <li><strong>TCP port:</strong> <code>rds_port</code></li>
+            <li><strong>Username:</strong> <code>rds_username</code></li>
+            <li><strong>Password:</strong> <code>rds_password</code></li>
+          </ul>
+      </p>
+
+2. (Optional) Under **KMS providers**, specify one or more Key Management Service (KMS) providers:
+    * **Name:** Enter the name of the KMS provider.
+    * **Endpoint:** Enter the Unix socket address for the KMS plug-in.
+    * **Primary:** Activate the **Primary** check box to indicate the primary KMS provider for your environment. You must mark one provider as primary. Do not mark more than one provider as primary.
+
+3. Under **Internal encryption provider keys**, specify one or more keys to use for encrypting and decrypting the values stored in the CredHub database.
+    * If you plan to use internal encryption, configure these fields:
+        * **Name:** Enter any key name.
+        * **Key:** Enter a randomly generated value that is at least 20 characters long. This key is used for encrypting all data.
+        * **Primary:** This check box marks the key you specified as the primary encryption key. You must mark one key as primary. Do not mark more than one key as primary.
+    * If you plan to use a hardware security module (HSM) as your encryption provider, configure these fields:
+        * **Name:** Enter a key name that already exists on your HSM or a new key name. For each new key name, CredHub generates a key in **HSM provider partition** that you configure.
+        * **Key:** Enter a placeholder value under **Key**. CredHub does not use this key for encryption. However, you cannot leave the **Key** field blank.
+        * **Primary:** This check box is used for marking the key you specified as the primary encryption key. You must mark one key as primary. Do not mark more than one key as primary.
+    <p> For information about using additional keys for key rotation, see <a href="credential-rotation.html">Rotating Runtime CredHub Encryption Keys</a>.</p>
+
+4. (Optional) To configure CredHub to use an HSM, configure these fields:
+    * **HSM provider partition:** Enter the name of the HSM provider partition.
+    * **HSM provider partition password:** Enter a password to use to access the HSM provider partition.
+    * **HSM provider client certificate:** Enter the client certificate for the HSM. For more information, see [Create and Register HSM Clients](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-hsm-config.html#create-register-hsm) in _Preparing CredHub HSMs for Configuration_.
+    * Under **HSM provider encryption keys**, specify one or more keys to use for encrypting and decrypting the values stored in the HSM provider. For each key, configure these fields:
+        * **Name:** Enter the name of the encryption key.
+        * **Primary:** This check box is used for marking the key you specified as the primary encryption key. You must mark one key as primary. Do not mark more than one key as primary.
+    * In the **HSM provider servers** section, click **Add** to add an HSM server. You can add multiple HSM servers. For each HSM server, configure these fields:
+        * **Host address:** Enter the hostname or IP address of the HSM server.
+        * **Port:** Enter the port of the HSM server. If you do not know your port address, enter `1792`.
+        * **Partition serial number:** Enter the serial number of the HSM partition.
+        * **HSM certificate:** Enter the certificate for the HSM server. The HSM presents this certificate to CredHub to establish a two-way TLS connection.
+
+5. If your deployment uses any <%= vars.platform_name %> services that support storing service instance credentials in CredHub and you want to activate this feature, activate the **Secure service instance credentials** check box. For more information about using CredHub for securing service instance credentials, see [Securing Service Instance Credentials with Runtime CredHub](secure-si-creds.html).
+
+6. Click **Save**.
+
+7. Go to the **Resource Config** pane.
+
+8. Under the **Job** column of the **CredHub** row, ensure that the number of instances is set to `2`. This is the minimum instance count required for high availability.
+
+9. To configure UAA so it detects a proxy, complete the following fields:
+    * **Proxy servers**: Enter a comma-separated list of router IP addresses for the first group of HTTP/TCP backends.
+    * **HTTP proxy URL**: Enter the `http_proxy` for all HTTP requests across VMs.
+    * **HTTPS proxy URL**: Enter the `https_proxy` for all HTTPS requests across VMs
+    * **Excluded hosts**: Enter a comma-separated list of domains, IP addresses, or DNS suffixes to exclude from proxying.
+
+10. Click **Save**.
