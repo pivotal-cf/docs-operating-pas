@@ -118,13 +118,6 @@ More API parameters are available to customize retrieved app logs. For more info
 <%= partial "/pcf/core/system_logging" %>
 
 
-## <a id='container-metrics'></a> Include container metrics in syslog drains
-
-Developers can monitor container metrics over the syslog protocol using the [CF drain CLI plug-in](https://github.com/cloudfoundry/cf-drain-cli). With the Cloud Foundry Drain CLI plug-in, you can use the Cloud Foundry Command Line Interface (cf CLI) tool to set the app container to deliver container metrics to a syslog drain. Developers can then monitor the app container based on those metrics.
-
-For more information, see [Including container metrics in syslog drains](../devguide/deploy-apps/streaming-logs.html#container-metrics) in _App Logging in <%= vars.app_runtime_abbr %>_.
-
-
 ## <a id='scaling'></a> Scale Loggregator
 
 Apps constantly generate app logs and <%= vars.app_runtime_abbr %> platform components constantly generate component metrics. The Loggregator system combines these data streams and handles them as follows. For more information, see [Loggregator Architecture](../loggregator/architecture.html).
