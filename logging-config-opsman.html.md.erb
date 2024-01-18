@@ -118,17 +118,17 @@ More API parameters are available to customize retrieved app logs. For more info
 <%= partial "/pcf/core/system_logging" %>
 
 
-## <a id='scaling'></a> Scale Loggregator
+## <a id='scaling'></a> Scale Loggregator Firehose system
 
-Apps constantly generate app logs and <%= vars.app_runtime_abbr %> platform components constantly generate component metrics. The Loggregator system combines these data streams and handles them as follows. For more information, see [Loggregator Architecture](../loggregator/architecture.html).
+Apps constantly generate app logs and <%= vars.app_runtime_abbr %> platform components constantly generate component metrics. The Loggregator Firehose system combines these data streams and handles them as follows. For more information, see [Loggregator Firehose Architecture](../loggregator/architecture.html#loggregator-firehose-architecture-1).
 
 * The Loggregator agent running on each component or app VM collects and sends this data out to Doppler components.
 
 * Doppler components temporarily buffer the data before periodically forwarding it to the Traffic Controller. When the log and metrics data input to a Doppler exceeds its buffer size for a given interval, data can be lost.
 
-* The Traffic Controller serves the aggregated data stream through the Firehose WebSocket endpoint.
+* The Traffic Controller / Reverse Log Proxy serve the aggregated data stream to clients.
 
-Use the following instructions to scale the Loggregator system. For guidance on monitoring and capacity planning, see [Monitoring <%= vars.app_runtime_abbr %>](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/<%= vars.current_major_version %>/tas-for-vms/monitoring-index.html).
+Use the following instructions to scale the Loggregator Firehose system. For guidance on monitoring and capacity planning, see [Monitoring <%= vars.app_runtime_abbr %>](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/<%= vars.current_major_version %>/tas-for-vms/monitoring-index.html).
 
 ### <a id="instances"></a> Add component VM instances
 
@@ -141,7 +141,7 @@ To add component VM instances for Loggregator components:
 3. Select **Resource Config**.
 
 4. Increase the number in the **Instances** column of the component you want to scale. You can add instances for the following Loggregator components:
-  * **Loggregator Traffic Controller**
+  * **Loggregator Trafficcontroller**
   * **Doppler Server**
   * **Log Cache**
 
@@ -152,6 +152,21 @@ To add component VM instances for Loggregator components:
 7. Click **Review Pending Changes**.
 
 8. Click **Apply Changes**.
+
+## <a id='scaling-shared-nothing'></a> Scale Loggregator Shared Nothing system
+
+<%= vars.company_name %> recommends the newer Shared Nothing logging and metrics architecture as an alternative to the Loggregator Firehose architecture.
+
+The Shared Nothing architecture egresses logs and metrics from the platform directly from each VM as opposed to the more centralized approach of the Loggregator Firehose architecture.
+Egressing directly from the VMs where logs and metrics are generated has better scaling characteristics, may reduce costs and should be preferred for new deployments.
+
+For more information, see [Shared Nothing Architecture](../loggregator/architecture.html#sharednothing-architecture-2).
+
+* The Syslog agent running on each component or app VM collects and sends this data out to Log Cache and any configured external syslog destination.
+
+* The OpenTelemetry Collector (beta) running on each component or app VM egresses metrics via the configured exporters.
+
+When using the Shared Nothing architecture you can potentially scale down the VMs associated with the Loggregator Firehose architecture. See [Scaling down Logging and Metrics infrastructure](config-resources.html#scale-down-logging) for more information.
 
 
 ## <a id="app-traffic-log"></a> App traffic logging
