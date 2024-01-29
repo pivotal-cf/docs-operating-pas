@@ -15,18 +15,12 @@ The GDPR grants data subjects certain rights, such as the right to obtain a copy
 Article 4, Section 1 of the GDPR defines personal data as follows:
 
 <blockquote>
-'personal data' is any information relating to an identified or identifiable natural person ('data subject'); an identifiable natural person is one who can be identified, directly or indirectly, in particular by reference to an identifier such as a name, an identification number, location data, an online identifier or to one or more factors specific to the physical, physiological, genetic, mental, economic, cultural or social identity of that natural person;
+<i>'personal data' is any information relating to an identified or identifiable natural person ('data subject'); an identifiable natural person is one who can be identified, directly or indirectly, in particular by reference to an identifier such as a name, an identification number, location data, an online identifier or to one or more factors specific to the physical, physiological, genetic, mental, economic, cultural or social identity of that natural person;</i>
 </blockquote>
 
 For more information, see the GDPR [text](http://www.privacy-regulation.eu/en/article-4-definitions-GDPR.htm).
 
-Personal data can be collected, stored, and processed in a <%= vars.app_runtime_abbr %> deployment. <%= vars.company_name %> has performed a review of <%= vars.app_runtime_abbr %> components and determined that personal data might reside in the following areas:
-
-- [](#)
-		- [Routing](#routing)
-			- [ Deactivate client IP logging](#-deactivate-client-ip-logging)
-		- [ Diego](#-diego)
-		- [ Notifications Service](#-notifications-service)
+Personal data can be collected, stored, and processed in a <%= vars.app_runtime_abbr %> deployment. <%= vars.company_name %> has performed a review of <%= vars.app_runtime_abbr %> components and determined that personal data might reside in the areas discussed in the following sections.
 
 
 ## <a id='where'></a> Where personal data might reside
@@ -179,7 +173,6 @@ The Cloud Foundry API release contains several components, including the Cloud C
 | **Audit Trails** | Audit what changes a user makes | <ul><li>Name</li><li>User ID</li><li>Email address</li></ul> | On specific API requests that mutate the state of resources | Audit Event Table in the Cloud Controller DB |  n/a | <ul><li><%= vars.platform_name %> operator</li><li>Users that can view the resource that had an audited change</li></ul> | 31 days |
 | | Audit what changes a user makes |  <ul><li>IP Address</li><li>Email address</li><li>User ID</li><li>Username</li></ul> | On each request | <ul><li>Local VM:<br />CEF logs</li><li>Log aggregator used by <%= vars.platform_name %> operator</li></ul> | n/a | <%= vars.platform_name %> operator | <ul><li>Local VM:<br />4 week maximum by default</li><li>Log aggregator as configured by <%= vars.platform_name %> operator</li></ul>
 | | Audit what user created a resource | <ul><li>Name</li><li>User ID</li><li>Email address</li></ul> | When API resources are created | As part of the resource row in Cloud Controller DB | n/a | <ul><li><%= vars.platform_name %> operator</li><li>Users that can view the resource</li></ul> | As long as the resource exists |
->>>>>>> 6813c2d (Convert four tables.)
 
 ### <a id='routing'></a>Routing
 
