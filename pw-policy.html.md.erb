@@ -13,14 +13,14 @@ To open the internal user store (formerly called internal UAA) configuration for
 
 2. Click the **<%= vars.app_runtime_abbr %>** tile.
 
-3. Select **Authentication and Enterprise SSO**. For help configuring these fields, see the **Configure Authentication and Enterprise SSO** section of the **Configuring TAS** topic.
+3. Select **UAA**.
 
-  ![alt-text="Deployment uses the internal user store for authentication. Verify that Internal user store is selected."](./images/er-config-auth-enterprise-sso-uaa.png)
+  ![alt-text="Deployment uses the internal user store for authentication. Confirm that Configure policies is selected."](./images/uaa-password-policies.png)
 
-  * Confirm that the **Internal user store** option is selected.
+  * Confirm that the **Configure policies** option is selected.
   * For **Minimum password length**, enter the minimum number of characters for a valid password.
-  * For **Minimum uppercase characters**, enter the minimum number of uppercase characters required for a valid password.
-  * For **Minimum lowercase characters**, enter the minimum number of lowercase characters required for a valid password.
-  * For **Minimum numerical digits**, enter the minimum number of digits required for a valid password.
-  * For **Minimum special characters**, enter the minimum number of special characters required for a valid password.
+  * For **Require at least one lowercase character**, select if at least 1 lowercase character is required for a valid password.
+  * For **Require at least one uppercase character**, select if at least 1 uppercase character is required for a valid password.
+  * For **Require at least one numeric character**, select if at least 1 numeric digit is required for a valid password.
+  * For **Require at least one special character**, select if at least 1 special character is required for a valid password.
   * For **Maximum password entry attempts allowed**, enter the maximum number of failures allowed to enter a password within a five minute timespan before the account is locked.
