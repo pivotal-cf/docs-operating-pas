@@ -215,7 +215,7 @@ Diego is the container management system for <%= vars.app_runtime_abbr %>. For m
 </thead>
 <tbody>
 	<tr>
-	<th>Business Execution</th>
+	<td><strong>Business Execution</strong></td>
 	<td>Executing apps and tasks</td>
 	<td>No personal data is collected explicitly, but personal data might be encoded in app file contents or runtime metadata such as environment variables or start commands.</td>
 	<td>Runtime metadata is collected when Cloud Controller submits work specification to the Diego BBS API. File contents are collected when Diego schedules an app or a task on a Diego Cell.</td>
@@ -226,7 +226,7 @@ Diego is the container management system for <%= vars.app_runtime_abbr %>. For m
 	<li>To delete the app file contents stored in the running app and task containers, stop the app or cancel the task to destroy the containers. To get rid of the app file contents stored in the download cache on the Diego Cells, recreate the Diego Cell VMs.</li></ul></td>
 	</tr>
 	<tr>
-	<th>Reports/Logs</th>
+	<td><strong>Reports/Logs</strong></td>
 	<td>SSH proxy logs <%= vars.app_runtime_abbr %> user access.</td>
 	<td>UAA user name and ID</td>
 	<td>When the user authenticates for SSH access to an app.</td>
