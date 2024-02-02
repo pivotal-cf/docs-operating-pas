@@ -101,31 +101,32 @@ To create ASGs that block apps from sending traffic to the networks that host <%
 
 1. Create a `config.yml` containing the appropriate content for your network layout and replace the indicated values with the CIDRs you gathered:
 
-* **Two Network Layout**:
+    * **Two-network layout**:
 
         ```
         exclude:
         - YOUR-OPS-MANAGER-CIDR
         - YOUR-TAS-AND-SERVICES-CIDR
         ```
-* **Three Network Layout**:
 
-  If you want to secure only the <%= vars.ops_manager %>
-         and <%= vars.app_runtime_abbr %> components, you can remove the services CIDR
-         from the <code>exclude</code> section.
+    * **Three-network layout**:
 
-         ```
-          exclude:
-          - YOUR-OPS-MANAGER-CIDR
-          - YOUR-TAS-CIDR
-          - YOUR-SERVICES-CIDR
-         ```
+        If you want to secure only the <%= vars.ops_manager %>
+        and <%= vars.app_runtime_abbr %> components, you can remove the services CIDR
+        from the <code>exclude</code> section.
 
-  * **Three or More Network Layout**:
+        ```
+        exclude:
+        - YOUR-OPS-MANAGER-CIDR
+        - YOUR-TAS-CIDR
+        - YOUR-SERVICES-CIDR
+        ```
 
-      If you want to secure only the <%= vars.ops_manager %>
-         and <%= vars.app_runtime_abbr %> components, you can remove the services CIDRs
-         from the <code>exclude</code> section.
+    * **Three or more network layout**:
+
+        If you want to secure only the <%= vars.ops_manager %>
+        and <%= vars.app_runtime_abbr %> components, you can remove the services CIDRs
+        from the <code>exclude</code> section.
 
         ```
         exclude:
@@ -136,43 +137,43 @@ To create ASGs that block apps from sending traffic to the networks that host <%
         etc...
         ```
 
-1. To generate the `public-networks.json` and `private-networks.json` default files that contain your ASG rules, specify the location of the `config.yml` file as input, and run:
+2. To generate the `public-networks.json` and `private-networks.json` default files that contain your ASG rules, specify the location of the `config.yml` file as input, and run:
 
     ```yaml
     asg-creator create --config config.yml
     ```
 
-2. Create the `public-networks` ASG by running:
+3. Create the `public-networks` ASG by running:
 
     ```console
     cf create-security-group public-networks public-networks.json
     ```
 
-3. Bind the ASG to the default staging set by running:
+4. Bind the ASG to the default staging set by running:
 
     ```console
     cf bind-staging-security-group public-networks
     ```
 
-4. Bind the ASG to the default running set by running:
+5. Bind the ASG to the default running set by running:
 
     ```console
     cf bind-running-security-group public-networks
     ```
 
-5. Create the `private-networks` ASG by running:
+6. Create the `private-networks` ASG by running:
 
     ```console
     cf create-security-group private-networks private-networks.json
     ```
 
-6. Bind the ASG to the default staging set by running:
+7. Bind the ASG to the default staging set by running:
 
     ```console
     cf bind-staging-security-group private-networks
     ```
 
-7. Bind the ASG to the default running set by running:
+8. Bind the ASG to the default running set by running:
 
     ```console
     cf bind-running-security-group private-networks
