@@ -89,14 +89,14 @@ To configure IDP and SP entities in CA SSO:
 	* **Supported NameID format:** Enter `urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress` and `urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified` to select both email address and unspecified as supported NameID formats.
 
 1. To create a remote entity:
-	1. Click **Import Metadata Button**.
-	1. Download the SP metadata from https://login.SYSTEM-DOMAIN/saml/metadata, where `SYSTEM-DOMAIN` is the system domain of your <%= vars.platform_name %> installation.
-	1. Save the SP metadata to an XML file.
-	1. Browse and select the saved XML metadata you downloaded in the previous step.
-	1. Provide a name for the **Remote Service Provider Entity**.
-	1. Provide an alias for the **Signing Certificate** imported from the metadata.
+	1. Click **Import Metadata**.
+	2. Download the SP metadata from https://login.SYSTEM-DOMAIN/saml/metadata, where `SYSTEM-DOMAIN` is the system domain of your <%= vars.platform_name %> installation.
+	3. Save the SP metadata to an XML file.
+	4. Browse and select the saved XML metadata you downloaded in the previous step.
+	5. Provide a name for the **Remote Service Provider Entity**.
+	6. Provide an alias for the **Signing Certificate** imported from the metadata.
 	    <p> <%= vars.platform_name %> signs the outgoing SAML authentication requests.</p>
-	1. Click **Save**.
+	7. Click **Save**.
 
 ### <a id='ca-sso-pcf-config'></a> Configure partnership between CA SSO and <%= vars.platform_name %>
 
