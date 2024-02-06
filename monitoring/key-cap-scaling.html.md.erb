@@ -15,7 +15,9 @@ indicators, see
 There are three key capacity scaling indicators <%= vars.company_name %> recommends for a Diego Cell.
 
 <table>
+  <thead>
   <tr><th id="cell-memory" colspan="2" style="text-align: center;"><br>Diego Cell memory capacity<br><br></th></tr>
+  </thead>
     <tr>
       <th width="25%">Description</th>
         <td>
@@ -24,7 +26,7 @@ There are three key capacity scaling indicators <%= vars.company_name %> recomme
           The metric <code>CapacityRemainingMemory</code> is the remaining memory, in MiB, available to a Diego Cell.<br>
           The metric <code>CapacityTotalMemory</code> is the total memory, in MiB, available to a Diego Cell.<br>
         </td>
-    </tr></thead>
+    </tr>
     <tr>
       <th>Source ID</th>
         <td>
@@ -58,7 +60,9 @@ There are three key capacity scaling indicators <%= vars.company_name %> recomme
 </table>
 
 <table>
+  <thead>
    <tr><th id="cell-disk" colspan="2" style="text-align: center;"><br>Diego Cell disk capacity<br><br></th></tr>
+   </thead>
     <tr>
       <th width="25%">Description</th>
         <td>
@@ -101,7 +105,9 @@ There are three key capacity scaling indicators <%= vars.company_name %> recomme
 </table>
 
 <table>
+  <thead>
   <tr><th id="cell-container" colspan="2" style="text-align: center;"><br>Diego Cell Container Capacity<br><br></th></tr>
+  </thead>
     <tr>
       <th width="25%">Description</th>
         <td>
@@ -148,7 +154,9 @@ There are three key capacity scaling indicators <%= vars.company_name %> recomme
 <%= vars.company_name %> recommends three key capacity scaling indicators for monitoring Firehose performance.
 
 <table>
+  <thead>
   <tr><th id="firehose-loss-rate" id="firehose-loss-rate" colspan="2" style="text-align: center;"><br>Log Transport Loss Rate<br><br></th></tr>
+  </thead>
     <tr>
       <th width="25">Description</th>
         <td>
@@ -206,7 +214,9 @@ There are three key capacity scaling indicators <%= vars.company_name %> recomme
 </table>
 
 <table>
+  <thead>
   <tr><th id="doppler-message-rate-ksi" colspan="2" style="text-align: center;">Doppler Message Ingress Capacity</th></tr>
+  </thead>
     <tr>
       <th width="25">Description</th>
         <td>The Doppler Ingress counter is the number of messages ingressed by the Doppler instance. Divide the sum of the rate of <code>ingress</code> metrics across instances by the <code>current number of Doppler instances</code> to get this
@@ -243,7 +253,9 @@ There are three key capacity scaling indicators <%= vars.company_name %> recomme
 </table>
 
 <table>
+  <thead>
   <tr><th id="rlp-ksi" colspan="2" style="text-align: center;"><br>Reverse Log Proxy Loss Rate<br><br></th></tr>
+  </thead>
     <tr>
       <th width="25">Description</th>
         <td>
@@ -294,7 +306,9 @@ There are three key capacity scaling indicators <%= vars.company_name %> recomme
 <%= vars.company_name %> recommends the following scaling indicator for monitoring the performance of consumers of the Firehose.
 
 <table>
+  <thead>
   <tr><th id="slow-consumer" colspan="2" style="text-align: center;"><br>Slow Consumer Drops<br><br></th></tr>
+  </thead>
     <tr>
       <th width="25">Description</th>
         <td>The Slow Consumer Drops indicator is the <code>slow_consumer</code> metric incremented for each connection the Firehose closes because a consumer cannot keep up.<br>
@@ -331,7 +345,9 @@ There are three key capacity scaling indicators <%= vars.company_name %> recomme
 </table>
 
 <table>
+  <thead>
   <tr><th id="rlp-egress-dropped" colspan="2" style="text-align: center;"><br>Reverse Log Proxy Egress Dropped Messages<br><br></th></tr>
+  </thead>
     <tr>
       <th width="25">Description</th>
         <td>
@@ -375,12 +391,14 @@ There are three key capacity scaling indicators <%= vars.company_name %> recomme
 </table>
 
 <table>
+  <thead>
   <tr><th id="doppler-egress-dropped" colspan="2" style="text-align: center;"><br>Doppler Egress Dropped Messages<br><br></th></tr>
+  </thead>
     <tr>
       <th width="25">Description</th>
         <td>
           The Doppler Egress Dropped Messages indicator shows the number of messages that the Dopplers drop when consumers of the RLP, such as monitoring tool nozzles, ingest the exiting stream of logs and metrics too slowly.
-          For more information about how the Dopplers transport logs and metrics through Loggregator, see <a href="https://docs.vmware.com/en/VMware-Tanzu-Application-Service/4.0/tas-for-vms/loggregator-architecture.html">Loggregator Architecture</a> in <em>Loggregator Architecture</em>.
+          For more information about how the Dopplers transport logs and metrics through Loggregator, see <a href="https://docs.vmware.com/en/VMware-Tanzu-Application-Service/<%= vars.current_major_version %>/tas-for-vms/loggregator-architecture.html">Loggregator Architecture</a> in <em>Loggregator Architecture</em>.
           <p> The <code>doppler.dropped</code> metric includes both <code>ingress</code> and <code>egress</code> directions.
           To differentiate between <code>ingress</code> and <code>egress</code>, see the <code>direction</code> tag on the metric.</p>
         </td>
@@ -431,7 +449,9 @@ There is a single key capacity scaling indicator <%= vars.company_name %> recomm
 <p> These Syslog Drain scaling indicators are only relevant if your deployment contains apps using the syslog drain binding feature.</p>
 
 <table>
+  <thead>
   <tr><th id="syslog-agent-ksi" colspan="2" style="text-align: center;"><br>Syslog Agent Loss Rate<br><br></th></tr>
+  </thead>
     <tr>
       <th width="25">Description</th>
         <td>
@@ -491,7 +511,9 @@ There is a single key capacity scaling indicator <%= vars.company_name %> recomm
 <%= vars.company_name %> recommends the following scaling indicator for monitoring the performance of log cache.
 
 <table>
+  <thead>
   <tr><th id="cache-duration" colspan="2" style="text-align: center;"><br>Log Cache Caching Duration<br><br></th></tr>
+  </thead>
     <tr>
       <th width="25">Description</th>
         <td> The Log Cache Caching Duration indicator shows the age in milliseconds of the oldest data point stored in Log Cache.<br>
@@ -536,7 +558,9 @@ There is one key capacity scaling indicator <%= vars.company_name %> recommends 
 <p> The following metric appears in the Firehose in two different formats. The following table lists both formats.</p>
 
 <table>
+  <thead>
   <tr><th id="system.cpu.user" colspan="2" style="text-align: center;"><br>Gorouter VM CPU Utilization<br><br></th></tr>
+  </thead>
     <tr>
       <th>Description</th>
         <td>The Gorouter VM CPU Utilization indicator shows how much of a Gorouter VM's CPU is being used.
@@ -588,7 +612,9 @@ There is one key capacity scaling indicator <%= vars.company_name %> recommends 
 <p> The following metric appears in the Firehose in two different formats. The following table lists both formats.</p>
 
 <table>
+  <thead>
   <tr><th id="uaa-system.cpu.user" colspan="2" style="text-align: center;"><br>UAA VM CPU Utilization<br><br></th></tr>
+  </thead>
     <tr>
       <th>Description</th>
         <td>The UAA VM CPU Utilization indicator shows how much of the UAA VM's CPU is used. High CPU utilization of the UAA VMs can cause requests per second to decrease.</td>
@@ -640,7 +666,9 @@ There is one key capacity scaling indicator for external S3 external storage.
 <p> The following metric appears in the Firehose in two different formats. The following table lists both formats.</p>
 
 <table>
+  <thead>
   <tr><th colspan="2" style="text-align: center;"><br>External S3 External Storage<br><br></th></tr>
+  </thead>
     <tr>
       <th width="25%">Description</th>
         <td>The External S3 External Storage indicator shows the percentage of persistent disk used.
