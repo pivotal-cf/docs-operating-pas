@@ -9,10 +9,10 @@ The KPIs described here are provided for operators to give general guidance on m
 
 This alerting and response guidance has been shown to apply to most deployments. <%= vars.company_name %> recommends that operators continue to fine-tune the alert measures to their deployment by observing historical trends. <%= vars.company_name %> also recommends that operators expand beyond this guidance and create new, deployment-specific monitoring metrics, thresholds, and alerts based on learning from their deployments.
 
-<p> Thresholds noted as "dynamic" in the following tables indicate that
+Thresholds noted as "dynamic" in the following tables indicate that
 while a metric is highly important to watch, the relative numbers to set threshold warnings at are specific
-  to a given <%= vars.app_runtime_abbr %> deployment and its use cases. These dynamic thresholds should be occasionally revisited
-  because the foundation and its usage continue to evolve. For more information, see <a href="metrics.html#thresholds">Warning and Critical Thresholds</a> in <em>Selecting and Configuring a Monitoring System</em>.</p>
+to a given <%= vars.app_runtime_abbr %> deployment and its use cases. These dynamic thresholds should be occasionally revisited
+because the foundation and its usage continue to evolve. For more information, see <a href="metrics.html#thresholds">Warning and Critical Thresholds</a> in <em>Selecting and Configuring a Monitoring System</em>.
 
 While the performance impact on TAS for VMs is considered when building new features, VMware does not perform discrete load and scale testing on a regular basis.
 It is impossible to test each configuration of TAS for VMs with every type of infrastructure and app workload.
@@ -27,7 +27,9 @@ These sections describe Diego Auctioneer metrics.
 ### <a id="AuctioneerLRPAuctionsFailed"></a> Auctioneer app instance (AI) placement failures
 
 <table>
+  <thead>
   <tr><th colspan="2" style="text-align: center;"><br>auctioneer.AuctioneerLRPAuctionsFailed<br><br></th></tr>
+  </thead>  
     <tr>
       <th width="25%">Description</th>
         <td>
@@ -67,7 +69,9 @@ These sections describe Diego Auctioneer metrics.
 ### <a id="AuctioneerFetchStatesDuration"></a> Auctioneer time to fetch Diego Cell state
 
 <table>
+  <thead>
   <tr><th colspan="2" style="text-align: center;"><br>auctioneer.AuctioneerFetchStatesDuration<br><br></th></tr>
+  </thead>
     <tr>
       <th width="25%">Description</th>
         <td>
@@ -103,7 +107,9 @@ These sections describe Diego Auctioneer metrics.
 ### <a id="AuctioneerLRPAuctionsStarted"></a> Auctioneer app instance starts
 
 <table>
+  <thead>
   <tr><th colspan="2" style="text-align: center;"><br>auctioneer.AuctioneerLRPAuctionsStarted<br><br></th></tr>
+  </thead>
     <tr>
       <th width="25%">Description</th>
         <td>
@@ -141,7 +147,9 @@ These sections describe Diego Auctioneer metrics.
 ### <a id="AuctioneerTaskAuctionsFailed"></a> Auctioneer task placement failures
 
 <table>
+  <thead>
   <tr><th colspan="2" style="text-align: center;"><br>auctioneer.AuctioneerTaskAuctionsFailed<br><br></th></tr>
+  </thead>
     <tr>
       <th width="25%">Description</th>
         <td>
@@ -186,7 +194,9 @@ These sections describe Diego BBS metrics.
 ### <a id="ConvergenceLRPDuration"></a> BBS time to run LRP convergence
 
 <table>
-   <tr><th colspan="2" style="text-align: center;"><br>bbs.ConvergenceLRPDuration<br><br></th></tr>
+  <thead>
+  <tr><th colspan="2" style="text-align: center;"><br>bbs.ConvergenceLRPDuration<br><br></th></tr>
+  </thead>
     <tr>
       <th width="25%">Description</th>
         <td>
@@ -224,7 +234,9 @@ These sections describe Diego BBS metrics.
 ### <a id="RequestLatency"></a> BBS time to handle requests
 
 <table>
+  <thead>
   <tr><th colspan="2" style="text-align: center;"><br>bbs.RequestLatency<br><br></th></tr>
+  </thead>
     <tr>
       <th width="25%">Description</th>
         <td>
@@ -264,7 +276,9 @@ These sections describe Diego BBS metrics.
 ### <a id="cc-diego-sync"></a> Cloud Controller and Diego in sync
 
 <table>
+  <thead>
   <tr><th colspan="2" style="text-align: center;"><br>bbs.Domain.cf-apps<br><br></th></tr>
+  </thead>
     <tr>
       <th width="25%">Description</th>
         <td>
@@ -305,7 +319,9 @@ These sections describe Diego BBS metrics.
 ### <a id="LRPsExtra"></a> More app instances than expected
 
 <table>
+  <thead>
   <tr><th colspan="2" style="text-align: center;"><br>bbs.LRPsExtra<br><br></th></tr>
+  </thead>
     <tr>
       <th width="25%">Description</th>
         <td>
@@ -342,7 +358,9 @@ These sections describe Diego BBS metrics.
 ### <a id="LRPsMissing"></a> Fewer app instances than expected
 
 <table>
+  <thead>
   <tr><th colspan="2" style="text-align: center;"><br>bbs.LRPsMissing<br><br></th></tr>
+  </thead>
     <tr>
       <th width="25%">Description</th>
         <td>
@@ -379,7 +397,9 @@ These sections describe Diego BBS metrics.
 ### <a id="bbs.CrashedActualLRPs"></a> Crashed app instances
 
 <table>
+  <thead>
   <tr><th colspan="2" style="text-align: center;"><br>bbs.CrashedActualLRPs<br><br></th></tr>
+  </thead>
     <tr>
       <th width="25%">Description</th>
         <td>
@@ -415,7 +435,9 @@ These sections describe Diego BBS metrics.
 ### <a id="1hraverageofbbs.LRPsRunning"></a> Running app instances, rate of change
 
 <table>
-  <tr><th colspan="2" style="text-align: center;"><br>1hr average of bbs.LRPsRunning – prior 1hr average of bbs.LRPsRunning<br><br></th></tr>
+  <thead>
+  <tr><th colspan="2" style="text-align: center;"><br>1 hr average of bbs.LRPsRunning – prior 1 hr average of bbs.LRPsRunning<br><br></th></tr>
+  </thead>
     <tr>
       <th width="25%">Description</th>
         <td>
@@ -446,7 +468,9 @@ These sections describe Diego BBS metrics.
 ### <a id="bbs.BBSMasterElected"></a> BBS master elected
 
 <table>
+  <thead>
   <tr><th colspan="2" style="text-align: center;"><br>bbs.BBSMasterElected<br><br></th></tr>
+  </thead>
     <tr>
       <th width="25%">Description</th>
         <td>
@@ -488,7 +512,9 @@ These sections describe Diego Cell metrics.
 ### <a id="rep.CapacityRemainingMemory"></a> Remaining memory available — Diego Cell memory chunks available
 
 <table>
+  <thead>
   <tr><th colspan="2" style="text-align: center;"><br>rep.CapacityRemainingMemory<br><br></th></tr>
+  </thead>
     <tr>
       <th width="25%">Description</th>
         <td>
@@ -545,7 +571,9 @@ These sections describe Diego Cell metrics.
 ### <a id="rep.CapacityRemainingMemory2"></a> Remaining memory available — Overall remaining memory available
 
 <table>
+  <thead>
   <tr><th colspan="2" style="text-align: center;"><br>rep.CapacityRemainingMemory<br>(Alternative Use)<br><br></th></tr>
+  </thead>
     <tr>
       <th width="25%">Description</th>
         <td>
@@ -585,7 +613,9 @@ These sections describe Diego Cell metrics.
 ### <a id="rep.CapacityRemainingDiskChunks"></a> Remaining disk available — Diego Cell disk chunks available
 
 <table>
+  <thead>
   <tr><th colspan="2" style="text-align: center;"><br>rep.CapacityRemainingDisk<br><br></th></tr>
+  </thead>
     <tr>
       <th width="25%">Description</th>
         <td>
@@ -642,7 +672,9 @@ These sections describe Diego Cell metrics.
 ### <a id="CapacityRemainingDisk"></a> Remaining disk available - Overall remaining disk available
 
 <table>
+  <thead>
   <tr><th colspan="2" style="text-align: center;"><br> rep.CapacityRemainingDisk<br>(Alternative Use)<br><br></th></tr>
+  </thead>
     <tr>
       <th width="25%">Description</th>
         <td>
@@ -683,7 +715,9 @@ These sections describe Diego Cell metrics.
 ### <a id="RepBulkSyncDuration"></a> Diego Cell rep time to sync
 
 <table>
+  <thead>
   <tr><th colspan="2" style="text-align: center;"><br>rep.RepBulkSyncDuration<br><br></th></tr>
+  </thead>
     <tr>
       <th width="25%">Description</th>
         <td>
@@ -719,7 +753,9 @@ These sections describe Diego Cell metrics.
 ### <a id="GardenHealthCheckFailed"></a> Garden health check failed
 
 <table>
+  <thead>
   <tr><th colspan="2" style="text-align: center;"><br>rep.GardenHealthCheckFailed<br><br></th></tr>
+  </thead>
     <tr>
       <th width="25%">Description</th>
         <td>
@@ -757,7 +793,7 @@ These sections describe Diego Cell metrics.
                 </ol>
               </li>
               <li>As a last resort, if you cannot wait for Support, it sometimes helps to recreate the Diego Cell by running <code>bosh recreate</code>. For information about the <code>bosh recreate</code> command syntax, see <a href="http://bosh.io/docs/cli-v2/#deployment-mgmt">Deployments</a> in <em>Commands</em> in the BOSH documentation.
-                <p> Recreating a Diego Cell destroys its logs. To activate a root cause analysis of the Diego Cell's problem, save out its logs before running <code>bosh recreate</code>.</p></li>
+              Recreating a Diego Cell destroys its logs. To activate a root cause analysis of the Diego Cell's problem, save out its logs before running <code>bosh recreate</code>.</li>
             </ol>
           </td>
       </tr>
@@ -771,7 +807,9 @@ These sections describe Diego Locket metrics.
 ### <a id="BBSActiveLocks"></a> Locks held by BBS
 
 <table>
+  <thead>
   <tr><th colspan="2" style="text-align: center;"><br>bbs.LockHeld<br><br></th></tr>
+  </thead>
     <tr>
       <th width="25%">Description</th>
         <td>
@@ -812,7 +850,9 @@ These sections describe Diego Locket metrics.
 ### <a id="AuctioneerActiveLocks"></a> Locks held by auctioneer
 
 <table>
+  <thead>
   <tr><th colspan="2" style="text-align: center;"><br>auctioneer.LockHeld<br><br></th></tr>
+  </thead>
     <tr>
       <th width="25%">Description</th>
         <td>
@@ -852,7 +892,9 @@ These sections describe Diego Locket metrics.
 ### <a id="ActivePresences"></a> Active presences
 
 <table>
+  <thead>
   <tr><th colspan="2" style="text-align: center;"><br>locket.ActivePresences<br><br></th></tr>
+  </thead>
     <tr>
       <th width="25%">Description</th>
         <td>
@@ -897,7 +939,9 @@ These sections describe Diego Route Emitter metrics.
 ### <a id="RouteEmitterSyncDuration"></a> Route Emitter time to sync
 
 <table>
+  <thead>
   <tr><th colspan="2" style="text-align: center;"><br>route_emitter.RouteEmitterSyncDuration<br><br></th></tr>
+  </thead>
     <tr>
       <th width="25%">Description</th>
         <td>
@@ -939,7 +983,7 @@ These sections describe <%= vars.app_runtime_abbr %> MySQL KPIs.
 
 When <%= vars.app_runtime_abbr %> uses an internal MySQL database, as configured in the **Databases** pane of the <%= vars.app_runtime_abbr %> tile, the database cluster generates KPIs as described here.
 
-<p> This section assumes you are using the <strong>Internal Databases - MySQL - Percona XtraDB Cluster</strong> option as your system database.</p>
+This section assumes you are using the <strong>Internal Databases - MySQL - Percona XtraDB Cluster</strong> option as your system database.
 
 <%= partial vars.path_to_partials + '/mysql/monitoring/kpis-metrics/all-kpis' %>
 
@@ -950,7 +994,9 @@ These sections describe Gorouter metrics.
 ### <a id="file_descriptors"></a> Router file descriptors
 
 <table>
+  <thead>
   <tr><th colspan="2" style="text-align: center;"><br>gorouter.file_descriptors<br><br></th></tr>
+  </thead>
     <tr>
       <th width="25%">Description</th>
         <td>
@@ -994,7 +1040,9 @@ These sections describe Gorouter metrics.
 ### <a id="exhausted_connections"></a> Router exhausted connections
 
 <table>
+  <thead>
   <tr><th colspan="2" style="text-align: center;"><br>gorouter.backend_exhausted_conns<br><br></th></tr>
+  </thead>
     <tr>
       <th width="25%">Description</th>
         <td>
@@ -1031,7 +1079,9 @@ These sections describe Gorouter metrics.
 ### <a id="total_requests"></a> Router throughput
 
 <table>
+  <thead>
   <tr><th colspan="2" style="text-align: center;"><br>gorouter.total_requests<br><br></th></tr>
+  </thead>
     <tr>
       <th width="25%">Description</th>
         <td>
@@ -1064,7 +1114,9 @@ These sections describe Gorouter metrics.
 ### <a id="latency"></a> Router handling latency
 
 <table>
+  <thead>
   <tr><th colspan="2" style="text-align: center;"><br>gorouter.latency<br><br></th></tr>
+  </thead>
     <tr>
       <th width="25%">Description</th>
         <td>
@@ -1103,7 +1155,9 @@ These sections describe Gorouter metrics.
 ### <a id="mssincelastregistryupdate"></a> Time since last route register received
 
 <table>
+  <thead>
   <tr><th colspan="2" style="text-align: center;"><br>gorouter.ms_since_last_registry_update<br><br></th></tr>
+  </thead>
     <tr>
       <th width="25%">Description</th>
         <td>
@@ -1142,7 +1196,9 @@ These sections describe Gorouter metrics.
 ### <a id="bad_gateways"></a> Router Error: 502 bad gateway
 
 <table>
+  <thead>
   <tr><th colspan="2" style="text-align: center;"><br>gorouter.bad_gateways<br><br></th></tr>
+  </thead>
     <tr>
       <th width="25%">Description</th>
         <td>
@@ -1181,7 +1237,9 @@ These sections describe Gorouter metrics.
 ### <a id="responses.5xx"></a> Router Error: server error
 
 <table>
+  <thead>
   <tr><th colspan="2" style="text-align: center;"><br>gorouter.responses.5xx<br><br></th></tr>
+  </thead>
     <tr>
       <th width="25%">Description</th>
         <td>
@@ -1217,7 +1275,9 @@ These sections describe Gorouter metrics.
 ### <a id="total_routes"></a> Number of Gorouter routes registered
 
 <table>
+  <thead>
   <tr><th colspan="2" style="text-align: center;"><br>gorouter.total_routes<br><br></th></tr>
+  </thead>
     <tr>
       <th width="25%">Description</th>
         <td>
@@ -1262,7 +1322,9 @@ These sections describe Gorouter metrics.
 ### <a id="uaa_throughput"></a> UAA throughput
 
 <table>
+  <thead>
   <tr><th colspan="2" style="text-align: center;"><br>uaa.requests.global.completed.count<br><br></th></tr>
+  </thead>
     <tr>
       <th width="25%">Description</th>
         <td>
@@ -1297,7 +1359,9 @@ These sections describe Gorouter metrics.
 ### <a id="uaa_latency"></a> UAA request latency
 
 <table>
+  <thead>
   <tr><th colspan="2" style="text-align: center;"><br>gorouter.latency.uaa<br><br></th></tr>
+  </thead>
     <tr>
       <th width="25%">Description</th>
         <td>
@@ -1336,7 +1400,9 @@ These sections describe Gorouter metrics.
 ### <a id="uaa_requests_inflight"></a> UAA requests in flight
 
 <table>
+  <thead>
   <tr><th colspan="2" style="text-align: center;"><br>uaa.server.inflight.count<br><br></th></tr>
+  </thead>
     <tr>
       <th width="25%">Description</th>
         <td>
@@ -1370,13 +1436,15 @@ These sections describe Gorouter metrics.
 
 These sections describe system metrics, or BOSH metrics.
 
-<p> BOSH system metrics appear in the Firehose in two different formats. The tables in the following section
-list both formats.</p>
+BOSH system metrics appear in the Firehose in two different formats. The tables in the following section
+list both formats.
 
 ### <a id="healthy"></a> Virtual Machine (VM) health
 
 <table>
+  <thead>
   <tr><th colspan="2" style="text-align: center;"><br>system.healthy<br>system_healthy<br><br></th></tr>
+  </thead>
     <tr>
       <th width="25%">Description</th>
         <td>
@@ -1409,7 +1477,9 @@ list both formats.</p>
 ### <a id="disk.system.percent"></a> VM disk used
 
 <table>
+  <thead>
   <tr><th colspan="2" style="text-align: center;"><br>system.disk.system.percent<br>system_disk_system_percent<br><br></th></tr>
+  </thead>
     <tr>
       <th width="25%">Description</th>
         <td>
@@ -1443,7 +1513,9 @@ list both formats.</p>
 ### <a id="disk.ephemeral.percent"></a> VM ephemeral disk used
 
 <table>
+  <thead>
   <tr><th colspan="2" style="text-align: center;"><br>system.disk.ephemeral.percent<br>system_disk_ephemeral_percent<br><br></th></tr>
+  </thead>
     <tr>
       <th width="25%">Description</th>
         <td>
@@ -1479,7 +1551,9 @@ list both formats.</p>
 ### <a id="disk.persistent.percent"></a> VM persistent disk used
 
 <table>
+  <thead>
   <tr><th colspan="2" style="text-align: center;"><br>system.disk.persistent.percent<br>system_disk_persistent_percent<br><br></th></tr>
+  </thead>
     <tr>
       <th width="25%">Description</th>
         <td>
