@@ -130,12 +130,12 @@ Follow the same installation and configuration steps as for <%= vars.app_runtime
 * **Configuring resources:**
 	* The **Resource Config** pane in the Small Footprint <%= vars.app_runtime_abbr %> tile reflects the differences in VMs discussed in [Architecture](#arch).
 	* Small Footprint <%= vars.app_runtime_abbr %> does not default to a highly available configuration like <%= vars.app_runtime_abbr %> does. It defaults to a minimum configuration. To make Small Footprint <%= vars.app_runtime_abbr %> highly available, scale the VMs to the following instance counts:
-		* **Compute**: `3`
-		* **Control**: `2`
-		* **Database**: `3`
-		* **Router**: `3`
+      * **Compute**: `3`
+      * **Control**: `2`
+      * **Database**: `3`
+      * **Router**: `3`
 
-* **Configuring load balancers:** If you are using an SSH load balancer, you must enter its name in the **Control VM** row of the **Resource Config** pane. There is no **Diego Brain** row in Small Footprint <%= vars.app_runtime_abbr %> because the Diego Brain is colocated on the Control VM. You can still enter the appropriate load balancers in the **Router** and **TCP Router** rows as normal.
+* **Configuring load balancers:** If you are using an SSH load balancer, you must enter its name in the **Control VM** row of the **Resource Config** pane. There is no **Diego Brain** row in Small Footprint <%= vars.app_runtime_abbr %> because the Diego Brain is co-located on the Control VM. You can still enter the appropriate load balancers in the **Router** and **TCP Router** rows as normal.
 
 
 ## <a id='logs'></a> Troubleshooting co-located jobs using logs

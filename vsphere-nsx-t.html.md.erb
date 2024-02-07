@@ -40,10 +40,8 @@ Before you deploy <%= vars.app_runtime_abbr %> with NSX-T networking, you must h
     Installation Guide_ for the versions of NCP and NSX-T that you want to install.
 
 * BOSH and <%= vars.ops_manager %> installed and configured on vSphere. For more information, see
-  [Deploying <%= vars.ops_manager %> on
-  vSphere](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/vsphere-deploy.html)
-  and [Configuring BOSH Director on
-  vSphere](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/vsphere-config.html).
+  [Deploying <%= vars.ops_manager %> on vSphere](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/vsphere-deploy.html)
+  and [Configuring BOSH Director on vSphere](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/vsphere-config.html).
 
 * The [VMware NSX-T Container Plug-in for <%= vars.platform_name %>
   tile](https://network.tanzu.vmware.com/products/vmware-nsx-t) is downloaded from VMware Tanzu
@@ -398,8 +396,7 @@ To configure <%= vars.app_runtime_abbr %> for external container networking:
 
   ![alt-text="Tanzu Operations Manager Installation Dashboard with NSX-T tile"](./images/nsx-t/nsx-t-install-dash.png)
 
-1. Configure <%= vars.app_runtime_abbr %>, following the directions in [Configuring <%=
-   vars.app_runtime_abbr %>](./prerequisites.html). When you configure **Networking**, select
+1. Configure <%= vars.app_runtime_abbr %>, starting with [Prerequisites](./prerequisites.html). When you configure **Networking**, select
    **External** under **Container networking interface plugin**.<br>
 
     ![alt-text=""](./images/nsx-t/nsx-t-tas-cni.png)
