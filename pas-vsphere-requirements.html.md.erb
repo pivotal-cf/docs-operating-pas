@@ -15,7 +15,11 @@ The following are requirements for installing <%= vars.app_runtime_abbr %> that 
 
 The following are the minimum resource requirements for maintaining a [<%= vars.platform_name %>](https://network.tanzu.vmware.com/products/ops-manager) deployment with <%= vars.app_runtime_abbr %> on vSphere:
 
-* vSphere v7.0, v6.7, or v6.5
+* vSphere v8.0, v7.0, v6.7, or v6.5
+    <p class="note important">
+    <span class="note__title">Important</span>
+    Some versions of <%= vars.ops_manager_first %> are not compatible with vSphere 8.0.3. See the <%= vars.ops_manager %> <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/release-notes.html">v3.0 release notes</a> or <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/2.10/vmware-tanzu-ops-manager/release-notes.html">v2.10 release notes</a>.
+    </p>
 * Disk space: 2&nbsp;TB recommended
 * Memory: 120&nbsp;GB
 * Two public IP addresses: One for <%= vars.app_runtime_abbr %> and one for <%= vars.ops_manager %>
