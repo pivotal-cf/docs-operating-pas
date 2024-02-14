@@ -7,6 +7,12 @@ owner: Identity
 If your <%= vars.app_runtime_first %> deployment uses the internal user store for authentication, you can
 configure its' password policy in the <%= vars.app_runtime_abbr %> tile.
 
+## <a id='config-sso'></a> Configuring in the Authentication and Enterprise SSO pane (Deprecated)
+<i>Depreaction notice: This method of configuring UAA internal user password
+policy is deprecated and will be removed in future TAS versions. To make
+sure that the configuration will be compatible with future TAS versions, use
+the method described in [Configuring in the UAA pane](#config-uaa) below.</i>
+
 To open the internal user store (formerly called internal UAA) configuration for your deployment:
 
 1. In a browser, go to the fully qualified domain name (FQDN) of your Tanzu Operations Manager and log in.
@@ -23,4 +29,23 @@ To open the internal user store (formerly called internal UAA) configuration for
   * For **Minimum lowercase characters**, enter the minimum number of lowercase characters required for a valid password.
   * For **Minimum numerical digits**, enter the minimum number of digits required for a valid password.
   * For **Minimum special characters**, enter the minimum number of special characters required for a valid password.
+  * For **Maximum password entry attempts allowed**, enter the maximum number of failures allowed to enter a password within a five minute timespan before the account is locked.
+
+## <a id='config-uaa'></a> Configuring in the UAA pane
+To open the internal user store (formerly called internal UAA) configuration for your deployment:
+
+1. In a browser, go to the fully qualified domain name (FQDN) of your Tanzu Operations Manager and log in.
+
+2. Click the **<%= vars.app_runtime_abbr %>** tile.
+
+3. Select **UAA**.
+
+![alt-text="Deployment uses the internal user store for authentication. Confirm that Configure policies is selected."](./images/uaa-password-policies.png)
+
+  * Confirm that the **Configure policies** option is selected.
+  * For **Minimum password length**, enter the minimum number of characters for a valid password.
+  * For **Require at least one lowercase character**, select if at least 1 lowercase character is required for a valid password.
+  * For **Require at least one uppercase character**, select if at least 1 uppercase character is required for a valid password.
+  * For **Require at least one numeric character**, select if at least 1 numeric digit is required for a valid password.
+  * For **Require at least one special character**, select if at least 1 special character is required for a valid password.
   * For **Maximum password entry attempts allowed**, enter the maximum number of failures allowed to enter a password within a five minute timespan before the account is locked.
