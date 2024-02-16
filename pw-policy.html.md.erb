@@ -4,52 +4,22 @@ title: Configuring UAA Password Policy
 owner: Identity
 ---
 
-If your <%= vars.app_runtime_first %> deployment uses the internal user store for authentication, you can
-configure its password policy in the <%= vars.app_runtime_abbr %> tile.
+If your <%= vars.app_runtime_first %> deployment uses the internal user store for authentication, you can configure its password policy in the <%= vars.app_runtime_abbr %> tile.
 
-## <a id='config-sso'></a> Use the Authentication and Enterprise SSO pane (deprecated)
+To open the internal user store (formerly called internal UAA) configuration for your deployment:
 
-<p class="note">
-<span class="note__title">Note</span>
-  This method is deprecated. To ensure that your configuration is compatible
-  with future versions of <%= vars.app_runtime_abbr %>, follow the procedure
-  described in [Use the UAA pane](#config-uaa) instead.
-</p>
-
-To configure the password policy using the Authentication and Enterprise SSO pane of the <%= vars.app_runtime_abbr %> tile:
-
-1. Log in to <%= vars.ops_manager_first %>.
+1. In a browser, go to the fully qualified domain name (FQDN) of your Tanzu Operations Manager and log in.
 
 2. Click the **<%= vars.app_runtime_abbr %>** tile.
 
-3. Click **Authentication and Enterprise SSO**. For information about configuring these fields, see the **Configure Authentication and Enterprise SSO** section of the **Configuring TAS** topic.
+3. Select **Authentication and Enterprise SSO**. For help configuring these fields, see the **Configure Authentication and Enterprise SSO** section of the **Configuring TAS** topic.
 
-  ![alt-text="Deployment uses the internal user store for authentication. Verify that 'Internal user store' is selected."](./images/er-config-auth-enterprise-sso-uaa.png)
+  ![alt-text="Deployment uses the internal user store for authentication. Verify that Internal user store is selected."](./images/er-config-auth-enterprise-sso-uaa.png)
 
-  * **Internal user store**: Select this option to use the internal user store for authentication.
-  * **Minimum password length**: Enter the minimum number of characters required for a valid password.
-  * **Minimum uppercase characters**: Enter the minimum number of uppercase characters required for a valid password.
-  * **Minimum lowercase characters**: Enter the minimum number of lowercase characters required for a valid password.
-  * **Minimum numerical digits**: Enter the minimum number of numerical digits required for a valid password.
-  * **Minimum special characters**: Enter the minimum number of special characters required for a valid password.
-  * **Maximum password entry attempts allowed**: Enter the maximum number of failed login attempts allowed within five minutes. When a user reaches this number of failed attempts, the account is locked.
-
-## <a id='config-uaa'></a> Use the UAA pane
-
-To configure the password policy using the UAA pane of the <%= vars.app_runtime_abbr %> tile:
-
-1. Log in to <%= vars.ops_manager_first %>.
-
-2. Click the **<%= vars.app_runtime_abbr %>** tile.
-
-3. Click **UAA**.
-
-![alt-text="Deployment uses the internal user store for authentication. Verify that 'Configure policies' is selected."](./images/uaa-password-policies.png)
-
-  * **Configure policies**: Select this option to configure authentication policies manually.
-  * **Minimum password length**: Enter the minimum number of characters required for a valid password.
-  * **Require at least one lowercase character**: Select this check box to require at least one lowercase character for a valid password.
-  * **Require at least one uppercase character**: Select this check box to require at least one uppercase character for a valid password.
-  * **Require at least one numeric character**: Select this check box to require at least one numeric digit for a valid password.
-  * **Require at least one special character**: Select this check box to require at least one special character for a valid password.
-  * **Maximum password entry attempts allowed**: Enter the maximum number of failed login attempts allowed within five minutes. When a user reaches this number of failed attempts, the account is locked.
+  * Confirm that the **Internal user store** option is selected.
+  * For **Minimum password length**, enter the minimum number of characters for a valid password.
+  * For **Minimum uppercase characters**, enter the minimum number of uppercase characters required for a valid password.
+  * For **Minimum lowercase characters**, enter the minimum number of lowercase characters required for a valid password.
+  * For **Minimum numerical digits**, enter the minimum number of digits required for a valid password.
+  * For **Minimum special characters**, enter the minimum number of special characters required for a valid password.
+  * For **Maximum password entry attempts allowed**, enter the maximum number of failures allowed to enter a password within a five-minute timespan before the account is locked.
