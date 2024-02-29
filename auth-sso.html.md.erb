@@ -114,7 +114,7 @@ To integrate the UAA with one or more LDAP servers:
 
 3. In **User authentication mechanism**, click  **LDAP server**.
 
-4. For **Server URLs**, enter the URL that points to your LDAP server. To configure multiple LDAP server URLs for failover purpose (if UAA fails to connect to the first URL, it will retry with the second URL, and so on), enter a space-separated list. Each URL must include one of the following protocols:
+4. For **Server URLs**, enter the URL that points to your LDAP server. You can configure multiple LDAP server URLs for failover purposes, so that if UAA fails to connect to the first URL, it retries with the second URL, and so on. To configure multiple LDAP server URLs, enter a space-separated list. Each URL must include one of the following protocols:
     * `ldap://`: This specifies that the LDAP server uses an unencrypted connection.
     * `ldaps://`: This specifies that the LDAP server uses SSL for an encrypted connection and requires that the LDAP server holds a trusted certificate or that you import a trusted certificate to the JVM trust store.
 
