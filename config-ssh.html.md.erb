@@ -38,6 +38,10 @@ For AWS, Azure, and GCP IaaSes, you configure SSH load balancers in the **Resour
 
 1. Select **Resource Config**.
 
-1. In the **Diego Brain** row, enter your load balancer name in the **Load Balancers** field.
+1. Expand the row for the job that handles SSH requests. This depends on the <%= vars.app_runtime_abbr %> release you are using:
+    * **<%= vars.app_runtime_abbr %>**: Click the icon next to **Diego Brain**.
+    * **Small Footprint <%= vars.app_runtime_abbr %>**: Click the icon next to **Control**.
+
+1. Enter your load balancer name in the **Load Balancers** field.
 
 <%= vars.ops_manager %> supports an API-only `nsx_lbs` field. You can configure load balancers in vSphere using this field.
