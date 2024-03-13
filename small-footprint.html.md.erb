@@ -3,29 +3,7 @@ title: Getting Started with Small Footprint TAS for VMs
 owner: RelEng
 ---
 
-The Small Footprint <%= vars.app_runtime_abbr %> is a repackaging of the <%= vars.app_runtime_abbr %> components into a
-smaller deployment with fewer virtual machines (VMs). For a description of the limitations that come with a
-smaller deployment, see [Limitations](#limits).
 
-## <a id='compare'></a> Differentiate small footprint <%= vars.app_runtime_abbr %> and <%= vars.app_runtime_abbr %>
-
-A standard <%= vars.app_runtime_abbr %> deployment must have at least 13 VMs, but Small Footprint <%= vars.app_runtime_abbr %> requires only four.
-
-
-* Required VMs: Cloud Controller, Cloud Controller Worker, Clock Global, Diego BBS, Diego Brain, Diego Cell, Doppler Server, Loggregator Traffic Controller, NATS, Router, Syslog Adapter, Syslog Scheduler, and UAA.
-* Optional VMs: File Storage, HAProxy, Backup Restore Node, MySQL Monitor, MySQL Proxy, MySQL Server, TCP Router, and CredHub.
-
-For Small Footprint TAS for VMs:
-
-* Required VMs: Compute, Control, Database, and Router.
-* Optional VMs: File Storage, HAProxy, Backup Restore Node, MySQL Monitor, and TCP Router.
-
-The following image displays a comparison of the number of VMs deployed by <%= vars.app_runtime_abbr %> and Small Footprint <%= vars.app_runtime_abbr %>.
-For TAS for VMs:
-
-[//]: https://docs.google.com/drawings/d/19V1SY4BGW2T--c4Y8Jm26CkA8C-6jIHXl7gpEzYlTmY/edit?usp=sharing
-
-![alt-text=""](./images/ert-vms-2.0.png)
 
 ## <a id='install'></a> Installing Small Footprint <%= vars.app_runtime_abbr %>
 
