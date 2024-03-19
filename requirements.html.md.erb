@@ -8,34 +8,7 @@ The <%= vars.app_runtime_full %> runtime is available in two forms, both availab
 * <%= vars.app_runtime_abbr %>
 * Small Footprint <%= vars.app_runtime_abbr %>
 
-For more information about the difference and about <%= vars.app_runtime_abbr %> resource requirements, see the following sections:
-
-* [When should you use Small Footprint <%= vars.app_runtime_abbr %>?](#small-footprint)
-* [<%= vars.app_runtime_abbr %> requirements](#requirements)
-
-## <a id='small-footprint'></a> When should you use Small Footprint <%= vars.app_runtime_abbr %>?
-
-Use Small Footprint <%= vars.app_runtime_abbr %> for smaller <%= vars.platform_name %> deployments on which you intend to host 2500 or fewer apps, as described in [Limitations](#limits). If you want to use Small Footprint <%= vars.app_runtime_abbr %> in a production environment, ensure the limitations described are not an issue in your use case.
-
-<p> Small Footprint <%= vars.app_runtime_abbr %> is compatible with <%= vars.platform_name %> service tiles.</p>
-
-Small Footprint <%= vars.app_runtime_abbr %> is also ideal for the following use cases:
-
-* **Proof-of-concept installations:** Deploy <%= vars.platform_name %> quickly and with a small footprint for evaluation or testing purposes.
-
-* **Sandbox installations:** Use Small Footprint <%= vars.app_runtime_abbr %> as a <%= vars.platform_name %> operator sandbox for tasks such as testing compatibility.
-
-* **Service tile R&D:** Test a service tile against Small Footprint <%= vars.app_runtime_abbr %> instead of a standard <%= vars.app_runtime_abbr %> deployment to increase efficiency and reduce cost.
-
-### <a id='limits'></a> Small Footprint <%= vars.app_runtime_abbr %> Limitations
-
-Small Footprint <%= vars.app_runtime_abbr %> has the following limitations:
-
-* **Number of app instances:** The tile is not designed to support large numbers of app instances. You cannot scale the number of Compute VMs beyond 10 instances in the **Resource Config** pane. Small Footprint <%= vars.app_runtime_abbr %> is designed to support 2500 or fewer apps.
-
-* **Management plane availability during tile upgrades:** You might not be able to perform management plane operations like deploying new apps and accessing APIs for brief periods during tile upgrades. The management plane is located on the Control VM.
-
-* **App availability during tile upgrades:** If you require availability during your upgrades, you must scale your Compute VMs to a highly available configuration. Ensure sufficient capacity exists to move app instances between Compute VM instances during the upgrade.
+For more information about the difference, see [Small Footprint <%= vars.app_runtime_abbr %>](./small-footprint.html).
 
 ## <a id='requirements'></a> <%= vars.app_runtime_abbr %> requirements
 
@@ -81,6 +54,49 @@ of <%= vars.ops_manager %> and <%= vars.app_runtime_first %> are:
 * (**Optional**) External user stores. When you deploy <%= vars.app_runtime_abbr %>, you can select a SAML user store for <%= vars.ops_manager %> or a SAML or LDAP user store for <%= vars.app_runtime_abbr %>, to integrate existing user accounts.
 
 * The most recent version of the [Cloud Foundry Command Line Interface](https://github.com/cloudfoundry/cli#downloads) (cf CLI).
+
+## <a id='small-footprint-diffs'></a> Differences in Small Footprint TAS for VMs
+
+You can deploy Small Footprint <%= vars.app_runtime_abbr %> with a minimum of four VMs, as shown in the following image.
+
+<p class="note">
+<span class="note__title">Note</span>
+The following image assumes that you are using an external blobstore.
+</p>
+
+![alt-text="Small Footprint TAS for VMs has 4 required VMs and 5 optional VMs."](./images/srt-vms.png)
+
+To reduce the number of VMs required for Small Footprint <%= vars.app_runtime_abbr %>, the Control and Database VMs include co-located jobs that run on a single VM in <%= vars.app_runtime_abbr %>. See the next sections for details.
+
+For more information about the components mentioned on this page, see [<%= vars.app_runtime_abbr %> Components](../concepts/architecture/index.html).
+
+### <a id='controlvm'></a> Control VM
+
+The Control VM includes the <%= vars.app_runtime_abbr %> jobs that handle management plane operations, app life cycles, logging, and user authorization and authentication. Additionally, all errands run on the Control VM, eliminating the need for a VM for each errand and significantly reducing the time it takes to run errands.
+
+The following image shows all the jobs from <%= vars.app_runtime_abbr %> that are co-located on the Control VM in Small Footprint <%= vars.app_runtime_abbr %>. Small Footprint TAS for VMs co-locates 11 VMs onto 1 VM called Control. The 11 VMs are Cloud Controller, Cloud Controller Worker, Clock Global, Diego BBS, Diego Brain, Doppler Server, Loggregator Traffic Controller, Syslog Adapter, Syslog Scheduler, UAA, and optionally, CredHub.
+
+![alt-text=""](./images/control-vms-2.0.png)
+
+### <a id='dbvm'></a> Database VM
+
+The Database VM includes the <%= vars.app_runtime_abbr %> jobs that handle internal storage and messaging.
+
+The following image shows all the jobs from <%= vars.app_runtime_abbr %> that are co-located on the Database VM in Small Footprint <%= vars.app_runtime_abbr %>. Small Footprint TAS for VMs Condenses 3 VMs onto 1 VM called Database. The three TAS for VMs VMs are NATS, MySQL Proxy, and MySQL Server. The MySQL Proxy and MySQL Server are optional VMs.
+
+![alt-text=""](./images/db-vms.png)
+
+### <a id='computevm'></a> Compute VM
+
+The Compute VM is the same as the Diego Cell VM in <%= vars.app_runtime_abbr %>.
+
+![alt-text=""](./images/compute-vms.png)
+
+### <a id='othervms'></a> Other VMs (unchanged)
+
+For the other VMs, they perform the same functions in both versions of the <%= vars.app_runtime_abbr %> tile. The Router, File Storage, Backup Restore Node, MySQL Monitor, and TCP Router VMs are the same in both TAS for VMs and Small Footprint TAS for VMs.
+
+![alt-text=""](./images/unchanged-vms.png)
 
 ## <a id='instance-number-scaling-reqs'></a> Instance number and scaling requirements
 
