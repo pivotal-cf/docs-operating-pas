@@ -76,19 +76,19 @@ To configure the **App Containers** pane:
 
     For more information, see [Preventing Misrouting](../concepts/http-routing.html#consistency) in _HTTP Routing_.
 
-2. (Optional) You can configure <%= vars.app_runtime_abbr %> to run app instances in Docker containers by provided a comma-separated list of their IP address ranges in the **Docker registry allow list** field. For more information, see [Using Docker Registries](../operating/docker-registry.html).
+1. (Optional) You can configure <%= vars.app_runtime_abbr %> to run app instances in Docker containers by provided a comma-separated list of their IP address ranges in the **Docker registry allow list** field. For more information, see [Using Docker Registries](../operating/docker-registry.html).
 
-3. Select your preference for disk cleanup scheduling. If you choose **Clean up disk space once usage fills disk**, enter a value in MB for **Reserved disk space for other jobs**. This is the amount of space the garbage collection algorithm must keep free for other jobs. For more information about the configuration options and how to configure a reserved amount, see [Configuring Diego Cell Disk Cleanup Scheduling](../operating/config-cell-cleanup.html).
+1. Select your preference for disk cleanup scheduling. If you choose **Clean up disk space once usage fills disk**, enter a value in MB for **Reserved disk space for other jobs**. This is the amount of space the garbage collection algorithm must keep free for other jobs. For more information about the configuration options and how to configure a reserved amount, see [Configuring Diego Cell Disk Cleanup Scheduling](../operating/config-cell-cleanup.html).
 
-4. The **Allow containerd delegation** check box governs whether or not Garden delegates containers create and destroy operations to the containerd tool. By default, this option is activated and Garden uses containerd. Deactivate this option by deselecting the check box. For more information about the containerd tool, see [containerd](https://containerd.io).
+1. The **Allow containerd delegation** check box governs whether or not Garden delegates containers create and destroy operations to the containerd tool. By default, this option is activated and Garden uses containerd. Deactivate this option by deselecting the check box. For more information about the containerd tool, see [containerd](https://containerd.io).
 
-5. Under **NFSv3 volume services**, select **Allow** or **Do not allow**. NFS volume services allow app developers to bind existing NFS volumes to their apps for shared file access. For more information, see [Enabling Volume Services](../operating/enable-vol-services.html).
+1. Under **NFSv3 volume services**, select **Allow** or **Do not allow**. NFS volume services allow app developers to bind existing NFS volumes to their apps for shared file access. For more information, see [Enabling Volume Services](../operating/enable-vol-services.html).
 
     <p class="note important">
     <span class="note__title">Important</span> In a fresh installation, NFSv3 volume services are activated by default. In an upgrade, NFSv3 volume services is set to the same
     setting as it was in the previous deployment.</p>
 
-8. (Optional) To configure LDAP for NFSv3 volume services:
+1. (Optional) To configure LDAP for NFSv3 volume services:
 
    * For **LDAP service account user**, enter the user name of the service account in LDAP that manages volume services.
    * For **LDAP service account password**, enter the password for the service account.
@@ -101,7 +101,15 @@ To configure the **App Containers** pane:
     <span class="note__title">Important</span>UAA can only parse one certificate entered into this field. If you enter multiple certificates, UAA only uses the first one you entered and ignores the rest. You only need to include one root certificate or self-signed certificate.
     </p>
 
-9. Click **Save**.
+1. (Optional) To limit the number of log lines each app instance in your isolation segment can generate per second, select
+**Enable** under **App log rate limit (deprecated)** and enter an integer for **Maximum app log lines
+per second**. At minimum, <%= vars.company_name %> recommends using the default limit of `100`.
+This feature is deactivated by default.
+    <p class='note'><strong>Note:</strong> This method of limiting log output from applications is
+      deprecated. <%= vars.company_name %> recommends using the log rate limiting quota feature
+      which provides more granular control over application log output.</p>
+
+1. Click **Save**.
 
 ### <a id='syslog'></a> Configure system logging
 
