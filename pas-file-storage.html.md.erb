@@ -145,31 +145,14 @@ To configure Fog blobstores to use AWS IAM instance profiles:
 
 ## <a id="gcp"></a> GCP
 
-This section describes how to configure file storage for GCP. Follow the procedure that
-corresponds to your installation method:
-
-* [Manual](#gcp-manual)
-* [Terraform](#gcp-terraform)
+This section describes how to configure file storage for GCP.
 
 For production-level <%= vars.platform_name %> deployments on GCP, <%= vars.company_name %>
 recommends selecting **External Google Cloud Storage**. For more information about production-level
 <%= vars.platform_name %> deployments on GCP, see [GCP Reference Architecture](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/refarch-gcp-gcp_ref_arch.html).
 
-### <a id="gcp-manual"></a> Manual
-
-This section describes how to configure file storage for GCP if you installed <%= vars.platform_name %>
-manually.
-
 <%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
 <%= partial "/pcf/core/filestore_gcp_config" %>
-
-### <a id="gcp-terraform"></a> Terraform
-
-This section describes how to configure file storage for GCP if you installed <%= vars.platform_name %>
-with Terraform.
-
-<%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
-<%= partial "/pcf/core/filestore_gcp_config_terraform" %>
 
 ## <a id="azure"></a> Azure
 
