@@ -1,0 +1,66 @@
+---
+title: Upgrading from Small Footprint to full TAS for VMs
+owner:
+---
+
+If you have installed Small Footprint <%= vars.app_runtime_full %>, you can upgrade your installation to full <%= vars.app_runtime_abbr %>. The upgrade process preserves most of the existing tile configuration and transforms the existing Small Footprint <%= vars.app_runtime_abbr %> into full <%= vars.app_runtime_abbr %>.
+
+<p class="note">
+<span class="note__title">Note</span>
+This feature is only available in <%= vars.app_runtime_abbr %> v6.0.1 and later.
+</p>
+
+For more information about choosing between Small Footprint and full <%= vars.app_runtime_abbr %>, see [When should you use Small Footprint TAS for VMs?](https://docs-staging.vmware.com/en/VMware-Tanzu-Application-Service/6.0/tas-for-vms/toc-tas-install-index.html#when-should-you-use-small-footprint-tas-for-vms-0) in _Installing TAS for VMs_.
+
+## <a id='preserving-data'></a> Preserving data after the upgrade
+
+<%= vars.app_runtime_abbr %> stores data in two separate locations: a database and a blobstore. By default, full <%= vars.app_runtime_abbr %> uses internal disks, created and maintained by the BOSH Director, for both datastores. Operators can instead provide their own external database and blobstore, if desired.
+
+When you upgrade a Small Footprint <%= vars.app_runtime_abbr %> tile to a full <%= vars.app_runtime_abbr %> tile:
+
+* Any **internal disks** containing application data are not automatically transferred over. These disks are _orphaned_, unattached to any <%= vars.app_runtime_abbr %> instance and no longer actively read or written to by your deployment. To restore the data, you must reattach any orphaned Small Footprint <%= vars.app_runtime_abbr %> disks to the full <%= vars.app_runtime_abbr %> deployment, using one of the two procedures described below.
+
+* **External datastores** do not have disks managed by BOSH, and therefore are not orphaned. When the upgrade is complete, these datastores are automatically attached to the new full <%= vars.app_runtime_abbr %> deployment, and the stored data is immediately available. You do not need to perform any further steps for external datastores.
+
+It is critical to be aware of which datastores are internal and which are external before beginning the process to upgrade from Small Footprint to full <%= vars.app_runtime_abbr %>. 
+
+<p class="note caution">
+<span class="note__title">Caution</span>
+Disks become orphaned after you perform the <strong>Apply Changes</strong> to upgrade to full <%= vars.app_runtime_abbr %>. After a period of time (by default, five days), BOSH automatically and permanently deletes orphaned disks. Failure to reattach any orphaned Small Footprint TAS disks will result in loss of your data. For more information about orphaned disks, see the [BOSH documentation](https://bosh.io/docs/persistent-disks/#orphaned-disks). 
+</p>
+
+## <a id='prerequisites'></a> Prerequisites
+
+In order to upgrade from Small Footprint <%= vars.app_runtime_abbr %>, you must:
+
+* **Upgrade to the same major and minor as your Small Footprint <%= vars.app_runtime_abbr %> deployment, but a higher patch version.** For example, if your Small Footprint <%= vars.app_runtime_abbr %> deployment is at version v6.0.1, you can upgrade to full <%= vars.app_runtime_abbr %> v6.0.2, but not to v6.1.0. This prevents potentially severe and unforeseen upgrading issues, due to changes in the topology of <%= vars.app_runtime_abbr %> between major or minor versions.
+
+		<p class="note">
+		<span class="note__title">Note</span>
+		You cannot upgrade to the same patch version as your Small Footprint <%= vars.app_runtime_abbr %> deployment. This is due to a limitation of <%= vars.ops_manager_first %>.
+		</p>
+
+* **Finalize all configuration and ensure that no other processes are running on your Small Footprint <%= vars.app_runtime_abbr %> deployment.**
+
+    For example, there must not be any of these:
+
+		* Changes being applied by <%= vars.ops_manager %>
+
+		* Pending changes for any tile, including <%= vars.app_runtime_abbr %>
+
+		* Actively running operator-initiated BOSH tasks against the deployment
+
+		During the upgrade process:
+
+		* You must not modify any choices regarding use of internal or external databases and blobstores.
+
+		* The underlying IaaS infrastructure for the deployment must not be modified or moved.
+
+* **Back up your deployment using [BOSH Backup and Restore](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-backup-restore-backup-pcf-bbr.html).**
+
+## <a id='upgrade'></a> Upgrade to full <%= vars.app_runtime_abbr %>
+
+### <a id='manual-upgrade'></a> Manual upgrade
+
+### <a id='assisted-upgrade'></a> Assisted upgrade
+
