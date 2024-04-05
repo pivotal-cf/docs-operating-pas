@@ -35,26 +35,26 @@ In order to upgrade from Small Footprint <%= vars.app_runtime_abbr %>, you must:
 
 * **Upgrade to the same major and minor as your Small Footprint <%= vars.app_runtime_abbr %> deployment, but a higher patch version.** For example, if your Small Footprint <%= vars.app_runtime_abbr %> deployment is at version v6.0.1, you can upgrade to full <%= vars.app_runtime_abbr %> v6.0.2, but not to v6.1.0. This prevents potentially severe and unforeseen upgrading issues, due to changes in the topology of <%= vars.app_runtime_abbr %> between major or minor versions.
 
-		<p class="note">
-		<span class="note__title">Note</span>
-		You cannot upgrade to the same patch version as your Small Footprint <%= vars.app_runtime_abbr %> deployment. This is due to a limitation of <%= vars.ops_manager_first %>.
-		</p>
+    <p class="note">
+    <span class="note__title">Note</span>
+    You cannot upgrade to the same patch version as your Small Footprint <%= vars.app_runtime_abbr %> deployment. This is due to a limitation of <%= vars.ops_manager_first %>.
+    </p>
 
 * **Finalize all configuration and ensure that no other processes are running on your Small Footprint <%= vars.app_runtime_abbr %> deployment.**
 
     For example, there must not be any of these:
 
-		* Changes being applied by <%= vars.ops_manager %>
+    * Changes being applied by <%= vars.ops_manager %>
 
-		* Pending changes for any tile, including <%= vars.app_runtime_abbr %>
+    * Pending changes for any tile, including <%= vars.app_runtime_abbr %>
 
-		* Actively running operator-initiated BOSH tasks against the deployment
+    * Actively running operator-initiated BOSH tasks against the deployment
 
-		During the upgrade process:
+    During the upgrade process:
 
-		* You must not modify any choices regarding use of internal or external databases and blobstores.
+    * You must not modify any choices regarding use of internal or external databases and blobstores.
 
-		* The underlying IaaS infrastructure for the deployment must not be modified or moved.
+    * The underlying IaaS infrastructure for the deployment must not be modified or moved.
 
 * **Back up your deployment using [BOSH Backup and Restore](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-backup-restore-backup-pcf-bbr.html).**
 
