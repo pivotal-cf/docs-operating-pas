@@ -235,8 +235,10 @@ To upgrade from Small Footprint <%= vars.app_runtime_abbr %> to full <%= vars.ap
     Run the following command:
 
     ```
-    bosh -d [your_deployment's_id] start
+    bosh -d [DEPLOYMENT] start
     ```
+
+    Where `[DEPLOYMENT]` is the ID of your deployment.
 
     After the deployment has restarted, the upgrade from Small Footprint <%= vars.app_runtime_abbr %> to full <%= vars.app_runtime_abbr %> is complete.
 
