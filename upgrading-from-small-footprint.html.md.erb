@@ -1,0 +1,308 @@
+---
+title: Upgrading from Small Footprint to full TAS for VMs
+owner:
+---
+
+If you have installed Small Footprint <%= vars.app_runtime_full %>, you can upgrade your installation to full <%= vars.app_runtime_abbr %>. The upgrade process preserves most of the existing tile configuration and transforms the existing Small Footprint <%= vars.app_runtime_abbr %> into full <%= vars.app_runtime_abbr %>.
+
+<p class="note">
+<span class="note__title">Note</span>
+This feature is only available in <%= vars.app_runtime_abbr %> v6.0.1 and later.
+</p>
+
+For more information about choosing between Small Footprint and full <%= vars.app_runtime_abbr %>, see [When should you use Small Footprint TAS for VMs?](https://docs-staging.vmware.com/en/VMware-Tanzu-Application-Service/6.0/tas-for-vms/toc-tas-install-index.html#when-should-you-use-small-footprint-tas-for-vms-0) in _Installing TAS for VMs_.
+
+## <a id='preserving-data'></a> Preserving data after the upgrade
+
+<%= vars.app_runtime_abbr %> stores data in two separate locations: a database and a blobstore. By default, full <%= vars.app_runtime_abbr %> uses internal disks, created and maintained by the BOSH Director, for both datastores. Operators can instead provide their own external database and blobstore, if desired.
+
+When you upgrade a Small Footprint <%= vars.app_runtime_abbr %> tile to a full <%= vars.app_runtime_abbr %> tile:
+
+* Any **internal disks** containing application data are not automatically transferred over. These disks are _orphaned_, unattached to any <%= vars.app_runtime_abbr %> instance and no longer actively read or written to by your deployment. To restore the data, you must reattach any orphaned Small Footprint <%= vars.app_runtime_abbr %> disks to the full <%= vars.app_runtime_abbr %> deployment, using one of the two procedures described below.
+
+* **External datastores** do not have disks managed by BOSH, and therefore are not orphaned. When the upgrade is complete, these datastores are automatically attached to the new full <%= vars.app_runtime_abbr %> deployment, and the stored data is immediately available. You do not need to perform any further steps for external datastores.
+
+It is critical to be aware of which datastores are internal and which are external before beginning the process to upgrade from Small Footprint to full <%= vars.app_runtime_abbr %>. 
+
+<p class="note caution">
+<span class="note__title">Caution</span>
+Disks become orphaned after you perform the <strong>Apply Changes</strong> to upgrade to full <%= vars.app_runtime_abbr %>. After a period of time (by default, five days), BOSH automatically and permanently deletes orphaned disks. Failure to reattach any orphaned Small Footprint TAS disks will result in loss of your data. For more information about orphaned disks, see the <a href="https://bosh.io/docs/persistent-disks/#orphaned-disks">BOSH documentation</a>.
+</p>
+
+## <a id='reqs-prereqs'></a> Requirements and prerequisites
+
+In order to upgrade from Small Footprint <%= vars.app_runtime_abbr %>, you must:
+
+* **Upgrade to the same major and minor as your Small Footprint <%= vars.app_runtime_abbr %> deployment, but a higher patch version.** For example, if your Small Footprint <%= vars.app_runtime_abbr %> deployment is at version v6.0.1, you can upgrade to full <%= vars.app_runtime_abbr %> v6.0.2, but not to v6.1.0. This prevents potentially severe and unforeseen upgrading issues, due to changes in the topology of <%= vars.app_runtime_abbr %> between major or minor versions.
+
+    <p class="note">
+    <span class="note__title">Note</span>
+    You cannot upgrade to the same patch version as your Small Footprint <%= vars.app_runtime_abbr %> deployment. This is due to a limitation of <%= vars.ops_manager_first %>.
+    </p>
+
+* **Finalize all configuration and ensure that no other processes are running on your Small Footprint <%= vars.app_runtime_abbr %> deployment.**
+
+    For example, there must not be any of these:
+
+    * Changes being applied by <%= vars.ops_manager %>
+
+    * Pending changes for any tile, including <%= vars.app_runtime_abbr %>
+
+    * Actively running operator-initiated BOSH tasks against the deployment
+
+    During the upgrade process:
+
+    * You must not modify any choices regarding use of internal or external databases and blobstores.
+
+    * The underlying IaaS infrastructure for the deployment must not be modified or moved.
+
+* **Back up your deployment using [BOSH Backup and Restore](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-backup-restore-backup-pcf-bbr.html).**
+
+If using the [Assisted upgrade](#assisted-upgrade) approach, you will need:
+
+* The bosh CLI tool, used for interacting with your BOSH deployment. For more information, see the [Cloud Foundry BOSH documentation](https://bosh.io/docs/cli-v2-install/).
+
+* The om CLI tool, used for interacting with <%= vars.ops_manager %>. For more information, see the [<%= vars.ops_manager %> documentation](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-cli.html).
+
+## <a id='upgrade'></a> Upgrade to full <%= vars.app_runtime_abbr %>
+
+You can upgrade Small Footprint <%= vars.app_runtime_abbr %> to full <%= vars.app_runtime_abbr %> either manually, or with the assistance of the Bash scripts provided by <%= vars.company_name %>. When planning your upgrade schedule, keep in mind that both procedures cause several hours of downtime and involve at least one **Apply Changes** step, as well as stopping and restarting the entire BOSH deployment.
+
+<p class="note caution">
+<span class="note__title">Caution</span>
+During the upgrade process, ensure that all aspects of the deployment and control plane remain constant except when directed otherwise. Making any changes not described in the upgrade procedures can result in unforeseen and potentially unrecoverable data loss or deployment issues.
+</p>
+
+### <a id='manual-upgrade'></a> Manual upgrade
+
+To upgrade from Small Footprint <%= vars.app_runtime_abbr %> to full <%= vars.app_runtime_abbr %> manually:
+
+1. Verify that your foundation is in the correct state.
+
+    1. If using an internal database and/or blobstore, scale each down to exactly one (1) instance.
+
+        To count the database and/or blobstore instances:
+
+        * If using Ops Manager, open the **Resource Config** pane of the Small Footprint <%= vars.app_runtime_abbr %> tile settings. The database is labeled `Database`. The blobstore is labeled `File Storage`.
+
+        * If using the BOSH CLI tool, run the `bosh instances` command. The database is called `database`. The blobstore is called `blobstore`.
+
+        If necessary, scale down either or both instance groups to 1 in Ops Manager and then run **Apply Changes**.
+
+    1. In the **Advanced Features** pane of the Small Footprint <%= vars.app_runtime_abbr %> tile settings, check the **Enable upgrade from Small Footprint Tanzu Application Service to VMware Tanzu Application Service for VMs** checkbox.
+
+1. Upgrade the tile.
+
+    1. Select the version of full <%= vars.app_runtime_abbr %> to which you wish to upgrade Small Footprint <%= vars.app_runtime_abbr %>. This version must be the same major and minor as the existing Small Footprint <%= vars.app_runtime_abbr %> installation, and must be a higher patch version than your existing Small Footprint <%= vars.app_runtime_abbr %> installation. Download the full <%= vars.app_runtime_abbr %> release from <%= vars.product_network %>.
+
+    1. Upload the full <%= vars.app_runtime_abbr %> release to your foundation and stage it.
+
+    1. If your deployment uses an internal database and / or blobstore:
+
+        1. Open the **Resource Config** pane of the full <%= vars.app_runtime_abbr %> tile settings.
+
+        1. Scale down both of the following instance groups to 1:
+
+            * MySQL Server
+
+            * NFS Store
+
+    1. Review the staged configuration changes.
+
+    1. Click **Apply Changes**.
+
+    If the foundation uses both an external database and an external blobstore, the upgrade procedure is now complete. If not, continue to the next step.
+
+1. Reattach the Small Footprint <%= vars.app_runtime_abbr %> disks to the full <%= vars.app_runtime_abbr %> deployment.
+
+    <p class="note">
+    <span class="note__title">Note</span>
+    The following instructions assume both an internal database and an internal blobstore. If your foundation uses an external database or an external blobstore, ignore instructions for that specific datastore.
+    </p>
+
+    1. Locate the two Small Footprint <%= vars.app_runtime_abbr %> disk CIDs that contain your application data.
+
+        In a terminal window, run the following command:
+
+        ```
+        bosh disks --orphaned
+        ```
+
+        For the database disk CID:
+
+        * `Instance` begins with `database/`.
+
+        * `Orphaned At` is the most recent of all `database/…` rows.
+
+        * `Deployment` is the ID of your deployment.
+
+        For the blobstore disk CID:
+
+        * `Instance` begins with `blobstore/`.
+
+        * `Orphaned At` is the most recent of all `blobstore/…` rows.
+
+        * `Deployment` is the ID of your deployment.
+
+        Record the instance for each of the disks.
+
+    1. Locate the two full <%= vars.app_runtime_abbr %> instance IDs to which the Small Footprint <%= vars.app_runtime_abbr %> disks will be reattached.
+
+        In a terminal window, run the following command:
+
+        ```
+        bosh -d [DEPLOYMENT] instances -i
+        ```
+
+        Where `[DEPLOYMENT]` is the ID of your deployment.
+
+        Find the two instance IDs:
+
+        * For the database instance ID, `Instance` begins with `mysql/`.
+
+        * For the blobstore instance ID, `Instance` begins with `nfs_store/`.
+
+        Record the entire value of both instance IDs.
+
+    1. Stop the entire BOSH deployment.
+
+        Run the following command:
+
+        ```
+        bosh -d [DEPLOYMENT] stop
+        ```
+
+        Where `[DEPLOYMENT]` is the ID of your deployment.
+
+    1. Delete the database and blobstore VMs.
+
+        * Run the following command to delete the database VM:
+
+            ```
+            bosh -d [DEPLOYMENT] stop --hard mysql
+            ```
+
+            Where `[DEPLOYMENT]` is the ID of your deployment.
+
+        * Run the following command to delete the blobstore VM:
+
+            ```
+            bosh -d [DEPLOYMENT] stop --hard nfs_store
+            ```
+
+            Where `[DEPLOYMENT]` is the ID of your deployment.
+
+    1. Reattach the orphaned Small Footprint <%= vars.app_runtime_abbr %> disks to the correct full <%= vars.app_runtime_abbr %> instances.
+
+        * Run the following command to reattach the database disk:
+
+            ```
+            bosh -d [DEPLOYMENT] attach-disk [FULL_TAS_DATABASE_ID] [SF_TAS_DATABASE_CID]
+            ```
+
+            Where:
+
+            * `[DEPLOYMENT]` is the ID of your deployment.
+
+            * `[FULL_TAS_DATABASE_ID]` is the ID of the full <%= vars.app_runtime_abbr %> instance to which the database disk will be attached.
+
+            * `[SF_TAS_DATABASE_CID]` is the CID of the orphaned Small Footprint <%= vars.app_runtime_abbr %> database disk.
+
+        * Run the following command to reattach the blobstore disk:
+
+            ```
+            bosh -d [DEPLOYMENT] attach-disk [FULL_TAS_BLOBSTORE_ID] [SF_TAS_BLOBSTORE_CID]
+            ```
+
+            Where:
+
+            * `[DEPLOYMENT]` is the ID of your deployment.
+
+            * `[FULL_TAS_BLOBSTORE_ID]` is the ID of the full <%= vars.app_runtime_abbr %> instance to which the blobstore disk will be attached.
+
+            * `[SF_TAS_BLOBSTORE_CID]` is the CID of the orphaned Small Footprint <%= vars.app_runtime_abbr %> blobstore disk.
+
+1. Verify that the correct disks were reattached to the database and blobstore instances.
+
+    Run the following command:
+
+    ```
+    bosh instances -i
+    ```
+
+1. Restart the BOSH deployment.
+
+    Run the following command:
+
+    ```
+    bosh -d [DEPLOYMENT] start
+    ```
+
+    Where `[DEPLOYMENT]` is the ID of your deployment.
+
+    After the deployment has restarted, the upgrade from Small Footprint <%= vars.app_runtime_abbr %> to full <%= vars.app_runtime_abbr %> is complete.
+
+After upgrading to full <%= vars.app_runtime_abbr %>, verify that your applications are functioning as expected. If you encounter any issues, contact <%= vars.support_link %>.
+
+A full <%= vars.app_runtime_abbr %> deployment can be configured to provide high availability (HA) for applications. For information about HA options and best practices, see [High Availability in TAS for VMs](../concepts/high-availability.html).
+
+### <a id='assisted-upgrade'></a> Assisted upgrade
+
+<%= vars.company_name %> provides a set of Bash scripts to assist in the upgrade process. To download these scripts, see [Automation scripts for upgrading Small Footprint TAS for VMs 6.0 to 'full' TAS for VMs 6.0](https://community.pivotal.io/s/article/Automation-scripts-for-upgrading-Small-Footprint-TAS-for-VMs-6-0-to-full-TAS-for-VMs-6-0) in the VMware Tanzu Support Hub.
+
+The downloaded archive contains:
+
+* Two automation scripts.
+
+    * The `validate_sf_tas_deployment` script runs against a Small Footprint <%= vars.app_runtime_abbr %> deployment and does not alter the deployment in any way. The script scans the deployment configuration to determine if all requirements for the upgrade process are met, and prints out any missing requirements for you to correct. When the script executes successfully, the deployment is ready to be upgraded to full <%= vars.app_runtime_abbr %>.
+
+    * The `reattach_sf_tas_disks` script runs against a full <%= vars.app_runtime_abbr %> deployment after the deployment has been upgraded from Small Footprint <%= vars.app_runtime_abbr %>. The script scans the deployment to ensure that the database and blobstore have at most one instance, and if so, automatically stops all VMs, reattaches the Small Footprint TAS disks, and restarts the deployment. You can run the script multiple times if necessary. It creates log files to determine which instances already have disks reattached, and skips those instances in future executions. When the script executes successfully, the upgrade from Small Footprint <%= vars.app_runtime_abbr %> to full <%= vars.app_runtime_abbr %> is complete.
+
+* Common helper code.
+
+* A directory in which to store logs.
+
+<p class="note important">
+<span class="note__title">Important</span>
+Do not modify the directory structure or contents. If you do, the scripts may not work correctly.
+</p>
+
+To upgrade from Small Footprint <%= vars.app_runtime_abbr %> to full <%= vars.app_runtime_abbr %> using the automation scripts:
+
+1. Verify that your foundation is in the correct state.
+
+    In a terminal window, run the `validate_sf_tas_deployment` script to determine whether all requirements have been met for the upgrade to full <%= vars.app_runtime_abbr %>.
+
+    * If the script discovers any missing requirements, correct them. For information about how to correct any missing requirements, see [Manual upgrade](#manual-upgrade).
+
+    * When the script succeeds, the deployment is ready to be upgraded to full <%= vars.app_runtime_abbr %>.
+
+1. Upgrade the tile.
+
+    1. Select the version of full <%= vars.app_runtime_abbr %> to which you wish to upgrade Small Footprint <%= vars.app_runtime_abbr %>. This version must be the same major and minor as the existing Small Footprint <%= vars.app_runtime_abbr %> installation, and must be a higher patch version than your existing Small Footprint <%= vars.app_runtime_abbr %> installation. Download the full <%= vars.app_runtime_abbr %> release from <%= vars.product_network %>.
+
+    1. Upload the full <%= vars.app_runtime_abbr %> release to your foundation and stage it.
+
+    1. If your deployment uses an internal database and / or blobstore:
+
+        1. Open the **Resource Config** pane of the full <%= vars.app_runtime_abbr %> tile settings.
+
+        1. Scale down both of the following instance groups to 1:
+
+            * MySQL Server
+
+            * NFS Store
+
+    1. Review the staged configuration changes.
+
+    1. Click **Apply Changes**.
+
+    If the foundation uses both an external database and an external blobstore, the upgrade procedure is now complete. If not, continue to the next step.
+
+1. Reattach the Small Footprint <%= vars.app_runtime_abbr %> disks to the full <%= vars.app_runtime_abbr %> deployment.
+
+    In a terminal window, run the `reattach_sf_tas_disks` script against the newly upgraded full <%= vars.app_runtime_abbr %> deployment to automatically reattach the Small Footprint <%= vars.app_runtime_abbr %> disks that contain your applications' data.
+
+    * If the script exits early with errors, examine the script logs, correct the errors, and rerun the script. You can also contact <%= vars.support_link %> for assistance.
+
+    * When the script succeeds, the upgrade from Small Footprint <%= vars.app_runtime_abbr %> to full <%= vars.app_runtime_abbr %> is complete.
