@@ -73,10 +73,9 @@ gateways, each connecting to a network within <%= vars.platform_name %>. Each vS
 column cluster corresponds to an Availability Zone (AZ) in <%= vars.platform_name %>: The NXT T0 Router is
 connected between the IP Backbone and the T1 Routers. The T1
 Routers each end on a network.
-Three network types are shown: On-demand Orgs, Isolation
-Segments, and On-demand Services.
 
-![alt-text=""](./images/nsx-t/nsx-t-refarch.png)
+![Three network types are shown: On-demand Orgs, Isolation
+Segments, and On-demand Services.](./images/nsx-t/nsx-t-refarch.png)
 
 When you push an app to a new org for the first time, the NSX-T plug-in starts NSX-T to create a
 new T1 gateway and allocate an address range for the org, on demand.
@@ -122,7 +121,7 @@ To configure Network Address Translation (NAT) rules:
         * The <%= vars.ops_manager %> internal network address.
         * Firewall setting bypass: the packet bypasses firewall rules.
 
-          ![alt-text=""](./images/nsx-t/nsx-t-dnat-rule.png)
+          ![NAT page](./images/nsx-t/nsx-t-dnat-rule.png)
 
   2. Add a rule for source NAT (SNAT) for the infrastructure and deployment networks:
 
@@ -130,7 +129,7 @@ To configure Network Address Translation (NAT) rules:
         * The internal network address in CIDR notation.
         * Firewall Setting bypass: the packet bypasses firewall rules.
 
-          ![alt-text=""](./images/nsx-t/nsx-t-snat-net-rule.png)
+          ![NAT page](./images/nsx-t/nsx-t-snat-net-rule.png)
 
 ### <a id='#nsx-t-gateways'></a> Configure gateways
 
@@ -145,7 +144,7 @@ To configure Tier-1 (T1) gateways:
       Balancer. The Infrastructure network gateway configuration looks similar to the following
       image:
 
-    ![alt-text="Configure Infrastructure network gateway"](./images/nsx-t/nsx-t-t1-gateway.png)
+    ![Configure Infrastructure network gateway.](./images/nsx-t/nsx-t-t1-gateway.png)
 
 2. Advertise the routes of the T1 gateways to the T0 gateway, so the T0 gateway can correctly route
    incoming requests based on their destination IP addresses:
@@ -153,7 +152,7 @@ To configure Tier-1 (T1) gateways:
     2. Activate **All Connected Segments & Service Ports**.
     3. Activate **All LB VIP Routes**. (necessary if Load Balancing service is configured).
 
-        ![alt-text=""](./images/nsx-t/nsx-t-route-advertise-policy.png)
+        ![Tier-1 Gateways page](./images/nsx-t/nsx-t-route-advertise-policy.png)
 
 3. Allocate an IP block for <%= vars.app_runtime_abbr %> orgs.
     1. From the NSX-T Manager, go to **Networking**, then **IP Address Pools**, click the **IP
@@ -170,7 +169,7 @@ To configure Tier-1 (T1) gateways:
        limits](https://configmax.vmware.com/guest?vmwareproduct=VMware%20NSX-T&release=NSX-T%20Data%20Center%202.4.0&categories=31-0)
        in the VMware documentation.
 
-        ![alt-text=""](./images/nsx-t/nsx-t-ip-block-policy.png)
+        ![IP Address Pools page](./images/nsx-t/nsx-t-ip-block-policy.png)
 
 4. Create an external SNAT IP pool:
     1. Go to **Networking**, then **IP Address Pools**.
@@ -182,15 +181,15 @@ To configure Tier-1 (T1) gateways:
        Org Networks**.
     5. Set a subnet of externally-routable IP addresses for future NAT IP addresses.
 
-        ![alt-text=""](./images/nsx-t/nsx-t-external-ip-pool.png)
+        ![IP Address Pools page](./images/nsx-t/nsx-t-external-ip-pool.png)
 
-        ![alt-text=""](./images/nsx-t/nsx-t-external-ip-pool-subnet.png)
+        ![Set Subnets page](./images/nsx-t/nsx-t-external-ip-pool-subnet.png)
 
 5.  In vSphere, create segments that correspond to the networks that <%= vars.platform_name %> uses.
     1. Log in to the **NSX-T Manager Dashboard**.
     2. Go to **Networking**.
-    1. Go to the **Segments** pane.
-    2. For each of these networks...
+    3. Go to the **Segments** pane.
+    4. For each of these networks...
          * **Infrastructure** (BOSH and <%= vars.ops_manager %>, defined in the **Assign AZs and
            Networks** pane of the BOSH Director tile)
         * **Deployment** (<%= vars.app_runtime_abbr %>, defined in the **Assign AZs and Networks**
@@ -204,7 +203,7 @@ To configure Tier-1 (T1) gateways:
             3. Enter a Gateway to connect to.
             4. Click **SAVE**.
 
-![alt-text=""](./images/nsx-t/nsx-t-segment.png)
+![Segments page](./images/nsx-t/nsx-t-segment.png)
 
 ### <a id='nsx-t-segments'></a> Configure segments
 
@@ -381,7 +380,7 @@ To activate NSX-T mode in the BOSH Director:
 
 3. Verify that the **Use NSX-T Policy API** option is selected.
 
-![alt-text=""](./images/nsx-t/nsx-t-bosh-director-policy.png)
+![Use NSX-T Policy API check box](./images/nsx-t/nsx-t-bosh-director-policy.png)
 
 ### <a id='external-net'></a> Configure <%= vars.app_runtime_abbr %> for external container networking
 
@@ -394,12 +393,12 @@ To configure <%= vars.app_runtime_abbr %> for external container networking:
   For instructions, see [Add and Import
   Products](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-add-delete.html#add-and-import-products-0).
 
-  ![alt-text="Tanzu Operations Manager Installation Dashboard with NSX-T tile"](./images/nsx-t/nsx-t-install-dash.png)
+  ![Tanzu Operations Manager Installation Dashboard with NSX-T tile](./images/nsx-t/nsx-t-install-dash.png)
 
 1. Configure <%= vars.app_runtime_abbr %>, starting with [Prerequisites](./prerequisites.html). When you configure **Networking**, select
    **External** under **Container networking interface plugin**.<br>
 
-    ![alt-text=""](./images/nsx-t/nsx-t-tas-cni.png)
+    ![Container networking interface plug-in radio buttons. External is selected.](./images/nsx-t/nsx-t-tas-cni.png)
 
 ### <a id='nsx-t-tile'></a> Install and configure the NSX-T container plug-in
 
@@ -409,12 +408,12 @@ To configure <%= vars.app_runtime_abbr %> for external container networking:
      2. Click the arrow next to each job to reveal the **NSX-T Configuration** column.
      3. Under **Logical Load Balancer**, complete the JSON `server_pools` list with the NSX-T Server
         Pool these instance must be added to upon deployment.
-        <ul>
-            <li>router: tas-web-pool</li>
-            <li>diego_brain: tas-ssh-pool</li>
-            <li>tcp_router: tas-tcp-pool</li>
-        </ul>
-     4. Click **Save** ![alt-text=""](./images/nsx-t/nsx-t-web-server-pool.png)
+        * router: tas-web-pool
+        * diego_brain: tas-ssh-pool
+        * tcp_router: tas-tcp-pool
+     4. Click **Save**.
+
+        ![NSX-T configuration](./images/nsx-t/nsx-t-web-server-pool.png)
 
 2. If you have not already done so, download the VMware NSX-T Container Plug-in for <%=
    vars.platform_name %> tile from [VMware Tanzu
@@ -422,7 +421,7 @@ To configure <%= vars.app_runtime_abbr %> for external container networking:
    **Installation Dashboard**. For instructions, see [Add and Import
    Products](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-add-delete.html#add-import).
 
-    ![alt-text="Installation Dashboard with NSX-T tile."](./images/nsx-t/nsx-t-install-dash.png)
+    ![Installation Dashboard with NSX-T tile.](./images/nsx-t/nsx-t-install-dash.png)
 
 3. Click the **VMware NSX-T** tile to open the **Settings** tab, and configure **NSX Manager**:
     * **NSX Manager Address**: The NSX-T Manager host address or IP address.
@@ -460,12 +459,12 @@ To configure <%= vars.app_runtime_abbr %> for external container networking:
       created in [Configure Gateways](#nsx-t-gateways).
     * **Enable NSX-T Policy API**: Activate this check box to use the new Policy API.
 
-      ![alt-text="NSX-T tile config: NCP"](./images/nsx-t/nsx-t-tile-config-ncp-policy.png)
+      ![NSX-T tile config: NCP](./images/nsx-t/nsx-t-tile-config-ncp-policy.png)
 
 5. In the **NSX Node Agent** pane, activate the **Enable Debug Level of Logging for NSX Node Agent**
    check box.
 
-    ![alt-text="NSX-T tile config: NSX-T Node Agent"](./images/nsx-t/nsx-t-tile-config-agent.png)
+    ![NSX-T tile config: NSX-T Node Agent](./images/nsx-t/nsx-t-tile-config-agent.png)
 
 6. Click **Save** and return to the **Installation Dashboard**.
 7. After you configure both the **<%= vars.app_runtime_abbr %>** tile and the **VMware NSX-T** tile,
