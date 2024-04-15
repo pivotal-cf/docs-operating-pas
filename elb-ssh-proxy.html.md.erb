@@ -11,7 +11,7 @@ Use the following steps to create an ELB:
 
 1. Click **Create Load Balancer** and configure a classic load balancer with the following information:
 
-  ![alt-text="Define the Load Balancer."](./images/aws/aws_ssh_elb_step1.png)
+  ![Define the Load Balancer.](./images/aws/aws_ssh_elb_step1.png)
 
   * In **Load Balancer name**, enter a load balancer name.
   * In **Create LB Inside**, select the **<%= vars.platform_name_lc %>-vpc** VPC where your <%= vars.platform_name %> installation lives.
@@ -25,15 +25,15 @@ Use the following steps to create an ELB:
   * In the table, configure the Inbound tab by selecting **Type** and **Source**.
   * Click **Create**.
 
-    ![alt-text="Create a new security group that allows inbound traffic on the TCP port 2222."](./images/aws/aws_ssh_elb_securitygroup.png)
+    ![Create a new security group that allows inbound traffic on the TCP port 2222.](./images/aws/aws_ssh_elb_securitygroup.png)
 
 1. The **Configure Security Settings** page displays a security warning because your load balancer is not using a secure listener. You can ignore this warning.
 
-    ![alt-text="Ignore the warning on the Configure Security Settings page."](./images/aws/aws_ssh_elb_security_warning.png)
+    ![Ignore the warning on the Configure Security Settings page.](./images/aws/aws_ssh_elb_security_warning.png)
 
 2. Click **Next: Configure Health Check**.
 
-    ![alt-text="Customize the health checks."](./images/aws/aws_ssh_elb_healthcheck.png)
+    ![Customize the health checks.](./images/aws/aws_ssh_elb_healthcheck.png)
 
 3. On the **Configure Health Check** screen:
      * In **Ping Protocol**, select **TCP in Ping Protocol**.
@@ -50,8 +50,8 @@ Use the following steps to create an ELB:
 
 8. With your DNS service (for example, Amazon Route 53), create an <code>ssh.system.YOUR-SYSTEM-DOMAIN</code> DNS record that points to the ELB that you just created. You can now use this ELB to the SSH Proxy of your <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) installation.
 
-    ![alt-text="The Create Record Set form shows a TTL of 300 and the name of your ELB domain."](./images/aws/aws_ssh_elb_domain.png)
+    ![The Create Record Set form shows a TTL of 300 and the name of your ELB domain.](./images/aws/aws_ssh_elb_domain.png)
 
 9.  In <%= vars.app_runtime_abbr %>, select **Resource Config** and enter the ELB that you just created into the **Diego Brain** row, in the **Load Balancers** column.
 
-  ![alt-text=" Enter the ELB that you just created into the Diego Brain row."](./images/aws/aws_ssh_er_diego_brain_config.png)
+  ![Enter the ELB that you just created into the Diego Brain row.](./images/aws/aws_ssh_er_diego_brain_config.png)
