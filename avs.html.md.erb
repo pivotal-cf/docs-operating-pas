@@ -77,7 +77,7 @@ To configure segments:
             <li>Click **Add**.</li>
         </ol>
 
-![alt-text="Add a new segment."](./images/nsx-t/nsx-t-logical-switch.png)
+![Add a new segment.](./images/nsx-t/nsx-t-logical-switch.png)
 
 ### <a id='nsx-t-routers'></a> Configure gateways
 
@@ -90,7 +90,7 @@ To configure segments:
 
  The Infrastructure network gateway configuration might look like the following image:
 
-![alt-text="Add a Tier 1 Gateway and configure it."](./images/nsx-t/nsx-t-t1-router.png)
+![Add a Tier 1 Gateway and configure it.](./images/nsx-t/nsx-t-t1-router.png)
 
 Create T1 gateway downlink ports for <%= vars.app_runtime_abbr %>.
 
@@ -102,7 +102,7 @@ For each T1 gateway you created, add a **New Router Port** to allow traffic in a
 4. Click **Set**.
 5. For **Segments**, enter the name of the segment you defined for the network in **Add New Segments**.
 6. For **IP Address**, use the first IP of the appropriate subnet. In this example, 192.168.1.0/24 is set aside for Infrastructure (<%= vars.ops_manager %> and BOSH Director), and 192.168.2.0/24 for the Deployment, so 192.168.1.1 and 192.168.2.1 are used respectively.
-![alt-text="New Router port"](./images/nsx-t/nsx-t-router-port.png)
+![New Router port](./images/nsx-t/nsx-t-router-port.png)
 
 1. Advertise the routes of the T1 gateways to the T0 gateway, so the T0 gateway can correctly route incoming requests based on their destination IP address:
 2. Click Gateway in the list.
@@ -111,17 +111,17 @@ For each T1 gateway you created, add a **New Router Port** to allow traffic in a
    1. Turn on **All Connected Segments & Service Ports** by using the green switch.
    2. Turn on All IPSec Local Endpoints.
    3. Turn on **All LB VIP Routes** by using the green switch(necessary if Load Balancing service is configured).
-![alt-text="Edit the Route Advertisement Configuration"](./images/nsx-t/nsx-t-route-advertise.png)
+![Edit the Route Advertisement Configuration](./images/nsx-t/nsx-t-route-advertise.png)
 
 1. Navigate to IP Address Pools.
 2. Click IP Address Pools in the navigation.
 3. Click IP Address Blocks to allocate an IP block for <%= vars.app_runtime_abbr %> orgs.
 4. Add IP Address Block.
 5.  Enter a name (for example, `<%= vars.app_runtime_abbr %>-container-ip-block`). This IP block name is also used in the **VMware NSX-T** tile in the **NCP** section under **IP Blocks of Container Networks**.
-4. Enter a description, such as `Subnets are allocated from this pool to each newly-created org`.
-5. Enter a CIDR to allocate an address block large enough to accommodate all <%= vars.app_runtime_abbr %> apps. A `/14` CIDR is large enough for ~1,000 Orgs with ~250 apps each. If you are planning such a large foundation, see [VMware NSX-T <%= vars.app_runtime_abbr %> limits](https://configmax.vmware.com/guest?vmwareproduct=VMware%20NSX-T&release=NSX-T%20Data%20Center%202.4.0&categories=31-0) in the VMware documentation.
+6. Enter a description, such as `Subnets are allocated from this pool to each newly-created org`.
+7. Enter a CIDR to allocate an address block large enough to accommodate all <%= vars.app_runtime_abbr %> apps. A `/14` CIDR is large enough for ~1,000 Orgs with ~250 apps each. If you are planning such a large foundation, see [VMware NSX-T <%= vars.app_runtime_abbr %> limits](https://configmax.vmware.com/guest?vmwareproduct=VMware%20NSX-T&release=NSX-T%20Data%20Center%202.4.0&categories=31-0) in the VMware documentation.
 
-![alt-text="Add a new IP block."](./images/nsx-t/nsx-t-ip-block.png)
+![Add a new IP block.](./images/nsx-t/nsx-t-ip-block.png)
 
 ### <a id='nsx-t-load-balancer'></a> Configure load balancer
 
@@ -316,10 +316,10 @@ in the [Step 2: Configure vCenter](https://docs.vmware.com/en/VMware-Tanzu-Opera
 To configure <%= vars.app_runtime_abbr %> for external container networking:
 
 1. If you have not already done so, download the <%= vars.app_runtime_abbr %> tile from [VMware Tanzu Network](https://network.tanzu.vmware.com/products/elastic-runtime) and import it to the **Installation Dashboard**. For instructions, see [Adding and Importing Products](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-add-delete.html#add-import).
-![alt-text="Installation Dashboard with NSX-T tile"](./images/nsx-t/nsx-t-install-dash.png)
+![Installation Dashboard with NSX-T tile](./images/nsx-t/nsx-t-install-dash.png)
 
 1. Configure <%= vars.app_runtime_abbr %>, following the directions in [Configuring <%= vars.app_runtime_abbr %>](./prerequisites.html). When you configure **Networking**, select **External** under **Container networking interface plugin**.<br>
-![alt-text="Configure the NSX-T tile."](./images/nsx-t/nsx-t-pas-cni.png)
+![Configure the NSX-T tile.](./images/nsx-t/nsx-t-pas-cni.png)
 
 1. Update the server pool membership for the NSX-T load balancers:
 
@@ -333,7 +333,7 @@ To install and configure the NSX-T Container Plug-In tile:
 
 1. If you have not already done so, download the VMware NSX-T Container Plug-in tile from [VMware Tanzu Network](https://network.tanzu.vmware.com/products/vmware-nsx-t) and import it to the **Installation Dashboard**. For instructions, see [Adding and Importing Products](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-add-delete.html#add-import).
 
-    ![alt-text="Tanzu Operations Manager Installation Dashboard with NSX-T tile."](./images/nsx-t/nsx-t-install-dash.png)
+    ![Tanzu Operations Manager Installation Dashboard with NSX-T tile.](./images/nsx-t/nsx-t-install-dash.png)
 
 2. Click the **VMware NSX-T** tile to open its **Settings** tab, and configure the **NSX Manager** pane as follows:
 
@@ -348,7 +348,7 @@ To install and configure the NSX-T Container Plug-In tile:
             <li>SSH into NSX-T Manager using the admin account that you created when you deployed NSX-T Manager.</li>
             <li>From the NSX-T Manager command line, run <code>get certificate api</code> to retrieve the certificate.</li>
         </ol>
-    ![alt-text="Obtain the NSX Manager CA Cert"](./images/nsx-t/nsx-t-tile-config-mgr.png)
+    ![Obtain the NSX Manager CA Cert](./images/nsx-t/nsx-t-tile-config-mgr.png)
 
 3. Open and configure the **NCP** (NSX-T Container Plugin) pane as follows:
 
@@ -358,10 +358,10 @@ To install and configure the NSX-T Container Plug-In tile:
     * **Subnet Prefix of Container Networks**: Subnet mask to set the address range size for apps in a single org. Defaults to `24`. This number must be higher than the mask for all <%= vars.app_runtime_abbr %> orgs in the NSX-T Manager **New IP Block** pane, to define each org's fraction of the total <%= vars.app_runtime_abbr %> address space.
     * **Enable SNAT for Container Network**: Select  this check box.
 
-    ![alt-text="NSX-T tile config: NCP"](./images/nsx-t/nsx-t-tile-config-ncp.png)
+    ![NSX-T tile config: NCP](./images/nsx-t/nsx-t-tile-config-ncp.png)
 
 4. In the **NSX Node Agent** pane, select the **Enable Debug Level of Logging for NSX Node Agent** check box.
-    ![alt-text="Enable the Debug Level of Logging for NSX Node Agent."](./images/nsx-t/nsx-t-tile-config-agent.png)
+    ![Enable the Debug Level of Logging for NSX Node Agent.](./images/nsx-t/nsx-t-tile-config-agent.png)
 
 5. Click **Save** and return to the **Installation Dashboard**.
 
