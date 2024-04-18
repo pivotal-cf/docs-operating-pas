@@ -182,10 +182,10 @@ pane of the <%= vars.app_runtime_abbr %> tile:
 
 | Use case | Compute isolation | Gorouter sharding mode | Requests to isolation segments | Other requirements | Scaling recommendations |
 | -------- | ----------------- | -------------------- | ---------------------------------------------------------------------------------- | ------------------ | ----------------------- |
-| Use compute isolation and network isolation | Enabled | The isolated Diego cells for this segment or Isolated Diego cells for a list of segments | No isolation segments | <%= vars.segment_runtime_full %> has its own load balancer and uses a different domain from <%= vars.app_runtime_abbr %> | Apps in the isolation segment can have their own Diego Cells and Gorouters. |
-| Use compute isolation and extra <%= vars.segment_runtime_full %> Gorouters | Enabled | The isolated Diego cells for this segment or Isolated Diego cells for a list of segments | All isolation segments | <%= vars.segment_runtime_full %> has its own load balancer and uses the same domain as <%= vars.app_runtime_abbr %> | Apps in the isolation segment can have their own Diego Cells and Gorouters. |
-| Use compute isolation only | Enabled | The main TAS deployment, shared Diego cells, and the Diego cells for this segment | All isolation segments | <%= vars.segment_runtime_full %> uses <%= vars.app_runtime_abbr %> load balancer and domain | Scale <%= vars.segment_runtime_full %> Gorouters to 0. |
-| Use network isolation in some cases | See other rows for guidance | See other rows for guidance | A list of isolation segments | See other rows for guidance | See other rows for guidance |
+| Use compute isolation and network isolation. | Enabled | The isolated Diego cells for this segment or Isolated Diego cells for a list of segments | No isolation segments | <%= vars.segment_runtime_full %> has its own load balancer and uses a different domain from <%= vars.app_runtime_abbr %>. | Apps in the isolation segment can have their own Diego Cells and Gorouters. |
+| Use compute isolation and extra <%= vars.segment_runtime_full %> Gorouters. | Enabled | The isolated Diego cells for this segment or Isolated Diego cells for a list of segments | All isolation segments | <%= vars.segment_runtime_full %> has its own load balancer and uses the same domain as <%= vars.app_runtime_abbr %>. | Apps in the isolation segment can have their own Diego Cells and Gorouters. |
+| Use compute isolation only. | Enabled | The main TAS deployment, shared Diego cells, and the Diego cells for this segment | All isolation segments | <%= vars.segment_runtime_full %> uses <%= vars.app_runtime_abbr %> load balancer and domain. | Scale <%= vars.segment_runtime_full %> Gorouters to 0. |
+| Use network isolation in some cases. | See other rows for guidance | See other rows for guidance. | A list of isolation segments | See other rows for guidance. | See other rows for guidance. |
 
 The use cases from the previous table are described here:
 
@@ -209,10 +209,9 @@ The use cases from the previous table are described here:
   Gorouters. This configuration is useful if you want to configure isolated
   compute resources for your apps but do not have additional networking
   restrictions. Use **The isolated Diego cells for this segment** if you want
-  to configure Gorouters in isolation segment to only route to apps in that
+  to configure Gorouters in the isolation segment to only route to apps in that
   isolation segment. Use **Isolated Diego cells for a list of segments** with
-  comma-separated list of isolation segment names to configure Gorouters in
-  isolation segment to route to multiple isolation segments.
+  comma-separated list of isolation segment names to configure Gorouters in the isolation segment to route to multiple isolation segments.
 
 * **Use compute isolation only**: To configure the <%= vars.app_runtime_abbr %>
   load balancer and apps domain route requests from your isolated apps, you can
