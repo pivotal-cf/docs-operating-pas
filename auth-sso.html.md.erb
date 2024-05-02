@@ -11,13 +11,11 @@ If your enterprise user store is exposed as a SAML, LDAP, or OIDC identity provi
 
 For information about managing user identity and pre-provisioning user roles with SAML or LDAP, see [Adding existing SAML or LDAP users to an <%= vars.platform_name %> deployment](external-user-management.html).
 
-For an explanation of the process used by the UAA server when it attempts to authenticate a user through LDAP, see [VMware Tanzu Support documentation](https://community.pivotal.io/s/article/Configuring-LDAP-Integration-with-Pivotal-Cloud-Foundry?language=en_US) in the Knowledge Base.
+For an explanation of the process used by the UAA server when it attempts to authenticate a user through LDAP, see [Configuring LDAP Integration with <%= vars.platform_name %>](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/kb-articles-config-ldap.html).
 
-When you integrate with an external IdP (identity provider), such as LDAP,
-authentication within the UAA becomes chained. An authentication attempt with user credentials is first attempted against the UAA
-user store before the external provider, LDAP. For more information about authentication,
-see <a href="https://github.com/cloudfoundry/uaa/blob/master/docs/UAA-LDAP.md#chained-authentication">Chained Authentication</a> in
-the <em>User Account and Authentication LDAP Integration</em> documentation on GitHub.
+<p class="note">
+<span class="note__title">Note</span>
+When integrating with an external IDP, such as LDAP, authentication within the UAA becomes chained. An authentication attempt with a user's credentials is first attempted against the UAA user store before the external provider, LDAP. For more information, see <a href="https://github.com/cloudfoundry/uaa/blob/master/docs/UAA-LDAP.md#chained-authentication">Chained Authentication</a> in the <em>User Account and Authentication LDAP Integration</em> documentation on GitHub.</p>
 
 Use one of the following procedures to configure your deployment with SAML, LDAP, or OIDC.
 
@@ -137,8 +135,7 @@ In the LDAP search filter string that you use to configure <%= vars.app_runtime_
     For example, use `cn={0}` to return all LDAP objects with the same common name as the user name.
 <br>
 In addition to `cn`, other attributes commonly searched for and returned are `mail`, `uid` and, in the case of Active Directory, `sAMAccountName`.
-
-    For instructions for testing and troubleshooting your LDAP search filters, see <a href="https://community.pivotal.io/s/article/Configuring-LDAP-Integration-with-Pivotal-Cloud-Foundry">Configuring LDAP Integration with Pivotal Cloud Foundry</a> in the Knowledge Base.
+For instructions for testing and troubleshooting your LDAP search filters, see <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/kb-articles-config-ldap.html">Configuring LDAP Integration with <%= vars.platform_name %></a>.
 
 1. For **Group search base**, enter the location in the LDAP directory tree from which the LDAP group search begins.
 <br>
