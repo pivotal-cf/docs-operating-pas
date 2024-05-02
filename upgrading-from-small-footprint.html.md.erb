@@ -248,7 +248,7 @@ A full <%= vars.app_runtime_abbr %> deployment can be configured to provide high
 
 ### <a id='assisted-upgrade'></a> Assisted upgrade
 
-<%= vars.company_name %> provides a set of Bash scripts to assist in the upgrade process. To download these scripts, see [Automation scripts for upgrading Small Footprint TAS for VMs 6.0 to 'full' TAS for VMs 6.0](https://community.pivotal.io/s/article/Automation-scripts-for-upgrading-Small-Footprint-TAS-for-VMs-6-0-to-full-TAS-for-VMs-6-0) in the VMware Tanzu Support Hub.
+<%= vars.company_name %> provides a set of Bash scripts to assist in the upgrade process. To download these scripts, see [Automation scripts for upgrading Small Footprint TAS for VMs 6.0 to "full" TAS for VMs 6.0](./kb-articles/auto-upgrade-scripts.html).
 
 The downloaded archive contains:
 
@@ -277,29 +277,29 @@ To upgrade from Small Footprint <%= vars.app_runtime_abbr %> to full <%= vars.ap
 
     * When the script succeeds, the deployment is ready to be upgraded to full <%= vars.app_runtime_abbr %>.
 
-1. Upgrade the tile.
+2. Upgrade the tile.
 
     1. Select the version of full <%= vars.app_runtime_abbr %> to which you wish to upgrade Small Footprint <%= vars.app_runtime_abbr %>. This version must be the same major and minor as the existing Small Footprint <%= vars.app_runtime_abbr %> installation, and must be a higher patch version than your existing Small Footprint <%= vars.app_runtime_abbr %> installation. Download the full <%= vars.app_runtime_abbr %> release from <%= vars.product_network %>.
 
-    1. Upload the full <%= vars.app_runtime_abbr %> release to your foundation and stage it.
+    2. Upload the full <%= vars.app_runtime_abbr %> release to your foundation and stage it.
 
-    1. If your deployment uses an internal database and / or blobstore:
+    3. If your deployment uses an internal database and / or blobstore:
 
         1. Open the **Resource Config** pane of the full <%= vars.app_runtime_abbr %> tile settings.
 
-        1. Scale down both of the following instance groups to 1:
+        2. Scale down both of the following instance groups to 1:
 
             * MySQL Server
 
             * NFS Store
 
-    1. Review the staged configuration changes.
+    4. Review the staged configuration changes.
 
-    1. Click **Apply Changes**.
+    5. Click **Apply Changes**.
 
     If the foundation uses both an external database and an external blobstore, the upgrade procedure is now complete. If not, continue to the next step.
 
-1. Reattach the Small Footprint <%= vars.app_runtime_abbr %> disks to the full <%= vars.app_runtime_abbr %> deployment.
+3. Reattach the Small Footprint <%= vars.app_runtime_abbr %> disks to the full <%= vars.app_runtime_abbr %> deployment.
 
     In a terminal window, run the `reattach_sf_tas_disks` script against the newly upgraded full <%= vars.app_runtime_abbr %> deployment to automatically reattach the Small Footprint <%= vars.app_runtime_abbr %> disks that contain your applications' data.
 
