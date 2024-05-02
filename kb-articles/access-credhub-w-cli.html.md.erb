@@ -1,0 +1,87 @@
+---
+title: How to access Tanzu Operations Manager CredHub with the CredHub CLI
+owner: Ops Manager
+---
+
+<!--- from kb articles:
+https://community.pivotal.io/s/article/How-to-Access-CredHub-with-the-CredHub-CLI?language=en_US
+https://community.pivotal.io/articles/en_US/KnowledgeArticle/How-to-access-Ops-Manager-s-CredHub-with-the-CredHub-CLI?r=186&ui-knowledge-components-aura-actions.KnowledgeArticleVersionCreateDraftFromOnlineAction.createDraftFromOnlineArticle=1
+--->
+
+CredHub lives in different places. This topic documents two of them: how you can talk to the CredHub service on the BOSH Director, and how you can talk to the CredHub service on Tanzu Application Service (TAS for VMs).
+You can connect to the CredHub service through its own API.
+
+<p class="note important">
+<span class="note__title">Important</span>
+This procedure should be used only when you cannot use the Tanzu Operations Manager API. Use this procedure only as a fallback.
+Start with
+<a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-ops-man-api.html">Using the Tanzu Operations Manager API</a>.
+</p>
+
+If you are trying to access credentials stored in CredHub by a service broker, these are stored in the TAS for VMs CredHub. See [Accessing TAS for VMs CredHub with the CredHub CLI](#accessing-tas-for-vms-credhub-with-the-credhub-cli) in this topic for instructions for accessing CredHub.
+
+## Connecting to BOSH Director CredHub
+
+To connect to the BOSH Director CredHub:
+
+1. SSH into the BOSH director VM.
+
+1. Run:
+
+    ```
+    cat /var/vcap/jobs/director/config/director.yml
+    ```
+
+1. Locate the CredHub client name and secret in the output. The client name is `director_to_credhub`.
+
+2. Run:
+
+    ```
+    cat /var/vcap/jobs/director/config/uaa_server_ca.cert
+    ```
+
+1. Copy the output to a file on your local machine. This is the CA cert that is used to establish trust with CredHub. You will use this in a later step.
+
+2. Exit out of the BOSH Director VM.
+
+3. Create the file `uaa_server_ca.crt`. In it, paste the contents of `uaa_server_ca.cert` that you copied from the earlier step.
+
+4. Use the CredHub CLI to connect.
+
+    ```
+    credhub api https://<director IP>:8844 --ca-cert uaa_server_ca.crt
+    credhub login --client-name=director_to_credhub --client-secret=<Secret you copied>
+    ```
+
+5. After you have successfully logged in, commands run successfully on the Bosh Director.
+
+
+## Accessing TAS for VMs CredHub with the CredHub CLI
+
+To connect to VMware Tanzu Application Service (TAS) for VMs CredHub:
+
+1. SSH into the Operations Manager VM. This VM should already include the CredHub CLI.
+
+1. Create two host entries in /etc/hosts. One for CredHub server and one for UAA. This is required because the CredHub API will use DNS names for some redirect and cert verifications.
+
+    ```
+    /etc/hosts: 
+    <TAS CredHub VM IP> credhub.service.cf.internal
+    <TAS UAA VM IP>  uaa.service.cf.internal
+    ```
+
+1. Set CredHub CLI API endpoint to include root_ca_certificate:
+
+    ```
+    credhub api --server credhub.service.cf.internal:8844 --ca-cert /var/tempest/workspaces/default/root_ca_certificate
+    Setting the target url: https://credhub.service.cf.internal:8844
+    ```
+
+1. Get the **CredHub Admin Client Credentials** from Operations Manager > **TAS** > **Credentials** tab.
+
+1. Log in using **CredHub Admin Client Credentials**:
+
+    ```
+    credhub login --client-name=credhub_admin_client --client-secret=<secret>
+    Login Successful
+    ```
