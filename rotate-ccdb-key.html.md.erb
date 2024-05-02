@@ -127,10 +127,9 @@ To view the encryption keys listed in this file:
 
 To view current and previous encryption keys using CredHub:
 
-1. Follow the steps in [How to access CredHub with the CredHub CLI](https://community.pivotal.io/s/article/How-to-Access-CredHub-with-the-CredHub-CLI?language=en_US)
-   in the Knowledge Base to log in to the CredHub CLI.
+1. Follow the steps in [How to access CredHub with the CredHub CLI](./kb-articles/access-credhub-w-cli.html) to log in to the CredHub CLI.
 
-1. Run the following command to view the five most recent encryption keys:
+2. Run the following command to view the five most recent encryption keys:
 
     ```yaml
     credhub get -n /opsmgr/TAS-GUID/cloud_controller/INDEX/encryption_keys --versions=5
