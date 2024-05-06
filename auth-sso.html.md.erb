@@ -128,7 +128,7 @@ Some IDPs allow uploads of SP metadata. Other providers require you to manually 
 
 ## <a id="configure-ldap"></a> Configure LDAP as an Identity Provider for <%= vars.app_runtime_abbr %>
 
-To integrate the UAA with one or more LDAP servers:
+To integrate the UAA with an LDAP server:
 
 1. Go to the <%= vars.ops_manager %> Installation Dashboard.
 
@@ -139,12 +139,20 @@ To integrate the UAA with one or more LDAP servers:
 
 1. Under **Configure your UAA user account store with either internal or external authentication mechanisms**, select **LDAP server**.
 
-1. For **Server URLs**, enter the URL that points to your LDAP server. You can configure multiple LDAP server URLs for failover purposes, so that if UAA fails to connect to the first URL, it retries with the second URL, and so on. To configure multiple LDAP server URLs, enter a space-separated list. Each URL must include one of the following protocols:
+3. In **User authentication mechanism**, click  **LDAP server**.
+
+4. For **Server URLs**, enter the URL that points to your LDAP server. You can configure multiple LDAP server URLs for failover purposes, so that if UAA fails to connect to the first URL, it retries with the second URL, and so on. All URLs must be in the same domain. To configure multiple LDAP server URLs, enter a space-separated list. Each URL must include one of the following protocols:
     * `ldap://`: This specifies that the LDAP server uses an unencrypted connection.
     * `ldaps://`: This specifies that the LDAP server uses SSL for an encrypted connection and requires that the LDAP server holds a trusted certificate or that you import a trusted certificate to the JVM truststore.
 
-1. For **LDAP credentials**, enter the LDAP distinguished name (DN) and password for binding to the LDAP server. For example, `cn=administrator,ou=Users,dc=example,dc=com`.
-  <%= vars.company_name %> recommends that you provide LDAP credentials that grant read-only permissions on the LDAP search base and the LDAP group search base. Additionally, if the bind user belongs to a different search base, you must use the full DN.
+    <p class="note important">
+    <span class="note__title">Important</span>
+    Only a single LDAP forest can be supported for the entire TAS for VMs installation. If you need support for multiple domains and forests, then SAML integration is the recommended solution.
+    </p>
+
+5. For **LDAP credentials**, enter the LDAP distinguished name (DN) and password for binding to the LDAP server. For example, `cn=administrator,ou=Users,dc=example,dc=com`.
+
+   <%= vars.company_name %> recommends that you provide LDAP credentials that grant read only permissions on the LDAP search base and the LDAP group search base. Additionally, if the bind user belongs to a different search base, you must use the full DN.
 
     <p class="note caution">
     <span class="note__title">Caution</span>
