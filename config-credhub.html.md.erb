@@ -16,9 +16,9 @@ To configure the **CredHub** pane:
     * **External database**: If you select this option, configure these fields:
         * **Hostname:** Enter the IP address of your database server.
         * **TCP port:** Enter the port of your database server, such as `3306`.
-        * **Username:** Enter a unique username to use to access your UAA database on the database server.
+        * **Username:** Enter a unique username to use to access your CredHub database on the database server.
         * **Password:** Enter the password for the provided username.
-        * **CA certificate:** This certificate is used when encrypting traffic to and from the UAA database.
+        * **CA certificate:** This certificate is used when encrypting traffic to and from the CredHub database.
         * **Skip hostname verification:** Select if you don't want CredHub to verify the identity of your database server during TLS connections.You cannot deactivate hostname verification for TLS connections to Postgres databases. You must select this option if you are configuring an external database on GCP or Azure.
 
       <p> If you deploy <%= vars.app_runtime_abbr %> on AWS using Terraform, you can locate these values in your Terraform output:
@@ -67,7 +67,7 @@ To configure the **CredHub** pane:
 
 8. Under the **Job** column of the **CredHub** row, ensure that the number of instances is set to `2`. This is the minimum instance count required for high availability.
 
-9. To configure UAA so it detects a proxy, complete the following fields:
+9. To configure CredHub so it detects a proxy, complete the following fields:
     * **Proxy servers**: Enter a comma-separated list of router IP addresses for the first group of HTTP/TCP backends.
     * **HTTP proxy URL**: Enter the `http_proxy` for all HTTP requests across VMs.
     * **HTTPS proxy URL**: Enter the `https_proxy` for all HTTPS requests across VMs
