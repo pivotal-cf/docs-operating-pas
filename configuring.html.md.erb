@@ -147,3 +147,9 @@ As a best-effort calculation, estimate the total number of bits needed to move d
   external or IaaS-provided file storage.</p>
 
 * **Maximum In-Flight Load and Container Starts for Diego Cells**: Operators can limit the number of containers and Diego Cell instances that Diego starts concurrently. If operators impose no limits, your file storage might experience exceptionally heavy load during an upgrade.
+
+## <a id="other"></a> Other pre-upgrade configuration changes
+
+Additional pre-upgrade configuration changes that you might need before upgrading <%= vars.app_runtime_abbr %> include:
+
+* If you are upgrading from <%= vars.app_runtime_abbr %> v2.0.24 or earlier, make sure in the <%= vars.app_runtime_abbr %> tile > **Resource Config** pane that the **Cloud Controller** > **Persistent Disk Type** setting specifies disk capacity of 40960 MB or more.
