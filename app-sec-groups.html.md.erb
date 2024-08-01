@@ -1,5 +1,5 @@
 ---
-title: Restricting app access to internal TAS for VMs components
+title: Restricting app access to internal Tanzu for Cloud Foundry components
 owner: Security
 ---
 
@@ -106,7 +106,7 @@ To create ASGs that block apps from sending traffic to the networks that host <%
         ```
         exclude:
         - YOUR-OPS-MANAGER-CIDR
-        - YOUR-TAS-AND-SERVICES-CIDR
+        - YOUR-TANZU-CF-AND-SERVICES-CIDR
         ```
 
     * **Three-network layout**:
@@ -118,7 +118,7 @@ To create ASGs that block apps from sending traffic to the networks that host <%
         ```
         exclude:
         - YOUR-OPS-MANAGER-CIDR
-        - YOUR-TAS-CIDR
+        - YOUR-TANZU-CF-CIDR
         - YOUR-SERVICES-CIDR
         ```
 
@@ -131,7 +131,7 @@ To create ASGs that block apps from sending traffic to the networks that host <%
         ```
         exclude:
         - YOUR-OPS-MANAGER-CIDR
-        - YOUR-TAS-CIDR
+        - YOUR-TANZU-CF-CIDR
         - YOUR-SERVICE-CIDR-1
         - YOUR-SERVICE-CIDR-2
         etc...

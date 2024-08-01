@@ -1,5 +1,5 @@
 ---
-title: Upgrading from Small Footprint to full TAS for VMs
+title: Upgrading from Small Footprint to full Tanzu for Cloud Foundry
 owner:
 ---
 
@@ -10,7 +10,7 @@ If you have installed Small Footprint <%= vars.app_runtime_full %>, you can upgr
 This feature is only available in <%= vars.app_runtime_abbr %> v6.0.1 and later.
 </p>
 
-For more information about choosing between Small Footprint and full <%= vars.app_runtime_abbr %>, see [When should you use Small Footprint TAS for VMs?](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/6.0/tas-for-vms/toc-tas-install-index.html#when-should-you-use-small-footprint-tas-for-vms-0) in _Installing TAS for VMs_.
+For more information about choosing between Small Footprint and full <%= vars.app_runtime_abbr %>, see [When should you use Small Footprint Tanzu for Cloud Foundry?](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/6.0/tas-for-vms/toc-tas-install-index.html#when-should-you-use-small-footprint-tas-for-vms-0) in _Installing Tanzu for Cloud Foundry_.
 
 ## <a id='preserving-data'></a> Preserving data after the upgrade
 
@@ -26,7 +26,7 @@ It is critical to be aware of which datastores are internal and which are extern
 
 <p class="note caution">
 <span class="note__title">Caution</span>
-Disks become orphaned after you perform the <strong>Apply Changes</strong> to upgrade to full <%= vars.app_runtime_abbr %>. After a period of time (by default, five days), BOSH automatically and permanently deletes orphaned disks. Failure to reattach any orphaned Small Footprint TAS disks will result in loss of your data. For more information about orphaned disks, see the <a href="https://bosh.io/docs/persistent-disks/#orphaned-disks">BOSH documentation</a>.
+Disks become orphaned after you perform the <strong>Apply Changes</strong> to upgrade to full <%= vars.app_runtime_abbr %>. After a period of time (by default, five days), BOSH automatically and permanently deletes orphaned disks. Failure to reattach any orphaned Small Footprint Tanzu Platform for CF disks will result in loss of your data. For more information about orphaned disks, see the <a href="https://bosh.io/docs/persistent-disks/#orphaned-disks">BOSH documentation</a>.
 </p>
 
 ## <a id='reqs-prereqs'></a> Requirements and prerequisites
@@ -89,7 +89,7 @@ To upgrade from Small Footprint <%= vars.app_runtime_abbr %> to full <%= vars.ap
 
         If necessary, scale down either or both instance groups to 1 in Ops Manager and then run **Apply Changes**.
 
-    1. In the **Advanced Features** pane of the Small Footprint <%= vars.app_runtime_abbr %> tile settings, check the **Enable upgrade from Small Footprint Tanzu Application Service to VMware Tanzu Application Service for VMs** checkbox.
+    1. In the **Advanced Features** pane of the Small Footprint <%= vars.app_runtime_abbr %> tile settings, check the **Enable upgrade from Small Footprint Tanzu Platform for Cloud Foundry to VMware Tanzu Application Service for VMs** checkbox.
 
 1. Upgrade the tile.
 
@@ -197,30 +197,30 @@ To upgrade from Small Footprint <%= vars.app_runtime_abbr %> to full <%= vars.ap
         * Run the following command to reattach the database disk:
 
             ```
-            bosh -d [DEPLOYMENT] attach-disk [FULL_TAS_DATABASE_ID] [SF_TAS_DATABASE_CID]
+            bosh -d [DEPLOYMENT] attach-disk [FULL_TANZU_CF_DATABASE_ID] [SF_TANZU_CF_DATABASE_CID]
             ```
 
             Where:
 
             * `[DEPLOYMENT]` is the ID of your deployment.
 
-            * `[FULL_TAS_DATABASE_ID]` is the ID of the full <%= vars.app_runtime_abbr %> instance to which the database disk will be attached.
+            * `[FULL_TANZU_CF_DATABASE_ID]` is the ID of the full <%= vars.app_runtime_abbr %> instance to which the database disk will be attached.
 
-            * `[SF_TAS_DATABASE_CID]` is the CID of the orphaned Small Footprint <%= vars.app_runtime_abbr %> database disk.
+            * `[SF_TANZU_CF_DATABASE_CID]` is the CID of the orphaned Small Footprint <%= vars.app_runtime_abbr %> database disk.
 
         * Run the following command to reattach the blobstore disk:
 
             ```
-            bosh -d [DEPLOYMENT] attach-disk [FULL_TAS_BLOBSTORE_ID] [SF_TAS_BLOBSTORE_CID]
+            bosh -d [DEPLOYMENT] attach-disk [FULL_TANZU_CF_BLOBSTORE_ID] [SF_TANZU_CF_BLOBSTORE_CID]
             ```
 
             Where:
 
             * `[DEPLOYMENT]` is the ID of your deployment.
 
-            * `[FULL_TAS_BLOBSTORE_ID]` is the ID of the full <%= vars.app_runtime_abbr %> instance to which the blobstore disk will be attached.
+            * `[FULL_TANZU_CF_BLOBSTORE_ID]` is the ID of the full <%= vars.app_runtime_abbr %> instance to which the blobstore disk will be attached.
 
-            * `[SF_TAS_BLOBSTORE_CID]` is the CID of the orphaned Small Footprint <%= vars.app_runtime_abbr %> blobstore disk.
+            * `[SF_TANZU_CF_BLOBSTORE_CID]` is the CID of the orphaned Small Footprint <%= vars.app_runtime_abbr %> blobstore disk.
 
 1. Verify that the correct disks were reattached to the database and blobstore instances.
 
@@ -244,11 +244,11 @@ To upgrade from Small Footprint <%= vars.app_runtime_abbr %> to full <%= vars.ap
 
 After upgrading to full <%= vars.app_runtime_abbr %>, verify that your applications are functioning as expected. If you encounter any issues, contact <%= vars.support_link %>.
 
-A full <%= vars.app_runtime_abbr %> deployment can be configured to provide high availability (HA) for applications. For information about HA options and best practices, see [High Availability in TAS for VMs](../concepts/high-availability.html).
+A full <%= vars.app_runtime_abbr %> deployment can be configured to provide high availability (HA) for applications. For information about HA options and best practices, see [High Availability in Tanzu for Cloud Foundry](../concepts/high-availability.html).
 
 ### <a id='assisted-upgrade'></a> Assisted upgrade
 
-<%= vars.company_name %> provides a set of Bash scripts to assist in the upgrade process. To download these scripts, see [Automation scripts for upgrading Small Footprint TAS for VMs 6.0 to "full" TAS for VMs 6.0](./kb-articles/auto-upgrade-scripts.html).
+<%= vars.company_name %> provides a set of Bash scripts to assist in the upgrade process. To download these scripts, see [Automation scripts for upgrading Small Footprint Tanzu for Cloud Foundry 6.0 to "full" Tanzu for Cloud Foundry 6.0](./kb-articles/auto-upgrade-scripts.html).
 
 The downloaded archive contains:
 
@@ -256,7 +256,7 @@ The downloaded archive contains:
 
     * The `validate_sf_tas_deployment` script runs against a Small Footprint <%= vars.app_runtime_abbr %> deployment and does not alter the deployment in any way. The script scans the deployment configuration to determine if all requirements for the upgrade process are met, and prints out any missing requirements for you to correct. When the script executes successfully, the deployment is ready to be upgraded to full <%= vars.app_runtime_abbr %>.
 
-    * The `reattach_sf_tas_disks` script runs against a full <%= vars.app_runtime_abbr %> deployment after the deployment has been upgraded from Small Footprint <%= vars.app_runtime_abbr %>. The script scans the deployment to ensure that the database and blobstore have at most one instance, and if so, automatically stops all VMs, reattaches the Small Footprint TAS disks, and restarts the deployment. You can run the script multiple times if necessary. It creates log files to determine which instances already have disks reattached, and skips those instances in future executions. When the script executes successfully, the upgrade from Small Footprint <%= vars.app_runtime_abbr %> to full <%= vars.app_runtime_abbr %> is complete.
+    * The `reattach_sf_tas_disks` script runs against a full <%= vars.app_runtime_abbr %> deployment after the deployment has been upgraded from Small Footprint <%= vars.app_runtime_abbr %>. The script scans the deployment to ensure that the database and blobstore have at most one instance, and if so, automatically stops all VMs, reattaches the Small Footprint Tanzu Platform for CF disks, and restarts the deployment. You can run the script multiple times if necessary. It creates log files to determine which instances already have disks reattached, and skips those instances in future executions. When the script executes successfully, the upgrade from Small Footprint <%= vars.app_runtime_abbr %> to full <%= vars.app_runtime_abbr %> is complete.
 
 * Common helper code.
 

@@ -8,7 +8,7 @@ https://community.pivotal.io/s/article/How-to-Access-CredHub-with-the-CredHub-CL
 https://community.pivotal.io/articles/en_US/KnowledgeArticle/How-to-access-Ops-Manager-s-CredHub-with-the-CredHub-CLI?r=186&ui-knowledge-components-aura-actions.KnowledgeArticleVersionCreateDraftFromOnlineAction.createDraftFromOnlineArticle=1
 --->
 
-CredHub lives in different places. This topic documents two of them: how you can talk to the CredHub service on the BOSH Director, and how you can talk to the CredHub service on Tanzu Application Service (TAS for VMs).
+CredHub lives in different places. This topic documents two of them: how you can talk to the CredHub service on the BOSH Director, and how you can talk to the CredHub service on Tanzu Platform for Cloud Foundry (Tanzu for Cloud Foundry).
 You can connect to the CredHub service through its own API.
 
 <p class="note important">
@@ -18,7 +18,7 @@ Start with
 <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-ops-man-api.html">Using the Tanzu Operations Manager API</a>.
 </p>
 
-If you are trying to access credentials stored in CredHub by a service broker, these are stored in the TAS for VMs CredHub. See [Accessing TAS for VMs CredHub with the CredHub CLI](#accessing-tas-for-vms-credhub-with-the-credhub-cli) in this topic for instructions for accessing CredHub.
+If you are trying to access credentials stored in CredHub by a service broker, these are stored in the Tanzu for Cloud Foundry CredHub. See [Accessing Tanzu for Cloud Foundry CredHub with the CredHub CLI](#accessing-tas-for-vms-credhub-with-the-credhub-cli) in this topic for instructions for accessing CredHub.
 
 ## Connecting to BOSH Director CredHub
 
@@ -56,9 +56,9 @@ To connect to the BOSH Director CredHub:
 5. After you have successfully logged in, commands run successfully on the Bosh Director.
 
 
-## Accessing TAS for VMs CredHub with the CredHub CLI
+## Accessing Tanzu for CF CredHub with the CredHub CLI
 
-To connect to VMware Tanzu Application Service (TAS) for VMs CredHub:
+To connect to VMware Tanzu Platform for Cloud Foundry (Tanzu for CF) CredHub:
 
 1. SSH into the Operations Manager VM. This VM should already include the CredHub CLI.
 
@@ -66,8 +66,8 @@ To connect to VMware Tanzu Application Service (TAS) for VMs CredHub:
 
     ```
     /etc/hosts: 
-    <TAS CredHub VM IP> credhub.service.cf.internal
-    <TAS UAA VM IP>  uaa.service.cf.internal
+    <Tanzu CF CredHub VM IP> credhub.service.cf.internal
+    <Tanzu CF UAA VM IP>  uaa.service.cf.internal
     ```
 
 1. Set CredHub CLI API endpoint to include root_ca_certificate:
@@ -77,7 +77,7 @@ To connect to VMware Tanzu Application Service (TAS) for VMs CredHub:
     Setting the target url: https://credhub.service.cf.internal:8844
     ```
 
-1. Get the **CredHub Admin Client Credentials** from Operations Manager > **TAS** > **Credentials** tab.
+1. Get the **CredHub Admin Client Credentials** from Operations Manager > **Tanzu CF** > **Credentials** tab.
 
 1. Log in using **CredHub Admin Client Credentials**:
 

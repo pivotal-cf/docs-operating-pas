@@ -1,18 +1,18 @@
 ---
-title: Automation Scripts for upgrading Small Footprint TAS for VMs to "Full" TAS for VMs
+title: Automation Scripts for upgrading Small Footprint Tanzu for Cloud Foundry to "Full" Tanzu for Cloud Foundry
 owner: TAS
 ---
 
-If you have installed Small Footprint VMware Tanzu Application Service for VMs 6.0, you can upgrade your installation to full TAS for VMs 6.0. The upgrade process preserves most of the existing tile configuration and transforms the existing Small Footprint TAS for VMs into full TAS for VMs.
+If you have installed Small Footprint VMware Tanzu Platform for Cloud Foundry, you can upgrade your installation to full Tanzu for Cloud Foundry. The upgrade process preserves most of the existing tile configuration and transforms the existing Small Footprint Tanzu for Cloud Foundry into full Tanzu for Cloud Foundry.
 
-See [Upgrading from Small Footprint to full TAS for VMs](../upgrading-from-small-footprint.html) for detailed instructions on how to use these Bash scripts in your upgrade. Pay special attention to the sections that describe the
+See [Upgrading from Small Footprint to full Tanzu for Cloud Foundry](../upgrading-from-small-footprint.html) for detailed instructions on how to use these Bash scripts in your upgrade. Pay special attention to the sections that describe the
 [upgrade process](../upgrading-from-small-footprint.html#upgrade-to-full-tas_for-vms) and
 [safety considerations](../kb-articles/auto-upgrade-scripts.html#preserving-data-after-the-upgrade) to ensure that your upgrade goes as smoothly as possible.
 
 Small footprint migration automation scripts (for use with the [Assisted upgrade](../kb-articles/auto-upgrade-scripts.html#assited-upgrade) section):
 
-* The `validate_sf_tas_deployment` script runs against a Small Footprint TAS for VMs deployment and does not alter the deployment in any way. The script scans the deployment configuration to determine if all requirements for the upgrade process are met, and prints out any missing requirements for you to correct. When the script executes successfully, the deployment is ready to be upgraded to full TAS for VMs.
+* The `validate_sf_tas_deployment` script runs against a Small Footprint Tanzu for Cloud Foundry deployment and does not alter the deployment in any way. The script scans the deployment configuration to determine if all requirements for the upgrade process are met, and prints out any missing requirements for you to correct. When the script executes successfully, the deployment is ready to be upgraded to full Tanzu for Cloud Foundry.
 
-* The `reattach_sf_tas_disks` script runs against a full TAS for VMs deployment after the deployment has been upgraded from Small Footprint TAS for VMs. The script scans the deployment to ensure that the database and blobstore have at most one instance, and if so, automatically stops all VMs, reattaches the Small Footprint TAS disks, and restarts the deployment. You can run the script multiple times if necessary. It creates log files to determine which instances already have disks reattached, and skips those instances in future executions. When the script executes successfully, the upgrade from Small Footprint TAS for VMs to full TAS for VMs is complete.
+* The `reattach_sf_tas_disks` script runs against a full Tanzu for Cloud Foundry deployment after the deployment has been upgraded from Small Footprint Tanzu for Cloud Foundry. The script scans the deployment to ensure that the database and blobstore have at most one instance, and if so, automatically stops all VMs, reattaches the Small Footprint Tanzu Platform for CF disks, and restarts the deployment. You can run the script multiple times if necessary. It creates log files to determine which instances already have disks reattached, and skips those instances in future executions. When the script executes successfully, the upgrade from Small Footprint Tanzu for Cloud Foundry to full Tanzu for Cloud Foundry is complete.
 
 These scripts can be found in the [6.0_sf_tas_to_full_tas_upgrade_scripts](https://pivotal.my.salesforce.com/sfc/p/#U0000000YQaz/a/8X000000dwmz/Ngp0zT_q19ev_pJlBpPqxHJIo87Rk.8sDmSfCic0QH4) bundle.

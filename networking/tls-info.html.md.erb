@@ -1,5 +1,5 @@
 ---
-title: TLS connections in TAS for VMs
+title: TLS connections in Tanzu for Cloud Foundry
 owner: Security
 ---
 
@@ -17,7 +17,7 @@ Within an <%= vars.app_runtime_abbr %> deployment, TLS secures connections betwe
 
 The following diagram illustrates the flow of communication from a client making a request to an app. The Client Request goes to the External Load Balancer, and then through Gorouter to the app.
 
-![The Gorouter and app are grouped as TAS for VMs.](./images/ingress-traffic.png)
+![The Gorouter and app are grouped as Tanzu for Cloud Foundry.](./images/ingress-traffic.png)
 
 The following table describes each component involved in receiving a client request and where their certificates for TLS termination originate:
 
@@ -81,7 +81,7 @@ Separately, <%= vars.app_runtime_abbr %> Runtime CredHub might store credentials
 
 The following diagram illustrates communications between apps and external, brokered services secured with TLS:
 
-![The TAS Block (internal) includes App1 and App2, along with CredHub. The off-platform backend block (external) includes Oracle DB and a TIBCO block.](./images/apps-external-services.png)
+![The Tanzu CF Block (internal) includes App1 and App2, along with CredHub. The off-platform backend block (external) includes Oracle DB and a TIBCO block.](./images/apps-external-services.png)
 
 The developer must retrieve the certificate from the external service and provide it to their app. One way to do this is by placing the certificate in Runtime CredHub and editing your app to consume the certificate through CredHub Service Broker. For more information, see the [CredHub Service Broker](https://docs.vmware.com/en/CredHub-Service-Broker/index.html) documentation.
 

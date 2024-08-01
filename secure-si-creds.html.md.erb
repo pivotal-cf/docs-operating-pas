@@ -123,13 +123,13 @@ To ensure the ASGs for your deployment allow apps to communicate with the runtim
 
 1. Record the CIDR for the <%= vars.app_runtime_abbr %> network.
 
-1. Create a file named `runtime-credhub.json` for specifying your ASG rules. Copy the following content into the file. Replace `YOUR-TAS-CIDR` with the CIDR you recorded in the previous step.
+1. Create a file named `runtime-credhub.json` for specifying your ASG rules. Copy the following content into the file. Replace `YOUR-TANZU-CF-CIDR` with the CIDR you recorded in the previous step.
 
     ```
     [
       {
       "protocol": "tcp",
-      "destination": "YOUR-TAS-CIDR",
+      "destination": "YOUR-TANZU-CF-CIDR",
       "ports": "8844"
       }
     ]

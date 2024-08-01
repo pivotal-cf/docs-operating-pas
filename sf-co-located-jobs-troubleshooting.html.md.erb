@@ -12,22 +12,22 @@ To troubleshoot a job that runs on the Control or Database VMs:
 
 2. Use BOSH to list the VMs in your Small Footprint <%= vars.app_runtime_abbr %> deployment. Run:
 
-		bosh -e BOSH-ENV -d TAS-DEPLOYMENT vms
+		bosh -e BOSH-ENV -d TANZU-CF-DEPLOYMENT vms
 
 	Where:
 	* `BOSH-ENV` is the name of your BOSH environment.
-	* `TAS-DEPLOYMENT` is the name of your Small Footprint <%= vars.app_runtime_abbr %> deployment.
+	* `TANZU-CF-DEPLOYMENT` is the name of your Small Footprint <%= vars.app_runtime_abbr %> deployment.
 
 	<p> If you do not know the name of your deployment, you can run
 		<code>bosh -e BOSH-ENV deployments</code> to list the deployments for your BOSH Director.</p>
 
 3. Use BOSH to SSH into one of the Small Footprint <%= vars.app_runtime_abbr %> VMs. Run:
 
-		bosh -e BOSH-ENV -d TAS-DEPLOYMENT ssh VM-NAME/VM-GUID
+		bosh -e BOSH-ENV -d TANZU-CF-DEPLOYMENT ssh VM-NAME/VM-GUID
 
 	Where:
 	* `BOSH-ENV` is the name of your BOSH environment.
-	* `TAS-DEPLOYMENT` is the name of your Small Footprint <%= vars.app_runtime_abbr %> deployment.
+	* `TANZU-CF-DEPLOYMENT` is the name of your Small Footprint <%= vars.app_runtime_abbr %> deployment.
 	* `VM-NAME` is the name of your VM.
 	* `VM-GUID` is the GUID of your VM.
 
