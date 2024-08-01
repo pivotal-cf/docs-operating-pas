@@ -1,5 +1,5 @@
 ---
-title: Tanzu for Cloud Foundry Resource Requirements
+title: Tanzu Platform for Cloud Foundry Resource Requirements
 owner:
 ---
 
@@ -46,7 +46,7 @@ of <%= vars.ops_manager %> and <%= vars.app_runtime_first %> are:
 
 * The most recent version of the [Cloud Foundry Command Line Interface](https://github.com/cloudfoundry/cli#downloads) (cf CLI).
 
-## <a id='small-footprint-diffs'></a> Differences in Small Footprint Tanzu for Cloud Foundry
+## <a id='small-footprint-diffs'></a> Differences in Small Footprint Tanzu Platform for Cloud Foundry
 
 You can deploy Small Footprint <%= vars.app_runtime_abbr %> with a minimum of four VMs, as shown in the following image.
 
@@ -55,7 +55,7 @@ You can deploy Small Footprint <%= vars.app_runtime_abbr %> with a minimum of fo
 The following image assumes that you are using an external blobstore.
 </p>
 
-![Small Footprint Tanzu for Cloud Foundry has 4 required VMs and 5 optional VMs.](./images/srt-vms.png)
+![Small Footprint Tanzu Platform for Cloud Foundry has 4 required VMs and 5 optional VMs.](./images/srt-vms.png)
 
 To reduce the number of VMs required for Small Footprint <%= vars.app_runtime_abbr %>, the Control and Database VMs include co-located jobs that run on a single VM in <%= vars.app_runtime_abbr %>. See the next sections for details.
 
@@ -65,7 +65,7 @@ For more information about the components mentioned on this page, see [<%= vars.
 
 The Control VM includes the <%= vars.app_runtime_abbr %> jobs that handle management plane operations, app life cycles, logging, and user authorization and authentication. Additionally, all errands run on the Control VM, eliminating the need for a VM for each errand and significantly reducing the time it takes to run errands.
 
-The following image shows all the jobs from <%= vars.app_runtime_abbr %> that are co-located on the Control VM in Small Footprint <%= vars.app_runtime_abbr %>. Small Footprint Tanzu for Cloud Foundry co-locates 11 VMs onto 1 VM called Control. The 11 VMs are Cloud Controller, Cloud Controller Worker, Clock Global, Diego BBS, Diego Brain, Doppler Server, Loggregator Traffic Controller, Syslog Adapter, Syslog Scheduler, UAA, and optionally, CredHub.
+The following image shows all the jobs from <%= vars.app_runtime_abbr %> that are co-located on the Control VM in Small Footprint <%= vars.app_runtime_abbr %>. Small Footprint Tanzu Platform for Cloud Foundry co-locates 11 VMs onto 1 VM called Control. The 11 VMs are Cloud Controller, Cloud Controller Worker, Clock Global, Diego BBS, Diego Brain, Doppler Server, Loggregator Traffic Controller, Syslog Adapter, Syslog Scheduler, UAA, and optionally, CredHub.
 
 ![VMs in Tanzu CF versus VM in Small Footprint Tanzu Platform for CF](./images/control-vms-2.0.png)
 
@@ -73,7 +73,7 @@ The following image shows all the jobs from <%= vars.app_runtime_abbr %> that ar
 
 The Database VM includes the <%= vars.app_runtime_abbr %> jobs that handle internal storage and messaging.
 
-The following image shows all the jobs from <%= vars.app_runtime_abbr %> that are co-located on the Database VM in Small Footprint <%= vars.app_runtime_abbr %>. Small Footprint Tanzu for Cloud Foundry Condenses 3 VMs onto 1 VM called Database. The three Tanzu for Cloud Foundry VMs are NATS, MySQL Proxy, and MySQL Server. The MySQL Proxy and MySQL Server are optional VMs.
+The following image shows all the jobs from <%= vars.app_runtime_abbr %> that are co-located on the Database VM in Small Footprint <%= vars.app_runtime_abbr %>. Small Footprint Tanzu Platform for Cloud Foundry Condenses 3 VMs onto 1 VM called Database. The three Tanzu Platform for Cloud Foundry VMs are NATS, MySQL Proxy, and MySQL Server. The MySQL Proxy and MySQL Server are optional VMs.
 
 ![VMs in Tanzu CF versus VM in Small Footprint Tanzu Platform for CF](./images/db-vms.png)
 
@@ -85,7 +85,7 @@ The Compute VM is the same as the Diego Cell VM in <%= vars.app_runtime_abbr %>.
 
 ### <a id='othervms'></a> Other VMs (unchanged)
 
-For the other VMs, they perform the same functions in both versions of the <%= vars.app_runtime_abbr %> tile. The Router, File Storage, Backup Restore Node, MySQL Monitor, and TCP Router VMs are the same in both Tanzu for Cloud Foundry and Small Footprint Tanzu for Cloud Foundry.
+For the other VMs, they perform the same functions in both versions of the <%= vars.app_runtime_abbr %> tile. The Router, File Storage, Backup Restore Node, MySQL Monitor, and TCP Router VMs are the same in both Tanzu Platform for Cloud Foundry and Small Footprint Tanzu Platform for Cloud Foundry.
 
 ![VMs in both Tanzu CF and Small Footprint Tanzu Platform for CF](./images/unchanged-vms.png)
 

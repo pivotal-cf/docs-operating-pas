@@ -1,6 +1,6 @@
 ---
-breadcrumb: Tanzu for Cloud Foundry Documentation
-title: Configuring authentication and enterprise SSO for Tanzu for Cloud Foundry
+breadcrumb: Tanzu Platform for Cloud Foundry Documentation
+title: Configuring authentication and enterprise SSO for Tanzu Platform for Cloud Foundry
 owner: Identity
 ---
 
@@ -118,7 +118,7 @@ To integrate the UAA with an LDAP server:
 
     <p class="note important">
     <span class="note__title">Important</span>
-    Only a single LDAP forest can be supported for the entire Tanzu for Cloud Foundry installation. If you need support for multiple domains and forests, then SAML integration is the recommended solution.
+    Only a single LDAP forest can be supported for the entire Tanzu Platform for Cloud Foundry installation. If you need support for multiple domains and forests, then SAML integration is the recommended solution.
     </p>
 
 5. For **LDAP credentials**, enter the LDAP distinguished name (DN) and password for binding to the LDAP server. For example, `cn=administrator,ou=Users,dc=example,dc=com`.
@@ -208,13 +208,13 @@ To integrate the UAA with an external OIDC identity provider (IDP):
 
 3.  For **Email domains**, enter a comma-separated list of the email domains for external users to invite to Apps Manager.
 
-4.  For **Username claim**, enter the attribute in your OIDC provider claim that corresponds to the Tanzu for Cloud Foundry user name.
+4.  For **Username claim**, enter the attribute in your OIDC provider claim that corresponds to the Tanzu Platform for Cloud Foundry user name.
 
-5.  For **First name claim**, enter the attribute in your OIDC provider claim that corresponds to the user's first name in Tanzu for Cloud Foundry.
+5.  For **First name claim**, enter the attribute in your OIDC provider claim that corresponds to the user's first name in Tanzu Platform for Cloud Foundry.
 
-6.  For **Last name claim**, enter the attribute in your OIDC provider claim that corresponds to the user's last name in Tanzu for Cloud Foundry.
+6.  For **Last name claim**, enter the attribute in your OIDC provider claim that corresponds to the user's last name in Tanzu Platform for Cloud Foundry.
 
-7.  For **Email claim**, enter the attribute in your OIDC provider claim that corresponds to the user's email in Tanzu for Cloud Foundry.
+7.  For **Email claim**, enter the attribute in your OIDC provider claim that corresponds to the user's email in Tanzu Platform for Cloud Foundry.
 
 8.  For **External groups claims**, enter the attribute in your OIDC provider claim that defines the groups to which a user belongs.
 This is a comma separated list, and is used to map to internal <%= vars.app_runtime_abbr %> scopes.
